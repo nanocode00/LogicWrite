@@ -1,0 +1,266 @@
+{
+  "schema_version": "0.1.0",
+  "language": "ko",
+  "synthetic": true,
+  "cases": [
+    {
+      "id": "LW-001",
+      "description": "Installer instructions contain internal packaging deliberation",
+      "document_type": "installation_guide",
+      "contract": {
+        "audience": "End users installing the Windows application",
+        "purpose": "Install the app and complete first launch",
+        "register": "한다체",
+        "required_information": [
+          "Run the installer",
+          "Launch the application"
+        ]
+      },
+      "input": "설치 파일을 실행한 뒤 앱을 시작한다. 초기 설계에서는 NSIS와 다른 패키징 방식의 장단점을 여러 차례 비교했다.",
+      "expected_findings": [
+        {
+          "rule_id": "AUDIENCE_IRRELEVANCE",
+          "action": "MOVE",
+          "evidence": [
+            "초기 설계에서는 NSIS와 다른 패키징 방식의 장단점을 여러 차례 비교했다."
+          ],
+          "reason": "Historical packaging discussion belongs in a design note, not a user installation flow."
+        }
+      ]
+    },
+    {
+      "id": "LW-002",
+      "description": "Empty PR rhetoric",
+      "document_type": "pull_request",
+      "contract": {
+        "audience": "Code reviewers",
+        "purpose": "Understand the precise change",
+        "register": "한다체",
+        "required_information": [
+          "Timeout is now 30 seconds"
+        ]
+      },
+      "input": "이번 변경은 전반적인 안정성과 유지보수성을 크게 향상하는 매우 중요한 작업이다. API 요청 제한 시간을 30초로 설정했다.",
+      "expected_findings": [
+        {
+          "rule_id": "AUDIENCE_IRRELEVANCE",
+          "action": "REMOVE",
+          "evidence": [
+            "이번 변경은 전반적인 안정성과 유지보수성을 크게 향상하는 매우 중요한 작업이다."
+          ],
+          "reason": "Unsupported generic praise contributes no verifiable change detail."
+        }
+      ]
+    },
+    {
+      "id": "LW-003",
+      "description": "Korean narration mixes speech levels",
+      "document_type": "status_report",
+      "contract": {
+        "audience": "Team members",
+        "purpose": "Report deployment status",
+        "register": "한다체",
+        "required_information": [
+          "Deployment completed",
+          "Health check passed"
+        ]
+      },
+      "input": "배포를 완료했다. 상태 확인 요청도 성공했습니다.",
+      "expected_findings": [
+        {
+          "rule_id": "REGISTER_INCONSISTENCY",
+          "action": "COMPRESS",
+          "evidence": [
+            "상태 확인 요청도 성공했습니다."
+          ],
+          "reason": "Normalize narration to the specified 한다체 without altering the claim."
+        }
+      ]
+    },
+    {
+      "id": "LW-004",
+      "description": "Universal approval claim conflicts with a payment exception",
+      "document_type": "design_document",
+      "contract": {
+        "audience": "Backend developers",
+        "purpose": "Define request authorization policy",
+        "register": "한다체",
+        "required_information": [
+          "The payment request approval policy must be clear"
+        ]
+      },
+      "input": "모든 API 요청은 예외 없이 자동 승인된다. 결제 API 요청은 관리자의 수동 승인을 받은 후에만 처리된다.",
+      "expected_findings": [
+        {
+          "rule_id": "CLAIM_CONTRADICTION",
+          "action": "FLAG",
+          "evidence": [
+            "모든 API 요청은 예외 없이 자동 승인된다.",
+            "결제 API 요청은 관리자의 수동 승인을 받은 후에만 처리된다."
+          ],
+          "reason": "Claims share scope and conflict; source policy is required before editing."
+        }
+      ]
+    },
+    {
+      "id": "LW-005",
+      "description": "A correctly scoped exception is not a contradiction",
+      "document_type": "design_document",
+      "contract": {
+        "audience": "Backend developers",
+        "purpose": "Describe authorization policy",
+        "register": "한다체",
+        "required_information": [
+          "Ordinary requests auto-approve",
+          "Payment requires manager approval"
+        ]
+      },
+      "input": "일반 API 요청은 자동 승인된다. 결제 API 요청은 관리자의 승인을 받은 뒤 처리된다.",
+      "expected_findings": []
+    },
+    {
+      "id": "LW-006",
+      "description": "Quoted disagreement must not be rewritten as a fact conflict",
+      "document_type": "meeting_notes",
+      "contract": {
+        "audience": "Project team",
+        "purpose": "Record competing proposals",
+        "register": "한다체",
+        "required_information": [
+          "Both proposals attributed to their authors"
+        ]
+      },
+      "input": "A팀은 배치를 매일 실행하자고 제안했다. B팀은 배치를 매주 실행하자고 제안했다.",
+      "expected_findings": []
+    },
+    {
+      "id": "LW-007",
+      "description": "Contract-required limit omitted from user instructions",
+      "document_type": "user_guide",
+      "contract": {
+        "audience": "API users",
+        "purpose": "Explain one-time token activation",
+        "register": "한다체",
+        "required_information": [
+          "Token expires 15 minutes after issuance"
+        ]
+      },
+      "input": "발급된 일회용 토큰을 입력해 인증을 완료한다.",
+      "expected_findings": [
+        {
+          "rule_id": "REQUIRED_INFORMATION_MISSING",
+          "action": "ADD",
+          "evidence": [],
+          "reason": "Add the 15-minute expiry condition supplied by the contract; do not invent other limits."
+        }
+      ]
+    },
+    {
+      "id": "LW-008",
+      "description": "Decision-relevant trade-off must remain",
+      "document_type": "experiment_report",
+      "contract": {
+        "audience": "Project lead",
+        "purpose": "Decide whether to ship a faster model",
+        "register": "한다체",
+        "required_information": [
+          "Latency changed from 9.1 seconds to 5.4 seconds",
+          "Accuracy decreased from 90% to 57%",
+          "Deployment was rejected"
+        ]
+      },
+      "input": "처리 시간은 9.1초에서 5.4초로 단축됐다. 정확도는 90%에서 57%로 하락해 배포하지 않았다.",
+      "expected_findings": []
+    },
+    {
+      "id": "LW-009",
+      "description": "Duplicate status sentence can be condensed",
+      "document_type": "status_report",
+      "contract": {
+        "audience": "Project manager",
+        "purpose": "Understand whether CI passed",
+        "register": "한다체",
+        "required_information": [
+          "CI succeeded"
+        ]
+      },
+      "input": "CI 검사가 통과했다. CI 검사는 모두 통과한 상태다.",
+      "expected_findings": [
+        {
+          "rule_id": "CONTENT_REDUNDANCY",
+          "action": "COMPRESS",
+          "evidence": [
+            "CI 검사가 통과했다.",
+            "CI 검사는 모두 통과한 상태다."
+          ],
+          "reason": "Two sentences repeat the same outcome without an added condition."
+        }
+      ]
+    },
+    {
+      "id": "LW-010",
+      "description": "Unverified metric must not be asserted as proven",
+      "document_type": "pull_request",
+      "contract": {
+        "audience": "Code reviewers",
+        "purpose": "Assess a performance patch",
+        "register": "한다체",
+        "required_information": [
+          "A caching patch was added"
+        ]
+      },
+      "input": "캐시 패치를 추가했다. 이 변경으로 실제 사용 환경의 응답 속도가 80% 개선됐다.",
+      "expected_findings": [
+        {
+          "rule_id": "UNSUPPORTED_CLAIM",
+          "action": "FLAG",
+          "evidence": [
+            "이 변경으로 실제 사용 환경의 응답 속도가 80% 개선됐다."
+          ],
+          "reason": "No measured baseline or production evidence was provided; ask for evidence or qualify the statement."
+        }
+      ]
+    },
+    {
+      "id": "LW-011",
+      "description": "Necessary long technical safeguards should not be removed",
+      "document_type": "design_document",
+      "contract": {
+        "audience": "Security reviewer",
+        "purpose": "Verify a token-revocation design",
+        "register": "한다체",
+        "required_information": [
+          "Revocation invalidates active tokens",
+          "Revocation is propagated across replicas",
+          "Race condition is tested"
+        ]
+      },
+      "input": "토큰 폐기 요청이 들어오면 현재 유효한 토큰을 무효화한다. 복제 서버에도 폐기 상태를 전파한다. 폐기 직전 동시 요청이 허용되지 않는지 경합 테스트를 수행한다.",
+      "expected_findings": []
+    },
+    {
+      "id": "LW-012",
+      "description": "Unnecessary meta-narration in release notes",
+      "document_type": "release_notes",
+      "contract": {
+        "audience": "Users upgrading the app",
+        "purpose": "Explain observable changes in the new version",
+        "register": "한다체",
+        "required_information": [
+          "Startup crash is fixed"
+        ]
+      },
+      "input": "이번 릴리스에서는 여러 방향을 깊이 고민하고 단계별 검토를 충실히 진행했다. 앱 시작 시 발생하던 충돌을 수정했다.",
+      "expected_findings": [
+        {
+          "rule_id": "AUDIENCE_IRRELEVANCE",
+          "action": "REMOVE",
+          "evidence": [
+            "이번 릴리스에서는 여러 방향을 깊이 고민하고 단계별 검토를 충실히 진행했다."
+          ],
+          "reason": "Implementation-process self-assessment distracts from the user-visible fix."
+        }
+      ]
+    }
+  ]
+}
