@@ -43,6 +43,10 @@ Writing Contract (audience, purpose, register, required facts)
                            re-validation
 ```
 
+The proposed [editorial workflow](docs/architecture.md#editorial-workflow) is: determine audience and purpose → assess relevance and importance → decide actions → regroup information → order by reader needs → validate the result.
+
+[Vector-assisted routing](docs/architecture.md#future-design-vector-assisted-routing) is a future design for finding candidate destinations and overlapping content. Similarity alone does not establish importance or justify deletion.
+
 The contract, findings, and revision limits will be explicit. A controller—not an instruction asking the writer to remember—must enforce validation when strict execution is required.
 
 **Important limitation:** deterministic checks can enforce shapes and explicit constraints, not prove that a document has no factual or logical errors. Semantic findings will carry evidence and uncertainty; unresolved issues must not be silently marked as passed.
@@ -51,15 +55,13 @@ The contract, findings, and revision limits will be explicit. A controller—not
 
 | Action | Meaning |
 | --- | --- |
-| `KEEP` | Necessary and well-placed information |
+| `KEEP` | Preserve information relevant and important to the document's audience and purpose; assess section and order separately as `placement` without fixing the current position |
 | `COMPRESS` | Useful idea, needlessly verbose or repeated |
 | `REVISE` | Preserve information while correcting wording, register, or terminology |
-| `MOVE` | Useful content, wrong audience or location |
+| `MOVE` | Transfer useful information only to another document suited to its audience and purpose, after reviewing destination context; within-document reordering is `placement` |
 | `REMOVE` | Does not help the stated purpose |
 | `ADD` | Missing required context, condition, or evidence |
 | `FLAG` | Cannot safely resolve without confirmation |
-
-The aim is **information usefulness**, not a fixed word-count reduction.
 
 ## Repository
 

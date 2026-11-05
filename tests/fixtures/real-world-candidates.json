@@ -1,0 +1,1087 @@
+{
+  "schema_version": "0.1.0",
+  "data_status": "provisional_candidates_not_gold",
+  "capture_date": "2026-11-02",
+  "purpose": "Manual M0 curation candidates for LogicWrite; no scoring claims.",
+  "policy": {
+    "use_public_source_only": true,
+    "files_are_commit_pinned": true,
+    "pr_bodies_are_snapshot_only": true,
+    "annotation_requires_independent_human_review": true,
+    "evaluation_split": "unassigned",
+    "do_not_train_or_score_as_gold": true
+  },
+  "summary": {
+    "total_cases": 20,
+    "proposed_issue_cases": 12,
+    "source_repositories": [
+      "nanocode00/chatgpt2codex",
+      "nanocode00/resume",
+      "nanocode00/QuotaTray",
+      "nanocode00/project3-planning",
+      "nanocode00/mallo-intro"
+    ],
+    "proposed_keep_cases": 8
+  },
+  "cases": [
+    {
+      "id": "RW-001",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/chatgpt2codex",
+        "path": "README.md",
+        "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+        "blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+        "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 76,
+          "line_end": 82,
+          "text": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+        }
+      ],
+      "contract": {
+        "audience": "처음 설치하는 사용자",
+        "purpose": "앱의 용도와 설치 방법 파악",
+        "language": "en"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "MOVE",
+        "rule_id": "INFORMATION_PLACEMENT",
+        "rationale": "PKG와 DMG의 비교 및 선택 이유는 패키징 의사결정 기록의 목적에 맞는다. README에는 제공 패키지와 설치 안내를 남기고 선택 근거는 의사결정·설계 이력 문서로 이동한다.",
+        "nuance": "대상은 문서 역할을 제안한 것이며 실제 경로와 새 문서 생성 여부는 미정이다. 선택 근거의 정보 가치는 보존한다.",
+        "placement": {
+          "target_document": "패키징 의사결정·설계 이력 문서 (경로 미정)",
+          "target_section": "PKG 선택 근거",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "패키징 요구사항과 대안 비교"
+          },
+          "purpose_reason": "번들 런타임과 설치 후 점검을 고려해 PKG를 선택한 이유를 의사결정 근거로 보존한다.",
+          "priority_reason": "대상 문서에서 요구사항과 대안을 먼저 설명한 뒤 선택 근거를 배치한다. README에서는 설치·사용 안내가 우선이다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-002",
+      "document_type": "installation_guide",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/chatgpt2codex",
+        "path": "docs/INSTALL.md",
+        "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+        "blob_sha": "6c9d228e844fae6421366eec895375f62a916aba",
+        "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/docs/INSTALL.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 20,
+          "line_end": 22,
+          "text": "### PKG가 DMG보다 나은가요?\n\n이번 릴리스는 PKG가 낫습니다. DMG는 드래그 앤 드롭 앱에는 예쁘지만, 이 앱은 Applications에 메뉴 막대 앱을 설치하고, 번들 런타임을 넣고, 설치 후 Doctor 점검을 돌리는 흐름이 필요합니다. 초보자에게는 PKG가 더 덜 헷갈립니다."
+        }
+      ],
+      "contract": {
+        "audience": "초보 설치 사용자",
+        "purpose": "설치 과정을 완료",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "MOVE",
+        "rule_id": "INFORMATION_PLACEMENT",
+        "rationale": "PKG와 DMG 중 무엇을 선택했는지에 대한 근거는 설치 완료를 돕는 절차가 아니라 의사결정 기록에 속한다. RW-001과 같은 기록으로 이동하고 중복 설명은 통합한다.",
+        "nuance": "이미 의사결정 기록에 보존되어 있거나 보존 가치가 낮다고 판단되면 해당 설명의 REMOVE도 고려한다. 낮은 우선순위만으로 제거하지 않으며 패키지 다운로드·실행·설치 후 점검 안내는 유지한다.",
+        "placement": {
+          "target_document": "패키징 의사결정·설계 이력 문서 (경로 미정)",
+          "target_section": "PKG 선택 근거",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "패키징 요구사항과 대안 비교"
+          },
+          "purpose_reason": "설치 절차와 패키지 선택 근거를 분리하고 RW-001과 같은 결정의 설명은 통합한다.",
+          "priority_reason": "설치 가이드에서는 설치를 완료하는 절차가 우선이다. 이동 대상에서는 요구사항과 대안 비교 뒤에 선택 근거를 배치한다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-003",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/chatgpt2codex",
+        "path": "README.md",
+        "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+        "blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+        "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 21,
+          "line_end": 22,
+          "text": "> Help us get this in front of more builders: star the repo if you want\n> ChatGPT to stop talking about code and start safely doing the repo loop."
+        }
+      ],
+      "contract": {
+        "audience": "처음 방문한 개발자",
+        "purpose": "도구의 용도와 시작 방법 파악",
+        "language": "en"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "AUDIENCE_RELEVANCE",
+        "rationale": "별점 요청은 README의 프로젝트 홍보·참여 유도 목적에 부합하므로 현재 문서에 보존한다. 설치·사용 안내보다 낮은 배치 우선순위는 placement로 별도 기록한다.",
+        "nuance": "KEEP는 정보 보존 판단이며 현재 위치·순서를 고정하지 않는다. 같은 README 하단의 응원 섹션으로 재배치하는 것은 placement이고, 다른 문서로 소속을 바꾸는 MOVE와 구분한다. 원문에는 별점 요청 앞에 이미 제품 소개와 설치 링크가 있다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "프로젝트 응원 / Support",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "설치·사용 안내 및 제약사항"
+          },
+          "purpose_reason": "프로젝트 홍보와 참여 유도는 README의 프로젝트 응원 안내에 속한다.",
+          "priority_reason": "처음 방문한 독자의 도구 이해·설치·사용을 먼저 돕고, 별점 요청은 그 뒤에 배치한다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-004",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/chatgpt2codex",
+        "path": "README.md",
+        "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+        "blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+        "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 70,
+          "line_end": 74,
+          "text": "The first-run wizard can configure the ChatGPT web connector. Users without an\nexisting Cloudflare Named Tunnel/hostname can choose a temporary Quick Tunnel and do not need a\nCloudflare account, domain, or Tunnel Token. The resulting\n`*.trycloudflare.com` URL changes when the tunnel restarts and is intended as\na convenience/development path rather than a stable production hostname."
+        }
+      ],
+      "contract": {
+        "audience": "첫 설정을 수행하는 사용자",
+        "purpose": "임시 터널과 고정 터널 중 선택",
+        "language": "en"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "REQUIRED_CAVEAT",
+        "rationale": "Quick Tunnel의 계정·도메인·Tunnel Token 요구 여부와 URL의 비영속성은 첫 설정 사용자가 임시·고정 터널을 선택하는 데 필요한 정보다. README의 첫 설정 목적에 부합하므로 보존하고 선택 전에 확인할 수 있는 위치에 배치한다.",
+        "nuance": "KEEP는 필요한 정보를 보존한다는 판단이며 현재 위치를 무조건 고정한다는 뜻은 아니다. 현재 배치가 선택 전에 조건을 전달하는지 확인하고 필요하면 재배치한다. 아래 목적지는 논리적 배치 제안이며 실제 섹션·앵커의 존재를 확정하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "첫 설정 / 터널 선택 안내",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "임시·고정 터널 선택 및 설정 실행"
+          },
+          "purpose_reason": "계정·도메인·Tunnel Token 요구 여부와 URL의 비영속성을 알려 사용자가 목적에 맞는 연결 방식을 선택하도록 돕는다.",
+          "priority_reason": "터널 방식 선택에 영향을 주는 조건이므로 선택·설정 실행 전에 읽도록 배치한다. 기존 위치가 이 조건을 충족하면 유지한다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-005",
+      "document_type": "release_notes",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/chatgpt2codex",
+        "path": "docs/RELEASE_NOTES_v0.3.1.md",
+        "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+        "blob_sha": "d6b804f59e7e992c65a08511b6bc0077b7c9712b",
+        "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/docs/RELEASE_NOTES_v0.3.1.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 7,
+          "line_end": 10,
+          "text": "- **Quick Tunnel readiness:** `install.sh` waits for the public Cloudflare endpoint to become healthy instead of stopping as soon as the local runtime starts. It fails early when the runtime or tunnel exits.\n- **Fresh-clone installation:** Restores the executable Git mode (`100755`) of `install.sh` so the documented `./install.sh` command works after `git clone`.\n- **C2C source editing:** Preserves existing file permissions when applying patches or overwriting files, carries source permissions on moves, and restores permissions during rollback.\n- **Regression protection:** Restores the executable mode of `scripts/e2e-release-bootstrap.sh`, adds permission-preservation tests, and checks both bootstrap scripts' executable Git modes in CI."
+        }
+      ],
+      "contract": {
+        "audience": "업데이트 사용자와 유지보수 담당자",
+        "purpose": "버전 변경 내용 파악",
+        "language": "en"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "CHANGELOG_SPECIFICITY",
+        "rationale": "사용자에게 보이는 터널 준비 확인·설치 스크립트 실행 권한·파일 권한 보존의 변화와 유지보수자의 회귀 방지 검증 정보는 릴리스 변경사항을 이해하는 목적에 관련성이 높고 중요하므로 보존한다.",
+        "nuance": "KEEP는 정보 보존 판단이며 현재 위치나 항목 순서를 고정하지 않는다. 사용자 동작 변화와 유지보수자용 검증 정보를 독자·구성에 맞게 배치할 수 있다. 변경 설명의 보존이 실제 구현 동작이나 테스트 통과의 확인을 뜻하지는 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "변경사항 / 검증",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "사용자 동작 변화 안내 (회귀 방지 테스트·CI 설명의 배치 기준)"
+          },
+          "purpose_reason": "업데이트 사용자에게 동작 변화를, 유지보수자에게 회귀 방지 검증 정보를 전달한다. 사용자 영향은 변경사항에 두고 테스트·CI는 뒤에 두거나 검증 섹션으로 묶을 수 있다.",
+          "priority_reason": "사용자에게 직접 영향을 주는 변화부터 전달하고 검증 정보를 이어서 배치하는 것을 기본으로 하되 독자·문서 구성에 따라 조정한다. 현재 순서를 고정하지 않는다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-006",
+      "document_type": "technical_document",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/chatgpt2codex",
+        "path": "docs/TAURI_F4D3_WINDOWS_CLI_REGISTRATION.md",
+        "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+        "blob_sha": "109fafaa0ee8249dd443027aaf5cbc2586f14041",
+        "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/docs/TAURI_F4D3_WINDOWS_CLI_REGISTRATION.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 14,
+          "line_end": 32,
+          "text": "- Default invocation: **read-only** JSON inventory. No changes.\n- `-Install`: explicit opt-in only. Requires the existing per-user installed\n  `Programs/ChatGPT To Codex/bin/node.exe` and `dist/cli.js`. Creates two\n  `.cmd` wrappers in a separate private current-user location under\n  `%LOCALAPPDATA%/C2C-CLI-Shims`, then appends that directory to **User**\n  PATH only if absent. Does not touch the Process/Machine PATH nor change\n  the current terminal. Start a **new** PowerShell session afterwards.\n- A receipt marks ownership, target installation and whether this installer\n  originally added the User PATH entry. Repeated `-Install` verifies owned\n  wrapper content and does not duplicate entries.\n- `-Remove`: explicit opt-in; refuses to delete edited or unowned commands,\n  deletes only registered shims and receipt, removes PATH entry **only if**\n  the registration added it, and leaves unrelated files untouched.\n- Safeguards: reject symlink/reparse shims and receipt, missing CLI files,\n  injected Windows command-path metacharacters and conflicting existing\n  `c2c` or `chatgpt2codex` commands. Fixture root overrides work only\n  in isolated Windows GitHub CI under `RUNNER_TEMP`.\n- The fixed output includes only booleans and action ID. No sensitive paths,\n  arguments, process IDs, OAuth state, Owner Tokens or URLs are serialized."
+        }
+      ],
+      "contract": {
+        "audience": "CLI 등록 변경을 검토하는 개발자",
+        "purpose": "실행 및 제거의 영향 범위 검증",
+        "language": "en"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "SAFETY_DETAIL_PRESERVATION",
+        "rationale": "명시적 설치·제거 선택, 사용자 PATH 수정 범위, 명령 소유권과 제거 안전장치, 민감정보 출력 제한은 CLI 등록 변경을 검토하는 개발자가 영향 범위와 안전성을 판단하는 데 관련성과 중요도가 높으므로 보존한다.",
+        "nuance": "KEEP는 정보 보존 판단이며 위치·순서를 고정하지 않는다. 원문 문서의 CI-only 상태와 실제 Windows 업그레이드·제거·OAuth 연결 유지가 입증되지 않았다는 한계도 연결해 읽어야 한다. 해당 한계는 현재 발췌 밖의 문맥이며 이 사례의 검수로 구현 동작이나 CI 통과를 새로 확인한 것은 아니다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "CLI 등록 설계 / 동작 범위와 안전장치",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "적용 범위와 검증 상태 안내"
+          },
+          "purpose_reason": "개발자가 설치·제거의 영향 범위와 안전 조건을 검토할 수 있도록 동작 및 제한 정보를 같은 문서에 보존한다.",
+          "priority_reason": "적용 범위·검증 상태를 먼저 밝히고 설치 동작, 제거 동작, 안전장치·출력 제한 순으로 안내한다. 발췌는 대체로 이 순서이므로 큰 재배치는 필요 없어 보이지만 현재 순서를 고정하지 않는다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-007",
+      "document_type": "technical_document",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/resume",
+        "path": "experiences/README.md",
+        "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+        "blob_sha": "b71bbcb8782b5b45716dc5c8bab7506435590d9f",
+        "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/experiences/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 52,
+          "line_end": 55,
+          "text": "- 말로는 [12개 개인/팀 기여·수치/모집단 교차검증 원장](mallo-rework-checkpoint.md)과 [AI 시스템/백엔드 핵심 사례 5선](mallo.md#채용용-핵심-사례-5선--ai-시스템백엔드-기준)을 구분합니다. 60대 초기 탐색 설문 13명과 미실행 최종 사용자 평가는 별개이며, Real E2E p95 3.338초는 요구 1.5초 미달이라는 한계를 포함합니다.\n- 말해봄은 [12개 작업군·대화 누락 감사·귀속/중복 교차검증 원장](malhaebom-rework-checkpoint.md)과 [AI Agent/Backend 우선 사례 5개](malhaebom.md#채용용-핵심-사례-5선--ai-agentbackend-기준)를 구분해 활용합니다. 검증 완료는 실제 운영 전체 E2E·마감 제출·독립 사람 품질 평가를 뜻하지 않습니다.\n\n- HCI 주식정보 서비스는 [개인 DB/쿼리 Git 커밋·팀 설문 A/B 검증 원장](hci-stock-service-evidence-ledger.md)을 근거로 작성했습니다. 18명 팀 사용자 평가와 개인 구현을 분리하며, 목표가 과거 적중률·Gemini 전체 재현·현재 서비스 운영은 검증 완료로 간주하지 않습니다. 원본 CSV 12/6과 발표 13/5의 일부 설문 집계 차이도 원장에 명시했습니다."
+        }
+      ],
+      "contract": {
+        "audience": "경험 자료를 찾아보는 독자",
+        "purpose": "대상 프로젝트 문서 탐색",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "COMPRESS",
+        "rule_id": "INDEX_DETAIL_OVERLOAD",
+        "rationale": "자료 링크와 원장·핵심 사례의 역할 구분은 색인의 탐색·활용 목적에 필요하므로 유지한다. 상세 성능 수치·평가 미완료·집계 차이는 고정 커밋의 근거 문서에 이미 설명되어 있어 색인에서는 중복을 축약한다. 단, 색인에 남긴 성과 주장에 필수인 해석 조건은 함께 남긴다.",
+        "nuance": "주의사항이라는 이유만으로 모두 노출하거나 제거하지 않는다. 수정된 색인의 주장을 기준으로 오해·판단 변화 여부를 다시 확인한다. 예를 들어 색인에서 성능 달성을 주장하지 않으면 상세 지연 수치까지 반복할 필요는 적지만, 성능·검증 완료를 주장하면 해당 한계를 링크만으로 대체할 수 없다. COMPRESS는 원문 전체 이동이나 근거 기록 삭제를 뜻하지 않으며 실제 출처 파일은 수정하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "작성 원칙 / 자료 활용 안내",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "경험 목록"
+          },
+          "purpose_reason": "원장과 핵심 사례의 역할·링크를 남겨 독자가 목적에 맞는 경험 자료를 선택하도록 돕는다.",
+          "priority_reason": "경험 탐색 뒤에 자료 활용 원칙을 안내하고, 남긴 주장을 이해하는 데 필수인 조건은 그 주장 가까이에 둔다. 세부 한계는 연결된 근거 문서에서 확인하도록 한다."
+        },
+        "context_evidence": [
+          {
+            "repository": "nanocode00/resume",
+            "path": "experiences/mallo-rework-checkpoint.md",
+            "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+            "supports": "초기 13명 설문과 최종 사용자 평가 미수행, Real Warm p95 3.338초의 1.5초 요구 미달 기록",
+            "blob_sha": "48039dcfa73c75fab92374f1f706c03f44fff2e5"
+          },
+          {
+            "repository": "nanocode00/resume",
+            "path": "experiences/malhaebom-rework-checkpoint.md",
+            "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+            "blob_sha": "6a2a12808c4bd777dca84c1ed57c8410301d2f32",
+            "supports": "운영 전체 E2E·독립 사람 품질·마감 및 동결 상태의 검증 범위 구분"
+          },
+          {
+            "repository": "nanocode00/resume",
+            "path": "experiences/hci-stock-service-evidence-ledger.md",
+            "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+            "blob_sha": "15c8c1401122eee78d33bf3cc248a45bb747c5bc",
+            "supports": "개인·팀 귀속, 미확정 기능·운영 상태, 설문 원본 12/6과 발표 13/5 차이 기록"
+          }
+        ]
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-008",
+      "document_type": "resume_master",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/resume",
+        "path": "resume.md",
+        "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+        "blob_sha": "6c3fdd833e3b0b2259136c7a49c05392df1d38ea",
+        "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/resume.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 67,
+          "line_end": 68,
+          "text": "- **조치**: PRD/TRD와 공통 command contract, Order Engine, Senior-first UI를 구성하고 AI Hub 친절 발화로 MeloTTS를 fine-tuning했습니다. 동일 20문장 GPU benchmark에서 **Melo Base 0.1985s / Melo Friendly 0.2041s / Qwen Base 6.9075s / Qwen Friendly 28.1953s**를 비교해 MeloTTS Friendly를 선택했습니다. 프로젝트 후반에는 Whisper Medium QLoRA 후보 sweep과 Qwen3-1.7B QLoRA 3-epoch 학습도 직접 수행했으며, Gateway/STT/NLU/TTS를 `8000/8001/8002/8003` sidecar 구조로 통합했습니다.\n- **결과**: Fine-tuned MeloTTS는 baseline보다 평균 생성 시간이 약 **5.6ms(+2.8%)** 늘었지만 친절체 억양을 얻으면서 0.2초 수준의 interactive latency를 유지했습니다. 이후 `G_2800` production checkpoint 기준 benchmark는 **mean 0.38s / p95 0.53s / RTF 0.0894**였습니다. Vercel frontend + Cloudflare Tunnel + local FastAPI runtime으로 배포했고, real STT+NLU와 MockTTS 기반 50-turn isolated E2E는 **p95 312.2ms**로 STT를 주 bottleneck으로 확인했습니다. 2026년 8월 기능 동결과 repository cleanup까지 마치고 프로젝트를 종료했습니다."
+        }
+      ],
+      "contract": {
+        "audience": "빠르게 훑는 채용 담당자",
+        "purpose": "채용 담당자가 프로젝트별 실제 기여와 성과를 이해할 수 있도록, 부적합한 템플릿에 억지로 압축된 요약 이력의 구조를 재설계",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "FLAG",
+        "rule_id": "TEMPLATE_STRUCTURE_MISMATCH",
+        "rationale": "사용자 검토에서 핵심 문제는 관리 안내의 문서 간 이동이 아니라, 실제 수행한 일을 맞지 않는 템플릿에 억지로 압축해 기여·판단·결과가 밀집한 요약 이력의 구조로 정정됐다. 추가 압축이나 단순 이동을 전제하지 않고 정보 단위를 다시 나누고 재취합·구조화하는 방향을 검토한다. 구체적 구조와 액션 표현은 아직 모호하므로 FLAG를 유지한다.",
+        "nuance": "README의 관리·작업 안내를 AGENTS.md로 옮기는 판단은 RW-009에서 별도로 다룬다. 이 사례는 구조 재설계이며 단순한 위치 이동이나 문구 수정만으로 해결된다고 가정하지 않는다. 새 구조에서도 실제 기여·측정 조건·검증 한계·출처를 보존하며 기존 템플릿이나 더 짧은 분량에 다시 억지로 맞추지 않는다. 현재 발췌만으로 이력서 전체의 결함을 확정하지 않는다.",
+        "review_status": "provisional_revisit_required",
+        "proposed_plan": [
+          {
+            "source_document": "resume.md",
+            "target_document": "resume.md",
+            "proposed_actions": [
+              "REVISE"
+            ],
+            "source_disposition": "retain_information_during_restructuring",
+            "reason": "추가 압축보다 실제 수행 내용에 맞게 정보 단위를 재분리·재취합하고 설명 구조를 재설계한다. REVISE의 구조 변경 범위와 placement의 역할은 재검토가 필요하다."
+          }
+        ],
+        "open_questions": [
+          "기존 템플릿이 어떤 정보 관계를 왜곡·누락하는지 전체 이력과 대조해 확인",
+          "프로젝트별 실제 기여·판단·결과를 설명하는 적절한 구조와 정보 단위 결정",
+          "구조 재설계를 기존 REVISE·placement 및 재취합 단계로 어떻게 표현·평가할지 재검토",
+          "유지할 주장에 필수인 측정 조건·귀속·검증 한계를 새 구조에서 보존하는 방식 확인"
+        ]
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-009",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/resume",
+        "path": "README.md",
+        "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+        "blob_sha": "6e3e3e02f7aaef0e1d433971f8fdcbe41013c1f6",
+        "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 34,
+          "line_end": 40,
+          "text": "- `resume.md`는 지원 직무에 맞춰 내용을 덜어내기 전의 **마스터 이력서**로 관리합니다.\n- 프로젝트의 세부 사실, 문제 상황, 선택 이유, 수치와 성과는 `experiences/`에 보존합니다.\n- `experiences/career-timeline.md`에는 이력서에서 빠진 학습과 제작 경험도 연대기 형태로 남깁니다.\n- 오래된 프로젝트를 다시 정리할 때는 `guides/commit-based-experience-reconstruction.md`의 `commit graph → 작업 원장 → 누락 역검증 → canonical 문서 → 포트폴리오 선별` 절차를 따릅니다.\n- 이력서·경험기술서로 압축할 때는 `guides/resume-experience-writing.md`, 자소서를 쓸 때는 `guides/cover-letter-writing.md`를 따릅니다.\n- 실제 제출했던 자소서는 회사별로 `cover-letters/`에 보관합니다.\n- 공개 저장소이므로 전화번호, 개인 이메일, 주소 등 불필요한 개인정보는 커밋하지 않습니다."
+        }
+      ],
+      "contract": {
+        "audience": "채용 담당자 (README), 저장소 작업 에이전트 (AGENTS.md)",
+        "purpose": "README는 핵심 이력 전달에 사용하고, 자료 구조·관리 원칙·작업 제약은 AGENTS.md에서 에이전트에게 안내",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "MOVE",
+        "rule_id": "DOCUMENT_PURPOSE_ALIGNMENT",
+        "rationale": "발췌는 이력 자체보다 원본·근거 문서의 역할, 자료 복원·작성 절차, 보관 위치와 개인정보 커밋 제약을 설명한다. 채용 담당자용 README보다 에이전트의 저장소 작업 안내에 부합하므로 AGENTS.md로 이동한다.",
+        "nuance": "문서 역할에 대한 사용자 지정 목표를 적용한 판단이며 실제 출처 문서를 수정한 것은 아니다. 이동 시 기존 안내의 경로·개인정보 제약을 보존하고 AGENTS.md의 기존 내용과 중복·충돌 여부를 확인한다. 요약 이력의 템플릿·구조 문제는 RW-008에서 별도로 다룬다.",
+        "placement": {
+          "target_document": "AGENTS.md",
+          "target_section": "저장소 구조와 자료 관리·작업 원칙",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "이력·자소서 작성 및 수정 절차"
+          },
+          "purpose_reason": "에이전트가 원본·근거·가이드의 역할과 경로, 개인정보 커밋 제약을 파악한 뒤 작업하도록 한다.",
+          "priority_reason": "문서별 역할·보존 원칙·개인정보 제약을 먼저 안내한 뒤 구체적인 복원·작성 절차와 참고 가이드를 배치한다. 실제 대상 문서의 기존 구성은 이동 전에 확인한다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-010",
+      "document_type": "writing_guide",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/resume",
+        "path": "guides/resume-experience-writing.md",
+        "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+        "blob_sha": "4d92cc824e0844630a7bb71e96683bd827e7f895",
+        "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/guides/resume-experience-writing.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 11,
+          "line_end": 17,
+          "text": "채용 담당자가 짧은 시간 안에 강한 근거를 확인할 수 있는 문서로 작성합니다.\n\n- 추상적인 장점보다 실제 수치와 판단을 우선\n- 주력 프로젝트 2~3개를 상세히 설명\n- 보조 프로젝트는 2~3줄로 압축\n- 각 프로젝트에 기간, 팀 규모, 본인 담당 범위를 표시\n- 세부 provenance와 디버깅 기록은 `experiences/`로 넘김"
+        }
+      ],
+      "contract": {
+        "audience": "경험문서를 작성·수정하는 에이전트",
+        "purpose": "근거를 바탕으로 경험문서를 작성하는 방법을 안내하고, 저장소 문서별 역할·작업 분담은 루트 AGENTS.md에서 확인",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "MOVE",
+        "rule_id": "DOCUMENT_ROLE_GUIDANCE_PLACEMENT",
+        "rationale": "가이드의 독자는 작성 작업을 수행하는 에이전트다. resume.md와 experiences/의 역할·관리 경로·정보 분담 같은 저장소 공통 안내는 루트 AGENTS.md로 옮기고 경험문서를 근거에 따라 작성하는 방법은 현재 가이드에 남긴다.",
+        "nuance": "MOVE의 대상은 문서별 역할·경로·정보 분담 안내이며 발췌 전체나 가이드 전체가 아니다. 근거·귀속·측정 조건을 보존하는 작성 원칙은 유지한다. 채용 담당자는 결과 문서의 독자이지 이 작업 가이드의 직접 독자가 아니다. 문서 목적 설명과 경험 작성 기준이 섞인 구간은 정보 단위로 분리해 적용하고 획일적 분량·템플릿을 강제하는 기준은 RW-008의 구조 문제와 구분해 재검토한다.",
+        "action_scope": "resume.md 등의 역할·저장소 경로·문서 간 정보 분담 안내",
+        "placement": {
+          "target_document": "AGENTS.md",
+          "target_section": "문서별 역할과 작성 가이드 연결",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "경험문서 작성 작업 안내와 가이드 참조"
+          },
+          "purpose_reason": "에이전트가 각 문서의 역할·작업 대상·자료 위치를 루트에서 확인하고 상세 작성 방법은 가이드로 찾아가도록 한다.",
+          "priority_reason": "문서별 역할·작업 범위를 먼저 안내한 뒤 경험 작성 가이드를 연결한다. RW-009에서 이동할 관리 안내와 대상 문서의 기존 내용은 통합·중복 검토한다."
+        },
+        "context_note": "고정 커밋의 전체 가이드를 재조회해 상단의 문서 역할 구분, resume.md·experiences/*.md 설명과 말미의 문서 간 정보 분담 체크리스트를 확인했다. 발췌 11~17행 자체에는 resume.md라는 파일명은 없고 바로 위 문맥에 있다."
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-011",
+      "document_type": "experience_record",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/resume",
+        "path": "experiences/crypto-lob-prediction.md",
+        "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+        "blob_sha": "cddfc532673ffd28d469ea671bb549a486a32b97",
+        "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/experiences/crypto-lob-prediction.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 3,
+          "line_end": 5,
+          "text": "## 한 줄 요약\n\nBinance BTCUSDT의 tick-by-tick 체결 데이터를 수집·전처리하고, 4-layer Mamba 모델로 5초 뒤 가격 방향을 예측했습니다. **약 19분의 validation 구간을 이용한 가상 중복거래 백테스트에서는 무수수료 +23.26%가 나왔지만, 수수료를 반영하면 손실로 바뀌었습니다.** 독립 test 20만 시퀀스의 3-class accuracy는 **45.79%**로 최빈 클래스 기준 55.64%보다 낮았습니다. 이 프로젝트는 모델의 수익성 입증이 아니라 **시계열 예측·실행비용 평가 과정과 실험 설계의 한계를 확인한 경험**입니다."
+        }
+      ],
+      "contract": {
+        "audience": "실험 평가자·채용 담당자",
+        "purpose": "투자 전략 실험의 결과와 한계 이해",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "CONDITIONAL_RESULT_NOT_CONTRADICTION",
+        "rationale": "문서 전체에서 다루는 데이터 수집·예측 실험, 결과와 한계, 경험의 의미를 함께 요약하므로 실험 평가자·채용 담당자가 경험을 파악하는 목적에 관련성과 중요도가 높다. 정보를 KEEP하고 문서 상단의 현재 요약 배치도 유지한다.",
+        "nuance": "무수수료 수익과 수수료 반영 손실은 조건이 다르므로 모순이 아니다. 요약에 성과 수치가 포함되어 있어 validation 구간·가상 중복거래·수수료 및 기준선 비교는 해석에 필요한 조건으로 함께 보존한다. 현재 사례의 배치 적절성을 인정하는 것이 모든 KEEP의 위치를 고정한다는 뜻은 아니며 실제 실험을 재실행·검증한 것도 아니다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "문서 상단 / 한 줄 요약",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "실험·경험의 상세 설명"
+          },
+          "purpose_reason": "독자가 상세 내용을 읽기 전에 경험 전체의 수행 내용·결과·한계를 파악하도록 한다.",
+          "priority_reason": "문서 전체를 안내하는 요약은 상세 설명보다 먼저 제공하는 것이 적절하다. 현재 상단 배치에 문제가 없어 재배치를 제안하지 않는다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-012",
+      "document_type": "resume_master",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/resume",
+        "path": "resume.md",
+        "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+        "blob_sha": "6c3fdd833e3b0b2259136c7a49c05392df1d38ea",
+        "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/resume.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 79,
+          "line_end": 84,
+          "text": "- **LLM 모델 평가·선정:** OpenRouter **40종 사전검증**, **22종 × 30건 = 660건 합성 평가**, 별도 최종 후보 4종 비교를 통해 출력 계약·지연·비용·로컬 서비스 호환성을 확인하고 **Gemini Flash-Lite를 로컬 코칭 기본 후보로 선정**했습니다. 합성 평가 결과를 실제 사용자 품질이나 운영 안정성으로 해석하지 않았습니다.\n- **Agent/MCP 신뢰성 검증:** FastMCP 연동·인증·DB 저장 경로를 통합 테스트하고, PR 리뷰에서 **기존 DB 행을 새 요청의 저장 성공으로 잘못 판정하는 결함**을 발견해 수정 요청했습니다. **검증 기준과 결함 발견은 개인 기여**이며, 저장 verifier의 실제 코드 수정은 팀원이 맡았습니다.\n- **Whisper STT 도메인 적응:** Whisper Medium QLoRA 학습·데이터 정제와 면접 도메인/기존 도메인 성능을 함께 평가했습니다. 후보 C2는 최종 **1,233건 평가 WER 9.77%**를 기록했지만 기존 119건 retention WER는 **15.33% → 16.81%로 악화**되어, 이를 전반적인 성능 개선이나 운영 모델 교체 성공으로 주장하지 않습니다.\n- **개발 품질 게이트:** PR 본문 수정과 최신 HEAD의 정책 검사 재실행 과정에서 발생하는 **race condition을 수정**하고, Backend/Frontend 테스트·빌드용 **GitHub Actions CI**를 구성했습니다. 초기 Actions 4개 체크 통과는 확인했으나, 배포 전체 E2E나 CI 비용 절감 효과가 검증됐다고 주장하지 않습니다.\n\n> 코어 Agent 구현·DB verifier 패치 등 팀원 작업과 개인의 모델 평가·실험·리뷰·테스트·CI 기여를 구분합니다. 최종 서비스 운영 전체 E2E·독립 사용자 품질 평가 완료를 의미하지 않습니다."
+        }
+      ],
+      "contract": {
+        "audience": "기술 면접관·채용 담당자",
+        "purpose": "채용 담당자·기술 면접관에게 실제 수행한 작업의 전문성과 개인 기여·성과를 전달",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "MOVE",
+        "rule_id": "ATTRIBUTION_AND_LIMITS",
+        "rationale": "이력서의 목적은 수행 작업의 전문성과 개인 기여·성과를 전달하는 것이다. 네 항목 말미와 마지막 종합 주의사항의 상세 검증 한계는 별도 프로젝트 근거 문서로 이동하고, 이력서에서는 핵심 작업과 성과를 중심으로 구성한다. 같은 문서 끝에 주의사항을 모으는 이전 안을 대체한다.",
+        "nuance": "MOVE 대상은 상세 한계·검증 범위 설명이며 핵심 기여 전체가 아니다. 남기는 주장을 더 넓게 해석하게 만드는 조건은 짧게 유지하거나 주장을 정확한 범위로 좁힌다. 예를 들어 합성 평가를 실사용 검증으로, 결함 발견·수정 요청을 팀원의 패치 구현으로, 일부 도메인 성능을 전반적 개선으로 바꾸지 않는다. 상세 근거 연결은 가능하되 필수 해석 조건을 링크만으로 대체하지 않는다. 실제 대상 문서의 중복·누락을 확인한 뒤 이전 범위를 확정한다.",
+        "placement": {
+          "target_document": "프로젝트별 상세 경험·검증 근거 문서 (최종 경로 미정)",
+          "target_section": "기여 항목별 검증 범위와 한계",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "각 작업·실험의 상세 근거"
+          },
+          "purpose_reason": "상세 검증을 원하는 독자는 별도 문서에서 근거와 한계를 확인하고, 이력서 독자는 작업의 전문성과 핵심 기여를 빠르게 파악하도록 한다.",
+          "priority_reason": "상세 조건은 대응하는 작업·측정 근거와 함께 배치한다. 이력서에는 핵심 기여·성과 및 그 의미를 바꾸지 않는 최소 조건을 남기고 근거 문서를 연결한다."
+        },
+        "action_scope": "네 기여 항목 말미 및 마지막 종합 주의사항의 상세 한계·검증 범위 설명"
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-013",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/QuotaTray",
+        "path": "README.md",
+        "commit_sha": "e62eb5c37fbf7265a7937f3939bf99681e38cb03",
+        "blob_sha": "3a3209e9caf26dce59e87a9bb66bf04174e4395e",
+        "url": "https://github.com/nanocode00/QuotaTray/blob/e62eb5c37fbf7265a7937f3939bf99681e38cb03/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 54,
+          "line_end": 62,
+          "text": "Antigravity/agy에서 한 번 정상 로그인해 로컬 OAuth 세션이 생성되면, 이후 QuotaTray는 `agy` 프로세스가 꺼져 있어도 직접 access token을 갱신해 쿼터를 조회할 수 있습니다.\n\n일반 사용자는 Antigravity OAuth 환경변수를 별도로 설정할 필요가 없습니다. QuotaTray는 공개 installed-app OAuth client 메타데이터를 자동으로 확인하고 SHA-256 fingerprint로 검증한 뒤 QuotaTray 전용 credential cache에 저장합니다. Antigravity가 소유한 `gemini:antigravity` credential은 덮어쓰지 않습니다.\n\n문제 진단 시 다음 명령으로 직접 refresh 경로를 검증할 수 있습니다.\n\n```powershell\ndotnet run --project .\\QuotaTray.TestCli -- refresh-test\n```"
+        }
+      ],
+      "contract": {
+        "audience": "QuotaTray 설치·사용자",
+        "purpose": "로그인 이후 쿼터가 정상 갱신되는지 이해",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "MOVE",
+        "rule_id": "AUDIENCE_SEGMENTATION",
+        "rationale": "로그인 후 agy 종료 상태에서도 갱신되는 동작과 OAuth 환경변수 불필요 안내는 사용자에게 필요하므로 README에 유지한다. 메타데이터·지문 검증·캐시 저장의 내부 구현은 인증 설계 문서로, 개발 환경이 필요한 TestCli 진단은 개발자용 문제 해결 문서로 분리한다.",
+        "nuance": "MOVE는 발췌 전체가 아니라 내부 구현과 개발자 진단에 한정한다. 기존 Antigravity 자격증명을 덮어쓰지 않는다는 사용자 영향은 README에 짧게 남기고 상세 소유권·저장 방식은 설계 문서에 보존한다. 목적지의 실제 구성·중복을 확인한 뒤 이전하며 실제 인증 동작을 재검증했다는 뜻은 아니다.",
+        "action_scope": "OAuth 메타데이터·지문 검증·캐시 저장의 내부 구현과 dotnet TestCli 진단 절차",
+        "information_decisions": [
+          {
+            "content_action": "KEEP",
+            "scope": "최초 로그인 후 agy가 꺼져 있어도 쿼터 갱신 가능 및 OAuth 환경변수 불필요 안내",
+            "placement": {
+              "target_document": "current",
+              "target_section": "인증 설정 / 첫 사용",
+              "purpose_reason": "사용자가 필요한 초기 설정과 로그인 이후 동작을 이해하도록 안내한다."
+            }
+          },
+          {
+            "content_action": "KEEP",
+            "scope": "기존 Antigravity 자격증명을 덮어쓰지 않는다는 짧은 사용자 영향 안내",
+            "placement": {
+              "target_document": "current",
+              "target_section": "인증 설정 / 첫 사용",
+              "purpose_reason": "연동이 기존 인증 정보에 미치는 영향을 사용자에게 알린다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "OAuth 메타데이터 확인·SHA-256 지문 검증·전용 캐시 저장 및 상세 소유권 설명",
+            "placement": {
+              "target_document": "인증 설계 문서 (최종 경로·기존 내용 확인 필요)",
+              "target_section": "OAuth 검증·자격증명 소유권과 저장",
+              "purpose_reason": "내부 인증 구조를 검토하는 개발자에게 구현과 보안 경계를 설명한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "dotnet run --project .\\QuotaTray.TestCli -- refresh-test 진단 절차",
+            "placement": {
+              "target_document": "개발자용 문제 해결 문서 (최종 경로·기존 내용 확인 필요)",
+              "target_section": "직접 refresh 경로 진단",
+              "purpose_reason": "소스와 개발 환경이 필요한 진단 절차를 해당 환경을 갖춘 독자에게 안내한다."
+            }
+          }
+        ]
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-014",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/QuotaTray",
+        "path": "README.md",
+        "commit_sha": "e62eb5c37fbf7265a7937f3939bf99681e38cb03",
+        "blob_sha": "3a3209e9caf26dce59e87a9bb66bf04174e4395e",
+        "url": "https://github.com/nanocode00/QuotaTray/blob/e62eb5c37fbf7265a7937f3939bf99681e38cb03/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 28,
+          "line_end": 38,
+          "text": "### ✨ 핵심 기능\n\n* **🚀 8대 주요 AI 프로바이더 완벽 지원**:\n  1. **OpenAI Codex**: API 실제 반환 Rate Limit 윈도우(`5h / 7d`) 및 장기 윈도우 대표값 표시 (`codex login` / `~/.codex/auth.json`)\n  2. **Google Antigravity**: Gemini 풀 및 Claude/GPT 풀 쿼터 실시간 모니터링 (`agy auth login` / Cloud Code Assist)\n  3. **Claude Code**: Anthropic 5h / 7d 사용률 및 리셋 카운트다운 (`claude login` / `API Key`)\n  4. **GitHub Copilot**: 플랜별 최적화 (Free 플랜: Code Completions / 유료 플랜: Premium Requests 단독 집중)\n  5. **OpenRouter**: 계정 크레딧 실시간 잔액($), 무료 모델 일일 한도(`50/day` or `1,000/day`), API Key 제한 모니터링\n  6. **Kimi (Moonshot AI)**: 사용 가능한 캐시/바우처 잔액 및 쿼터\n  7. **Z.AI (Zhipu GLM)**: API 계정 상태 및 토큰 쿼터\n  8. **Synthetic.new**: 사용량 및 구독 상태"
+        }
+      ],
+      "contract": {
+        "audience": "잠재 사용자",
+        "purpose": "지원 서비스와 제한 사항 파악",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "FLAG",
+        "rule_id": "UNVERIFIED_ABSOLUTE_CLAIM",
+        "rationale": "핵심 기능 목록은 잠재 사용자가 지원 범위를 파악하는 데 필요하므로 유지한다. 사용자 지정 문체에 따라 이모지를 정리하고, 근거 없는 완벽 지원·8대 주요·플랜별 최적화 같은 표현은 실제 지원 기능을 설명하는 문장으로 고친다. 실시간 동작 등 확인되지 않은 주장은 FLAG로 남기고 근거 확인 후 표현을 결정한다.",
+        "nuance": "기능 개요에 세부 조건·기준 시점을 일괄 필수로 요구하지 않는다. 필요한 상세 정책·설정 정보는 별도 문서로 연결할 수 있으며 현재 문서의 주장 해석에 꼭 필요한 한정만 가까이 남긴다. 고정 한도 수치에 조건·날짜가 없다는 이유만으로 오류로 판정하지 않는다. 실제 연동·갱신 주기·제공자 정책은 이번 원문 검수로 확인하지 않았으므로 실시간을 주기적 갱신으로 임의 확정하지 않는다.",
+        "review_points": [
+          {
+            "action": "REVISE",
+            "scope": "제목·강조의 이모지",
+            "reason": "사용자 지정 문체에 맞춰 장식성 이모지를 제거한다."
+          },
+          {
+            "action": "REVISE",
+            "scope": "8대 주요·완벽 지원·플랜별 최적화",
+            "reason": "근거 없는 서열·절대적 지원·추상적 품질 표현을 실제 표시 항목과 지원 범위 중심으로 수정한다. 대체 문구에서도 확인되지 않은 기능을 추가하지 않는다."
+          },
+          {
+            "action": "FLAG",
+            "scope": "실시간 모니터링·실시간 잔액",
+            "reason": "실제 갱신 동작을 확인한 뒤 표현을 정한다. 개요에서 갱신 주기 수치를 반드시 제시하라는 요구는 아니다."
+          },
+          {
+            "action": "REVISE",
+            "scope": "서비스별 기능 목록의 설명 기준",
+            "reason": "서비스·표시 정보·필요한 지원 제약이라는 공통 기준으로 정리하되 개요에 불필요한 세부 조건·기준 시점을 일괄 추가하지 않는다."
+          },
+          {
+            "action": "REVISE",
+            "scope": "Rate Limit 윈도우·대표값·모델 풀 등 용어",
+            "reason": "잠재 사용자가 이해할 수 있게 의미를 풀어 쓰고 서비스별 표현을 통일한다."
+          },
+          {
+            "action": "MOVE",
+            "scope": "인증 파일 경로와 내부 인증·설정 상세",
+            "reason": "기능 파악에 불필요한 상세는 인증·설정 문서로 옮기고 필요한 안내를 연결한다. 실제 목적지와 기존 내용은 이동 전 확인한다."
+          }
+        ]
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-015",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/QuotaTray",
+        "path": "README.md",
+        "commit_sha": "e62eb5c37fbf7265a7937f3939bf99681e38cb03",
+        "blob_sha": "3a3209e9caf26dce59e87a9bb66bf04174e4395e",
+        "url": "https://github.com/nanocode00/QuotaTray/blob/e62eb5c37fbf7265a7937f3939bf99681e38cb03/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 8,
+          "line_end": 8,
+          "text": "[![Release](https://img.shields.io/badge/Release-v0.1.0-818cf8.svg)](https://github.com/nanocode00/QuotaTray/releases)"
+        },
+        {
+          "line_start": 70,
+          "line_end": 70,
+          "text": "[GitHub Releases](https://github.com/HonorBear/QuotaTray/releases)에서 OS에 맞는 단일 실행 파일을 다운로드하여 실행하세요:"
+        }
+      ],
+      "contract": {
+        "audience": "설치 사용자",
+        "purpose": "공식 릴리스 페이지로 정확히 이동",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "REVISE",
+        "rule_id": "BROKEN_DOWNLOAD_LINK",
+        "rationale": "2026-11-05 링크 확인에서 nanocode00/QuotaTray/releases는 200, HonorBear/QuotaTray/releases는 리다이렉트 없이 404로 응답했다. 설치 사용자가 다운로드 경로를 따라갈 수 있도록 본문 링크를 정상 릴리스 주소로 수정한다.",
+        "nuance": "설치에 필요한 다운로드 안내는 유지한다. 확인된 것은 현재 공개 접근의 응답 상태이며 수집 당시 링크 상태나 404의 원인을 확정하지 않는다. 실제 다운로드 파일의 정상 실행·설치·보안성을 확인한 것은 아니다.",
+        "link_check": {
+          "observed_on": "2026-11-05",
+          "scope": "current_public_http_response_not_capture_time",
+          "results": [
+            {
+              "url": "https://github.com/nanocode00/QuotaTray/releases",
+              "http_status": 200,
+              "final_url": "https://github.com/nanocode00/QuotaTray/releases"
+            },
+            {
+              "url": "https://github.com/HonorBear/QuotaTray/releases",
+              "http_status": 404,
+              "final_url": "https://github.com/HonorBear/QuotaTray/releases"
+            }
+          ],
+          "proposed_replacement": "https://github.com/nanocode00/QuotaTray/releases"
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-016",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/project3-planning",
+        "path": "README.md",
+        "commit_sha": "0f5b6f8068db58d58045880bd6e94f64b7ec7537",
+        "blob_sha": "ebdb5156798abab32fc56298042708c123f1f244",
+        "url": "https://github.com/nanocode00/project3-planning/blob/0f5b6f8068db58d58045880bd6e94f64b7ec7537/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 3,
+          "line_end": 5,
+          "text": "**이 저장소 루트에서 프로젝트에 옮길 문서 구조를 바로 검토할 수 있습니다.** 실제 대상은 [2조 프로젝트 저장소](https://github.com/aihuman-7th/proj3-b)이며, 해당 저장소에 적용하거나 PR을 생성하지 않았습니다. 아이디어·개별 기획안·API 실험·비밀값은 제외했습니다.\n\n기준 구조는 강사님이 제공한 `proj3-b`의 `f06acf2221f48e448c54c7254e8b9b4b76612170`입니다. 이곳에는 이관 후보 문서만 두며, 기존 제품 코드·평가셋·workflow를 복제하지 않습니다."
+        }
+      ],
+      "contract": {
+        "audience": "프로젝트 협업자",
+        "purpose": "문서 복사/이관 대상의 경계 판단",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "MOVE",
+        "rule_id": "INTRODUCTION_AND_WORK_CONTEXT_SEPARATION",
+        "rationale": "README에는 문서 이관 후보 구조를 검토하는 저장소라는 소개와 실제 적용 대상 링크만 유지한다. 적용·PR 미수행 상태, 기준 커밋, 선별·제외 내역 및 작업 제약은 상태·준비 기록·작업 지침으로 나눠 별도 문서에 분리한다.",
+        "nuance": "MOVE는 부연설명에 한정하며 저장소의 핵심 소개는 KEEP한다. 분리는 정보 폐기를 뜻하지 않는다. 현재 구성의 제외 내역과 향후 작업 금지 지침을 구분하고, 실제 목적지·기존 내용과 중복을 확인한 뒤 배치한다. 미수행 상태는 수집 시점의 기록으로 보존하며 현재 상태라고 단정하지 않는다. source 원문이나 외부 저장소를 수정한 것은 아니다.",
+        "action_scope": "적용·PR 미수행 상태, 기준 커밋, 자료 선별·제외 내역과 작업 제약의 부연설명",
+        "information_decisions": [
+          {
+            "content_action": "KEEP",
+            "scope": "문서 이관 후보 구조를 검토하는 저장소라는 소개와 실제 적용 대상 링크",
+            "placement": {
+              "target_document": "current",
+              "target_section": "저장소 소개",
+              "relative_position": {
+                "relation": "before",
+                "anchor": "문서 목록과 검토 안내"
+              },
+              "purpose_reason": "독자가 이 저장소의 용도와 실제 적용 대상을 바로 이해하도록 한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "실제 적용·PR 생성 미수행 상태",
+            "placement": {
+              "target_document": "이관 상태·작업 기록 (최종 경로 미정)",
+              "target_section": "진행 상태",
+              "purpose_reason": "소개와 별도로 관리하고 기록 시점에 따른 상태 변화가 드러나도록 한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "기준 커밋 SHA와 자료 선별·제외 내역",
+            "placement": {
+              "target_document": "이관 준비·기준 기록 (최종 경로 미정)",
+              "target_section": "기준 자료와 포함·제외 범위",
+              "purpose_reason": "재현·인계·대조에 필요한 세부 준비 정보를 보존한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "제품 코드·평가셋·workflow 복제 금지 등 향후 작업 제약으로 적용할 내용",
+            "placement": {
+              "target_document": "AGENTS.md",
+              "target_section": "이관 작업 범위와 제약",
+              "purpose_reason": "에이전트가 작업할 때 따라야 할 지침을 모은다. 단순한 현재 구성 설명은 준비 기록으로 구분하며 원문의 서술을 근거 없이 금지 규칙으로 강화하지 않는다."
+            }
+          }
+        ]
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-017",
+      "document_type": "project_gate_checklist",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/project3-planning",
+        "path": "docs/GATES.md",
+        "commit_sha": "0f5b6f8068db58d58045880bd6e94f64b7ec7537",
+        "blob_sha": "beadd876250fa235938246fc5406234aa2ab1b02",
+        "url": "https://github.com/nanocode00/project3-planning/blob/0f5b6f8068db58d58045880bd6e94f64b7ec7537/docs/GATES.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 31,
+          "line_end": 33,
+          "text": "## G4와 G5의 \"통과\"는 증거가 아닙니다: 변이 확인\n\n테스트가 초록이라는 것은 아무것도 단언하지 않는 테스트도 초록이라는 뜻입니다. 핵심 코드를 **한 줄 깨뜨렸을 때 그 테스트가 실제로 실패하는지** 확인하고 기록하세요. 사례: 재작성 횟수 상한 테스트가 상수끼리 비교하면(`assert n == MAX_REWRITES`) 상한을 99로 올려도 통과합니다. 리터럴과 비교해야(`assert n == 2`) 상한 변경을 잡습니다. AI 에이전트가 \"변이를 잡았다\"고 보고해도 직접 확인하세요. DART 실험에서 그 보고가 틀렸습니다."
+        }
+      ],
+      "contract": {
+        "audience": "CI 및 평가 게이트 담당자",
+        "purpose": "시험이 실제 결함을 검출하는지 판단",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "REVISE",
+        "rule_id": "CHECKLIST_TASK_ORIENTED_WRITING",
+        "rationale": "게이트 점검 문서에서는 주장을 강조하는 제목과 긴 해설보다 담당자가 수행·확인·기록할 작업을 명확히 안내해야 한다. 제목은 테스트 결함 검출 확인처럼 작업 중심으로 다시 쓰고, 본문은 의도적 결함 주입·예상 테스트 실패 확인·결과 기록 절차로 축약한다.",
+        "nuance": "핵심 검증 절차는 보존한다. 제목이 다른 페이지에서 복사됐는지는 확인하지 않았으며 수정 근거는 출처 추정이 아니라 점검 문서의 목적이다. 상수·리터럴 비교의 단정적 설명과 DART 과거 이력은 점검 본문에서 반복하지 않는다. 필요하면 정확한 상세 설명·실험 기록을 별도로 연결하되 실제 보존·출처를 확인한다. 이 사례 검수로 해당 테스트나 변이 검사를 실행한 것은 아니다.",
+        "editing_actions": [
+          {
+            "action": "REVISE",
+            "scope": "제목",
+            "reason": "논쟁적·단정적인 주장 대신 확인할 작업을 드러내는 제목으로 작성한다."
+          },
+          {
+            "action": "COMPRESS",
+            "scope": "본문의 교육적 해설·상수 비교 예시·과거 실험 일화",
+            "reason": "점검 담당자가 해야 할 절차와 기록 항목을 남기고 설명을 줄인다. 리터럴 비교만으로 결함 검출이 보장된다고 쓰지 않는다."
+          }
+        ],
+        "proposed_revision": "## 테스트 결함 검출 확인\n\n- 핵심 동작에 의도적인 결함을 넣고 실패해야 할 테스트를 지정한다.\n- 테스트를 실행해 예상한 실패가 발생하는지 확인한다.\n- 변경 지점, 예상 테스트, 실제 결과와 확인 날짜를 기록한다. 에이전트의 보고만으로 확인을 대신하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "G4·G5 결함 검출 점검",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "변이 확인 결과 기록표"
+          },
+          "purpose_reason": "담당자가 간결한 절차에 따라 점검하고 바로 결과를 기록하도록 한다.",
+          "priority_reason": "관련 G4·G5 항목에 연결하고 결과 기록표 앞에 절차를 배치한다. 긴 해설·과거 사례보다 실행할 작업을 우선한다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-018",
+      "document_type": "readme",
+      "source": {
+        "type": "public_git_file",
+        "repository": "nanocode00/mallo-intro",
+        "path": "README.md",
+        "commit_sha": "916a3df7b6481d78c1a5fe95b53565f4fb7d91df",
+        "blob_sha": "463a2993d5b5dccc4fe48bf71d306266f4cf04cb",
+        "url": "https://github.com/nanocode00/mallo-intro/blob/916a3df7b6481d78c1a5fe95b53565f4fb7d91df/README.md"
+      },
+      "excerpts": [
+        {
+          "line_start": 3,
+          "line_end": 8,
+          "text": "로컬 API, 백엔드, 키오스크 런타임에 의존하지 않는 공개용 정적 소개 페이지입니다.\n\n- `index.html`: 대상별 소개 페이지 선택 진입점\n- `customer.html`: 고객·비개발자용 제품/이용 방법 소개\n- `evaluator.html`: 평가자·쇼케이스용 구조와 검증 지표 소개\n- `styles/intro.css`: 세 페이지가 공유하는 스타일"
+        }
+      ],
+      "contract": {
+        "audience": "소개 페이지 유지보수자",
+        "purpose": "페이지별 대상 독자와 역할 이해",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "AUDIENCE_SPLIT",
+        "rationale": "저장소 소개와 파일별 역할은 용도·구성을 이해하는 데 필요하므로 원래 발췌 3~8행은 KEEP한다. 추가 발췌의 미디어·호스팅 안내는 작업·배포 문서로 분리한다. 호스팅 설명은 원본 프로젝트의 artifacts/intro 맥락이 별도 저장소 루트 안내에 남은 것으로, 대상 저장소를 명시하고 경로를 맥락에 맞게 수정한다.",
+        "nuance": "주 라벨 KEEP는 원래 발췌 3~8행에 한정한다. 추가 발췌의 MOVE·REVISE는 별도로 판단한다. artifacts/intro는 원본 프로젝트에 실제 존재했으므로 경로 자체가 잘못됐다고 일반화하지 않는다. 같은 안내라도 원본 프로젝트와 별도 저장소에서 기준 경로가 다르다. 파일·커밋 이력을 확인한 것이며 실제 Pages·Vercel 설정이나 배포 성공은 미검증이다.",
+        "action_scope": "원래 발췌 3~8행의 저장소 소개와 파일별 역할 안내",
+        "context_excerpts": [
+          {
+            "line_start": 10,
+            "line_end": 12,
+            "text": "## 미디어 추가\n\n이미지는 `assets/images/`, 영상은 `assets/videos/`에 넣습니다. 권장 파일명은 각 디렉터리의 README에 정리되어 있습니다. 해당 이름으로 파일을 추가하면 `evaluator.html`이 자동 표시하며, 없을 때는 placeholder가 유지됩니다."
+          },
+          {
+            "line_start": 14,
+            "line_end": 16,
+            "text": "## 정적 호스팅\n\nGitHub Pages에서는 이 디렉터리를 배포 대상(root)으로 지정하거나, Pages가 저장소 루트만 지원하는 경우 빌드/배포 단계에서 `artifacts/intro`의 내용을 사이트 루트로 복사합니다. Vercel에서는 Framework Preset을 `Other`, Root Directory를 `artifacts/intro`으로 지정합니다."
+          }
+        ],
+        "additional_reviews": [
+          {
+            "actions": [
+              "MOVE"
+            ],
+            "scope": "추가 발췌 10~12행: 미디어 추가",
+            "target_document": "AGENTS.md 또는 미디어 관리 가이드 (최종 목적지 미정)",
+            "reason": "미디어 추가는 수정 작업 지침으로 분리하고 이미 있는 assets/images/README.md·assets/videos/README.md 안내와 중복을 검토한다."
+          },
+          {
+            "actions": [
+              "MOVE",
+              "REVISE"
+            ],
+            "scope": "추가 발췌 14~16행: 정적 호스팅",
+            "target_document": "배포 안내 문서 (최종 경로 미정)",
+            "reason": "배포 담당자용 문서로 분리하고 어느 저장소 기준인지 명시한다. 원본 proj1-d에서는 artifacts/intro가 유효했고, 별도 mallo-intro에서는 HTML이 루트에 있어 기존 안내를 그대로 적용할 수 없다. 실제 호스팅 설정을 확인해 각 저장소에 맞는 경로를 안내한다."
+          }
+        ],
+        "path_check": {
+          "commit_sha": "916a3df7b6481d78c1a5fe95b53565f4fb7d91df",
+          "tree_complete": true,
+          "existing_paths": [
+            "index.html",
+            "customer.html",
+            "evaluator.html",
+            "styles/intro.css",
+            "assets/images/",
+            "assets/images/README.md",
+            "assets/videos/",
+            "assets/videos/README.md"
+          ],
+          "missing_paths": [
+            "artifacts/intro"
+          ],
+          "conclusion": "artifacts/intro는 원본 proj1-d의 소개 페이지 경로다. 해당 경로를 포함한 README와 동일한 blob이 별도 저장소 루트에 들어 있어, 원본 경로의 오류가 아니라 복제된 안내의 저장소 맥락 불일치로 판단한다.",
+          "limits": "고정 커밋의 소스 구조·파일 존재만 확인했으며 현재 원격 브랜치와 호스팅 설정·배포 동작은 미검증",
+          "origin_evidence": {
+            "original_repository": "aihuman-7th/proj1-d",
+            "original_path": "artifacts/intro/README.md",
+            "original_commit_sha": "fc5ffe2750868403091202748f5e3e10e7e872c0",
+            "original_commit_message": "refactor: 소개 정적 페이지를 artifacts로 통합",
+            "original_blob_sha": "463a2993d5b5dccc4fe48bf71d306266f4cf04cb",
+            "standalone_repository": "nanocode00/mallo-intro",
+            "standalone_root_commit_sha": "640a6d6aea7fccf26d1c7269df95383fe4e0bd2f",
+            "standalone_root_commit_message": "refactor: 통합 소개 페이지를 root에 배포",
+            "standalone_path": "README.md",
+            "same_blob_as_captured_source": true,
+            "finding": "원본 artifacts/intro README와 별도 저장소의 수집 커밋 README는 본문·blob이 일치하며 루트 배치 커밋에 해당 안내가 추가된 것을 확인했다."
+          }
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-019",
+      "document_type": "pull_request",
+      "source": {
+        "type": "public_pr_description_snapshot",
+        "repository": "nanocode00/resume",
+        "pr_number": 19,
+        "url": "https://github.com/nanocode00/resume/pull/19",
+        "head_sha_at_capture": "ca6d8c3ea213681fadcad60608331e2006d1004e",
+        "observed_on": "2026-11-02",
+        "provenance_note": "PR descriptions can be edited independently of head_sha; excerpt text is the captured snapshot, not an immutable Git object."
+      },
+      "excerpts": [
+        {
+          "line_start": 1,
+          "line_end": 5,
+          "text": "`resume.md`에서 **Verilog Single-cycle CPU**와 **CNN Accelerator** 두 섹션의 위치만 교환합니다.\n\n- Single-cycle CPU → **Main Projects** (기존 CNN Accelerator 위치)\n- CNN Accelerator → **Additional Projects** (기존 CPU 위치)\n- 각 프로젝트 본문·정량 수치·링크는 변경 없이 그대로 보존"
+        }
+      ],
+      "contract": {
+        "audience": "PR 검토자",
+        "purpose": "변경 범위 확인",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "PR_SCOPE_CLARITY",
+        "rationale": "변경 파일과 두 섹션의 위치 교환을 첫 문장에서 요약하고 목록에서 이동 목적지를 구체화한다. 본문·수치·링크를 바꾸지 않았다는 안내도 검토 범위를 좁혀 주므로 관련성과 중요도가 높아 KEEP한다.",
+        "nuance": "첫 문장의 작업 요약과 목록의 정확한 이동 위치는 역할이 달라 완전한 중복이 아니다. 작은 PR에 추가 배경·검증·주의사항 템플릿을 강요하지 않는다. PR이 설명하는 작업이 위치 교환이라는 사실과 평가 대상인 PR 설명문 자체의 액션을 혼동하지 않는다. 실제 diff와 본문·수치·링크 보존 주장의 일치는 별도 확인 사항이며 이번 문장 검수만으로 확정하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "PR 변경 설명",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "변경 파일·위치 교환 작업의 첫 문장 요약"
+          },
+          "purpose_reason": "요약 뒤에 두 프로젝트의 구체적 목적지와 변경하지 않은 범위를 안내해 검토자가 diff 범위를 파악하도록 한다.",
+          "priority_reason": "현재 요약 → 이동 전후 위치 → 본문·수치·링크 보존 안내 순서가 적절하므로 유지한다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    },
+    {
+      "id": "RW-020",
+      "document_type": "pull_request",
+      "source": {
+        "type": "public_pr_description_snapshot",
+        "repository": "nanocode00/resume",
+        "pr_number": 20,
+        "url": "https://github.com/nanocode00/resume/pull/20",
+        "head_sha_at_capture": "f48dd540d99d97ba4ddb7746273176e45393688a",
+        "observed_on": "2026-11-02",
+        "provenance_note": "PR descriptions can be edited independently of head_sha; excerpt text is the captured snapshot, not an immutable Git object."
+      },
+      "excerpts": [
+        {
+          "line_start": 9,
+          "line_end": 14,
+          "text": "- DB verifier 수정과 코어 Agent 구현은 **팀원 기여**로 구별.\n- STT의 기존 도메인 WER 15.33%→16.81% 악화 및 **운영 모델 교체 미확정** 명시.\n- 서비스 전체 배포 E2E·CI 비용 절감 등은 미확인으로 남김.\n\n## 변경 범위\n- **`resume.md` 1개 파일에 새 섹션만 삽입**. 기존 HummingBlocks, Single-cycle CPU, Mallo, Additional Projects 등 **어떤 기존 문장도 변경하지 않음**."
+        }
+      ],
+      "contract": {
+        "audience": "PR 검토자",
+        "purpose": "추가된 이력의 정확한 기여·검증 범위 판단",
+        "language": "ko"
+      },
+      "annotation": {
+        "status": "assistant_proposal",
+        "human_review_required": true,
+        "expected_action": "KEEP",
+        "rule_id": "PROVENANCE_CAVEAT",
+        "rationale": "PR에서는 추가 이력의 귀속·성과·검증 범위가 정확한지 확인하는 것이 검토자의 작업이다. 팀원 구현과 개인 기여, STT 회귀·운영 교체 미확정, 전체 E2E·비용 효과 미확인과 파일 변경 범위는 해당 검토에 직접 필요하므로 KEEP한다.",
+        "nuance": "주의사항이라는 이유만으로 보존하는 것이 아니라 이번 추가 이력의 정확성과 변경 범위를 검토하는 데 필요해서 유지한다. 전문성을 전달하는 이력서에서 상세 한계를 분리하는 RW-012와 독자·목적이 다르다. 발췌만으로 과도한 반복은 보이지 않으며 실제 diff·성과·검증 증거와의 일치는 별도 확인 사항이다. PR 본문은 편집 가능하므로 수집 스냅샷과 현재 본문을 구분한다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "PR 변경 요약 / 귀속·검증 범위 / 파일 변경 범위",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "추가한 주요 이력의 변경 요약"
+          },
+          "purpose_reason": "검토자가 먼저 변경 내용을 파악하고 추가 성과의 귀속·검증 범위와 실제 diff 범위를 확인하도록 한다.",
+          "priority_reason": "주요 변경 요약 → 귀속·검증 범위 → 파일 변경 범위 순서가 자연스럽다. 발췌는 설명 도중부터 시작하므로 첫 부분 누락을 문서의 누락으로 판단하지 않는다."
+        }
+      },
+      "not_a_full_document_judgment": true
+    }
+  ]
+}
