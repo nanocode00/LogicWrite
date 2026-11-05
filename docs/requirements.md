@@ -1,85 +1,85 @@
-# Requirements
+# 요구사항
 
-## 1. Problem and intended users
+## 1. 문제와 대상 사용자
 
-AI-generated text is often fluent yet inefficient to read. Typical failures include irrelevant detail, misidentified document purpose, missing context, repeated summaries, misplaced cross-document content, unjustified claims, contradictory statements, and inconsistent tone.
+AI가 생성한 글은 유창하지만 읽기 비효율적일 수 있다. 불필요한 세부사항, 문서 목적 오판, 누락된 맥락, 반복 요약, 부적절한 문서 간 배치, 근거 없는 주장, 서로 충돌하는 서술, 일관되지 않은 문체가 대표적인 문제다.
 
-**Primary users:** developers and AI-agent builders writing Korean README files, PR descriptions, release notes, technical designs, and status reports.
+**주요 사용자:** 한국어 README, PR 설명, 릴리스 노트, 기술 설계서, 상태 보고서를 작성하는 개발자 및 AI 에이전트 개발자.
 
-**Primary reader:** the human recipient of each document. The recipient's needs and the user's intended purpose—not the writer's raw activity log or an inherited template—determine what belongs in the final document and how it is organized.
+**주요 독자:** 각 문서의 실제 수신자. 문서에 필요한 내용과 구성은 작성자의 활동 일지나 기존 템플릿이 아니라 **독자의 요구와 사용자의 의도**를 기준으로 결정한다.
 
-## 2. Writing Contract
+## 2. 작성 계약(Writing Contract)
 
-Each evaluation and revision run operates under a shared normalized `Writing Contract`, supplied by the caller or explicitly inferred and labeled as an assumption:
+각 평가·수정 실행은 호출자가 제공하거나, 추론 사실을 명시적으로 가정으로 표시한 정규화된 `Writing Contract` 아래 진행한다.
 
-| Field | Requirement |
+| 필드 | 요구사항 |
 | --- | --- |
-| `audience` | Intended readers and assumed knowledge |
-| `purpose` | What readers should understand, decide, or do (reflecting actual user intent) |
-| `document_type` | README, PR, changelog, guide, design, report, etc. |
-| `register` | Target speech level and tone (e.g., Korean 해요체 / 합니다체 / 한다체) |
-| `required_information` | Facts, numbers, conditions, qualifiers, or decisions that must survive revision |
-| `constraints` | Optional terms, structure, privacy, claims, and disclosure rules |
-| `source_material` | Optional authoritative source text, destination context, and provenance |
+| `audience` | 대상 독자와 예상 배경지식 |
+| `purpose` | 독자가 이해·판단·수행해야 할 것(실제 사용자 의도 반영) |
+| `document_type` | README, PR, 변경 기록, 가이드, 설계서, 보고서 등 |
+| `register` | 한국어 해요체·합니다체·한다체 등 목표 문체와 어조 |
+| `required_information` | 수정 후에도 유지해야 할 사실·수치·조건·한정 표현·결정 |
+| `constraints` | 용어·구조·개인정보·주장·공개 범위에 관한 선택적 제약 |
+| `source_material` | 권위 있는 원자료, 목적지 맥락, 출처 정보(선택) |
 
-### Intent precedence and conflict handling
+### 의도 우선순위와 충돌 처리
 
-- **User intent over inferred draft purpose:** Explicit user intent takes precedence over the apparent or historical purpose inferred from an existing draft (for example, when converting a master work log into a focused submission or splitting an overloaded README).
-- **Surface conflicts and uncertainty:** If user intent, contract fields, and the existing document's content or source evidence conflict—or if the contract is ambiguous—the system must surface the conflict (`FLAG` / `REVIEW`) and either ask for clarification or label its working assumptions.
-- **Evidence-only contract repair:** The system may repair a misidentified contract purpose only from explicit user context or authoritative evidence. It must never silently overwrite user intent or quietly invent a target reader, destination document, or authoritative facts.
+- **사용자 의도가 초안에서 추론한 목적보다 우선한다.** 예를 들어 종합 작업 일지를 제출용 문서로 바꾸거나 과부하된 README를 분리할 수 있다.
+- **충돌과 불확실성을 드러낸다.** 사용자 의도·계약·기존 문서·원자료가 충돌하거나 계약이 모호하다면 `FLAG`/`REVIEW`로 표시하고 확인을 요청하거나 가정을 기록한다.
+- **근거가 있는 계약 복구만 허용한다.** 명시적 사용자 맥락이나 권위 있는 증거가 있어야 목적 오판을 수정할 수 있다. 목표 독자·문서·사실을 지어내거나 사용자 의도를 조용히 덮어쓰지 않는다.
 
-## 3. Functional requirements
+## 3. 기능 요구사항
 
-Architectural module boundaries (`Information Extraction & Analysis`, `Information Organization`, `Expression Refinement`, `Validation Gate`, and `Revision Controller`) are defined in [Architecture](architecture.md).
+세 모듈, Validation Gate, Revision Controller의 책임은 [아키텍처](architecture.md)에 정의한다.
 
-| ID | Requirement | Acceptance criterion |
+| ID | 요구사항 | 수용 기준 |
 | --- | --- | --- |
-| R1 | Validate contract and intent alignment | Missing/invalid required fields produce deterministic diagnostics; conflicts between user intent and inferred draft purpose are surfaced for recovery or clarification without silent overwrite |
-| R2 | Extract and evaluate information boundaries | Information units are segmented and assessed for audience/purpose fit and importance; each proposed removal, cross-document move, or intra-document placement identifies text spans and audience/purpose rationale |
-| R3 | Support compatible edit decisions across dimensions | Findings emit primary compatibility actions (`KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, `FLAG`) while distinguishing information preservation (`KEEP`), expression edits (`REVISE`, `COMPRESS`), cross-document transfer (`MOVE`), and intra-document ordering (`placement`) |
-| R4 | Check expression and style consistency | Target Korean register, terminology, and clarity/compression rules are checked with spans and context exceptions (quotes, code fences, headings) |
-| R5 | Check claim, number, and condition consistency | Potentially incompatible assertions or dropped qualifiers across a document or candidate pair reference both spans, quantities, and governing conditions |
-| R6 | Avoid false contradictions | Quotations, attributed opinions, time changes, and legitimate scoped exceptions are accounted for |
-| R7 | Protect essential information and provenance | Revisions preserve required facts, numbers, qualifiers, citations, decisions, and provenance across both source and destination documents (see [caveat retention rules](architecture.md#caveat-retention-and-exposure)) |
-| R8 | Return structured findings | Rule ID, severity, primary action, spans, evidence, confidence/uncertainty, and explanation are available for each module and gate check |
-| R9 | Enforce module-routed revision orchestration | The controller routes findings to the responsible module, invalidates and revalidates downstream outputs, validates the entire affected document(s) after each edit, caps attempts, and stops on ambiguity, no progress, or attempt limit |
-| R10 | Make outcomes auditable | Contract version, assumptions/intent provenance, validator version, module routing iterations, and change log can be inspected |
-| R11 | Provide safe failure behavior | Missing evidence, unverified move destinations, or unresolved purpose conflicts yield `FLAG` / `REVIEW`; the system never fabricates facts or silently deletes valuable out-of-scope context |
-| R12 | Evaluate on held-out cases | Module and end-to-end results are compared against human annotations and prompt-only baselines without tuning on held-out items |
+| R1 | 계약 및 의도 정합성 확인 | 필수 필드의 누락·오류를 재현 가능한 진단으로 보고하고 목적 충돌은 무단 변경 없이 복구·확인 대상으로 표시한다. |
+| R2 | 정보 단위 추출·평가 | 각 정보의 독자·목적 적합성과 중요도를 평가하며 삭제·문서 간 이동·문서 내 재배치 제안마다 원문 범위와 판단 근거를 제공한다. |
+| R3 | 여러 차원의 편집 판단 지원 | 기존 7개 대표 액션을 보고하되 보존(`KEEP`), 표현(`REVISE`/`COMPRESS`), 문서 간 이동(`MOVE`), 문서 내 순서(`placement`)를 분리한다. |
+| R4 | 표현과 문체 일관성 검사 | 목표 한국어 문체·용어·명확성·압축 규칙을 원문 범위와 함께 검사하고 인용·코드 펜스·제목의 예외를 고려한다. |
+| R5 | 주장·수치·조건의 일관성 검사 | 같은 문서나 후보 문장 쌍에서 충돌 가능성·빠진 조건을 발견하면 양쪽 위치와 수치·적용 조건을 제시한다. |
+| R6 | 거짓 모순 방지 | 인용문, 발화자가 다른 의견, 시간 변화, 정당한 범위별 예외를 구별한다. |
+| R7 | 필수 정보와 출처 보존 | 원본과 목적지 문서에 필요한 사실·수치·조건·인용·결정·출처를 유지한다([주의사항 보존 기준](architecture.md#주의사항-보존과-노출)). |
+| R8 | 구조화된 검토 결과 제공 | 각 모듈 및 게이트가 규칙 ID·심각도·대표 액션·원문 범위·근거·확신/불확실성·설명을 반환한다. |
+| R9 | 모듈별 수정 제어 | 결함의 원인 모듈로 복귀하고 하위 결과를 무효화·재검증하며, 수정마다 관련 문서 전체를 검사하고 모호성·진전 없음·한도 도달 시 중지한다. |
+| R10 | 사후 추적성 확보 | 계약 버전, 가정·의도 출처, 검사기 버전, 모듈 호출 기록, 변경 이력을 확인할 수 있다. |
+| R11 | 안전한 실패 처리 | 근거 부족·미확인 이동 목적지·미해결 목적 충돌은 `FLAG`/`REVIEW`로 남기며 사실을 조작하거나 다른 곳에 보존해야 할 내용을 몰래 삭제하지 않는다. |
+| R12 | 홀드아웃 사례 평가 | 사람의 판정과 프롬프트만 사용한 기준선을 비교하고 평가용 홀드아웃으로 규칙을 튜닝하지 않는다. |
 
-The contract-shape part of R1 and deterministic parts of R4 and R7 are potential hard gates. Intent alignment in R1, relevance in R2, and semantic judgments in R5/R6 require contextual review; their automated output—and any future vector-retrieved candidate list—is **not proof of correctness** or authorization to delete content.
+R1의 계약 형식, R4·R7의 일부 결정론적 검사만 강제 검증 규칙 후보가 된다. R1의 의도 정합성, R2의 관련성, R5·R6의 의미 판단에는 문맥 검토가 필요하다. **자동 판정이나 벡터 검색 후보는 참·거짓의 증명 또는 삭제 권한이 아니다.**
 
-## 4. Severity and disposition
+## 4. 심각도와 처리 상태
 
-- `ERROR`: confirmed violation of an explicit, machine-verifiable contract constraint, dropped protected fact/number, or evidence-backed critical contradiction.
-- `WARNING`: plausible semantic, organizational, or stylistic issue requiring revision or confirmation.
-- `INFO`: optional expression or ordering improvement with low risk.
-- `UNRESOLVED`: cannot decide from available evidence (e.g., conflicting claims, ambiguous contract purpose, or unconfirmed move destination); keep visible to the caller.
+- `ERROR`: 명시적으로 검증 가능한 계약 위반, 보호된 사실·수치 누락, 근거로 확인된 중대한 모순.
+- `WARNING`: 수정이나 확인이 필요한 의미·구조·문체상의 가능성 있는 문제.
+- `INFO`: 위험이 낮은 선택적인 표현·순서 개선.
+- `UNRESOLVED`: 근거가 부족해 결정할 수 없는 경우(충돌 주장·모호한 목적·미확인 목적지 등). 호출자에게 남긴다.
 
-Disposition is separate from confidence. A high-confidence model suggestion or high vector similarity score is still a proposal unless backed by an explicit deterministic rule or verified evidence.
+처리 상태는 모델의 확신도와 별개다. 높은 모델 확신도나 유사도 점수만으로 결정론적 사실 또는 검증된 증거가 되지는 않는다.
 
-## 5. Non-functional requirements
+## 5. 비기능 요구사항
 
-- **Model-agnostic:** no dependence on a single model, embedding provider, or vendor.
-- **Reproducible hard checks:** deterministic rules produce stable results for identical inputs and configuration.
-- **Traceable:** extracted units and findings refer to stable document spans, content hashes, and rule IDs.
-- **Conservative revision:** preserve meaningful claims, numbers, and caveats unless source evidence authorizes change; `KEEP` preserves information without freezing surface wording or position.
-- **Bounded and dependency-aware:** limit rewrite attempts, invalidate stale downstream module states after upstream edits, and detect non-improving cycles.
-- **Privacy-aware:** do not transmit confidential documents to external model providers without user choice and appropriate controls.
-- **Korean-first:** handle Korean register, quotes, and technical terminology; architecture must allow other languages.
-- **Human-overridable:** uncertain semantic judgments, unresolved purpose conflicts, and unverified cross-document destinations require human review rather than forced correction.
+- **모델 비종속성:** 특정 LLM·임베딩 제공자·벤더에 의존하지 않는다.
+- **재현 가능한 강제 검사:** 입력과 설정이 같다면 결정론적 규칙의 결과가 안정적이어야 한다.
+- **추적성:** 정보 단위·검토 결과를 고정된 원문 위치·콘텐츠 해시·규칙 ID에 연결한다.
+- **보수적인 수정:** 원자료가 허용하지 않는 한 의미 있는 주장·수치·조건을 보존한다. `KEEP`은 위치나 문장을 고정하지 않는다.
+- **유한·의존성 기반 실행:** 재작성 횟수를 제한하고 상위 변경 시 오래된 하위 결과를 폐기하며 개선 없는 반복을 감지한다.
+- **개인정보 보호:** 사용자 선택과 적절한 통제 없이 비밀 문서를 외부 모델 제공자에게 전송하지 않는다.
+- **한국어 우선:** 한국어 문체·인용·기술 용어를 처리하면서 다른 언어로 확장할 수 있도록 한다.
+- **사람의 최종 판단:** 불확실한 의미 판단, 목적 충돌, 미확인 문서 이동은 강제 수정하지 않고 검토받는다.
 
-## 6. Out of scope for the first implementation
+## 6. 첫 구현 범위 밖
 
-- Guaranteed factual accuracy or proof of absence of contradictions.
-- Reliable identification of whether a human or AI authored a document.
-- Automatic publication, GitHub mutation, automatic creation of new repository files, or uncontrolled document replacement.
-- A universal grammar checker, machine translator, or academic peer reviewer.
-- Global interception of every ChatGPT/agent answer by a passive plugin.
-- Automated high-stakes legal or medical content approval.
+- 사실 정확성 또는 모순 부재의 완전한 보장
+- 사람·AI 작성 여부의 신뢰성 있는 판별
+- 자동 출판, GitHub 수정, 새 파일의 무단 생성, 통제 없는 문서 덮어쓰기
+- 범용 문법 검사기·번역기·학술 심사기
+- 수동적인 플러그인만으로 모든 ChatGPT/에이전트 응답 가로채기
+- 법률·의료 등 고위험 콘텐츠의 자동 승인
 
-## 7. Definition of done for the MVP
+## 7. MVP 완료 기준
 
-An MVP is complete only when it can load a `Writing Contract`, run at least one deterministic check and one semantic check across the modular pipeline, emit structured findings with evidence, drive a bounded revision cycle that revalidates affected documents and protects mandatory information, and report status as `PASS`, `REVIEW`, `FAIL`, or `STOPPED`.
+MVP는 `Writing Contract`를 읽고, 모듈 파이프라인에서 결정론적 검사와 의미 검사를 최소 하나씩 수행하며, 증거가 있는 구조화 검토 결과를 반환하고, 필수 정보를 보호하면서 관련 문서를 재검증하는 유한 수정 루프를 구동하고, `PASS`/`REVIEW`/`FAIL`/`STOPPED`를 보고할 수 있어야 한다.
 
-A `PASS` means configured checks found no blocking issue; it is never a guarantee that the text is factually or logically flawless. Evaluation results and failure cases must accompany the MVP.
+`PASS`는 설정된 검사에서 차단할 문제가 발견되지 않았다는 뜻이지 글이 사실적으로·논리적으로 완벽하다는 보장은 아니다. MVP 결과에는 평가 수치와 실패 사례가 함께 있어야 한다.
