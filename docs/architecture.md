@@ -2,6 +2,8 @@
 
 > Design proposal. None of the components below is implemented yet.
 
+Detailed logical data models, module input/output contracts, provenance and invalidation rules, and provisional-case walkthroughs are in [Common data model and module interfaces](data-model-and-interfaces.md). That proposal does not adopt an executable schema or migrate evaluation fixtures.
+
 ## System overview and pipeline
 
 LogicWrite separates editorial processing into **three explicit core modules** coordinated by **shared contract, validation, and revision infrastructure**:
@@ -65,7 +67,7 @@ The `Contract Resolver` validates required fields and normalizes the contract un
 
 ### Validation Gate
 
-The gate owns check execution and verdicts independently of editorial proposals: a module cannot pass its own output by declaration. This is a responsibility boundary, not a requirement for another model vendor.
+The gate owns check execution and verdicts independently of editorial proposals: a module cannot pass its own output by declaration. The [versioned ValidationPlan](data-model-and-interfaces.md#validationplan-and-required-check-completeness) defines required check IDs/versions, declared output scopes and conditional applicability; the gate reconciles every expected instance with its execution result before allowing `PASS`. Contract or policy changes invalidate dependent reports. This is a responsibility boundary, not a requirement for another model vendor.
 
 The gate combines deterministic **Rule Validators** and a model-assisted **Semantic Reviewer** to verify both **inter-module boundaries** and **entire affected documents** (including both source and destination documents when content is moved or consolidated):
 
@@ -87,13 +89,13 @@ Proposed finding envelope (subject to change):
 }
 ```
 
-Offsets refer to the evaluated draft snapshot. Exact conventions and versioning must be fixed before implementation (recommended: Unicode code-point offsets plus document content hash). Cross-document findings must identify the document snapshot for each span; this illustrative envelope is not a frozen schema.
+Offsets refer to the evaluated draft snapshot. The [detailed reference proposal](data-model-and-interfaces.md#shared-references-and-provenance) uses zero-based, half-open Unicode code-point offsets against exact stored text, with immutable snapshot references and content digests. Hashing, serialization and executable schema versioning remain open. Cross-document findings must identify the document snapshot for each span; this illustrative envelope is not a frozen schema.
 
 Gate states:
 
 | State | Meaning |
 | --- | --- |
-| `PASS` | All configured hard checks passed; no blocking findings remain across affected documents |
+| `PASS` | All applicable required checks in the pinned ValidationPlan passed, conditional exclusions are justified, and no blocking findings remain across affected documents |
 | `REVIEW` | No confirmed hard failure, but unresolved semantic concerns, purpose conflicts, or provisional destinations need human decision |
 | `FAIL` | Confirmed hard check or blocking requirement failed |
 | `STOPPED` | Revision limit reached, no progress, or execution error; report outstanding issues |
@@ -249,7 +251,7 @@ Within **Information Organization** (and feeding candidate contradiction pairs t
 
 ## Open decisions
 
-- Claim and information-unit extraction representation and cross-paragraph linking in `Information Extraction & Analysis`.
+- Executable representation and extraction policy for the [proposed unit/element relationships](data-model-and-interfaces.md#informationunit-and-informationassessment), including cross-paragraph linking in `Information Extraction & Analysis`.
 - Granularity rules for unit segmentation (clause, sentence, claim, or paragraph) across extraction and organization.
 - Protocol for surfacing and resolving contract purpose misidentification when user prompts are brief.
 - Document profile representation for audience, purpose, and scope embeddings in `Information Organization`.

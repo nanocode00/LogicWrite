@@ -75,6 +75,7 @@ LogicWrite separates **information preservation** (`Information Extraction & Ana
 
 - [Requirements](docs/requirements.md) — Writing Contract precedence rules, functional requirements (`R1`..`R12`), and MVP scope
 - [Architecture](docs/architecture.md) — three core modules, module boundaries, six-stage workflow mapping, caveat exposure, and revision controller
+- [Data model and interfaces](docs/data-model-and-interfaces.md) — proposed shared types, module contracts, traceability, recovery, and manual candidate walkthroughs; not an adopted fixture schema
 - [Roadmap](docs/roadmap.md) — `M0`..`M4` milestones and current status
 - [Evaluation plan](docs/evaluation.md) — `B0`/`B1`/`B2` baselines, per-module evaluation checks, and proposed (unadopted) schema extensions
 - [Real-world candidates](docs/real-world-candidates.md) — 20 provisional M0 candidate annotations from public repositories (`tests/fixtures/real-world-candidates.json`)
