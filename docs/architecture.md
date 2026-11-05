@@ -67,7 +67,7 @@ The `Contract Resolver` validates required fields and normalizes the contract un
 
 ### Validation Gate
 
-The gate owns check execution and verdicts independently of editorial proposals: a module cannot pass its own output by declaration. This is a responsibility boundary, not a requirement for another model vendor.
+The gate owns check execution and verdicts independently of editorial proposals: a module cannot pass its own output by declaration. The [versioned ValidationPlan](data-model-and-interfaces.md#validationplan-and-required-check-completeness) defines required check IDs/versions, declared output scopes and conditional applicability; the gate reconciles every expected instance with its execution result before allowing `PASS`. Contract or policy changes invalidate dependent reports. This is a responsibility boundary, not a requirement for another model vendor.
 
 The gate combines deterministic **Rule Validators** and a model-assisted **Semantic Reviewer** to verify both **inter-module boundaries** and **entire affected documents** (including both source and destination documents when content is moved or consolidated):
 
@@ -95,7 +95,7 @@ Gate states:
 
 | State | Meaning |
 | --- | --- |
-| `PASS` | All configured hard checks passed; no blocking findings remain across affected documents |
+| `PASS` | All applicable required checks in the pinned ValidationPlan passed, conditional exclusions are justified, and no blocking findings remain across affected documents |
 | `REVIEW` | No confirmed hard failure, but unresolved semantic concerns, purpose conflicts, or provisional destinations need human decision |
 | `FAIL` | Confirmed hard check or blocking requirement failed |
 | `STOPPED` | Revision limit reached, no progress, or execution error; report outstanding issues |
