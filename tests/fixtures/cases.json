@@ -69,7 +69,7 @@
       "expected_findings": [
         {
           "rule_id": "REGISTER_INCONSISTENCY",
-          "action": "COMPRESS",
+          "action": "REVISE",
           "evidence": [
             "상태 확인 요청도 성공했습니다."
           ],

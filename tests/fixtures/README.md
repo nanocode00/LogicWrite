@@ -19,7 +19,7 @@ An empty `expected_findings` array means **no issue should be raised for the tar
 - `REQUIRED_INFORMATION_MISSING`: a contract-required fact is absent.
 - `UNSUPPORTED_CLAIM`: an assertion demands evidence unavailable in supplied sources.
 
-Actions are `KEEP`, `COMPRESS`, `MOVE`, `REMOVE`, `ADD`, or `FLAG`. The labels represent *human-designed expected judgments*, not deterministic truth for every linguistic context.
+Actions are `KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, or `FLAG`. `REVISE` preserves information while correcting wording, register, or terminology; `COMPRESS` addresses verbosity or repetition. The labels represent *human-designed expected judgments*, not deterministic truth for every linguistic context.
 
 ## Important negative controls
 

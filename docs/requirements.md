@@ -30,7 +30,7 @@ If the contract is ambiguous, the system should either ask for missing informati
 | --- | --- | --- |
 | R1 | Validate contract shape | Missing/invalid required fields produce deterministic diagnostics |
 | R2 | Evaluate information boundaries | Each proposed removal or move identifies a text span and audience/purpose rationale |
-| R3 | Support edit decisions | Findings use `KEEP`, `COMPRESS`, `MOVE`, `REMOVE`, `ADD`, or `FLAG` |
+| R3 | Support edit decisions | Findings use `KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, or `FLAG` |
 | R4 | Check style consistency | Target register/terminology violations are reported with spans and exceptions |
 | R5 | Check claim consistency | Potentially incompatible assertions reference both spans and their conditions |
 | R6 | Avoid false contradictions | Quotations, attributed opinions, time changes, and legitimate exceptions are accounted for |

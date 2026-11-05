@@ -35,7 +35,7 @@ This is a proposed sequence, not a delivery promise. A milestone advances only w
 
 ## M3 — Revision controller
 
-- [ ] Targeted edit proposals: KEEP / COMPRESS / MOVE / REMOVE / ADD / FLAG
+- [ ] Targeted edit proposals: KEEP / COMPRESS / REVISE / MOVE / REMOVE / ADD / FLAG
 - [ ] Protect required information and source attribution
 - [ ] Revalidate the entire document after each edit
 - [ ] Limit iterations; detect repeated/no-progress states

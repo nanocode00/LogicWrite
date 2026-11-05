@@ -53,6 +53,7 @@ The contract, findings, and revision limits will be explicit. A controller—not
 | --- | --- |
 | `KEEP` | Necessary and well-placed information |
 | `COMPRESS` | Useful idea, needlessly verbose or repeated |
+| `REVISE` | Preserve information while correcting wording, register, or terminology |
 | `MOVE` | Useful content, wrong audience or location |
 | `REMOVE` | Does not help the stated purpose |
 | `ADD` | Missing required context, condition, or evidence |
