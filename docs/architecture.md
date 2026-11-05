@@ -2,6 +2,8 @@
 
 > Design proposal. None of the components below is implemented yet.
 
+Detailed logical data models, module input/output contracts, provenance and invalidation rules, and provisional-case walkthroughs are in [Common data model and module interfaces](data-model-and-interfaces.md). That proposal does not adopt an executable schema or migrate evaluation fixtures.
+
 ## System overview and pipeline
 
 LogicWrite separates editorial processing into **three explicit core modules** coordinated by **shared contract, validation, and revision infrastructure**:
@@ -87,7 +89,7 @@ Proposed finding envelope (subject to change):
 }
 ```
 
-Offsets refer to the evaluated draft snapshot. Exact conventions and versioning must be fixed before implementation (recommended: Unicode code-point offsets plus document content hash). Cross-document findings must identify the document snapshot for each span; this illustrative envelope is not a frozen schema.
+Offsets refer to the evaluated draft snapshot. The [detailed reference proposal](data-model-and-interfaces.md#shared-references-and-provenance) uses zero-based, half-open Unicode code-point offsets against exact stored text, with immutable snapshot references and content digests. Hashing, serialization and executable schema versioning remain open. Cross-document findings must identify the document snapshot for each span; this illustrative envelope is not a frozen schema.
 
 Gate states:
 
@@ -249,7 +251,7 @@ Within **Information Organization** (and feeding candidate contradiction pairs t
 
 ## Open decisions
 
-- Claim and information-unit extraction representation and cross-paragraph linking in `Information Extraction & Analysis`.
+- Executable representation and extraction policy for the [proposed unit/element relationships](data-model-and-interfaces.md#informationunit-and-informationassessment), including cross-paragraph linking in `Information Extraction & Analysis`.
 - Granularity rules for unit segmentation (clause, sentence, claim, or paragraph) across extraction and organization.
 - Protocol for surfacing and resolving contract purpose misidentification when user prompts are brief.
 - Document profile representation for audience, purpose, and scope embeddings in `Information Organization`.
