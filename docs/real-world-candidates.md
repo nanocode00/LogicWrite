@@ -4,7 +4,7 @@
 
 ## 수집 범위
 
-- 총 **20건**: 개선·확인 후보 **8건**, 수정하지 않는 정상 대조 사례 **12건**.
+- 총 **20건**: KEEP 외 액션 후보 **12건**, 정보 보존(`KEEP`) 후보 **8건**. KEEP는 문서 내 배치 조정을 허용하므로 무수정 대조군과 동일하지 않다. JSON 집계도 `proposed_keep_cases`로 기록한다.
 - 공개 저장소 **5개**: `nanocode00/chatgpt2codex`, `nanocode00/resume`, `nanocode00/QuotaTray`, `nanocode00/project3-planning`, `nanocode00/mallo-intro`.
 - 출처 유형: Git 파일과 PR 설명. Git 파일은 **정확한 커밋 SHA와 blob SHA**, 행 범위 및 원문 스냅샷을 포함한다.
 - PR 설명은 헤드 커밋과 별개로 편집될 수 있으므로 **조회 당시의 본문 발췌 스냅샷**과 조회일을 저장한다. PR 헤드 SHA만으로 본문 변경을 고정했다고 주장하지 않는다.
@@ -14,33 +14,33 @@
 
 | ID | 대상 | 잠정 판단 | 검토 포인트 |
 | --- | --- | --- | --- |
-| RW-001 | `nanocode00/chatgpt2codex` `README.md` | MOVE | 패키지 선택의 내부 의사결정은 첫 방문 사용자의 설치·사용 이해보다 설계 기록에 가깝다. 제품 설계 문서 이동 여부를 검토한다. |
-| RW-002 | `nanocode00/chatgpt2codex` `docs/INSTALL.md` | MOVE | 설치 순서를 찾는 독자에게 PKG 대 DMG 선택 근거는 우선순위가 낮다. 별도 설계 설명으로 이동 검토한다. |
-| RW-003 | `nanocode00/chatgpt2codex` `README.md` | MOVE | 프로젝트 별점 요청이 첫 화면의 설치·기능 안내보다 먼저 노출된다. 홍보 의도는 존중하되 아래로 이동할지 검토한다. |
-| RW-004 | `nanocode00/chatgpt2codex` `README.md` | KEEP | Quick Tunnel URL의 비영속성과 계정 요구사항은 실제 사용자의 구성 결정에 필요하다. |
-| RW-005 | `nanocode00/chatgpt2codex` `docs/RELEASE_NOTES_v0.3.1.md` | KEEP | 변경사항을 어떤 동작이 개선됐는지로 구체화하며 실행·권한 보존 범위를 전달한다. |
-| RW-006 | `nanocode00/chatgpt2codex` `docs/TAURI_F4D3_WINDOWS_CLI_REGISTRATION.md` | KEEP | 별도 CLI 등록의 권한 범위·제거 안전장치 등은 검토와 승인에 필수인 상세 조건이다. |
-| RW-007 | `nanocode00/resume` `experiences/README.md` | MOVE | 경험 색인 내부에 개별 프로젝트의 긴 검증 결과가 연속 배치돼 탐색 목적을 방해할 수 있다. 상세 검증은 개별 근거 문서로 이동하고 색인에 링크만  |
-| RW-008 | `nanocode00/resume` `resume.md` | COMPRESS | 채용용 요약을 찾는 독자에게 다수의 모델 이름·수치·포트·배포 경로가 하나의 프로젝트 설명에 밀집한다. 핵심 기여와 성과를 중심으로 압축할지 검토한 |
-| RW-009 | `nanocode00/resume` `README.md` | KEEP | 마스터 이력서와 세부 경험 원장에 서로 다른 역할을 부여하고 공개 저장소의 개인정보 기준까지 밝힌다. |
-| RW-010 | `nanocode00/resume` `guides/resume-experience-writing.md` | KEEP | 채용 담당자가 읽는 시간과 필요한 근거를 기준으로 문서 밀도 및 세부 정보 위치를 지정한다. |
-| RW-011 | `nanocode00/resume` `experiences/crypto-lob-prediction.md` | KEEP | 무수수료 수익과 수수료 반영 손실은 전제가 다르므로 모순이 아니다. 불리한 결과와 데이터 한계를 반드시 보존한다. |
-| RW-012 | `nanocode00/resume` `resume.md` | KEEP | 개인 기여와 팀 기여를 분리하고 합성평가·기존 도메인 성능 악화·미검증 범위를 명시한다. |
-| RW-013 | `nanocode00/QuotaTray` `README.md` | MOVE | 일반 사용자 안내와 내부 OAuth 지문 검증 및 TestCli 진단 절차가 함께 나온다. 개발자용 심화 문서에 둘 정보인지 검토한다. |
-| RW-014 | `nanocode00/QuotaTray` `README.md` | FLAG | '완벽 지원'은 절대적 표현이다. 각 제공자 지원 수준·검증 범위를 확인하거나 검증된 표현으로 한정할지 검토한다. |
-| RW-015 | `nanocode00/QuotaTray` `README.md` | FLAG | 같은 README의 릴리스 링크가 서로 다른 GitHub 소유자명을 가리킨다. 저장소 이전·리다이렉트 여부를 확인해야 한다. |
-| RW-016 | `nanocode00/project3-planning` `README.md` | KEEP | 이관 준비 저장소와 실제 적용 대상이 다르고 실행·PR 미수행 범위를 명확히 한다. |
-| RW-017 | `nanocode00/project3-planning` `docs/GATES.md` | KEEP | 단순 테스트 통과와 실제 변이 감지를 구분하고 검증 실패 가능성을 명시한다. |
-| RW-018 | `nanocode00/mallo-intro` `README.md` | KEEP | 고객용 페이지와 평가자용 페이지의 목적을 분리해 문서 구조에서 독자 차이를 명확히 한다. |
-| RW-019 | `nanocode00/resume` PR #19 | KEEP | 변경한 위치와 의도적으로 변경하지 않은 범위를 짧게 전달한다. |
-| RW-020 | `nanocode00/resume` PR #20 | KEEP | 합성 평가, 팀 기여, 기존 성능 회귀, 미확정 사항을 숨기지 않는 귀속·검증 경계다. |
+| RW-001 | `nanocode00/chatgpt2codex` `README.md` | MOVE | 목적: 패키징 의사결정·설계 이력 문서(경로 미정)의 PKG 선택 근거로 이동. 배치: 요구사항·대안 비교 뒤. README의 패키지·설치 안내는 유지한다. |
+| RW-002 | `nanocode00/chatgpt2codex` `docs/INSTALL.md` | MOVE | 목적: RW-001과 같은 패키징 의사결정 기록으로 이동·통합. 배치: 요구사항·대안 비교 뒤. 이미 보존된 중복이거나 보존 가치가 낮으면 REMOVE도 고려하되 설치 절차는 유지한다. |
+| RW-003 | `nanocode00/chatgpt2codex` `README.md` | KEEP | 목적: 현재 README의 프로젝트 응원 / Support 섹션에 보존. 배치: 독자의 주요 작업인 설치·사용 안내 및 제약사항 뒤. 기존 제품 소개·설치 링크보다 먼저 나온다는 주장은 사용하지 않는다. |
+| RW-004 | `nanocode00/chatgpt2codex` `README.md` | KEEP | 목적: README의 첫 설정에 필요한 계정·도메인·Tunnel Token 요구 여부와 임시 URL의 비영속성을 보존. 배치: 터널 선택·설정 실행 전. KEEP는 정보 보존 판단이며 기존 위치가 이 조건을 충족하는지 별도로 확인한다. |
+| RW-005 | `nanocode00/chatgpt2codex` `docs/RELEASE_NOTES_v0.3.1.md` | KEEP | 목적: 릴리스의 사용자 동작 변화와 회귀 방지 검증 정보는 관련성과 중요도가 높아 보존. 배치: 사용자 영향 안내를 우선하고 테스트·CI는 뒤나 검증 섹션에 둘 수 있으며 현재 순서는 고정하지 않는다. |
+| RW-006 | `nanocode00/chatgpt2codex` `docs/TAURI_F4D3_WINDOWS_CLI_REGISTRATION.md` | KEEP | 목적: CLI 등록의 권한·소유권·제거 안전장치·출력 제한은 개발자의 검토에 필수이므로 보존. 배치: 적용 범위·검증 상태 → 설치 → 제거 → 안전장치·출력 제한. 현재 순서는 고정하지 않으며 발췌 밖의 CI-only·실제 Windows 동작 미입증 한계도 함께 확인한다. |
+| RW-007 | `nanocode00/resume` `experiences/README.md` | COMPRESS | 자료 링크·원장과 핵심 사례의 역할은 유지하고, 근거 문서에 이미 보존된 상세 한계를 축약한다. 남긴 성과 주장을 해석하는 데 필수인 조건은 주장 가까이에 보존하며 전체 MOVE는 요구하지 않는다. |
+| RW-008 | `nanocode00/resume` `resume.md` | FLAG | 재검토 필요: 실제 수행한 일을 부적합한 템플릿에 억지로 압축한 요약 이력의 구조 문제. 추가 압축·이동 대신 정보 재분리·재취합과 구조 재설계를 검토한다. 구체적 구조와 REVISE·placement 적용 범위는 미정. 관리 안내 이동은 RW-009에서 다룬다. |
+| RW-009 | `nanocode00/resume` `README.md` | MOVE | 목적: 원본·근거·가이드의 역할, 자료 관리·작성 절차와 개인정보 커밋 제약은 AGENTS.md의 에이전트 작업 안내로 이동. 배치: 역할·보존 원칙·작업 제약을 구체적 작성 절차보다 먼저 안내. 대상의 기존 내용과 중복·충돌을 확인한다. |
+| RW-010 | `nanocode00/resume` `guides/resume-experience-writing.md` | MOVE | 독자: 경험문서를 작성하는 에이전트. resume.md·experiences/ 등의 역할·관리 경로·정보 분담은 루트 AGENTS.md로 이동하고 실제 경험 작성 방법은 가이드에 유지한다. 전체 발췌 이동이 아니라 정보 단위 분리가 필요하며 RW-009의 관리 안내와 통합한다. |
+| RW-011 | `nanocode00/resume` `experiences/crypto-lob-prediction.md` | KEEP | 목적: 경험 전체의 수행 내용·결과·한계를 요약해 관련성과 중요도가 높으므로 KEEP. 배치: 문서 상단의 현재 요약 위치가 적절해 유지. 수익·손실의 비교 조건과 기준선은 남긴 수치의 해석에 필요하므로 함께 보존한다. |
+| RW-012 | `nanocode00/resume` `resume.md` | MOVE | 목적: 채용 담당자에게 수행 작업의 전문성과 기여·성과 전달. 항목별·종합 주의사항의 상세 한계는 별도 프로젝트 근거 문서로 이동. 이력서에는 핵심 기여와 주장의 의미·귀속을 바꾸지 않는 최소 조건을 남기고 근거로 연결한다. 최종 목적지·중복 보존은 확인 필요. |
+| RW-013 | `nanocode00/QuotaTray` `README.md` | MOVE | 범위 한정 MOVE: 로그인 후 갱신·환경변수 불필요·기존 자격증명 보존의 사용자 안내는 README 인증 설정에 유지. 내부 OAuth 검증·저장은 인증 설계 문서로, TestCli 명령은 개발자용 문제 해결 문서로 분리. 목적지·중복은 확인 필요. |
+| RW-014 | `nanocode00/QuotaTray` `README.md` | FLAG | 이모지·8대 주요·완벽 지원·추상적 최적화 표현을 수정하고 서비스별 설명 기준·용어를 통일한다. 실시간 주장은 동작 확인 후 표현 결정. 인증·설정 상세는 분리하되 기능 개요에 조건·기준 시점을 일괄 요구하지 않는다. |
+| RW-015 | `nanocode00/QuotaTray` `README.md` | REVISE | 2026-11-05 공개 링크 확인: nanocode00 릴리스는 200, HonorBear 릴리스는 리다이렉트 없이 404. 본문 다운로드 링크를 정상 주소로 수정. 수집 당시 상태·실제 설치 동작까지 검증한 것은 아니다. |
+| RW-016 | `nanocode00/project3-planning` `README.md` | MOVE | 범위 한정 MOVE: README에는 저장소 소개·실제 적용 대상 링크만 KEEP. 미수행 상태는 이관 상태 기록으로, 기준 커밋·선별 및 제외 내역은 준비 기록으로, 향후 작업 제약은 AGENTS.md로 분리한다. 현재 구성 설명을 금지 규칙으로 확대하지 않으며 목적지·중복 확인이 필요하다. |
+| RW-017 | `nanocode00/project3-planning` `docs/GATES.md` | REVISE | 점검 문서에 맞춰 제목을 테스트 결함 검출 확인으로 재작성. 본문은 결함 주입·예상 테스트 실패 확인·결과 기록 중심으로 축약하고, 긴 예시·과거 이력은 필요 시 상세 근거로 연결한다. 제목 복사 여부는 미확인. |
+| RW-018 | `nanocode00/mallo-intro` `README.md` | KEEP | 소개·파일 설명 3~8행은 KEEP. 추가 미디어·호스팅 안내는 MOVE. artifacts/intro는 원본 proj1-d의 유효 경로이며 원본·별도 저장소 README의 blob이 일치한다. 별도 저장소 루트로 복제된 안내의 기준 저장소·경로를 REVISE. 실제 호스팅 설정은 미검증. |
+| RW-019 | `nanocode00/resume` PR #19 | KEEP | KEEP: 작업 요약·정확한 이동 위치·본문/수치/링크 보존 안내가 검토 범위를 명확히 한다. 현재 순서 유지. 작은 PR에 추가 템플릿은 불필요하며 실제 diff 일치 여부는 별도 확인 사항이다. |
+| RW-020 | `nanocode00/resume` PR #20 | KEEP | KEEP: 추가 이력의 귀속·검증 범위와 파일 변경 범위는 PR 검토에 직접 필요. 변경 요약 → 귀속·검증 범위 → 파일 변경 범위 순서로 배치. RW-012의 이력서와 목적이 다르며 실제 증거·diff 일치는 별도 검증 사항이다. |
 
 ## 라벨링 원칙
 
 1. **작성 맥락을 고정:** 발췌만 보고 판단하지 말고 독자, 목적, 글의 유형을 확인한다. 실제 글을 제출용으로 변환하는 가상 계약과 기존 마스터 원본의 목적은 다를 수 있다.
-2. **판정 단위 분리:** `MOVE`는 정보의 가치가 없다는 뜻이 아니다. `KEEP`도 문서 전체가 완벽하다는 뜻이 아니라 해당 사례의 표적 우려는 고치지 말아야 한다는 뜻이다.
+2. **판정 단위 분리:** `KEEP`는 문서의 독자·목적에 관련되고 중요한 정보를 보존한다는 판단이며, 현재 위치·순서나 문서 전체의 적절성을 보장하지 않는다. 문서 내 섹션·순서 조정은 독자 우선순위와 선행 조건에 따라 `placement`로 별도 기록한다. `MOVE`는 다른 문서로 정보의 소속을 바꿀 때만 사용한다. `MOVE`도 정보의 가치가 없다는 뜻은 아니다.
 3. **불확실성 노출:** `FLAG`는 오류 확정이 아니다. URL 차이는 리다이렉트/이전 여부를 확인하고, 절대적 홍보 표현은 근거를 점검해야 한다.
-4. **범위와 수치 보존:** 수수료, 제한 조건, 팀/개인 기여, 운영 미검증 사항은 지운다고 좋은 글이 되는 게 아니다.
+4. **범위와 수치 보존:** [주의사항의 보존·노출 기준](architecture.md#caveat-retention-and-exposure)에 따라 현재 주장의 해석에 필수인 조건은 가까이 남기고, 상세 근거의 보존과 현재 문서의 노출은 구분한다.
 5. **검토자 승인 전 실험 정답 사용 금지:** 독립 검토자가 `agree`/`disagree`/`uncertain`을 기록하고, 반대 의견은 해결 근거와 함께 남긴다.
 
 ## 다음 작업 (미완료)
@@ -50,6 +50,7 @@
 - [ ] 각 후보에 `reviewer_decision`, 리뷰 사유, 최종 수정/유지 지침을 기록
 - [ ] 일부 사례를 홀드아웃으로 고정하고 B0/B1/B2 비교 시 동일 조건 적용
 - [ ] 모델/규칙 기반 검사기를 구현한 뒤 탐지율뿐 아니라 **오탐·정보 손실**을 측정
+- [ ] 향후 벡터 기반 체계 설계: 문서별 독자·목적과 정보 단위의 임베딩으로 목적지·중복 후보를 검색하고, 정보 중요도·보존 여부·배치 판단은 문맥 평가와 구분해 검증
 
 ## 데이터 위치
 

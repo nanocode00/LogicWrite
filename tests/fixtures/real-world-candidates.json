@@ -13,15 +13,15 @@
   },
   "summary": {
     "total_cases": 20,
-    "proposed_issue_cases": 8,
-    "proposed_keep_controls": 12,
+    "proposed_issue_cases": 12,
     "source_repositories": [
       "nanocode00/chatgpt2codex",
       "nanocode00/resume",
       "nanocode00/QuotaTray",
       "nanocode00/project3-planning",
       "nanocode00/mallo-intro"
-    ]
+    ],
+    "proposed_keep_cases": 8
   },
   "cases": [
     {
@@ -52,8 +52,18 @@
         "human_review_required": true,
         "expected_action": "MOVE",
         "rule_id": "INFORMATION_PLACEMENT",
-        "rationale": "패키지 선택의 내부 의사결정은 첫 방문 사용자의 설치·사용 이해보다 설계 기록에 가깝다. 제품 설계 문서 이동 여부를 검토한다.",
-        "nuance": "설계 배경을 읽으려는 개발자에게는 유용할 수 있다."
+        "rationale": "PKG와 DMG의 비교 및 선택 이유는 패키징 의사결정 기록의 목적에 맞는다. README에는 제공 패키지와 설치 안내를 남기고 선택 근거는 의사결정·설계 이력 문서로 이동한다.",
+        "nuance": "대상은 문서 역할을 제안한 것이며 실제 경로와 새 문서 생성 여부는 미정이다. 선택 근거의 정보 가치는 보존한다.",
+        "placement": {
+          "target_document": "패키징 의사결정·설계 이력 문서 (경로 미정)",
+          "target_section": "PKG 선택 근거",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "패키징 요구사항과 대안 비교"
+          },
+          "purpose_reason": "번들 런타임과 설치 후 점검을 고려해 PKG를 선택한 이유를 의사결정 근거로 보존한다.",
+          "priority_reason": "대상 문서에서 요구사항과 대안을 먼저 설명한 뒤 선택 근거를 배치한다. README에서는 설치·사용 안내가 우선이다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -85,8 +95,18 @@
         "human_review_required": true,
         "expected_action": "MOVE",
         "rule_id": "INFORMATION_PLACEMENT",
-        "rationale": "설치 순서를 찾는 독자에게 PKG 대 DMG 선택 근거는 우선순위가 낮다. 별도 설계 설명으로 이동 검토한다.",
-        "nuance": "설치 패키지에 대한 FAQ가 필요한 경우 유지할 수도 있다."
+        "rationale": "PKG와 DMG 중 무엇을 선택했는지에 대한 근거는 설치 완료를 돕는 절차가 아니라 의사결정 기록에 속한다. RW-001과 같은 기록으로 이동하고 중복 설명은 통합한다.",
+        "nuance": "이미 의사결정 기록에 보존되어 있거나 보존 가치가 낮다고 판단되면 해당 설명의 REMOVE도 고려한다. 낮은 우선순위만으로 제거하지 않으며 패키지 다운로드·실행·설치 후 점검 안내는 유지한다.",
+        "placement": {
+          "target_document": "패키징 의사결정·설계 이력 문서 (경로 미정)",
+          "target_section": "PKG 선택 근거",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "패키징 요구사항과 대안 비교"
+          },
+          "purpose_reason": "설치 절차와 패키지 선택 근거를 분리하고 RW-001과 같은 결정의 설명은 통합한다.",
+          "priority_reason": "설치 가이드에서는 설치를 완료하는 절차가 우선이다. 이동 대상에서는 요구사항과 대안 비교 뒤에 선택 근거를 배치한다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -116,10 +136,20 @@
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "MOVE",
+        "expected_action": "KEEP",
         "rule_id": "AUDIENCE_RELEVANCE",
-        "rationale": "프로젝트 별점 요청이 첫 화면의 설치·기능 안내보다 먼저 노출된다. 홍보 의도는 존중하되 아래로 이동할지 검토한다.",
-        "nuance": "오픈소스 README의 일반적인 기여 유도 문구이므로 자동 삭제 금지."
+        "rationale": "별점 요청은 README의 프로젝트 홍보·참여 유도 목적에 부합하므로 현재 문서에 보존한다. 설치·사용 안내보다 낮은 배치 우선순위는 placement로 별도 기록한다.",
+        "nuance": "KEEP는 정보 보존 판단이며 현재 위치·순서를 고정하지 않는다. 같은 README 하단의 응원 섹션으로 재배치하는 것은 placement이고, 다른 문서로 소속을 바꾸는 MOVE와 구분한다. 원문에는 별점 요청 앞에 이미 제품 소개와 설치 링크가 있다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "프로젝트 응원 / Support",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "설치·사용 안내 및 제약사항"
+          },
+          "purpose_reason": "프로젝트 홍보와 참여 유도는 README의 프로젝트 응원 안내에 속한다.",
+          "priority_reason": "처음 방문한 독자의 도구 이해·설치·사용을 먼저 돕고, 별점 요청은 그 뒤에 배치한다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -151,8 +181,18 @@
         "human_review_required": true,
         "expected_action": "KEEP",
         "rule_id": "REQUIRED_CAVEAT",
-        "rationale": "Quick Tunnel URL의 비영속성과 계정 요구사항은 실제 사용자의 구성 결정에 필요하다.",
-        "nuance": "길다고 삭제하지 않는 운영상의 중요한 제한 설명."
+        "rationale": "Quick Tunnel의 계정·도메인·Tunnel Token 요구 여부와 URL의 비영속성은 첫 설정 사용자가 임시·고정 터널을 선택하는 데 필요한 정보다. README의 첫 설정 목적에 부합하므로 보존하고 선택 전에 확인할 수 있는 위치에 배치한다.",
+        "nuance": "KEEP는 필요한 정보를 보존한다는 판단이며 현재 위치를 무조건 고정한다는 뜻은 아니다. 현재 배치가 선택 전에 조건을 전달하는지 확인하고 필요하면 재배치한다. 아래 목적지는 논리적 배치 제안이며 실제 섹션·앵커의 존재를 확정하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "첫 설정 / 터널 선택 안내",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "임시·고정 터널 선택 및 설정 실행"
+          },
+          "purpose_reason": "계정·도메인·Tunnel Token 요구 여부와 URL의 비영속성을 알려 사용자가 목적에 맞는 연결 방식을 선택하도록 돕는다.",
+          "priority_reason": "터널 방식 선택에 영향을 주는 조건이므로 선택·설정 실행 전에 읽도록 배치한다. 기존 위치가 이 조건을 충족하면 유지한다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -184,8 +224,18 @@
         "human_review_required": true,
         "expected_action": "KEEP",
         "rule_id": "CHANGELOG_SPECIFICITY",
-        "rationale": "변경사항을 어떤 동작이 개선됐는지로 구체화하며 실행·권한 보존 범위를 전달한다.",
-        "nuance": null
+        "rationale": "사용자에게 보이는 터널 준비 확인·설치 스크립트 실행 권한·파일 권한 보존의 변화와 유지보수자의 회귀 방지 검증 정보는 릴리스 변경사항을 이해하는 목적에 관련성이 높고 중요하므로 보존한다.",
+        "nuance": "KEEP는 정보 보존 판단이며 현재 위치나 항목 순서를 고정하지 않는다. 사용자 동작 변화와 유지보수자용 검증 정보를 독자·구성에 맞게 배치할 수 있다. 변경 설명의 보존이 실제 구현 동작이나 테스트 통과의 확인을 뜻하지는 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "변경사항 / 검증",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "사용자 동작 변화 안내 (회귀 방지 테스트·CI 설명의 배치 기준)"
+          },
+          "purpose_reason": "업데이트 사용자에게 동작 변화를, 유지보수자에게 회귀 방지 검증 정보를 전달한다. 사용자 영향은 변경사항에 두고 테스트·CI는 뒤에 두거나 검증 섹션으로 묶을 수 있다.",
+          "priority_reason": "사용자에게 직접 영향을 주는 변화부터 전달하고 검증 정보를 이어서 배치하는 것을 기본으로 하되 독자·문서 구성에 따라 조정한다. 현재 순서를 고정하지 않는다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -217,8 +267,18 @@
         "human_review_required": true,
         "expected_action": "KEEP",
         "rule_id": "SAFETY_DETAIL_PRESERVATION",
-        "rationale": "별도 CLI 등록의 권한 범위·제거 안전장치 등은 검토와 승인에 필수인 상세 조건이다.",
-        "nuance": "상세함 자체를 과잉 서술로 판단하지 말아야 한다."
+        "rationale": "명시적 설치·제거 선택, 사용자 PATH 수정 범위, 명령 소유권과 제거 안전장치, 민감정보 출력 제한은 CLI 등록 변경을 검토하는 개발자가 영향 범위와 안전성을 판단하는 데 관련성과 중요도가 높으므로 보존한다.",
+        "nuance": "KEEP는 정보 보존 판단이며 위치·순서를 고정하지 않는다. 원문 문서의 CI-only 상태와 실제 Windows 업그레이드·제거·OAuth 연결 유지가 입증되지 않았다는 한계도 연결해 읽어야 한다. 해당 한계는 현재 발췌 밖의 문맥이며 이 사례의 검수로 구현 동작이나 CI 통과를 새로 확인한 것은 아니다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "CLI 등록 설계 / 동작 범위와 안전장치",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "적용 범위와 검증 상태 안내"
+          },
+          "purpose_reason": "개발자가 설치·제거의 영향 범위와 안전 조건을 검토할 수 있도록 동작 및 제한 정보를 같은 문서에 보존한다.",
+          "priority_reason": "적용 범위·검증 상태를 먼저 밝히고 설치 동작, 제거 동작, 안전장치·출력 제한 순으로 안내한다. 발췌는 대체로 이 순서이므로 큰 재배치는 필요 없어 보이지만 현재 순서를 고정하지 않는다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -248,10 +308,43 @@
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "MOVE",
+        "expected_action": "COMPRESS",
         "rule_id": "INDEX_DETAIL_OVERLOAD",
-        "rationale": "경험 색인 내부에 개별 프로젝트의 긴 검증 결과가 연속 배치돼 탐색 목적을 방해할 수 있다. 상세 검증은 개별 근거 문서로 이동하고 색인에 링크만 남기는 방안을 검토한다.",
-        "nuance": "작성자용 근거 DB 인덱스라 상세한 근거도 일부 필요할 수 있다."
+        "rationale": "자료 링크와 원장·핵심 사례의 역할 구분은 색인의 탐색·활용 목적에 필요하므로 유지한다. 상세 성능 수치·평가 미완료·집계 차이는 고정 커밋의 근거 문서에 이미 설명되어 있어 색인에서는 중복을 축약한다. 단, 색인에 남긴 성과 주장에 필수인 해석 조건은 함께 남긴다.",
+        "nuance": "주의사항이라는 이유만으로 모두 노출하거나 제거하지 않는다. 수정된 색인의 주장을 기준으로 오해·판단 변화 여부를 다시 확인한다. 예를 들어 색인에서 성능 달성을 주장하지 않으면 상세 지연 수치까지 반복할 필요는 적지만, 성능·검증 완료를 주장하면 해당 한계를 링크만으로 대체할 수 없다. COMPRESS는 원문 전체 이동이나 근거 기록 삭제를 뜻하지 않으며 실제 출처 파일은 수정하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "작성 원칙 / 자료 활용 안내",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "경험 목록"
+          },
+          "purpose_reason": "원장과 핵심 사례의 역할·링크를 남겨 독자가 목적에 맞는 경험 자료를 선택하도록 돕는다.",
+          "priority_reason": "경험 탐색 뒤에 자료 활용 원칙을 안내하고, 남긴 주장을 이해하는 데 필수인 조건은 그 주장 가까이에 둔다. 세부 한계는 연결된 근거 문서에서 확인하도록 한다."
+        },
+        "context_evidence": [
+          {
+            "repository": "nanocode00/resume",
+            "path": "experiences/mallo-rework-checkpoint.md",
+            "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+            "supports": "초기 13명 설문과 최종 사용자 평가 미수행, Real Warm p95 3.338초의 1.5초 요구 미달 기록",
+            "blob_sha": "48039dcfa73c75fab92374f1f706c03f44fff2e5"
+          },
+          {
+            "repository": "nanocode00/resume",
+            "path": "experiences/malhaebom-rework-checkpoint.md",
+            "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+            "blob_sha": "6a2a12808c4bd777dca84c1ed57c8410301d2f32",
+            "supports": "운영 전체 E2E·독립 사람 품질·마감 및 동결 상태의 검증 범위 구분"
+          },
+          {
+            "repository": "nanocode00/resume",
+            "path": "experiences/hci-stock-service-evidence-ledger.md",
+            "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+            "blob_sha": "15c8c1401122eee78d33bf3cc248a45bb747c5bc",
+            "supports": "개인·팀 귀속, 미확정 기능·운영 상태, 설문 원본 12/6과 발표 13/5 차이 기록"
+          }
+        ]
       },
       "not_a_full_document_judgment": true
     },
@@ -275,16 +368,34 @@
       ],
       "contract": {
         "audience": "빠르게 훑는 채용 담당자",
-        "purpose": "주요 역량과 검증 가능한 성과 확인",
+        "purpose": "채용 담당자가 프로젝트별 실제 기여와 성과를 이해할 수 있도록, 부적합한 템플릿에 억지로 압축된 요약 이력의 구조를 재설계",
         "language": "ko"
       },
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "COMPRESS",
-        "rule_id": "AUDIENCE_DENSITY",
-        "rationale": "채용용 요약을 찾는 독자에게 다수의 모델 이름·수치·포트·배포 경로가 하나의 프로젝트 설명에 밀집한다. 핵심 기여와 성과를 중심으로 압축할지 검토한다.",
-        "nuance": "이 문서는 마스터 이력서이기도 하므로 제출용 변형을 따로 만드는 방안 우선. 수치 왜곡 금지."
+        "expected_action": "FLAG",
+        "rule_id": "TEMPLATE_STRUCTURE_MISMATCH",
+        "rationale": "사용자 검토에서 핵심 문제는 관리 안내의 문서 간 이동이 아니라, 실제 수행한 일을 맞지 않는 템플릿에 억지로 압축해 기여·판단·결과가 밀집한 요약 이력의 구조로 정정됐다. 추가 압축이나 단순 이동을 전제하지 않고 정보 단위를 다시 나누고 재취합·구조화하는 방향을 검토한다. 구체적 구조와 액션 표현은 아직 모호하므로 FLAG를 유지한다.",
+        "nuance": "README의 관리·작업 안내를 AGENTS.md로 옮기는 판단은 RW-009에서 별도로 다룬다. 이 사례는 구조 재설계이며 단순한 위치 이동이나 문구 수정만으로 해결된다고 가정하지 않는다. 새 구조에서도 실제 기여·측정 조건·검증 한계·출처를 보존하며 기존 템플릿이나 더 짧은 분량에 다시 억지로 맞추지 않는다. 현재 발췌만으로 이력서 전체의 결함을 확정하지 않는다.",
+        "review_status": "provisional_revisit_required",
+        "proposed_plan": [
+          {
+            "source_document": "resume.md",
+            "target_document": "resume.md",
+            "proposed_actions": [
+              "REVISE"
+            ],
+            "source_disposition": "retain_information_during_restructuring",
+            "reason": "추가 압축보다 실제 수행 내용에 맞게 정보 단위를 재분리·재취합하고 설명 구조를 재설계한다. REVISE의 구조 변경 범위와 placement의 역할은 재검토가 필요하다."
+          }
+        ],
+        "open_questions": [
+          "기존 템플릿이 어떤 정보 관계를 왜곡·누락하는지 전체 이력과 대조해 확인",
+          "프로젝트별 실제 기여·판단·결과를 설명하는 적절한 구조와 정보 단위 결정",
+          "구조 재설계를 기존 REVISE·placement 및 재취합 단계로 어떻게 표현·평가할지 재검토",
+          "유지할 주장에 필수인 측정 조건·귀속·검증 한계를 새 구조에서 보존하는 방식 확인"
+        ]
       },
       "not_a_full_document_judgment": true
     },
@@ -307,17 +418,27 @@
         }
       ],
       "contract": {
-        "audience": "이력서 자료를 관리하는 작성자·협업자",
-        "purpose": "저장소 각 문서의 관리 목적 확인",
+        "audience": "채용 담당자 (README), 저장소 작업 에이전트 (AGENTS.md)",
+        "purpose": "README는 핵심 이력 전달에 사용하고, 자료 구조·관리 원칙·작업 제약은 AGENTS.md에서 에이전트에게 안내",
         "language": "ko"
       },
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "KEEP",
-        "rule_id": "DOCUMENT_SCOPE_DECLARATION",
-        "rationale": "마스터 이력서와 세부 경험 원장에 서로 다른 역할을 부여하고 공개 저장소의 개인정보 기준까지 밝힌다.",
-        "nuance": null
+        "expected_action": "MOVE",
+        "rule_id": "DOCUMENT_PURPOSE_ALIGNMENT",
+        "rationale": "발췌는 이력 자체보다 원본·근거 문서의 역할, 자료 복원·작성 절차, 보관 위치와 개인정보 커밋 제약을 설명한다. 채용 담당자용 README보다 에이전트의 저장소 작업 안내에 부합하므로 AGENTS.md로 이동한다.",
+        "nuance": "문서 역할에 대한 사용자 지정 목표를 적용한 판단이며 실제 출처 문서를 수정한 것은 아니다. 이동 시 기존 안내의 경로·개인정보 제약을 보존하고 AGENTS.md의 기존 내용과 중복·충돌 여부를 확인한다. 요약 이력의 템플릿·구조 문제는 RW-008에서 별도로 다룬다.",
+        "placement": {
+          "target_document": "AGENTS.md",
+          "target_section": "저장소 구조와 자료 관리·작업 원칙",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "이력·자소서 작성 및 수정 절차"
+          },
+          "purpose_reason": "에이전트가 원본·근거·가이드의 역할과 경로, 개인정보 커밋 제약을 파악한 뒤 작업하도록 한다.",
+          "priority_reason": "문서별 역할·보존 원칙·개인정보 제약을 먼저 안내한 뒤 구체적인 복원·작성 절차와 참고 가이드를 배치한다. 실제 대상 문서의 기존 구성은 이동 전에 확인한다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -340,17 +461,29 @@
         }
       ],
       "contract": {
-        "audience": "경험기술서 작성자",
-        "purpose": "제출용 이력서 작성 기준 확인",
+        "audience": "경험문서를 작성·수정하는 에이전트",
+        "purpose": "근거를 바탕으로 경험문서를 작성하는 방법을 안내하고, 저장소 문서별 역할·작업 분담은 루트 AGENTS.md에서 확인",
         "language": "ko"
       },
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "KEEP",
-        "rule_id": "AUDIENCE_SPECIFIC_CRITERIA",
-        "rationale": "채용 담당자가 읽는 시간과 필요한 근거를 기준으로 문서 밀도 및 세부 정보 위치를 지정한다.",
-        "nuance": null
+        "expected_action": "MOVE",
+        "rule_id": "DOCUMENT_ROLE_GUIDANCE_PLACEMENT",
+        "rationale": "가이드의 독자는 작성 작업을 수행하는 에이전트다. resume.md와 experiences/의 역할·관리 경로·정보 분담 같은 저장소 공통 안내는 루트 AGENTS.md로 옮기고 경험문서를 근거에 따라 작성하는 방법은 현재 가이드에 남긴다.",
+        "nuance": "MOVE의 대상은 문서별 역할·경로·정보 분담 안내이며 발췌 전체나 가이드 전체가 아니다. 근거·귀속·측정 조건을 보존하는 작성 원칙은 유지한다. 채용 담당자는 결과 문서의 독자이지 이 작업 가이드의 직접 독자가 아니다. 문서 목적 설명과 경험 작성 기준이 섞인 구간은 정보 단위로 분리해 적용하고 획일적 분량·템플릿을 강제하는 기준은 RW-008의 구조 문제와 구분해 재검토한다.",
+        "action_scope": "resume.md 등의 역할·저장소 경로·문서 간 정보 분담 안내",
+        "placement": {
+          "target_document": "AGENTS.md",
+          "target_section": "문서별 역할과 작성 가이드 연결",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "경험문서 작성 작업 안내와 가이드 참조"
+          },
+          "purpose_reason": "에이전트가 각 문서의 역할·작업 대상·자료 위치를 루트에서 확인하고 상세 작성 방법은 가이드로 찾아가도록 한다.",
+          "priority_reason": "문서별 역할·작업 범위를 먼저 안내한 뒤 경험 작성 가이드를 연결한다. RW-009에서 이동할 관리 안내와 대상 문서의 기존 내용은 통합·중복 검토한다."
+        },
+        "context_note": "고정 커밋의 전체 가이드를 재조회해 상단의 문서 역할 구분, resume.md·experiences/*.md 설명과 말미의 문서 간 정보 분담 체크리스트를 확인했다. 발췌 11~17행 자체에는 resume.md라는 파일명은 없고 바로 위 문맥에 있다."
       },
       "not_a_full_document_judgment": true
     },
@@ -382,8 +515,18 @@
         "human_review_required": true,
         "expected_action": "KEEP",
         "rule_id": "CONDITIONAL_RESULT_NOT_CONTRADICTION",
-        "rationale": "무수수료 수익과 수수료 반영 손실은 전제가 다르므로 모순이 아니다. 불리한 결과와 데이터 한계를 반드시 보존한다.",
-        "nuance": "비교 조건을 없애면 오히려 잘못된 인상을 준다."
+        "rationale": "문서 전체에서 다루는 데이터 수집·예측 실험, 결과와 한계, 경험의 의미를 함께 요약하므로 실험 평가자·채용 담당자가 경험을 파악하는 목적에 관련성과 중요도가 높다. 정보를 KEEP하고 문서 상단의 현재 요약 배치도 유지한다.",
+        "nuance": "무수수료 수익과 수수료 반영 손실은 조건이 다르므로 모순이 아니다. 요약에 성과 수치가 포함되어 있어 validation 구간·가상 중복거래·수수료 및 기준선 비교는 해석에 필요한 조건으로 함께 보존한다. 현재 사례의 배치 적절성을 인정하는 것이 모든 KEEP의 위치를 고정한다는 뜻은 아니며 실제 실험을 재실행·검증한 것도 아니다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "문서 상단 / 한 줄 요약",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "실험·경험의 상세 설명"
+          },
+          "purpose_reason": "독자가 상세 내용을 읽기 전에 경험 전체의 수행 내용·결과·한계를 파악하도록 한다.",
+          "priority_reason": "문서 전체를 안내하는 요약은 상세 설명보다 먼저 제공하는 것이 적절하다. 현재 상단 배치에 문제가 없어 재배치를 제안하지 않는다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -407,16 +550,27 @@
       ],
       "contract": {
         "audience": "기술 면접관·채용 담당자",
-        "purpose": "성과에 대한 귀속과 검증 한계 판단",
+        "purpose": "채용 담당자·기술 면접관에게 실제 수행한 작업의 전문성과 개인 기여·성과를 전달",
         "language": "ko"
       },
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "KEEP",
+        "expected_action": "MOVE",
         "rule_id": "ATTRIBUTION_AND_LIMITS",
-        "rationale": "개인 기여와 팀 기여를 분리하고 합성평가·기존 도메인 성능 악화·미검증 범위를 명시한다.",
-        "nuance": "문장 수만 줄인다고 단서를 삭제하지 말 것."
+        "rationale": "이력서의 목적은 수행 작업의 전문성과 개인 기여·성과를 전달하는 것이다. 네 항목 말미와 마지막 종합 주의사항의 상세 검증 한계는 별도 프로젝트 근거 문서로 이동하고, 이력서에서는 핵심 작업과 성과를 중심으로 구성한다. 같은 문서 끝에 주의사항을 모으는 이전 안을 대체한다.",
+        "nuance": "MOVE 대상은 상세 한계·검증 범위 설명이며 핵심 기여 전체가 아니다. 남기는 주장을 더 넓게 해석하게 만드는 조건은 짧게 유지하거나 주장을 정확한 범위로 좁힌다. 예를 들어 합성 평가를 실사용 검증으로, 결함 발견·수정 요청을 팀원의 패치 구현으로, 일부 도메인 성능을 전반적 개선으로 바꾸지 않는다. 상세 근거 연결은 가능하되 필수 해석 조건을 링크만으로 대체하지 않는다. 실제 대상 문서의 중복·누락을 확인한 뒤 이전 범위를 확정한다.",
+        "placement": {
+          "target_document": "프로젝트별 상세 경험·검증 근거 문서 (최종 경로 미정)",
+          "target_section": "기여 항목별 검증 범위와 한계",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "각 작업·실험의 상세 근거"
+          },
+          "purpose_reason": "상세 검증을 원하는 독자는 별도 문서에서 근거와 한계를 확인하고, 이력서 독자는 작업의 전문성과 핵심 기여를 빠르게 파악하도록 한다.",
+          "priority_reason": "상세 조건은 대응하는 작업·측정 근거와 함께 배치한다. 이력서에는 핵심 기여·성과 및 그 의미를 바꾸지 않는 최소 조건을 남기고 근거 문서를 연결한다."
+        },
+        "action_scope": "네 기여 항목 말미 및 마지막 종합 주의사항의 상세 한계·검증 범위 설명"
       },
       "not_a_full_document_judgment": true
     },
@@ -448,8 +602,47 @@
         "human_review_required": true,
         "expected_action": "MOVE",
         "rule_id": "AUDIENCE_SEGMENTATION",
-        "rationale": "일반 사용자 안내와 내부 OAuth 지문 검증 및 TestCli 진단 절차가 함께 나온다. 개발자용 심화 문서에 둘 정보인지 검토한다.",
-        "nuance": "인증 소유권과 보안 경계는 보존해야 한다."
+        "rationale": "로그인 후 agy 종료 상태에서도 갱신되는 동작과 OAuth 환경변수 불필요 안내는 사용자에게 필요하므로 README에 유지한다. 메타데이터·지문 검증·캐시 저장의 내부 구현은 인증 설계 문서로, 개발 환경이 필요한 TestCli 진단은 개발자용 문제 해결 문서로 분리한다.",
+        "nuance": "MOVE는 발췌 전체가 아니라 내부 구현과 개발자 진단에 한정한다. 기존 Antigravity 자격증명을 덮어쓰지 않는다는 사용자 영향은 README에 짧게 남기고 상세 소유권·저장 방식은 설계 문서에 보존한다. 목적지의 실제 구성·중복을 확인한 뒤 이전하며 실제 인증 동작을 재검증했다는 뜻은 아니다.",
+        "action_scope": "OAuth 메타데이터·지문 검증·캐시 저장의 내부 구현과 dotnet TestCli 진단 절차",
+        "information_decisions": [
+          {
+            "content_action": "KEEP",
+            "scope": "최초 로그인 후 agy가 꺼져 있어도 쿼터 갱신 가능 및 OAuth 환경변수 불필요 안내",
+            "placement": {
+              "target_document": "current",
+              "target_section": "인증 설정 / 첫 사용",
+              "purpose_reason": "사용자가 필요한 초기 설정과 로그인 이후 동작을 이해하도록 안내한다."
+            }
+          },
+          {
+            "content_action": "KEEP",
+            "scope": "기존 Antigravity 자격증명을 덮어쓰지 않는다는 짧은 사용자 영향 안내",
+            "placement": {
+              "target_document": "current",
+              "target_section": "인증 설정 / 첫 사용",
+              "purpose_reason": "연동이 기존 인증 정보에 미치는 영향을 사용자에게 알린다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "OAuth 메타데이터 확인·SHA-256 지문 검증·전용 캐시 저장 및 상세 소유권 설명",
+            "placement": {
+              "target_document": "인증 설계 문서 (최종 경로·기존 내용 확인 필요)",
+              "target_section": "OAuth 검증·자격증명 소유권과 저장",
+              "purpose_reason": "내부 인증 구조를 검토하는 개발자에게 구현과 보안 경계를 설명한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "dotnet run --project .\\QuotaTray.TestCli -- refresh-test 진단 절차",
+            "placement": {
+              "target_document": "개발자용 문제 해결 문서 (최종 경로·기존 내용 확인 필요)",
+              "target_section": "직접 refresh 경로 진단",
+              "purpose_reason": "소스와 개발 환경이 필요한 진단 절차를 해당 환경을 갖춘 독자에게 안내한다."
+            }
+          }
+        ]
       },
       "not_a_full_document_judgment": true
     },
@@ -481,8 +674,40 @@
         "human_review_required": true,
         "expected_action": "FLAG",
         "rule_id": "UNVERIFIED_ABSOLUTE_CLAIM",
-        "rationale": "'완벽 지원'은 절대적 표현이다. 각 제공자 지원 수준·검증 범위를 확인하거나 검증된 표현으로 한정할지 검토한다.",
-        "nuance": "8개 서비스 이름의 진위나 실제 통합 동작을 원문만으로 판단하지 않는다."
+        "rationale": "핵심 기능 목록은 잠재 사용자가 지원 범위를 파악하는 데 필요하므로 유지한다. 사용자 지정 문체에 따라 이모지를 정리하고, 근거 없는 완벽 지원·8대 주요·플랜별 최적화 같은 표현은 실제 지원 기능을 설명하는 문장으로 고친다. 실시간 동작 등 확인되지 않은 주장은 FLAG로 남기고 근거 확인 후 표현을 결정한다.",
+        "nuance": "기능 개요에 세부 조건·기준 시점을 일괄 필수로 요구하지 않는다. 필요한 상세 정책·설정 정보는 별도 문서로 연결할 수 있으며 현재 문서의 주장 해석에 꼭 필요한 한정만 가까이 남긴다. 고정 한도 수치에 조건·날짜가 없다는 이유만으로 오류로 판정하지 않는다. 실제 연동·갱신 주기·제공자 정책은 이번 원문 검수로 확인하지 않았으므로 실시간을 주기적 갱신으로 임의 확정하지 않는다.",
+        "review_points": [
+          {
+            "action": "REVISE",
+            "scope": "제목·강조의 이모지",
+            "reason": "사용자 지정 문체에 맞춰 장식성 이모지를 제거한다."
+          },
+          {
+            "action": "REVISE",
+            "scope": "8대 주요·완벽 지원·플랜별 최적화",
+            "reason": "근거 없는 서열·절대적 지원·추상적 품질 표현을 실제 표시 항목과 지원 범위 중심으로 수정한다. 대체 문구에서도 확인되지 않은 기능을 추가하지 않는다."
+          },
+          {
+            "action": "FLAG",
+            "scope": "실시간 모니터링·실시간 잔액",
+            "reason": "실제 갱신 동작을 확인한 뒤 표현을 정한다. 개요에서 갱신 주기 수치를 반드시 제시하라는 요구는 아니다."
+          },
+          {
+            "action": "REVISE",
+            "scope": "서비스별 기능 목록의 설명 기준",
+            "reason": "서비스·표시 정보·필요한 지원 제약이라는 공통 기준으로 정리하되 개요에 불필요한 세부 조건·기준 시점을 일괄 추가하지 않는다."
+          },
+          {
+            "action": "REVISE",
+            "scope": "Rate Limit 윈도우·대표값·모델 풀 등 용어",
+            "reason": "잠재 사용자가 이해할 수 있게 의미를 풀어 쓰고 서비스별 표현을 통일한다."
+          },
+          {
+            "action": "MOVE",
+            "scope": "인증 파일 경로와 내부 인증·설정 상세",
+            "reason": "기능 파악에 불필요한 상세는 인증·설정 문서로 옮기고 필요한 안내를 연결한다. 실제 목적지와 기존 내용은 이동 전 확인한다."
+          }
+        ]
       },
       "not_a_full_document_judgment": true
     },
@@ -517,10 +742,27 @@
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "FLAG",
-        "rule_id": "POTENTIAL_LINK_INCONSISTENCY",
-        "rationale": "같은 README의 릴리스 링크가 서로 다른 GitHub 소유자명을 가리킨다. 저장소 이전·리다이렉트 여부를 확인해야 한다.",
-        "nuance": "링크 대상이 다르다는 사실만으로 둘 중 하나가 잘못됐다고 단정하지 않는다."
+        "expected_action": "REVISE",
+        "rule_id": "BROKEN_DOWNLOAD_LINK",
+        "rationale": "2026-11-05 링크 확인에서 nanocode00/QuotaTray/releases는 200, HonorBear/QuotaTray/releases는 리다이렉트 없이 404로 응답했다. 설치 사용자가 다운로드 경로를 따라갈 수 있도록 본문 링크를 정상 릴리스 주소로 수정한다.",
+        "nuance": "설치에 필요한 다운로드 안내는 유지한다. 확인된 것은 현재 공개 접근의 응답 상태이며 수집 당시 링크 상태나 404의 원인을 확정하지 않는다. 실제 다운로드 파일의 정상 실행·설치·보안성을 확인한 것은 아니다.",
+        "link_check": {
+          "observed_on": "2026-11-05",
+          "scope": "current_public_http_response_not_capture_time",
+          "results": [
+            {
+              "url": "https://github.com/nanocode00/QuotaTray/releases",
+              "http_status": 200,
+              "final_url": "https://github.com/nanocode00/QuotaTray/releases"
+            },
+            {
+              "url": "https://github.com/HonorBear/QuotaTray/releases",
+              "http_status": 404,
+              "final_url": "https://github.com/HonorBear/QuotaTray/releases"
+            }
+          ],
+          "proposed_replacement": "https://github.com/nanocode00/QuotaTray/releases"
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -550,10 +792,53 @@
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "KEEP",
-        "rule_id": "SCOPE_BOUNDARY",
-        "rationale": "이관 준비 저장소와 실제 적용 대상이 다르고 실행·PR 미수행 범위를 명확히 한다.",
-        "nuance": null
+        "expected_action": "MOVE",
+        "rule_id": "INTRODUCTION_AND_WORK_CONTEXT_SEPARATION",
+        "rationale": "README에는 문서 이관 후보 구조를 검토하는 저장소라는 소개와 실제 적용 대상 링크만 유지한다. 적용·PR 미수행 상태, 기준 커밋, 선별·제외 내역 및 작업 제약은 상태·준비 기록·작업 지침으로 나눠 별도 문서에 분리한다.",
+        "nuance": "MOVE는 부연설명에 한정하며 저장소의 핵심 소개는 KEEP한다. 분리는 정보 폐기를 뜻하지 않는다. 현재 구성의 제외 내역과 향후 작업 금지 지침을 구분하고, 실제 목적지·기존 내용과 중복을 확인한 뒤 배치한다. 미수행 상태는 수집 시점의 기록으로 보존하며 현재 상태라고 단정하지 않는다. source 원문이나 외부 저장소를 수정한 것은 아니다.",
+        "action_scope": "적용·PR 미수행 상태, 기준 커밋, 자료 선별·제외 내역과 작업 제약의 부연설명",
+        "information_decisions": [
+          {
+            "content_action": "KEEP",
+            "scope": "문서 이관 후보 구조를 검토하는 저장소라는 소개와 실제 적용 대상 링크",
+            "placement": {
+              "target_document": "current",
+              "target_section": "저장소 소개",
+              "relative_position": {
+                "relation": "before",
+                "anchor": "문서 목록과 검토 안내"
+              },
+              "purpose_reason": "독자가 이 저장소의 용도와 실제 적용 대상을 바로 이해하도록 한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "실제 적용·PR 생성 미수행 상태",
+            "placement": {
+              "target_document": "이관 상태·작업 기록 (최종 경로 미정)",
+              "target_section": "진행 상태",
+              "purpose_reason": "소개와 별도로 관리하고 기록 시점에 따른 상태 변화가 드러나도록 한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "기준 커밋 SHA와 자료 선별·제외 내역",
+            "placement": {
+              "target_document": "이관 준비·기준 기록 (최종 경로 미정)",
+              "target_section": "기준 자료와 포함·제외 범위",
+              "purpose_reason": "재현·인계·대조에 필요한 세부 준비 정보를 보존한다."
+            }
+          },
+          {
+            "content_action": "MOVE",
+            "scope": "제품 코드·평가셋·workflow 복제 금지 등 향후 작업 제약으로 적용할 내용",
+            "placement": {
+              "target_document": "AGENTS.md",
+              "target_section": "이관 작업 범위와 제약",
+              "purpose_reason": "에이전트가 작업할 때 따라야 할 지침을 모은다. 단순한 현재 구성 설명은 준비 기록으로 구분하며 원문의 서술을 근거 없이 금지 규칙으로 강화하지 않는다."
+            }
+          }
+        ]
       },
       "not_a_full_document_judgment": true
     },
@@ -583,10 +868,33 @@
       "annotation": {
         "status": "assistant_proposal",
         "human_review_required": true,
-        "expected_action": "KEEP",
-        "rule_id": "TEST_EVIDENCE_BOUNDARY",
-        "rationale": "단순 테스트 통과와 실제 변이 감지를 구분하고 검증 실패 가능성을 명시한다.",
-        "nuance": "단정적인 표현이 있지만 바로 뒤에 구체적인 반례가 있다."
+        "expected_action": "REVISE",
+        "rule_id": "CHECKLIST_TASK_ORIENTED_WRITING",
+        "rationale": "게이트 점검 문서에서는 주장을 강조하는 제목과 긴 해설보다 담당자가 수행·확인·기록할 작업을 명확히 안내해야 한다. 제목은 테스트 결함 검출 확인처럼 작업 중심으로 다시 쓰고, 본문은 의도적 결함 주입·예상 테스트 실패 확인·결과 기록 절차로 축약한다.",
+        "nuance": "핵심 검증 절차는 보존한다. 제목이 다른 페이지에서 복사됐는지는 확인하지 않았으며 수정 근거는 출처 추정이 아니라 점검 문서의 목적이다. 상수·리터럴 비교의 단정적 설명과 DART 과거 이력은 점검 본문에서 반복하지 않는다. 필요하면 정확한 상세 설명·실험 기록을 별도로 연결하되 실제 보존·출처를 확인한다. 이 사례 검수로 해당 테스트나 변이 검사를 실행한 것은 아니다.",
+        "editing_actions": [
+          {
+            "action": "REVISE",
+            "scope": "제목",
+            "reason": "논쟁적·단정적인 주장 대신 확인할 작업을 드러내는 제목으로 작성한다."
+          },
+          {
+            "action": "COMPRESS",
+            "scope": "본문의 교육적 해설·상수 비교 예시·과거 실험 일화",
+            "reason": "점검 담당자가 해야 할 절차와 기록 항목을 남기고 설명을 줄인다. 리터럴 비교만으로 결함 검출이 보장된다고 쓰지 않는다."
+          }
+        ],
+        "proposed_revision": "## 테스트 결함 검출 확인\n\n- 핵심 동작에 의도적인 결함을 넣고 실패해야 할 테스트를 지정한다.\n- 테스트를 실행해 예상한 실패가 발생하는지 확인한다.\n- 변경 지점, 예상 테스트, 실제 결과와 확인 날짜를 기록한다. 에이전트의 보고만으로 확인을 대신하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "G4·G5 결함 검출 점검",
+          "relative_position": {
+            "relation": "before",
+            "anchor": "변이 확인 결과 기록표"
+          },
+          "purpose_reason": "담당자가 간결한 절차에 따라 점검하고 바로 결과를 기록하도록 한다.",
+          "priority_reason": "관련 G4·G5 항목에 연결하고 결과 기록표 앞에 절차를 배치한다. 긴 해설·과거 사례보다 실행할 작업을 우선한다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -618,8 +926,72 @@
         "human_review_required": true,
         "expected_action": "KEEP",
         "rule_id": "AUDIENCE_SPLIT",
-        "rationale": "고객용 페이지와 평가자용 페이지의 목적을 분리해 문서 구조에서 독자 차이를 명확히 한다.",
-        "nuance": null
+        "rationale": "저장소 소개와 파일별 역할은 용도·구성을 이해하는 데 필요하므로 원래 발췌 3~8행은 KEEP한다. 추가 발췌의 미디어·호스팅 안내는 작업·배포 문서로 분리한다. 호스팅 설명은 원본 프로젝트의 artifacts/intro 맥락이 별도 저장소 루트 안내에 남은 것으로, 대상 저장소를 명시하고 경로를 맥락에 맞게 수정한다.",
+        "nuance": "주 라벨 KEEP는 원래 발췌 3~8행에 한정한다. 추가 발췌의 MOVE·REVISE는 별도로 판단한다. artifacts/intro는 원본 프로젝트에 실제 존재했으므로 경로 자체가 잘못됐다고 일반화하지 않는다. 같은 안내라도 원본 프로젝트와 별도 저장소에서 기준 경로가 다르다. 파일·커밋 이력을 확인한 것이며 실제 Pages·Vercel 설정이나 배포 성공은 미검증이다.",
+        "action_scope": "원래 발췌 3~8행의 저장소 소개와 파일별 역할 안내",
+        "context_excerpts": [
+          {
+            "line_start": 10,
+            "line_end": 12,
+            "text": "## 미디어 추가\n\n이미지는 `assets/images/`, 영상은 `assets/videos/`에 넣습니다. 권장 파일명은 각 디렉터리의 README에 정리되어 있습니다. 해당 이름으로 파일을 추가하면 `evaluator.html`이 자동 표시하며, 없을 때는 placeholder가 유지됩니다."
+          },
+          {
+            "line_start": 14,
+            "line_end": 16,
+            "text": "## 정적 호스팅\n\nGitHub Pages에서는 이 디렉터리를 배포 대상(root)으로 지정하거나, Pages가 저장소 루트만 지원하는 경우 빌드/배포 단계에서 `artifacts/intro`의 내용을 사이트 루트로 복사합니다. Vercel에서는 Framework Preset을 `Other`, Root Directory를 `artifacts/intro`으로 지정합니다."
+          }
+        ],
+        "additional_reviews": [
+          {
+            "actions": [
+              "MOVE"
+            ],
+            "scope": "추가 발췌 10~12행: 미디어 추가",
+            "target_document": "AGENTS.md 또는 미디어 관리 가이드 (최종 목적지 미정)",
+            "reason": "미디어 추가는 수정 작업 지침으로 분리하고 이미 있는 assets/images/README.md·assets/videos/README.md 안내와 중복을 검토한다."
+          },
+          {
+            "actions": [
+              "MOVE",
+              "REVISE"
+            ],
+            "scope": "추가 발췌 14~16행: 정적 호스팅",
+            "target_document": "배포 안내 문서 (최종 경로 미정)",
+            "reason": "배포 담당자용 문서로 분리하고 어느 저장소 기준인지 명시한다. 원본 proj1-d에서는 artifacts/intro가 유효했고, 별도 mallo-intro에서는 HTML이 루트에 있어 기존 안내를 그대로 적용할 수 없다. 실제 호스팅 설정을 확인해 각 저장소에 맞는 경로를 안내한다."
+          }
+        ],
+        "path_check": {
+          "commit_sha": "916a3df7b6481d78c1a5fe95b53565f4fb7d91df",
+          "tree_complete": true,
+          "existing_paths": [
+            "index.html",
+            "customer.html",
+            "evaluator.html",
+            "styles/intro.css",
+            "assets/images/",
+            "assets/images/README.md",
+            "assets/videos/",
+            "assets/videos/README.md"
+          ],
+          "missing_paths": [
+            "artifacts/intro"
+          ],
+          "conclusion": "artifacts/intro는 원본 proj1-d의 소개 페이지 경로다. 해당 경로를 포함한 README와 동일한 blob이 별도 저장소 루트에 들어 있어, 원본 경로의 오류가 아니라 복제된 안내의 저장소 맥락 불일치로 판단한다.",
+          "limits": "고정 커밋의 소스 구조·파일 존재만 확인했으며 현재 원격 브랜치와 호스팅 설정·배포 동작은 미검증",
+          "origin_evidence": {
+            "original_repository": "aihuman-7th/proj1-d",
+            "original_path": "artifacts/intro/README.md",
+            "original_commit_sha": "fc5ffe2750868403091202748f5e3e10e7e872c0",
+            "original_commit_message": "refactor: 소개 정적 페이지를 artifacts로 통합",
+            "original_blob_sha": "463a2993d5b5dccc4fe48bf71d306266f4cf04cb",
+            "standalone_repository": "nanocode00/mallo-intro",
+            "standalone_root_commit_sha": "640a6d6aea7fccf26d1c7269df95383fe4e0bd2f",
+            "standalone_root_commit_message": "refactor: 통합 소개 페이지를 root에 배포",
+            "standalone_path": "README.md",
+            "same_blob_as_captured_source": true,
+            "finding": "원본 artifacts/intro README와 별도 저장소의 수집 커밋 README는 본문·blob이 일치하며 루트 배치 커밋에 해당 안내가 추가된 것을 확인했다."
+          }
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -652,8 +1024,18 @@
         "human_review_required": true,
         "expected_action": "KEEP",
         "rule_id": "PR_SCOPE_CLARITY",
-        "rationale": "변경한 위치와 의도적으로 변경하지 않은 범위를 짧게 전달한다.",
-        "nuance": "범위가 작은 PR에 과도한 템플릿을 강요하지 않는 사례."
+        "rationale": "변경 파일과 두 섹션의 위치 교환을 첫 문장에서 요약하고 목록에서 이동 목적지를 구체화한다. 본문·수치·링크를 바꾸지 않았다는 안내도 검토 범위를 좁혀 주므로 관련성과 중요도가 높아 KEEP한다.",
+        "nuance": "첫 문장의 작업 요약과 목록의 정확한 이동 위치는 역할이 달라 완전한 중복이 아니다. 작은 PR에 추가 배경·검증·주의사항 템플릿을 강요하지 않는다. PR이 설명하는 작업이 위치 교환이라는 사실과 평가 대상인 PR 설명문 자체의 액션을 혼동하지 않는다. 실제 diff와 본문·수치·링크 보존 주장의 일치는 별도 확인 사항이며 이번 문장 검수만으로 확정하지 않는다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "PR 변경 설명",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "변경 파일·위치 교환 작업의 첫 문장 요약"
+          },
+          "purpose_reason": "요약 뒤에 두 프로젝트의 구체적 목적지와 변경하지 않은 범위를 안내해 검토자가 diff 범위를 파악하도록 한다.",
+          "priority_reason": "현재 요약 → 이동 전후 위치 → 본문·수치·링크 보존 안내 순서가 적절하므로 유지한다."
+        }
       },
       "not_a_full_document_judgment": true
     },
@@ -686,8 +1068,18 @@
         "human_review_required": true,
         "expected_action": "KEEP",
         "rule_id": "PROVENANCE_CAVEAT",
-        "rationale": "합성 평가, 팀 기여, 기존 성능 회귀, 미확정 사항을 숨기지 않는 귀속·검증 경계다.",
-        "nuance": "근거 없이 미검증 단서를 압축 삭제하지 않는다."
+        "rationale": "PR에서는 추가 이력의 귀속·성과·검증 범위가 정확한지 확인하는 것이 검토자의 작업이다. 팀원 구현과 개인 기여, STT 회귀·운영 교체 미확정, 전체 E2E·비용 효과 미확인과 파일 변경 범위는 해당 검토에 직접 필요하므로 KEEP한다.",
+        "nuance": "주의사항이라는 이유만으로 보존하는 것이 아니라 이번 추가 이력의 정확성과 변경 범위를 검토하는 데 필요해서 유지한다. 전문성을 전달하는 이력서에서 상세 한계를 분리하는 RW-012와 독자·목적이 다르다. 발췌만으로 과도한 반복은 보이지 않으며 실제 diff·성과·검증 증거와의 일치는 별도 확인 사항이다. PR 본문은 편집 가능하므로 수집 스냅샷과 현재 본문을 구분한다.",
+        "placement": {
+          "target_document": "current",
+          "target_section": "PR 변경 요약 / 귀속·검증 범위 / 파일 변경 범위",
+          "relative_position": {
+            "relation": "after",
+            "anchor": "추가한 주요 이력의 변경 요약"
+          },
+          "purpose_reason": "검토자가 먼저 변경 내용을 파악하고 추가 성과의 귀속·검증 범위와 실제 diff 범위를 확인하도록 한다.",
+          "priority_reason": "주요 변경 요약 → 귀속·검증 범위 → 파일 변경 범위 순서가 자연스럽다. 발췌는 설명 도중부터 시작하므로 첫 부분 누락을 문서의 누락으로 판단하지 않는다."
+        }
       },
       "not_a_full_document_judgment": true
     }
