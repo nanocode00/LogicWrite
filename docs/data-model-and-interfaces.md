@@ -22,7 +22,7 @@
 | `UnitRef` / `ElementRef` | `{analysis_ref, unit_id}` / `{analysis_ref, unit_id, element_id}`. 정보 목록 안의 ID는 다른 분석 버전에 자동 적용되지 않는다. |
 | `Rationale` | `{reason, evidence_ids: ID[], uncertainty, assumptions: Text[]}`. 불확실성은 설명과 함께 정성적으로 기록한다. 숫자 확신도 임계값을 정하지 않는다. 증거가 비었다면 검증된 사실이 아니라 명시적 가정이다. |
 
-산출물은 `EvidenceRef` 모음을 갖거나 `meta.depends_on`에서 변경 불가능한 증거 산출물을 고정한다. 모든 `evidence_ids`는 해당 고정된 자료에서 해석돼야 하며 버전 없는 전역 조회에 의존할 수 없다.
+산출물은 `evidence` 필드에 `EvidenceRef` 모음을 갖거나 `meta.depends_on`에서 변경 불가능한 증거 산출물을 고정한다. 모든 `evidence_ids`는 해당 고정된 자료에서 해석돼야 하며 버전 없는 전역 조회에 의존할 수 없다.
 
 사용자 지시·참고 자료도 문서처럼 스냅샷으로 저장한다. 공개 URL이나 PR 헤드 커밋은 변경 가능한 PR 본문을 고정하지 못하므로 실제 조회 본문과 시점도 보존한다. 평가 자료의 발췌는 **부분 스냅샷**이지 원문 전체가 아니다.
 
