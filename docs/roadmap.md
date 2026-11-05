@@ -2,56 +2,58 @@
 
 This is a proposed sequence, not a delivery promise. A milestone advances only when its exit criteria are met.
 
-## M0 — Evidence and evaluation foundation (now)
+> **Current status:** M0 is in progress. Only design documents, 12 synthetic seed fixtures (`tests/fixtures/cases.json`), and 20 provisional real-world candidate records (`tests/fixtures/real-world-candidates.json`, summarized in [`docs/real-world-candidates.md`](real-world-candidates.md)) exist today. No validator, module pipeline, CLI, MCP server, or baseline experiment has been implemented or executed.
+
+## M0 — Evidence and evaluation foundation (in progress)
 
 - [x] Establish public repository and initial design documents
 - [x] Define synthetic, labeled examples in `tests/fixtures/cases.json`
-- [ ] Collect 10–20 permission-safe samples from real README, PR, release, and report writing
-- [ ] Have a human reviewer confirm audience, purpose, and expected action for each example
+- [x] Collect 20 permission-safe provisional candidate samples from 5 public repositories (12 non-`KEEP` action candidates and 8 `KEEP` preservation candidates) in `tests/fixtures/real-world-candidates.json`
+- [ ] Have an independent human reviewer confirm audience, purpose, preservation/placement judgment, and expected action for each candidate (provisional labels are not gold data)
 - [ ] Freeze fixture schema v1 and reserve held-out cases
-- [ ] Document baseline prompt-only evaluation
+- [ ] Document the B0/B1/B2 comparison protocol and prompt-only pilot; defer executable B2 runs until the validator and controller exist in M3
 
-**Exit:** reproducible labeled corpus with positive and negative examples; disagreements recorded instead of overwritten.
+**Exit:** reproducible, human-reviewed labeled corpus with positive and negative examples and a locked held-out split; reviewer disagreements recorded instead of overwritten.
 
-## M1 — Deterministic rule engine
+## M1 — Contract resolver and deterministic validation gate
 
-- [ ] Define versioned Writing Contract and finding schemas
-- [ ] Implement contract parser and deterministic validators
-- [ ] Handle Markdown code blocks, quotations, headings, and exceptions
-- [ ] Provide CLI that returns machine-readable findings and exit status
+- [ ] Define versioned `Writing Contract` and finding schemas (preserving compatibility with existing fixture labels)
+- [ ] Implement `Contract Resolver` (required-field checks and assumption recording); reserve semantic intent/purpose alignment checks for M2
+- [ ] Implement deterministic `Rule Validators` for protected facts/numbers and explicit terminology invariants; label pattern-based Korean register checks as heuristic
+- [ ] Handle Markdown code blocks, quotations, headings, and contextual exceptions
+- [ ] Provide CLI that returns machine-readable findings and gate status (`PASS`, `REVIEW`, `FAIL`, `STOPPED`)
 - [ ] Add unit tests and CI
 
-**Exit:** stable results for equal inputs; no false PASS for missing required contract fields.
+**Exit:** stable results for equal inputs; no false `PASS` for missing required contract fields or dropped deterministic invariants.
 
-## M2 — Semantic checks
+## M2 — Modular extraction, analysis, and organization checks
 
-- [ ] Evaluate relevance and information location against audience/purpose
-- [ ] Detect potential conflicting claims, including quantifiers, time, and scope
-- [ ] Capture supporting spans and label uncertainty
-- [ ] Test negative examples (legitimate exceptions and attributed disagreements)
-- [ ] Add human-review path for unresolved factual claims
+- [ ] Implement `Information Extraction & Analysis` checks: segment information units, link claims/conditions/numbers/provenance, assess audience/purpose fit and importance, and detect/recover purpose misidentification
+- [ ] Implement `Information Organization` checks: verify cross-document `MOVE` destination context, duplicate consolidation without caveat/number loss, and intra-document `placement` (grouping and reader-task ordering)
+- [ ] Detect potential conflicting claims across scope, time, quantifiers, and conditions, while respecting legitimate exceptions and attributed opinions
+- [ ] Capture supporting spans and label uncertainty (`FLAG` / `REVIEW`) when evidence or destination context is incomplete
+- [ ] Evaluate module-level checks on held-out data (including optional future evaluation of vector-assisted candidate retrieval once core checks are measured)
 
-**Exit:** evaluation on held-out data; false positives and false negatives reported explicitly.
+**Exit:** per-module and whole-document semantic evaluation on held-out data; false positives, false negatives, and unresolved `FLAG` rates reported explicitly.
 
-## M3 — Revision controller
+## M3 — Expression refinement and revision controller
 
-- [ ] Targeted edit proposals: KEEP / COMPRESS / REVISE / MOVE / REMOVE / ADD / FLAG
-- [ ] Protect required information and source attribution
-- [ ] Revalidate the entire document after each edit
-- [ ] Limit iterations; detect repeated/no-progress states
-- [ ] Return PASS / REVIEW / FAIL / STOPPED with an audit trail
+- [ ] Implement `Expression Refinement` proposals (`REVISE`, `COMPRESS`, register/terminology normalization) constrained by protected facts, numbers, and conditions
+- [ ] Implement `Revision Controller` routing findings to the responsible module (`Information Extraction & Analysis`, `Information Organization`, or `Expression Refinement`)
+- [ ] Enforce downstream invalidation and whole-document revalidation across affected source and destination documents after each edit
+- [ ] Limit iterations and stop on `PASS`, ambiguity/human-review blockers (`FLAG` / `REVIEW`), repeated states, or attempt limits (`STOPPED`) with a full audit trail
 
-**Exit:** bounded edit/recheck workflow demonstrable on fixtures, including an unresolved-case stop.
+**Exit:** bounded, module-routed edit and revalidation workflow demonstrable on fixtures, including preservation of required caveats/numbers and clean stops on unresolved cases.
 
 ## M4 — Agent integrations
 
-- [ ] Provide an MCP interface to the validator
-- [ ] Add an optional Skill describing appropriate use
+- [ ] Provide an MCP interface to the modular validator and revision controller
+- [ ] Add an optional Skill describing appropriate use of contracts, module findings, and review gates
 - [ ] Offer opt-in editor or PR workflow integration
-- [ ] Publish measured comparison to an unassisted writer and prompt-only revision
+- [ ] Publish measured `B0` / `B1` / `B2` comparisons on held-out cases
 
 **Exit:** usable integration without suggesting that a plugin can universally intercept or guarantee every agent output.
 
 ## Prioritization rule
 
-Do not optimize for length or AI-detector scores at the expense of factual meaning. Prefer a small engine that reliably catches a few documented problems to a broad evaluator with unmeasured confidence.
+Do not optimize for length or AI-detector scores at the expense of factual meaning. Prefer a small engine that reliably catches documented contract, boundary, and consistency problems to a broad evaluator with unmeasured confidence.
