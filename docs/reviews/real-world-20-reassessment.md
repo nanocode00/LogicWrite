@@ -9,6 +9,7 @@
 - 18건의 Git 파일 사례는 정확한 커밋에서 13개 source 파일을 다시 조회했다. 추가 근거·목적지 12개를 포함한 **25개 Git blob**은 UTF-8 바이트로 Git blob SHA와 SHA-256을 계산해 대조했다. source 행의 발췌와 RW-018 추가 문맥도 저장 fixture와 일치했다. 전체 파일을 조회했지만 정독·판단 범위는 사례별 발췌와 표시한 주변/관련 구간이다. 전체 파일의 모든 사실을 검수했다는 뜻이 아니다.
 - RW-019/020은 **2026-11-02 저장된 PR 본문 발췌**가 평가 입력이다. 현재 본문의 해당 구간·head SHA도 대조했지만 head SHA로 과거 본문 전체를 고정할 수 없다. 실제 PR diff의 모든 문장 불변을 검증하지 않았다.
 - source assertion은 원문이 그렇게 말한다는 근거다. 구현·성능·실서비스·테스트의 사실성을 독립적으로 입증하지 않는다. README/가이드/과거 annotation은 현재 사용자 의도를 대신하지 못한다.
+- RW-001/002는 후속 사용자 피드백에 따라 설치 행동 안내와 패키징 선택 논거를 구분하도록 정정했다. 이 범위의 사용자 의견을 독립 사람 전체 검수나 골드 승인으로 확대하지 않는다.
 - 기존 라벨은 비교 가설로만 사용했다. 기존 annotation과 PR #4 설계 예시를 읽은 상태이므로 **맹검 또는 독립 정답 실험이라고 주장하지 않는다.** source와 목적에서 새 근거를 찾고 다른 결론을 허용했다. fixture에 기록된 과거 사용자 정정과 문체 선호는 원래 대화가 없는 간접 기록으로 분리했다.
 - Antigravity에는 초점 5건의 판단 초안을 읽기 전용으로 맡겼다. Codex는 원문·차원 분리·미확인 주장과 diff를 직접 대조했다. 유용했던 하단 Star Pitch와 실제 OAuth 문서 링크는 직접 재조회했다. AGY의 RW-008 기존 템플릿 안 재구성안은 사용자 목적 확인 전 고정하지 않았다. 모델 간 검토는 **독립적인 사람 검토가 아니다.** AGY 원시 응답·개인 cache·로그는 저장소에 포함하지 않았다.
 
@@ -38,8 +39,8 @@
 
 | 사례 | 기존 잠정 액션 | 새 검토와의 관계 | 실제 수정 제안 |
 | --- | --- | --- | --- |
-| [RW-001](#rw-001) | MOVE | 부분 불일치 | P2: macOS 문맥과 표현 개선; 문서 간 이동은 승인·목적지 확인 후 |
-| [RW-002](#rw-002) | MOVE | 부분 불일치 | P2: 표현·대안 비교 축약 선택; 즉시 MOVE 불필요 |
+| [RW-001](#rw-001) | MOVE | 일치·사용자 피드백 반영 | P2: 선택 근거를 패키징 결정 기록으로 MOVE 후보; 목적지 확인 전 원문 보존 |
+| [RW-002](#rw-002) | MOVE | 일치·사용자 피드백 반영 | P2: 선택 근거를 패키징 결정 기록으로 MOVE 후보; 목적지 확인 전 원문 보존 |
 | [RW-003](#rw-003) | KEEP | 일치·보완 | P3: 선택적 REVISE/COMPRESS·placement; 필수 수정 없음 |
 | [RW-004](#rw-004) | KEEP | 일치·보완 | P3: 가독성 개선 선택; 조건 유지 필수 |
 | [RW-005](#rw-005) | KEEP | 일치·보완 | P3: KEEP+선택적 REVISE/COMPRESS; 필수 수정 없음 |
@@ -63,48 +64,48 @@
 
 ### RW-001
 
-**PKG 설명을 모두 설계 이력으로 보내야 하는가** — 기존 `MOVE` / 새 비교: **부분 불일치**.
+**README의 설치 안내와 PKG 선택 근거 분리** — 기존 `MOVE` / 새 비교: **일치·사용자 피드백 반영**.
 
 출처: [README.md](https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md); 조회/검토 문맥: README L44–87. snapshot `S01`.
 
-**목적 판단:** fixture는 초보 설치자용 소개를 가정한다. 원문은 여러 OS의 설치·안전 경계·기능을 함께 설명한다. 패키징 선택 이유도 설치 결과를 예상하게 한다. 원문만으로 사용자가 이유 설명을 배제했다고 단정할 수 없다.
+**목적 판단:** 처음 설치하는 독자가 앱의 용도와 설치 방법을 파악하는 범위다. 사용자 피드백에 따라 설치 행동 안내와 패키징 의사결정 근거를 구분한다. 발췌의 Applications·번들·Doctor는 PKG를 선택한 이유를 뒷받침하며, 설치자가 수행할 절차로 제시된 것이 아니다. 순서가 자연스럽다는 이유로 현재 README의 설치 안내에 포함할 근거로 삼지 않는다.
 
 | Unit | 원문 행 | 보호할 주장·수치·조건·귀속 | 현재 범위 관련성 / 중요도 | 보존 / 표현 | 판단 근거 |
 | --- | --- | --- | --- | --- | --- |
-| RW-001-a | 78–80 | 이번 릴리스 PKG 선택: Applications 메뉴 막대 runtime, Node/cloudflared 번들, non-blocking 설치 후 Doctor 필요. | relevant / useful | `retain_current` / COMPRESS | 패키지 실행 결과를 이해시키는 설치 관련 설명이다. |
-| RW-001-b | 81–81 | PKG는 초보자의 install and open 흐름을 명료하게 한다. | relevant / useful | `retain_current` / REVISE | 초보자 적합성은 원문의 평가이며 입증된 사용성 결과처럼 강화하지 않는다. |
-| RW-001-c | 78–79 | DMG는 drag-and-drop 앱에 적합하다는 대안 비교. | relevant / optional | `preserve_elsewhere_candidate` / COMPRESS | 설치 완료의 필수 절차는 아니지만 선택 근거의 가치는 있다. |
-| RW-001-d | 81–82 | signed/notarized DMG는 나중에 추가할 수 있다는 가능성. | relevant / optional | `preserve_elsewhere_candidate` / unchanged | 현재 제공 또는 확정 로드맵으로 바꾸지 않는다. |
+| RW-001-a | 78–80 | 이번 릴리스 PKG 선택: Applications 메뉴 막대 runtime, Node/cloudflared 번들, non-blocking 설치 후 Doctor 필요. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | Applications·Node/cloudflared·non-blocking Doctor는 PKG 선택을 정당화하는 근거다. 원문의 논증 역할을 설치 절차로 바꿔 KEEP하지 않는다. |
+| RW-001-b | 81–81 | PKG는 초보자의 install and open 흐름을 명료하게 한다. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 초보자에게 명료하다는 평가는 PKG 선택 이유이며 설치자가 수행할 행동이 아니다. 평가를 실증된 사용성 결과로 강화하지 않고 의사결정 기록에 보존한다. |
+| RW-001-c | 78–79 | DMG는 drag-and-drop 앱에 적합하다는 대안 비교. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | DMG의 drag-and-drop 적합성은 패키징 대안 비교이므로 설치 행동 안내 범위 밖이다. 선택 근거로 별도 보존할 가치가 있다. |
+| RW-001-d | 81–82 | signed/notarized DMG는 나중에 추가할 수 있다는 가능성. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | signed/notarized DMG의 향후 추가 가능성은 현재 설치 절차가 아니다. 의사결정 기록에 보존하되 제공 사실이나 확정 계획으로 바꾸지 않는다. |
 
-**배치·통합:** a/b는 README의 macOS 패키지 안내 가까이 둔다. 현재 PKG 설명은 Linux/WSL bootstrap 다음이므로 macOS임을 분명히 하는 문서 내 재배치가 유용하다. c/d의 세부 대안·미래 계획만 패키징 결정 기록 역할 후보로 분리한다. 실제 목적지는 미확인이고 삭제·이동은 blocked.
+**배치·통합:** a/b/c/d 모두 패키징 의사결정 기록의 보존 후보로 둔다. README에는 실제 제공 패키지·다운로드·실행 등 설치 행동 안내를 남기되, 이 발췌에서 새 설치 절차를 만들어내지 않는다. 목적지 문맥과 통합 후 정보 보존을 확인하기 전 source removal은 blocked이며 MOVE 완료가 아니다.
 
-**수작업 확인:** 발췌의 릴리스 한정, Applications·Node/cloudflared·non-blocking Doctor를 확인했다. 설치 동작은 새로 시험하지 않았다. RW-002와 주제는 겹치지만 영어판만의 non-blocking·미래 DMG 조건은 통합 시 남겨야 한다.
+**수작업 확인:** 설치 행동과 선택 근거를 혼동했던 판단을 정정했다. 이번 릴리스 한정, Applications·Node/cloudflared·non-blocking Doctor, 초보자 적합성 평가, DMG 비교와 미래 가능성은 의사결정 근거로 보존한다. RW-002와 통합할 때 서로 다른 조건을 유지한다. 실제 설치나 목적지 검증을 새로 실행한 것은 아니다.
 
-**미확인·사람 검토:** 패키징 결정 기록의 존재·독자·중복, 실제 installer 동작, 선택 이유를 README에서 얼마나 원하는지.
+**미확인·사람 검토:** 패키징 결정 기록의 실제 경로·독자·기존 내용과 통합 결과. 이동 후 README의 실제 다운로드·실행 안내가 충분한지도 확인해야 한다.
 
-**실제 수정 필요성·우선순위:** P2: macOS 문맥과 표현 개선; 문서 간 이동은 승인·목적지 확인 후. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
+**실제 수정 필요성·우선순위:** P2: 선택 근거를 패키징 결정 기록으로 MOVE 후보; 목적지 확인 전 원문 보존. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
 
 ### RW-002
 
-**설치 가이드의 짧은 선택 이유** — 기존 `MOVE` / 새 비교: **부분 불일치**.
+**설치 가이드에서 패키징 선택 근거 분리** — 기존 `MOVE` / 새 비교: **일치·사용자 피드백 반영**.
 
 출처: [docs/INSTALL.md](https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/docs/INSTALL.md); 조회/검토 문맥: INSTALL L1–56. snapshot `S02`.
 
-**목적 판단:** 초보 설치자가 직접 독자다. 원문은 한국어 FAQ에서 앱 설명 → PKG 이유 → macOS 설치 순서다. FAQ를 둔 사실 자체가 목적 위반은 아니다.
+**목적 판단:** 초보 설치자가 설치 과정을 완료하는 것이 목적이다. 사용자가 이 검토에서 명시한 경계는 다운로드·실행 등 설치 행동 안내와 PKG를 선택한 이유의 분리다. 원문의 FAQ 배치나 한국어라는 사실은 선택 근거를 설치문서에 KEEP할 이유가 아니다.
 
 | Unit | 원문 행 | 보호할 주장·수치·조건·귀속 | 현재 범위 관련성 / 중요도 | 보존 / 표현 | 판단 근거 |
 | --- | --- | --- | --- | --- | --- |
-| RW-002-a | 22–22 | 이번 릴리스 PKG 제공·선택; Applications 메뉴 막대 앱, 번들 runtime, 설치 후 Doctor 흐름. | relevant / useful | `retain_current` / COMPRESS | 설치 뒤 무엇이 생기는지 설명한다. |
-| RW-002-b | 22–22 | 초보자가 설치 흐름을 덜 헷갈리게 한다는 선택 이유. | relevant / useful | `retain_current` / REVISE | 더 덜 헷갈립니다를 덜 헷갈립니다 등으로 다듬되 평가 범위는 유지한다. |
-| RW-002-c | 22–22 | DMG drag-and-drop 비교. | relevant / optional | `preserve_elsewhere_candidate` / COMPRESS | 긴 비교는 분리 가능하지만 목적지 없는 제거는 불가하다. |
+| RW-002-a | 22–22 | 이번 릴리스 PKG 제공·선택; Applications 메뉴 막대 앱, 번들 runtime, 설치 후 Doctor 흐름. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | Applications·번들 runtime·Doctor는 PKG를 선택한 근거로 서술됐다. 다운로드·설치 행동 안내가 아니므로 설치 가이드의 현재 범위에서는 이동 후보다. |
+| RW-002-b | 22–22 | 초보자가 설치 흐름을 덜 헷갈리게 한다는 선택 이유. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 초보자가 덜 헷갈린다는 평가는 패키징 결정 이유다. 문구만 다듬어 설치 가이드에 유지할 근거가 되지 않는다. |
+| RW-002-c | 22–22 | DMG drag-and-drop 비교. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | DMG drag-and-drop 비교는 설치 절차가 아니라 대안 평가다. 비교 길이에 관계없이 의사결정 기록의 보존 후보로 판단한다. |
 
-**배치·통합:** a/b는 macOS 설치 앞의 짧은 설명으로 유지 가능하다. c의 비교·중복 세부만 결정 기록 후보. RW-001과 통합할 경우 두 언어의 독자 접근성과 서로 다른 조건을 검토한다. 같은 내용이라는 이유로 한국어 안내를 바로 지우지 않는다.
+**배치·통합:** a/b/c 모두 패키징 의사결정 기록으로 MOVE 후보이며, 설치 가이드에는 실제 PKG 다운로드·실행과 필요한 설치 절차를 남긴다. Applications·번들 runtime·Doctor를 언급했다는 이유만으로 발췌의 선택 논거를 설치 절차로 재해석하지 않는다. RW-001과 통합할 때 조건·출처와 접근성을 확인하되, 언어 차이 자체를 현지 보존 근거로 삼지 않는다. 목적지 미확인으로 source removal은 blocked다.
 
-**수작업 확인:** 설치 순서 문맥과 발췌를 대조했다. Applications·번들 runtime·Doctor는 보존한다. RW-001의 non-blocking이라는 표현을 이 한국어 발췌 자체의 확인 사실로 추가하지 않는다.
+**수작업 확인:** 기존의 순서가 타당하고 짧은 이유 설명은 KEEP 가능하다는 결론을 철회했다. 발췌는 PKG 선택을 정당화하는 설명이며 다운로드·실행 지시와 구별된다. Applications·번들 runtime·Doctor·초보자 적합성·DMG 비교를 의사결정 근거로 보존한다. RW-001의 non-blocking을 한국어 원문 자체의 확인 사실로 추가하지 않는다.
 
-**미확인·사람 검토:** 설치자에게 FAQ가 유용한지, 결정 기록의 실제 내용과 한국어 접근성.
+**미확인·사람 검토:** 패키징 결정 기록의 실제 경로·독자·기존 내용, 통합 시 조건·출처 보존과 독자의 접근성. 이동 후 가이드의 다운로드·실행 절차 충족 여부.
 
-**실제 수정 필요성·우선순위:** P2: 표현·대안 비교 축약 선택; 즉시 MOVE 불필요. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
+**실제 수정 필요성·우선순위:** P2: 선택 근거를 패키징 결정 기록으로 MOVE 후보; 목적지 확인 전 원문 보존. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
 
 ### RW-003
 
@@ -562,7 +563,8 @@
 
 | 공통 문제 | 사례·관측 근거 | 현재 모델로 표현할 부분 | 부족한 표현·다음 개선 |
 | --- | --- | --- | --- |
-| 문서 역할을 좁게 추정해 관련 정보를 과하게 이동 | RW-001/002의 설치 이유, RW-007의 경험 DB 역할, RW-016의 이관 판단 경계 | WritingContract intent provenance, scope별 Assessment | historical role / desired role / 적용 시점을 구분하는 주석 지침; 목적 오판의 증거와 불확실성을 독립 기록 |
+| 문서 역할을 좁게 추정해 관련 정보를 과하게 이동 | RW-007의 경험 DB 역할, RW-016의 이관 판단 경계 | WritingContract intent provenance, scope별 Assessment | historical role / desired role / 적용 시점을 구분하는 주석 지침; 목적 오판의 증거와 불확실성을 독립 기록 |
+| 설명의 주제를 독자의 작업과 혼동 | RW-001/002: 설치 구성 요소를 언급해도 실제 역할은 PKG 선택 정당화였음 | InformationUnit.statement와 문맥별 기능, 계약에 따른 관련성 판단 | 포함 여부를 판단한 뒤 배치 검토; 설치 행동 안내와 의사결정 논거를 구별하고 길이·순서·언어를 KEEP 근거로 대체하지 않기 |
 | 기존 template·분량에 다시 맞추려는 편향 | RW-008의 기여·선정·서로 다른 측정 혼재; RW-010의 2~3개/2~3줄 | Resolver → Analysis 관계 재분리 → Organization 재취합 → Expression | 구조 재설계 전후의 단위 lineage, 여러 단위가 한 그룹을 이루는 근거와 reader-task 평가 기준이 더 필요 |
 | 하나의 주 라벨로 다중 판단을 표현하기 어려움 | RW-013 동일 문단의 7개 판단; RW-003/005 KEEP+표현/순서 | 세 차원, assessment/scope ID, many-to-many trace | 기존 0.1.0의 주 라벨 집계로 새 결론을 강제하지 말고 per-unit 관계와 관련 액션의 비교 기록을 별도 설계 |
 | 조건·범위가 수치와 분리될 위험 | RW-008의 서로 다른 checkpoint/E2E, RW-011의 비용, RW-012의 regression/귀속 및 119 식별자와 4,802개 표본 혼동 | elements, qualifies/depends_on, local exposure | metric/experiment/cohort/checkpoint/measurement boundary의 일관된 annotation 지침과 보호 요소 분해 예제가 필요 |
