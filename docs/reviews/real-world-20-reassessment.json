@@ -1,6 +1,6 @@
 {
   "record_kind": "manual_model_reassessment_not_adopted_engine_schema",
-  "review_revision": "r2",
+  "review_revision": "r3",
   "review_date": "2026-11-05 Asia/Seoul",
   "base_main": "d15dcb99ff30d1106d4f3e3b6d8a0e7f08b2ec58",
   "reviewer_kind": "Codex model, AGY advisory pass; no independent human approval",
@@ -1943,13 +1943,13 @@
     },
     {
       "id": "RW-007",
-      "title": "색인의 한계·원장 링크 축약",
-      "comparison": "부분 일치·조건 강화",
-      "intent": "fixture의 탐색 목적 외에 원문 L3–14는 경험 원본 보존과 활용을 명시한다. 단순 링크 색인으로만 보면 상세 조건을 과소평가한다. L22–31 표에도 Real E2E·18명 팀 평가 표현이 있다.",
-      "placement": "원장/핵심 사례 링크와 개인·팀 구분을 작성 원칙에 유지한다. 상세 수치의 축약은 같은 문서 표에 남는 주장까지 대조해야 한다. 세 원장의 관련 구간을 확인했지만 상세 한계의 일괄 삭제나 문서 전체 개정은 승인하지 않는다.",
-      "manual_review": "Mallo 13명 초기 탐색과 최종 평가 미실행, Real E2E 3.338초 대 1.5초; 말해봄 운영/E2E/마감/사람 품질 미확인; HCI 18명 팀 평가와 12/6 대 13/5를 연결 원장과 대조했다. 수치가 다른 모집단·집계라는 조건은 보존한다.",
-      "unknown": "원장 전체의 사실성·사람 승인과 수정 후 색인 전체의 caveat 노출. 표의 Real E2E가 독자에게 성공을 암시하는지도 검토 필요.",
-      "priority": "P2: 전체 색인의 주장과 조건을 함께 정리한 뒤 COMPRESS",
+      "title": "자료 탐색 목적에 따른 색인 정보 선별·재구성",
+      "comparison": "부분 일치·정보 선별과 배치 재설계",
+      "intent": "독자의 주된 작업은 경험 자료를 찾고 핵심 사례와 상세 근거 중 무엇을 읽을지 선택하는 것이다. 원문 L3–14의 경험 원본 보존은 폴더와 개별 파일의 역할이며, 색인 README가 상세 작업 기록·수치·검증 한계를 반복해야 한다는 뜻이 아니다. 사용자 피드백에 따라 경험 목록·짧은 주제 소개·자료 역할과 링크·간단한 공통 활용 원칙을 선별한다. 기존 표에 성과 표현이 있다는 이유로 상세 한계를 계속 싣기보다 그 성과 표현 자체가 탐색 목적에 필요한지 먼저 판단한다.",
+      "placement": "a/c/e1의 프로젝트별 링크와 자료 역할은 작성 원칙에서 빼고 같은 문서 경험 목록의 해당 프로젝트 항목에 배치한다. 작성 원칙에는 불확실한 수치를 확정하지 않기, 개인·팀 귀속 구분, 근거 문서 확인 등 공통 기준만 짧게 남긴다. b/d/e2/f의 상세 수치·검증 미완료·집계 차이는 대응하는 경험·검증 문서에 보존할 후보이며 기존 내용의 요소별 대응을 확인한 뒤 중복 정리한다. 색인 소개를 주제·자료 역할 중심으로 고쳐 성공·평가 완료를 암시하지 않게 한다. 그래도 성과 주장을 남기는 경우에만 그 해석에 필수인 최소 조건을 현지 노출한다. 완성한 source/destination 수정본이 없어 실제 이동·삭제는 blocked다.",
+      "manual_review": "원문 작성 원칙 L48–51의 공통 기준과 L52–55의 프로젝트별 자료 안내·상세 한계를 분리했다. a/c는 핵심 사례와 원장 선택 안내로 유지한다. 기존 HCI e는 원장 링크/역할 e1과 18명 팀 평가/개인 구현 귀속 e2로 분할해 서로 다른 판단을 가능하게 했다. Mallo 13명 초기 탐색 대 최종 평가 미실행·p95 3.338초 대 요구 1.5초, 말해봄의 운영/E2E/마감/사람 평가 경계, HCI 18명 팀 평가와 CSV 12/6 대 발표 13/5는 기존 근거 장부의 보존 대상이다. 이번 수정에서는 이 정보의 사실성을 새로 검증하거나 외부 색인·원장을 수정하지 않았다.",
+      "unknown": "최종 색인에서 남길 주제·성과 표현과 그에 따른 현지 조건 필요성, 목적지의 요소별 중복·조건·귀속 보존과 통합 후 전체 문맥. 기존 원장의 관련 구간을 확인한 사실만으로 상세 정보 삭제나 이동 완료를 확정하지 않는다.",
+      "priority": "P2: 자료 역할·링크 KEEP, 경험 목록으로 재배치·축약; 상세 기록은 보존 확인 후 중복 정리",
       "units": [
         {
           "statement": "Mallo의 12개 교차검증 원장과 채용용 핵심 사례 5선은 다른 자료 역할이다.",
@@ -1957,7 +1957,7 @@
           "expression": "COMPRESS",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "두 링크와 역할을 남겨 탐색을 돕는다.",
+          "rationale": "Mallo 핵심 사례와 원장의 역할·링크를 경험 목록에 두어 독자가 자료를 선택하도록 한다. 항목 수는 원래 자료의 식별 정보이며 상세 성과 수치와 구별한다.",
           "id": "RW-007-a",
           "source_lines": {
             "start": 52,
@@ -1975,10 +1975,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-007-a-current",
           "scope_ref": {
-            "contract_id": "RW-007-contract-review-r1",
+            "contract_id": "RW-007-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "navigation_role_and_link",
           "protection": {
             "semantic": "Mallo의 12개 교차검증 원장과 채용용 핵심 사례 5선은 다른 자료 역할이다.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -1989,11 +1989,11 @@
         },
         {
           "statement": "60대 초기 설문 13명과 미실행 최종 사용자 평가는 별개; Real E2E p95 3.338초는 1.5초 요구 미달.",
-          "preservation": "retain_current",
-          "expression": "COMPRESS",
-          "importance": "required",
-          "relevance": "relevant",
-          "rationale": "현재 표에도 Real E2E가 있어 성능/검증 경계를 링크만으로 감추지 않는다.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "초기/최종 평가 구분·지연·요구 미달은 상세 검증 정보다. 색인의 주제·자료 역할 소개에는 반복하지 않을 후보이며, 성과 주장 자체를 선별한 뒤 현지 조건 필요성을 재판단한다.",
           "id": "RW-007-b",
           "source_lines": {
             "start": 52,
@@ -2011,10 +2011,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-007-b-current",
           "scope_ref": {
-            "contract_id": "RW-007-contract-review-r1",
+            "contract_id": "RW-007-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "source_unchanged_until_review",
           "protection": {
             "semantic": "60대 초기 설문 13명과 미실행 최종 사용자 평가는 별개; Real E2E p95 3.338초는 1.5초 요구 미달.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -2024,7 +2024,8 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-007-a"
+              "target": "RW-007-a",
+              "rationale": "원문 상세 검증 정보의 연결 관계; 탐색 중심 수정본에서 현지 노출을 무조건 요구한다는 뜻은 아님."
             }
           ]
         },
@@ -2034,7 +2035,7 @@
           "expression": "COMPRESS",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "역할·링크를 보존한다.",
+          "rationale": "말해봄 핵심 사례와 검증 원장의 역할·링크를 경험 목록에 연결한다. 프로젝트별 안내를 공통 작성 원칙으로 취급하지 않는다.",
           "id": "RW-007-c",
           "source_lines": {
             "start": 53,
@@ -2052,10 +2053,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-007-c-current",
           "scope_ref": {
-            "contract_id": "RW-007-contract-review-r1",
+            "contract_id": "RW-007-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "navigation_role_and_link",
           "protection": {
             "semantic": "말해봄 12개 작업군 원장과 핵심 사례 5개 구분.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -2066,11 +2067,11 @@
         },
         {
           "statement": "말해봄 검증 완료는 운영 전체 E2E·마감 제출·독립 사람 품질 평가를 뜻하지 않는다.",
-          "preservation": "retain_current",
-          "expression": "COMPRESS",
-          "importance": "required",
-          "relevance": "relevant",
-          "rationale": "검증 완료라는 말을 남기면 현지 한정이 필요하다.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "운영/E2E/마감/사람 평가 경계는 검증 원장에 보존한다. 색인에서 검증 완료라는 성과 주장을 빼고 자료 역할만 안내하는 경우 현지 반복 필요성이 줄어든다.",
           "id": "RW-007-d",
           "source_lines": {
             "start": 53,
@@ -2088,10 +2089,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-007-d-current",
           "scope_ref": {
-            "contract_id": "RW-007-contract-review-r1",
+            "contract_id": "RW-007-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "source_unchanged_until_review",
           "protection": {
             "semantic": "말해봄 검증 완료는 운영 전체 E2E·마감 제출·독립 사람 품질 평가를 뜻하지 않는다.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -2101,18 +2102,19 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-007-c"
+              "target": "RW-007-c",
+              "rationale": "원문 상세 검증 정보의 연결 관계; 탐색 중심 수정본에서 현지 노출을 무조건 요구한다는 뜻은 아님."
             }
           ]
         },
         {
-          "statement": "HCI 개인 DB/쿼리와 팀 설문 A/B 원장; 18명 팀 평가와 개인 구현을 구분.",
+          "statement": "HCI 개인 DB/쿼리 Git 커밋·팀 설문 A/B 검증 원장의 역할과 링크.",
           "preservation": "retain_current",
           "expression": "COMPRESS",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "개인 성과로 오인하지 않게 한다.",
-          "id": "RW-007-e",
+          "rationale": "개인 구현·팀 평가 근거를 어디에서 확인할지 알려주는 원장 링크와 역할은 자료 선택에 필요하다.",
+          "id": "RW-007-e1",
           "source_lines": {
             "start": 55,
             "end": 55
@@ -2127,27 +2129,73 @@
           ],
           "source_quote_hint": "- HCI 주식정보 서비스는 [개인 DB/쿼리 Git 커밋·팀 설문 A/B 검증 원장](hci-stock-service-evidence-ledger.md)을 근거",
           "evidence_kind": "source_assertion_not_runtime_verification",
-          "assessment_id": "RW-007-e-current",
+          "assessment_id": "RW-007-e1-current",
           "scope_ref": {
-            "contract_id": "RW-007-contract-review-r1",
+            "contract_id": "RW-007-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "navigation_role_and_link",
           "protection": {
-            "semantic": "HCI 개인 DB/쿼리와 팀 설문 A/B 원장; 18명 팀 평가와 개인 구현을 구분.",
+            "semantic": "HCI 개인 DB/쿼리 Git 커밋·팀 설문 A/B 검증 원장의 역할과 링크.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
           },
           "human_review_status": "pending",
           "placement_status": "proposal_only",
-          "relations": []
+          "relations": [],
+          "predecessor": {
+            "review_revision": "r2",
+            "unit_id": "RW-007-e",
+            "reason": "원장 탐색 안내와 개별 평가·귀속 정보를 분리; 원문 span은 동일"
+          }
+        },
+        {
+          "statement": "HCI의 18명 팀 사용자 평가와 개인 구현 기여를 구분한다.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "18명이라는 표본 수와 해당 팀 평가의 귀속은 상세 근거에 보존한다. 색인에는 공통 귀속 구분 원칙과 원장 역할을 남기고 특정 평가 성과를 주장하지 않는 안을 검토한다.",
+          "id": "RW-007-e2",
+          "source_lines": {
+            "start": 55,
+            "end": 55
+          },
+          "source_spans": [
+            {
+              "snapshot_ref": "S05",
+              "start": 3344,
+              "end": 3571,
+              "offset_convention": "zero_based_unicode_codepoint_half_open_no_normalization"
+            }
+          ],
+          "source_quote_hint": "- HCI 주식정보 서비스는 [개인 DB/쿼리 Git 커밋·팀 설문 A/B 검증 원장](hci-stock-service-evidence-ledger.md)을 근거",
+          "evidence_kind": "source_assertion_not_runtime_verification",
+          "assessment_id": "RW-007-e2-current",
+          "scope_ref": {
+            "contract_id": "RW-007-contract-review-r2",
+            "scope_id": "current"
+          },
+          "local_exposure": "source_unchanged_until_review",
+          "protection": {
+            "semantic": "HCI의 18명 팀 사용자 평가와 개인 구현 기여를 구분한다.",
+            "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
+          },
+          "human_review_status": "pending",
+          "placement_status": "proposal_only",
+          "relations": [],
+          "predecessor": {
+            "review_revision": "r2",
+            "unit_id": "RW-007-e",
+            "reason": "원장 탐색 안내와 개별 평가·귀속 정보를 분리; 원문 span은 동일"
+          }
         },
         {
           "statement": "목표가 적중률·Gemini 전체 재현·현재 운영은 검증 완료 아님; CSV 12/6과 발표 13/5의 일부 집계 차이가 있다.",
           "preservation": "preserve_elsewhere_candidate",
-          "expression": "COMPRESS",
-          "importance": "useful",
-          "relevance": "relevant",
-          "rationale": "상세 집계는 연결 원장의 동일 조건 보존을 확인한 범위에서만 축약 후보다.",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "세부 미검증 기능·운영 상태와 집계 차이는 개별 경험의 정확성 검토에 필요하다. 대응 원장의 수치·조건·출처 보존 확인 후 색인 중복을 정리할 후보다.",
           "id": "RW-007-f",
           "source_lines": {
             "start": 55,
@@ -2165,7 +2213,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-007-f-current",
           "scope_ref": {
-            "contract_id": "RW-007-contract-review-r1",
+            "contract_id": "RW-007-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "source_unchanged_until_review",
@@ -2178,7 +2226,8 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-007-e"
+              "target": "RW-007-e2",
+              "rationale": "원문 상세 검증 정보의 연결 관계; 탐색 중심 수정본에서 현지 노출을 무조건 요구한다는 뜻은 아님."
             }
           ]
         }
@@ -2191,7 +2240,7 @@
       "legacy": "COMPRESS",
       "legacy_annotation_reference": "tests/fixtures/real-world-candidates.json#/cases/6/annotation",
       "contract_review": {
-        "id": "RW-007-contract-review-r1",
+        "id": "RW-007-contract-review-r2",
         "status": "needs_review",
         "fixture_contract": {
           "audience": "경험 자료를 찾아보는 독자",
@@ -2246,8 +2295,13 @@
             "transfer_status": "proposal_only_no_output_change_set"
           }
         ],
-        "required_information_policy": "all retained claim-defining conditions, numbers, attribution, identifiers and provenance remain locally exposed; no source deletion authorized",
-        "intent_assessment": "fixture의 탐색 목적 외에 원문 L3–14는 경험 원본 보존과 활용을 명시한다. 단순 링크 색인으로만 보면 상세 조건을 과소평가한다. L22–31 표에도 Real E2E·18명 팀 평가 표현이 있다."
+        "required_information_policy": "Preserve navigation links and document roles locally. Detailed project evidence remains protected in the affected corpus; remove locally only after destination coverage and revised source claims are reviewed. Any retained achievement claim keeps its necessary local interpretation conditions.",
+        "intent_assessment": "독자의 주된 작업은 경험 자료를 찾고 핵심 사례와 상세 근거 중 무엇을 읽을지 선택하는 것이다. 원문 L3–14의 경험 원본 보존은 폴더와 개별 파일의 역할이며, 색인 README가 상세 작업 기록·수치·검증 한계를 반복해야 한다는 뜻이 아니다. 사용자 피드백에 따라 경험 목록·짧은 주제 소개·자료 역할과 링크·간단한 공통 활용 원칙을 선별한다. 기존 표에 성과 표현이 있다는 이유로 상세 한계를 계속 싣기보다 그 성과 표현 자체가 탐색 목적에 필요한지 먼저 판단한다.",
+        "review_constraint": {
+          "basis": "explicit_user_feedback_in_current_conversation",
+          "statement": "색인은 경험 자료 탐색·선택을 우선한다. 링크·자료 역할과 공통 원칙을 남기고 상세 프로젝트 기록은 보존 위치 확인 후 정리한다. 현 성과 표현도 필요성을 먼저 판단한다.",
+          "scope": "RW-007 review correction only; no approval of completed transfer or gold annotations"
+        }
       },
       "inspected_context": "experiences/README L1–55; linked ledgers: matching population/metric/attribution passages",
       "source_ref": "S05",
@@ -2312,13 +2366,18 @@
           "original_line": 55,
           "status": "accounted_for_by_units",
           "unit_ids": [
-            "RW-007-e",
+            "RW-007-e1",
+            "RW-007-e2",
             "RW-007-f"
           ]
         }
       ],
       "manual_disposition": "REVIEW recommendation only; engine gate not run",
-      "independent_human_review": "pending"
+      "independent_human_review": "pending",
+      "review_feedback": {
+        "basis": "explicit_user_feedback",
+        "decision": "경험 원본 보존이라는 폴더 역할과 색인 문서의 탐색 역할을 구별해 정보 선별·배치·표현을 정정한다. 독립 사람 전체 검수·골드 승인·외부 원문 수정은 아님."
+      }
     },
     {
       "id": "RW-008",
