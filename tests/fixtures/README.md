@@ -1,30 +1,31 @@
-# Annotated fixture set
+# 주석이 달린 합성 평가 예시
 
-`cases.json` contains **synthetic examples**, not a benchmark result or tested implementation.
+`cases.json`은 **인위적으로 만든 예시**를 담는다. 실행 결과나 검증된 성능 평가가 아니다.
 
-Each case specifies:
+각 사례의 구성:
+
 - `id`, `description`, `document_type`
-- `contract`: intended audience, purpose, register, and required information
-- `input`: the unedited text
-- `expected_findings`: expected rule, action, evidence span(s), and reason
+- `contract`: 대상 독자, 목적, 문체, 필수 정보
+- `input`: 수정 전 텍스트
+- `expected_findings`: 예상 규칙·액션·문제 범위·이유
 
-An empty `expected_findings` array means **no issue should be raised for the targeted concern**. It does not certify flawless prose.
+`expected_findings`가 비어 있다는 것은 **해당 사례에서 의도적으로 겨냥한 문제를 발견하지 않아야 한다**는 뜻이며, 글에 모든 종류의 문제가 없다는 인증이 아니다.
 
-## Rules in this seed set
+## 합성 사례에 포함된 규칙
 
-- `AUDIENCE_IRRELEVANCE`: detail does not help intended reader.
-- `CONTENT_REDUNDANCY`: repeated content adds no meaningful distinction.
-- `REGISTER_INCONSISTENCY`: narration violates an explicitly selected Korean register.
-- `CLAIM_CONTRADICTION`: incompatible assertions under the same subject/time/scope.
-- `REQUIRED_INFORMATION_MISSING`: a contract-required fact is absent.
-- `UNSUPPORTED_CLAIM`: an assertion demands evidence unavailable in supplied sources.
+- `AUDIENCE_IRRELEVANCE`: 대상 독자에게 도움이 되지 않는 세부사항
+- `CONTENT_REDUNDANCY`: 의미 있는 구분 없이 반복하는 내용
+- `REGISTER_INCONSISTENCY`: 명시적으로 정한 한국어 문체와 서술 불일치
+- `CLAIM_CONTRADICTION`: 같은 대상·시간·범위에서 서로 양립하지 않는 주장
+- `REQUIRED_INFORMATION_MISSING`: 계약에서 요구한 사실 누락
+- `UNSUPPORTED_CLAIM`: 제공된 출처로 뒷받침되지 않는 주장
 
-Actions are `KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, or `FLAG`. `KEEP` preserves information relevant and important to the document's audience and purpose; it does not fix its current location or order. Section and order changes within the same document are recorded as `placement`, independently of the content action. `MOVE` transfers information to another document. `REVISE` preserves information while correcting wording, register, or terminology; `COMPRESS` addresses verbosity or repetition. The labels represent *human-designed expected judgments*, not deterministic truth for every linguistic context.
+대표 액션은 `KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, `FLAG`다. `KEEP`은 독자와 목적에 필요한 **정보를 보존**한다는 뜻이며 현재 문장·위치를 고정하지 않는다. 같은 문서의 섹션·순서는 정보 보존과 독립적인 `placement`로 기록한다. `MOVE`는 다른 문서로 이동할 때만 사용한다. `REVISE`는 의미를 보존한 문장·문체·용어 수정, `COMPRESS`는 장황함·반복의 축약을 뜻한다. 라벨은 **사람이 설계한 예상 판단**이며 모든 문맥에서 참인 결정론적 정답은 아니다.
 
-## Important negative controls
+## 중요한 부정 대조 사례
 
-Cases with valid policy exceptions, attributed opposing opinions, or necessary implementation detail should not be flagged simply because they contain contrasting claims or long explanations.
+정당한 정책 예외, 다른 사람에게 귀속된 대립 의견, 필요한 구현 상세는 주장 간 대비가 있거나 설명이 길다는 이유만으로 오류로 표시하지 않아야 한다.
 
-## Next step
+## 다음 작업
 
-Add IDs and independent human review to real, permission-safe samples. Before implementing automated scoring, freeze fixture structure and write a JSON Schema with precise field and offset conventions.
+사용 가능한 실제 사례를 추가하고 독립적인 사람 검토를 수행한다. 자동 채점 구현 전 평가셋 구조를 확정하고 필드 및 원문 오프셋 규칙을 명시한 JSON Schema를 작성한다.
