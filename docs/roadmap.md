@@ -54,6 +54,27 @@ This is a proposed sequence, not a delivery promise. A milestone advances only w
 
 **Exit:** usable integration without suggesting that a plugin can universally intercept or guarantee every agent output.
 
+## Long-term direction — conversational agent responses
+
+> **Future exploration only.** This is not an M0–M4 deliverable or an implemented capability. The first target remains durable technical documents, while the core information-processing and validation concepts should be reusable for other kinds of agent-generated text.
+
+**Common principle:** A response, like a document, should convey the right information to its intended reader for the current purpose—neither dropping necessary qualifiers nor exposing irrelevant detail. Reuse the shared `Writing Contract`, the three modules, and independent validation rather than creating a separate writing-quality engine.
+
+| Module | Future conversational-response adaptation |
+| --- | --- |
+| **Information Extraction & Analysis** | Identify the user's actual question, relevant conversation/tool context, required facts and conditions, and details not needed for the current turn. Distinguish omission from destruction of source knowledge. |
+| **Information Organization** | Group and order facts **within the response** according to the question and decision/action needs. There is normally no destination document and no cross-document `MOVE`; response-level `placement` handles reordering, while omitting nonessential information from this answer does not delete its source. |
+| **Expression Refinement** | Adjust register, terminology, level of detail, and response length to the dialogue rather than imposing a fixed document template. Retain scope, attribution, important safety caveats, and uncertainty. |
+| **Validation Gate & Revision Controller** | Check answer coverage, relevance, contradictions, preservation of essential qualifications, and avoidable verbosity. Support pre-generation information planning and post-generation review, without promising error-free semantics. |
+
+**Future design and evaluation questions:**
+- Define an optional *output profile* for a conversational response versus a durable document; do not retroactively modify the current contract or fixture schemas.
+- Compare direct response, prompt-only revision, and validation-assisted response using question satisfaction, information retention, clarity, over-answering, and latency—not word count alone.
+- Account for streaming and tool execution: withholding a final answer for verification can increase latency, while post-stream corrections cannot retract already displayed text. Decide when checking is feasible and how unresolved concerns are disclosed.
+- Enforcement requires control over the response-generation pipeline or an explicit invocation point. An optional Skill or MCP tool cannot universally intercept every ChatGPT or agent response.
+
+This direction must not make conversational adapters, response interception, vector databases, or online integrations prerequisites for the first document-oriented MVP.
+
 ## Prioritization rule
 
 Do not optimize for length or AI-detector scores at the expense of factual meaning. Prefer a small engine that reliably catches documented contract, boundary, and consistency problems to a broad evaluator with unmeasured confidence.

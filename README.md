@@ -86,6 +86,10 @@ Establish a small human-reviewed benchmark before implementing a validator. Both
 
 The initial priority is Korean technical writing (README files, pull requests, release notes, design documents, and work reports), while keeping the contract and finding format usable across languages.
 
+## Longer-term applicability
+
+The first target is durable technical documentation. A [future direction](docs/roadmap.md#long-term-direction--conversational-agent-responses) is to reuse the three-module engine for **agent conversational responses**, where selecting what to say, grouping it within a reply, and matching the requested detail level matter as much as document structure. This is a design goal, **not an implemented response interceptor or a current MVP requirement**.
+
 ## Inspirations
 
 - [Yoonmoon](https://github.com/amondnet/yoonmoon) — staged Korean proofreading, humanization, tone conversion, and re-diagnosis
