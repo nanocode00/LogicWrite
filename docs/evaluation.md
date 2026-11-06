@@ -71,6 +71,8 @@ For example, RW-003 can combine relevant but optional information with preservat
 
 Source assertions, additional evidence and reviewer findings must be distinguishable and connected to their own supporting locations. These answer-organization principles are agreed; the per-case answer contents, serialization and final freeze approval remain pending. No fixture fields, labels, scores or gold status are changed by this agreement.
 
+A first case is available for joint review as a separate [RW-001 model input](reviews/diagnostic-gold-draft/RW-001.input.json) and [evaluator-only answer draft](reviews/diagnostic-gold-draft/RW-001.answer.md). These files demonstrate the agreed separation; they are not an adopted serialization/schema, an approved case or a frozen gold set. The other 19 cases remain outside this draft export.
+
 ## Baselines
 
 After M0 human review, prepare comparisons using identical source facts, draft snapshots, and writing contracts. Execute B2 only when the validator and revision controller exist:
