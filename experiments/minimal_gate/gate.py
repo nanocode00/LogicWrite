@@ -4,9 +4,15 @@ import hashlib
 import json
 from pathlib import Path
 
-VERSION = 'minimal-gate-spike-v1'
+VERSION = 'minimal-gate-spike-v2'
 CHECKS = ('INPUT_CONTRACT', 'SNAPSHOT_INTEGRITY', 'SPAN_REFERENCES',
           'PROTECTED_LITERALS', 'SEMANTIC_REVIEW')
+# Per-check implementation versions are distinct from the plan/report policy version.
+CHECK_VERSIONS = {check_id: '1' for check_id in CHECKS}
+
+
+def required_checks():
+    return [{'check_id': key, 'check_version': CHECK_VERSIONS[key]} for key in CHECKS]
 
 
 class InvalidInput(ValueError):
@@ -108,17 +114,33 @@ def literal_check(data):
 
 def reconcile(required_checks, rows):
     """Reconcile internally executed checks. The CLI never accepts caller result rows."""
+    expected = {}
+    diagnostics = []
+    if not required_checks:
+        diagnostics.append('INVALID_PLAN')
+    for check in required_checks:
+        if not isinstance(check, dict) or not nonempty(check.get('check_id')):
+            diagnostics.append('INVALID_PLAN')
+            continue
+        check_id = check['check_id']
+        if check_id in expected or not nonempty(check.get('check_version')):
+            diagnostics.append('INVALID_PLAN')
+        expected[check_id] = check.get('check_version')
     ids = [row.get('check_id') for row in rows]
     failed = any(row.get('status') == 'violated' for row in rows)
-    diagnostics = []
-    if not required_checks or len(set(required_checks)) != len(required_checks):
-        diagnostics.append('INVALID_PLAN')
-    if len(set(ids)) != len(ids) or set(ids) - set(required_checks):
+    if len(set(ids)) != len(ids) or set(ids) - expected.keys():
         diagnostics.append('REPORT_INTEGRITY_ERROR')
+    for row in rows:
+        check_id = row.get('check_id')
+        if check_id in expected:
+            if not nonempty(row.get('check_version')):
+                diagnostics.append('CHECK_VERSION_MISSING: ' + check_id)
+            elif row['check_version'] != expected[check_id]:
+                diagnostics.append('CHECK_VERSION_MISMATCH: ' + check_id)
     if any(row.get('status') not in {'passed', 'violated', 'unresolved', 'not_run', 'execution_error'} for row in rows):
         diagnostics.append('REPORT_INTEGRITY_ERROR')
     failed = failed or bool(diagnostics)
-    missing = sorted(set(required_checks) - set(ids))
+    missing = sorted(expected.keys() - set(ids))
     if missing:
         diagnostics.append('CHECK_RESULT_MISSING: ' + ', '.join(missing))
     stopped = bool(missing) or any(row.get('status') == 'execution_error' for row in rows)
@@ -156,16 +178,16 @@ def evaluate(data):
             except Exception as error:
                 status, reason = 'execution_error', type(error).__name__ + ': ' + str(error)
                 blocked = check_id
-        rows.append({'check_id': check_id, 'check_version': VERSION, 'status': status, 'reason': reason, 'evidence': evidence})
-    rows.append({'check_id': 'SEMANTIC_REVIEW', 'check_version': VERSION, 'status': 'not_run',
+        rows.append({'check_id': check_id, 'check_version': CHECK_VERSIONS[check_id], 'status': status, 'reason': reason, 'evidence': evidence})
+    rows.append({'check_id': 'SEMANTIC_REVIEW', 'check_version': CHECK_VERSIONS['SEMANTIC_REVIEW'], 'status': 'not_run',
                  'reason': 'Awaiting human semantic review; no semantic engine is implemented'})
-    report = reconcile(list(CHECKS), rows)
+    report = reconcile(required_checks(), rows)
     # This canonicalization is an experimental choice, not the shared model's adopted digest policy.
     input_digest = hashlib.sha256(json.dumps(data, ensure_ascii=True, sort_keys=True,
                                             separators=(',', ':')).encode('ascii')).hexdigest()
     report.update({'input_digest': input_digest, 'record_kind': 'experimental_gate_report_not_adopted_schema',
                    'plan': {'version': VERSION, 'boundary': 'single_document_structural_spike',
-                            'required_checks': list(CHECKS)}, 'check_results': rows})
+                            'required_checks': required_checks()}, 'check_results': rows})
     return report
 
 
@@ -193,10 +215,10 @@ def main():
         report = evaluate(None)
         report['diagnostics'].append('INVALID_INPUT: ' + str(error))
     except RecursionError as error:
-        report = reconcile(list(CHECKS), [])
+        report = reconcile(required_checks(), [])
         report['diagnostics'].append('INPUT_PARSE_ERROR: ' + str(error))
     except OSError as error:
-        report = reconcile(list(CHECKS), [])
+        report = reconcile(required_checks(), [])
         report['diagnostics'].append('INPUT_READ_ERROR: ' + str(error))
     else:
         report = evaluate(data)

@@ -34,6 +34,10 @@ def bundle():
     }
 
 
+def check_plan(*ids):
+    return [{'check_id': check_id, 'check_version': '1'} for check_id in ids]
+
+
 class GateTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -97,22 +101,59 @@ class GateTests(unittest.TestCase):
                 self.assertEqual(self.gate.evaluate(data)['gate_state'], 'FAIL')
 
     def test_missing_result_stops_and_preserves_failure(self):
-        plan = ['a', 'b']
-        rows = [{'check_id': 'a', 'status': 'violated', 'reason': 'protected number changed'}]
+        plan = check_plan('a', 'b')
+        rows = [{'check_id': 'a', 'check_version': '1', 'status': 'violated', 'reason': 'protected number changed'}]
         report = self.gate.reconcile(plan, rows)
         self.assertEqual(report['gate_state'], 'STOPPED')
         self.assertEqual(report['last_gate_state'], 'FAIL')
         self.assertIn('CHECK_RESULT_MISSING', str(report))
 
     def test_empty_or_duplicate_results_never_pass(self):
-        for rows in [[], [{'check_id': 'a', 'status': 'passed'}] * 2]:
-            report = self.gate.reconcile(['a'], rows)
+        for rows in [[], [{'check_id': 'a', 'check_version': '1', 'status': 'passed'}] * 2]:
+            report = self.gate.reconcile(check_plan('a'), rows)
             self.assertNotEqual(report['gate_state'], 'PASS')
 
     def test_reducer_pass_is_only_for_complete_passed_checks(self):
-        report = self.gate.reconcile(['a'], [{'check_id': 'a', 'status': 'passed'}])
+        report = self.gate.reconcile(check_plan('a'), [{'check_id': 'a', 'check_version': '1', 'status': 'passed'}])
         self.assertEqual(report['gate_state'], 'PASS')
         self.assertFalse(report['delivery_approved'])
+
+    def test_missing_check_version_fails(self):
+        report = self.gate.reconcile(check_plan('a'), [{'check_id': 'a', 'status': 'passed'}])
+        self.assertEqual(report['gate_state'], 'FAIL')
+        self.assertIn('CHECK_VERSION_MISSING', str(report))
+
+    def test_mismatched_check_version_fails(self):
+        report = self.gate.reconcile(check_plan('a'), [{'check_id': 'a', 'check_version': 'obsolete', 'status': 'passed'}])
+        self.assertEqual(report['gate_state'], 'FAIL')
+        self.assertIn('CHECK_VERSION_MISMATCH', str(report))
+
+    def test_live_report_plan_pins_each_executed_check_version(self):
+        report = self.gate.evaluate(bundle())
+        expected = {x['check_id']: x['check_version'] for x in report['plan']['required_checks']}
+        self.assertEqual(expected, {x['check_id']: x['check_version'] for x in report['check_results']})
+
+    def test_versions_are_matched_per_check_not_plan_version(self):
+        plan = [{'check_id': 'a', 'check_version': 'a-v2'},
+                {'check_id': 'b', 'check_version': 'b-v3'}]
+        rows = [dict(x, status='passed') for x in plan]
+        self.assertEqual(self.gate.reconcile(plan, rows)['gate_state'], 'PASS')
+        rows[0]['check_version'] = 'b-v3'
+        self.assertEqual(self.gate.reconcile(plan, rows)['gate_state'], 'FAIL')
+
+    def test_invalid_plan_version_never_passes(self):
+        for version in [None, '', 1]:
+            with self.subTest(version=version):
+                plan = [{'check_id': 'a', 'check_version': version}]
+                rows = [{'check_id': 'a', 'check_version': '1', 'status': 'passed'}]
+                self.assertEqual(self.gate.reconcile(plan, rows)['gate_state'], 'FAIL')
+
+    def test_version_failure_survives_another_missing_result(self):
+        report = self.gate.reconcile(check_plan('a', 'b'),
+                                    [{'check_id': 'a', 'check_version': 'old', 'status': 'passed'}])
+        self.assertEqual(report['gate_state'], 'STOPPED')
+        self.assertEqual(report['last_gate_state'], 'FAIL')
+        self.assertIn('CHECK_VERSION_MISMATCH', str(report))
 
     def test_unknown_fields_are_not_silently_ignored(self):
         data = bundle(); data['contract']['required_information'] = ['a semantic requirement']
@@ -134,11 +175,11 @@ class GateTests(unittest.TestCase):
         self.assertEqual(row['evidence'][0]['source_span'], data['protected_literals'][0]['source_span'])
 
     def test_unsupported_result_status_fails_integrity_check(self):
-        report = self.gate.reconcile(['a'], [{'check_id': 'a', 'status': 'maybe'}])
+        report = self.gate.reconcile(check_plan('a'), [{'check_id': 'a', 'check_version': '1', 'status': 'maybe'}])
         self.assertEqual(report['gate_state'], 'FAIL')
 
     def test_unexpected_result_cannot_replace_required_one(self):
-        report = self.gate.reconcile(['a'], [{'check_id': 'b', 'status': 'passed'}])
+        report = self.gate.reconcile(check_plan('a'), [{'check_id': 'b', 'check_version': '1', 'status': 'passed'}])
         self.assertEqual(report['gate_state'], 'STOPPED')
         self.assertEqual(report['last_gate_state'], 'FAIL')
 
