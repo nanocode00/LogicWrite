@@ -1,6 +1,6 @@
 {
   "record_kind": "manual_model_reassessment_not_adopted_engine_schema",
-  "review_revision": "r5",
+  "review_revision": "r6",
   "review_date": "2026-11-05 Asia/Seoul",
   "base_main": "d15dcb99ff30d1106d4f3e3b6d8a0e7f08b2ec58",
   "reviewer_kind": "Codex model, AGY advisory pass; no independent human approval",
@@ -5397,11 +5397,11 @@
       "id": "RW-014",
       "title": "지원 목록·절대 표현·인증 상세",
       "comparison": "부분 일치·근거 제한",
-      "intent": "잠재 사용자가 지원 서비스·표시 범위를 파악한다. 완벽 지원의 충분한 근거는 원문 목록 자체에 없다. 기존 annotation의 이모지 제거 사용자 지정 문체는 원 지시가 제공되지 않았으므로 현재 계약의 확정 요구로 채택하지 않는다.",
+      "intent": "잠재 사용자가 지원 서비스·표시 범위를 파악한다. 완벽 지원의 충분한 근거는 원문 목록 자체에 없다. 제목·강조의 장식성 이모지는 기능 정보를 바꾸지 않는 REVISE 대상으로 정리한다. 표현 개선 제안에 과거 사용자 지시의 확인을 선행 조건으로 두지 않으며, 지원 범위·실시간 동작의 근거 검토와 구별한다.",
       "placement": "서비스별 표시 정보는 현지 기능 목록에 유지. 인증 파일/명령은 설정 역할 후보지만 현재 문서에 연결된 설정 맥락도 유용하므로 전면 분리를 강제하지 않는다. 목적지 미확인 이동은 blocked.",
       "manual_review": "8개 서비스와 각각의 표시 항목·창·플랜·조건을 확인했다. 실시간을 주기적 갱신으로 바꿀 동작 증거는 없다. 원문 L47은 자동 갱신 주기 1분~60분 설정도 명시한다. 실시간 표현과 이 설정의 의미를 함께 검토하되 실제 동작을 이 설정만으로 단정하지 않는다. 현 정책을 확인한 것이 아니라 고정 source의 제품 주장을 검토한 것이며 50/day·1,000/day를 현재 provider 정책으로 보증하지 않는다.",
-      "unknown": "실제 지원 범위·갱신 주기·plan 동작·provider 정책. 이모지 제거의 원 사용자 지시.",
-      "priority": "P1: 완벽 지원/실시간 근거 확인 또는 범위 한정; 이모지 정리는 P3",
+      "unknown": "실제 지원 범위·갱신 주기·plan 동작·provider 정책.",
+      "priority": "P1: 완벽 지원/실시간 근거 확인 또는 범위 한정; 장식성 이모지 제거 REVISE는 P3",
       "units": [
         {
           "statement": "8대 주요 AI 프로바이더 완벽 지원이라는 제목.",
@@ -5409,7 +5409,7 @@
           "expression": "REVISE",
           "importance": "useful",
           "relevance": "uncertain",
-          "rationale": "8개 나열은 확인되지만 주요·완벽이라는 평가/전칭은 별도 근거가 없다.",
+          "rationale": "8개 나열은 확인되지만 주요·완벽이라는 평가/전칭은 별도 근거가 없다. 제목·강조의 장식성 이모지 제거는 별도의 REVISE 표현 개선이며 이 주장들의 사실성 판정과 구별한다.",
           "id": "RW-014-a",
           "source_lines": {
             "start": 30,
@@ -5427,7 +5427,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-a-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "source_unchanged_until_review",
@@ -5463,7 +5463,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-b-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5499,7 +5499,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-c-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5535,7 +5535,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-d-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5571,7 +5571,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-e-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5607,7 +5607,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-f-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5643,7 +5643,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-g-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5679,7 +5679,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-h-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5715,7 +5715,7 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-014-i-current",
           "scope_ref": {
-            "contract_id": "RW-014-contract-review-r1",
+            "contract_id": "RW-014-contract-review-r2",
             "scope_id": "current"
           },
           "local_exposure": "claim_and_interpretation_conditions",
@@ -5732,7 +5732,7 @@
       "legacy": "FLAG",
       "legacy_annotation_reference": "tests/fixtures/real-world-candidates.json#/cases/13/annotation",
       "contract_review": {
-        "id": "RW-014-contract-review-r1",
+        "id": "RW-014-contract-review-r2",
         "status": "needs_review",
         "fixture_contract": {
           "audience": "잠재 사용자",
@@ -5742,7 +5742,7 @@
         "fixture_intent_basis": "supplied_fixture_context_not_new_explicit_user_instruction",
         "current_task_basis": "explicit_user_request_to_reassess_not_authorization_to_edit_source_repositories",
         "source_role_basis": "authoritative_context_for_historical_document_role_only",
-        "register": "unspecified; no inferred emoji prohibition",
+        "register": "speech level unspecified; remove decorative emoji in feature headings/emphasis as a REVISE proposal",
         "output_scopes": [
           {
             "scope_id": "current",
@@ -5766,7 +5766,7 @@
           }
         ],
         "required_information_policy": "all retained claim-defining conditions, numbers, attribution, identifiers and provenance remain locally exposed; no source deletion authorized",
-        "intent_assessment": "잠재 사용자가 지원 서비스·표시 범위를 파악한다. 완벽 지원의 충분한 근거는 원문 목록 자체에 없다. 기존 annotation의 이모지 제거 사용자 지정 문체는 원 지시가 제공되지 않았으므로 현재 계약의 확정 요구로 채택하지 않는다."
+        "intent_assessment": "잠재 사용자가 지원 서비스·표시 범위를 파악한다. 완벽 지원의 충분한 근거는 원문 목록 자체에 없다. 제목·강조의 장식성 이모지는 기능 정보를 바꾸지 않는 REVISE 대상으로 정리한다. 표현 개선 제안에 과거 사용자 지시의 확인을 선행 조건으로 두지 않으며, 지원 범위·실시간 동작의 근거 검토와 구별한다."
       },
       "inspected_context": "README L22–50, L81–97",
       "source_ref": "S10",
@@ -5881,7 +5881,23 @@
         }
       ],
       "manual_disposition": "REVIEW recommendation only; engine gate not run",
-      "independent_human_review": "pending"
+      "independent_human_review": "pending",
+      "expression_review": {
+        "operations": [
+          "REVISE"
+        ],
+        "target": "기능 제목·강조의 장식성 이모지",
+        "decision": "장식성 이모지를 제거하되 서비스명·기능·수치·조건은 보존한다. 원문 출처 snapshot과 발췌를 수정하는 것이 아니라 표현 수정 제안을 기록한다.",
+        "reason": "기능 안내의 정보 전달에 불필요한 장식을 정리하는 편집 판단이며 별도 지시가 있어야만 제안 가능한 사안은 아니다.",
+        "independent_from": "지원 범위·완벽 지원·실시간 동작 등 기존 근거 검토",
+        "status": "proposal_only_no_source_edit"
+      },
+      "review_feedback": {
+        "date": "2026-11-06 Asia/Seoul",
+        "basis": "explicit_user_feedback",
+        "scope": "RW-014 decorative emoji only",
+        "decision": "이모지는 별도 언급이 없어도 표현 개선으로 제거 제안한다. 나머지 사실·배치 판단과 다른 사례는 유지한다."
+      }
     },
     {
       "id": "RW-015",

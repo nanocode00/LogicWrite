@@ -52,7 +52,7 @@
 | [RW-011](#rw-011) | KEEP | 일치·보완 | P3: 선택적 문장 분리; 필수 수정 없음 |
 | [RW-012](#rw-012) | MOVE | 일치·주장 조정 후 상세 근거 MOVE 후보 | P1: 근거 장부의 retention 표본 수 확인; P2: 기여 주장 조정·상세 평가/한계의 근거 문서 분리 |
 | [RW-013](#rw-013) | MOVE | 일치·세분화 | P2: 확인한 설계 문서와 중복 통합 후보; 수정본 검토 전 source 보존 |
-| [RW-014](#rw-014) | FLAG | 부분 일치·근거 제한 | P1: 완벽 지원/실시간 근거 확인 또는 범위 한정; 이모지 정리는 P3 |
+| [RW-014](#rw-014) | FLAG | 부분 일치·근거 제한 | P1: 완벽 지원/실시간 근거 확인 또는 범위 한정; 장식성 이모지 제거 REVISE는 P3 |
 | [RW-015](#rw-015) | REVISE | 일치·재확인 | P1: 본문 다운로드 URL REVISE 제안; 외부 source는 수정하지 않음 |
 | [RW-016](#rw-016) | MOVE | 부분 불일치 | P2: 세부 기준 중복 통합 선택; 상태·범위 전면 MOVE 반대 |
 | [RW-017](#rw-017) | REVISE | 일치·보완 | P1: 잘못 일반화될 테스트 예시 REVISE; 기록 3건 요구 보존 |
@@ -411,11 +411,11 @@
 
 출처: [README.md](https://github.com/nanocode00/QuotaTray/blob/e62eb5c37fbf7265a7937f3939bf99681e38cb03/README.md); 조회/검토 문맥: README L22–50, L81–97. snapshot `S10`.
 
-**목적 판단:** 잠재 사용자가 지원 서비스·표시 범위를 파악한다. 완벽 지원의 충분한 근거는 원문 목록 자체에 없다. 기존 annotation의 이모지 제거 사용자 지정 문체는 원 지시가 제공되지 않았으므로 현재 계약의 확정 요구로 채택하지 않는다.
+**목적 판단:** 잠재 사용자가 지원 서비스·표시 범위를 파악한다. 완벽 지원의 충분한 근거는 원문 목록 자체에 없다. 제목·강조의 장식성 이모지는 기능 정보를 바꾸지 않는 REVISE 대상으로 정리한다. 표현 개선 제안에 과거 사용자 지시의 확인을 선행 조건으로 두지 않으며, 지원 범위·실시간 동작의 근거 검토와 구별한다.
 
 | Unit | 원문 행 | 보호할 주장·수치·조건·귀속 | 현재 범위 관련성 / 중요도 | 보존 / 표현 | 판단 근거 |
 | --- | --- | --- | --- | --- | --- |
-| RW-014-a | 30–30 | 8대 주요 AI 프로바이더 완벽 지원이라는 제목. | uncertain / useful | `undecided` / REVISE | 8개 나열은 확인되지만 주요·완벽이라는 평가/전칭은 별도 근거가 없다. |
+| RW-014-a | 30–30 | 8대 주요 AI 프로바이더 완벽 지원이라는 제목. | uncertain / useful | `undecided` / REVISE | 8개 나열은 확인되지만 주요·완벽이라는 평가/전칭은 별도 근거가 없다. 제목·강조의 장식성 이모지 제거는 별도의 REVISE 표현 개선이며 이 주장들의 사실성 판정과 구별한다. |
 | RW-014-b | 31–31 | OpenAI Codex: API 실제 반환 5h/7d Rate Limit 윈도우·장기 윈도우 대표값; codex login / ~/.codex/auth.json. | relevant / required | `retain_current` / REVISE | 윈도우·대표값 의미를 풀고 인증 상세만 분리 후보다. |
 | RW-014-c | 32–32 | Antigravity: Gemini 풀 및 Claude/GPT 풀 quota 실시간 모니터링; agy auth login / Cloud Code Assist. | relevant / required | `retain_current` / REVISE | 표시 범위는 보존하고 실시간 동작은 별도 FLAG. |
 | RW-014-d | 33–33 | Claude Code: Anthropic 5h/7d 사용률·reset countdown; claude login / API Key. | relevant / required | `retain_current` / REVISE | 시간 창과 인증 대안을 보존한다. |
@@ -429,9 +429,11 @@
 
 **수작업 확인:** 8개 서비스와 각각의 표시 항목·창·플랜·조건을 확인했다. 실시간을 주기적 갱신으로 바꿀 동작 증거는 없다. 원문 L47은 자동 갱신 주기 1분~60분 설정도 명시한다. 실시간 표현과 이 설정의 의미를 함께 검토하되 실제 동작을 이 설정만으로 단정하지 않는다. 현 정책을 확인한 것이 아니라 고정 source의 제품 주장을 검토한 것이며 50/day·1,000/day를 현재 provider 정책으로 보증하지 않는다.
 
-**미확인·사람 검토:** 실제 지원 범위·갱신 주기·plan 동작·provider 정책. 이모지 제거의 원 사용자 지시.
+**표현 수정:** 제목·강조의 장식성 이모지는 REVISE로 제거 제안한다. 서비스명·지원 기능·수치·조건은 보존하며, 과거 사용자 지시 확인이나 사실 오류 판정을 기다릴 필요는 없다. 원문 snapshot을 수정하거나 지원 동작의 검증 결과로 취급하지 않는다.
 
-**실제 수정 필요성·우선순위:** P1: 완벽 지원/실시간 근거 확인 또는 범위 한정; 이모지 정리는 P3. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
+**미확인·사람 검토:** 실제 지원 범위·갱신 주기·plan 동작·provider 정책.
+
+**실제 수정 필요성·우선순위:** P1: 완벽 지원/실시간 근거 확인 또는 범위 한정; 장식성 이모지 제거 REVISE는 P3. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
 
 ### RW-015
 
@@ -589,7 +591,7 @@
 | 경고라는 이유로 무조건 남기거나 제거 | RW-007/012/020의 독자 과제가 다름 | per-scope exposure, each_member vs across_group | 현재 claim의 최소 해석 조건 판단 rubric, 중복 조건의 현지 통합 승인 규칙 필요 |
 | source assertion과 새 실행 증거 혼동 | RW-005/006/013의 테스트·CI·refresh 기록 | EvidenceRef.kind/authority_basis, execution status | 사실 확인 수준(원문 진술/동일 코드 확인/새 실행/사람 검토)을 UI·평가 기록에서 일관되게 보여줄 필요 |
 | mutable snapshot과 현재 접근 상태 혼동 | RW-015 HTTP, RW-019/020 PR body | source_record, ArtifactRef/digest | body capture time/digest와 live retrieval time, redirect chain, 과거/현재의 차이를 표현할 수집 규약 필요 |
-| 지정되지 않은 문체·새 규칙의 확정 | RW-014 이모지, RW-016 구성 설명→금지 | assumptions/constraints, resolver review | 원 사용자 지시가 없는 과거 annotation의 권한 수준·문체 scope를 명시; 미확인 선호를 강제하지 않기 |
+| 표현 개선과 새 규칙 확정의 혼동 | RW-014 장식성 이모지 정리와 RW-016 구성 설명→금지의 차이 | Expression Refinement, assumptions/constraints, resolver review | 장식 정리는 별도 지시 없이 REVISE 제안 가능; 원문에 없는 작업 금지 규칙 확정과 구별 |
 
 이 표는 구현·schema migration 제안이다. 공통 모델은 이미 다수의 경계를 표현하며, 이번 검토에서 새 enum/API/수치 기준을 동결하지 않는다.
 
