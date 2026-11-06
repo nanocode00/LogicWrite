@@ -595,11 +595,11 @@
 | mutable snapshot과 현재 접근 상태 혼동 | RW-015 HTTP, RW-019/020 PR body | source_record, ArtifactRef/digest | body capture time/digest와 live retrieval time, redirect chain, 과거/현재의 차이를 표현할 수집 규약 필요 |
 | 표현 개선과 새 규칙 확정의 혼동 | RW-014 장식성 이모지 정리와 RW-016 구성 설명→금지의 차이 | Expression Refinement, assumptions/constraints, resolver review | 장식 정리는 별도 지시 없이 REVISE 제안 가능; 원문에 없는 작업 금지 규칙 확정과 구별 |
 
-이 표는 구현·schema migration 제안이다. 공통 모델은 이미 다수의 경계를 표현하며, 이번 검토에서 새 enum/API/수치 기준을 동결하지 않는다.
+공통 편집 판단은 [목적 우선 판단 절차](../architecture.md#purpose-first-decision-procedure)와 [문맥별 평가 기준](../evaluation.md#contextual-judgment-rubric)에 보강했다. 표의 구현·schema migration 항목은 제안으로 남기며, 공통 모델의 새 enum/API/수치 기준이나 사례별 정답을 동결하지 않는다.
 
 ## 다음 단계와 사람 검토 경계
 
-1. 사용자/사람 검토자는 먼저 RW-008의 원하는 제출 목적·구조, RW-009의 명시된 목적에 따른 목적지 연결·통합과 RW-010의 문서 역할 분담, RW-014의 문체 근거를 확인한다. 이번 모델 재검토의 제안을 그대로 정답으로 채택하지 않는다.
+1. 사용자/사람 검토자는 먼저 RW-008의 원하는 제출 목적·구조, RW-009의 명시된 목적에 따른 목적지 연결·통합과 RW-010의 문서 역할 분담을 확인한다. RW-014의 장식성 이모지 정리는 표현 개선 제안으로 다루고 과거 문체 지시 확인을 다시 요구하지 않는다. 이번 모델 재검토의 제안을 그대로 정답으로 채택하지 않는다.
 2. 독립 사람이 unit 분할·보존·배치·표현을 별개로 `agree / disagree / uncertain`으로 기록한다. 가능하면 두 사람이 중첩 subset을 독립 검토하고 불일치 이유를 해결한다. 작성자/리뷰어 이름·일자·근거를 별도 남긴다. 현재 모든 human review는 pending이다.
 3. P1 항목부터 원시 근거와 문맥을 확보한다. RW-008의 FastAPI/ThreadingHTTPServer 및 E2E 경계, RW-012의 평가/귀속, RW-014 지원 주장, RW-015 다운로드, RW-017 실제 테스트 예시, RW-018 배포 기준을 우선한다. 외부 저장소 수정은 별도 작업이다.
 4. 승인된 소수 사례에만 전체 source/destination 수정본을 만들고 protected elements·source/target trace·현지 조건 노출·전체 문서 의미를 검토한다. RW-013의 이미 있는 OAuth 문서는 중복 통합 대상이며 새 목적지 생성을 기본으로 하지 않는다. 확인되지 않은 목적지는 REVIEW로 남긴다.
@@ -642,5 +642,5 @@ RW-015 추가 HTTP 확인은 2026-11-05 15:39 KST에 공개 비인증 GET으로 
 ## 이번 PR의 검증 범위
 
 - 20개 case와 단위 ID, source span/digest, 기존 발췌 일치, 선언 scope의 참조, 목적지 기존 단위·관계 참조, 다섯 수작업 확인 기록의 존재를 로컬 정적 검사했다. 이는 문서 장부의 무결성 점검이며 LogicWrite 검증 엔진 실행이 아니다.
-- `git diff --check`, 새 문서의 로컬 링크/앵커·표·JSON parse, 기존 tracked 파일의 main 대비 동일성을 확인한다. 기존 평가 JSON·schema 0.1.0·기존 문서는 수정하지 않는다.
+- `git diff --check`, 문서의 로컬 링크/앵커·표·JSON parse와 수정 범위를 확인한다. 후속 기준 보강은 기존 architecture/evaluation 두 문서에만 반영하고, 평가 JSON·schema 0.1.0·공통 데이터 모델·요구사항 등 나머지 기존 파일 9개는 기준 main과 동일하게 유지한다. 사례별 판단 장부 JSON은 이번 기준 보강에서 수정하지 않았다.
 - 최종 전체 수정본/engine·모델 성능/B0·B1·B2/실제 CI·배포·독립 사람 승인을 검증한 결과는 없다. Draft PR은 사람 검토용이며 병합하지 않는다.

@@ -204,6 +204,29 @@ Within the modular architecture above, editorial processing follows six logical 
 | 5. Order within destination *(followed by explicit expression refinement)* | `Information Organization` (`placement`) → `Expression Refinement` (rewrite/compress/style) | Regrouped units, reader tasks, prerequisites, relative importance, register/term constraints | Ordered document plan (`placement`) and expression-refined revised draft(s) (`REVISE`, `COMPRESS`, register/term normalization) |
 | 6. Whole-document validation | `Validation Gate` + `Revision Controller` | Complete revised source and destination document(s), contract, protected facts/qualifiers | Deterministic and semantic findings; gate state (`PASS`, `REVIEW`, `FAIL`, `STOPPED`) or targeted module re-routing |
 
+### Purpose-first decision procedure
+
+Use the six stages above to decide what belongs before deciding where it reads smoothly. An existing section, a familiar template, or usefulness to some reader is not sufficient evidence for retaining a unit in the current output scope.
+
+| Decision | Required reasoning and owner |
+| --- | --- |
+| Establish the reader task | Resolver distinguishes explicit desired purpose from the draft's historical role and the surrounding repository's role. A folder that preserves experience evidence does not require its index to repeat that evidence. Record assumptions; do not infer a universal document policy from one user's choice. |
+| Identify the unit's function in context | Analysis distinguishes instructions, selection rationale, navigation, contribution claims, measurements, limitations, and time-dependent status as applicable. Topic words alone do not determine function: mentioning an installer is not necessarily installation guidance. These are descriptive distinctions, not new schema enums. |
+| Select information for each output | Analysis justifies why the unit helps that scope's reader task. Distinguish preservation value across the affected corpus from the need for local exposure. Consider whether an existing claim should remain at all before retaining its detailed caveats by default. |
+| Plan preservation and placement | Organization separates introduction/navigation from detailed work or evidence records where the contract calls for that division. Inspect destination context and overlap; preserve source text while a transfer remains blocked. Then decide section, grouping and order within each document. |
+| Refine the selected information | Expression improves wording and readability under the accepted plan. Harmless decorative cleanup can be proposed without proof of an earlier user instruction; it does not establish a universal style prohibition or a factual defect. Preserve meaningful symbols and applicable quote/code exclusions. |
+| Recheck the actual resulting claims | Gate checks the full affected outputs, provenance, authorized preservation and necessary local qualifiers. A changed purpose, selection or claim scope returns to the responsible upstream component and invalidates dependent work; fluent phrasing alone cannot discharge these checks. |
+
+The following are context-dependent counterexamples from the [manual reassessment](reviews/real-world-20-reassessment.md), not gold annotations or default rules for every README, resume or guide.
+
+| Case | Distinction that prevents a wrong decision |
+| --- | --- |
+| RW-001/002 | Download/run instructions serve installation; explaining why PKG was selected serves a packaging decision record. A natural order or short length does not make the latter an installation step. |
+| RW-007/009 | An index can select links and document roles while detailed evidence stays elsewhere; an explicitly requested master-career landing page can replace repository-management introduction. Existing content does not override desired purpose. |
+| RW-012 | Describing learning/evaluation work can avoid claiming a performance gain. Keep detailed positive results, regression, attribution and verification limits together in evidence rather than showing only a favorable metric. |
+| RW-016/018 | Repository identity differs from changing migration status or maintenance procedures. Under the reviewed purpose, introduce the repository and link to the appropriate work records. |
+| RW-003 | A top-of-page participation request and consolidation into an existing later section can both be defensible. Explain the tradeoff rather than forcing one placement as the only correct answer. |
+
 ### Editorial invariants
 
 The [module boundaries](#core-modules) and [decision dimensions](#separating-preservation-expression-and-placement) apply throughout all six stages: relevance is contextual, low relevance alone cannot justify deleting valuable information, and unresolved purpose/destination/claim questions yield `FLAG` / `REVIEW`. Neither regrouping nor polishing overrides the protected facts, conditions, numbers, or provenance.
@@ -220,6 +243,8 @@ Ask: **If this caveat is omitted, will readers misunderstand a claim in this doc
 | The same condition is already adequately stated | Consolidate the duplication |
 
 Adjust claims and caveats together: narrow an overbroad claim or move the claim and its supporting detail together rather than deleting only its limitation. A link cannot replace a condition necessary to interpret the visible claim. Verify destination preservation before removing duplicated detail; unknown preservation yields `FLAG` / `REVIEW`. Because `Information Organization` and `Expression Refinement` can alter which claims appear in a document and how they are grouped, the `Validation Gate` reassesses caveat exposure on the complete revised source and destination documents after editing.
+
+Selecting a narrower contribution claim instead of a quantitative outcome requires Analysis to reassess the affected units/exposure and Organization to plan their preservation before Expression rewrites them. It is not permission for Expression to discard protected numbers or for a writer to hide counterevidence. The source evidence and authorized preservation obligations remain intact even when the current document no longer repeats the detailed result or limitation.
 
 ## Future design: vector-assisted routing
 
