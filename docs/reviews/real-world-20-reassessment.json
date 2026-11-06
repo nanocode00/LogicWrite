@@ -1,6 +1,6 @@
 {
   "record_kind": "manual_model_reassessment_not_adopted_engine_schema",
-  "review_revision": "r4",
+  "review_revision": "r5",
   "review_date": "2026-11-05 Asia/Seoul",
   "base_main": "d15dcb99ff30d1106d4f3e3b6d8a0e7f08b2ec58",
   "reviewer_kind": "Codex model, AGY advisory pass; no independent human approval",
@@ -3958,21 +3958,21 @@
     },
     {
       "id": "RW-012",
-      "title": "기여·측정 조건·상세 한계의 분리",
-      "comparison": "부분 일치·수치 문맥 불일치",
-      "intent": "기술 면접관·채용자에게 개인 기여를 전달한다. 원문은 master 역할도 가지므로 상세 한계를 제거하는 것 자체가 목표가 아니다. 성과의 의미를 바꾸는 조건은 현재 이력서에도 필수다.",
-      "placement": "a/b, c/d, e/f, g/h를 각각 작업과 조건 묶음으로 현지 노출한다. 상세 경험·검증 원장은 실제 확인했지만 통합 결과 문서는 만들지 않았다. 수치/귀속/조건이 대상 문서 어느 요소에 보존되는지 gate 검토 전까지 source removal은 blocked다. 마지막 종합 주의는 필요한 귀속·미검증 조건을 각 항목에 옮긴 후에만 문서 내 중복 통합 후보다.",
-      "manual_review": "40종 → 22×30=660 합성 → 별도 4종 후보 비교를 구분; 개인 결함 발견/수정 요청과 팀원 verifier patch 분리; C2 1,233건 WER 9.77%와 retention 15.33→16.81% 회귀를 함께 보존하되, 원문 119건은 원장 L268/278/285의 AI Hub 119 데이터셋·4,802개 retention 표본과 다르다. 식별자를 표본 수로 혼동했을 가능성을 P1 FLAG로 남겼고 원시 manifest 확인 전 확정 정정하지 않는다. 동일 최종 test의 B0 값이 없어 직접 개선율도 계산할 수 없다; 초기 4개 Actions 체크와 배포 전체 E2E/비용·사람 품질 미확인을 구분했다. 두 근거 문서의 관련 구간과 대조했으나 실제 성능/운영은 미검증이다.",
-      "unknown": "119건 표기와 AI Hub 119 retention 4,802개 기록의 불일치 해소·정확한 평가 manifest, 전체 평가 원시 기록 재현성·최종 운영 교체·사람 품질 검토. 상세 한계 중 무엇을 중복 통합할지는 완성한 수정본과 독자 판단이 필요하다.",
-      "priority": "P1: retention 표본 수 확인·조건·귀속 노출; 확인 전 MOVE 금지",
+      "title": "기여 중심 이력서와 상세 평가·한계의 노출 분리",
+      "comparison": "일치·주장 조정 후 상세 근거 MOVE 후보",
+      "intent": "기술 면접관·채용 담당자에게 전문성과 실제 개인 기여를 전달하는 것이 목적이다. 사용자 피드백에 따라 검증 기록에 보존할 사실과 이력서에 노출할 정보를 분리한다. 각 기여에 미검증·한계를 의무적으로 병기하는 기존 판단을 철회하고, 먼저 기여 문장의 범위를 정확히 조정한 뒤 상세 평가 수치·한계는 근거 문서로 분리할 후보로 본다. 마스터 이력서라는 이유만으로 상세 한계의 반복 노출을 요구하지 않는다. 개인 기여를 과장하지 않는 것은 계속 필요하지만 모든 한계를 이력서에 적는 것과 같지 않다.",
+      "placement": "이력서에는 a/b1의 합성 평가·로컬 기본 후보 선정, c의 결함 발견·수정 요청, e1의 Whisper 학습·데이터 정제·신규/기존 도메인 비교 평가, g의 PR 경합 수정·테스트/빌드 CI 구성을 기여별로 배치한다. b2/d/e2/f/h/i의 상세 검증 경계·팀원 패치 경과·성능 수치와 회귀·운영 교체 여부·미검증 효과·종합 주의는 상세 경험/검증 원장에 보존할 후보로 둔다. STT는 긍정 수치 9.77%만 이력서에 남기고 회귀를 감추는 대신 수치와 회귀를 모두 상세 근거에 두며 수행 기여를 표현한다. 결함 발견·수정 요청은 패치 구현으로, CI 구성은 비용 절감이나 전체 배포 검증으로 바꾸지 않는다. 목적지의 관련 구간은 확인했지만 요소별 통합 결과와 전체 수정본은 없어 실제 이전·삭제는 아직 blocked다.",
+      "manual_review": "검증을 위해 수치·조건·귀속을 보존하는 것과 이력서 노출 의무를 혼동한 판단을 정정했다. 기존 b를 기본 후보 선정 b1/실사용·운영 검증 경계 b2로, e를 학습·정제·양 도메인 평가 e1/정량 결과 e2로 분리해 서로 다른 노출을 계획했다. 합성 평가와 후보 선정, 개인의 발견·수정 요청, 학습·평가 수행, CI 구성으로 주장을 한정하면 상세 한계를 매번 병기하지 않을 수 있다. 원문 119건과 근거 원장의 AI Hub 119 식별자·retention 4,802개 불일치 및 동일 최종 test의 B0 값 부재는 근거 장부에 그대로 남긴다. 원시 manifest나 런타임을 새로 검증하지 않았다.",
+      "unknown": "기여 중심 최종 문장과 근거 문서 간 정보 대응·통합 후 전체 의미 보존. 119건 표현과 AI Hub 119 retention 4,802개 기록의 차이는 원시 평가 manifest로 확인해야 하며 이력서에서 해당 수치를 쓰지 않아도 검토 기록에서 삭제하지 않는다. 다른 성과 수치를 이력서에 선택해 남길 경우 필요한 해석 조건은 그 주장과 함께 다시 평가한다.",
+      "priority": "P1: 근거 장부의 retention 표본 수 확인; P2: 기여 주장 조정·상세 평가/한계의 근거 문서 분리",
       "units": [
         {
           "statement": "OpenRouter 40종 사전검증; 22종×30건=660건 합성 평가; 별도 최종 후보 4종 비교로 출력 계약·지연·비용·로컬 호환성 확인.",
           "preservation": "retain_current",
-          "expression": "COMPRESS",
+          "expression": "REVISE",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "순차 단계와 모집단을 합산하거나 같은 평가로 바꾸지 않는다.",
+          "rationale": "평가 설계·수행 기여를 설명하되 40종 사전검증·22×30 합성 본평가·별도 4종 비교를 하나의 실사용 평가로 합산하지 않는다.",
           "id": "RW-012-a",
           "source_lines": {
             "start": 79,
@@ -3990,10 +3990,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-012-a-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "bounded_personal_contribution_and_claim_scope",
           "protection": {
             "semantic": "OpenRouter 40종 사전검증; 22종×30건=660건 합성 평가; 별도 최종 후보 4종 비교로 출력 계약·지연·비용·로컬 호환성 확인.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -4003,13 +4003,13 @@
           "relations": []
         },
         {
-          "statement": "Gemini Flash-Lite는 로컬 코칭 기본 후보; 합성 결과는 실제 사용자 품질·운영 안정성 검증이 아님.",
+          "statement": "Gemini Flash-Lite를 로컬 코칭 기본 후보로 선정했다.",
           "preservation": "retain_current",
           "expression": "REVISE",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "candidate와 synthetic 조건은 현재 주장 가까이 필수 노출한다.",
-          "id": "RW-012-b",
+          "rationale": "로컬 기본 후보 선정이라는 실제 판단을 표현한다. 운영 모델 채택·사용자 품질 입증을 주장하지 않는 문장이라면 b2를 매번 이력서에 병기할 필요는 없다.",
+          "id": "RW-012-b1",
           "source_lines": {
             "start": 79,
             "end": 79
@@ -4024,14 +4024,55 @@
           ],
           "source_quote_hint": "- **LLM 모델 평가·선정:** OpenRouter **40종 사전검증**, **22종 × 30건 = 660건 합성 평가**, 별도 최종 후보 4종 비교를 통",
           "evidence_kind": "source_assertion_not_runtime_verification",
-          "assessment_id": "RW-012-b-current",
+          "assessment_id": "RW-012-b1-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "bounded_personal_contribution_and_claim_scope",
           "protection": {
-            "semantic": "Gemini Flash-Lite는 로컬 코칭 기본 후보; 합성 결과는 실제 사용자 품질·운영 안정성 검증이 아님.",
+            "semantic": "Gemini Flash-Lite를 로컬 코칭 기본 후보로 선정했다.",
+            "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
+          },
+          "human_review_status": "pending",
+          "placement_status": "proposal_only",
+          "relations": [],
+          "predecessor": {
+            "review_revision": "r4",
+            "unit_id": "RW-012-b",
+            "reason": "기여/선정 내용과 상세 평가/한계의 노출 판단 분리; 원문 span 유지"
+          }
+        },
+        {
+          "statement": "합성 평가 결과는 실제 사용자 품질이나 운영 안정성 검증이 아니다.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "합성 평가의 검증 경계는 상세 근거에서 보존한다. 이력서의 a/b1를 합성 평가·로컬 후보 선정으로 한정하면 이 부정형 설명의 현지 병기를 일괄 요구하지 않는다.",
+          "id": "RW-012-b2",
+          "source_lines": {
+            "start": 79,
+            "end": 79
+          },
+          "source_spans": [
+            {
+              "snapshot_ref": "S06",
+              "start": 5615,
+              "end": 5823,
+              "offset_convention": "zero_based_unicode_codepoint_half_open_no_normalization"
+            }
+          ],
+          "source_quote_hint": "- **LLM 모델 평가·선정:** OpenRouter **40종 사전검증**, **22종 × 30건 = 660건 합성 평가**, 별도 최종 후보 4종 비교를 통",
+          "evidence_kind": "source_assertion_not_runtime_verification",
+          "assessment_id": "RW-012-b2-current",
+          "scope_ref": {
+            "contract_id": "RW-012-contract-review-r2",
+            "scope_id": "current"
+          },
+          "local_exposure": "source_unchanged_until_review",
+          "protection": {
+            "semantic": "합성 평가 결과는 실제 사용자 품질이나 운영 안정성 검증이 아니다.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
           },
           "human_review_status": "pending",
@@ -4039,7 +4080,43 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-012-a"
+              "target": "RW-012-a",
+              "rationale": "원문과 상세 근거의 조건/귀속 연결을 유지한다. 이력서 주장을 좁힌 뒤에도 해당 상세 문장 전체를 현지에 반드시 보여야 한다는 뜻은 아니다."
+            }
+          ],
+          "predecessor": {
+            "review_revision": "r4",
+            "unit_id": "RW-012-b",
+            "reason": "기여/선정 내용과 상세 평가/한계의 노출 판단 분리; 원문 span 유지"
+          },
+          "proposed_destination_scopes": [
+            "experience",
+            "evidence"
+          ],
+          "additional_scope_assessments": [
+            {
+              "id": "RW-012-b2-experience",
+              "unit_ref": "RW-012-b2",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "experience"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
+            },
+            {
+              "id": "RW-012-b2-evidence",
+              "unit_ref": "RW-012-b2",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "evidence"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
             }
           ]
         },
@@ -4049,7 +4126,7 @@
           "expression": "REVISE",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "발견한 결함과 수행 범위를 보존한다.",
+          "rationale": "본인의 동사를 결함 발견·수정 요청으로 정확히 쓴다. 팀원 패치 구현을 개인 기여로 주장하지 않으면 d의 상세 귀속 문장을 근거 문서에 둘 수 있다.",
           "id": "RW-012-c",
           "source_lines": {
             "start": 80,
@@ -4067,10 +4144,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-012-c-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "bounded_personal_contribution_and_claim_scope",
           "protection": {
             "semantic": "FastMCP 연동·인증·DB 저장 통합 테스트 및 기존 DB 행을 새 저장 성공으로 오판하는 결함 발견·수정 요청은 개인 기여.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -4081,11 +4158,11 @@
         },
         {
           "statement": "저장 verifier의 실제 코드 수정은 팀원 담당.",
-          "preservation": "retain_current",
-          "expression": "COMPRESS",
-          "importance": "required",
-          "relevance": "relevant",
-          "rationale": "개인의 수정 요청을 patch 구현 성과로 바꾸지 않는다.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "팀원 패치 구현의 귀속은 근거 문서에 보존한다. 이력서는 개인의 발견·수정 요청만 표현해 귀속 오해를 방지한다.",
           "id": "RW-012-d",
           "source_lines": {
             "start": 80,
@@ -4103,10 +4180,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-012-d-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "source_unchanged_until_review",
           "protection": {
             "semantic": "저장 verifier의 실제 코드 수정은 팀원 담당.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -4116,18 +4193,49 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-012-c"
+              "target": "RW-012-c",
+              "rationale": "원문과 상세 근거의 조건/귀속 연결을 유지한다. 이력서 주장을 좁힌 뒤에도 해당 상세 문장 전체를 현지에 반드시 보여야 한다는 뜻은 아니다."
+            }
+          ],
+          "proposed_destination_scopes": [
+            "experience",
+            "evidence"
+          ],
+          "additional_scope_assessments": [
+            {
+              "id": "RW-012-d-experience",
+              "unit_ref": "RW-012-d",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "experience"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
+            },
+            {
+              "id": "RW-012-d-evidence",
+              "unit_ref": "RW-012-d",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "evidence"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
             }
           ]
         },
         {
-          "statement": "Whisper Medium QLoRA 학습·정제·양 도메인 평가; C2 최종 1,233건 WER 9.77%.",
+          "statement": "Whisper Medium QLoRA 학습·데이터 정제와 신규 면접 도메인·기존 도메인의 비교 평가를 수행했다.",
           "preservation": "retain_current",
           "expression": "REVISE",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "수치와 평가 모집단·모델 후보를 함께 보호한다.",
-          "id": "RW-012-e",
+          "rationale": "학습·정제와 신규/기존 도메인 평가 수행이라는 전문성을 표현한다. 성능 개선이나 운영 교체 성공을 주장하지 않으며 상세 수치·회귀는 함께 근거 문서에 보존한다.",
+          "id": "RW-012-e1",
           "source_lines": {
             "start": 81,
             "end": 81
@@ -4142,27 +4250,103 @@
           ],
           "source_quote_hint": "- **Whisper STT 도메인 적응:** Whisper Medium QLoRA 학습·데이터 정제와 면접 도메인/기존 도메인 성능을 함께 평가했습니다. 후보 ",
           "evidence_kind": "source_assertion_not_runtime_verification",
-          "assessment_id": "RW-012-e-current",
+          "assessment_id": "RW-012-e1-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "bounded_personal_contribution_and_claim_scope",
           "protection": {
-            "semantic": "Whisper Medium QLoRA 학습·정제·양 도메인 평가; C2 최종 1,233건 WER 9.77%.",
+            "semantic": "Whisper Medium QLoRA 학습·데이터 정제와 신규 면접 도메인·기존 도메인의 비교 평가를 수행했다.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
           },
           "human_review_status": "pending",
           "placement_status": "proposal_only",
-          "relations": []
+          "relations": [],
+          "predecessor": {
+            "review_revision": "r4",
+            "unit_id": "RW-012-e",
+            "reason": "기여/선정 내용과 상세 평가/한계의 노출 판단 분리; 원문 span 유지"
+          }
+        },
+        {
+          "statement": "후보 C2는 최종 1,233건 평가에서 WER 9.77%를 기록했다.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "1,233건 WER 9.77% 결과는 회귀·모집단 조건과 함께 상세 근거에 보존할 후보이며, 이력서는 e1의 수행 기여를 중심으로 쓴다. 긍정 수치만 남기고 회귀를 숨기는 안은 아니다.",
+          "id": "RW-012-e2",
+          "source_lines": {
+            "start": 81,
+            "end": 81
+          },
+          "source_spans": [
+            {
+              "snapshot_ref": "S06",
+              "start": 6004,
+              "end": 6223,
+              "offset_convention": "zero_based_unicode_codepoint_half_open_no_normalization"
+            }
+          ],
+          "source_quote_hint": "- **Whisper STT 도메인 적응:** Whisper Medium QLoRA 학습·데이터 정제와 면접 도메인/기존 도메인 성능을 함께 평가했습니다. 후보 ",
+          "evidence_kind": "source_assertion_not_runtime_verification",
+          "assessment_id": "RW-012-e2-current",
+          "scope_ref": {
+            "contract_id": "RW-012-contract-review-r2",
+            "scope_id": "current"
+          },
+          "local_exposure": "source_unchanged_until_review",
+          "protection": {
+            "semantic": "후보 C2는 최종 1,233건 평가에서 WER 9.77%를 기록했다.",
+            "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
+          },
+          "human_review_status": "pending",
+          "placement_status": "proposal_only",
+          "relations": [],
+          "predecessor": {
+            "review_revision": "r4",
+            "unit_id": "RW-012-e",
+            "reason": "기여/선정 내용과 상세 평가/한계의 노출 판단 분리; 원문 span 유지"
+          },
+          "proposed_destination_scopes": [
+            "experience",
+            "evidence"
+          ],
+          "additional_scope_assessments": [
+            {
+              "id": "RW-012-e2-experience",
+              "unit_ref": "RW-012-e2",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "experience"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
+            },
+            {
+              "id": "RW-012-e2-evidence",
+              "unit_ref": "RW-012-e2",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "evidence"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
+            }
+          ]
         },
         {
           "statement": "원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음. 연결 원장은 AI Hub 119 retention 4,802개로 적어 표본 수 표현이 상충함.",
-          "preservation": "retain_current",
-          "expression": "REVISE",
-          "importance": "required",
-          "relevance": "relevant",
-          "rationale": "e를 남기면 회귀/운영 한정은 현지 필수. 119를 표본 수로 확정하지 말고 원문 표현과 원장의 식별자/4,802개를 구분해 FLAG.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "회귀·운영 교체 상태와 119 식별자/4,802개 표본 불일치를 근거 장부에 보존한다. 이력서에서 정량 성과 대신 e1의 학습/평가 기여를 쓰는 안이면 현지 병기를 강제하지 않는다.",
           "id": "RW-012-f",
           "source_lines": {
             "start": 81,
@@ -4180,10 +4364,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-012-f-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "source_unchanged_until_review",
           "protection": {
             "semantic": "원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음. 연결 원장은 AI Hub 119 retention 4,802개로 적어 표본 수 표현이 상충함.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -4193,17 +4377,48 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-012-e"
+              "target": "RW-012-e2",
+              "rationale": "원문과 상세 근거의 조건/귀속 연결을 유지한다. 이력서 주장을 좁힌 뒤에도 해당 상세 문장 전체를 현지에 반드시 보여야 한다는 뜻은 아니다."
+            }
+          ],
+          "proposed_destination_scopes": [
+            "experience",
+            "evidence"
+          ],
+          "additional_scope_assessments": [
+            {
+              "id": "RW-012-f-experience",
+              "unit_ref": "RW-012-f",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "experience"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
+            },
+            {
+              "id": "RW-012-f-evidence",
+              "unit_ref": "RW-012-f",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "evidence"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
             }
           ]
         },
         {
           "statement": "PR 본문 수정/최신 HEAD 정책 재실행 race condition 수정 및 Backend/Frontend 테스트·빌드 CI 구성.",
           "preservation": "retain_current",
-          "expression": "COMPRESS",
+          "expression": "REVISE",
           "importance": "required",
           "relevance": "relevant",
-          "rationale": "개인 기여와 CI의 적용 범위를 보존한다.",
+          "rationale": "PR 정책 경합 수정과 테스트·빌드 CI 구성이라는 실제 작업을 표현한다. 성과를 전체 배포 검증·비용 절감으로 확장하지 않으면 h의 한계를 매 항목에 덧붙일 필요는 없다.",
           "id": "RW-012-g",
           "source_lines": {
             "start": 82,
@@ -4221,10 +4436,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-012-g-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "bounded_personal_contribution_and_claim_scope",
           "protection": {
             "semantic": "PR 본문 수정/최신 HEAD 정책 재실행 race condition 수정 및 Backend/Frontend 테스트·빌드 CI 구성.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -4235,11 +4450,11 @@
         },
         {
           "statement": "초기 Actions 4개 체크 통과는 확인됐지만 배포 전체 E2E·CI 비용 절감은 입증 아님.",
-          "preservation": "retain_current",
-          "expression": "REVISE",
-          "importance": "required",
-          "relevance": "relevant",
-          "rationale": "일부 체크 통과를 전체 배포 검증으로 확대하지 않는다.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "초기 4개 체크와 전체 E2E·비용 효과의 검증 경계를 상세 근거에 보존한다. 이력서에서 g의 CI 구성만 주장하면 모든 미검증 효과를 나열할 필요는 없다.",
           "id": "RW-012-h",
           "source_lines": {
             "start": 82,
@@ -4257,10 +4472,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-012-h-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "source_unchanged_until_review",
           "protection": {
             "semantic": "초기 Actions 4개 체크 통과는 확인됐지만 배포 전체 E2E·CI 비용 절감은 입증 아님.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -4270,17 +4485,48 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-012-g"
+              "target": "RW-012-g",
+              "rationale": "원문과 상세 근거의 조건/귀속 연결을 유지한다. 이력서 주장을 좁힌 뒤에도 해당 상세 문장 전체를 현지에 반드시 보여야 한다는 뜻은 아니다."
+            }
+          ],
+          "proposed_destination_scopes": [
+            "experience",
+            "evidence"
+          ],
+          "additional_scope_assessments": [
+            {
+              "id": "RW-012-h-experience",
+              "unit_ref": "RW-012-h",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "experience"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
+            },
+            {
+              "id": "RW-012-h-evidence",
+              "unit_ref": "RW-012-h",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "evidence"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
             }
           ]
         },
         {
           "statement": "코어 Agent·DB verifier patch는 팀원 작업; 개인은 평가·실험·리뷰·테스트·CI; 운영 전체 E2E·독립 사용자 품질 평가 완료 아님.",
-          "preservation": "retain_current",
-          "expression": "COMPRESS",
-          "importance": "required",
-          "relevance": "relevant",
-          "rationale": "각 항목에서 동일 귀속/조건이 충분히 보이면 문서 내 중복 통합 가능; 즉시 삭제 아님.",
+          "preservation": "preserve_elsewhere_candidate",
+          "expression": "unchanged",
+          "importance": "optional",
+          "relevance": "irrelevant",
+          "rationale": "종합 귀속·운영/사용자 평가 한계를 근거 문서에 보존한다. 이력서 각 기여의 동사와 범위를 정확히 조정한 뒤 종합 주의의 현지 반복을 줄일 후보로 본다.",
           "id": "RW-012-i",
           "source_lines": {
             "start": 84,
@@ -4298,10 +4544,10 @@
           "evidence_kind": "source_assertion_not_runtime_verification",
           "assessment_id": "RW-012-i-current",
           "scope_ref": {
-            "contract_id": "RW-012-contract-review-r1",
+            "contract_id": "RW-012-contract-review-r2",
             "scope_id": "current"
           },
-          "local_exposure": "claim_and_interpretation_conditions",
+          "local_exposure": "source_unchanged_until_review",
           "protection": {
             "semantic": "코어 Agent·DB verifier patch는 팀원 작업; 개인은 평가·실험·리뷰·테스트·CI; 운영 전체 E2E·독립 사용자 품질 평가 완료 아님.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
@@ -4311,7 +4557,38 @@
           "relations": [
             {
               "kind": "qualifies",
-              "target": "RW-012-c"
+              "target": "RW-012-c",
+              "rationale": "원문과 상세 근거의 조건/귀속 연결을 유지한다. 이력서 주장을 좁힌 뒤에도 해당 상세 문장 전체를 현지에 반드시 보여야 한다는 뜻은 아니다."
+            }
+          ],
+          "proposed_destination_scopes": [
+            "experience",
+            "evidence"
+          ],
+          "additional_scope_assessments": [
+            {
+              "id": "RW-012-i-experience",
+              "unit_ref": "RW-012-i",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "experience"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
+            },
+            {
+              "id": "RW-012-i-evidence",
+              "unit_ref": "RW-012-i",
+              "scope_ref": {
+                "contract_id": "RW-012-contract-review-r2",
+                "scope_id": "evidence"
+              },
+              "relevance": "relevant",
+              "importance": "required",
+              "preservation": "undecided",
+              "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
             }
           ]
         }
@@ -4323,7 +4600,7 @@
       "legacy": "MOVE",
       "legacy_annotation_reference": "tests/fixtures/real-world-candidates.json#/cases/11/annotation",
       "contract_review": {
-        "id": "RW-012-contract-review-r1",
+        "id": "RW-012-contract-review-r2",
         "status": "needs_review",
         "fixture_contract": {
           "audience": "기술 면접관·채용 담당자",
@@ -4367,8 +4644,13 @@
             "transfer_status": "proposal_only_no_output_change_set"
           }
         ],
-        "required_information_policy": "all retained claim-defining conditions, numbers, attribution, identifiers and provenance remain locally exposed; no source deletion authorized",
-        "intent_assessment": "기술 면접관·채용자에게 개인 기여를 전달한다. 원문은 master 역할도 가지므로 상세 한계를 제거하는 것 자체가 목표가 아니다. 성과의 의미를 바꾸는 조건은 현재 이력서에도 필수다."
+        "required_information_policy": "Preserve personal contribution and claim-defining scope in resume wording (synthetic evaluation, local candidate, defect discovery/change request, learning/evaluation work, CI construction). Preserve detailed metrics, regression, implementation attribution and verification limits in evidence scopes. If a broader outcome or selected positive metric is retained locally, reassess its local conditions; never keep positive numbers alone while hiding counterevidence. Source removal awaits integrated-output coverage review.",
+        "intent_assessment": "기술 면접관·채용 담당자에게 전문성과 실제 개인 기여를 전달하는 것이 목적이다. 사용자 피드백에 따라 검증 기록에 보존할 사실과 이력서에 노출할 정보를 분리한다. 각 기여에 미검증·한계를 의무적으로 병기하는 기존 판단을 철회하고, 먼저 기여 문장의 범위를 정확히 조정한 뒤 상세 평가 수치·한계는 근거 문서로 분리할 후보로 본다. 마스터 이력서라는 이유만으로 상세 한계의 반복 노출을 요구하지 않는다. 개인 기여를 과장하지 않는 것은 계속 필요하지만 모든 한계를 이력서에 적는 것과 같지 않다.",
+        "review_constraint": {
+          "basis": "explicit_user_feedback_in_current_conversation",
+          "statement": "이력서는 전문성과 개인 기여를 전달한다. 주장을 실제 기여 범위로 조정하고 상세 평가·한계는 근거 문서에 보존하며 이력서 병기를 일괄 요구하지 않는다.",
+          "scope": "RW-012 review; no approval of source edits, completed transfer or gold labels"
+        }
       },
       "inspected_context": "resume L71–86; malhaebom L105, L151, L159–171, L243; rework ledger L138–153, L268–285, L392",
       "source_ref": "S06",
@@ -4413,7 +4695,8 @@
           "status": "accounted_for_by_units",
           "unit_ids": [
             "RW-012-a",
-            "RW-012-b"
+            "RW-012-b1",
+            "RW-012-b2"
           ]
         },
         {
@@ -4428,7 +4711,8 @@
           "original_line": 81,
           "status": "accounted_for_by_units",
           "unit_ids": [
-            "RW-012-e",
+            "RW-012-e1",
+            "RW-012-e2",
             "RW-012-f"
           ]
         },
@@ -4474,7 +4758,40 @@
           "uncertainty": "원시 manifest 미조회; 원장 자체의 사실성은 독립 검증하지 않음",
           "human_review_required": true
         }
-      ]
+      ],
+      "review_feedback": {
+        "date": "2026-11-06 Asia/Seoul",
+        "basis": "explicit_user_feedback",
+        "decision": "검증에 필요한 사실의 보존과 이력서 노출을 구분한다. 기여 주장을 정확히 조정하고 상세 평가/한계는 근거 문서에 보존하는 방향으로 정정한다. 범위 한정 사용자 의견이며 전체 독립 검수·골드 승인은 아니다."
+      },
+      "preview_fragments": [
+        {
+          "unit_refs": [
+            "RW-012-a",
+            "RW-012-b1"
+          ],
+          "text": "합성 평가로 모델 후보의 출력 계약·지연·비용·로컬 호환성을 비교하고 Gemini Flash-Lite를 로컬 코칭 기본 후보로 선정했습니다."
+        },
+        {
+          "unit_refs": [
+            "RW-012-c"
+          ],
+          "text": "FastMCP 연동·인증·DB 저장 경로를 통합 테스트하고, 기존 DB 행을 새 요청의 저장 성공으로 오판하는 결함을 발견해 수정 요청했습니다."
+        },
+        {
+          "unit_refs": [
+            "RW-012-e1"
+          ],
+          "text": "Whisper Medium QLoRA 학습·데이터 정제와 신규 면접 도메인·기존 도메인의 비교 평가를 수행했습니다."
+        },
+        {
+          "unit_refs": [
+            "RW-012-g"
+          ],
+          "text": "최신 HEAD 정책 검사 재실행의 race condition을 수정하고 Backend/Frontend 테스트·빌드 CI를 구성했습니다."
+        }
+      ],
+      "preview_status": "discussion_fragments_only_not_complete_revised_document; numeric detail remains protected in evidence scopes; no transfer/deletion executed"
     },
     {
       "id": "RW-013",
