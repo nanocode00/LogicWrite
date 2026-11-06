@@ -21,6 +21,21 @@ Across the corpus, cases span:
 - Design documents, verification gates, and work/experience reports
 - Negative controls where long technical safeguards, scoped exceptions, or attributed disagreements should be preserved (`KEEP`)
 
+### Agreed scope for the planned diagnostic gold set
+
+The user agreed to the following evaluation scope for the 20 real-world cases. This settles the task definition only: final inputs, accepted judgments, review records and the freeze version are still to be agreed. Existing fixtures remain provisional and unchanged.
+
+| Evaluate | Evidence of a satisfactory judgment |
+| --- | --- |
+| Purpose and information extraction | Interpret the reader task correctly; distinguish explicit intent from assumptions and identify units with their necessary conditions and provenance. |
+| Preservation and organization | Justify what belongs in each document and where other information must be preserved; distinguish local exposure, internal placement and cross-document transfer. |
+| Expression decisions and alternatives | Separate required corrections from optional improvements and recognize defensible alternatives rather than demanding one layout or wording. |
+| Uncertainty and evidence limits | Identify unsupported claims, ambiguous intent or unverified destinations and recommend `FLAG` / `REVIEW` where warranted; never report unverified behavior as confirmed. |
+
+This is a **development/regression set for diagnosis and editorial decisions**, not a test requiring a completed rewritten document, an executed transfer, or independent proof of every source's runtime/performance claim. Exact replacement-text matching is outside this task. These exclusions do not excuse wrong attribution, meaning distortion or unsupported assertions in the diagnosis or any suggested text. A working validation engine is not a prerequisite for freezing these diagnostic annotations.
+
+The cases have already informed the editorial criteria and must not be represented as an unseen holdout. A separate future set is needed for that purpose. This scope decision neither approves all annotations as gold nor records independent human agreement; those remain separate steps.
+
 ## Baselines
 
 After M0 human review, prepare comparisons using identical source facts, draft snapshots, and writing contracts. Execute B2 only when the validator and revision controller exist:
