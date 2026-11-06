@@ -56,7 +56,7 @@
 | [RW-015](#rw-015) | REVISE | 일치·재확인 | P1: 본문 다운로드 URL REVISE 제안; 외부 source는 수정하지 않음 |
 | [RW-016](#rw-016) | MOVE | 일치·역할 KEEP과 상태/세부 기록 MOVE 분리 | P2: 준비 저장소 역할·대상 KEEP; 현재 상태·기준 커밋·상세 선별 기록 MOVE 후보 |
 | [RW-017](#rw-017) | REVISE | 일치·보완 | P1: 잘못 일반화될 테스트 예시 REVISE; 기록 3건 요구 보존 |
-| [RW-018](#rw-018) | KEEP | 부분 일치·추가 MOVE 재검토 | P1: 호스팅 repository/root 문맥 REVISE; MOVE는 P3 선택 |
+| [RW-018](#rw-018) | KEEP | 일치·소개 KEEP과 유지보수 상세 MOVE 분리 | P1: 호스팅 경로/저장소 문맥 REVISE; P2: 미디어 관리·배포 절차 MOVE 후보 |
 | [RW-019](#rw-019) | KEEP | 일치 | P3: 현 설명 수정 불필요; diff 검토는 별도 필요 |
 | [RW-020](#rw-020) | KEEP | 일치 | P3: 설명 수정 불필요; 사실·diff 검토는 별도 |
 
@@ -506,11 +506,11 @@
 
 ### RW-018
 
-**페이지 역할과 추가 호스팅 문맥** — 기존 `KEEP` / 새 비교: **부분 일치·추가 MOVE 재검토**.
+**소개·파일 역할과 미디어 관리·배포 절차 분리** — 기존 `KEEP` / 새 비교: **일치·소개 KEEP과 유지보수 상세 MOVE 분리**.
 
 출처: [README.md](https://github.com/nanocode00/mallo-intro/blob/916a3df7b6481d78c1a5fe95b53565f4fb7d91df/README.md); 조회/검토 문맥: README L1–16; assets READMEs; evaluator source path; original proj1-d README blob. snapshot `S13`.
 
-**목적 판단:** 원래 3–8행은 소개 페이지 유지보수자에게 파일 역할을 설명한다. 같은 독자에게 미디어 추가·배포도 유용할 수 있으므로 별도 문서를 반드시 만들어야 한다는 근거는 부족하다.
+**목적 판단:** README는 저장소의 용도와 페이지별 대상 독자·역할 및 상세 안내로 가는 경로를 소개한다. 사용자 피드백에 따라 유지보수에 유용하다는 이유만으로 수정·운영 절차를 README에 유지하지 않는다. 원래 3–8행의 소개·파일 역할은 KEEP하고 추가 문맥의 미디어 관리와 배포 절차는 별도 작업·배포 문서에 분리할 후보로 본다. 고정 fixture의 유지보수자 독자 기록은 보존하되 현재 소개 범위 판단을 대신하게 하지 않는다.
 
 | Unit | 원문 행 | 보호할 주장·수치·조건·귀속 | 현재 범위 관련성 / 중요도 | 보존 / 표현 | 판단 근거 |
 | --- | --- | --- | --- | --- | --- |
@@ -518,17 +518,17 @@
 | RW-018-b | 5–5 | index.html은 대상별 소개 페이지 선택 진입점. | relevant / required | `retain_current` / unchanged | routing 역할이다. |
 | RW-018-c | 6–6 | customer.html은 고객·비개발자용 제품/이용 소개. | relevant / required | `retain_current` / unchanged | 대상 독자 구분을 보호한다. |
 | RW-018-d | 7–7 | evaluator.html은 평가자·showcase용 구조·검증 지표 소개. | relevant / required | `retain_current` / unchanged | 고객용 소개와 서로 다른 목적이다. |
-| RW-018-e | 8–8 | styles/intro.css는 세 페이지의 공유 style. | relevant / useful | `retain_current` / unchanged | 유지보수 의존 관계다. |
-| RW-018-f | 10–12 | media는 assets/images/·assets/videos/에 권장 파일명으로 추가; evaluator 자동 표시/없으면 placeholder. | relevant / useful | `retain_current` / COMPRESS | 해당 asset README로 링크·중복 통합 가능하지만 정보 가치는 현재 독자에게도 있다. |
-| RW-018-g | 14–16 | Pages/Vercel 배포 경로 artifacts/intro와 Framework Preset Other 안내. | relevant / required | `retain_current` / REVISE | 복제 전 원본 repository 기준임을 분리하고 현 저장소 경로를 실제 설정 확인 후 확정한다. |
+| RW-018-e | 8–8 | styles/intro.css는 세 페이지의 공유 style. | relevant / useful | `retain_current` / unchanged | 공유 스타일 파일의 역할은 저장소의 기본 파일 구성을 설명하는 정보다. 스타일 수정 절차 자체와 구별한다. |
+| RW-018-f | 10–12 | media는 assets/images/·assets/videos/에 권장 파일명으로 추가; evaluator 자동 표시/없으면 placeholder. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 미디어 추가는 파일 역할 소개가 아니라 수정 작업 절차다. 자산 안내와 중복 통합해 경로·파일명·자동 표시/placeholder 조건을 보존한다. |
+| RW-018-g | 14–16 | Pages/Vercel 배포 경로 artifacts/intro와 Framework Preset Other 안내. | irrelevant / optional | `preserve_elsewhere_candidate` / REVISE | 배포 설정은 별도 배포 안내에 분리한다. 원본 artifacts/intro 경로를 별도 저장소에 그대로 적용하지 않도록 문맥을 정정하되 실제 호스팅 설정은 확인 후 확정한다. |
 
-**배치·통합:** a–e는 루트 역할 안내에 유지. f의 media 사용법은 asset README와 중복 통합을 검토하되 짧은 루트 링크 안내 유지 가능. g는 root 배치와 맞게 REVISE가 우선; 별도 배포 guide MOVE는 선택이며 목적지 미확인이다.
+**배치·통합:** a–e는 README의 저장소 소개·페이지 및 파일 역할 안내에 유지한다. f의 미디어 추가 경로·파일명·자동 표시/placeholder 절차는 기존 assets/images/README.md·assets/videos/README.md 등 미디어 관리 안내의 내용과 대조해 통합할 MOVE 후보로 둔다. g의 Pages/Vercel 설정은 별도 배포 안내 역할로 MOVE하고, 원본 artifacts/intro 기준과 별도 저장소 root 구조를 구별하도록 REVISE할 후보로 둔다. README에는 상세 작업 순서 대신 해당 안내의 역할과 링크만 남길 수 있다. 기존 자산 안내의 문맥 확인은 유지하되 모든 조건 보존을 통합본으로 검토한 것은 아니고, 배포 문서의 실제 목적지는 미확인이므로 source removal은 blocked다.
 
-**수작업 확인:** captured README와 원본 proj1-d artifacts/intro README의 blob이 동일함을 재확인했다. evaluator.html과 두 asset README도 조회했다. 별도 저장소 evaluator는 실제 root에 존재하므로 원본 artifacts/intro 기준을 그대로 적용할 수 없다. media 자동 표시 문구는 source 주장으로 추적하며 브라우저 실행·Pages/Vercel 설정은 검증하지 않았다.
+**수작업 확인:** 유지보수자에게 유용하다는 사실과 README에 둘 필요성을 혼동했던 판단을 정정했다. 원래 소개·파일 역할과 추가 발췌의 미디어/호스팅 절차를 분리했다. 기존 README와 원본 proj1-d artifacts/intro README의 동일 blob, root의 evaluator.html 및 두 자산 안내를 확인한 근거는 유지한다. f의 경로·파일명 규칙·표시/placeholder 조건은 작업 안내에 보존해야 한다. g는 원본 문맥을 버리거나 실제 설정을 추측하지 말고 해당 저장소의 경로·설정과 대조해 수정해야 한다. 브라우저 동작·Pages/Vercel 설정·배포 성공은 새로 검증하지 않았다.
 
-**미확인·사람 검토:** 실제 호스팅 설정·배포 성공·media fallback runtime; 별도 작업/배포 문서의 존재와 독자 선호.
+**미확인·사람 검토:** 미디어 안내의 기존 내용과 통합했을 때 경로·파일명·표시/placeholder 조건의 요소별 보존, 배포 안내의 실제 경로·독자·기존 내용, 실제 호스팅 설정·배포 성공·media fallback runtime. 외부 source 수정이나 이동 완료를 확정하지 않는다.
 
-**실제 수정 필요성·우선순위:** P1: 호스팅 repository/root 문맥 REVISE; MOVE는 P3 선택. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
+**실제 수정 필요성·우선순위:** P1: 호스팅 경로/저장소 문맥 REVISE; P2: 미디어 관리·배포 절차 MOVE 후보. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
 
 ### RW-019
 
@@ -585,6 +585,7 @@
 | 폴더의 보존 목적을 색인의 상세 반복 의무로 확대 | RW-007: 작성 원칙에 프로젝트별 기록·제약이 섞이고 기존 성과 표현을 유지한 채 조건만 보존하려 했음 | 문서별 WritingContract, 단위 분리, Organization placement와 범위별 exposure | 자료 선택에 필요한 링크·역할을 먼저 선별; 성과 표현 자체의 필요성을 판단하고 상세 근거는 보존 확인 후 분리 |
 | 기존 문서 역할을 사용자가 원하는 목적보다 우선 | RW-009: 기존 작업 저장소 소개를 유지하려다 마스터 이력 직접 표시라는 명시적 목표와 충돌 | Contract Resolver의 명시적 의도 우선, 계약 버전 변경과 범위별 재평가 | 역사적 문서 역할은 출처 문맥으로만 기록; 관리 안내의 정보 가치를 다른 목적지에서 보존하고 새 목적의 README에 잔류시키지 않기 |
 | 근거 보존을 이력서의 한계 병기 의무와 혼동 | RW-012: 모든 한계를 붙이기보다 합성 평가·후보 선정·결함 발견·학습/평가 수행·CI 구성으로 주장 범위를 조정 | scope별 preservation/exposure, 주장과 조건의 공동 조정, 정보 단위 분리 | 긍정 수치와 반대 근거를 상세 문서에 함께 보존하는 선택을 평가; 남기는 기여가 실제보다 넓게 읽히는지 확인하고 현지 노출을 일괄 강제하지 않기 |
+| 독자에게 유용함을 현재 문서의 배치 근거로 대체 | RW-018: 소개·파일 역할과 미디어 수정·배포 절차를 같은 README에 유지하려 했음 | output_scopes, 정보별 preservation/placement와 목적지 검토 | 소개·탐색은 README에, 유지보수 절차는 작업·배포 안내에 분리; 알려진 목적지의 기존 내용과 통합 후 조건 보존을 구별 |
 | 기존 template·분량에 다시 맞추려는 편향 | RW-008의 기여·선정·서로 다른 측정 혼재; RW-010의 2~3개/2~3줄 | Resolver → Analysis 관계 재분리 → Organization 재취합 → Expression | 구조 재설계 전후의 단위 lineage, 여러 단위가 한 그룹을 이루는 근거와 reader-task 평가 기준이 더 필요 |
 | 하나의 주 라벨로 다중 판단을 표현하기 어려움 | RW-013 동일 문단의 7개 판단; RW-003/005 KEEP+표현/순서 | 세 차원, assessment/scope ID, many-to-many trace | 기존 0.1.0의 주 라벨 집계로 새 결론을 강제하지 말고 per-unit 관계와 관련 액션의 비교 기록을 별도 설계 |
 | 조건·범위가 수치와 분리될 위험 | RW-008의 서로 다른 checkpoint/E2E, RW-011의 비용, RW-012의 regression/귀속 및 119 식별자와 4,802개 표본 혼동 | elements, qualifies/depends_on, local exposure | metric/experiment/cohort/checkpoint/measurement boundary의 일관된 annotation 지침과 보호 요소 분해 예제가 필요 |
