@@ -54,6 +54,8 @@ All evaluation arms must receive the same selected facts and contract. Preparing
 
 ### Agreed answer criteria and judgment dimensions
 
+Organize case answers around the existing three modules: Information Extraction & Analysis (units, relevance, importance and preservation), Information Organization (cross-document transfer and intra-document placement), and Expression Refinement (wording and compression), followed by expected shared validation checks. The dimensions and answer criteria below describe judgments within that flow; they do not introduce new processing stages or engine fields. This diagnostic set evaluates intermediate decisions within the architecture that ultimately produces and validates revised documents.
+
 For each information unit and applicable output scope, record the following dimensions independently. A single compatibility action must not substitute for the full judgment.
 
 | Judgment dimension | What the answer must distinguish |
