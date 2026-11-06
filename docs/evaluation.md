@@ -21,6 +21,60 @@ Across the corpus, cases span:
 - Design documents, verification gates, and work/experience reports
 - Negative controls where long technical safeguards, scoped exceptions, or attributed disagreements should be preserved (`KEEP`)
 
+### Agreed scope for the planned diagnostic gold set
+
+The user agreed to the following evaluation scope for the 20 real-world cases. This settles the task definition only: per-case input bundles, accepted judgments, review records and the freeze version are still to be agreed. Existing fixtures remain provisional and unchanged.
+
+| Evaluate | Evidence of a satisfactory judgment |
+| --- | --- |
+| Purpose and information extraction | Interpret the reader task correctly; distinguish explicit intent from assumptions and identify units with their necessary conditions and provenance. |
+| Preservation and organization | Justify what belongs in each document and where other information must be preserved; distinguish local exposure, internal placement and cross-document transfer. |
+| Expression decisions and alternatives | Separate required corrections from optional improvements and recognize defensible alternatives rather than demanding one layout or wording. |
+| Uncertainty and evidence limits | Identify unsupported claims, ambiguous intent or unverified destinations and recommend `FLAG` / `REVIEW` where warranted; never report unverified behavior as confirmed. |
+
+This is a **development/regression set for diagnosis and editorial decisions**, not a test requiring a completed rewritten document, an executed transfer, or independent proof of every source's runtime/performance claim. Exact replacement-text matching is outside this task. These exclusions do not excuse wrong attribution, meaning distortion or unsupported assertions in the diagnosis or any suggested text. A working validation engine is not a prerequisite for freezing these diagnostic annotations.
+
+The cases have already informed the editorial criteria and must not be represented as an unseen holdout. A separate future set is needed for that purpose. This scope decision neither approves all annotations as gold nor records independent human agreement; those remain separate steps.
+
+### Agreed input composition and answer separation
+
+The model-facing input will contain the following fixed material. This agreement defines what may be supplied, not a completed export, adopted schema or frozen set of case inputs.
+
+| Input component | Inclusion and boundary |
+| --- | --- |
+| Source identity and text | Fixed excerpt with source kind, exact text and original range; Git commit/blob and content digest where applicable. A PR body requires its captured text and observation time, not just a head SHA. |
+| Necessary surrounding context | Source passages needed to interpret role, prerequisites, measurements, attribution or conflicts. Pin their snapshots and ranges as well; do not require the model to reconstruct our conversation or silently fetch changing live context. |
+| Reader task and user requirements | Self-contained audience, intended purpose and applicable constraints, including purpose changes agreed in this conversation. Distinguish explicit user requirements from historical document role and labeled assumptions. State the desired outcome without embedding our recommended editorial actions. |
+| Destination context or availability | Supplied destination text and role when verified, or a factual statement that destination context is unavailable/unverified. Availability is input evidence; our proposed MOVE or REVIEW verdict is an answer and must not be included here. |
+| Supplied check observations | Relevant recorded evidence such as dated HTTP observations, with method, scope and limits. A source's claim that tests passed is still a source assertion; no runtime verification is implied. |
+
+Keep existing action labels, annotation rationales, gold information-unit segmentation, preservation/placement/expression judgments, acceptable-answer alternatives and reassessment conclusions in a separate answer area. Do not pass the candidate fixture or review record wholesale to the evaluated model: their source/context fields and the resolved task must be selected explicitly. Ordinary source headings and statements remain source data, even when they discuss verification or limitations; answer separation must not strip necessary interpretation context.
+
+All evaluation arms must receive the same selected facts and contract. Preparing the bundles requires checking the selected context and snapshot references case by case; agreement on this composition does not assert that all 20 bundles are already complete or approved. Their serialization, final expected judgments and freeze approval remain later steps.
+
+### Agreed answer criteria and judgment dimensions
+
+Organize case answers around the existing three modules: Information Extraction & Analysis (units, relevance, importance and preservation), Information Organization (cross-document transfer and intra-document placement), and Expression Refinement (wording and compression), followed by expected shared validation checks. The dimensions and answer criteria below describe judgments within that flow; they do not introduce new processing stages or engine fields. This diagnostic set evaluates intermediate decisions within the architecture that ultimately produces and validates revised documents.
+
+For each information unit and applicable output scope, record the following dimensions independently. A single compatibility action must not substitute for the full judgment.
+
+| Judgment dimension | What the answer must distinguish |
+| --- | --- |
+| Relevance | How the information serves the specified reader task, rather than merely sharing a topic or being useful somewhere. |
+| Importance | Whether the information is necessary, useful or optional for that scope, with contextual reasons. Low importance alone does not authorize deletion. |
+| Information preservation | What must survive, where it must remain available and which conditions need local exposure. Preserve required numbers, attribution and provenance across the affected scopes. |
+| Cross-document transfer | Whether another document is an appropriate home, its role/context and any unresolved preconditions. A MOVE candidate is not a completed transfer or permission to remove source text. |
+| Intra-document placement | Suitable sections, grouping and relative order, including defensible alternatives within the same document; do not classify this as cross-document MOVE. |
+| Expression | Whether wording can remain unchanged or needs REVISE/COMPRESS; separate required corrections from optional improvements and preserve meaning. |
+
+Apply four kinds of answer criteria to each applicable judgment: **mandatory conditions** that must hold; **acceptable alternatives** that may differ while satisfying the task; **incorrect decisions** that violate meaning, evidence or contract constraints; and **unresolved matters** where supplied evidence calls for uncertainty or FLAG/REVIEW. Explain non-applicability where appropriate rather than forcing an edit or inventing a finding for every dimension. An optional suggestion and a justified unchanged choice can both be acceptable.
+
+For example, RW-003 can combine relevant but optional information with preservation in the README, no required cross-document transfer, either current placement or consolidation into the existing later section, and optional expression changes. A different defensible unit segmentation is acceptable if it accounts for the same claims, conditions and provenance; matching gold unit IDs or exact replacement text is not the target.
+
+Source assertions, additional evidence and reviewer findings must be distinguishable and connected to their own supporting locations. These answer-organization principles are agreed; the per-case answer contents, serialization and final freeze approval remain pending. No fixture fields, labels, scores or gold status are changed by this agreement.
+
+A first case is available for joint review as a separate [RW-001 model input](reviews/diagnostic-gold-draft/RW-001.input.json) and [evaluator-only answer draft](reviews/diagnostic-gold-draft/RW-001.answer.md). These files demonstrate the agreed separation; they are not an adopted serialization/schema, an approved case or a frozen gold set. The other 19 cases remain outside this draft export.
+
 ## Baselines
 
 After M0 human review, prepare comparisons using identical source facts, draft snapshots, and writing contracts. Execute B2 only when the validator and revision controller exist:
@@ -38,7 +92,7 @@ For existing drafts, every editing condition receives the same unchanged draft; 
 | Metric | How to assess |
 | --- | --- |
 | Reader-task success | Can independent readers answer or act on the intended question using the revised document? |
-| Essential-information retention | Proportion of human-labeled required facts, numbers, conditions, and provenance retained across affected documents |
+| Essential-information retention | Proportion of human-labeled required facts, numbers, conditions, and provenance retained across affected documents, with separately checked local exposure for claims that remain visible; see the [contextual rubric](#contextual-judgment-rubric) |
 | Irrelevant information | Human-labeled out-of-scope spans left in the final document without appropriate `MOVE` or `REMOVE` |
 | Contradiction detection | Precision/recall on labeled claim pairs (counting false alarms on legitimate exceptions or attributed quotes) |
 | Register & term consistency | Violations per eligible Korean narration sentence, excluding quotations, code blocks, and headings |
@@ -53,20 +107,40 @@ To isolate where failures occur in the [three-module architecture](architecture.
 | Module / component | What to verify | Failure evidence to record |
 | --- | --- | --- |
 | **Information Extraction & Analysis** | Unit/claim extraction and condition, number, evidence links; audience/purpose fit and preservation judgments; recovery of purpose misidentification from user context | Missing or incorrectly linked units; disagreement with human annotations; silent purpose overwrite; unsupported recovery or unnecessary changes when the purpose already fits |
-| **Information Organization** | Destination review before `MOVE`; source/destination retention; grouping, duplicate consolidation, reader-task ordering, and independent `placement` of `KEEP` units | Misrouting, lost caveats or provenance, remaining duplication, prerequisite-order violations, and unnecessary reorganization |
+| **Information Organization** | Destination review before `MOVE`; source/destination retention; grouping, duplicate consolidation, reader-task ordering, and independent `placement` of `KEEP` units | Misrouting, lost caveats or provenance, remaining duplication, prerequisite-order violations, and unjustified reorganization; a different valid placement alone is not a failure under the [contextual rubric](#contextual-judgment-rubric) |
 | **Vector candidate retrieval (future, within Organization)** | Recall of human-labeled related units, destinations, and contradiction pairs within a declared candidate budget; review of retrieved context before decisions | Missed candidates, irrelevant candidates, and any importance/truth/deletion decision made from similarity alone; retrieval quality is separate from downstream editorial accuracy |
 | **Expression Refinement** | Meaning-preserving `REVISE`/`COMPRESS`, terminology, Korean register, clarity, and readability; human usefulness ratings with required-content checks | Changed numbers, lost qualifiers or attribution, unsupported additions, edits in excluded quotes/code, or unauthorized routing/deletion |
 | **Validation Gate & Revision Controller** | Independent boundary and whole-document checks, routing by defect origin, downstream invalidation, and bounded stopping | Missed regressions, unnecessary retries, stale artifacts after upstream changes, incorrect target module, nontermination, or falsely clean `PASS` |
 
 Report sample sizes, uncertainty, and per-document-type breakdowns. Do not equate heuristic "AI-likeness" scores with writing quality.
 
+### Contextual judgment rubric
+
+Apply the [purpose-first decision procedure](architecture.md#purpose-first-decision-procedure) before comparing actions or surface wording. This is guidance for future human annotation and evaluation, not an executed benchmark, adopted scoring schema or new gold labels. The [20-case reassessment](reviews/real-world-20-reassessment.md) supplies illustrative reasoning and scoped user feedback; it does not establish universal document policies.
+
+| Criterion | Evidence to examine | Failure to distinguish from an acceptable alternative |
+| --- | --- | --- |
+| Desired purpose and reader task | Explicit user context, fixture assumptions, historical document role, and the task of each output scope | Preserving a historical management role against an explicit master-career display goal is a purpose error (RW-009). Do not assume every README must display a resume. |
+| Information function and selection | Source context, unit/condition boundaries, why that information belongs here rather than merely being useful somewhere | Installer-selection rationale is not an installation instruction (RW-001/002). Detailed maintenance procedures can belong in a guide even when README readers might use them (RW-018). |
+| Preservation versus local exposure | Full affected evidence set, proposed current claims, destination context, protected elements and their scope-specific exposure | Narrowing a resume to actual evaluation work can allow detailed metrics and limits to stay in evidence (RW-012). Keeping only favorable numbers while hiding regression or falsely claiming implementation credit is not equivalent. |
+| Organization and alternatives | Destination fit, existing overlap, retained unique information, actual anchor/order and reader task | Accept multiple defensible placements when the same contract is satisfied (RW-003); reject missing prerequisites, lost information, or unverified transfers, not a choice merely different from the suggested layout. |
+| Expression and edit necessity | Meaning of the actual before/after text, style constraints, readability, exclusions and substantive versus decorative content | Decorative emoji cleanup may be a reasonable REVISE proposal without an earlier instruction (RW-014). Do not demand it universally, remove meaningful symbols, or report it as evidence that a support claim is false. |
+| Evidence boundary and unresolved work | Source assertion, captured snapshot, current observation, independent human judgment, actual execution and complete output coverage | Reading a release note, a PR body or a destination document does not verify runtime behavior, diff invariance or completed preservation. Optional editorial alternatives do not themselves establish a missing fact. |
+
+For each proposed decision, describe the supporting purpose/evidence, preservation scope, required local exposure, placement and expression separately, using the existing review records where possible. State whether the edit addresses a demonstrated requirement/meaning failure, offers an optional improvement, or awaits evidence/intent clarification. These are review explanations, not new fixture fields or gate verdicts. Rejecting an optional placement or style suggestion does not by itself make a contract-compliant output incorrect; competing placements need not block delivery if all required checks are satisfied. Leaving an already suitable passage unchanged is valid; do not reward edit count or unmotivated churn. Unverified destinations and missing required checks still prevent `PASS` under the existing gate policy.
+
+Compare candidates under the same contract and source facts. A supported change of purpose creates a separate contract condition; do not score old and new judgments as disagreement under identical inputs. Preserve a predecessor record and rationale for a correction. Exact action-label or text match is insufficient for contextual judgments: assess whether the actual decision and output satisfy the task and preservation/exposure obligations. Deterministic constraints such as protected literals and valid references remain exact checks where applicable.
+
+Keep the agreed preservation obligations and retention denominator fixed across evaluation arms. Moving detail or narrowing a visible claim does not lower the denominator, authorize loss of evidence or permit changing required facts to improve a score. Check local exposure against the claims actually retained as well as corpus-wide preservation. Style improvements do not establish factual correctness, and semantic correctness cannot be replaced by counting shorter text or matching one reference layout. No weights, thresholds, scores or agreement results are established here.
+
 ## Annotation workflow and guardrails
 
 - **Independent human review:** Two people independently label a subset when feasible, marking each proposed finding, preservation judgment, and `placement` proposal as `agree`, `disagree`, or `uncertain`. Disagreements are resolved with a documented rationale rather than an automated model vote.
 - **Uncertainty is first-class:** `FLAG` is a valid outcome when source evidence cannot settle a factual conflict, when user intent vs. draft purpose requires clarification, or when a cross-document `MOVE` destination is not yet confirmed.
+- **Acceptable alternatives and necessity:** Reviewers record justified alternatives and distinguish a blocking contract/meaning problem from an optional editorial preference using the [contextual rubric](#contextual-judgment-rubric). Scoped user feedback can resolve an intended purpose or preference; it does not constitute independent annotation of the whole corpus or a gold freeze.
 - **No invented targets or silent relabeling:** Evaluators and tools must not fabricate destination file paths, invent source evidence, or silently overwrite existing fixture annotations.
 - **Guardrails:**
-  - Preserve provenance, literal numbers, constraints, and qualifiers unless authoritative source evidence authorizes change.
+  - Preserve provenance, literal numbers, constraints, and qualifiers across authorized affected scopes; separately check the [necessary local exposure](architecture.md#caveat-retention-and-exposure) of retained claims. Source correction needs authoritative evidence, while relocation needs verified preservation rather than forced repetition in every document.
   - Validate both source and destination contexts when evaluating cross-document moves or duplicate consolidation.
   - Never treat a missing detected contradiction as proof none exists.
   - Keep critical unresolved issues visible after the revision limit reaches `STOPPED` or `REVIEW`.
