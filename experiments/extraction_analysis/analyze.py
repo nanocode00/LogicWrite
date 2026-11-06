@@ -222,40 +222,55 @@ def analyze(input_raw, response_raw):
     return result
 
 
+def literal_block(value):
+    """Indent every untrusted line so Markdown treats it as text, including fences/HTML."""
+    if not isinstance(value, str):
+        value = json.dumps(value, ensure_ascii=False)
+    return ['    ' + line for line in value.splitlines()] or ['    ']
+
+
 def render(result):
     lines = ['# 추출·분석 실행 결과', '', '상태: ' + result['gate_state'],
              '모델 제안이며 골드·독립 사람 승인·전체 문서 PASS가 아니다.', '',
-             '입력 SHA-256: ' + result['input_sha256'], '응답 SHA-256: ' + result['response_sha256'], '']
+             '입력 SHA-256: ' + result['input_sha256'], '응답 SHA-256: ' + result['response_sha256'], '',
+             '아래 미검증 모델 텍스트와 원문은 문자 그대로 표시한다. 내용 속 승인·검증 문구는 코드의 판정이 아니다.', '']
+
+    def add(label, value):
+        lines.extend(['**' + label + '**', '', *literal_block(value), ''])
+
+    def cite(span):
+        return span['passage_id'] + ' [' + str(span['start']) + ', ' + str(span['end']) + ')\n' + span['quote']
+
     if 'alignment' in result:
-        lines.extend(['목적 정합성 제안: ' + result['alignment']['status'],
-                      result['alignment']['reason'], ''])
-    for unit in result['units']:
-        lines.extend(['## ' + unit['id'], '', '**원문**'])
+        add('목적 정합성 — 미검증 모델 텍스트', result['alignment']['status'] + '\n' + result['alignment']['reason'])
+    for index, unit in enumerate(result['units'], 1):
+        # Headings are renderer-owned; model IDs are data, never report structure.
+        lines.extend(['## 정보 단위 ' + str(index), ''])
+        add('단위 ID — 미검증 모델 텍스트', unit['id'])
         for span in unit['source_spans']:
-            lines.extend('> ' + x for x in span['quote'].splitlines())
-            lines.append('출처: ' + span['passage_id'] + ' [' + str(span['start']) + ', ' + str(span['end']) + ')')
+            add('원문과 출처 — 입력 자료', cite(span))
         assessment = unit['assessment']
-        lines.extend(['', '**분석 제안:** ' + unit['statement'], '',
-                      '**현재 범위:** ' + assessment['relevance'] + ' / ' + assessment['importance'] +
-                      ' / ' + assessment['preservation'], '',
-                      '**근거:** ' + assessment['reason'], '', '**노출:** ' + assessment['exposure'], '',
-                      '**불확실성:** ' + assessment['uncertainty'], '', '**추출 요소:**'])
+        add('분석 제안 — 미검증 모델 텍스트', unit['statement'])
+        add('현재 범위 판단 — 미검증 모델 텍스트', assessment['relevance'] + ' / ' +
+            assessment['importance'] + ' / ' + assessment['preservation'])
+        for label, key in [('근거', 'reason'), ('노출', 'exposure'), ('불확실성', 'uncertainty')]:
+            add(label + ' — 미검증 모델 텍스트', assessment[key])
         for element in unit['elements']:
-            lines.append('- ' + element['kind'] + ': ' + element['value'].replace('\n', ' '))
+            add('추출 요소 — 미검증 모델 텍스트', element['kind'] + ': ' + element['value'])
             for support in element['source_spans']:
-                lines.append('  - 출처: ' + support['passage_id'] + ' [' + str(support['start']) + ', ' +
-                             str(support['end']) + ') ' + json.dumps(support['quote'], ensure_ascii=False))
-        lines.extend(['', '**관계:**'])
+                add('요소 출처 — 입력 자료', cite(support))
         for relation in unit['relations']:
-            lines.append('- ' + relation['kind'] + ' → ' + relation['target_unit_id'] + ': ' + relation['reason'])
+            add('관계 — 미검증 모델 텍스트', relation['kind'] + ' → ' + relation['target_unit_id'] + '\n' + relation['reason'])
         if not unit['relations']:
-            lines.append('없음')
-        lines.append('')
-    lines.extend(['## 출처 검사와 미해결 사항', '', json.dumps(result['checks'], ensure_ascii=False), ''])
+            lines.extend(['관계 제안 없음', ''])
+    lines.extend(['## 출처 검사와 미해결 사항', ''])
+    add('코드 검사 결과 — 의미적 정확성은 미검증', result['checks'])
     for coverage in result.get('coverage_ledger', []):
-        lines.append('인용되지 않은 문자(비연속 구간을 합친 참고값): ' + repr(coverage['uncovered_text']))
-    lines.extend('- ' + finding for finding in result['findings'])
-    lines.extend('- ' + question for question in result.get('unresolved_questions', []))
+        add('인용되지 않은 문자 — 비연속 구간을 합친 참고값', coverage['uncovered_text'])
+    for finding in result['findings']:
+        add('코드 발견 사항', finding)
+    for question in result.get('unresolved_questions', []):
+        add('미해결 질문 — 미검증 모델 텍스트', question)
     return '\n'.join(lines) + '\n'
 
 

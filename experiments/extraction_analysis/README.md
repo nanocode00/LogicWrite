@@ -29,7 +29,7 @@ python3 experiments/extraction_analysis/analyze.py review docs/reviews/diagnosti
 python3 -m unittest discover -s experiments/extraction_analysis -p 'test_*.py'
 ```
 
-JSON은 상세 위치와 검사 결과, Markdown은 원문·정규화된 주장·판단 근거를 함께 제공한다. 표준 출력만 사용하며 입력·원문·답안을 수정하지 않는다. JSON은 ASCII escape를 사용한다. CLI 종료 코드 0은 보고서를 출력했다는 뜻이며 문서 통과가 아니다. 파일 읽기·프롬프트 생성 오류는 stderr와 종료 코드 2로 보고한다.
+JSON은 상세 위치와 검사 결과, Markdown은 원문·정규화된 주장·판단 근거를 함께 제공한다. Markdown의 제목은 코드가 만든 고정 구조·순번만 사용한다. 모델 ID·주장·근거·질문은 “미검증 모델 텍스트”로, 원문·출처는 입력 자료로 구별해 들여쓴 코드 블록에 표시한다. 각 줄을 들여쓰므로 제목·코드 펜스·HTML이 들어 있어도 보고서 구조로 해석되지 않는다. 내용에 있는 승인·검증 문구는 코드 판정이 아니며, 표시 과정에서 원본 JSON의 모델 값이나 검사 상태를 바꾸지 않는다. 표준 출력만 사용하며 입력·원문·답안을 수정하지 않는다. JSON은 ASCII escape를 사용한다. CLI 종료 코드 0은 보고서를 출력했다는 뜻이며 문서 통과가 아니다. 파일 읽기·프롬프트 생성 오류는 stderr와 종료 코드 2로 보고한다.
 
 ## 입력과 답안의 경계
 
