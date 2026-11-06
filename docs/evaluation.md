@@ -23,7 +23,7 @@ Across the corpus, cases span:
 
 ### Agreed scope for the planned diagnostic gold set
 
-The user agreed to the following evaluation scope for the 20 real-world cases. This settles the task definition only: final inputs, accepted judgments, review records and the freeze version are still to be agreed. Existing fixtures remain provisional and unchanged.
+The user agreed to the following evaluation scope for the 20 real-world cases. This settles the task definition only: per-case input bundles, accepted judgments, review records and the freeze version are still to be agreed. Existing fixtures remain provisional and unchanged.
 
 | Evaluate | Evidence of a satisfactory judgment |
 | --- | --- |
@@ -35,6 +35,22 @@ The user agreed to the following evaluation scope for the 20 real-world cases. T
 This is a **development/regression set for diagnosis and editorial decisions**, not a test requiring a completed rewritten document, an executed transfer, or independent proof of every source's runtime/performance claim. Exact replacement-text matching is outside this task. These exclusions do not excuse wrong attribution, meaning distortion or unsupported assertions in the diagnosis or any suggested text. A working validation engine is not a prerequisite for freezing these diagnostic annotations.
 
 The cases have already informed the editorial criteria and must not be represented as an unseen holdout. A separate future set is needed for that purpose. This scope decision neither approves all annotations as gold nor records independent human agreement; those remain separate steps.
+
+### Agreed input composition and answer separation
+
+The model-facing input will contain the following fixed material. This agreement defines what may be supplied, not a completed export, adopted schema or frozen set of case inputs.
+
+| Input component | Inclusion and boundary |
+| --- | --- |
+| Source identity and text | Fixed excerpt with source kind, exact text and original range; Git commit/blob and content digest where applicable. A PR body requires its captured text and observation time, not just a head SHA. |
+| Necessary surrounding context | Source passages needed to interpret role, prerequisites, measurements, attribution or conflicts. Pin their snapshots and ranges as well; do not require the model to reconstruct our conversation or silently fetch changing live context. |
+| Reader task and user requirements | Self-contained audience, intended purpose and applicable constraints, including purpose changes agreed in this conversation. Distinguish explicit user requirements from historical document role and labeled assumptions. State the desired outcome without embedding our recommended editorial actions. |
+| Destination context or availability | Supplied destination text and role when verified, or a factual statement that destination context is unavailable/unverified. Availability is input evidence; our proposed MOVE or REVIEW verdict is an answer and must not be included here. |
+| Supplied check observations | Relevant recorded evidence such as dated HTTP observations, with method, scope and limits. A source's claim that tests passed is still a source assertion; no runtime verification is implied. |
+
+Keep existing action labels, annotation rationales, gold information-unit segmentation, preservation/placement/expression judgments, acceptable-answer alternatives and reassessment conclusions in a separate answer area. Do not pass the candidate fixture or review record wholesale to the evaluated model: their source/context fields and the resolved task must be selected explicitly. Ordinary source headings and statements remain source data, even when they discuss verification or limitations; answer separation must not strip necessary interpretation context.
+
+All evaluation arms must receive the same selected facts and contract. Preparing the bundles requires checking the selected context and snapshot references case by case; agreement on this composition does not assert that all 20 bundles are already complete or approved. Their serialization, final expected judgments and freeze approval remain later steps.
 
 ## Baselines
 
