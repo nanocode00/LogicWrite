@@ -9,7 +9,7 @@
 - 18건의 Git 파일 사례는 정확한 커밋에서 13개 source 파일을 다시 조회했다. 추가 근거·목적지 12개를 포함한 **25개 Git blob**은 UTF-8 바이트로 Git blob SHA와 SHA-256을 계산해 대조했다. source 행의 발췌와 RW-018 추가 문맥도 저장 fixture와 일치했다. 전체 파일을 조회했지만 정독·판단 범위는 사례별 발췌와 표시한 주변/관련 구간이다. 전체 파일의 모든 사실을 검수했다는 뜻이 아니다.
 - RW-019/020은 **2026-11-02 저장된 PR 본문 발췌**가 평가 입력이다. 현재 본문의 해당 구간·head SHA도 대조했지만 head SHA로 과거 본문 전체를 고정할 수 없다. 실제 PR diff의 모든 문장 불변을 검증하지 않았다.
 - source assertion은 원문이 그렇게 말한다는 근거다. 구현·성능·실서비스·테스트의 사실성을 독립적으로 입증하지 않는다. README/가이드/과거 annotation은 현재 사용자 의도를 대신하지 못한다.
-- RW-001/002는 설치 행동 안내와 패키징 선택 논거를 구분하고, RW-007은 자료 탐색·선택을 위한 정보 선별과 재구성으로 후속 사용자 피드백을 반영했다. 이 범위의 사용자 의견을 독립 사람 전체 검수나 골드 승인으로 확대하지 않는다.
+- RW-001/002는 설치 행동 안내와 패키징 선택 논거를 구분하고, RW-007은 자료 탐색·선택을 위한 정보 선별과 재구성으로 후속 사용자 피드백을 반영했다. RW-009은 2026-11-06 피드백에 따라 README에서 마스터 이력을 직접 보여주는 목적으로 정정했다. 이 범위의 사용자 의견을 독립 사람 전체 검수나 골드 승인으로 확대하지 않는다.
 - 기존 라벨은 비교 가설로만 사용했다. 기존 annotation과 PR #4 설계 예시를 읽은 상태이므로 **맹검 또는 독립 정답 실험이라고 주장하지 않는다.** source와 목적에서 새 근거를 찾고 다른 결론을 허용했다. fixture에 기록된 과거 사용자 정정과 문체 선호는 원래 대화가 없는 간접 기록으로 분리했다.
 - Antigravity에는 초점 5건의 판단 초안을 읽기 전용으로 맡겼다. Codex는 원문·차원 분리·미확인 주장과 diff를 직접 대조했다. 유용했던 하단 Star Pitch와 실제 OAuth 문서 링크는 직접 재조회했다. AGY의 RW-008 기존 템플릿 안 재구성안은 사용자 목적 확인 전 고정하지 않았다. 모델 간 검토는 **독립적인 사람 검토가 아니다.** AGY 원시 응답·개인 cache·로그는 저장소에 포함하지 않았다.
 
@@ -47,7 +47,7 @@
 | [RW-006](#rw-006) | KEEP | 일치·보완 | P3: 기본 KEEP; 줄바꿈·목록 분리만 선택 |
 | [RW-007](#rw-007) | COMPRESS | 부분 일치·정보 선별과 배치 재설계 | P2: 자료 역할·링크 KEEP, 경험 목록으로 재배치·축약; 상세 기록은 보존 확인 후 중복 정리 |
 | [RW-008](#rw-008) | FLAG | 일치·구체화 | P1: 목적/측정 경계 확인 후 구조 재설계; 자동 축약 차단 |
-| [RW-009](#rw-009) | MOVE | 부분 일치·조건 강화 | P2: 목표 계약·목적지 확정 후 일부 MOVE; 원문 삭제 금지 |
+| [RW-009](#rw-009) | MOVE | 일치·사용자 목적에 따라 전체 MOVE 후보 | P2: 관리 안내 전체를 역할별 MOVE 후보; 목적지 확인 전 원문 보존 |
 | [RW-010](#rw-010) | MOVE | 부분 불일치 | P2: 분량 규칙 적용 범위 확인·REVISE; 전면 MOVE 불필요 |
 | [RW-011](#rw-011) | KEEP | 일치·보완 | P3: 선택적 문장 분리; 필수 수정 없음 |
 | [RW-012](#rw-012) | MOVE | 부분 일치·수치 문맥 불일치 | P1: retention 표본 수 확인·조건·귀속 노출; 확인 전 MOVE 금지 |
@@ -256,29 +256,29 @@
 
 ### RW-009
 
-**관리 안내의 AGENTS.md 이동** — 기존 `MOVE` / 새 비교: **부분 일치·조건 강화**.
+**마스터 이력을 직접 보여주는 README와 관리 안내 분리** — 기존 `MOVE` / 새 비교: **일치·사용자 목적에 따라 전체 MOVE 후보**.
 
 출처: [README.md](https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/README.md); 조회/검토 문맥: README L1–54; same-commit AGENTS lookup 404. snapshot `S07`.
 
-**목적 판단:** fixture는 채용자용 README/에이전트용 AGENTS 분리를 목표로 기록한다. 실제 README L3·54는 지원 기록과 경험 원본을 축적하는 작업 저장소 소개다. 원하는 개편 목적은 유지하되 원래 목적 자체를 잘못된 것으로 확정하지 않는다.
+**목적 판단:** 사용자가 이 사례에서 명시한 목표는 README에서 저장소 관리 방식을 소개하는 대신 마스터 이력을 바로 보여주는 것이다. 고정 원문 L3·54의 작업 저장소 소개는 기존 문서 역할의 증거일 뿐 이 목표를 제한하지 않는다. 따라서 이력 내용과 자료 관리 안내를 분리하며, 발췌의 문서 역할·보관 위치·작업 규칙은 README에 남기지 않는 MOVE 후보로 판단한다. 모든 README에 적용하는 일반 규칙이나 원문 역할 자체의 사실 오류 판정이 아니다.
 
 | Unit | 원문 행 | 보호할 주장·수치·조건·귀속 | 현재 범위 관련성 / 중요도 | 보존 / 표현 | 판단 근거 |
 | --- | --- | --- | --- | --- | --- |
-| RW-009-a | 34–34 | resume.md는 직무별 선별 전 마스터 이력서. | relevant / useful | `retain_current` / COMPRESS | 원본 역할은 방문자도 알아야 제출본과 혼동하지 않는다. |
-| RW-009-b | 35–35 | 프로젝트 사실·문제·선택 이유·수치·성과는 experiences/에 보존. | relevant / required | `preserve_elsewhere_candidate` / COMPRESS | 에이전트 작업 시 정보 유실 방지 규칙이다. |
-| RW-009-c | 36–36 | experiences/career-timeline.md는 빠진 학습·제작 경험까지 연대기 보존. | relevant / useful | `retain_current` / COMPRESS | 자료 탐색 경로로도 유효하다. |
-| RW-009-d | 37–37 | 오래된 경험 복원은 지정 guide의 commit graph → 원장 → 누락 역검증 → canonical → 선별 순서. | relevant / required | `preserve_elsewhere_candidate` / unchanged | 절차와 guide 경로를 함께 보존한다. |
-| RW-009-e | 38–38 | 이력서·경험 가이드와 자소서 가이드를 구분해 따른다. | relevant / useful | `preserve_elsewhere_candidate` / COMPRESS | README에는 링크 요약을 남길 수 있으나 작업 규칙 이전은 별도다. |
-| RW-009-f | 39–39 | 실제 제출 자소서는 회사별 cover-letters/ 보관. | relevant / useful | `retain_current` / COMPRESS | 자료의 역할과 탐색에 관련된다. |
-| RW-009-g | 40–40 | 공개 저장소에 전화번호·개인 이메일·주소 등 불필요 개인정보를 커밋하지 않는다. | relevant / required | `preserve_elsewhere_candidate` / unchanged | 목적지 확인 전 현지 규칙을 삭제하지 않는다. |
+| RW-009-a | 34–34 | resume.md는 직무별 선별 전 마스터 이력서. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 마스터 원본의 파일 역할 설명은 이력 자체가 아니라 자료 관리 안내다. README에 유지하지 않고 별도 구조 안내에 보존한다. |
+| RW-009-b | 35–35 | 프로젝트 사실·문제·선택 이유·수치·성과는 experiences/에 보존. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 경험 사실·문제·선택 이유·수치·성과를 보존할 위치와 의무는 작업 지침이다. 마스터 이력을 읽는 README 범위에서 분리하되 보존 규칙 자체는 유지한다. |
+| RW-009-c | 36–36 | experiences/career-timeline.md는 빠진 학습·제작 경험까지 연대기 보존. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 빠진 학습·제작 경험의 연대기 경로는 자료 구조 안내다. 탐색에도 유용하다는 이유로 마스터 이력 표시 목적에 우선해 남기지 않는다. |
+| RW-009-d | 37–37 | 오래된 경험 복원은 지정 guide의 commit graph → 원장 → 누락 역검증 → canonical → 선별 순서. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | commit graph부터 선별까지의 복원 절차와 지정 가이드는 작성 작업자가 따를 지침이다. 순서와 출처 경로를 목적지에 보존한다. |
+| RW-009-e | 38–38 | 이력서·경험 가이드와 자소서 가이드를 구분해 따른다. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 이력서·경험 문서와 자소서에 적용할 가이드 구분은 작업 지침이다. README에 링크 요약을 다시 남기는 기존 안을 철회한다. |
+| RW-009-f | 39–39 | 실제 제출 자소서는 회사별 cover-letters/ 보관. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 회사별 제출 자소서 보관 위치는 이력 내용이 아니라 자료 관리 안내다. 별도 구조·보관 문서로 분리할 후보다. |
+| RW-009-g | 40–40 | 공개 저장소에 전화번호·개인 이메일·주소 등 불필요 개인정보를 커밋하지 않는다. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 개인정보 커밋 제약은 저장소 작업 지침이다. README에서 분리하되 목적지 확인 전 삭제하거나 제약을 완화하지 않는다. |
 
-**배치·통합:** b/d/f/g의 작업 규칙은 AGENTS 역할 후보; a/c/e의 문서 역할·경로 탐색은 README에도 짧게 유용하다. 고정 커밋 AGENTS.md 조회는 404였다. 목적지 기존 내용이 확인되지 않으므로 이동은 blocked이며 새 파일을 존재한다고 가정하지 않는다.
+**배치·통합:** a/c/f의 마스터 원본 역할·연대기·회사별 자소서 보관 안내는 별도 자료 구조·보관 안내 역할로, b/d/e/g의 상세 정보 보존·경험 복원·가이드 적용·개인정보 커밋 제약은 AGENTS.md 등 작업 지침 역할로 분리한다. README에는 마스터 이력 자체를 보여주며 이 발췌의 관리 안내를 요약해 다시 남기지 않는다. 어느 실제 마스터 이력 내용을 어떻게 반영할지는 이 발췌만으로 생성하거나 복사하지 않는다. 고정 커밋 AGENTS.md 조회 404와 별도 구조 안내 미확인 때문에 두 목적지는 unverified이며, 통합·보존 검토 전 source removal은 blocked다.
 
-**수작업 확인:** 7개 bullet의 마스터 성격·경험 보존·연대기·복원 순서·가이드·회사별 보관·개인정보 제약을 분리했다. 개인정보와 원본 보존 지침은 단순 불필요한 설명이 아니다.
+**수작업 확인:** 7개 bullet을 이력 내용이 아닌 자료 구조·관리·작업 안내로 재판단했다. 기존에 README 유지 후보로 본 a/c/f도 명시된 마스터 이력 표시 목적에는 직접 기여하지 않아 MOVE 후보로 정정했다. 경로·복원 순서·보존 의무·개인정보 제약의 정보 가치는 다른 범위에서 보존한다. 사용자 피드백은 이 사례의 목표를 정한 근거이며, 전체 골드 승인·실제 목적지 검증·외부 원문 수정은 아니다.
 
-**미확인·사람 검토:** AGENTS 부재 원인·향후 생성 여부와 작성자 승인, 루트 README에서 남길 탐색 범위.
+**미확인·사람 검토:** 자료 구조·보관 안내와 작업 지침의 실제 목적지·독자·기존 내용·중복과 통합 후 정보 보존. 고정 커밋 AGENTS.md 404의 원인과 생성 여부. README에 표시할 실제 마스터 이력의 범위·출처·최종 구성은 별도 대조가 필요하며 이 발췌에서 만들어내지 않는다.
 
-**실제 수정 필요성·우선순위:** P2: 목표 계약·목적지 확정 후 일부 MOVE; 원문 삭제 금지. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
+**실제 수정 필요성·우선순위:** P2: 관리 안내 전체를 역할별 MOVE 후보; 목적지 확인 전 원문 보존. 최종 문서 판정은 하지 않으며 `REVIEW` 권고다.
 
 ### RW-010
 
@@ -569,6 +569,7 @@
 | 문서 역할을 좁게 추정해 관련 정보를 과하게 이동 | RW-016의 이관 판단 경계 | WritingContract intent provenance, scope별 Assessment | historical role / desired role / 적용 시점을 구분하는 주석 지침; 목적 오판의 증거와 불확실성을 독립 기록 |
 | 설명의 주제를 독자의 작업과 혼동 | RW-001/002: 설치 구성 요소를 언급해도 실제 역할은 PKG 선택 정당화였음 | InformationUnit.statement와 문맥별 기능, 계약에 따른 관련성 판단 | 포함 여부를 판단한 뒤 배치 검토; 설치 행동 안내와 의사결정 논거를 구별하고 길이·순서·언어를 KEEP 근거로 대체하지 않기 |
 | 폴더의 보존 목적을 색인의 상세 반복 의무로 확대 | RW-007: 작성 원칙에 프로젝트별 기록·제약이 섞이고 기존 성과 표현을 유지한 채 조건만 보존하려 했음 | 문서별 WritingContract, 단위 분리, Organization placement와 범위별 exposure | 자료 선택에 필요한 링크·역할을 먼저 선별; 성과 표현 자체의 필요성을 판단하고 상세 근거는 보존 확인 후 분리 |
+| 기존 문서 역할을 사용자가 원하는 목적보다 우선 | RW-009: 기존 작업 저장소 소개를 유지하려다 마스터 이력 직접 표시라는 명시적 목표와 충돌 | Contract Resolver의 명시적 의도 우선, 계약 버전 변경과 범위별 재평가 | 역사적 문서 역할은 출처 문맥으로만 기록; 관리 안내의 정보 가치를 다른 목적지에서 보존하고 새 목적의 README에 잔류시키지 않기 |
 | 기존 template·분량에 다시 맞추려는 편향 | RW-008의 기여·선정·서로 다른 측정 혼재; RW-010의 2~3개/2~3줄 | Resolver → Analysis 관계 재분리 → Organization 재취합 → Expression | 구조 재설계 전후의 단위 lineage, 여러 단위가 한 그룹을 이루는 근거와 reader-task 평가 기준이 더 필요 |
 | 하나의 주 라벨로 다중 판단을 표현하기 어려움 | RW-013 동일 문단의 7개 판단; RW-003/005 KEEP+표현/순서 | 세 차원, assessment/scope ID, many-to-many trace | 기존 0.1.0의 주 라벨 집계로 새 결론을 강제하지 말고 per-unit 관계와 관련 액션의 비교 기록을 별도 설계 |
 | 조건·범위가 수치와 분리될 위험 | RW-008의 서로 다른 checkpoint/E2E, RW-011의 비용, RW-012의 regression/귀속 및 119 식별자와 4,802개 표본 혼동 | elements, qualifies/depends_on, local exposure | metric/experiment/cohort/checkpoint/measurement boundary의 일관된 annotation 지침과 보호 요소 분해 예제가 필요 |
@@ -582,7 +583,7 @@
 
 ## 다음 단계와 사람 검토 경계
 
-1. 사용자/사람 검토자는 먼저 RW-008의 원하는 제출 목적·구조, RW-009/010의 문서 역할 분담, RW-014의 문체 근거를 확인한다. 이번 모델 재검토의 제안을 그대로 정답으로 채택하지 않는다.
+1. 사용자/사람 검토자는 먼저 RW-008의 원하는 제출 목적·구조, RW-009의 명시된 목적에 따른 목적지 연결·통합과 RW-010의 문서 역할 분담, RW-014의 문체 근거를 확인한다. 이번 모델 재검토의 제안을 그대로 정답으로 채택하지 않는다.
 2. 독립 사람이 unit 분할·보존·배치·표현을 별개로 `agree / disagree / uncertain`으로 기록한다. 가능하면 두 사람이 중첩 subset을 독립 검토하고 불일치 이유를 해결한다. 작성자/리뷰어 이름·일자·근거를 별도 남긴다. 현재 모든 human review는 pending이다.
 3. P1 항목부터 원시 근거와 문맥을 확보한다. RW-008의 FastAPI/ThreadingHTTPServer 및 E2E 경계, RW-012의 평가/귀속, RW-014 지원 주장, RW-015 다운로드, RW-017 실제 테스트 예시, RW-018 배포 기준을 우선한다. 외부 저장소 수정은 별도 작업이다.
 4. 승인된 소수 사례에만 전체 source/destination 수정본을 만들고 protected elements·source/target trace·현지 조건 노출·전체 문서 의미를 검토한다. RW-013의 이미 있는 OAuth 문서는 중복 통합 대상이며 새 목적지 생성을 기본으로 하지 않는다. 확인되지 않은 목적지는 REVIEW로 남긴다.
