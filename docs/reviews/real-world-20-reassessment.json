@@ -1,6 +1,6 @@
 {
   "record_kind": "manual_model_reassessment_not_adopted_engine_schema",
-  "review_revision": "r8",
+  "review_revision": "r9",
   "review_date": "2026-11-05 Asia/Seoul",
   "base_main": "d15dcb99ff30d1106d4f3e3b6d8a0e7f08b2ec58",
   "reviewer_kind": "Codex model, AGY advisory pass; no independent human approval",
@@ -4341,12 +4341,12 @@
           ]
         },
         {
-          "statement": "원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음. 연결 원장은 AI Hub 119 retention 4,802개로 적어 표본 수 표현이 상충함.",
+          "statement": "원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음.",
           "preservation": "preserve_elsewhere_candidate",
           "expression": "unchanged",
           "importance": "optional",
           "relevance": "irrelevant",
-          "rationale": "회귀·운영 교체 상태와 119 식별자/4,802개 표본 불일치를 근거 장부에 보존한다. 이력서에서 정량 성과 대신 e1의 학습/평가 기여를 쓰는 안이면 현지 병기를 강제하지 않는다.",
+          "rationale": "회귀·운영 교체 상태를 근거 장부에 보존한다. 이력서에서 정량 성과 대신 e1의 학습/평가 기여를 쓰는 안이면 현지 병기를 강제하지 않는다. 원장과의 표본 수 표현 차이는 연결된 finding에서 추가 근거와 구별해 다룬다.",
           "id": "RW-012-f",
           "source_lines": {
             "start": 81,
@@ -4369,7 +4369,7 @@
           },
           "local_exposure": "source_unchanged_until_review",
           "protection": {
-            "semantic": "원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음. 연결 원장은 AI Hub 119 retention 4,802개로 적어 표본 수 표현이 상충함.",
+            "semantic": "원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음.",
             "binding_note": "Protect the unit statement and its interpretation context; line-level source spans may also contain other units. No unrelated line literals are automatically assigned."
           },
           "human_review_status": "pending",
@@ -4410,6 +4410,9 @@
               "preservation": "undecided",
               "reason": "상세 검증과 귀속·조건 보존에 필요. 기존 목적지의 관련 문맥은 확인했으나 요소별 통합과 수정본은 미검토."
             }
+          ],
+          "related_finding_ids": [
+            "RW-012-retention-count-context"
           ]
         },
         {
@@ -4756,7 +4759,34 @@
           "observation": "resume의 기존 119건과 원장의 AI Hub 119 식별자 / retention 4,802개는 서로 다르게 표현됨",
           "proposed_resolution": "119를 표본 수로 확정하지 말고 원시 평가 manifest로 확인 후 데이터셋명·표본 수를 구분해 REVISE",
           "uncertainty": "원시 manifest 미조회; 원장 자체의 사실성은 독립 검증하지 않음",
-          "human_review_required": true
+          "human_review_required": true,
+          "evidence_kind": "reviewer_finding_not_source_assertion",
+          "context_evidence": [
+            {
+              "statement": "원장은 AI Hub 119를 기존 도메인으로 설명하고 기존 119 retention 4,802에서 B0 WER 15.3344%, C2 WER 16.8062%로 서술한다.",
+              "evidence_kind": "source_assertion_not_runtime_verification",
+              "source_spans": [
+                {
+                  "snapshot_ref": "S16",
+                  "start": 36999,
+                  "end": 37395,
+                  "offset_convention": "zero_based_unicode_codepoint_half_open_no_normalization"
+                },
+                {
+                  "snapshot_ref": "S16",
+                  "start": 40574,
+                  "end": 41011,
+                  "offset_convention": "zero_based_unicode_codepoint_half_open_no_normalization"
+                },
+                {
+                  "snapshot_ref": "S16",
+                  "start": 42126,
+                  "end": 42464,
+                  "offset_convention": "zero_based_unicode_codepoint_half_open_no_normalization"
+                }
+              ]
+            }
+          ]
         }
       ],
       "review_feedback": {
@@ -4791,7 +4821,12 @@
           "text": "최신 HEAD 정책 검사 재실행의 race condition을 수정하고 Backend/Frontend 테스트·빌드 CI를 구성했습니다."
         }
       ],
-      "preview_status": "discussion_fragments_only_not_complete_revised_document; numeric detail remains protected in evidence scopes; no transfer/deletion executed"
+      "preview_status": "discussion_fragments_only_not_complete_revised_document; numeric detail remains protected in evidence scopes; no transfer/deletion executed",
+      "record_correction": {
+        "date": "2026-11-06 Asia/Seoul",
+        "scope": "RW-012-f provenance correction only; no count correction, runtime verification or gold approval",
+        "reason": "원문 S06 주장과 S16 추가 근거를 분리하고 두 기록의 표현 차이는 reviewer finding으로 연결한다. 실제 표본 수는 원시 manifest 확인 전 미확정이다."
+      }
     },
     {
       "id": "RW-013",

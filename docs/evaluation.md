@@ -1,166 +1,157 @@
-# Evaluation protocol
+# 평가 계획
 
-## Goal
+## 목표
 
-Test whether modular, validation-assisted revision improves **reader usefulness, structural organization, and consistency** without dropping necessary information, numbers, or conditions. Shorter text is not automatically better, and **no benchmark or baseline experiment has been executed yet**.
+모듈별 검증을 거친 수정이 **독자의 실제 과업 수행, 정보 구조, 일관성**을 높이면서 필수 정보·수치·조건을 보존하는지 확인한다. 짧은 글이 무조건 더 좋은 글은 아니다. **현재까지 베이스라인이나 벤치마크 실험은 수행되지 않았다.**
 
-## Corpus and current status
+## 평가 자료와 현재 상태
 
-1. **Synthetic seed fixtures (`tests/fixtures/cases.json`):** 12 small, illustrative cases (`LW-001`..`LW-012`) covering audience irrelevance, redundancy, Korean register inconsistency, claim contradictions, scoped exceptions, attributed opinions, missing required information, and unsupported claims.
-2. **Provisional real-world candidates (`tests/fixtures/real-world-candidates.json`, documented in [`docs/real-world-candidates.md`](real-world-candidates.md)):** **20 provisional entries** collected from 5 public repositories—**12 non-`KEEP` action candidates** (`MOVE`, `COMPRESS`, `REVISE`, `FLAG`) and **8 `KEEP` information-preservation candidates** (where intra-document `placement` is evaluated separately from content retention).
+1. **합성 예시(`tests/fixtures/cases.json`):** `LW-001`~`LW-012` 총 12건. 독자 부적합, 반복, 한국어 문체 불일치, 주장 충돌, 범위가 있는 예외, 의견 귀속, 필수 정보 누락, 근거 없는 주장 등을 다룬 작은 예시다.
+2. **실제 문서 잠정 후보(`tests/fixtures/real-world-candidates.json`, [설명](real-world-candidates.md)):** 공개 저장소 5곳에서 수집한 20건. `KEEP` 외 액션 후보 12건(`MOVE`·`COMPRESS`·`REVISE`·`FLAG`)과 정보 보존 후보 `KEEP` 8건이다. 문서 안의 위치 변경(`placement`)은 정보 보존과 별개로 평가한다.
 
-**Current status constraints:**
-- Independent human review, reviewer agreement resolution, held-out split assignment, and `B0` / `B1` / `B2` baseline runs are **not done**.
-- Provisional candidates are marked `provisional_candidates_not_gold` and must not be reported as a validated gold benchmark.
-- Existing fixture files (`tests/fixtures/cases.json` and `tests/fixtures/real-world-candidates.json`) remain unchanged at `schema_version: "0.1.0"`, with **no invented target documents and no retroactive relabeling**.
+**완료되지 않은 작업**
 
-Across the corpus, cases span:
-- README and installation guides
-- Pull request descriptions
-- Release notes and changelogs
-- Design documents, verification gates, and work/experience reports
-- Negative controls where long technical safeguards, scoped exceptions, or attributed disagreements should be preserved (`KEEP`)
+- 사람의 독립 검토, 평가자 간 불일치 해결, 홀드아웃 분할, `B0`/`B1`/`B2` 기준선 실행은 모두 미완료다.
+- 실제 후보는 `provisional_candidates_not_gold`이며 검증된 골드셋으로 보고하지 않는다.
+- `tests/fixtures/cases.json`과 `tests/fixtures/real-world-candidates.json`은 `schema_version: "0.1.0"`을 유지한다. 확인되지 않은 목적지를 만들거나 기존 라벨을 소급 변경하지 않는다.
 
-### Agreed scope for the planned diagnostic gold set
+사례 유형은 README·설치 가이드, PR 설명, 릴리스·변경 기록, 설계·검증 절차·업무/경험 보고서다. 기술적 안전장치나 적용 범위가 있는 예외·인용된 반대 의견처럼, 길거나 대조되는 내용이어도 지켜야 할 정보(`KEEP`)를 부정 대조 사례로 포함한다.
 
-The user agreed to the following evaluation scope for the 20 real-world cases. This settles the task definition only: per-case input bundles, accepted judgments, review records and the freeze version are still to be agreed. Existing fixtures remain provisional and unchanged.
+### 합의한 진단용 골드셋의 평가 범위
 
-| Evaluate | Evidence of a satisfactory judgment |
+사용자와 실제 사례 20건의 평가 범위를 다음과 같이 합의했다. 이는 과제 정의에 관한 합의이며 사례별 입력 묶음·허용 판단·검토 기록·고정 버전의 확정은 별도다. 기존 fixture는 잠정 상태로 보존한다.
+
+| 평가 대상 | 적절한 판단의 근거 |
 | --- | --- |
-| Purpose and information extraction | Interpret the reader task correctly; distinguish explicit intent from assumptions and identify units with their necessary conditions and provenance. |
-| Preservation and organization | Justify what belongs in each document and where other information must be preserved; distinguish local exposure, internal placement and cross-document transfer. |
-| Expression decisions and alternatives | Separate required corrections from optional improvements and recognize defensible alternatives rather than demanding one layout or wording. |
-| Uncertainty and evidence limits | Identify unsupported claims, ambiguous intent or unverified destinations and recommend `FLAG` / `REVIEW` where warranted; never report unverified behavior as confirmed. |
+| 목적·정보 추출 | 독자 과업을 정확히 해석하고 명시적 의도와 가정을 구별하며 필수 조건·출처가 연결된 정보를 식별한다. |
+| 보존·조직 | 각 문서에 속할 정보와 다른 곳에 보존할 정보를 설명하고 현지 노출·문서 내 배치·문서 간 이동을 구별한다. |
+| 표현 판단·대안 | 필수 수정과 선택적 개선을 분리하고 하나의 구성·문구를 강제하지 않으며 타당한 대안을 인정한다. |
+| 불확실성·근거 한계 | 근거 없는 주장·모호한 의도·미확인 목적지를 식별하고 필요하면 `FLAG`/`REVIEW`를 제안한다. 미검증 동작을 확인한 것으로 보고하지 않는다. |
 
-This is a **development/regression set for diagnosis and editorial decisions**, not a test requiring a completed rewritten document, an executed transfer, or independent proof of every source's runtime/performance claim. Exact replacement-text matching is outside this task. These exclusions do not excuse wrong attribution, meaning distortion or unsupported assertions in the diagnosis or any suggested text. A working validation engine is not a prerequisite for freezing these diagnostic annotations.
+이는 **진단·편집 판단용 개발/회귀 세트**다. 완성된 수정 문서, 실제 이동 실행, 모든 원문 동작·성능 주장의 독립 입증이나 정확한 대체 문구 일치를 요구하지 않는다. 다만 진단이나 제안 문구의 잘못된 귀속·의미 왜곡·근거 없는 단정은 오류다. 이 진단 주석을 고정하는 데 작동하는 검증 엔진이 선행할 필요는 없다.
 
-The cases have already informed the editorial criteria and must not be represented as an unseen holdout. A separate future set is needed for that purpose. This scope decision neither approves all annotations as gold nor records independent human agreement; those remain separate steps.
+이 사례들은 이미 편집 기준을 만드는 데 사용했으므로 미공개 홀드아웃으로 보고할 수 없다. 홀드아웃에는 별도 사례가 필요하다. 범위 합의는 모든 주석의 골드 승인이나 독립 사람 일치 기록이 아니다.
 
-### Agreed input composition and answer separation
+### 합의한 입력 구성과 정답 분리
 
-The model-facing input will contain the following fixed material. This agreement defines what may be supplied, not a completed export, adopted schema or frozen set of case inputs.
+모델 입력은 다음 고정 자료로 구성한다. 이는 제공할 자료의 원칙이며 완료된 내보내기·채택 스키마·고정 입력 세트가 아니다.
 
-| Input component | Inclusion and boundary |
+| 입력 구성 | 포함 범위와 경계 |
 | --- | --- |
-| Source identity and text | Fixed excerpt with source kind, exact text and original range; Git commit/blob and content digest where applicable. A PR body requires its captured text and observation time, not just a head SHA. |
-| Necessary surrounding context | Source passages needed to interpret role, prerequisites, measurements, attribution or conflicts. Pin their snapshots and ranges as well; do not require the model to reconstruct our conversation or silently fetch changing live context. |
-| Reader task and user requirements | Self-contained audience, intended purpose and applicable constraints, including purpose changes agreed in this conversation. Distinguish explicit user requirements from historical document role and labeled assumptions. State the desired outcome without embedding our recommended editorial actions. |
-| Destination context or availability | Supplied destination text and role when verified, or a factual statement that destination context is unavailable/unverified. Availability is input evidence; our proposed MOVE or REVIEW verdict is an answer and must not be included here. |
-| Supplied check observations | Relevant recorded evidence such as dated HTTP observations, with method, scope and limits. A source's claim that tests passed is still a source assertion; no runtime verification is implied. |
+| 출처 식별·원문 | 출처 유형·정확한 텍스트·원래 범위를 가진 고정 발췌. Git commit/blob·콘텐츠 digest를 함께 기록한다. PR 본문은 head SHA만이 아니라 캡처한 텍스트와 관측 시점이 필요하다. |
+| 필요한 주변 문맥 | 역할·선행조건·측정·귀속·충돌을 해석하는 데 필요한 구간의 스냅샷·범위를 고정한다. 모델이 대화를 복원하거나 변동하는 원격 문맥을 몰래 조회하도록 요구하지 않는다. |
+| 독자 과업·사용자 요구 | 대화에서 합의한 목적 변경을 포함해 독자·목적·제약을 자체적으로 이해할 수 있게 제공한다. 명시 요구·기존 문서 역할·표시된 가정을 구별한다. 원하는 결과를 설명하되 권장 편집 액션을 정답처럼 넣지 않는다. |
+| 목적지 문맥·가용성 | 확인한 목적지 텍스트·역할 또는 문맥이 제공되지 않았거나 미확인이라는 사실을 제공한다. 가용성은 입력 근거지만 권장 MOVE·REVIEW 판정은 정답이므로 제외한다. |
+| 제공된 검사 관측 | 날짜·방법·범위·한계가 있는 HTTP 확인 등 관련 관측을 제공한다. 원문의 테스트 통과 주장은 여전히 원문 주장이며 실행 검증을 뜻하지 않는다. |
 
-Keep existing action labels, annotation rationales, gold information-unit segmentation, preservation/placement/expression judgments, acceptable-answer alternatives and reassessment conclusions in a separate answer area. Do not pass the candidate fixture or review record wholesale to the evaluated model: their source/context fields and the resolved task must be selected explicitly. Ordinary source headings and statements remain source data, even when they discuss verification or limitations; answer separation must not strip necessary interpretation context.
+기존 액션 라벨·주석 근거·정답 정보 분할·보존/배치/표현 판단·허용 답안·재검토 결론은 별도 정답 영역에 둔다. 후보 fixture나 검토 장부 전체를 모델에 전달하지 않고 출처·문맥 필드와 해석된 과제를 명시적으로 선택한다. 검증·한계를 설명하는 일반 원문 제목·서술도 입력 자료다. 정답을 분리하려다 해석에 필요한 문맥까지 빼지 않는다.
 
-All evaluation arms must receive the same selected facts and contract. Preparing the bundles requires checking the selected context and snapshot references case by case; agreement on this composition does not assert that all 20 bundles are already complete or approved. Their serialization, final expected judgments and freeze approval remain later steps.
+모든 평가 조건에는 동일한 선택 사실과 계약을 제공한다. 입력 묶음을 만들 때 사례별 선택 문맥·스냅샷 참조를 확인한다. 구성 합의가 20건 전체의 입력 완료·승인을 뜻하지 않는다. 직렬화·최종 예상 판단·고정 승인은 후속 단계다.
 
-### Agreed answer criteria and judgment dimensions
+### 합의한 정답 기준과 판단 차원
 
-Organize case answers around the existing three modules: Information Extraction & Analysis (units, relevance, importance and preservation), Information Organization (cross-document transfer and intra-document placement), and Expression Refinement (wording and compression), followed by expected shared validation checks. The dimensions and answer criteria below describe judgments within that flow; they do not introduce new processing stages or engine fields. This diagnostic set evaluates intermediate decisions within the architecture that ultimately produces and validates revised documents.
+답안은 기존 세 모듈인 Information Extraction & Analysis(정보 단위·관련성·중요도·보존), Information Organization(문서 간 이동·문서 내 배치), Expression Refinement(문장·축약)와 공통 검증의 기대 사항 순서로 구성한다. 아래 차원·정답 기준은 그 흐름 안의 판단 항목이며 새 처리 단계나 엔진 필드가 아니다. 진단 세트는 최종 수정 문서 생성·검증으로 이어지는 아키텍처의 중간 판단을 평가한다.
 
-For each information unit and applicable output scope, record the following dimensions independently. A single compatibility action must not substitute for the full judgment.
+각 정보 단위·적용 출력 범위별로 다음을 독립 기록한다. 대표 액션 하나로 전체 판단을 대신하지 않는다.
 
-| Judgment dimension | What the answer must distinguish |
+| 판단 차원 | 정답에서 구별할 사항 |
 | --- | --- |
-| Relevance | How the information serves the specified reader task, rather than merely sharing a topic or being useful somewhere. |
-| Importance | Whether the information is necessary, useful or optional for that scope, with contextual reasons. Low importance alone does not authorize deletion. |
-| Information preservation | What must survive, where it must remain available and which conditions need local exposure. Preserve required numbers, attribution and provenance across the affected scopes. |
-| Cross-document transfer | Whether another document is an appropriate home, its role/context and any unresolved preconditions. A MOVE candidate is not a completed transfer or permission to remove source text. |
-| Intra-document placement | Suitable sections, grouping and relative order, including defensible alternatives within the same document; do not classify this as cross-document MOVE. |
-| Expression | Whether wording can remain unchanged or needs REVISE/COMPRESS; separate required corrections from optional improvements and preserve meaning. |
+| 관련성 | 주제가 같거나 어딘가에서 유용하다는 것과 지정된 독자 과업에 기여하는 것을 구별한다. |
+| 중요도 | 해당 범위에서 필수·유용·선택적인 이유를 문맥으로 설명한다. 낮은 중요도만으로 삭제를 허용하지 않는다. |
+| 정보 보존 | 남아야 할 정보·보존 장소·현지 노출 조건을 구별한다. 관련 범위 전체에서 필수 수치·귀속·출처를 보존한다. |
+| 문서 간 이동 | 다른 문서의 적합성·역할·문맥과 미해결 선행조건을 설명한다. MOVE 후보는 이동 완료나 원문 삭제 허가가 아니다. |
+| 문서 내 배치 | 같은 문서의 섹션·그룹·상대 순서와 타당한 대안을 설명하고 문서 간 MOVE로 분류하지 않는다. |
+| 표현 | 무수정 또는 REVISE/COMPRESS 필요성을 판단하고 필수 수정·선택적 개선을 구별하며 의미를 보존한다. |
 
-Apply four kinds of answer criteria to each applicable judgment: **mandatory conditions** that must hold; **acceptable alternatives** that may differ while satisfying the task; **incorrect decisions** that violate meaning, evidence or contract constraints; and **unresolved matters** where supplied evidence calls for uncertainty or FLAG/REVIEW. Explain non-applicability where appropriate rather than forcing an edit or inventing a finding for every dimension. An optional suggestion and a justified unchanged choice can both be acceptable.
+각 적용 판단에 **필수 조건**, **허용 대안**, **오답 조건**, **미확정 사항**을 붙인다. 근거에 따라 불확실성·FLAG/REVIEW를 유지한다. 모든 차원에서 편집이나 발견 사항을 억지로 만들지 말고 적용되지 않으면 이유를 설명한다. 선택적 제안과 근거 있는 무수정은 함께 허용할 수 있다.
 
-For example, RW-003 can combine relevant but optional information with preservation in the README, no required cross-document transfer, either current placement or consolidation into the existing later section, and optional expression changes. A different defensible unit segmentation is acceptable if it accounts for the same claims, conditions and provenance; matching gold unit IDs or exact replacement text is not the target.
+예를 들어 RW-003은 관련 있지만 선택적인 정보를 README에 보존하면서 문서 간 이동은 요구하지 않고, 현재 위치 유지·기존 하단 섹션 통합과 선택적 표현 개선을 함께 허용할 수 있다. 같은 주장·조건·출처를 설명한다면 정보 분할이 달라도 된다. 정답 unit ID·대체 문구의 일치가 목표가 아니다.
 
-Source assertions, additional evidence and reviewer findings must be distinguishable and connected to their own supporting locations. These answer-organization principles are agreed; the per-case answer contents, serialization and final freeze approval remain pending. No fixture fields, labels, scores or gold status are changed by this agreement.
+원문 주장·추가 근거·검토자의 발견 사항은 구별하고 각각의 근거 위치에 연결한다. 정답 구성 원칙은 합의했지만 사례별 최종 내용·직렬화·고정 승인은 미확정이다. 이 합의로 fixture 필드·라벨·점수·gold 상태를 바꾸지 않는다.
 
-A first case is available for joint review as a separate [RW-001 model input](reviews/diagnostic-gold-draft/RW-001.input.json) and [evaluator-only answer draft](reviews/diagnostic-gold-draft/RW-001.answer.md). These files demonstrate the agreed separation; they are not an adopted serialization/schema, an approved case or a frozen gold set. The other 19 cases remain outside this draft export.
+첫 공동 검토 예시로 [RW-001 모델 입력](reviews/diagnostic-gold-draft/RW-001.input.json)과 [평가자용 답안 초안](reviews/diagnostic-gold-draft/RW-001.answer.md)을 분리했다. 채택 직렬화·스키마, 승인된 사례, 고정 골드셋이 아니다. 나머지 19건의 입력·답안은 내보내지 않았다. 사용자 요청에 따라 골드 준비는 이 초안까지로 멈춘 상태다.
 
-## Baselines
+## 비교 기준선
 
-After M0 human review, prepare comparisons using identical source facts, draft snapshots, and writing contracts. Execute B2 only when the validator and revision controller exist:
+M0 사람 검토를 마친 뒤 **같은 원자료·문서 스냅샷·작성 계약**을 바탕으로 비교한다. B2의 실행 평가는 검증기와 수정 제어기가 존재하는 M3 이후에 수행한다.
 
-1. **B0 — direct generation / unassisted draft:** writer alone.
-2. **B1 — prompt-only:** writer prompted to be concise, coherent, and audience-aware.
-3. **B2 — LogicWrite:** modular pipeline (`Information Extraction & Analysis` → `Information Organization` → `Expression Refinement`) governed by the `Validation Gate` and bounded `Revision Controller`.
+- **B0 — 직접 작성 / 보조 없는 초안:** 작성 모델만 사용한다.
+- **B1 — 프롬프트만 보완:** 간결함·일관성·독자 적합성을 지시한 작성 모델을 사용한다.
+- **B2 — LogicWrite:** `정보 추출·분석 → 정보 재배치·재구성 → 표현 수정`을 독립 `Validation Gate`와 제한된 `Revision Controller`로 제어한다.
 
-For existing drafts, every editing condition receives the same unchanged draft; do not compare a newly generated B0 document with an edited B2 document as if their inputs were equal. Record model identifiers, temperature/settings when available, contract, prompt, and validator versions.
+기존 초안을 수정하는 실험은 모든 조건에 **같은 변경 전 초안**을 제공한다. 새로 생성한 B0와 기존 문서를 편집한 B2를 입력이 같은 실험처럼 비교하지 않는다. 가능한 경우 모델 식별자·샘플링 설정·계약·프롬프트·검증기 버전을 기록한다.
 
-## Overall and per-module evaluation checks
+## 전체·모듈별 평가 지표
 
-### 1. End-to-end document measures
+### 1. 문서 전체 지표
 
-| Metric | How to assess |
+| 지표 | 측정 방법 |
 | --- | --- |
-| Reader-task success | Can independent readers answer or act on the intended question using the revised document? |
-| Essential-information retention | Proportion of human-labeled required facts, numbers, conditions, and provenance retained across affected documents, with separately checked local exposure for claims that remain visible; see the [contextual rubric](#contextual-judgment-rubric) |
-| Irrelevant information | Human-labeled out-of-scope spans left in the final document without appropriate `MOVE` or `REMOVE` |
-| Contradiction detection | Precision/recall on labeled claim pairs (counting false alarms on legitimate exceptions or attributed quotes) |
-| Register & term consistency | Violations per eligible Korean narration sentence, excluding quotations, code blocks, and headings |
-| Revision regression | New factual errors, dropped caveats, altered numbers, or broken transitions introduced during editing |
-| Reviewer time | Human time required to inspect findings, verify moves/edits, and approve the result |
-| Length | Descriptive statistic only; never an optimization target by itself |
+| **독자 과업 달성** | 독립 평가자가 문서를 읽고 의도된 질문에 답하거나 필요한 조치를 실행할 수 있는가? |
+| **필수 정보 보존** | 사람이 지정한 필수 사실·수치·조건·출처 중 관련 문서 전체에서 유지된 비율과, 남기는 주장에 필요한 현지 노출을 별도 검사한다([문맥별 기준](#문맥별-판단-기준)). |
+| **불필요한 정보** | 적절한 `MOVE`/`REMOVE` 없이 최종 문서에 남은 목적 외 정보의 범위 |
+| **모순 탐지** | 주석이 달린 주장 쌍의 정밀도·재현율(정당한 예외·인용 의견의 오탐 포함) |
+| **문체·용어 일관성** | 인용·코드·제목을 제외한 한국어 서술 문장의 위반 비율 |
+| **수정으로 인한 퇴행** | 재작성 중 새로 생긴 사실 오류·빠진 조건·변경된 수치·어색한 연결 |
+| **검토 시간** | 발견 사항 확인, 이동·수정 검증, 최종 승인에 필요한 사람의 시간 |
+| **분량** | 참고용 통계로만 기록한다. 자체적으로 최적화 목표가 아니다. |
 
-### 2. Per-module evaluation checks
+### 2. 모듈별 검사
 
-To isolate where failures occur in the [three-module architecture](architecture.md), evaluate each module and the controller independently against human annotations:
+[세 모듈 아키텍처](architecture.md)를 기준으로 각 모듈과 제어기를 사람의 판정에 대해 독립적으로 평가한다.
 
-| Module / component | What to verify | Failure evidence to record |
+| 모듈·구성 요소 | 확인할 내용 | 기록할 실패 사례 |
 | --- | --- | --- |
-| **Information Extraction & Analysis** | Unit/claim extraction and condition, number, evidence links; audience/purpose fit and preservation judgments; recovery of purpose misidentification from user context | Missing or incorrectly linked units; disagreement with human annotations; silent purpose overwrite; unsupported recovery or unnecessary changes when the purpose already fits |
-| **Information Organization** | Destination review before `MOVE`; source/destination retention; grouping, duplicate consolidation, reader-task ordering, and independent `placement` of `KEEP` units | Misrouting, lost caveats or provenance, remaining duplication, prerequisite-order violations, and unjustified reorganization; a different valid placement alone is not a failure under the [contextual rubric](#contextual-judgment-rubric) |
-| **Vector candidate retrieval (future, within Organization)** | Recall of human-labeled related units, destinations, and contradiction pairs within a declared candidate budget; review of retrieved context before decisions | Missed candidates, irrelevant candidates, and any importance/truth/deletion decision made from similarity alone; retrieval quality is separate from downstream editorial accuracy |
-| **Expression Refinement** | Meaning-preserving `REVISE`/`COMPRESS`, terminology, Korean register, clarity, and readability; human usefulness ratings with required-content checks | Changed numbers, lost qualifiers or attribution, unsupported additions, edits in excluded quotes/code, or unauthorized routing/deletion |
-| **Validation Gate & Revision Controller** | Independent boundary and whole-document checks, routing by defect origin, downstream invalidation, and bounded stopping | Missed regressions, unnecessary retries, stale artifacts after upstream changes, incorrect target module, nontermination, or falsely clean `PASS` |
+| **정보 추출·분석** | 정보·주장 추출, 조건·수치·근거 연결, 독자·목적 적합성과 보존 판단, 사용자 맥락을 통한 목적 오판 복구 | 누락·잘못 연결된 정보, 사람 판정과의 불일치, 사용자 의도 무단 변경, 근거 없는 목적 수정, 불필요한 수정 |
+| **정보 재배치·재구성** | `MOVE` 전 목적지 확인, 원본·목적지 보존, 그룹화·중복 통합·독자 과업 순서, `KEEP`의 독립적 `placement` | 잘못된 목적지, 빠진 조건·출처, 남은 중복, 선행 조건보다 앞선 설명, 근거 없는 재배치. [문맥별 기준](#문맥별-판단-기준)에 따라 타당한 다른 배치 자체는 실패가 아니다. |
+| **벡터 기반 후보 검색(향후)** | 지정된 후보 예산에서 사람이 라벨링한 관련 정보·목적지·모순 후보의 재현율과 후보 맥락 검토 | 놓친 후보, 무관한 후보, 유사도만으로 중요도·진실성·삭제를 결정한 사례. 검색 품질과 편집 품질은 분리 평가 |
+| **표현 수정** | 의미를 보존한 `REVISE`/`COMPRESS`, 용어·한국어 문체·명확성·가독성, 사람 유용성 평가와 필수 내용 검사 | 변경된 수치, 누락된 조건·귀속, 근거 없는 추가, 제외된 인용·코드 변경, 무단 정보 이동·삭제 |
+| **검증 게이트·수정 제어기** | 독립적인 모듈 경계·전체 문서 검증, 결함 원인 단계 복귀, 하위 무효화, 유한 종료 | 검사 누락, 퇴행 누락, 불필요한 재시도, 오래된 정보 재사용, 잘못된 모듈 복귀, 종료 실패, 거짓 `PASS` |
 
-Report sample sizes, uncertainty, and per-document-type breakdowns. Do not equate heuristic "AI-likeness" scores with writing quality.
+표본 수, 불확실성, 문서 유형별 결과를 함께 공개한다. 휴리스틱 AI 작성 의심 점수를 글의 품질과 동일시하지 않는다.
 
-### Contextual judgment rubric
+### 문맥별 판단 기준
 
-Apply the [purpose-first decision procedure](architecture.md#purpose-first-decision-procedure) before comparing actions or surface wording. This is guidance for future human annotation and evaluation, not an executed benchmark, adopted scoring schema or new gold labels. The [20-case reassessment](reviews/real-world-20-reassessment.md) supplies illustrative reasoning and scoped user feedback; it does not establish universal document policies.
+액션이나 겉으로 드러난 문구를 비교하기 전에 [목적 우선 판단 절차](architecture.md#목적-우선-판단-절차)를 적용한다. 향후 사람 주석·평가를 위한 지침이며 실행한 벤치마크·채택 점수 스키마·새 골드 라벨이 아니다. [20건 재검토](reviews/real-world-20-reassessment.md)는 판단 예시와 한정된 사용자 피드백을 제공하며 보편적 문서 정책을 정하지 않는다.
 
-| Criterion | Evidence to examine | Failure to distinguish from an acceptable alternative |
+| 기준 | 확인할 근거 | 허용 대안과 구별할 오류 |
 | --- | --- | --- |
-| Desired purpose and reader task | Explicit user context, fixture assumptions, historical document role, and the task of each output scope | Preserving a historical management role against an explicit master-career display goal is a purpose error (RW-009). Do not assume every README must display a resume. |
-| Information function and selection | Source context, unit/condition boundaries, why that information belongs here rather than merely being useful somewhere | Installer-selection rationale is not an installation instruction (RW-001/002). Detailed maintenance procedures can belong in a guide even when README readers might use them (RW-018). |
-| Preservation versus local exposure | Full affected evidence set, proposed current claims, destination context, protected elements and their scope-specific exposure | Narrowing a resume to actual evaluation work can allow detailed metrics and limits to stay in evidence (RW-012). Keeping only favorable numbers while hiding regression or falsely claiming implementation credit is not equivalent. |
-| Organization and alternatives | Destination fit, existing overlap, retained unique information, actual anchor/order and reader task | Accept multiple defensible placements when the same contract is satisfied (RW-003); reject missing prerequisites, lost information, or unverified transfers, not a choice merely different from the suggested layout. |
-| Expression and edit necessity | Meaning of the actual before/after text, style constraints, readability, exclusions and substantive versus decorative content | Decorative emoji cleanup may be a reasonable REVISE proposal without an earlier instruction (RW-014). Do not demand it universally, remove meaningful symbols, or report it as evidence that a support claim is false. |
-| Evidence boundary and unresolved work | Source assertion, captured snapshot, current observation, independent human judgment, actual execution and complete output coverage | Reading a release note, a PR body or a destination document does not verify runtime behavior, diff invariance or completed preservation. Optional editorial alternatives do not themselves establish a missing fact. |
+| 원하는 목적·독자 과업 | 명시 사용자 맥락·fixture 가정·기존 문서 역할·출력별 과업 | 명시된 마스터 이력 표시 목적에 반해 기존 관리 역할을 유지하면 목적 오류다(RW-009). 모든 README가 이력서를 보여야 한다고 일반화하지 않는다. |
+| 정보 기능·선택 | 원문 문맥·정보/조건 경계·이곳에 속하는 이유 | 설치 파일 선택 근거는 설치 지시가 아니다(RW-001/002). README 독자에게 유용하더라도 상세 유지보수 절차는 별도 가이드에 속할 수 있다(RW-018). |
+| 보존·현지 노출 | 영향받는 전체 근거·남길 주장·목적지·보호 요소와 범위별 노출 | 실제 평가 작업으로 이력서 주장을 좁히면 상세 지표·한계를 근거에 둘 수 있다(RW-012). 유리한 수치만 남기고 회귀를 숨기거나 구현 기여를 잘못 귀속하는 것은 동등하지 않다. |
+| 조직·대안 | 목적지 적합성·기존 중복·고유 정보 보존·실제 기준점/순서·독자 과업 | 같은 계약을 충족하는 여러 배치를 허용한다(RW-003). 선행조건 누락·정보 손실·미확인 이동은 오류지만 권장 구성과 다르다는 이유만으로 실패시키지 않는다. |
+| 표현·수정 필요성 | 실제 전후 의미·문체 제약·가독성·제외 조건·내용과 장식 구분 | 장식 이모지 정리는 과거 지시 없이도 REVISE로 제안할 수 있다(RW-014). 보편적으로 강제하거나 의미 있는 기호를 지우거나 지원 주장이 거짓이라는 근거로 삼지 않는다. |
+| 근거 경계·미해결 작업 | 원문 주장·캡처·현재 관측·독립 사람 판단·실행·전체 출력 범위 | 릴리스 노트·PR 본문·목적지를 읽었다고 실행 동작·diff 불변성·이동 후 보존이 입증되지 않는다. 선택적 편집 대안 자체가 사실 누락을 입증하지 않는다. |
 
-For each proposed decision, describe the supporting purpose/evidence, preservation scope, required local exposure, placement and expression separately, using the existing review records where possible. State whether the edit addresses a demonstrated requirement/meaning failure, offers an optional improvement, or awaits evidence/intent clarification. These are review explanations, not new fixture fields or gate verdicts. Rejecting an optional placement or style suggestion does not by itself make a contract-compliant output incorrect; competing placements need not block delivery if all required checks are satisfied. Leaving an already suitable passage unchanged is valid; do not reward edit count or unmotivated churn. Unverified destinations and missing required checks still prevent `PASS` under the existing gate policy.
+각 제안은 목적·근거, 보존 범위, 필수 현지 노출, 배치, 표현을 별도로 설명하며 가능하면 기존 장부를 사용한다. 확인된 요구사항/의미 위반을 고치는지, 선택적 개선인지, 근거·의도 확인을 기다리는지 명시한다. 이는 검토 설명이며 새 fixture 필드나 게이트 판정이 아니다. 계약을 충족한 결과에서 선택적 배치·문체 제안을 거절했다고 오답이 되지 않는다. 필수 검사가 모두 충족됐다면 타당한 배치 대안이 여럿이라는 이유만으로 전달을 막지 않는다. 적절한 원문 유지도 허용하며 수정 개수나 근거 없는 변경에 보상하지 않는다. 미확인 목적지·필수 검사 누락은 기존 정책에 따라 여전히 `PASS`를 막는다.
 
-Compare candidates under the same contract and source facts. A supported change of purpose creates a separate contract condition; do not score old and new judgments as disagreement under identical inputs. Preserve a predecessor record and rationale for a correction. Exact action-label or text match is insufficient for contextual judgments: assess whether the actual decision and output satisfy the task and preservation/exposure obligations. Deterministic constraints such as protected literals and valid references remain exact checks where applicable.
+같은 계약·원문 사실 아래에서 비교한다. 근거 있는 목적 변경은 별도 계약 조건이므로 이전·이후 판단을 같은 입력의 불일치로 채점하지 않는다. 수정 전 기록과 근거를 보존한다. 액션 라벨·문구 일치만으로 문맥 판단을 평가하지 않고 실제 판단·결과가 과업과 보존/노출 의무를 충족하는지 확인한다. 보호 문자값·유효 참조처럼 결정론적으로 확인할 항목은 해당되는 경우 정확히 검사한다.
 
-Keep the agreed preservation obligations and retention denominator fixed across evaluation arms. Moving detail or narrowing a visible claim does not lower the denominator, authorize loss of evidence or permit changing required facts to improve a score. Check local exposure against the claims actually retained as well as corpus-wide preservation. Style improvements do not establish factual correctness, and semantic correctness cannot be replaced by counting shorter text or matching one reference layout. No weights, thresholds, scores or agreement results are established here.
+평가 조건 간 합의된 보존 의무·보존율 분모를 고정한다. 세부사항 이동이나 주장 축소가 분모 축소·근거 손실·점수 개선을 위한 필수 사실 변경을 허용하지 않는다. 실제 남긴 주장에 필요한 현지 노출과 자료 전체 보존을 함께 확인한다. 문체 개선은 사실성을 입증하지 않으며 짧은 글이나 단일 참조 구성과의 일치로 의미 정확성을 대신할 수 없다. 여기서 가중치·임계값·점수·평가자 일치 결과를 정하지 않는다.
 
-## Annotation workflow and guardrails
+## 주석 검토 절차와 안전장치
 
-- **Independent human review:** Two people independently label a subset when feasible, marking each proposed finding, preservation judgment, and `placement` proposal as `agree`, `disagree`, or `uncertain`. Disagreements are resolved with a documented rationale rather than an automated model vote.
-- **Uncertainty is first-class:** `FLAG` is a valid outcome when source evidence cannot settle a factual conflict, when user intent vs. draft purpose requires clarification, or when a cross-document `MOVE` destination is not yet confirmed.
-- **Acceptable alternatives and necessity:** Reviewers record justified alternatives and distinguish a blocking contract/meaning problem from an optional editorial preference using the [contextual rubric](#contextual-judgment-rubric). Scoped user feedback can resolve an intended purpose or preference; it does not constitute independent annotation of the whole corpus or a gold freeze.
-- **No invented targets or silent relabeling:** Evaluators and tools must not fabricate destination file paths, invent source evidence, or silently overwrite existing fixture annotations.
-- **Guardrails:**
-  - Preserve provenance, literal numbers, constraints, and qualifiers across authorized affected scopes; separately check the [necessary local exposure](architecture.md#caveat-retention-and-exposure) of retained claims. Source correction needs authoritative evidence, while relocation needs verified preservation rather than forced repetition in every document.
-  - Validate both source and destination contexts when evaluating cross-document moves or duplicate consolidation.
-  - Never treat a missing detected contradiction as proof none exists.
-  - Keep critical unresolved issues visible after the revision limit reaches `STOPPED` or `REVIEW`.
-  - Use permission-safe public or consented examples; do not introduce private documents without permission and appropriate redaction.
+- **독립 사람 검토:** 가능하면 일부 사례를 두 명이 개별 검토해 각 발견 사항·보존 판단·배치 제안에 `agree`/`disagree`/`uncertain`을 기록한다. 의견 차이는 자동 모델 투표로 덮지 않고 해결 근거를 남긴다.
+- **불확실성 보존:** 사실 충돌의 근거가 부족하거나, 사용자 의도와 초안 목적에 확인이 필요하거나, `MOVE` 목적지가 확정되지 않으면 `FLAG`를 유지한다.
+- **허용 대안·필요성:** [문맥별 기준](#문맥별-판단-기준)으로 전달을 막을 계약/의미 문제와 선택적 편집 선호를 구별하고 타당한 대안을 기록한다. 한정된 사용자 피드백은 목적·선호를 정할 수 있지만 전체 자료의 독립 주석·골드 고정을 뜻하지 않는다.
+- **목적지·판정 조작 금지:** 확인되지 않은 파일 경로나 근거를 만들어내지 않고 기존 주석을 몰래 덮어쓰지 않는다.
+- **핵심 보호:** 승인된 관련 범위 전체에서 출처·원문 수치·제약·조건을 보존하고 남긴 주장의 [필수 현지 노출](architecture.md#주의사항-보존과-노출)을 별도로 확인한다. 사실 정정에는 권위 있는 근거가 필요하고 이동에는 모든 문서의 반복 노출이 아닌 실제 보존 검증이 필요하다. 문서 이동·중복 통합에서는 원본과 목적지 모두 검사하며, 모순을 발견하지 못했다고 해서 모순이 없다고 주장하지 않는다.
+- **미해결 문제 노출:** `STOPPED`나 `REVIEW`로 종료하면 중요한 미해결 문제를 남긴다.
+- **자료 사용:** 공개 또는 동의받은 사례만 사용하며 허락·익명화 없이 비공개 문서를 가져오지 않는다.
 
-## Proposed schema extensions (proposal only — not adopted)
+## 스키마 확장 제안 (미채택)
 
-> **Status: design proposal only.** The fields below are **not adopted**, **not implemented**, **not migrated** into `tests/fixtures/cases.json` or `tests/fixtures/real-world-candidates.json`, and **not** a gold-standard annotation format. Both existing JSON fixture files remain byte-identical at `schema_version: "0.1.0"` and continue to use the seven primary compatibility action labels (`KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, `FLAG`).
+> **설계 제안일 뿐이다.** 아래 필드는 아직 채택·구현·마이그레이션되지 않았고 골드셋 형식도 아니다. 기존 JSON 파일은 `schema_version: "0.1.0"`으로 보존하고, `KEEP`·`COMPRESS`·`REVISE`·`MOVE`·`REMOVE`·`ADD`·`FLAG` 7개 라벨을 유지한다.
 
-Consider these additions separately before any schema freeze or migration:
-
-| Proposed addition | Purpose and compatibility question |
+| 제안 | 목적 및 호환성 검토 사항 |
 | --- | --- |
-| Per-unit preservation, expression, and placement decisions | Represent independent decisions without replacing existing `action` / `expected_action` labels; define span/unit linkage and handling of multiple edits |
-| Contract intent provenance and purpose conflict/recovery record | Distinguish explicit user context from inferred assumptions and retain the evidence for recovery |
-| Responsible module and editorial stage | Audit where a defect originated and where the controller routed it, separately from its primary action |
-| Protected-element references and verification evidence | Track facts, numbers, conditions, citations, and source/destination checks using snapshot references, rather than unsupported boolean success claims |
+| 정보별 보존·표현·배치 결정 | 기존 `action`/`expected_action`을 대체하지 않고 독립적 판단 표현. 원문 단위·범위와 다중 수정의 연결 규칙 정의 |
+| 계약 의도 출처·목적 충돌/복구 기록 | 명시된 사용자 의도와 추론된 가정을 구분하고 수정 근거를 보존 |
+| 담당 모듈·편집 단계 | 대표 액션과 별개로 결함의 발생 원인과 제어기 복귀 지점을 기록 |
+| 보호 요소 참조·검증 근거 | 단순 성공 플래그가 아니라 버전이 고정된 스냅샷으로 사실·수치·조건·인용 및 이동 검증 추적 |
 
-Existing candidate annotations already contain `placement` and, in some cases, scoped additional actions. Review reuse of those fields before adding alternatives; define backward mapping, versioning, and human approval before adoption. No new fields, labels, thresholds, or migrated records are established by this proposal.
+기존 일부 실제 후보에는 `placement`와 범위가 지정된 추가 액션이 이미 있다. 새 필드 이전에 재사용 가능성을 검토하고, 도입 시 역호환 매핑·버전·사람 승인을 정의한다. 지금은 새 필드·라벨·임계값·이전된 사례를 확정하지 않는다.
 
-## Immediate next step
+## 다음 단계
 
-Complete M0 human review on the 20 provisional real-world candidates, retain reviewer decisions and disagreement rationales in review records, and reserve a held-out split before tuning. Prepare a small B0/B1 pilot and the B2 protocol; run the executable B2 comparison after M3 provides validation and bounded revision. Expand only if reader usefulness and information retention justify it.
+잠정 실제 후보 20건의 M0 사람 검토를 완료하고 판단·불일치 해결 근거를 남긴다. 이 20건은 개발/회귀용이며, 튜닝 전에 별도의 홀드아웃 사례를 확보·분리한다. 작은 B0/B1 예비 비교와 B2 프로토콜을 준비하고, 실행 가능한 B2는 M3의 검증기·수정 제어기가 준비된 뒤 수행한다. 독자 유용성과 정보 보존의 개선이 확인될 때 범위를 넓힌다.

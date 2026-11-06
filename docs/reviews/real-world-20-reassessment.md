@@ -345,12 +345,14 @@
 | RW-012-d | 80–80 | 저장 verifier의 실제 코드 수정은 팀원 담당. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 팀원 패치 구현의 귀속은 근거 문서에 보존한다. 이력서는 개인의 발견·수정 요청만 표현해 귀속 오해를 방지한다. |
 | RW-012-e1 | 81–81 | Whisper Medium QLoRA 학습·데이터 정제와 신규 면접 도메인·기존 도메인의 비교 평가를 수행했다. | relevant / required | `retain_current` / REVISE | 학습·정제와 신규/기존 도메인 평가 수행이라는 전문성을 표현한다. 성능 개선이나 운영 교체 성공을 주장하지 않으며 상세 수치·회귀는 함께 근거 문서에 보존한다. |
 | RW-012-e2 | 81–81 | 후보 C2는 최종 1,233건 평가에서 WER 9.77%를 기록했다. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 1,233건 WER 9.77% 결과는 회귀·모집단 조건과 함께 상세 근거에 보존할 후보이며, 이력서는 e1의 수행 기여를 중심으로 쓴다. 긍정 수치만 남기고 회귀를 숨기는 안은 아니다. |
-| RW-012-f | 81–81 | 원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음. 연결 원장은 AI Hub 119 retention 4,802개로 적어 표본 수 표현이 상충함. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 회귀·운영 교체 상태와 119 식별자/4,802개 표본 불일치를 근거 장부에 보존한다. 이력서에서 정량 성과 대신 e1의 학습/평가 기여를 쓰는 안이면 현지 병기를 강제하지 않는다. |
+| RW-012-f | 81–81 | 원문은 기존 119건 retention WER 15.33%→16.81% 악화라고 서술하며 전반 개선·운영 교체 성공은 주장하지 않음. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 회귀·운영 교체 상태를 근거 장부에 보존한다. 이력서에서 정량 성과 대신 e1의 학습/평가 기여를 쓰는 안이면 현지 병기를 강제하지 않는다. 원장과의 표본 수 표현 차이는 연결된 finding에서 추가 근거와 구별해 다룬다. |
 | RW-012-g | 82–82 | PR 본문 수정/최신 HEAD 정책 재실행 race condition 수정 및 Backend/Frontend 테스트·빌드 CI 구성. | relevant / required | `retain_current` / REVISE | PR 정책 경합 수정과 테스트·빌드 CI 구성이라는 실제 작업을 표현한다. 성과를 전체 배포 검증·비용 절감으로 확장하지 않으면 h의 한계를 매 항목에 덧붙일 필요는 없다. |
 | RW-012-h | 82–82 | 초기 Actions 4개 체크 통과는 확인됐지만 배포 전체 E2E·CI 비용 절감은 입증 아님. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 초기 4개 체크와 전체 E2E·비용 효과의 검증 경계를 상세 근거에 보존한다. 이력서에서 g의 CI 구성만 주장하면 모든 미검증 효과를 나열할 필요는 없다. |
 | RW-012-i | 84–84 | 코어 Agent·DB verifier patch는 팀원 작업; 개인은 평가·실험·리뷰·테스트·CI; 운영 전체 E2E·독립 사용자 품질 평가 완료 아님. | irrelevant / optional | `preserve_elsewhere_candidate` / unchanged | 종합 귀속·운영/사용자 평가 한계를 근거 문서에 보존한다. 이력서 각 기여의 동사와 범위를 정확히 조정한 뒤 종합 주의의 현지 반복을 줄일 후보로 본다. |
 
 **배치·통합:** 이력서에는 a/b1의 합성 평가·로컬 기본 후보 선정, c의 결함 발견·수정 요청, e1의 Whisper 학습·데이터 정제·신규/기존 도메인 비교 평가, g의 PR 경합 수정·테스트/빌드 CI 구성을 기여별로 배치한다. b2/d/e2/f/h/i의 상세 검증 경계·팀원 패치 경과·성능 수치와 회귀·운영 교체 여부·미검증 효과·종합 주의는 상세 경험/검증 원장에 보존할 후보로 둔다. STT는 긍정 수치 9.77%만 이력서에 남기고 회귀를 감추는 대신 수치와 회귀를 모두 상세 근거에 두며 수행 기여를 표현한다. 결함 발견·수정 요청은 패치 구현으로, CI 구성은 비용 절감이나 전체 배포 검증으로 바꾸지 않는다. 목적지의 관련 구간은 확인했지만 요소별 통합 결과와 전체 수정본은 없어 실제 이전·삭제는 아직 blocked다.
+
+**출처 대응 정정 (2026-11-06):** `RW-012-f`는 S06 81행의 원문 주장만 담는다. 추가 근거는 S16 268·278·285행의 AI Hub 119 및 retention 4,802 기록이며, JSON의 `context_evidence`에 해당 원문 범위를 연결했다. 두 기록의 표현 차이는 `RW-012-retention-count-context` finding으로 구분하고 정보 단위에서 참조한다. 이는 장부의 근거 연결 정정이며 새 엔진 필드 채택이나 실제 표본 수 확정이 아니다. 원시 평가 manifest 확인은 여전히 필요하다.
 
 **수작업 확인:** 검증을 위해 수치·조건·귀속을 보존하는 것과 이력서 노출 의무를 혼동한 판단을 정정했다. 기존 b를 기본 후보 선정 b1/실사용·운영 검증 경계 b2로, e를 학습·정제·양 도메인 평가 e1/정량 결과 e2로 분리해 서로 다른 노출을 계획했다. 합성 평가와 후보 선정, 개인의 발견·수정 요청, 학습·평가 수행, CI 구성으로 주장을 한정하면 상세 한계를 매번 병기하지 않을 수 있다. 원문 119건과 근거 원장의 AI Hub 119 식별자·retention 4,802개 불일치 및 동일 최종 test의 B0 값 부재는 근거 장부에 그대로 남긴다. 원시 manifest나 런타임을 새로 검증하지 않았다.
 
@@ -595,7 +597,7 @@
 | mutable snapshot과 현재 접근 상태 혼동 | RW-015 HTTP, RW-019/020 PR body | source_record, ArtifactRef/digest | body capture time/digest와 live retrieval time, redirect chain, 과거/현재의 차이를 표현할 수집 규약 필요 |
 | 표현 개선과 새 규칙 확정의 혼동 | RW-014 장식성 이모지 정리와 RW-016 구성 설명→금지의 차이 | Expression Refinement, assumptions/constraints, resolver review | 장식 정리는 별도 지시 없이 REVISE 제안 가능; 원문에 없는 작업 금지 규칙 확정과 구별 |
 
-공통 편집 판단은 [목적 우선 판단 절차](../architecture.md#purpose-first-decision-procedure)와 [문맥별 평가 기준](../evaluation.md#contextual-judgment-rubric)에 보강했다. 표의 구현·schema migration 항목은 제안으로 남기며, 공통 모델의 새 enum/API/수치 기준이나 사례별 정답을 동결하지 않는다.
+공통 편집 판단은 [목적 우선 판단 절차](../architecture.md#목적-우선-판단-절차)와 [문맥별 평가 기준](../evaluation.md#문맥별-판단-기준)에 보강했다. 표의 구현·schema migration 항목은 제안으로 남기며, 공통 모델의 새 enum/API/수치 기준이나 사례별 정답을 동결하지 않는다.
 
 ## 다음 단계와 사람 검토 경계
 

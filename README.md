@@ -1,103 +1,103 @@
 # LogicWrite
 
-**Logical Writing for Agents**
+**에이전트를 위한 논리적 글쓰기 (Logical Writing for Agents)**
 
-LogicWrite is an early-stage, model-agnostic project for reviewing and improving AI-generated writing. Its goal is not simply shorter prose: it is writing that gives the intended reader the right information, in the right place, without unsupported claims or internal contradictions.
+LogicWrite는 AI가 생성한 글을 검토하고 개선하기 위한 **모델 비종속형 초기 프로젝트**다. 목표는 무조건 글을 짧게 만드는 것이 아니라, 독자에게 필요한 정보를 적절한 위치에서 제공하고 근거 없는 주장과 내부 모순을 줄이는 것이다.
 
-> **Status: design and evaluation fixtures only.** There is no working validator, CLI, MCP server, or automatic revision loop yet. Current fixtures consist of 12 synthetic seed cases and 20 provisional real-world candidate records (12 non-`KEEP`, 8 `KEEP`) awaiting independent human review.
+> **현재 상태: 설계 문서와 평가 사례만 존재한다.** 실행 가능한 검증기, CLI, MCP 서버, 자동 수정 루프는 아직 없다. 합성 예시 12건과 독립적인 사람 검토를 기다리는 실제 후보 20건(`KEEP` 외 12건, `KEEP` 8건)을 확보했다.
 
-## Why?
+## 문제의식
 
-AI-generated documents can be grammatically correct and still be unhelpful: unnecessary implementation history in a user guide, a draft written for the wrong document purpose, filler in a pull request, inconsistent Korean speech levels, or claims that conflict elsewhere in the same document.
+AI가 생성한 문서는 문법상 자연스러워도 도움이 되지 않을 수 있다. 사용자 가이드에 과도한 구현 이력이 들어가거나, 문서의 목적 자체를 잘못 판단하거나, PR 설명에 불필요한 내용을 반복하거나, 한국어 문체가 혼재하거나, 같은 문서의 주장끼리 충돌하는 경우가 있다.
 
-Before polishing sentences, LogicWrite addresses four questions:
+문장을 다듬기 전에 다음을 확인한다.
 
-1. **Audience & actual intent:** Who will read this, what do they already know, and does the draft match the user's intended purpose?
-2. **Information boundary & preservation:** Which information units, claims, numbers, and conditions must be kept, supplemented, moved, removed, or flagged?
-3. **Organization & placement:** Which document and section should hold each unit, how should duplicates be consolidated, and what order fits the reader's task?
-4. **Expression & consistency:** Are claims, conditions, figures, terms, and target Korean register consistent and clearly expressed?
+1. **독자와 실제 의도:** 누가 읽고 어떤 배경지식을 가졌으며, 초안은 사용자의 원래 목적과 일치하는가?
+2. **정보의 범위와 보존:** 어떤 정보 단위·주장·수치·조건을 유지하거나 보완·이동·삭제·검토해야 하는가?
+3. **구조와 배치:** 정보가 어느 문서와 섹션에 있어야 하며, 중복을 어떻게 합치고 어떤 순서로 보여줄 것인가?
+4. **표현과 일관성:** 주장·조건·수치·용어·한국어 문체가 서로 맞고 명확하게 표현되는가?
 
-A long verification record can be good writing; a long installation guide that hides the steps may not be.
+긴 검증 기록은 적절한 글일 수 있지만, 설치 절차를 숨기는 긴 설치 가이드는 그렇지 않을 수 있다.
 
-## Planned approach
+## 설계한 접근법
 
-LogicWrite organizes review and revision around **three explicit modules** governed by a shared **Writing Contract**, a **Validation Gate**, and a bounded **Revision Controller**:
+LogicWrite는 공통 **Writing Contract(작성 계약)**, 독립적인 **Validation Gate(검증 게이트)**, 반복 횟수가 제한된 **Revision Controller(수정 제어기)** 아래 세 모듈로 글을 검토·수정하도록 설계한다.
 
 ```text
-Writing Contract (user intent, audience, purpose, register, required facts)
-                        |
-                        v
-     1. Information Extraction & Analysis
-        (extract units, analyze claims/conditions/numbers,
-         assess audience/purpose fit, recover purpose misidentification)
-                        |
-                        v
-     2. Information Organization
-        (cross-document MOVE, duplicate consolidation,
-         intra-document grouping & ordering, [future] vector candidate search)
-                        |
-                        v
-     3. Expression Refinement
-        (sentence/paragraph rewrite, Korean register & terminology,
-         meaning-preserving compression, readability)
-                        |
-                        v
-            Validation Gate
-            (module boundaries + whole affected documents)
-                  /              \
-          PASS / REVIEW         revise
-                |                 |
-             Result       Revision Controller
-                          (route to responsible module,
-                           invalidate & revalidate downstream)
+Writing Contract (사용자 의도·독자·목적·문체·필수 정보)
+                         │
+                         ▼
+        1. 정보 추출·분석
+           정보 단위·주장·조건·수치 추출
+           독자/목적 적합성 판단과 목적 오판 복구
+                         │
+                         ▼
+        2. 정보 재배치·재구성
+           문서 간 MOVE·중복 통합
+           문서 내부 그룹화·순서·향후 벡터 후보 검색
+                         │
+                         ▼
+        3. 표현 수정
+           문장·문단 재작성, 한국어 문체·용어 통일
+           의미 보존 압축과 가독성 개선
+                         │
+                         ▼
+                  Validation Gate
+               (모듈 경계·전체 문서 검증)
+                   ╱            ╲
+             PASS/REVIEW       수정 필요
+                 │                 │
+               결과       Revision Controller
+                          (원인 모듈 복귀·하위 무효화·재검증)
 ```
 
-- **Shared Writing Contract:** Specifies actual user intent, audience, purpose, required information, and constraints. User intent takes precedence over an existing draft's inferred purpose; conflicts or ambiguities are surfaced (`FLAG` / `REVIEW`) rather than silently overwritten.
-- **Modular [editorial workflow](docs/architecture.md#editorial-workflow):** Maps the six editorial stages (audience/purpose determination → unit extraction & relevance/importance assessment → action decision → regrouping & duplicate consolidation → ordering & expression refinement → whole-document validation) across the three modules, while enforcing [caveat retention and exposure](docs/architecture.md#caveat-retention-and-exposure) across source and destination documents.
-- **[Vector-assisted routing](docs/architecture.md#future-design-vector-assisted-routing):** An unimplemented future design within `Information Organization` for retrieving candidate destinations, overlapping units, and potential contradictions. Similarity retrieves candidates only—it never establishes importance, truth, or deletion authority.
-- **Independent gate and controller:** Deterministic checks and model-assisted semantic review inspect module boundaries and complete documents. Unresolved semantic issues or unverified move destinations must not be silently marked as passed.
+- **공통 작성 계약:** 사용자 의도, 독자, 목적, 필수 정보와 제약을 명시한다. 기존 초안에서 추론한 목적보다 명시된 사용자 의도를 우선하며, 충돌·모호성은 임의로 덮어쓰지 않고 `FLAG` / `REVIEW`로 드러낸다.
+- **[모듈별 편집 절차](docs/architecture.md#편집-절차):** 독자·목적 결정 → 정보 추출 및 중요도 평가 → 액션 결정 → 목적지별 재구성·중복 통합 → 순서·표현 수정 → 전체 문서 검증의 여섯 단계를 세 모듈에 대응시킨다. 원본과 목적지 모두에서 [조건과 주의사항의 보존·노출](docs/architecture.md#주의사항-보존과-노출)을 확인한다.
+- **[벡터 기반 후보 검색](docs/architecture.md#향후-설계-벡터-기반-경로-탐색):** 향후 관련 문서·중복·모순 후보를 찾는 수단이다. 유사도가 중요도·진실성·삭제 권한을 결정하지 않는다. 미구현 설계다.
+- **독립 검증과 수정 제어:** 규칙 기반 검사와 모델 보조 의미 검토로 각 경계 및 관련 문서 전체를 검사한다. 해결되지 않은 의미 문제나 확인하지 않은 이동 목적지를 `PASS` 처리하지 않는다.
 
-## Proposed editing actions
+## 제안하는 편집 액션
 
-LogicWrite separates **information preservation** (`Information Extraction & Analysis`), **document/section placement** (`Information Organization`), and **surface phrasing** (`Expression Refinement`), while retaining seven primary action labels for compatibility across fixtures and reports:
+정보 **보존**(추출·분석), 문서·섹션 **배치**(재배치·재구성), **표현**(표현 수정)은 독립적으로 판단한다. 다만 기존 평가 사례 및 결과 보고와의 호환성을 위해 7개 대표 액션을 유지한다.
 
-| Action | Meaning |
+| 액션 | 의미 |
 | --- | --- |
-| `KEEP` | Preserve information relevant and important to the document's audience and purpose; does **not** freeze original wording or current position (intra-document section and order are recorded separately as `placement`) |
-| `COMPRESS` | Preserve information while condensing verbose or repeated expression without dropping required facts, numbers, or conditions |
-| `REVISE` | Preserve information while rewriting sentences/paragraphs or correcting register, terminology, or clarity |
-| `MOVE` | Transfer useful information to another document suited to its audience and purpose after reviewing destination context; within-document reordering is `placement`, not `MOVE` |
-| `REMOVE` | Information does not help the stated purpose and does not require preservation elsewhere |
-| `ADD` | Supplement missing contract-required context, condition, or evidence from authoritative sources |
-| `FLAG` | Surface purpose conflicts, unsupported claims, or unverified move destinations that cannot be safely resolved without confirmation |
+| `KEEP` | 목적과 독자에게 필요한 정보를 보존한다. **원래 문장·위치를 고정하지 않는다.** 문서 내부 순서는 `placement`로 별도 결정한다. |
+| `COMPRESS` | 필수 사실·수치·조건을 잃지 않고 장황하거나 반복된 표현을 압축한다. |
+| `REVISE` | 정보의 의미는 유지하면서 문장·문단·문체·용어·명확성을 수정한다. |
+| `MOVE` | 목적지 내용을 확인한 후 다른 문서로 정보를 옮긴다. 같은 문서 안의 순서 변경은 `MOVE`가 아닌 `placement`다. |
+| `REMOVE` | 보존 의무가 없는 정보를 생략하거나, 다른 곳에 동등한 정보·필수 조건이 보존됐음을 확인한 뒤 중복 서술을 제거한다. |
+| `ADD` | 신뢰할 수 있는 자료를 근거로 계약상 누락된 맥락·조건·증거를 보완한다. |
+| `FLAG` | 목적 충돌·근거 부족·미확인 이동 목적지처럼 확인 없이는 안전하게 결정할 수 없는 문제를 표시한다. |
 
-## Repository
+## 문서 안내
 
-- [Requirements](docs/requirements.md) — Writing Contract precedence rules, functional requirements (`R1`..`R12`), and MVP scope
-- [Architecture](docs/architecture.md) — three core modules, module boundaries, six-stage workflow mapping, caveat exposure, and revision controller
-- [Data model and interfaces](docs/data-model-and-interfaces.md) — proposed shared types, module contracts, traceability, recovery, and manual candidate walkthroughs; not an adopted fixture schema
-- [Roadmap](docs/roadmap.md) — `M0`..`M4` milestones and current status
-- [Evaluation plan](docs/evaluation.md) — `B0`/`B1`/`B2` baselines, per-module evaluation checks, and proposed (unadopted) schema extensions
-- [Real-world candidates](docs/real-world-candidates.md) — 20 provisional M0 candidate annotations from public repositories (`tests/fixtures/real-world-candidates.json`)
-- [Annotated examples](tests/fixtures/README.md) — 12 synthetic seed evaluation cases in `tests/fixtures/cases.json`
+- [간단한 기획서](docs/project-proposal.md) — 배경, 목표, 핵심 기능, 단계별 계획
+- [요구사항](docs/requirements.md) — 작성 계약과 의도 우선순위, 기능 요구사항 `R1`~`R12`, MVP 범위
+- [아키텍처](docs/architecture.md) — 세 모듈의 책임, 여섯 편집 단계, 주의사항 보존, 수정 제어기
+- [공통 데이터 모델·인터페이스](docs/data-model-and-interfaces.md) — 자료형, 출처 추적, 모듈 계약, 복구, 사례별 수작업 검토(미확정 스키마)
+- [로드맵](docs/roadmap.md) — `M0`~`M4`의 계획과 현황
+- [평가 계획](docs/evaluation.md) — `B0`/`B1`/`B2` 비교, 모듈별 검증, 미채택 스키마 제안
+- [실제 사례 후보](docs/real-world-candidates.md) — 공개 저장소에서 수집한 M0 잠정 사례 20건
+- [합성 평가 예시](tests/fixtures/README.md) — `tests/fixtures/cases.json`의 합성 사례 12건
 
-## First milestone (`M0`)
+## 첫 단계: M0
 
-Establish a small human-reviewed benchmark before implementing a validator. Both the synthetic cases in `tests/fixtures/cases.json` and the 20 provisional real-world candidates in `tests/fixtures/real-world-candidates.json` describe expected judgments—**they are not completed human-verified gold data, baseline runs, or evidence of model accuracy**.
+검증기를 구현하기 전에 사람이 검토한 소규모 평가셋을 확보한다. 현재 합성 12건과 실제 후보 20건은 예상 판정을 담은 자료일 뿐, **사람이 확정한 골드셋·베이스라인 실험·모델 정확도의 증거가 아니다.**
 
-The initial priority is Korean technical writing (README files, pull requests, release notes, design documents, and work reports), while keeping the contract and finding format usable across languages.
+초기에는 한국어 기술 문서(README, PR 설명, 릴리스 노트, 설계 문서, 업무 보고서)를 우선하되, 계약과 검증 결과 형식은 다른 언어에도 적용 가능하도록 설계한다.
 
-## Longer-term applicability
+## 장기 확장 방향
 
-The first target is durable technical documentation. A [future direction](docs/roadmap.md#long-term-direction--conversational-agent-responses) is to reuse the three-module engine for **agent conversational responses**, where selecting what to say, grouping it within a reply, and matching the requested detail level matter as much as document structure. This is a design goal, **not an implemented response interceptor or a current MVP requirement**.
+첫 적용 대상은 지속적으로 보존되는 기술 문서다. [장기 방향](docs/roadmap.md#장기-방향-에이전트-대화-응답)으로는 동일한 세 모듈을 **에이전트 대화 응답의 정보 선별·구조·분량 조정**에 재사용하는 방안을 검토한다. 이는 목표이며, 모든 응답을 자동 가로채는 기능이나 현 MVP 요구사항이 아니다.
 
-## Inspirations
+## 참고한 프로젝트
 
-- [Yoonmoon](https://github.com/amondnet/yoonmoon) — staged Korean proofreading, humanization, tone conversion, and re-diagnosis
-- [Humanizer KO](https://github.com/nyjin/humanizer-ko) — document → paragraph → sentence review
+- [Yoonmoon](https://github.com/amondnet/yoonmoon) — 단계별 한국어 교정, 인간다운 표현, 문체 변환, 재진단
+- [Humanizer KO](https://github.com/nyjin/humanizer-ko) — 문서 → 문단 → 문장 수준의 검토
 
-LogicWrite does not bundle or claim ownership of these projects. Its intended distinction is explicit audience/purpose contracts, modular extraction/organization/refinement boundaries, cross-document claim and caveat checks, and independently controlled validation loops.
+LogicWrite는 두 프로젝트를 포함하거나 소유한다고 주장하지 않는다. 독자·목적을 명시한 계약, 정보 추출·배치·표현의 책임 분리, 문서 간 주장·조건 검토, 외부에서 제어하는 검증 루프를 차별화 방향으로 삼는다.
 
-## License
+## 라이선스
 
-MIT. See [LICENSE](LICENSE).
+MIT 라이선스. [LICENSE](LICENSE) 참조.

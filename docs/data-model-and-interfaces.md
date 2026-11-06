@@ -1,215 +1,215 @@
-# Common data model and module interfaces
+# 공통 데이터 모델과 모듈 인터페이스
 
-> Implementation-preparation design proposal, based on the [three-module architecture](architecture.md). These are logical contracts, not executable schemas or an adopted fixture format. No pipeline, validator, LLM, retrieval service, or adapter is implemented here. Existing seven-action annotations and fixture schema `0.1.0` remain unchanged. M0 independent human review, holdout assignment, and schema freeze remain incomplete.
+> **구현 준비 단계의 논리 설계 제안.** [세 모듈 아키텍처](architecture.md)에 기반하지만 실행 가능한 스키마나 채택된 평가 데이터 형식은 아니다. 파이프라인·검증기·LLM·검색 서비스·어댑터는 아직 구현되지 않았다. 기존 7개 액션과 평가 스키마 `0.1.0`은 변경하지 않는다. M0 독립 사람 검토·홀드아웃 분리·스키마 동결도 미완료다.
 
-## Scope and design choices
+## 범위와 설계 선택
 
-The engine carries information independently of paragraphs, files, and expression edits. One paragraph can contain several units with different judgments; one unit can span several passages. A unit is the smallest independently assessable assertion or instruction **with its necessary interpretation context**, not necessarily a sentence. Linked conditions can be separate units, but a claim cannot be delivered without the conditions it needs.
+엔진에서 정보는 문단·파일·표현 변경과 독립적으로 존재한다. 한 문단에 서로 다른 판단이 필요한 정보가 여럿 있을 수 있고, 한 정보 단위가 여러 위치에 걸칠 수도 있다. **정보 단위**는 해석에 필요한 조건을 포함해 독립적으로 평가할 수 있는 가장 작은 주장·지시이며, 반드시 한 문장은 아니다. 조건을 별도 단위로 추출할 수는 있지만 그 조건이 필요한 주장을 조건 없이 전달해서는 안 된다.
 
-The design uses versioned artifact references and three decision dimensions: preservation, placement, and expression. A single action object would conflate those decisions; embedding a copy of every claim in each module's output would allow them to drift. Instead, modules reference a shared immutable inventory, and each owns its own decisions. Expression plans are embedded in revision results rather than requiring a separate top-level artifact.
+설계는 **버전이 고정된 산출물 참조**와 보존·배치·표현이라는 세 판단을 사용한다. 이를 하나의 액션에 묶으면 판단이 섞이고, 각 모듈이 주장을 복제하면 내용이 서로 달라질 수 있다. 따라서 모듈은 하나의 변경 불가능한 정보 목록을 참조하고 각자 자신의 판단만 소유한다. 표현 계획은 별도 최상위 산출물 대신 수정 결과에 포함한다.
 
-Types below are language-neutral notation: `T?` is optional, `T[]` is a list, and tagged alternatives require the fields of their selected branch. Lists may be empty unless a field invariant requires entries; empty findings, assumptions, relations, consolidation groups and destination reviews are valid. Source-unit spans, supported-addition evidence and non-omission trace spans must be nonempty. Required contract information is nonempty when the caller specifies obligations; an empty list does not waive other constraints. IDs are opaque, scoped to a run or a named external snapshot; they are not paths. Enumerations and field names are proposed for this design, not frozen public API choices.
+아래 표기는 구현 언어와 무관하다. `T?`는 선택 필드, `T[]`는 목록이며 태그가 있는 대안은 해당 가지의 필수 필드를 따른다. 별도 불변조건이 없으면 목록은 비어 있을 수 있다(예: 발견 사항·가정·관계·통합 그룹·목적지 검토). 다만 원본 정보의 원문 범위, 근거가 있는 추가 정보의 증거, 생략이 아닌 추적 항목의 출력 범위는 비어서는 안 된다. 호출자가 필수 정보를 지정했으면 해당 요구사항이 충족돼야 하고, 빈 목록으로 다른 제약을 면제할 수 없다. ID는 실행 또는 고정된 외부 스냅샷 범위의 불투명 식별자이며 파일 경로가 아니다. 필드·열거값은 **제안**이며 공개 API로 확정되지 않았다.
 
-## Shared references and provenance
+## 공통 참조와 출처
 
-| Structure | Fields and interpretation |
+| 구조 | 필드와 의미 |
 | --- | --- |
-| `ArtifactRef` | `{id, revision, digest}` identifies immutable content. Equality includes all three fields; a newer revision does not silently replace an older dependency. Hash algorithm and canonical serialization remain open. |
-| `ArtifactMeta` | `{ref: ArtifactRef, run_id, producer, depends_on: ArtifactRef[]}` on every contract, snapshot, analysis, organization, revision, ValidationPlan, and ValidationReport artifact. Producer identifies component/configuration version; dependencies include policy and check configuration where relevant. |
-| `SpanRef` | `{snapshot_ref, start, end}` uses zero-based Unicode code-point offsets, half-open `[start,end)`, against the exact stored text, without newline or Unicode normalization. A quote or line/section hint may be added for display but is not identity. Invalid or mismatched offsets are errors, never silently rebased. |
-| `EvidenceRef` | `{id, kind, spans: SpanRef[], source_record?, authority_basis, uncertainty}`. Kinds distinguish user instruction, source assertion, reference evidence, and check observation. Non-text evidence needs an immutable source record instead of a fabricated span. A citation proves provenance, not truth; authority is recorded with its basis. |
-| `ScopeRef` | `{contract_ref: ArtifactRef, scope_id}` resolves exactly one entry in that immutable WritingContract’s `output_scopes`; it never resolves against the latest contract or an undeclared path/role. Local references inside the contract use `scope_id` only, avoiding a self-digest reference. |
-| `UnitRef` / `ElementRef` | `{analysis_ref, unit_id}` / `{analysis_ref, unit_id, element_id}`. Inventory-local IDs never resolve against a different analysis revision. |
-| `Rationale` | `{reason, evidence_ids: ID[], uncertainty, assumptions: Text[]}`. Uncertainty is qualitative with an explanation; no numeric confidence threshold is fixed. Empty evidence means an explicit unsupported assumption, never verified support. |
+| `ArtifactRef` | `{id, revision, digest}`: 변경 불가능한 콘텐츠 식별자. 세 필드 모두 같아야 동일하며 최신 버전이 기존 의존성을 암묵적으로 대체하지 않는다. 해시 알고리즘·정규 직렬화 방식은 미정. |
+| `ArtifactMeta` | `{ref: ArtifactRef, run_id, producer, depends_on: ArtifactRef[]}`: 계약·스냅샷·분석·재배치·수정·ValidationPlan·ValidationReport에 포함. `producer`는 구성 요소/설정 버전, 의존성은 검증 정책과 설정도 포함. |
+| `SpanRef` | `{snapshot_ref, start, end}`: 정확히 저장된 텍스트의 0부터 시작하는 유니코드 코드 포인트 오프셋, 반개구간 `[start,end)`. 줄바꿈·유니코드 정규화는 하지 않는다. 인용·행/섹션 힌트는 표시용일 뿐 식별 기준이 아니다. 불일치·범위 오류를 임의로 보정하지 않는다. |
+| `EvidenceRef` | `{id, kind, spans: SpanRef[], source_record?, authority_basis, uncertainty}`: 사용자 지시·원문 주장·참고 근거·검사 관측을 구별한다. 비텍스트 근거는 가짜 텍스트 범위가 아니라 변경 불가능한 외부 기록을 사용한다. 인용은 **출처**를 증명할 뿐 **진실**을 증명하지 않는다. |
+| `ScopeRef` | `{contract_ref: ArtifactRef, scope_id}`: 정확히 그 계약의 `output_scopes` 항목 하나에 연결한다. 최신 계약이나 선언되지 않은 역할·경로에 자동 연결하지 않는다. 계약 내부에서는 자기 해시 순환 참조를 피하려고 `scope_id`만 쓴다. |
+| `UnitRef` / `ElementRef` | `{analysis_ref, unit_id}` / `{analysis_ref, unit_id, element_id}`. 정보 목록 안의 ID는 다른 분석 버전에 자동 적용되지 않는다. |
+| `Rationale` | `{reason, evidence_ids: ID[], uncertainty, assumptions: Text[]}`. 불확실성은 설명과 함께 정성적으로 기록한다. 숫자 확신도 임계값을 정하지 않는다. 증거가 비었다면 검증된 사실이 아니라 명시적 가정이다. |
 
-Each producing artifact carries an `evidence` collection of `EvidenceRef` records or pins the immutable evidence artifact it uses in `meta.depends_on`; every `evidence_ids` entry must resolve there. Evidence cannot be replaced by an unversioned run-global lookup.
+산출물은 `evidence` 필드에 `EvidenceRef` 모음을 갖거나 `meta.depends_on`에서 변경 불가능한 증거 산출물을 고정한다. 모든 `evidence_ids`는 해당 고정된 자료에서 해석돼야 하며 버전 없는 전역 조회에 의존할 수 없다.
 
-Snapshots of user instructions and reference material use the same snapshot mechanism as documents. A public URL or PR head commit alone does not fix mutable PR body text; store the captured body and capture metadata. Fixture excerpts are partial captures, not reconstructed full documents.
+사용자 지시·참고 자료도 문서처럼 스냅샷으로 저장한다. 공개 URL이나 PR 헤드 커밋은 변경 가능한 PR 본문을 고정하지 못하므로 실제 조회 본문과 시점도 보존한다. 평가 자료의 발췌는 **부분 스냅샷**이지 원문 전체가 아니다.
 
 ### DocumentSnapshot
 
-| Field | Contract |
+| 필드 | 계약 |
 | --- | --- |
-| `meta`, `document_id`, `version` | Immutable artifact metadata, logical document identity, and source version/capture identity. Output versions are new snapshots of the same document. |
-| `content`, `content_digest` | Exact original text and its digest; never overwritten by a revision. |
-| `source_record` | Source kind, repository/path or external identifier, Git commit/blob if available, capture time and mutable-source caveat where applicable. A Git blob digest and the engine's content digest are distinct. |
-| `coverage` | `complete` or `excerpt`; excerpts record original line ranges and capture boundaries. Offsets always address stored content, not absent original text. |
-| `media_type`, `profile` | Media type plus audience/purpose/scope with evidence and uncertainty. A profile is context for routing, not authority to override user intent. |
-| `locations` | Optional derived section/block map to `SpanRef`; Markdown headings are one adapter, not the required location system. |
+| `meta`, `document_id`, `version` | 변경 불가능한 메타데이터, 논리 문서 ID, 원본 버전·수집 ID. 수정본은 동일 논리 문서의 새로운 스냅샷이다. |
+| `content`, `content_digest` | 정확한 원본 텍스트와 다이제스트. 기존 스냅샷을 덮어쓰지 않는다. |
+| `source_record` | 출처 유형·저장소/경로·외부 ID·Git 커밋/Blob·수집 시점·변경 가능한 출처의 주의사항. Git Blob과 엔진 자체 콘텐츠 다이제스트는 다르다. |
+| `coverage` | `complete` 또는 `excerpt`; 발췌는 원문 행 범위·수집 경계를 기록한다. 오프셋은 저장된 발췌 기준이다. |
+| `media_type`, `profile` | 매체 유형과 독자·목적·범위의 근거 및 불확실성. 라우팅 참고 정보이지 사용자 의도보다 우선하지 않는다. |
+| `locations` | 선택적인 섹션·블록 → `SpanRef` 지도. Markdown 제목은 가능한 어댑터 중 하나다. |
 
-A future dialogue response may be a text snapshot identified by conversation/message rather than a file. Sections become logical groups. The current design does not implement streaming or response interception.
+향후 대화 응답은 파일 대신 대화·메시지 식별자로 스냅샷을 만들고, 섹션 대신 논리적 그룹을 사용할 수 있다. 지금은 스트리밍이나 응답 가로채기를 구현하지 않는다.
 
 ### WritingContract
 
-| Field | Contract |
+| 필드 | 계약 |
 | --- | --- |
-| `meta`, `intent`, `audience`, `purpose`, `document_type` | Explicit desired reader outcome and intended reader/knowledge. Each resolved field records its value, basis (`explicit_user`, `authoritative_context`, or `inferred_assumption`), and evidence IDs. |
-| `language`, `register`, `terminology` | Expression constraints, including exclusions for quotations/code/headings as applicable; unspecified style remains explicitly unspecified. |
-| `output_scopes` | Nonempty list of named output scope declarations, defined below; the only declaration site for `ScopeRef.scope_id`. |
-| `required_information` | Requirement entries `{id, description, evidence_ids, applies_to, protection}`. `applies_to` is a nonempty list of `{scope_id, coverage}` references to `output_scopes`; `protection` distinguishes exact literal preservation from semantic preservation. Analysis binds each expanded requirement/scope obligation to units/elements or records an unmet requirement. |
-| `constraints` | Named rules with scope and verification kind: deterministic, semantic, or human decision. Includes required structure, privacy, claim limits, and disclosure needs. |
-| `source_material` | Snapshot/evidence references and their authority basis, including supplied destination context. |
-| `intent_resolution` | Conflicts, inferred existing-draft purpose, accepted assumptions, decision evidence, unresolved questions, and predecessor contract reference. Status is `resolved` or `needs_review`. |
+| `meta`, `intent`, `audience`, `purpose`, `document_type` | 원하는 독자 결과·대상 독자와 지식 수준. 각 해석 필드는 값, 근거 유형(`explicit_user`·`authoritative_context`·`inferred_assumption`), 증거 ID를 갖는다. |
+| `language`, `register`, `terminology` | 인용·코드·제목의 제외 조건을 포함할 수 있는 표현 제약. 미지정 문체는 미지정으로 남긴다. |
+| `output_scopes` | 아래에서 정의하는 **비어 있지 않은 출력 범위 선언 목록**. `ScopeRef.scope_id`의 유일한 선언 장소다. |
+| `required_information` | `{id, description, evidence_ids, applies_to, protection}`. `applies_to`는 `{scope_id, coverage}`의 비어 있지 않은 목록이며, `protection`은 문구 그대로 보존할지 의미를 보존할지 구별한다. 분석은 범위별 의무를 정보·요소와 연결하거나 누락으로 기록한다. |
+| `constraints` | 검증 유형(결정론·의미·사람 결정), 출력 범위, 필수 구조·개인정보·주장·공개 요구를 담은 규칙. |
+| `source_material` | 제공된 목적지 맥락을 포함한 스냅샷·증거 참조 및 권위의 근거. |
+| `intent_resolution` | 충돌·초안에서 추론한 목적·채택 가정·결정 근거·미해결 질문·이전 계약 참조. `resolved` 또는 `needs_review`. |
 
-The Contract Resolver alone emits a new resolved contract. Analysis may propose a purpose correction with evidence; it cannot overwrite intent. Explicit user intent outranks inferred draft purpose. Conflicting explicit fields or uncertain interpretation produce a finding and `REVIEW`. A missing required field or malformed contract produces `FAIL`. No downstream generation resumes against a changed contract until its dependencies have been rebuilt and checked.
+새로운 해석 계약을 만드는 권한은 **Contract Resolver**에만 있다. 분석 모듈은 근거가 있는 목적 수정안을 제안할 뿐 의도를 덮어쓰지 않는다. 명시적 사용자 의도는 초안에서 추론한 목적보다 우선한다. 명시 필드끼리 충돌하거나 해석이 불확실하면 `REVIEW`를 기록한다. 필수 필드 누락·잘못된 계약은 `FAIL`이다. 계약 변경 시 의존성을 다시 구축·검사하기 전에는 다음 단계의 생성을 재개하지 않는다.
 
-### Output scope declarations and integrity
+### 출력 범위 선언과 참조 무결성
 
-Each `output_scopes` entry has `{scope_id, kind, target, audience?, purpose?}`. IDs are unique within the contract. Optional audience/purpose values record evidence using the same resolved-field format as the contract; absence inherits the contract values. Explicit intent precedence still applies.
+각 `output_scopes` 항목은 `{scope_id, kind, target, audience?, purpose?}`다. ID는 계약 내부에서 유일해야 한다. 독자·목적의 선택적 재정의에도 근거 기록이 필요하며, 생략하면 계약 값을 상속한다. 사용자 의도 우선 원칙은 그대로 유지한다.
 
-| `kind` | `target` and resolution |
+| `kind` | `target`과 해석 |
 | --- | --- |
-| `document` | Either `{document_id}` for one logical document, or `{destination_role}` for a provisional destination with no invented path. A role is a declared scope, not an existing document; binding it requires a new contract revision identifying the document and inspected snapshot dependencies. |
-| `document_group` | `{member_scope_ids}`: a nonempty, duplicate-free list of declared `document` scopes in the same contract. Groups do not nest; membership is explicit, never inferred from a directory or mutable search result. |
-| `response` | `{response_id}` identifies one planned conversational output; source/output snapshots can later bind conversation/message identifiers. This is a future logical scope, not an implemented response adapter. |
+| `document` | 실제 논리 문서의 `{document_id}`, 또는 경로를 만들지 않은 잠정 목적지 역할 `{destination_role}`. 역할은 실존 문서가 아니므로 문서·검사된 스냅샷을 연결하려면 새 계약 버전이 필요하다. |
+| `document_group` | `{member_scope_ids}`: 같은 계약의 문서 범위들을 중복 없이 나열한 비어 있지 않은 목록. 그룹 중첩 불가. 디렉터리·변경 가능한 검색 결과로 소속을 추론하지 않는다. |
+| `response` | 예정된 대화 출력의 `{response_id}`. 향후 대화/메시지 식별자와 연결할 수 있지만 현재 구현되지 않은 논리 범위다. |
 
-`coverage: each_member` requires preservation in every member of a group; for a document/response it means that single output. `coverage: across_group` is allowed only for a document group and requires the information across its members collectively, with trace to the contributing outputs. It does not require repetition in every member, and never waives conditions needed to interpret a claim locally. Requirements with overlapping scopes are cumulative; a collective requirement cannot cancel a per-document one. Constraints that name output scopes use the same local IDs and coverage semantics.
+`coverage: each_member`는 그룹 구성원 **각각**에서 정보를 보존해야 한다는 뜻이다(단일 문서·응답이면 그 하나). `coverage: across_group`은 문서 그룹 전체에 걸쳐 보존하는 조건에서만 허용한다. 모든 구성원에 반복할 필요는 없지만, 현재 문서에 나타난 주장을 이해하는 데 필요한 조건을 생략해도 된다는 뜻은 아니다. 범위가 겹치는 의무는 누적되며 그룹 전체 의무가 개별 문서 의무를 없애지 않는다. 범위를 지정한 제약도 같은 ID·범위 규칙을 사용한다.
 
-The resolver checks declarations and every contract-local reference before accepting a contract. Downstream gates check that each external `ScopeRef.contract_ref` equals the consuming artifact’s pinned contract, the ID exists exactly once, and its kind/coverage permits the operation. Unknown IDs, duplicate IDs/members, invalid group members/coverage, wrong contract revisions and placements outside their declared scope are confirmed reference errors: `invalid_input` plus an `ERROR` finding and `FAIL`. They do not fall back to a default scope. A valid but unbound destination role instead yields `REVIEW` and blocks a move, not a fabricated reference error. No group/role can hide a missing output from whole-document validation.
+해석기는 선언과 내부 참조를 먼저 검사한다. 이후 게이트는 외부 `ScopeRef.contract_ref`가 산출물에 고정된 계약과 일치하는지, ID가 정확히 한 번 선언됐는지, 범위 종류·적용 범위가 작업을 허용하는지 검사한다. 미존재·중복 ID/구성원, 잘못된 그룹 소속·범위 조건·계약 버전, 선언 밖 배치는 `invalid_input` + `ERROR` + `FAIL`이다. 기본 범위로 대체하지 않는다. **선언됐지만 실제 문서로 연결되지 않은 목적지 역할**은 참조 오류가 아니라 `REVIEW`로 이동을 차단한다. 그룹/역할이 전체 문서 검사에서 빠진 출력을 감출 수는 없다.
 
-`InformationAssessment` uses a `ScopeRef` to state relevance, importance, preservation and exposure **for that output**, not for the entire corpus. A document-scoped `retain_current` protects the information in that scope’s document; a scope-local omission does not authorize deletion from other documents or source knowledge. Group assessments are aggregate judgments and cannot override member-specific assessments. Before delivery, each planned unit/leaf-output pair and each requirement binding needs its applicable assessment; an unbound role can have a provisional assessment but not a completed placement.
+`InformationAssessment`의 `ScopeRef`는 **그 출력 범위에 한정된** 관련성·중요도·보존·노출 판단이다. 문서별 `retain_current`는 해당 문서의 정보를 보호하며, 그 문서에서의 생략이 다른 문서나 원본 지식의 삭제를 허용하지 않는다. 그룹 평가는 집계 판단이므로 개별 문서 평가보다 우선하지 않는다. 전달 전 각 정보·최종 출력 쌍과 요구사항 연결에 필요한 평가를 확보해야 한다. 잠정 역할의 평가는 가능해도 확정 배치는 불가능하다.
 
-`requirement_bindings` records `{requirement_id, scope_ref, coverage, unit_refs, element_refs, unmet_reason?}`. Group obligations expand using the declared membership. Organization placements reference the exact assessment ID, unit and scope; targets must be within that scope’s document/group members. A cross-document transfer connects a source disposition and a destination placement with their respective scope/assessment references: their optional `transfer_peer_ids` name counterpart placement IDs within the same plan and must concern the same unit. The source disposition never puts a foreign document inside its own scope; retained local qualifiers remain explicit source targets. Organization cannot create a new scope or resolve conflicting assessments by dropping an obligation; it returns to analysis/resolver, invalidating dependencies as necessary.
+`requirement_bindings`는 `{requirement_id, scope_ref, coverage, unit_refs, element_refs, unmet_reason?}`를 기록하고 그룹 의무는 구성원으로 확장한다. 배치 계획은 정확한 평가 ID·정보·범위를 참조하며 목적지는 그 범위의 문서 또는 구성원이어야 한다. 문서 간 이동은 원본 처리와 목적지 배치를 각각의 범위·평가로 연결한다. 선택적 `transfer_peer_ids`는 같은 계획의 상대 배치 ID를 가리키며 같은 정보여야 한다. 원본 처리 결과에 외부 문서를 끼워 넣지 않고, 원본에 남아야 할 조건은 별도 배치 대상으로 기록한다. 재배치 모듈은 새 범위를 만들거나 의무를 버려 충돌을 해결하지 않는다. 필요하면 분석·해석기로 돌아가고 종속 산출물을 무효화한다.
 
-### InformationUnit and InformationAssessment
+### InformationUnit과 InformationAssessment
 
-An `AnalysisResult` contains `{meta, units, assessments, requirement_bindings, coverage_ledger, alignment, findings}`. This is the common output of Information Extraction & Analysis and input to Organization; modules do not invent competing inventories.
+`AnalysisResult = {meta, units, assessments, requirement_bindings, coverage_ledger, alignment, findings}`는 추출·분석의 공통 결과이자 재배치의 입력이다. 모듈마다 서로 다른 정보 목록을 만들지 않는다.
 
-| Inventory field | Contract |
+| 정보 목록 필드 | 계약 |
 | --- | --- |
-| `InformationUnit.id`, `origin` | Stable local identity and `source` or `supported_addition`. An addition is a new unit supported by source evidence, not fabricated text. |
-| `source_spans`, `evidence_ids` | One or more source locations for source units; supported additions reference authoritative evidence and the missing requirement instead. A synthesized unit must identify every input contribution. |
-| `statement` | Normalized assertion/instruction, retaining subject, predicate, object, attribution, quantifier, temporal and scope bounds as applicable. It is an analysis representation, not replacement source text. |
-| `elements` | `{id, kind, value, source_spans, evidence_ids, protection}` entries for facts, numbers, units/metrics, conditions, scope/time, attribution, identifiers and citations. Preserve lexical values and measurement context, not just a free-floating number. |
-| `relations` | Typed links such as `qualifies`, `supports`, `depends_on`, `duplicates_candidate`, `contradicts_candidate`, with unit/element targets and rationale. Candidate overlap/conflict is not a confirmed equivalence/contradiction. |
-| `InformationAssessment.id`, `unit_ref`, `scope_ref` | Explicit assessment identity and scope. Exactly one assessment per `(unit_ref, scope_ref)`. Several scopes can give the same information different relevance and exposure decisions. |
-| `relevance`, `importance` | Separate qualitative judgments (`relevant / irrelevant / uncertain`; `required / useful / optional / uncertain`) with individual rationale; not similarity scores. |
-| `preservation` | `retain_current`, `preserve_elsewhere_candidate`, `omit_candidate`, `add_supported`, or `undecided`, with rationale. `omit_candidate` requires evidence of no preservation obligation; low relevance alone is insufficient. |
-| `exposure` | Per-document requirement to show a claim/condition locally, allow linked detail elsewhere, or keep provenance only. Requires rationale under the [caveat rules](architecture.md#caveat-retention-and-exposure). |
-| `protected_elements`, `review_required` | Element references bound to contract requirements or semantic dependencies, plus uncertainty/review reason. Omission candidates with unresolved protection are blocked. |
+| `InformationUnit.id`, `origin` | 목록 안에서 안정적인 ID와 `source` 또는 `supported_addition`. 추가 정보는 원자료에 근거해야 한다. |
+| `source_spans`, `evidence_ids` | 원문 정보에는 하나 이상의 위치. 추가 정보에는 권위 있는 증거·누락 요구사항. 여러 정보를 종합했다면 모든 원본 기여를 표시한다. |
+| `statement` | 주체·관계·대상·귀속·수량 한정·시간·범위를 포함하는 정규화된 주장/지시. **원문 대체 문장**이 아니라 분석 표현이다. |
+| `elements` | `{id, kind, value, source_spans, evidence_ids, protection}`: 사실·수치·측정 단위·조건·범위/시간·귀속·식별자·인용. 수치뿐 아니라 측정 맥락과 원문 값도 유지한다. |
+| `relations` | `qualifies`·`supports`·`depends_on`·`duplicates_candidate`·`contradicts_candidate` 등 다른 단위/요소에 대한 유형 있는 관계와 근거. 중복·모순 **후보**는 확정 판단이 아니다. |
+| `InformationAssessment.id`, `unit_ref`, `scope_ref` | 평가 ID와 정보·출력 범위 참조. 정확히 한 `(unit_ref, scope_ref)` 쌍에 하나의 평가를 둔다. 같은 정보에 여러 출력 범위의 서로 다른 평가가 가능하다. |
+| `relevance`, `importance` | 관련성(`relevant`/`irrelevant`/`uncertain`)과 중요도(`required`/`useful`/`optional`/`uncertain`)를 각각 근거와 함께 기록한다. 유사도 점수가 아니다. |
+| `preservation` | `retain_current`·`preserve_elsewhere_candidate`·`omit_candidate`·`add_supported`·`undecided`와 근거. `omit_candidate`에는 별도 보존 의무가 없다는 증거가 필요하다. 낮은 관련성만으로 부족하다. |
+| `exposure` | 주장을 현재 문서에 직접 노출해야 하는지, 세부사항 링크로 충분한지, 출처 기록만 남기면 되는지와 [조건 노출 원칙](architecture.md#주의사항-보존과-노출)에 따른 이유. |
+| `protected_elements`, `review_required` | 계약 또는 의미상 의존성과 연결된 보호 요소 및 사람 검토 필요 사유. 보호 여부가 불확실한 생략 후보는 차단한다. |
 
-`requirement_bindings` maps each expanded contract requirement/scope obligation to protected unit/element references or an unmet entry with an `ADD`/`FLAG` proposal. An unsupported gap is **not** an addition unit. `coverage_ledger` accounts for all input blocks as extracted, non-prose/excluded with reason, or unresolved; code and quotations may be excluded from style checks but still carry substantive facts. This catches dropped source passages independently of the module's own list of units.
+`requirement_bindings`는 확장된 요구사항·범위 의무를 보호 정보·요소에 연결하거나 근거가 부족한 `ADD`/`FLAG`로 표시한다. **근거 없는 누락은 실제 추가 정보 단위가 아니다.** `coverage_ledger`는 모든 입력 블록을 추출됨·비산문/검사 제외(이유 명시)·미해결로 분류한다. 코드·인용이 문체 검사에서 제외돼도 중요한 사실을 담을 수 있다. 게이트는 이 기록으로 정보 목록 자체에서 빠진 부분을 별도로 확인한다.
 
-A paragraph's source spans may overlap: in RW-013, the same paragraph holds an environment-variable instruction, internal OAuth mechanics, and a credential-preservation statement. They have different IDs and assessments. If later splitting/merging units changes their meaning, create a new analysis revision and explicit predecessor links; never reuse stale IDs by assumption.
+정보 단위의 원문 범위는 겹칠 수 있다. RW-013의 한 문단에는 환경변수 안내, 내부 OAuth 방식, 자격증명 보존 지시가 함께 있으므로 ID·판정이 다르다. 분할·통합으로 뜻이 달라지면 이전 단위 연결을 남긴 새 분석 버전을 만들고 오래된 ID를 재사용하지 않는다.
 
 ### OrganizationPlan
 
-`OrganizationPlan = {meta, analysis_ref, placements, consolidation_groups, destination_reviews, affected_documents, findings}`.
+`OrganizationPlan = {meta, analysis_ref, placements, consolidation_groups, destination_reviews, affected_documents, findings}`
 
-| Field | Contract |
+| 필드 | 계약 |
 | --- | --- |
-| `placements` | One resolved disposition per assessed unit/scope: `{id, unit_ref, scope_ref, assessment_id, disposition, targets, transfer_peer_ids?, rationale}`. `disposition` is `placed`, `omitted`, or `blocked`. `targets` specify logical document, logical section/group and relative order (`before / after / within` with an anchor), or unresolved destination role with **no invented file path**. |
-| Target exposure | A target states which unit/elements it exposes, whether it is the primary information home or required local interpretation context, and any link to another target. This allows moving detailed limits while retaining the necessary qualifier beside a source claim. It is not an unrestricted duplicate of the whole unit. |
-| `consolidation_groups` | `{id, member_refs, equivalence_basis, retained_elements, member_contributions, targets}`. Every member's conditions, numbers and attribution remain traceable; a union of provenance alone is insufficient. Conflicting scope returns to analysis. Consolidation references original units rather than silently replacing them. |
-| `destination_reviews` | Per cross-document destination: immutable snapshot/profile references, inspected ranges, audience/purpose fit, existing-content overlap/conflicts, preconditions, uncertainty and review evidence. Status `verified_context` or `unverified`; the former does not assert runtime truth. |
-| `affected_documents` | Full source and destination snapshot dependencies and intended output set. Cross-document removal/integration is one proposed change set; partial publication is not allowed by this contract. |
+| `placements` | 평가된 정보·범위 쌍마다 하나의 처리 기록 `{id, unit_ref, scope_ref, assessment_id, disposition, targets, transfer_peer_ids?, rationale}`. `disposition`은 `placed`·`omitted`·`blocked`. 목적지에는 논리 문서·섹션/그룹·기준점에 대한 상대 위치(`before`/`after`/`within`) 또는 **가짜 경로가 없는 미확정 역할**을 기록한다. |
+| 대상의 노출 정도 | 어떤 정보·요소를 보여주는지, 정보의 주 저장처인지 원본 주장을 해석하기 위한 필수 조건인지, 다른 대상과의 링크가 있는지 표시한다. 전체 단위를 무제한 복제한다는 뜻은 아니다. |
+| `consolidation_groups` | `{id, member_refs, equivalence_basis, retained_elements, member_contributions, targets}`. 통합 전 각 구성원의 조건·수치·귀속·기여를 추적한다. 출처 목록을 합쳤다는 것만으로 충분하지 않다. 적용 범위가 충돌하면 분석으로 돌아간다. |
+| `destination_reviews` | 목적지마다 고정된 스냅샷·프로필·검토한 범위·독자/목적 적합성·중복/충돌·선행조건·불확실성·검토 증거를 기록한다. `verified_context`/`unverified`는 문맥 확인 여부이지 실제 동작의 진실을 보증하지 않는다. |
+| `affected_documents` | 전체 원본·목적지의 스냅샷 의존성과 변경할 출력의 집합. 문서 간 제거·통합은 하나의 변경 묶음이며 부분 출판은 허용하지 않는다. |
 
-A document-scoped `retain_current` unit remains in that scope’s document even if its section/order changes. Organization may select destinations for `preserve_elsewhere_candidate` units, but cannot turn `retain_current` into an authorized cross-document removal or override protection. It requests reassessment when such a change is needed. Any existing destination content participating in overlap/contradiction review or consolidation must first enter the shared analysis inventory with its own source spans and scope-specific assessments. If retrieval discovers it after analysis, the controller requests an expanded AnalysisResult revision and invalidates the dependent plan; Organization cannot mint destination unit IDs.
+문서별 `retain_current` 정보는 섹션·순서가 바뀌더라도 해당 문서에 남는다. 재배치는 `preserve_elsewhere_candidate`의 목적지를 고를 수 있지만 `retain_current`를 독단적으로 문서 간 삭제로 바꿀 수 없다. 목적지 기존 내용을 중복·모순 판단이나 통합에 사용하려면 **그 내용도 먼저 공통 분석 목록에 편입**해야 한다. 검색 후 새로 발견했다면 제어기가 확장 분석을 요청하고 기존 배치 계획을 무효화한다. 재배치 모듈은 자체적으로 목적지 정보 ID를 만들지 않는다.
 
-No source deletion for a move or redundancy is eligible until destination context, consolidated coverage and required local exposure have passed the gate. Unavailable destinations produce `blocked` placements and `REVIEW`; the source stays intact.
+문서 간 이동·중복 제거로 원본을 삭제하기 전에 목적지 문맥·통합 후 보존·원본에 필요한 조건 노출이 게이트를 통과해야 한다. 목적지가 없으면 `blocked`/`REVIEW`로 남기고 원본을 지운 것으로 처리하지 않는다. 배치 기준점은 해석 가능해야 하고 순서 그래프에 순환이 없어야 한다. 기존 문서에 새 그룹을 만드는 것은 가능하지만, 없는 대상 문서의 자동 생성·출판을 뜻하지 않는다.
 
-Placement anchors must resolve, and the ordering graph must be acyclic. A planned group can be new within an existing document; a missing destination document stays a proposal requiring review. No automatic file creation/publication is implied.
+### ExpressionPlan과 RevisionResult
 
-### ExpressionPlan and RevisionResult
+`RevisionResult = {meta, organization_ref, expression_plan, output_snapshots, preview_fragments, change_set, trace, findings, delivery_state}`. `delivery_state`는 `preview` 또는 `candidate`이며 **둘 다 게이트 승인 자체는 아니다.**
 
-`RevisionResult = {meta, organization_ref, expression_plan, output_snapshots, preview_fragments, change_set, trace, findings, delivery_state}`. `delivery_state` is `preview` or `candidate`; neither is gate approval.
-
-| Field | Contract |
+| 필드 | 계약 |
 | --- | --- |
-| `expression_plan` | List of `{id, target, unit_refs, operations, protected_elements, rationale}`. Operations can combine `REVISE` and `COMPRESS`; unchanged rendering is explicit. It consumes resolved placement and does not choose new destinations. |
-| `output_snapshots`, `preview_fragments` | For `candidate`, complete proposed text of every affected document with new snapshot identities, no preview fragments. For `preview`, output snapshots may be empty; fragments are separately captured excerpt snapshots with coverage/scope and unresolved plan references. All spans still address exact stored text. A preview cannot masquerade as whole-document delivery. |
-| `change_set` | Snapshot-bound edits with before/after spans, expression-plan entry and introducing artifact/module. Untouched text and deletions are also accounted for. No in-place source mutation. |
-| `trace` | Many-to-many mappings `{unit_refs, element_refs, output_spans, treatment, justification}`. Treatments include unchanged, rewritten, consolidated, relocated, omitted-with-authorization. Omission has an empty output span list and references its approved assessment/placement; all others need actual output spans. |
+| `expression_plan` | `{id, target, unit_refs, operations, protected_elements, rationale}` 목록. `REVISE`와 `COMPRESS`를 같이 적용할 수 있으며 수정 없는 표현도 명시한다. 확정 배치를 입력으로 받되 새 목적지를 정하지 않는다. |
+| `output_snapshots`, `preview_fragments` | `candidate`는 모든 관련 문서의 **완전한 새 스냅샷**을 담고 미리보기 조각이 없어야 한다. `preview`는 출력 문서가 비어 있을 수 있으며 조각은 범위·문맥·미해결 계획을 갖는 별도 발췌 스냅샷으로 저장한다. 모든 오프셋은 정확한 저장 텍스트에 연결한다. 미리보기를 전체 문서 결과처럼 전달하지 않는다. |
+| `change_set` | 스냅샷에 고정된 전후 위치, 표현 계획, 변경을 일으킨 모듈/산출물. 유지한 부분·삭제도 모두 설명한다. 원본을 제자리에서 수정하지 않는다. |
+| `trace` | `{unit_refs, element_refs, output_spans, treatment, justification}`의 다대다 대응. 그대로 유지·재작성·통합·이동·승인된 생략을 구별한다. 생략은 출력 범위가 비어 있고 승인된 판단을 참조해야 하며, 나머지는 실제 출력 범위가 필요하다. |
 
-Traceability is bidirectional: every retained/protected element resolves to output spans (in all required exposure scopes), and every substantive output assertion resolves to source/addition units and evidence. Multiple input units can form one sentence; a unit can render into several sentences/documents. Citation and condition edges must still reach the claims they support/qualify. A map is a checkable claim, not proof of meaning preservation: deterministic protected-element checks and semantic review examine the actual texts.
+추적은 **양방향**이다. 보존할 모든 정보·요소가 필요한 출력 범위에서 나타나야 하고, 최종 글의 모든 실질적 주장은 출처나 근거가 있는 추가 정보로 역추적돼야 한다. 여러 정보가 한 문장에 합쳐지거나 하나의 정보가 여러 문장·문서에 나타날 수 있다. 인용·조건의 관계도 주장까지 이어져야 한다. 대응표가 있다는 사실만으로 의미 보존이 증명되지는 않으며 **실제 원문과 결과 텍스트에 대한 결정론·의미 검증**이 필요하다.
 
-Expression cannot delete substantive units, erase locally required conditions, introduce unsupported assertions, or change cross-document destinations. It returns a finding/request to the controller if the plan cannot be expressed safely. Stylistic connective text can lack a factual unit only when explicitly classified as non-substantive and checked for hidden new assertions.
+표현 수정 모듈은 핵심 정보 삭제, 필요한 조건 제거, 근거 없는 주장 추가, 문서 간 목적지 변경을 할 수 없다. 안전하게 표현할 수 없다면 제어기에 문제를 보고한다. 연결 문구는 실질적인 사실 주장이 아님을 명시해 검증한 경우에만 정보 단위 없이 허용한다.
 
-### Seven-action compatibility
+### 기존 7개 액션과의 호환
 
-`CompatibilityDecision = {scope, primary_action, related_actions, decision_refs, rationale}` is a report projection, not the control state. Scope identifies units/spans, and `decision_refs` points into assessments, placement and expression entries. A complex edit need not collapse to one action; when a legacy consumer requires one label, the reporting policy selects the primary label with a stated rationale and lists the rest. That selection policy remains open; existing fixture labels are copied as provisional annotations, never recomputed or overwritten.
+`CompatibilityDecision = {scope, primary_action, related_actions, decision_refs, rationale}`는 실행 제어 상태가 아니라 **보고용 변환 결과**다. 범위는 정보·원문을 식별하고 `decision_refs`는 보존·배치·표현 판단을 가리킨다. 복합 수정이 한 액션으로 축소될 필요는 없으며 구형 소비자가 한 라벨을 요구할 경우 이유를 명시한 대표 라벨과 나머지 액션을 함께 보고한다. 대표 라벨 선택 정책은 미정이며 기존 평가 라벨은 잠정 자료로 복사만 하고 재판정·덮어쓰기하지 않는다.
 
-| Label | Projection and limits |
+| 라벨 | 보고 의미와 제한 |
 | --- | --- |
-| `KEEP` | Retained information in the current document; compatible with internal placement changes and `REVISE`/`COMPRESS`. |
-| `MOVE` | Verified cross-document transfer proposal, possibly with local qualifiers left behind; an unresolved destination remains a `MOVE` candidate plus `FLAG`, not an executed move. |
-| `REMOVE` | Authorized omission; redundancy requires verified equivalent preservation and exposure elsewhere. No paragraph-wide deletion inferred from one unit. |
-| `ADD` | Missing requirement proposal; render only after authoritative evidence supports an addition unit. |
-| `REVISE`, `COMPRESS` | Expression operations on preserved units; do not override their protection or placement. |
-| `FLAG` | Unresolved purpose, evidence, destination or other ambiguity, with explicit scope and review rationale. |
+| `KEEP` | 현재 문서에 정보 보존. 내부 순서 조정과 `REVISE`/`COMPRESS`를 함께 허용한다. |
+| `MOVE` | 검토된 문서 간 이동 제안이며 원본에 필수 조건을 남길 수 있다. 목적지 미확정은 실행 완료가 아니라 `MOVE` 후보 + `FLAG`다. |
+| `REMOVE` | 승인된 생략. 중복이라면 다른 곳에 동등한 정보·필수 조건이 보존되는지 검증해야 한다. 일부 단위의 삭제 근거로 문단 전체를 삭제하지 않는다. |
+| `ADD` | 계약상 누락에 대한 제안. 권위 있는 증거로 추가 정보 단위를 뒷받침한 경우에만 결과로 작성한다. |
+| `REVISE`/`COMPRESS` | 보존 정보에 대한 표현 변경. 보호·배치 판단을 무효화하지 않는다. |
+| `FLAG` | 범위와 검토 이유를 명시한 목적·증거·목적지 등의 미해결 문제. |
 
-### ValidationFinding and ValidationReport
+### ValidationFinding과 ValidationReport
 
-| Field | Contract |
+| 필드 | 계약 |
 | --- | --- |
-| `ValidationFinding.id`, `rule_id`, `severity` | Identity, named violated rule, and existing severity vocabulary: `ERROR`, `WARNING`, `INFO`, `UNRESOLVED`. Severity and compatibility action remain separate. |
-| `artifact_refs`, `spans`, `unit_refs`, `element_refs` | Exact evaluated artifacts and supporting locations; cross-document spans always carry snapshot identity. Shape/configuration errors can identify fields without fabricated text spans. |
-| `evidence_ids`, `rationale`, `uncertainty` | Evidence of violation or uncertainty, including expected vs. observed protected values and scope. |
-| `responsible_component`, `origin_ref`, `repair_recommendation` | Earliest known defect introducer (analysis, organization, expression, resolver, or shared infrastructure), artifact revision that introduced it, and proposed repair. Unknown origin is explicit, not guessed from action/severity. |
-| `requires_human_review`, `blocking`, `compatibility_decision?` | Review decision and policy-based delivery effect, separate from confidence. The gate assigns blocking disposition using named contract/check rules, not a raw model score. |
+| `ValidationFinding.id`, `rule_id`, `severity` | 발견 사항의 ID·규칙·심각도(`ERROR`/`WARNING`/`INFO`/`UNRESOLVED`). 심각도와 대표 액션은 별개다. |
+| `artifact_refs`, `spans`, `unit_refs`, `element_refs` | 실제 검사한 산출물과 근거 위치. 문서 간 원문 위치에는 반드시 스냅샷 ID가 있어야 한다. 설정·형식 오류에는 가짜 텍스트 위치 대신 필드 참조를 쓸 수 있다. |
+| `evidence_ids`, `rationale`, `uncertainty` | 기대·실제 보호 값과 적용 범위를 포함한 증거·이유·불확실성. |
+| `responsible_component`, `origin_ref`, `repair_recommendation` | 결함을 처음 만든 것으로 확인된 분석·재배치·표현·계약 해석기·공통 기반, 해당 산출물 버전, 수정 권고. 원인 미상은 액션·심각도로 억지 추론하지 않는다. |
+| `requires_human_review`, `blocking`, `compatibility_decision?` | 사람 검토 필요와 정책에 따른 전달 차단 여부. 높은 모델 점수만으로 결정하지 않는다. |
 
-`ValidationReport = {meta, validation_plan_ref, checked_artifacts, check_results, findings, gate_state, execution_state, last_gate_state?, stop_reason?}`. It pins the ValidationPlan below and records each expected check instance, including applicability decisions, missing execution and error diagnostics. Module findings are proposals; only the independently owned gate creates the delivery verdict. Infrastructure failures retain outstanding findings even when the report has no text span.
+`ValidationReport = {meta, validation_plan_ref, checked_artifacts, check_results, findings, gate_state, execution_state, last_gate_state?, stop_reason?}`는 아래 ValidationPlan을 고정하고 **예상 검사마다 적용 여부·누락·오류를 기록**한다. 모듈 자체의 발견 사항은 제안이며 독립 게이트만 전달 판정을 확정한다. 실행 기반 오류도 텍스트 위치가 없다는 이유로 미해결 문제를 지워서는 안 된다.
 
-### ValidationPlan and required-check completeness
+### ValidationPlan과 필수 검사 완전성
 
-`ValidationPlan = {meta, contract_ref, check_requirements}` is the single versioned source of required checks, prepared by the shared validation/controller infrastructure and accepted by the independent gate before execution. Its `ArtifactRef` fixes the policy revision/digest; `meta.depends_on` pins the contract and check definitions/configuration. Writers cannot select a smaller check list by submitting fewer results. Policy changes produce a new plan artifact, never edits to an existing plan.
+`ValidationPlan = {meta, contract_ref, check_requirements}`은 필수 검사에 대한 **하나의 버전 고정 기준**이다. 공통 검증·제어 기반이 계획을 준비하고 독립 게이트가 실행 전에 수용한다. `ArtifactRef`는 정책 버전·다이제스트를 고정하고 `meta.depends_on`은 계약·검사 정의와 설정을 고정한다. 작성 모듈이 실행 결과를 적게 제출해 검사 목록을 줄일 수 없다. 정책을 바꾸려면 기존 계획 수정이 아니라 새 산출물이 필요하다.
 
-| Entry in nonempty `check_requirements` | Contract |
+| 비어 있지 않은 `check_requirements` 항목 | 계약 |
 | --- | --- |
-| `requirement_id`, `check_id`, `check_version`, `kind` | Unique requirement identity, required check and exact definition/configuration version, with `deterministic / semantic / human` kind. A report’s version cannot substitute for the required version. Concrete version values are not chosen here. |
-| `boundary`, `scope_ref`, `coverage` | Contract/analysis/organization/final boundary, declared output scope and the same each-member/collective semantics as requirements. Each-member groups expand to separate check instances; collective checks inspect all contributing members together. |
-| `applicability` | `always` or `{condition, input_refs}`: an explicit, version-pinned predicate over immutable artifacts, such as “cross-document transfer or consolidation is proposed.” The gate records `applies / not_applicable / unresolved` with evidence. Lack of context is not evidence of non-applicability. |
+| `requirement_id`, `check_id`, `check_version`, `kind` | 고유한 의무 ID, 검사 ID, 정확한 검사 정의·설정 버전, `deterministic`/`semantic`/`human` 유형. 보고서 버전이 필수 검사 버전을 대신하지 않는다. 구체적 버전 값은 미정. |
+| `boundary`, `scope_ref`, `coverage` | 계약·분석·재배치·최종 경계와 선언된 출력 범위, 개별 구성원·그룹 전체 적용 규칙. `each_member`는 개별 인스턴스로 확장하고 집합 검사는 모든 기여 구성원을 함께 검사한다. |
+| `applicability` | `always` 또는 `{condition, input_refs}`. 예를 들어 '문서 간 이동·통합이 제안됨'처럼 변경 불가능한 입력을 사용하는 버전 고정 조건이다. `applies`/`not_applicable`/`unresolved`를 증거와 함께 기록한다. 맥락이 없다는 이유로 적용 안 됨을 주장하지 않는다. |
 
-The required families in the [boundary invariant table](#gate-dependencies-and-recovery) are a mandatory floor: contract/reference/scope integrity and requirement coverage; extraction coverage and analysis protection; placement, ordering and consolidation integrity; and final trace, protected facts/conditions, semantic preservation and whole-affected-document checks. A plan must cover the applicable boundary families, contract constraints and expanded requirement/scope obligations; an empty plan or one omitting an unconditional family is invalid (`FAIL`). Check decomposition and concrete rule versions remain open. Cross-document destination review is conditional on proposed cross-document transfers/consolidation, and style-specific checks on the relevant contract constraints. A blocked proposal still triggers its destination checks. Required semantic preservation is not replaced by literal checks or writer self-evaluation.
+[검증 경계의 불변조건](#검증-게이트-의존성-및-복구)은 **필수 검사군의 하한선**이다. 계약·참조·출력 범위·요구사항 충족, 추출 범위·정보 보호, 배치·정렬·중복 통합, 최종 추적·사실/조건·의미 보존·관련 문서 전체 검증이 포함된다. 계획은 적용되는 경계 검사군·계약 제약·범위별 의무를 모두 다뤄야 한다. 계획이 비어 있거나 무조건 필요한 검사군이 빠지면 `FAIL`이다. 구체적인 검사 분할과 버전은 아직 미정이다. 문서 간 이동·통합 검사와 문체 제약별 검사는 조건부지만, **차단된 이동 제안에도 목적지 검사는 적용**된다. 글자 그대로의 수치 확인이나 작성 모델의 자기평가만으로 의미 보존 검사를 대체하지 않는다.
 
-For a particular boundary and exact `checked_artifacts`, the gate derives expected instances from the accepted plan. An instance is identified by `(validation_plan_ref, requirement_id, expanded_scope_ref, checked_artifacts)`; its report row must match the required check ID/version and boundary. A group’s collective instance keeps the group scope plus every member artifact; each-member instances use leaf scopes. Each result row records `{requirement_id, check_id, check_version, boundary, scope_ref, checked_artifacts, applicability, status, evidence_ids, reason?}`, inheriting the report’s plan reference. `applicability` includes its state and evidence; `status` uses the execution outcomes in the table below. A declared but unbound scope still has an expected row: report unavailable member artifacts as coverage gaps and unresolved context, without inventing snapshot references. Every expected instance needs exactly one row. Duplicate/mismatched rows or invalid scope/version references fail report integrity; extra advisory checks do not discharge required instances. Earlier successful boundary reports must remain valid dependencies of a final report; a final-stage check alone cannot bypass an unchecked analysis or organization boundary.
+게이트는 정해진 경계와 `checked_artifacts`에 대해 예상 검사 인스턴스를 계산한다. ID는 `(validation_plan_ref, requirement_id, expanded_scope_ref, checked_artifacts)`이며 실제 행의 검사 ID·버전·경계가 일치해야 한다. 그룹 전체 검사에는 그룹 범위와 모든 구성원 산출물, 개별 검사에는 각 최종 범위를 사용한다. 각 행은 `{requirement_id, check_id, check_version, boundary, scope_ref, checked_artifacts, applicability, status, evidence_ids, reason?}`를 기록하고 보고서의 계획을 참조한다. **실제 문서에 아직 연결되지 않은 선언된 범위도 예상 행을 갖는다.** 거짓 스냅샷을 만들지 말고 필요한 자료의 부재·미해결 문맥을 기록한다.
 
-| Applicability / execution observation | Required representation and outcome |
+예상 인스턴스 하나당 결과 행도 정확히 하나여야 한다. 중복·버전/범위가 다른 행은 보고서 무결성 실패다. 추가 권고 검사로 필수 검사를 대체하지 못한다. 최종 보고서는 앞선 모듈 경계에서 성공한 검증 보고서도 유효한 의존성으로 가져야 한다. 마지막 단계만 검사해 앞선 경계를 생략할 수 없다.
+
+| 적용성·실행 관측 | 기록과 처리 |
 | --- | --- |
-| Applicable check completed | `passed`, `violated`, or `unresolved`, with evidence. A confirmed hard violation yields `FAIL`; an executed semantic/human check that cannot decide yields `REVIEW`, absent a hard failure. |
-| Condition proven false | `not_applicable` with predicate inputs/evidence; this discharges only that conditional obligation, not any unconditional check. |
-| Condition cannot be decided | Applicability `unresolved`, execution `not_run` with missing-decision evidence → `REVIEW`, absent a hard failure. No silent exclusion from the expected list. |
-| Expected row missing | The gate synthesizes a missing-instance diagnostic (`CHECK_RESULT_MISSING`); execution is incomplete and the controller returns `STOPPED`. No empty-list/vacuous `PASS`. |
-| Check explicitly not started | `not_run` with reason. A pending human/evidence decision can yield `REVIEW`; scheduling omission, cancellation or interrupted execution yields `STOPPED`. Neither is a pass or proven non-applicability. |
-| Check started but crashed/timed out/unavailable | `execution_error` with diagnostics → controller `STOPPED`. This is not an executed semantic `unresolved` judgment. |
+| 적용되는 검사가 완료됨 | 증거와 함께 `passed`·`violated`·`unresolved`. 확인된 강제 위반은 `FAIL`, 실행은 됐지만 의미·사람 판단이 불가능하면 강제 실패가 없는 한 `REVIEW`. |
+| 조건이 거짓으로 입증됨 | 조건 입력·증거를 갖는 `not_applicable`. 해당 조건부 의무만 면제한다. |
+| 조건의 참·거짓을 판단할 수 없음 | 적용성 `unresolved`, 실행 상태 `not_run` 및 미확정 근거 → 강제 실패가 없다면 `REVIEW`. 조용히 제외하지 않는다. |
+| 예상 결과 행 누락 | 게이트가 `CHECK_RESULT_MISSING` 진단을 만들고 실행 미완료로 제어기 `STOPPED`. 빈 결과로 `PASS` 불가. |
+| 명시적으로 실행하지 않음 | 이유를 담은 `not_run`. 사람·근거 판단 대기면 `REVIEW`, 스케줄러 누락·취소·중단이면 `STOPPED`. |
+| 실행 시작 후 오류·시간 초과·서비스 불가 | 진단을 담은 `execution_error` → 제어기 `STOPPED`. 의미적으로 판단한 `unresolved`와 구별한다. |
 
-`PASS` requires a valid plan/report, resolved applicability for every instance, every applicable required instance `passed`, every excluded conditional instance justified `not_applicable`, valid prerequisite reports and no blocking findings over full affected documents. Thus matching only the rows that happened to run is insufficient. On an execution stop, retain any confirmed hard failures in findings and `last_gate_state` (`FAIL` where established); `STOPPED` does not erase them. Invalid contract/plan/report references are confirmed hard errors, distinct from an execution interruption.
+`PASS`에는 유효한 계획·보고서, 모든 적용성의 해결, 적용되는 필수 검사의 통과, 제외된 조건부 검사의 근거, 앞선 경계 보고서의 유효성, 전체 관련 문서의 차단 결함 부재가 필요하다. **실행된 검사 결과끼리만 비교하면 충분하지 않다.** 실행 중단 시 이미 확인된 강제 실패를 발견 사항과 `last_gate_state`(필요시 `FAIL`)에 유지한다. `STOPPED`가 실패를 없애지 않는다. 계약·계획·보고서 참조의 구조 오류는 단순 실행 중단과 구별되는 확인된 오류다.
 
-A report pins both its plan and contract in `meta.depends_on`. Changing the contract (including scope declarations/membership/bindings), policy, check version/configuration, applicability inputs or evaluated artifacts invalidates the affected plan instances and dependent reports. A contract change requires a newly bound plan; no old `passed` row or `not_applicable` decision carries over by check ID alone. Editorial outputs are invalidated only when their own dependencies changed; an independent policy-only change requires revalidation without automatically regenerating text.
+보고서는 `meta.depends_on`에서 계획과 계약을 고정한다. 계약(범위 선언·구성원·의무), 정책, 검사 버전/설정, 적용 조건 입력, 검사 대상 산출물이 바뀌면 관련 인스턴스와 보고서를 무효화한다. 계약 변경에는 새 계획이 필요하며 동일한 검사 ID라도 이전의 `passed`·`not_applicable`을 자동 재사용하지 않는다. **검사 정책만 바뀐 경우에는 기존 텍스트를 반드시 다시 생성할 필요는 없지만 재검증은 필요하다.**
 
-## Module interfaces
+## 모듈 인터페이스
 
-All calls consume immutable references and return new artifacts plus findings. A module outcome distinguishes `ready`, `needs_review`, `invalid_input`, and `execution_error`; these are processing outcomes, **not** the gate's four delivery states. Partial artifacts are diagnostic/preview only and cannot feed automatic downstream delivery.
+모든 호출은 변경 불가능한 참조를 입력받고 새 산출물과 발견 사항을 반환한다. 모듈 실행 상태 `ready`/`needs_review`/`invalid_input`/`execution_error`는 최종 전달 상태 네 가지와 별개다. 부분 산출물은 진단·미리보기 전용이며 자동 전달의 다음 단계 입력으로 사용할 수 없다.
 
-| Interface | Input | Output | Preconditions and responsibility | Failure/recovery |
+| 인터페이스 | 입력 | 출력 | 선행조건과 책임 | 실패·복구 |
 | --- | --- | --- | --- | --- |
-| `analyze` — Information Extraction & Analysis | Resolved WritingContract, source snapshots, user-context/evidence references, optional candidate relation pairs | AnalysisResult, alignment report, optional evidence-backed contract correction request | Contract shape valid; sources addressable. Extract and account for units, link claims/conditions/numbers/attribution/evidence, bind requirements, assess relevance/importance, propose preservation/addition/move candidates. | Invalid spans/contract → `invalid_input` + hard finding. Purpose ambiguity or missing support → `needs_review`. Omitted unit/incorrect assessment → rerun analysis. Accepted purpose correction returns through resolver first. |
-| `organize` — Information Organization | Same contract, gate-accepted AnalysisResult, source and candidate destination snapshots/profiles, optional candidate-search response | OrganizationPlan and routing/consolidation findings | Analysis matches contract; all unit/element references resolve. Select destination/section/order, review existing destination content, preserve protected elements and per-document exposure during consolidation. | Missing target context → `needs_review`, no source removal. Scope/claim conflict → analysis request. Cyclic ordering, stale inputs or missing required placements → invalid plan. Retrieval outage may use supplied context; otherwise review, never pretend empty results prove no destination. |
-| `refine` — Expression Refinement | Same contract and analysis inventory, gate-accepted OrganizationPlan, protected-element bindings, full affected snapshots | RevisionResult with embedded ExpressionPlan, new snapshots and trace | Only resolved and verified placements may produce a deliverable candidate. Rewrite/compress for register, terminology and clarity without changing preservation/destinations. | Inexpressible protection or plan defect → finding to upstream owner. Number/meaning drift introduced here → expression repair. Missing full documents → preview only. Generation error → `execution_error`; preserve inputs. |
+| **`analyze` — 정보 추출·분석** | 확정된 작성 계약, 원본 스냅샷, 사용자 문맥/근거 참조, 선택적 관계 후보 | AnalysisResult, 목적 정합성 보고, 근거가 있는 계약 수정 요청(선택) | 계약 형식과 원본 참조 유효. 주장·조건·수치·귀속·근거를 추출하고 전체 범위를 설명하며 필수 의무·관련성·중요도·보존 후보를 판단. | 잘못된 계약/범위 → `invalid_input`과 강제 결함. 목적·근거 불명 → `needs_review`. 정보 누락·오판 → 재분석. 수용된 목적 수정은 먼저 해석기로 돌아간다. |
+| **`organize` — 정보 재배치·재구성** | 같은 계약, 게이트를 통과한 AnalysisResult, 원본·목적지 스냅샷/프로필, 후보 검색 결과(선택) | OrganizationPlan, 경로·통합 관련 발견 사항 | 분석이 계약과 일치하고 모든 참조 유효. 목적지·섹션·순서를 결정하고 기존 대상 내용을 검토하며 통합 시 보호 요소·문서별 노출을 보존. | 목적지 부족 → `needs_review` 및 원본 유지. 주장·범위 충돌 → 분석 요청. 순서 순환·오래된 입력·배치 누락 → 계획 오류. 검색 불가 시 이미 확보한 맥락으로만 진행하고 무검색을 '목적지 없음'으로 단정하지 않는다. |
+| **`refine` — 표현 수정** | 같은 계약과 정보 목록, 게이트가 승인한 OrganizationPlan, 보호 요소, 전체 원본·목적지 스냅샷 | ExpressionPlan을 포함한 RevisionResult, 새 스냅샷·양방향 추적 | 확정·검증된 배치만 실제 전달 후보를 만들 수 있다. 정보 보존·목적지는 바꾸지 않고 재작성·압축·문체·용어·가독성을 다룬다. | 안전한 표현 불가·계획 오류 → 앞선 모듈에 발견 사항 전달. 여기서 만든 수치/의미 왜곡 → 표현 수정 재시도. 문서 전체 미확보 → 미리보기만. 생성 오류 → `execution_error`, 입력 보존. |
 
-The controller may collect a preview for human review of blocked plans, but marks unresolved portions, keeps original source text, and never passes that preview as a ready plan or completed move. No module writes to Git, a server, or a user's files through these interfaces.
+제어기는 차단된 배치의 일부를 사람 검토용 미리보기로 만들 수 있으나 미해결 부분을 표시하고 원본을 유지해야 한다. 이 미리보기를 확정된 배치·이동 결과로 전달해서는 안 된다. 위 인터페이스 자체는 Git·서버·사용자 파일에 쓰지 않는다.
 
-### Search-independent candidate discovery
+### 검색 방식에 종속되지 않는 후보 탐색
 
-Organization may call a future `CandidateSearch` port:
+재배치 모듈은 향후 `CandidateSearch` 포트를 사용할 수 있다.
 
-- Request: `{contract_ref, analysis_ref, query_unit_refs, task, scope, context_refs, budget_policy_ref}`, where task is destination, related-information, overlap, or potential-conflict discovery. No fixed number of results is prescribed.
-- Response: `{request_ref, index_or_corpus_revision, candidates, coverage, limitations}`. Each candidate identifies a document snapshot and optional unit/span, retrieval rationale, method, optional method-specific score/rank, and context-availability status. Results can be empty, partial, stale, unavailable, or complete relative to a declared corpus; not complete relative to all possible knowledge.
-- Candidate context must be loaded and verified against the exact snapshot before routing or merging. Scores from different methods need not be comparable. Stale index hits require current context retrieval and rechecking; unavailable context yields `REVIEW`.
+- **요청:** `{contract_ref, analysis_ref, query_unit_refs, task, scope, context_refs, budget_policy_ref}`. 작업은 목적지·관련 정보·중복·잠재적 충돌 검색이며 고정 결과 수를 강제하지 않는다.
+- **응답:** `{request_ref, index_or_corpus_revision, candidates, coverage, limitations}`. 후보는 정확한 문서 스냅샷, 선택적 정보·원문 범위, 검색 이유·방법·선택적 점수/순위·문맥 확보 여부를 기록한다. 결과는 비어 있거나 부분·오래됨·사용 불가일 수 있으며, '완전'은 선언된 코퍼스에서만 의미가 있다.
+- **후속 검토:** 목적지·중복 통합 전에 정확한 스냅샷의 문맥을 불러와 검증한다. 방법별 점수는 서로 비교 가능하지 않을 수 있다. 오래된 인덱스 결과는 최신 문맥을 다시 확인하며 문맥이 없으면 `REVIEW`다.
 
-Vector embeddings and cosine similarity are an important possible implementation for document-profile affinity and unit overlap. Lexical search, metadata lookup, caller-supplied candidates, or hybrid retrieval can satisfy the same port. Similarity is neither relevance/importance nor truth, equivalence, deletion authority, or intra-document ordering. Potential contradictions return to analysis; destination decisions remain Organization's responsibility. No embedding model, vector database, provider, or threshold is chosen.
+문서 프로필과 정보 단위 임베딩·코사인 유사도는 중요한 구현 후보지만, 어휘 검색·메타데이터 조회·사용자 제공 후보·혼합 검색도 같은 포트로 사용할 수 있다. **유사도는 관련성·중요도·진실성·동등성·삭제 권한·문서 내부 순서의 판정이 아니다.** 모순 후보는 분석 모듈로, 목적지 결정은 재배치 모듈로 보낸다. 임베딩 모델·DB·제공자·임계값은 미정이다.
 
-## Gate, dependencies, and recovery
+## 검증 게이트, 의존성 및 복구
 
 ```mermaid
 flowchart TD
-    C[Contract Resolver: versioned WritingContract] --> A[Extraction & Analysis]
-    A --> GA[Gate: inventory and intent checks]
-    GA --> O[Organization]
-    O --> GO[Gate: placement and preservation checks]
-    GO --> E[Expression Refinement]
-    E --> GF[Gate: complete affected documents]
-    GF --> R[Report: PASS / REVIEW / FAIL]
+    C[Contract Resolver: 버전 고정 WritingContract] --> A[정보 추출·분석]
+    A --> GA[게이트: 정보 목록·의도 검사]
+    GA --> O[정보 재배치·재구성]
+    O --> GO[게이트: 배치·보존 검사]
+    GO --> E[표현 수정]
+    E --> GF[게이트: 영향받는 문서 전체 검사]
+    GF --> R[보고: PASS / REVIEW / FAIL]
     GA --> RC[Revision Controller]
     GO --> RC
     GF --> RC
@@ -217,125 +217,125 @@ flowchart TD
     RC --> A
     RC --> O
     RC --> E
-    RC --> S[STOPPED with unresolved evidence]
+    RC --> S[STOPPED: 미해결 근거 유지]
 ```
 
-| Boundary / invariant | Gate evidence and defect routing |
+| 검증 경계·불변조건 | 게이트 근거·결함 복구 |
 | --- | --- |
-| Contract → analysis | Required fields, intent provenance, complete requirement bindings, input-block coverage, snapshot/span/digest validity. Purpose mismatch goes to analysis/resolver; extraction gaps to analysis. |
-| Analysis → organization | Each unit has a scoped assessment and every protected element is reachable; claims retain conditions, metrics and attribution. Unsupported addition or incorrect preservation returns to analysis. |
-| Organization → expression | Every unit has a resolved disposition, every destination is inspected, every consolidation member contributes its required elements, ordering is acyclic, source-visible claims keep necessary local conditions. Routing or merge loss returns to organization. |
-| Expression → final report | Actual output text and both-direction trace satisfy all required facts, numbers, conditions, citations and attribution. Full source and destination documents, including untouched passages, are checked for contradictions, register and exposure. Wording drift returns to expression; pre-existing factual ambiguity to analysis. |
-| All boundaries | Scope references resolve to contract declarations, artifact dependencies match exactly, input text is untrusted data, ValidationPlan completeness is reconciled against results, and no unresolved required decision is hidden. A module's `ready` or self-evaluation is never a gate verdict. |
+| **계약 → 분석** | 필수 필드·의도 출처·요구사항 연결·모든 입력 블록 처리·스냅샷/범위/다이제스트 유효성. 목적 오판은 분석·해석기로, 추출 누락은 분석으로. |
+| **분석 → 재배치** | 모든 정보의 출력별 평가, 보호 요소 참조, 주장과 조건·측정 단위·귀속의 연결. 근거 없는 추가나 잘못된 보존은 분석으로. |
+| **재배치 → 표현** | 각 정보의 확정 처리, 목적지 검토, 통합 전 구성원별 보호 요소 보존, 순환 없는 순서, 원본 주장의 필수 조건 노출. 경로·통합 손실은 재배치로. |
+| **표현 → 최종 보고** | 실제 결과 텍스트와 양방향 추적에서 필수 사실·수치·조건·인용·귀속 확인. 바뀌지 않은 부분을 포함한 모든 원본·목적지 문서를 모순·문체·노출 관점으로 검토. 표현 왜곡은 표현 수정으로, 기존 사실 불확실성은 분석으로. |
+| **모든 경계** | 범위 참조가 계약 선언에 연결되고 산출물 의존성이 정확하며 비신뢰 입력을 지시로 실행하지 않는다. ValidationPlan의 필수 검사와 실제 결과를 대조하고, 미해결 필수 결정을 숨기지 않는다. 모듈의 `ready`나 자기평가는 게이트 판정이 아니다. |
 
-The gate checks extraction coverage against source text independently; otherwise an absent unit could escape every later preservation check. Likewise it checks output assertions independently of the submitted trace. Deterministic rules can compare protected literals and references; semantic scope, attribution and caveat proximity need contextual review. A human may decide an unresolved issue with recorded evidence; a model declaration alone does not settle it. A `PASS` is bounded to configured checks and checked snapshots, not proof of factual completeness.
+게이트는 정보 목록만 믿지 않고 **원문 자체에서 추출 범위의 완전성**을 확인해야 한다. 그렇지 않으면 추출 단계에서 빠진 정보가 이후 보존 검사에서도 보이지 않는다. 최종 주장도 제출된 대응표와 독립적으로 점검한다. 결정론적 규칙은 문자 그대로의 보호 값·참조를 비교할 수 있지만, 의미 범위·귀속·조건 인접성은 문맥 검토가 필요하다. 사람은 근거를 기록해 미해결 문제를 결정할 수 있으나 모델의 선언만으로 확정하지 않는다. `PASS`는 **실행한 정책과 고정된 스냅샷에 한정**되며 사실 전체의 완전성을 보증하지 않는다.
 
-### Invalidation and defect ownership
+### 무효화와 결함 책임
 
-Dependency edges are recorded in `meta.depends_on`. A changed contract invalidates dependent assessments, organization, expression and validation. Changed extraction/assessment invalidates organization and expression; changed organization invalidates expression. Any changed output invalidates its prior gate report. ValidationPlan, check configuration and applicability-input changes invalidate dependent validation reports as specified above. A source/destination update also invalidates its spans, extracted inventory, context reviews and all dependent results. The controller must reject stale artifacts even if their IDs or apparent text match.
+`meta.depends_on`은 의존성을 고정한다. 계약이 바뀌면 평가·재배치·표현·검증을, 분석·평가가 바뀌면 재배치·표현을, 재배치가 바뀌면 표현을 무효화한다. 결과 텍스트가 바뀌면 기존 게이트 보고서도 무효다. ValidationPlan·검사 설정·조건 입력이 바뀌면 관련 검증 결과가 무효다. 원본·목적지 스냅샷이 변경되면 오프셋·정보 목록·목적지 맥락 검토·종속 결과를 다시 확인한다. ID나 글이 겉으로 같아도 의존성이 다르면 오래된 산출물을 거부한다.
 
-Selective reuse is permitted only for artifacts whose complete dependency references are unchanged and whose independence is recorded; conservative full downstream recomputation is valid. Each accepted edit ends in whole-document validation across the complete affected change set. No full-document `PASS` is possible from fixture excerpts alone.
+부분 재사용은 **전체 의존성 참조가 같고 독립성이 기록된 경우에만** 허용한다. 확실하지 않으면 하위 전체 재계산이 안전하다. 수용된 수정은 영향받는 변경 묶음 전체를 검증해야 한다. 발췌만으로 문서 전체 `PASS`를 만들 수 없다.
 
-The controller compares the last gate-accepted boundary with the first artifact that loses an element or changes a claim. If the unit was absent during extraction, analysis owns the defect; if a complete analysis was misrouted/consolidated, organization owns it; if a correct plan was rewritten incorrectly, expression owns it. Unclear causes return to analysis with available evidence, as in PR #3. Resolver failures route to the resolver; validator/execution faults go to infrastructure rather than asking a writer to compensate.
+제어기는 마지막으로 게이트가 수용한 경계부터 정보가 사라지거나 주장이 달라진 최초 산출물을 찾는다. 원래 추출되지 않았다면 분석, 완전한 분석이 잘못 이동·통합됐다면 재배치, 올바른 계획을 잘못 표현했다면 표현 수정이 책임진다. 불분명하면 근거와 함께 분석으로 복귀한다. 계약 해석 오류는 해석기로, 검사·실행 인프라 오류는 글 작성 모듈이 아닌 공통 기반으로 보낸다.
 
-Every attempt records input/output refs, findings introduced/resolved, owner, repair request and invalidations. Reverting a regressive candidate retains the last accepted artifacts and marks the rejected attempt; it does not publish a partial move or erase the audit trail. Unsupported repairs stay reviewable instead of inventing facts.
+모든 시도는 입력·출력 참조, 새로 생기거나 해결된 문제, 책임 모듈, 수정 요청, 무효화 기록을 남긴다. 퇴행한 초안을 되돌릴 때는 마지막으로 승인된 산출물을 유지하고 실패 시도도 감사 기록에 남긴다. 일부 `MOVE`만 출판하거나 무근거 수정을 확정하지 않는다.
 
-### Bounded outcomes
+### 유한한 실행과 종료 상태
 
-The controller requires a finite `attempt_policy` (including a total run-wide limit and no-progress/repetition detection); the actual limit and comparison algorithm remain open. Module switches or contract repairs do not reset the total budget. The architecture's earlier default of three is only a prior proposal, not an adopted numerical setting.
+제어기는 전체 실행에 적용되는 **유한한 `attempt_policy`**와 진전 없음·반복 탐지가 필요하다. 실제 횟수·비교 알고리즘은 미정이다. 모듈을 바꾸거나 계약을 복구해도 전체 예산을 초기화하지 않는다. 기존 아키텍처의 '기본 3회'는 미채택 제안이다.
 
-| State | Meaning and handling |
+| 상태 | 의미·처리 |
 | --- | --- |
-| `PASS` | Every applicable ValidationPlan requirement has a matching passed instance, all conditional exclusions are justified, and no blocking findings/review decisions remain across full affected documents. Optional INFO can remain. Deliver a candidate/report, not automatic publication. |
-| `REVIEW` | No confirmed hard failure, but required semantic/human decisions, unverified destinations or intent conflicts remain. Stop automatic editing and return original/preview, evidence and specific open questions. |
-| `FAIL` | Confirmed hard requirement violation. If cause/evidence permit bounded repair, route to owner and recheck; otherwise return failure. An unresolved issue does not hide a simultaneous confirmed failure. |
-| `STOPPED` | Attempt limit, repeated/non-improving state, cancellation or execution error prevented completion. Include stop reason, latest attempted candidate, last accepted artifacts, outstanding findings and last actual gate state, if any. |
+| `PASS` | 모든 적용 대상 ValidationPlan 의무가 통과했고 조건부 제외에 근거가 있으며 차단 문제·검토 의무가 없다. `INFO`는 남을 수 있다. **자동 배포가 아닌 전달 후보·보고서**를 반환한다. |
+| `REVIEW` | 확정된 강제 실패는 없지만 의미·사람 판단·미확인 목적지·목적 충돌이 남는다. 자동 수정을 중지하고 원본/미리보기·근거·질문을 반환한다. |
+| `FAIL` | 확인된 강제 위반이 있다. 제한된 수정이 가능하면 책임 단계로 돌아가고 아니면 실패를 반환한다. 미해결 문제가 확정 실패를 가리지 않는다. |
+| `STOPPED` | 횟수 한도·반복/진전 없음·취소·실행 오류로 완료하지 못했다. 중단 이유, 최근 시도 후보, 마지막 승인 산출물, 미해결 사항, 마지막 실제 게이트 판정을 보존한다. |
 
-Gate delivery precedence is confirmed hard failure → `FAIL`; otherwise blocking unresolved decision → `REVIEW`; otherwise all required checks passed → `PASS`. A missing, not-run, errored or undecidable required instance prevents `PASS`, following the ValidationPlan completeness table: unresolved evidence/human decisions yield `REVIEW`; missing execution or execution breakdown yields controller `STOPPED`. `STOPPED` is a controller terminal outcome and preserves `last_gate_state` rather than implying the last violation vanished. ValidationReport carries `execution_state` to keep execution completion separate from content correctness.
+확정된 강제 실패가 있다면 `FAIL`, 그 밖의 차단된 미결정이 있으면 `REVIEW`, 모든 필수 검사가 통과하면 `PASS`라는 우선순위를 따른다. 누락·미실행·오류·판정 불가인 필수 검사가 있으면 `PASS`가 불가능하다. 근거·사람 판단 대기는 `REVIEW`, 실행 누락·실행 장애는 제어기 `STOPPED`다. `STOPPED`는 실행 종료 상태이며 `last_gate_state`를 통해 마지막 내용상의 문제를 별도로 유지한다. `ValidationReport.execution_state`도 실행 완료와 글의 올바름을 분리한다.
 
-## Manual walkthroughs using provisional candidates
+## 잠정 실제 사례를 이용한 수작업 흐름 검토
 
-These are design walkthroughs of the **stored excerpts and annotations** in [real-world-candidates.json](../tests/fixtures/real-world-candidates.json). They are not executable evaluations, remote-source rechecks, full-document edits, human review or label adoption. IDs below are local illustrative aliases. Line locations refer to fixture captures; a future adapter computes exact `SpanRef` offsets in each captured text. Plans and result text are previews; missing full documents/context block a final `PASS`. Findings below distinguish observed missing context from hypothetical injected defects.
+다음은 [실제 평가 후보 JSON](../tests/fixtures/real-world-candidates.json)에 **저장된 발췌와 기존 주석**을 이용한 설계 검토다. 실행 평가·원격 원문 재검증·전체 문서 편집·사람 검토·확정 라벨이 아니다. 예시 ID는 지역적인 가명이고 행 번호는 수집된 발췌의 위치다. 실제 `SpanRef`는 향후 어댑터가 저장 텍스트로 계산한다. 문서 전체나 목적지 맥락이 없으면 최종 `PASS`는 불가능하다. 관측된 자료 부족과 가상으로 주입한 결함을 구별한다.
 
-### RW-008 — recover a misidentified purpose before restructuring
+### RW-008 — 목적 오판과 구조 재설계
 
-| Step | Data flow |
+| 단계 | 자료 흐름 |
 | --- | --- |
-| Input | Captured `resume.md` lines 67–68, commit `a01e81e…`, plus the fixture contract for quickly scanning recruiters. Existing action remains provisional `FLAG`; exact structure remains unresolved. |
-| InformationUnit | `8a`: comparison and selection on the same 20-sentence GPU benchmark, including all four `0.1985s / 0.2041s / 6.9075s / 28.1953s` values; `8b`: resulting generation-time change `5.6ms(+2.8%)`; `8c`: later `G_2800` benchmark `mean 0.38s / p95 0.53s / RTF 0.0894`; `8d`: real STT+NLU with **MockTTS**, 50-turn isolated E2E, `p95 312.2ms`. Remaining integration/training/closure facts are separately accounted for, not discarded as connective text. |
-| Assessment | Preserve actual contribution, judgment and scoped results. The inherited action/result template or an inferred activity-log purpose must not force extra compression. Alignment proposes a purpose correction only if the supplied contract was wrongly inferred; the fixture's actual purpose is already the target and is not rewritten. |
-| OrganizationPlan | Block final restructuring pending whole-resume and template review. Candidate same-document groups can separate contribution, selection evidence and validation scope; record `placement`, not `MOVE`. No final group choice or `REVISE` scope is claimed. |
-| RevisionResult | `delivery_state: preview`; retain captured text as-is, trace `8a…8d` to their unchanged spans. A later approved structure may combine sentences, but cannot conflate the same-20-sentence comparison, production-checkpoint benchmark and MockTTS test. No compressed replacement is asserted here. |
-| ValidationFinding | Observed limitation: `PURPOSE_STRUCTURE_REVIEW`, `UNRESOLVED`, analysis/resolver, human review required. Gate `REVIEW`. Injected defect example: calling `312.2ms` production TTS latency would be scope loss; route to whichever artifact first introduced that claim. |
+| **입력** | `resume.md` 67~68행, 커밋 `a01e81e…`. 채용 담당자의 빠른 파악을 위한 잠정 계약. 기존 라벨 `FLAG`를 확정하지 않으며 구체 구조는 미정. |
+| **InformationUnit** | `8a`: 동일한 GPU 20문장 비교와 선택, `0.1985s / 0.2041s / 6.9075s / 28.1953s`; `8b`: 생성 시간 `5.6ms(+2.8%)` 변화; `8c`: 후속 `G_2800` `mean 0.38s / p95 0.53s / RTF 0.0894`; `8d`: 실제 STT+NLU와 **MockTTS**의 50턴 분리 E2E `p95 312.2ms`. 통합·학습·종료 작업도 별도 정보로 처리하고 연결 문장이라며 버리지 않는다. |
+| **판단** | 실제 기여·선택 근거·범위가 있는 성과를 보존한다. 기존 행동/결과 템플릿이나 활동 일지로 추론한 목적만으로 추가 압축하지 않는다. 제공 계약이 잘못 추론된 경우에만 목적 수정안을 제안한다. 이 평가 후보의 실제 목적은 이미 목표이므로 임의로 바꾸지 않는다. |
+| **OrganizationPlan** | 전체 이력서·템플릿 검토 전까지 최종 재구성 차단. 기여·선택 근거·검증 범위를 같은 문서의 다른 그룹으로 정리하는 후보는 `placement`이며 `MOVE`가 아니다. 최종 그룹·표현 범위는 미정. |
+| **RevisionResult** | `preview`; 원문을 그대로 유지하고 `8a…8d`를 원본 위치에 연결한다. 향후 문장을 통합해도 동일 20문장 비교, 체크포인트 성능, MockTTS 검증을 혼동하지 않는다. |
+| **ValidationFinding** | 관측된 한계: `PURPOSE_STRUCTURE_REVIEW`/`UNRESOLVED`, 분석/해석기, 사람 검토 필요 → `REVIEW`. **가상 결함:** `312.2ms`를 운영 환경의 실제 TTS 지연으로 표현하면 범위를 잘못 넓힌 것이다. 처음 결함을 만든 산출물로 복귀한다. |
 
-This explicitly supports a meaningful partial result when safe final structure cannot yet be chosen. It preserves the candidate's open questions rather than deciding that more compression solves the issue.
+이 방식은 안전한 전체 구조가 정해지지 않아도 의미 있는 부분 분석을 허용한다. 의문이 남았는데 추가 압축이 해법이라고 단정하지 않는다.
 
-### RW-013 — distinct decisions inside the same paragraph
+### RW-013 — 한 문단의 다른 판단
 
-| Step | Data flow |
+| 단계 | 자료 흐름 |
 | --- | --- |
-| Input | Captured QuotaTray README lines 54–62, commit `e62eb5c…`; purpose: users understand refresh after login. Provisional primary action stays `MOVE`, restricted to internals/developer diagnosis. |
-| InformationUnit | `13a`: after successful Antigravity/agy login creates a local OAuth session, refresh can work with agy off; `13b`: ordinary users need no OAuth environment variables; `13c`: metadata lookup, **SHA-256** fingerprint validation and dedicated cache storage; `13d`: do not overwrite `gemini:antigravity`; `13e`: exact TestCli command with its source/development-environment context. `13b`, `13c`, `13d` occupy one paragraph but are separate units. |
-| Assessment | `13a/b/d`: `retain_current`, with conditions/identifier protected; `13c/e`: `preserve_elsewhere_candidate`. The user-facing credential impact stays visible; detailed ownership can also appear with the design explanation. This reuses the fixture's scoped `information_decisions`, without revising its primary label. |
-| OrganizationPlan | Place `13a/b/d` under current authentication/first-use guidance. `13c` targets an authentication-design **role**, `13e` a developer-troubleshooting **role**; actual paths/context remain unverified. Both transfers are blocked. Any overlap search must inspect destination conditions and existing ownership statements first. |
-| RevisionResult | Local preview sentence: “Antigravity/agy에서 한 번 정상 로그인해 로컬 OAuth 세션이 생성되면, 이후 agy가 꺼져 있어도 쿼터를 갱신할 수 있습니다. 일반 사용자는 OAuth 환경변수를 따로 설정할 필요가 없으며, 기존 `gemini:antigravity` 자격증명을 덮어쓰지 않습니다.” It maps to `13a/b/d` and allows `KEEP` + `REVISE`. Until destinations are verified, retain `13c/e` unchanged in the source; no completed move/change set exists. |
-| ValidationFinding | Observed limitation: `DESTINATION_UNVERIFIED`, `UNRESOLVED`, organization, review required → `REVIEW`. Injected deletion of `13d` during polishing yields `PROTECTED_INFORMATION_LOST`; with an intact plan, expression owns the repair. |
+| **입력** | QuotaTray README 54~62행, 커밋 `e62eb5c…`. 로그인 뒤 갱신 동작을 사용자에게 알리는 목적. 잠정 대표 액션 `MOVE`는 내부 구현·개발자 진단 부분에 한정한다. |
+| **InformationUnit** | `13a`: 정상 Antigravity/agy 로그인으로 로컬 OAuth 세션이 만들어지면 agy 종료 후에도 갱신 가능; `13b`: 일반 사용자에게 OAuth 환경변수 불필요; `13c`: 메타데이터 조회·**SHA-256** 지문 확인·전용 캐시 저장; `13d`: 기존 `gemini:antigravity`를 덮어쓰지 않음; `13e`: 원본·개발 환경의 조건과 함께 있는 정확한 TestCli 명령. `13b/c/d`는 한 문단에 있지만 독립 정보다. |
+| **판단** | `13a/b/d`는 필수 조건·식별자를 보호하면서 `retain_current`, `13c/e`는 `preserve_elsewhere_candidate`. 자격증명에 관한 사용자 영향은 README에 남기고 세부 구현은 설계에도 나타낼 수 있다. 기존 잠정 `information_decisions`를 재사용한다. |
+| **OrganizationPlan** | `13a/b/d`는 현재 로그인·첫 사용 안내에, `13c`는 인증 설계 **역할**로, `13e`는 개발자 문제 해결 **역할**로 제안한다. 실제 파일·맥락을 검증하지 못했으므로 두 이동은 차단된다. 중복 판단에는 목적지 조건과 기존 자격증명 처리 내용의 확인이 선행돼야 한다. |
+| **RevisionResult** | 부분 미리보기: “Antigravity/agy에서 한 번 정상 로그인해 로컬 OAuth 세션이 생성되면, 이후 agy가 꺼져 있어도 쿼터를 갱신할 수 있습니다. 일반 사용자는 OAuth 환경변수를 따로 설정할 필요가 없으며, 기존 `gemini:antigravity` 자격증명을 덮어쓰지 않습니다.” `13a/b/d`의 `KEEP`+`REVISE`이며 목적지가 검증될 때까지 `13c/e`는 원본에 남긴다. |
+| **ValidationFinding** | 관측된 한계: `DESTINATION_UNVERIFIED`/`UNRESOLVED` → 재배치 `REVIEW`. **가상 결함:** 수정 중 `13d`를 지우면 `PROTECTED_INFORMATION_LOST`; 배치 계획이 정상이었다면 표현 수정 책임이다. |
 
-A whole-paragraph `MOVE` would incorrectly remove user guidance. The separate unit assessments and multiple expression operations avoid that failure.
+문단 전체를 `MOVE`하면 사용자 안내까지 잘못 없애게 된다. 정보 단위별 판단과 복수 표현 작업이 이를 막는다.
 
-### RW-012 — move detailed limits and preserve interpretation conditions
+### RW-012 — 상세 제약 이동과 조건 노출
 
-| Step | Data flow |
+| 단계 | 자료 흐름 |
 | --- | --- |
-| Input | Captured `resume.md` lines 79–84, commit `a01e81e…`; audience: recruiters/technical interviewers. Provisional `MOVE` applies to detailed limits, not all contributions. Final destination path is unknown. |
-| InformationUnit | `12a`: LLM screening/evaluation (`40`, `22 × 30 = 660`, final `4`) and local default **candidate**, with synthetic-evaluation scope; `12b`: defect discovery/review contribution versus teammate verifier patch; `12c`: C2 `1,233`-item evaluation WER `9.77%`, versus existing `119`-item retention WER `15.33% → 16.81%`; `12d`: CI changes and limited verification, not full deployed E2E/cost benefit. Detailed caveats link to their respective claims. |
-| Assessment | Retain contributions and necessary scope/attribution. Detailed validation limits are move candidates. For `12c`, dataset, metric, regression and no operational-replacement-success implication are protected together; a positive-only rewrite is not permitted. Other numeric details remain in the inventory and need verified destination coverage if omitted locally. |
-| OrganizationPlan | Current resume exposes concise scoped claims; a project-evidence destination exposes detailed measurements/limits near the relevant evidence. Target role is provisional, not a fabricated filename. Consolidation requires per-element contribution mapping and checks both current and destination claims. |
-| RevisionResult | Illustrative current-document preview for `12c`: “Whisper Medium QLoRA 학습·데이터 정제와 평가를 수행했습니다. 후보 C2는 1,233건 평가 WER 9.77%였으나, 기존 119건 retention WER는 15.33%에서 16.81%로 악화했습니다.” This maps all these elements to visible spans and does not claim general improvement/model replacement. Detailed limits stay at source until a real destination is inspected and integrated. Other contributions remain unchanged in this preview. |
-| ValidationFinding | Observed limitation: `DESTINATION_UNVERIFIED` → organization, `REVIEW`. Injected defect: a rewrite saying “전반적 성능 개선” or replacing necessary local qualifiers with a bare link triggers `CLAIM_SCOPE_BROADENED` / `CAVEAT_EXPOSURE_LOST`. Owner is organization if exposure was omitted in the plan; expression if a correct exposure plan was ignored. |
+| **입력** | `resume.md` 79~84행, 커밋 `a01e81e…`. 독자는 채용 담당자·기술 면접관. 잠정 `MOVE`는 전체 기여가 아닌 **상세 제한 조건**에만 적용. 최종 목적지 경로 미확인. |
+| **InformationUnit** | `12a`: LLM 선별/평가 `40`, `22 × 30 = 660`, 최종 `4`와 합성 평가 범위의 로컬 기본 **후보**; `12b`: 본인의 결함 발견·검토와 팀원의 검증기 패치 구분; `12c`: C2 `1,233`건의 WER `9.77%`와 기존 `119`건 유지 평가 WER `15.33% → 16.81%`; `12d`: 제한적으로 확인된 CI 변경과 검증(운영 배포 E2E·비용 효과 완료를 뜻하지 않음). 상세 주의사항은 각 주장에 연결한다. |
+| **판단** | 기여와 필수 범위·귀속은 유지, 자세한 검증 조건은 이동 후보다. `12c`의 데이터셋·지표·성능 악화·운영 대체 성공을 뜻하지 않는다는 조건을 함께 보호한다. 긍정적인 수치만 남기지 않는다. 다른 수치도 목적지 보존 검증 없이는 본문에서 제거하지 않는다. |
+| **OrganizationPlan** | 이력서는 범위가 정해진 간결한 주장, 프로젝트 근거 문서는 상세 수치·한계를 보유하는 방식의 후보. 목적지는 역할만 잠정 선언한다. 통합 시 요소별 기여를 추적하고 양쪽 문서 주장을 검사한다. |
+| **RevisionResult** | `12c` 미리보기: “Whisper Medium QLoRA 학습·데이터 정제와 평가를 수행했습니다. 후보 C2는 1,233건 평가 WER 9.77%였으나, 기존 119건 retention WER는 15.33%에서 16.81%로 악화했습니다.” 전체 성능 개선이나 모델 대체를 주장하지 않는다. 목적지 확인 전에는 상세 조건을 원문에서 없애지 않는다. |
+| **ValidationFinding** | 관측된 한계: `DESTINATION_UNVERIFIED` → 재배치 `REVIEW`. **가상 결함:** “전반적 성능 개선” 또는 필수 조건을 링크만으로 대체하면 `CLAIM_SCOPE_BROADENED`/`CAVEAT_EXPOSURE_LOST`. 계획 단계에서 조건을 뺐다면 재배치, 올바른 계획을 무시했다면 표현 수정이 책임진다. |
 
-Moving detail is not deleting limitations from the information corpus, and corpus preservation alone does not establish adequate local exposure. No target-preservation claim is made without its text.
+전체 근거 자료에서 한계를 보존하는 것과 **현재 독자가 볼 주장 가까이에 필요한 한계를 남기는 것**은 다르다. 목적지 실제 텍스트 없이 보존 완료를 주장하지 않는다.
 
-### RW-005 — KEEP permits placement and expression changes
+### RW-005 — KEEP과 배치·표현 수정의 공존
 
-| Step | Data flow |
+| 단계 | 자료 흐름 |
 | --- | --- |
-| Input | Captured release notes lines 7–10, commit `dcc9ed7…`; readers are update users and maintainers. Provisional action remains `KEEP`. |
-| InformationUnit | `5a`: public endpoint readiness and early runtime/tunnel exit; `5b`: restored Git mode `100755` for `install.sh` after fresh clone; `5c`: permission preservation on patches/overwrites/moves/rollback; `5d`: executable mode restoration for `scripts/e2e-release-bootstrap.sh`, tests and CI checks for **both** bootstrap scripts. |
-| Assessment | All retain information in the current release notes. Literal script names/mode and behavior conditions are protected. These are captured release assertions, not newly verified test/runtime facts. |
-| OrganizationPlan | User changes `5a/b/c` first; place `5d` after them or in a verification group of the **same document**. The proposed group need not already be a heading. A new document is neither required nor authorized. |
-| RevisionResult | Expression preview for `5b`: “Restores `install.sh` Git mode (`100755`) so `./install.sh` works after a fresh clone.” Trace joins this sentence to `5b` and its mode/script/fresh-clone elements. `5a/c/d` retain their full text while `5d` may change position. `KEEP` is compatible with `COMPRESS`/`REVISE` and placement. |
-| ValidationFinding | No violation is demonstrated in that local sentence; record check observations rather than inventing an ERROR. Missing complete-document context leaves the delivery gate at `REVIEW`. Injected omission of `100755` fails the protected-literal check and routes to expression, not organization merely because ordering also changed. |
+| **입력** | 릴리스 노트 7~10행, 커밋 `dcc9ed7…`. 독자는 업데이트 사용자·유지관리자. 잠정 `KEEP` 유지. |
+| **InformationUnit** | `5a`: 공개 엔드포인트 준비 및 런타임/터널 조기 종료; `5b`: 새 클론에서 `./install.sh`를 실행할 수 있게 `install.sh` Git 권한 `100755` 복구; `5c`: 패치·덮어쓰기·이동·롤백 과정의 권한 유지; `5d`: `scripts/e2e-release-bootstrap.sh`의 실행 권한 복구, 두 부트스트랩 스크립트의 테스트·CI 검사. |
+| **판단** | 모두 현재 릴리스 노트에서 보존. 스크립트 이름·모드·동작 조건을 보호한다. 수집된 릴리스 설명이지 새로 검증한 실행 사실은 아니다. |
+| **OrganizationPlan** | 사용자 영향 `5a/b/c`를 먼저 두고 검증 `5d`는 뒤 또는 같은 문서의 검증 그룹으로 옮길 수 있다. 새 문서는 필요하지도 허용되지도 않는다. |
+| **RevisionResult** | `5b` 표현 예시: “새로 클론한 뒤 `./install.sh`를 실행할 수 있도록 `install.sh`의 Git 모드(`100755`)를 복구했습니다.” 정보·모드·스크립트·조건을 추적한다. `5a/c/d`는 그대로 남기고 `5d`의 순서는 바뀔 수 있다. `KEEP`과 `COMPRESS`/`REVISE`/`placement`는 공존 가능하다. |
+| **ValidationFinding** | 해당 문장만으로 위반이 확인되지는 않는다. 근거 없이 `ERROR`를 지어내지 않는다. 전체 문서가 없어 최종 `REVIEW`다. **가상 결함:** `100755` 누락은 보호 값 검사 실패이며 순서 변경과 무관하게 표현 수정에서 복구한다. |
 
-### Applying scopes and required checks to the walkthroughs
+### 수작업 사례에 출력 범위·필수 검사 적용
 
-These are additional design declarations, not new fixture fields or confirmed annotations. For RW-013, let `C13` denote one illustrative contract ArtifactRef. Its `output_scopes` declares `readme` as a document bound to the captured README’s logical ID, `auth_design` as a document with the provisional authentication-design destination role, `troubleshooting` as the provisional developer-guide role, and `affected` as a document group containing those three IDs. No new path or verified destination is asserted. All external references use `{contract_ref: C13, scope_id: ...}`.
+아래 역시 **설계용 선언**이지 기존 평가 파일에 새 필드나 확정 판정을 추가한 것이 아니다. RW-013에 대해 가상의 계약 `ArtifactRef`를 `C13`으로 표기한다. `output_scopes`는 수집된 README의 논리 ID를 가리키는 `readme`, 미확인 인증 설계 목적지 역할인 `auth_design`, 미확인 개발자 문제 해결 역할인 `troubleshooting`, 이 셋으로 구성된 문서 그룹 `affected`를 선언한다. 실제 경로나 확인된 대상 파일을 꾸며내지 않는다. 외부 참조는 `{contract_ref: C13, scope_id: ...}`를 사용한다.
 
-| Same unit `13c`, different output | Assessment and placement consequence |
+| 같은 정보 `13c`, 다른 출력 | 판단·배치 결과 |
 | --- | --- |
-| `readme` — installation/users | Internal metadata/fingerprint/cache mechanics are `irrelevant` to first-use instructions; they are `useful` elsewhere and `preserve_elsewhere_candidate`. Source removal stays blocked until destination review. User-facing `13d` remains separately protected here. |
-| `auth_design` — authentication maintainers | The exact same `unit_ref` is `relevant` to understanding internals with `useful` importance; preservation is `undecided` pending destination binding/context. After verified binding and reassessment it can be `retain_current` in that destination scope. That does not revoke the README’s scoped judgment. |
+| **`readme` — 설치 사용자** | 내부 메타데이터·지문·캐시 방식은 첫 사용 안내에 `irrelevant`지만 다른 문서에는 `useful`하다. `preserve_elsewhere_candidate`로 두고 목적지 확인 전 원본 제거를 차단한다. 사용자용 `13d`는 별도 보호한다. |
+| **`auth_design` — 인증 유지관리자** | 같은 `unit_ref`가 내부 설계 설명에는 `relevant`/`useful`이다. 목적지 맥락 확인 전 보존 판단은 `undecided`; 확인·재평가 후 목적지에서 `retain_current`가 될 수 있다. 이 판단이 README의 평가를 취소하지 않는다. |
 
-The two assessments have different IDs/scopes but share source/elements. An illustrative contract requirement for `13d` uses `applies_to: [{scope_id: readme, coverage: each_member}]`; collective preservation of `13c` may instead name `affected` with `across_group`. These are design obligations only. Organization connects the two dispositions through source/destination scope refs, leaving the move blocked while `auth_design` is unbound. Removing `readme` while leaving its references, duplicating its ID, referencing an undeclared `auth_design`, or using an older `C13` revision is a reference `FAIL`; a correctly declared but unverified destination remains `REVIEW`.
+두 평가는 서로 다른 ID·범위를 갖지만 원본 정보·요소는 공유한다. `13d`의 필수 보존은 예시로 `applies_to: [{scope_id: readme, coverage: each_member}]`를, `13c`의 그룹 전체 보존은 `affected`+`across_group`를 사용할 수 있다. 이는 **가상 의무**다. 재배치 계획은 양쪽 범위를 연결하지만 `auth_design`이 미확정이면 이동을 차단한다. 참조가 남은 상태로 `readme` 선언을 지우거나, 중복 ID·미선언 `auth_design`·이전 `C13`을 참조하면 `FAIL`. 선언만 됐고 대상 문서가 확인되지 않은 경우는 `REVIEW`다.
 
-For RW-008, a single declared resume scope suffices; no scope change is needed merely to regroup sections. Its plan includes intent-alignment/structure review and protected-measurement checks on that scope. An executed intent check unable to choose a structure yields `unresolved`/`REVIEW`. If that required check has no result row, the controller reports missing execution/`STOPPED` instead; neither case permits `PASS`. Accepting a purpose correction creates a new contract and plan, invalidating old assessments and reports.
+RW-008에서는 이력서 출력 범위 하나로 충분하며 섹션을 재그룹화할 때마다 범위를 바꿀 필요는 없다. 목적 정합성·구조 검토·보호된 측정값 검사를 계획에 넣는다. 검사는 실행했지만 구조를 판단하지 못했다면 `unresolved`/`REVIEW`, **필수 검사 결과 행 자체가 없다면** 실행 누락/`STOPPED`다. 둘 다 `PASS`가 아니다. 목적 수정이 승인되면 계약·계획을 새 버전으로 만들고 이전 평가·보고서를 무효화한다.
 
-For RW-013, the cross-document proposal makes destination checks applicable even though the destinations are provisional. Successfully reporting register checks alone cannot satisfy the plan. Executed destination review that lacks context yields `REVIEW`; a missing destination-check row yields `STOPPED`; a false “not applicable” claim contradicting the move proposal fails applicability/report integrity. RW-012 uses the same mechanism for detailed-limit transfer and source-local exposure; RW-005’s internal ordering alone does not trigger a cross-document check, but the gate must record that exclusion with evidence and still check protected literals and the complete release notes. The excerpt-only nature of all four walkthroughs continues to prevent final `PASS`.
+RW-013의 문서 간 이동 제안은 목적지가 미확정이어도 목적지 검사를 **적용 대상**으로 만든다. 문체 검사만 성공했다고 계획을 통과시킬 수 없다. 실행된 목적지 검토에 맥락이 없으면 `REVIEW`, 검사 행이 누락되면 `STOPPED`, 이동 제안이 있는데도 적용하지 않는다고 주장하면 적용성·보고서 무결성 실패다. RW-012도 상세 조건 이동과 원본의 필수 조건 노출을 같은 방식으로 확인한다. RW-005의 **문서 내부 순서 변경만으로는** 문서 간 이동 검사가 필요하지 않지만, 제외 근거를 남기고 보호된 문자값과 전체 릴리스 노트를 검사해야 한다. 네 사례 모두 발췌만 있으므로 최종 `PASS`가 불가능하다.
 
-### Walkthrough conclusions and limits
+### 사례 검토의 결론과 한계
 
-Within each walkthrough, all stages reference that case’s same contract, snapshot and unit identities through assessment, placement, expression trace and findings. They exercise partial results, multi-unit paragraphs, separate decisions, local exposure after a move, scope/number/attribution protection, and defect-origin routing. Their present outcome is reviewable design evidence, not successful end-to-end validation. None establishes a verified destination, complete-document correctness, runtime behavior, final label or a benchmark score.
+각 사례는 하나의 계약·스냅샷·정보 ID를 분석·평가·배치·표현·검증까지 일관되게 연결했다. 부분 결과, 복합 문단, 독립 판단, 이동 후 원본의 필수 조건 노출, 수치·귀속 보호, 결함 원인 복귀를 설명하지만 **실행 성공을 증명한 것은 아니다.** 목적지 확인·전체 문서 정확성·실행 동작·사람 최종 판정·성능 점수 어느 것도 확정하지 않는다.
 
-## Decided for this proposal and still open
+## 현재 설계로 정한 경계와 미결정 사항
 
-| Decided design boundary | Remaining decision before implementation/adoption |
+| 설계상 정한 경계 | 구현·채택 전에 결정할 사항 |
 | --- | --- |
-| Immutable versioned dependencies, snapshot-bound Unicode code-point spans, many-to-many unit/element trace | Hash algorithm, canonical serialization, ID generation and adapter conversion from bytes/UTF-16; executable schema/version negotiation |
-| Units independent of paragraphs; conditions and evidence have typed links; preservation/placement/expression separate | Language-specific segmentation, cross-paragraph relation extraction, human annotation guidance and interoperability with fixture fields |
-| Declared document/group/response scopes with contract-bound references; one inventory, scoped assessments, explicit destination review and element contributions for consolidation | Precision of equivalence/contradiction evidence, minimum inspected context, destination profile encoding and retrieval evaluation |
-| Resolver-only contract repair, independent gate verdicts, earliest-defect routing, downstream invalidation | Human decision UX, semantic-review rubric, optional-warning blocking policy, selective-reuse proof and no-progress algorithm |
-| Versioned ValidationPlan with mandatory instance reconciliation; finite run-wide revision budget and distinct content/execution status | Actual retry limits, timeout/cancellation configuration and operational error taxonomy |
-| Seven legacy actions retained as a scoped reporting projection | Primary-label tie breaking, fixture mapping and any future migration after human review; no automatic relabeling |
-| Medium-neutral snapshot/group model | Future dialogue/streaming adapters; no conversational delivery or interception implementation |
+| 버전 고정 의존성, 스냅샷 기반 유니코드 코드 포인트 범위, 정보·요소·출력의 다대다 추적 | 해시·정규 직렬화·ID 생성, 바이트/UTF-16 오프셋 변환, 실행 스키마·버전 협상 |
+| 문단과 독립된 정보 단위, 조건·증거의 유형 관계, 보존·배치·표현의 분리 | 언어별 단위 분할, 문단 간 관계 추출, 사람 주석 지침, 기존 평가 필드와의 호환 |
+| 계약에 선언된 문서·그룹·응답 범위, 하나의 정보 목록, 범위별 평가, 목적지 검토와 통합 기여 추적 | 동등성·모순 판정 증거, 최소 목적지 문맥, 프로필 표현, 검색 평가 |
+| 계약 해석기만 목적 복구, 독립 게이트 판정, 최초 결함 원인 복귀, 하위 무효화 | 사람 검토 UX, 의미 검사 기준, 선택적 경고 차단 정책, 부분 재사용 증명, 진전 없음 판정 |
+| 버전 고정 ValidationPlan과 필수 인스턴스 대조, 전체 실행 예산, 내용·실행 상태 분리 | 실제 재시도·시간 초과 한도, 취소 설정, 운영 오류 분류 |
+| 기존 대표 액션 7개를 보고용으로 유지 | 대표 라벨의 동률 선택, 평가셋 매핑, 사람 검토 후 마이그레이션 정책 |
+| 매체 중립적 스냅샷·그룹 모델 | 대화·스트리밍 어댑터. 응답 생성·가로채기 미구현 |
 
-Implementation language, LLM/provider, embedding model, vector database and numeric thresholds remain open. Requirements, evaluation policy and milestones retain their existing ownership; this document specifies the data exchanged across the architecture, not new M0 completion claims.
+구현 언어, LLM·임베딩 제공자, 벡터 DB, 수치 임계값도 아직 정하지 않았다. 요구사항·평가 정책·로드맵은 각 문서의 책임으로 유지한다. 이 문서는 모듈 사이에 오가는 데이터의 논리적 계약을 제시할 뿐 M0의 완료를 선언하지 않는다.

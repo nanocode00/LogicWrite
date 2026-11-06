@@ -1,80 +1,82 @@
-# Roadmap
+# 개발 로드맵
 
-This is a proposed sequence, not a delivery promise. A milestone advances only when its exit criteria are met.
+이 문서는 **제안된 진행 순서**이며 납기 약속이 아니다. 각 단계는 완료 기준을 충족한 경우에만 다음으로 넘어간다.
 
-> **Current status:** M0 is in progress. Only design documents, 12 synthetic seed fixtures (`tests/fixtures/cases.json`), and 20 provisional real-world candidate records (`tests/fixtures/real-world-candidates.json`, summarized in [`docs/real-world-candidates.md`](real-world-candidates.md)) exist today. No validator, module pipeline, CLI, MCP server, or baseline experiment has been implemented or executed.
+> **현재 상태:** M0 진행 중. 설계 문서, 합성 예시 12건(`tests/fixtures/cases.json`), 공개 저장소 기반 잠정 후보 20건(`tests/fixtures/real-world-candidates.json`, [설명](real-world-candidates.md))만 존재한다. 검증기·모듈 파이프라인·CLI·MCP 서버·베이스라인 실험은 아직 구현 또는 수행되지 않았다.
 
-## M0 — Evidence and evaluation foundation (in progress)
+## M0 — 근거와 평가 기반 마련 (진행 중)
 
-- [x] Establish public repository and initial design documents
-- [x] Define synthetic, labeled examples in `tests/fixtures/cases.json`
-- [x] Collect 20 permission-safe provisional candidate samples from 5 public repositories (12 non-`KEEP` action candidates and 8 `KEEP` preservation candidates) in `tests/fixtures/real-world-candidates.json`
-- [ ] Have an independent human reviewer confirm audience, purpose, preservation/placement judgment, and expected action for each candidate (provisional labels are not gold data)
-- [ ] Freeze fixture schema v1 and reserve held-out cases
-- [ ] Document the B0/B1/B2 comparison protocol and prompt-only pilot; defer executable B2 runs until the validator and controller exist in M3
+- [x] 공개 저장소와 초기 설계 문서 작성
+- [x] `tests/fixtures/cases.json`에 합성 라벨 예시 작성
+- [x] 공개 저장소 5곳에서 사용 권한에 문제가 없는 잠정 사례 20건 수집(`KEEP` 외 12건, `KEEP` 8건)
+- [ ] 독립된 사람 검토자가 각 후보의 독자·목적·정보 보존·배치·예상 액션 확인(잠정 라벨은 골드셋이 아님)
+- [ ] 기존 20건을 개발·회귀용으로 유지하고, 사람 검토 후 개발·회귀용 평가셋 스키마 v1 동결
+- [ ] 기존 20건과 별도의 사례를 확보해 독립 평가용 홀드아웃으로 고정
+- [ ] `B0`/`B1`/`B2` 비교 프로토콜 및 프롬프트만 사용한 예비 실험 문서화. 실행 가능한 B2 평가는 M3에서 검증기와 수정 제어기가 준비된 후 수행
 
-**Exit:** reproducible, human-reviewed labeled corpus with positive and negative examples and a locked held-out split; reviewer disagreements recorded instead of overwritten.
+**완료 기준:** 긍정·부정 사례를 포함한 재현 가능한 사람 검토 평가셋, 기존 20건과 별도로 확보·고정한 독립 평가용 홀드아웃, 의견 불일치와 해결 근거의 기록.
 
-## M1 — Contract resolver and deterministic validation gate
+## M1 — 계약 해석과 결정론적 검증 게이트
 
-- [ ] Define versioned `Writing Contract` and finding schemas (preserving compatibility with existing fixture labels)
-- [ ] Implement `Contract Resolver` (required-field checks and assumption recording); reserve semantic intent/purpose alignment checks for M2
-- [ ] Implement deterministic `Rule Validators` for protected facts/numbers and explicit terminology invariants; label pattern-based Korean register checks as heuristic
-- [ ] Handle Markdown code blocks, quotations, headings, and contextual exceptions
-- [ ] Provide CLI that returns machine-readable findings and gate status (`PASS`, `REVIEW`, `FAIL`, `STOPPED`)
-- [ ] Add unit tests and CI
+- [ ] 버전이 고정된 `Writing Contract` 및 검토 결과 스키마 정의(기존 사례 라벨 호환)
+- [ ] `Contract Resolver` 구현: 필수 필드 검증 및 가정 기록. 의미적 목적·의도 정합성 판단은 M2에서 처리
+- [ ] 보호된 사실·수치, 명시적 용어 불변조건을 점검하는 결정론적 `Rule Validators` 구현. 패턴 기반 한국어 문체 검사는 휴리스틱으로 표시
+- [ ] Markdown 코드 블록·인용·제목과 문맥상 예외 처리
+- [ ] 기계가 읽을 수 있는 검토 결과 및 `PASS`/`REVIEW`/`FAIL`/`STOPPED`를 반환하는 CLI 제공
+- [ ] 단위 테스트와 CI 추가
 
-**Exit:** stable results for equal inputs; no false `PASS` for missing required contract fields or dropped deterministic invariants.
+**완료 기준:** 동일 입력과 설정에서 안정적인 결과를 얻고, 필수 계약 필드나 검증 가능한 보호 정보가 누락돼도 `PASS`가 나오지 않을 것.
 
-## M2 — Modular extraction, analysis, and organization checks
+## M2 — 정보 추출·분석 및 재배치 검사
 
-- [ ] Implement `Information Extraction & Analysis` checks: segment information units, link claims/conditions/numbers/provenance, assess audience/purpose fit and importance, and detect/recover purpose misidentification
-- [ ] Implement `Information Organization` checks: verify cross-document `MOVE` destination context, duplicate consolidation without caveat/number loss, and intra-document `placement` (grouping and reader-task ordering)
-- [ ] Detect potential conflicting claims across scope, time, quantifiers, and conditions, while respecting legitimate exceptions and attributed opinions
-- [ ] Capture supporting spans and label uncertainty (`FLAG` / `REVIEW`) when evidence or destination context is incomplete
-- [ ] Evaluate module-level checks on held-out data (including optional future evaluation of vector-assisted candidate retrieval once core checks are measured)
+- [ ] `Information Extraction & Analysis`: 정보 단위 분할, 주장·조건·수치·출처 연결, 독자·목적 적합성과 중요도 판단, 목적 오판 탐지·복구
+- [ ] `Information Organization`: 문서 간 `MOVE` 목적지 검증, 조건·수치 손실 없는 중복 통합, 문서 내부 그룹화·독자 과업 순서(`placement`)
+- [ ] 주체·시간·범위·한정 표현·조건에 따른 충돌 후보 탐지(정당한 예외·귀속된 의견을 오탐하지 않기)
+- [ ] 근거 위치 기록 및 근거·목적지 맥락 부족 시 `FLAG`/`REVIEW` 부여
+- [ ] 홀드아웃으로 모듈별 검사 평가. 코어 검사 결과가 확보된 뒤 벡터 기반 후보 검색의 별도 평가를 선택적으로 검토
 
-**Exit:** per-module and whole-document semantic evaluation on held-out data; false positives, false negatives, and unresolved `FLAG` rates reported explicitly.
+**완료 기준:** 모듈별·전체 문서 의미 검사에 대한 홀드아웃 평가를 수행하고 오탐·누락·미해결 `FLAG` 비율을 명시할 것.
 
-## M3 — Expression refinement and revision controller
+## M3 — 표현 수정과 수정 제어기
 
-- [ ] Implement `Expression Refinement` proposals (`REVISE`, `COMPRESS`, register/terminology normalization) constrained by protected facts, numbers, and conditions
-- [ ] Implement `Revision Controller` routing findings to the responsible module (`Information Extraction & Analysis`, `Information Organization`, or `Expression Refinement`)
-- [ ] Enforce downstream invalidation and whole-document revalidation across affected source and destination documents after each edit
-- [ ] Limit iterations and stop on `PASS`, ambiguity/human-review blockers (`FLAG` / `REVIEW`), repeated states, or attempt limits (`STOPPED`) with a full audit trail
+- [ ] 사실·수치·조건을 보호하면서 `REVISE`/`COMPRESS`·문체·용어 일관성의 수정안 생성
+- [ ] 결함을 정보 추출·분석, 재배치·재구성, 표현 수정 중 담당 모듈로 보내는 `Revision Controller` 구현
+- [ ] 수정 후 하위 산출물 무효화 및 관련 원본·목적지 문서 전체 재검증
+- [ ] `PASS`, 사람 검토 필요(`FLAG`/`REVIEW`), 반복 상태, 실행 한도(`STOPPED`)에 따른 종료 및 감사 기록
 
-**Exit:** bounded, module-routed edit and revalidation workflow demonstrable on fixtures, including preservation of required caveats/numbers and clean stops on unresolved cases.
+**완료 기준:** 평가 사례에서 유한한 수정·재검증을 시연하고 중요한 주의사항·수치를 보존하며 미해결 문제에서는 안전하게 중지할 것.
 
-## M4 — Agent integrations
+## M4 — 에이전트 연동
 
-- [ ] Provide an MCP interface to the modular validator and revision controller
-- [ ] Add an optional Skill describing appropriate use of contracts, module findings, and review gates
-- [ ] Offer opt-in editor or PR workflow integration
-- [ ] Publish measured `B0` / `B1` / `B2` comparisons on held-out cases
+- [ ] 모듈형 검증기·수정 제어기의 MCP 인터페이스 제공
+- [ ] 작성 계약·검토 결과·검증 게이트를 적절히 사용하는 선택형 Skill 추가
+- [ ] 편집기 또는 PR 작업 흐름에 선택적으로 연동
+- [ ] 홀드아웃에서 측정한 `B0`/`B1`/`B2` 비교 결과 공개
 
-**Exit:** usable integration without suggesting that a plugin can universally intercept or guarantee every agent output.
+**완료 기준:** 어떤 플러그인이든 모든 에이전트 출력을 가로채거나 품질을 보장한다고 주장하지 않는 사용 가능한 연동 기능.
 
-## Long-term direction — conversational agent responses
+## 장기 방향: 에이전트 대화 응답
 
-> **Future exploration only.** This is not an M0–M4 deliverable or an implemented capability. The first target remains durable technical documents, while the core information-processing and validation concepts should be reusable for other kinds of agent-generated text.
+> **향후 탐색 방향일 뿐이다.** M0~M4의 필수 산출물이나 구현된 기능이 아니다. 첫 적용 대상은 지속적으로 보존되는 기술 문서이며, 공통 정보 처리·검증 원칙은 다른 형태의 에이전트 생성 텍스트에도 재사용할 수 있도록 한다.
 
-**Common principle:** A response, like a document, should convey the right information to its intended reader for the current purpose—neither dropping necessary qualifiers nor exposing irrelevant detail. Reuse the shared `Writing Contract`, the three modules, and independent validation rather than creating a separate writing-quality engine.
+**공통 원칙:** 문서와 대화 응답 모두 지금 필요한 독자·목적에 맞는 정보를 제공해야 한다. 필요한 한정 조건은 남기고 관계없는 세부 사항은 과도하게 노출하지 않는다. 별도의 품질 엔진을 만드는 대신 `Writing Contract`, 세 모듈, 독립 검증을 재사용한다.
 
-| Module | Future conversational-response adaptation |
+| 모듈 | 대화 응답에 적용할 방향 |
 | --- | --- |
-| **Information Extraction & Analysis** | Identify the user's actual question, relevant conversation/tool context, required facts and conditions, and details not needed for the current turn. Distinguish omission from destruction of source knowledge. |
-| **Information Organization** | Group and order facts **within the response** according to the question and decision/action needs. There is normally no destination document and no cross-document `MOVE`; response-level `placement` handles reordering, while omitting nonessential information from this answer does not delete its source. |
-| **Expression Refinement** | Adjust register, terminology, level of detail, and response length to the dialogue rather than imposing a fixed document template. Retain scope, attribution, important safety caveats, and uncertainty. |
-| **Validation Gate & Revision Controller** | Check answer coverage, relevance, contradictions, preservation of essential qualifications, and avoidable verbosity. Support pre-generation information planning and post-generation review, without promising error-free semantics. |
+| **정보 추출·분석** | 사용자의 실제 질문, 관련 대화·도구 문맥, 필수 사실·조건, 이번 턴에 불필요한 정보를 식별한다. 응답에서 생략하는 것과 원자료를 삭제하는 것을 구분한다. |
+| **정보 재배치·재구성** | 질문과 판단·실행 목적에 따라 **응답 내부에서** 정보를 묶고 배열한다. 대개 문서 간 `MOVE` 목적지는 없으며 답변 내 `placement`로 순서를 조정한다. 응답 생략은 원본 지식 삭제가 아니다. |
+| **표현 수정** | 고정 문서 템플릿을 강제하지 않고 대화에 맞는 문체·용어·상세도·길이를 조정하며 주장 범위·귀속·필수 주의사항·불확실성을 유지한다. |
+| **검증 게이트·수정 제어기** | 질문 충족도·관련성·모순·필수 조건 보존·불필요한 장황함을 검사하고, 사전 정보 설계와 사후 응답 검토를 지원한다. 의미 오류가 없다고 보장하지 않는다. |
 
-**Future design and evaluation questions:**
-- Define an optional *output profile* for a conversational response versus a durable document; do not retroactively modify the current contract or fixture schemas.
-- Compare direct response, prompt-only revision, and validation-assisted response using question satisfaction, information retention, clarity, over-answering, and latency—not word count alone.
-- Account for streaming and tool execution: withholding a final answer for verification can increase latency, while post-stream corrections cannot retract already displayed text. Decide when checking is feasible and how unresolved concerns are disclosed.
-- Enforcement requires control over the response-generation pipeline or an explicit invocation point. An optional Skill or MCP tool cannot universally intercept every ChatGPT or agent response.
+**추가로 설계·평가할 문제**
 
-This direction must not make conversational adapters, response interception, vector databases, or online integrations prerequisites for the first document-oriented MVP.
+- 문서와 대화를 구분하는 선택적 출력 프로필을 정의하되 현재 계약이나 사례 스키마를 소급 변경하지 않는다.
+- 직접 생성·프롬프트만 이용한 개선·검증 보조 응답을 질문 충족, 정보 보존, 명확성, 과잉 설명, 지연시간으로 비교한다. 글자 수만 최적화하지 않는다.
+- 스트리밍·도구 실행 상황을 고려한다. 출력 전 검증은 지연을 늘릴 수 있고, 이미 보낸 문장은 사후 정정으로 회수할 수 없다. 검증 시점과 미해결 문제의 노출 방식을 설계한다.
+- 강제 검증에는 출력 생성 경로를 통제하거나 명시적으로 검증을 호출할 수 있어야 한다. 선택형 Skill이나 MCP 도구만으로 모든 ChatGPT·에이전트 답변을 보편적으로 가로챌 수는 없다.
 
-## Prioritization rule
+대화 어댑터·응답 가로채기·벡터 DB·온라인 연동을 첫 문서형 MVP의 선행조건으로 만들지 않는다.
 
-Do not optimize for length or AI-detector scores at the expense of factual meaning. Prefer a small engine that reliably catches documented contract, boundary, and consistency problems to a broad evaluator with unmeasured confidence.
+## 우선순위 원칙
+
+사실적 의미를 희생하면서 짧은 글이나 AI 탐지 점수에 최적화하지 않는다. 측정되지 않은 폭넓은 평가기보다 **기록된 계약·정보 경계·일관성 문제를 신뢰성 있게 발견하는 작은 엔진**을 우선한다.

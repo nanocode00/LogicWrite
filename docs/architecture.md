@@ -1,80 +1,75 @@
-# Proposed architecture
+# 아키텍처 제안
 
-> Design proposal. None of the components below is implemented yet.
+> **설계 단계.** 아래 구성 요소는 아직 구현되지 않았다.
 
-Detailed logical data models, module input/output contracts, provenance and invalidation rules, and provisional-case walkthroughs are in [Common data model and module interfaces](data-model-and-interfaces.md). That proposal does not adopt an executable schema or migrate evaluation fixtures.
+논리적 데이터 모델, 모듈의 입출력 계약, 출처·의존성·무효화 규칙, 잠정 사례의 수작업 검토는 [공통 데이터 모델과 모듈 인터페이스](data-model-and-interfaces.md)를 참조한다. 이 제안은 실행 스키마를 채택하거나 기존 평가 사례를 마이그레이션하지 않는다.
 
-## System overview and pipeline
+## 시스템 개요와 파이프라인
 
-LogicWrite separates editorial processing into **three explicit core modules** coordinated by **shared contract, validation, and revision infrastructure**:
+LogicWrite는 **세 가지 편집 모듈**을 공통 계약·검증·수정 제어 기반으로 묶는다.
 
-1. **Information Extraction & Analysis** — segments drafts into information units, analyzes claims/conditions/quantities/provenance, evaluates audience/purpose fit and importance, and detects or recovers from document-purpose misidentification.
-2. **Information Organization** — determines cross-document destinations (`MOVE`), consolidates duplicates across or within documents, and establishes intra-document grouping and reader-task ordering (`placement`), optionally assisted in the future by vector candidate retrieval.
-3. **Expression Refinement** — rewrites sentences and paragraphs (`REVISE`), enforces target Korean register and terminology consistency, and performs meaning-preserving compression (`COMPRESS`) and readability improvements.
+1. **Information Extraction & Analysis(정보 추출·분석):** 글을 정보 단위로 나누어 주장·조건·수치·출처의 관계를 추출하고 독자·목적 적합성과 중요도를 평가한다. 문서 목적을 잘못 추론한 경우 탐지·복구를 시도한다.
+2. **Information Organization(정보 재배치·재구성):** 문서 간 `MOVE` 목적지, 문서 안팎의 중복 통합, 문서 내부 그룹화 및 독자의 과업에 맞는 순서(`placement`)를 정한다. 향후 벡터 기반 후보 검색을 활용할 수 있다.
+3. **Expression Refinement(표현 수정):** 문장·문단을 `REVISE`하고 목표 한국어 문체·용어를 통일하며, 의미를 보존하는 `COMPRESS`와 가독성 개선을 수행한다.
 
-Shared infrastructure surrounds the three modules:
-- **Writing Contract & Contract Resolver** — normalizes actual user intent, audience, purpose, required information, constraints, and authoritative sources.
-- **Validation Gate** — executes deterministic rule validators and model-assisted semantic checks at module boundaries and across complete affected documents.
-- **Revision Controller** — routes validation findings back to the responsible module in a bounded loop with downstream invalidation and revalidation.
+공통 기반:
+
+- **Writing Contract + Contract Resolver:** 실제 사용자 의도, 독자, 목적, 필수 정보, 제약과 권위 있는 근거를 정규화한다.
+- **Validation Gate:** 모듈 경계와 영향을 받는 전체 문서에 대해 결정론적 규칙과 모델 보조 의미 검사를 수행한다.
+- **Revision Controller:** 검증 결함을 담당 모듈로 돌려보내며, 하위 결과의 무효화·재검증을 유한 횟수 안에서 제어한다.
 
 ```text
-Client / agent / CLI
-      |
-      v
-Contract Resolver ----> Shared Writing Contract
-      |                 (user intent > inferred doc purpose; surface conflicts)
-      v
-Draft / Source & Candidate Destination Contexts
-      |
-      v
-+-------------------------------------------------------------------+
-| 1. Information Extraction & Analysis                              |
-|    unit extraction, claim/condition/number analysis,              |
-|    audience/purpose fit & importance, purpose recovery            |
-+-------------------------------------------------------------------+
-      |  (boundary check: extracted units, contract alignment, protected facts)
-      v
-+-------------------------------------------------------------------+
-| 2. Information Organization                                       |
-|    cross-document routing (MOVE), duplicate consolidation,        |
-|    intra-document grouping & ordering (placement),                |
-|    [future] vector-assisted candidate search                      |
-+-------------------------------------------------------------------+
-      |  (boundary check: source + destination preservation, caveat proximity)
-      v
-+-------------------------------------------------------------------+
-| 3. Expression Refinement                                          |
-|    sentence/paragraph rewrite (REVISE), style/register/terms,     |
-|    meaning-preserving compression (COMPRESS), clarity             |
-+-------------------------------------------------------------------+
-      |
-      v
-Validation Gate (Deterministic Rules + Semantic Reviewer)
-      |                                   |
-  PASS / REVIEW                         revise
-      |                                   |
-report & audit trail            Revision Controller
-                                (route to Module 1, 2, or 3;
-                                 invalidate & revalidate downstream;
-                                 stop on ambiguity / no progress / limit)
+클라이언트 / 에이전트 / CLI
+              │
+              ▼
+      Contract Resolver ───► 공통 Writing Contract
+              │             (명시된 사용자 의도 > 초안에서 추론한 목적)
+              ▼
+   초안 / 원본 및 목적지 후보의 문맥
+              │
+              ▼
+┌──────────────────────────────────────────────────┐
+│ 1. 정보 추출·분석                                │
+│ 정보 단위·주장·조건·수치·출처, 독자·목적 적합성  │
+└──────────────────────────────────────────────────┘
+              │  경계 검사: 정보 누락·계약·보호 요소
+              ▼
+┌──────────────────────────────────────────────────┐
+│ 2. 정보 재배치·재구성                            │
+│ 문서 간 이동·중복 통합·섹션·순서·후보 검색       │
+└──────────────────────────────────────────────────┘
+              │  경계 검사: 양쪽 문서 보존·조건 인접성
+              ▼
+┌──────────────────────────────────────────────────┐
+│ 3. 표현 수정                                    │
+│ 재작성·압축·문체·용어·가독성                     │
+└──────────────────────────────────────────────────┘
+              │
+              ▼
+    Validation Gate (규칙 + 의미 검사)
+              ├── PASS / REVIEW → 결과·감사 기록
+              └── 수정 필요 → Revision Controller
+                                ├─ 원인 모듈 재실행
+                                ├─ 하위 결과 무효화·재검증
+                                └─ 모호성·진전 없음·한도 시 중지
 ```
 
-## Shared infrastructure
+## 공통 기반
 
-### Writing Contract and Contract Resolver
+### 작성 계약과 계약 해석기
 
-The `Contract Resolver` validates required fields and normalizes the contract under the [intent precedence and conflict rules](requirements.md#intent-precedence-and-conflict-handling). User intent takes precedence over purpose inferred from an existing draft. `Information Extraction & Analysis` can return an evidence-backed purpose correction to the resolver; the resolver records its basis and contract version before downstream work resumes. Unresolved ambiguity yields `FLAG` / `REVIEW`. Contract changes invalidate dependent assessments, organization plans, and expression edits rather than silently reusing them.
+`Contract Resolver`는 [의도 우선순위와 충돌 규칙](requirements.md#의도-우선순위와-충돌-처리)에 따라 필수 필드를 검증하고 계약을 정규화한다. 초안에서 추론한 목적보다 명시된 사용자 의도가 우선한다. 추출·분석 모듈은 증거가 있는 목적 수정안을 해석기로 돌려보낼 수 있지만 직접 계약을 덮어쓰지 않는다. 해석기는 수정 근거와 계약 버전을 기록한다. 모호성이 해소되지 않으면 `FLAG`/`REVIEW`가 된다. 계약 변경 시 의존하는 평가·재배치·표현 수정 산출물을 무효화한다.
 
-### Validation Gate
+### 검증 게이트
 
-The gate owns check execution and verdicts independently of editorial proposals: a module cannot pass its own output by declaration. The [versioned ValidationPlan](data-model-and-interfaces.md#validationplan-and-required-check-completeness) defines required check IDs/versions, declared output scopes and conditional applicability; the gate reconciles every expected instance with its execution result before allowing `PASS`. Contract or policy changes invalidate dependent reports. This is a responsibility boundary, not a requirement for another model vendor.
+각 편집 모듈은 **자기 출력에 대한 통과 판정을 직접 내리지 못한다.** 독립 `Validation Gate`가 검사 실행과 결과를 소유한다. 버전이 고정된 [ValidationPlan](data-model-and-interfaces.md#validationplan과-필수-검사-완전성)은 필수 검사 ID·버전·출력 범위·조건부 적용 기준을 정하며, 예상 검사마다 실제 결과가 존재해야 `PASS`가 가능하다. 계약·정책 변경 시 관련 보고서를 무효화한다. 이는 책임 분리이며 반드시 별도의 모델 제공자를 사용하라는 뜻은 아니다.
 
-The gate combines deterministic **Rule Validators** and a model-assisted **Semantic Reviewer** to verify both **inter-module boundaries** and **entire affected documents** (including both source and destination documents when content is moved or consolidated):
+게이트는 **결정론적 규칙 검사기**와 **모델 보조 의미 검토기**를 결합하며 모듈 경계와 영향을 받는 전체 문서(문서 간 이동 시 원본·목적지 모두)를 검증한다.
 
-- **Rule Validators (deterministic):** JSON schema validation, contract completeness, required sections/terms, explicit forbidden phrases, terminology invariants, and checkable protected items (such as literal numbers, identifiers, or required citations). Pattern-based Korean register checks are treated as heuristic unless context (quotes, code fences, headings, tables) is disambiguated.
-- **Semantic Reviewer (model-assisted):** Evaluates whether information units serve the contract's audience and purpose, whether claims conflict across subject/scope/condition/time/quantifiers/attribution, whether caveats remain attached to the claims they qualify, and whether rewrites or compressions altered meaning. **No semantic verdict is unconditionally deterministic;** `FLAG` and `REVIEW` remain valid outcomes when evidence is insufficient.
+- **Rule Validators(결정론적):** JSON 스키마·계약 완전성, 필수 섹션·용어, 금지 문구, 용어 불변조건, 원문 수치·식별자·필수 인용 같은 보호 요소를 확인한다. 한국어 문체 패턴은 인용·코드·제목·표 등 맥락을 구분하지 않았다면 휴리스틱으로 취급한다.
+- **Semantic Reviewer(모델 보조):** 각 정보의 목적 적합성, 주체·범위·조건·시간·한정 표현·귀속에 따른 모순 후보, 한정 조건과 주장의 연결, 재작성·압축의 의미 변화를 검토한다. 의미 판정은 무조건적인 결정론적 진실이 아니므로 근거가 부족하면 `FLAG`/`REVIEW`를 유지한다.
 
-Proposed finding envelope (subject to change):
+제안하는 결과 형식의 예시(확정 스키마 아님):
 
 ```json
 {
@@ -82,205 +77,184 @@ Proposed finding envelope (subject to change):
   "severity": "WARNING",
   "action": "FLAG",
   "spans": [{"start": 0, "end": 28}, {"start": 100, "end": 144}],
-  "evidence": "The two claims appear to apply to the same requests.",
-  "reason": "A universal rule conflicts with an exception unless its scope is narrowed.",
+  "evidence": "두 주장이 같은 요청 범위에 적용되는 것으로 보입니다.",
+  "reason": "범위를 좁히지 않은 보편적 주장은 명시적 예외와 충돌할 수 있습니다.",
   "confidence": "medium",
   "requires_human_review": true
 }
 ```
 
-Offsets refer to the evaluated draft snapshot. The [detailed reference proposal](data-model-and-interfaces.md#shared-references-and-provenance) uses zero-based, half-open Unicode code-point offsets against exact stored text, with immutable snapshot references and content digests. Hashing, serialization and executable schema versioning remain open. Cross-document findings must identify the document snapshot for each span; this illustrative envelope is not a frozen schema.
+오프셋은 평가한 초안의 **고정된 스냅샷**을 기준으로 한다. [상세 참조 제안](data-model-and-interfaces.md#공통-참조와-출처)은 정확히 저장된 텍스트에 대해 0부터 시작하는 유니코드 코드 포인트의 반개구간 `[start,end)`, 스냅샷 참조·콘텐츠 다이제스트를 제안한다. 해시·직렬화·실행 스키마 버전은 아직 결정하지 않았다. 문서 간 발견 사항은 각 원문 범위가 속한 스냅샷을 식별해야 한다.
 
-Gate states:
-
-| State | Meaning |
+| 상태 | 의미 |
 | --- | --- |
-| `PASS` | All applicable required checks in the pinned ValidationPlan passed, conditional exclusions are justified, and no blocking findings remain across affected documents |
-| `REVIEW` | No confirmed hard failure, but unresolved semantic concerns, purpose conflicts, or provisional destinations need human decision |
-| `FAIL` | Confirmed hard check or blocking requirement failed |
-| `STOPPED` | Revision limit reached, no progress, or execution error; report outstanding issues |
+| `PASS` | 고정된 ValidationPlan의 적용 대상 필수 검사가 모두 통과하고 조건부 제외가 입증되며 관련 문서에 차단 결함이 없다. |
+| `REVIEW` | 확정된 강제 실패는 없지만 의미·목적·미확인 목적지 등의 판단이 남아 사람의 검토가 필요하다. |
+| `FAIL` | 확인된 강제 검사 또는 필수 계약 요구사항 위반이 있다. |
+| `STOPPED` | 수정 한도·진전 없는 반복·실행 오류로 중단됐다. 미해결 문제를 보고한다. |
 
-### Revision Controller
+### 수정 제어기
 
-The `Revision Controller` enforces the validation loop externally rather than relying on a prompt asking the writer to self-police:
+`Revision Controller`는 모델에게 자기 검증을 지시하는 프롬프트만으로 대체하지 않는 **외부 실행 제어기**다.
 
-1. **Route by module ownership:** Inspect each finding and dispatch it to the responsible module:
-   - Purpose mismatch, omitted source units, incorrect preservation judgments, or unresolved claim/evidence relationships → `Information Extraction & Analysis`.
-   - Misrouted cross-document `MOVE`, unverified destination context, duplicate merge loss, detached caveats, or poor section/task ordering → `Information Organization`.
-   - Register violations, terminology drift, wordiness, local clarity defects, or meaning lost during rewriting → `Expression Refinement`.
-   - Route dropped facts or unsupported claims to the module that introduced them. If the cause is unclear, return to analysis before generating another edit; a severity or action label alone does not determine ownership.
-2. **Invalidate and revalidate downstream:** Any revision in an upstream module invalidates dependent downstream artifacts:
-   - Changes in `Information Extraction & Analysis` (e.g., recovering document purpose or changing unit preservation) require re-running `Information Organization` and `Expression Refinement` on affected units.
-   - Changes in `Information Organization` (e.g., regrouping, merging duplicates, or changing `placement`) require re-running `Expression Refinement` on modified sections.
-   - Every revision cycle concludes with a full **Validation Gate** check over the **entire** affected source and destination documents.
-3. **Reject regressions and bound execution:** Compare protected facts, numbers, conditions, and prior findings after each attempt. Stop on `PASS`, a human-review blocker (`FLAG` / `REVIEW`), a repeated/non-improving state, or the attempt limit (default proposal: three), returning the latest draft and all unresolved findings.
+1. **책임 모듈로 복귀:** 목적 불일치·원본 정보 누락·잘못된 보존 판단·주장/근거 연결 문제는 추출·분석으로, 잘못된 `MOVE`·목적지 미확인·중복 통합 손실·조건 분리·순서 오류는 재배치로, 문체·용어·장황함·표현 중 의미 손실은 표현 수정으로 보낸다. 누락·근거 없는 주장은 **처음 결함을 만든 모듈**에 배정한다. 원인이 불분명하면 다시 분석한다.
+2. **하위 결과 무효화:** 추출·분석에서 목적이나 보존 판단이 바뀌면 재배치와 표현을 다시 수행한다. 재배치에서 순서나 통합이 바뀌면 관련 표현 수정을 다시 수행한다. 수정 주기마다 영향을 받은 원본·목적지 **전체 문서**를 재검증한다.
+3. **퇴행 방지·유한 종료:** 필수 사실·수치·조건과 이전 발견 사항을 비교한다. `PASS`, 사람 검토 차단, 반복·개선 없음, 한도 도달 시 중지하고 최신 초안과 미해결 결함을 돌려준다. 초기 '3회'는 미채택 제안이며 확정 설정이 아니다.
 
-## Core modules
+## 핵심 모듈
 
-### 1. Information Extraction & Analysis
+### 1. 정보 추출·분석
 
-- **Responsibilities:**
-  - Segment source drafts and supplied reference texts into discrete information units.
-  - Extract and link claims, supporting evidence, conditions/qualifiers, literal numbers/metrics, time/scope bounds, and provenance.
-  - Assess each unit's relevance and importance relative to the contract's audience, purpose, and existing document context.
-  - Detect and recover from **purpose misidentification**—for example, when an inferred purpose reflects how a draft was originally written (an agent's activity log or an omnibus master file) rather than what the user's contract requires, or when a draft mixes multiple document roles.
-- **Inputs:** Source draft(s), normalized `Writing Contract`, user context, and optional authoritative `source_material` or candidate overlap pairs.
-- **Outputs:**
-  - Structured inventory of information units with extracted claims, conditions, numbers, and provenance links.
-  - Contract-alignment report (confirming audience/purpose fit or surfacing purpose conflicts/ambiguities for recovery or clarification).
-  - Per-unit preservation and boundary judgment (`KEEP`, `REMOVE`, `ADD`, `FLAG`, or candidate for cross-document `MOVE`) with audience/purpose rationale.
-- **Boundary and gate checks:**
-  - Every extracted unit maps to traceable source spans and provenance hashes; proposed additions retain their evidence reference and are marked missing when no source supports them.
-  - Contract-required facts, numbers, and conditions are accounted for (`REQUIRED_INFORMATION_MISSING` triggers `ADD` or `FLAG`; never invent unsupported facts).
-  - Purpose conflicts between user intent and draft content are explicitly surfaced rather than silently resolved by overwriting the contract or deleting high-value material.
-  - Low relevance to the current document alone cannot produce `REMOVE` if the unit carries architectural, operational, or historical value belonging in another document (`MOVE` or `FLAG`).
+**책임**
 
-### 2. Information Organization
+- 원본 초안과 제공된 근거 문서를 별도 **정보 단위**로 분할한다.
+- 주장·증거·조건·한정 표현·수치와 단위·시간·범위·출처의 관계를 추출한다.
+- 계약상의 독자·목적·문서 맥락을 기준으로 관련성과 중요도를 판단한다.
+- 에이전트가 작성한 활동 일지 또는 종합 자료를 원래 목적으로 착각하거나, 한 문서에 여러 역할을 섞은 상황 등 **목적 오판**을 탐지·복구한다.
 
-- **Responsibilities:**
-  - Determine cross-document destinations and execute `MOVE` decisions only after reviewing destination document context (audience, purpose, and existing content).
-  - Group information units by destination document and section, consolidating duplicates while preserving all qualifying conditions, numbers, facts, and provenance.
-  - Order units within each document (`placement`) according to reader task flow, prerequisites, and relative importance.
-  - Utilize optional vector-assisted candidate search (future design) to locate candidate target documents, related/overlapping units, and potential cross-paragraph or cross-document contradictions.
-- **Inputs:** Analyzed information units and preservation judgments from Module 1, source and candidate destination document contexts, and optional vector retrieval candidates.
-- **Outputs:**
-  - Document-level and section-level organization plan (`placement`: target document, target section, relative position, and ordering rationale).
-  - Consolidated unit groups with provenance and required caveats attached to the claims they qualify.
-  - Flagged routing ambiguities (`FLAG` / `REVIEW`) when a suitable destination document does not exist or cannot be verified.
-- **Boundary and gate checks:**
-  - **Source and destination validation:** A cross-document `MOVE` or redundancy-based `REMOVE` is blocked unless the destination context is inspected and both the source document (after removal) and destination document (after integration) preserve required claims, conditions, and numbers.
-  - **Caveat attachment:** Conditions required to interpret a retained claim remain adjacent to that claim; they cannot be stripped into a bare link or lost during duplicate merging.
-  - **`KEEP` vs. `placement` separation:** `KEEP` preserves the unit's information in the current document, while intra-document section and order remain adjustable via `placement`.
+**입력:** 원본 초안, 정규화된 `Writing Contract`, 사용자 맥락, 선택적 권위 있는 `source_material`과 관련 정보 후보.
 
-### 3. Expression Refinement
+**출력:** 출처 범위가 연결된 정보·주장·조건·수치 목록, 목적 정합성 보고, 정보별 보존·삭제·보완·검토 또는 문서 간 이동 후보와 판단 근거.
 
-- **Responsibilities:**
-  - Rewrite sentences and paragraphs (`REVISE`) to fix grammar, awkward phrasing, or structural transitions after reorganization.
-  - Enforce target Korean speech level/register (e.g., `해요체`, `합니다체`, `한다체`) and consistent domain terminology while respecting quotations, code blocks, and headings.
-  - Condense verbose phrasing or local repetition (`COMPRESS`) without altering semantic scope, conditions, or numbers.
-- **Inputs:** Organized document plan and consolidated units from Module 2, target register and terminology constraints from the `Writing Contract`, and the protected list of facts, numbers, and qualifiers.
-- **Outputs:**
-  - Revised document text(s) with span-level change tracking mapped back to the organized units.
-- **Boundary and gate checks:**
-  - **Meaning and fact invariance:** `REVISE` and `COMPRESS` must not drop contract-required facts, alter quantities/metrics, broaden claim scope by dropping qualifiers, or introduce unsupported assertions (`UNSUPPORTED_CLAIM`).
-  - **Style and register compliance:** Target register and terminology rules pass deterministic and contextual checks across eligible narration sentences.
-  - **Scope restraint:** Module 3 cannot delete substantive information units or reroute content across documents; if rewriting exposes a deeper structural or factual problem, the `Revision Controller` routes the issue back to Module 1 or Module 2.
+**검증 경계:** 각 정보는 추적 가능한 위치·출처 해시에 연결된다. 추가하려는 정보에 근거가 없으면 만들어내지 않고 누락으로 기록한다. 계약상 필수 조건은 `REQUIRED_INFORMATION_MISSING`으로 `ADD` 또는 `FLAG`한다. 목적 충돌을 조용히 없애거나, 현재 글에 관련성이 낮다는 이유만으로 다른 곳에 가치 있는 정보를 `REMOVE`하지 않는다.
 
-## Separating preservation, expression, and placement
+### 2. 정보 재배치·재구성
 
-A single passage often requires independent decisions across three conceptual dimensions:
+**책임**
 
-| Dimension | Owning module | Question answered |
+- 목적지 독자·목적·기존 내용을 검토한 후에만 문서 간 `MOVE`를 결정한다.
+- 목적지와 섹션에 따라 정보를 묶고 중복을 통합하되 모든 조건·수치·사실·출처를 보존한다.
+- 독자 과업·선행 설명·상대적 중요도에 따라 문서 내부 순서(`placement`)를 정한다.
+- 향후 벡터 기반 검색으로 목적지·중복·충돌 후보를 찾을 수 있다.
+
+**입력:** 추출·분석 결과와 정보별 보존 판단, 원본·목적지 후보 문서의 맥락, 선택적 검색 결과.
+
+**출력:** 대상 문서·섹션·상대 순서와 근거가 있는 배치 계획, 출처·한정 조건을 보존한 통합 그룹, 목적지 미확인 등 `FLAG`/`REVIEW` 항목.
+
+**검증 경계:** 원본 삭제 후와 목적지 통합 후 모두 필수 내용이 남아야 한다. 주장의 의미를 제한하는 조건은 주장 가까이에 있어야 하며 링크만으로 대체할 수 없다. `KEEP`은 현재 문서 내 보존이고 섹션·순서 변경을 막지 않는다.
+
+### 3. 표현 수정
+
+**책임:** 재배치 후 문장·문단을 `REVISE`하고 어색한 연결을 고친다. 인용·코드·제목을 고려하면서 목표 한국어 문체(해요체·합니다체·한다체)와 기술 용어를 통일한다. 주장 범위·조건·수치를 지키면서 장황함과 반복을 `COMPRESS`한다.
+
+**입력:** 정리된 문서 계획, 통합 정보 단위, 작성 계약의 문체·용어 제약, 보호할 사실·수치·조건 목록.
+
+**출력:** 원본 정보 단위까지 역추적할 수 있는 원문 범위별 변경 내역을 포함한 수정 결과.
+
+**검증 경계:** 필수 사실의 삭제, 측정치 변경, 조건 누락으로 인한 주장 범위 확대, 근거 없는 주장 추가(`UNSUPPORTED_CLAIM`)를 막는다. 서술 문장의 문체·용어 규칙을 문맥에 맞게 점검한다. 이 모듈은 정보 자체를 삭제하거나 문서 간 이동을 독자적으로 바꾸지 않는다. 구조·사실 결함이 드러나면 제어기를 통해 앞선 모듈로 돌아간다.
+
+## 보존·배치·표현 판단 분리
+
+하나의 발췌에도 아래 세 판단을 독립적으로 적용할 수 있다.
+
+| 판단 차원 | 담당 모듈 | 질문 |
 | --- | --- | --- |
-| **Preservation judgment** | Information Extraction & Analysis | Should this unit's information be retained here, moved elsewhere, supplemented, removed, or flagged for confirmation? |
-| **Placement decision** | Information Organization | Which document (`MOVE`) and which section/relative order (`placement`) best serve the reader's prerequisites and task flow? |
-| **Expression edit** | Expression Refinement | How should the retained or merged unit be phrased, condensed (`COMPRESS`), or normalized (`REVISE`) for register, terminology, and clarity? |
+| **정보 보존** | 추출·분석 | 이 정보를 현재 문서에 남길지, 다른 곳에 보존할지, 보완·삭제·검토할지? |
+| **정보 배치** | 재배치·재구성 | 어느 문서(`MOVE`)·섹션·순서(`placement`)가 독자의 목적에 맞는가? |
+| **표현 변경** | 표현 수정 | 보존된 정보를 어떤 문장·용어·문체로 표현하거나 압축할 것인가? |
 
-**Compatibility with the seven action labels:**
-LogicWrite retains the seven action names—`KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, and `FLAG`—for human readability and backward compatibility with existing fixtures (`tests/fixtures/cases.json` and `tests/fixtures/real-world-candidates.json`). These single labels record the **primary editorial disposition** of a finding rather than forcing one label to encode all three dimensions simultaneously:
-- `KEEP` means the information is relevant and important to preserve in the current document; it **does not freeze wording or current position**. A `KEEP` unit may still be reordered within the document (`placement`) by `Information Organization` or polished for style/conciseness by `Expression Refinement`.
-- `MOVE` denotes cross-document transfer to a document better suited to the unit's audience and purpose. Reordering or moving a passage to another section **within the same document** is recorded as `placement`, not `MOVE`.
-- `COMPRESS` and `REVISE` describe expression-level or redundancy edits on retained information without revoking its preservation status.
+기존 합성·실제 평가 자료와의 호환을 위해 대표 라벨 `KEEP`, `COMPRESS`, `REVISE`, `MOVE`, `REMOVE`, `ADD`, `FLAG`를 유지한다. 라벨은 세 판단을 하나로 강제하지 않고 **대표적인 편집 처리**를 나타낸다.
 
-## Editorial workflow
+- `KEEP`은 현재 문서에서 중요한 정보를 보존한다는 뜻이며 원문 표현·위치를 고정하지 않는다. `placement`나 `REVISE`/`COMPRESS`가 함께 가능하다.
+- `MOVE`는 다른 문서로 이동할 때만 사용한다. 현재 문서의 섹션을 바꾸는 일은 `placement`다.
+- `COMPRESS`/`REVISE`는 정보 보존을 취소하지 않는 표현 단계의 작업이다.
 
-Within the modular architecture above, editorial processing follows six logical stages before a revised document passes the gate. Each stage maps explicitly to the core modules and shared infrastructure, making unit extraction and expression refinement explicit where earlier summaries left them implicit:
+## 편집 절차
+
+모듈형 아키텍처는 최종 문서가 게이트를 통과하기 전에 여섯 단계의 편집 흐름을 따른다.
 
 ```text
-1. Audience & purpose determination            [Contract Resolver + Extraction & Analysis]
-  -> 2. Unit extraction, relevance & importance [Information Extraction & Analysis]
-  -> 3. Action & boundary decision             [Extraction & Analysis -> Organization]
-  -> 4. Regroup per destination & merge        [Information Organization]
-  -> 5. Order within destination & refine      [Information Organization -> Expression Refinement]
-  -> 6. Whole-document validation              [Validation Gate + Revision Controller]
+1. 독자·목적 결정           [Contract Resolver + 추출·분석]
+  → 2. 정보 추출·관련성 평가 [정보 추출·분석]
+  → 3. 액션·정보 범위 판단  [추출·분석 → 재배치]
+  → 4. 목적지별 재그룹·통합 [정보 재배치·재구성]
+  → 5. 순서 정리·표현 수정 [재배치 → 표현 수정]
+  → 6. 전체 문서 검증       [Validation Gate + Revision Controller]
 ```
 
-| Stage | Owning module / component | Input | Output |
+| 단계 | 담당 | 입력 | 출력 |
 | --- | --- | --- | --- |
-| 1. Audience & purpose determination | `Contract Resolver` + `Information Extraction & Analysis` | Source draft, `Writing Contract`, user context | Normalized audience, purpose, scope, recorded assumptions, and recovery/surfacing of any purpose misidentification |
-| 2. Relevance & importance assessment *(includes explicit unit & claim extraction)* | `Information Extraction & Analysis` | Source drafts, contract, and target document context | Extracted unit inventory plus context-dependent relevance and importance judgment per unit |
-| 3. Action decision | `Information Extraction & Analysis` (preservation/boundary) & `Information Organization` (destination viability) | Assessed units, source and candidate destination contexts | Primary compatibility action, preservation judgment, and candidate destination; expression proposals are realized and checked in Module 3 |
-| 4. Regroup & merge duplicates | `Information Organization` | Units grouped by destination, existing destination content, candidate overlaps | Consolidated units across/within documents preserving conditions, qualifiers, facts, numbers, and provenance |
-| 5. Order within destination *(followed by explicit expression refinement)* | `Information Organization` (`placement`) → `Expression Refinement` (rewrite/compress/style) | Regrouped units, reader tasks, prerequisites, relative importance, register/term constraints | Ordered document plan (`placement`) and expression-refined revised draft(s) (`REVISE`, `COMPRESS`, register/term normalization) |
-| 6. Whole-document validation | `Validation Gate` + `Revision Controller` | Complete revised source and destination document(s), contract, protected facts/qualifiers | Deterministic and semantic findings; gate state (`PASS`, `REVIEW`, `FAIL`, `STOPPED`) or targeted module re-routing |
+| 1. 독자·목적 결정 | 계약 해석기 + 추출·분석 | 초안·계약·사용자 맥락 | 목적·독자·범위·가정과 목적 오판의 복구/확인 |
+| 2. 정보 추출·평가 | 추출·분석 | 원본·계약·대상 문맥 | 정보 단위 목록과 관련성·중요도 판단 |
+| 3. 편집 액션 결정 | 추출·분석 + 목적지 적합성 검토 | 평가된 정보·원본·목적지 후보 | 대표 액션·보존 판단·목적지 후보 |
+| 4. 재그룹·중복 통합 | 재배치·재구성 | 목적지별 정보·기존 내용·중복 후보 | 조건·수치·출처를 유지한 통합 정보 |
+| 5. 순서·표현 수정 | 재배치 → 표현 수정 | 정보 그룹·독자 과업·선행조건·문체/용어 | 정렬된 `placement`와 `REVISE`/`COMPRESS` 적용 초안 |
+| 6. 전체 검증 | 검증 게이트 + 수정 제어기 | 모든 관련 문서·계약·보호 요소 | 규칙·의미 검사 결과와 상태 또는 담당 모듈 재실행 |
 
-### Purpose-first decision procedure
+### 목적 우선 판단 절차
 
-Use the six stages above to decide what belongs before deciding where it reads smoothly. An existing section, a familiar template, or usefulness to some reader is not sufficient evidence for retaining a unit in the current output scope.
+위 여섯 단계에서는 어디에 두면 자연스럽게 읽히는지에 앞서 어떤 정보가 현재 범위에 속하는지 판단한다. 기존 섹션이나 익숙한 템플릿이 있다는 사실, 일부 독자에게 유용하다는 사실만으로 현재 출력 범위의 보존을 정당화하지 않는다.
 
-| Decision | Required reasoning and owner |
+| 판단 | 필요한 근거와 담당 |
 | --- | --- |
-| Establish the reader task | Resolver distinguishes explicit desired purpose from the draft's historical role and the surrounding repository's role. A folder that preserves experience evidence does not require its index to repeat that evidence. Record assumptions; do not infer a universal document policy from one user's choice. |
-| Identify the unit's function in context | Analysis distinguishes instructions, selection rationale, navigation, contribution claims, measurements, limitations, and time-dependent status as applicable. Topic words alone do not determine function: mentioning an installer is not necessarily installation guidance. These are descriptive distinctions, not new schema enums. |
-| Select information for each output | Analysis justifies why the unit helps that scope's reader task. Distinguish preservation value across the affected corpus from the need for local exposure. Consider whether an existing claim should remain at all before retaining its detailed caveats by default. |
-| Plan preservation and placement | Organization separates introduction/navigation from detailed work or evidence records where the contract calls for that division. Inspect destination context and overlap; preserve source text while a transfer remains blocked. Then decide section, grouping and order within each document. |
-| Refine the selected information | Expression improves wording and readability under the accepted plan. Harmless decorative cleanup can be proposed without proof of an earlier user instruction; it does not establish a universal style prohibition or a factual defect. Preserve meaningful symbols and applicable quote/code exclusions. |
-| Recheck the actual resulting claims | Gate checks the full affected outputs, provenance, authorized preservation and necessary local qualifiers. A changed purpose, selection or claim scope returns to the responsible upstream component and invalidates dependent work; fluent phrasing alone cannot discharge these checks. |
+| 독자 과업 확인 | 해석기는 명시적으로 원하는 목적, 초안의 기존 역할, 저장소의 역할을 구별한다. 경험 근거를 보존하는 폴더의 색인이 그 근거를 반복할 필요는 없다. 가정을 기록하고 한 사용자의 선택을 보편적 문서 정책으로 확대하지 않는다. |
+| 문맥상 정보 기능 식별 | 분석은 지시·선택 근거·탐색 안내·기여 주장·측정·한계·시점에 따라 달라지는 상태를 구별한다. 설치 파일을 언급한다고 설치 안내가 되는 것은 아니다. 이 구분은 설명을 위한 것이며 새 스키마 열거값이 아니다. |
+| 출력별 정보 선택 | 분석은 해당 정보가 그 범위의 독자 과업에 필요한 이유를 설명한다. 관련 자료 전체의 보존 가치와 현재 문서의 노출 필요성을 구별한다. 세부 한계를 기본적으로 남기기 전에 그 한계가 붙은 주장 자체를 유지할지부터 검토한다. |
+| 보존·배치 계획 | 계약에 따라 소개·탐색 안내와 상세 작업·근거 기록을 분리한다. 재배치 모듈은 목적지 문맥과 중복을 확인하고 이동이 차단된 동안 원문을 보존한다. 이후 문서별 섹션·그룹·순서를 정한다. |
+| 선택된 정보의 표현 개선 | 표현 모듈은 수용된 계획 아래 문장과 가독성을 개선한다. 무해한 장식 정리는 과거 지시의 증명 없이 제안할 수 있으나 보편적 문체 금지나 사실 오류를 뜻하지 않는다. 의미 있는 기호와 해당 인용·코드 제외 조건은 보존한다. |
+| 실제 결과의 주장 재검토 | 게이트는 영향받는 전체 출력, 출처, 승인된 보존 의무와 필요한 현지 조건 노출을 검사한다. 목적·정보 선택·주장 범위가 바뀌면 담당 상위 구성 요소로 돌아가 하위 결과를 무효화한다. 자연스러운 문장만으로 검사를 대신하지 않는다. |
 
-The following are context-dependent counterexamples from the [manual reassessment](reviews/real-world-20-reassessment.md), not gold annotations or default rules for every README, resume or guide.
+다음은 [수작업 재검토](reviews/real-world-20-reassessment.md)의 문맥별 반례이며 골드 주석이나 모든 README·이력서·가이드의 기본 규칙이 아니다.
 
-| Case | Distinction that prevents a wrong decision |
+| 사례 | 잘못된 판단을 막는 구분 |
 | --- | --- |
-| RW-001/002 | Download/run instructions serve installation; explaining why PKG was selected serves a packaging decision record. A natural order or short length does not make the latter an installation step. |
-| RW-007/009 | An index can select links and document roles while detailed evidence stays elsewhere; an explicitly requested master-career landing page can replace repository-management introduction. Existing content does not override desired purpose. |
-| RW-012 | Describing learning/evaluation work can avoid claiming a performance gain. Keep detailed positive results, regression, attribution and verification limits together in evidence rather than showing only a favorable metric. |
-| RW-016/018 | Repository identity differs from changing migration status or maintenance procedures. Under the reviewed purpose, introduce the repository and link to the appropriate work records. |
-| RW-003 | A top-of-page participation request and consolidation into an existing later section can both be defensible. Explain the tradeoff rather than forcing one placement as the only correct answer. |
+| RW-001/002 | 다운로드·실행 지시는 설치를 돕고 PKG 선택 이유는 패키징 의사결정 기록에 해당한다. 순서가 자연스럽거나 길이가 짧아도 선택 이유가 설치 단계가 되지는 않는다. |
+| RW-007/009 | 색인에는 링크·문서 역할을 두고 상세 근거는 다른 곳에 보존할 수 있다. 명시적으로 요청한 마스터 이력 표시가 저장소 관리 소개를 대체할 수도 있다. 기존 내용이 원하는 목적보다 우선하지 않는다. |
+| RW-012 | 학습·평가 작업을 기여로 설명하면 성능 향상을 주장하지 않을 수 있다. 유리한 수치만 보이지 말고 상세 긍정 결과·회귀·귀속·검증 한계를 근거에 함께 보존한다. |
+| RW-016/018 | 저장소 정체성은 변동하는 이관 상태나 유지보수 절차와 다르다. 검토한 목적에서는 저장소를 소개하고 적절한 작업 기록으로 연결한다. |
+| RW-003 | 상단의 참여 요청 유지와 기존 하단 섹션으로의 통합은 모두 타당할 수 있다. 하나만 정답으로 강제하지 말고 선택의 장단점을 설명한다. |
 
-### Editorial invariants
+### 편집 불변조건
 
-The [module boundaries](#core-modules) and [decision dimensions](#separating-preservation-expression-and-placement) apply throughout all six stages: relevance is contextual, low relevance alone cannot justify deleting valuable information, and unresolved purpose/destination/claim questions yield `FLAG` / `REVIEW`. Neither regrouping nor polishing overrides the protected facts, conditions, numbers, or provenance.
+[모듈별 책임](#핵심-모듈)과 [세 가지 판단 차원](#보존배치표현-판단-분리)은 모든 단계에 적용한다. 관련성은 문맥에 따라 달라진다. 낮은 관련성만으로 보존 가치가 있는 정보를 삭제해서는 안 된다. 미해결 목적·목적지·주장 문제는 `FLAG`/`REVIEW`가 된다. 배치 변경이나 윤문이 보호된 사실·조건·수치·출처보다 우선하지 않는다.
 
-### Caveat retention and exposure
+### 주의사항 보존과 노출
 
-Ask: **If this caveat is omitted, will readers misunderstand a claim in this document or make a different decision?** Distinguish preserving information in the corpus from exposing it in each document.
+판단 질문: **주의사항을 생략하면 현재 문서에서 독자가 주장을 오해하거나 다른 결정을 내리게 되는가?** 전체 자료에서 정보를 *보존하는 것*과 각 문서에서 *노출하는 것*을 구별한다.
 
-| Effect of omission in the current document | Treatment |
+| 현재 문서에서 생략했을 때 | 처리 |
 | --- | --- |
-| Changes the meaning of a claim or materially affects the reader's decision | Retain the minimum necessary condition near that claim |
-| Matters to a subset of readers but is not needed to interpret the main text | Preserve details in an appropriate document and link where useful |
-| Needed for provenance or later reuse, without affecting the current reader's decision | Preserve in the evidence record; omit from the current text |
-| The same condition is already adequately stated | Consolidate the duplication |
+| 주장 의미가 달라지거나 독자 결정에 실질적 영향을 준다 | 필수 조건의 최소한을 해당 주장 가까이에 유지한다. |
+| 일부 독자에게 필요하나 본문 해석에 필수는 아니다 | 적절한 문서에 세부사항을 보존하고 필요하면 연결한다. |
+| 출처 추적이나 추후 재사용에만 필요하다 | 근거 기록에 보존하고 현재 본문에서는 생략할 수 있다. |
+| 조건이 이미 충분히 설명됐다 | 중복을 통합한다. |
 
-Adjust claims and caveats together: narrow an overbroad claim or move the claim and its supporting detail together rather than deleting only its limitation. A link cannot replace a condition necessary to interpret the visible claim. Verify destination preservation before removing duplicated detail; unknown preservation yields `FLAG` / `REVIEW`. Because `Information Organization` and `Expression Refinement` can alter which claims appear in a document and how they are grouped, the `Validation Gate` reassesses caveat exposure on the complete revised source and destination documents after editing.
+주장과 한정 조건은 함께 조정한다. 과도하게 넓은 주장은 범위를 좁히거나 필요한 근거를 함께 이동하며, 제한 조건만 따로 삭제하지 않는다. 링크는 현재 보이는 주장에 꼭 필요한 조건을 대체할 수 없다. 중복을 제거하기 전에 목적지에 실제로 보존되는지 확인한다. 확인할 수 없으면 `FLAG`/`REVIEW`다. 재배치·표현 수정으로 주장과 문맥이 달라질 수 있으므로 **최종 원본·목적지 전체에서 다시 확인**한다.
 
-Selecting a narrower contribution claim instead of a quantitative outcome requires Analysis to reassess the affected units/exposure and Organization to plan their preservation before Expression rewrites them. It is not permission for Expression to discard protected numbers or for a writer to hide counterevidence. The source evidence and authorized preservation obligations remain intact even when the current document no longer repeats the detailed result or limitation.
+정량 성과 대신 범위가 좁은 기여 주장을 선택하려면, 표현 수정 전에 분석이 관련 정보·노출을 재평가하고 재배치가 보존을 계획해야 한다. 이는 표현 모듈이 보호 수치를 버리거나 작성자가 반대 근거를 숨겨도 된다는 뜻이 아니다. 현재 문서에서 상세 결과·한계를 반복하지 않아도 원본 근거와 승인된 보존 의무는 유지한다.
 
-## Future design: vector-assisted routing
+## 향후 설계: 벡터 기반 경로 탐색
 
-> **Status: unimplemented future design.** Vector-assisted routing is neither implemented nor evaluated. No embedding providers, runtime dependencies, numeric importance scales, similarity thresholds, or executable schemas are fixed.
+> **미구현·미평가 설계.** 임베딩 제공자, 런타임 의존성, 중요도 수치 척도, 유사도 임계값, 실행 스키마는 정하지 않았다.
 
-Within **Information Organization** (and feeding candidate contradiction pairs to **Information Extraction & Analysis**), vector retrieval can assist candidate discovery across multi-document repositories before editorial judgment:
+`Information Organization`이 여러 문서의 후보를 찾고 `Information Extraction & Analysis`에 충돌 후보를 제공하는 방법으로 벡터 검색을 검토한다.
 
-1. **Profile and unit embeddings:** Compute embeddings for target document profiles (capturing audience, purpose, and scope) and extracted source information units from `Information Extraction & Analysis`.
-2. **Candidate retrieval via cosine similarity:** Use cosine similarity to retrieve:
-   - Candidate destination documents (unit-to-profile) for potential `MOVE` routing,
-   - Related or overlapping existing units (unit-to-unit) for duplicate consolidation,
-   - Potentially conflicting passages across paragraphs or documents for semantic contradiction review.
-3. **Contextual review and assembly:** `Information Extraction & Analysis` and `Information Organization` inspect the retrieved destination context, verify scope, conditions, numbers, and qualifiers, determine context-dependent preservation and `placement`, integrate new and existing material while preserving provenance, and hand the result to `Expression Refinement` and whole-document validation.
+1. **문서 프로필·정보 단위 임베딩:** 독자·목적·범위를 담은 목적지 문서 프로필과 추출된 정보 단위를 임베딩한다.
+2. **코사인 유사도 기반 후보 검색:** 정보↔문서 프로필로 `MOVE` 목적지, 정보↔정보로 중복·관련 정보, 문단·문서 사이의 잠재적 충돌을 찾는다.
+3. **문맥 검토·조립:** 후보 목적지의 실제 문맥과 주장 범위·조건·수치·한정 표현을 확인하고 보존·배치를 판단한 후 근거를 유지하면서 통합·표현 수정·전체 검증에 넘긴다.
 
-### Guardrails and boundaries
+### 안전장치와 경계
 
-- **Candidate retrieval only—not importance, truth, or deletion authority:** Vector similarity surfaces candidates for inspection; it never determines editorial importance, establishes factual truth, or authorizes `REMOVE`.
-- **Document affinity vs. intra-document ordering:** Vector similarity estimates which document a unit may belong to (document affinity). Position within a document (`placement`) is decided separately by `Information Organization` based on reader task flow, prerequisites, and importance.
-- **No blind merging:** Overlapping or contradictory units surfaced by similarity must not be merged automatically; scope, conditions, quantifiers, numbers, and provenance must be checked first.
-- **Provisional missing destinations:** If a suitable target document does not exist or cannot be confirmed, the destination remains provisional (`FLAG` / `REVIEW`). The system must not automatically create or publish new documents.
-- **Retrieval/routing vs. RAG:** Using similarity search alone to shortlist candidate destinations or related passages is **retrieval/routing**. Supplying retrieved destination passages to a model during draft synthesis or revision constitutes **RAG (Retrieval-Augmented Generation)**.
+- 유사도는 **검토할 후보만 제시**한다. 중요도·진실성·`REMOVE` 권한을 결정하지 않는다.
+- 문서에 어울리는 정도와 문서 안의 순서를 분리한다. `placement`는 독자의 작업 흐름·선행조건·중요도로 결정한다.
+- 중복·모순 후보를 무조건 합치지 않는다. 주장 범위·조건·수량·수치·출처를 먼저 확인한다.
+- 확인할 목적지가 없으면 `FLAG`/`REVIEW`로 보류하며 자동으로 새 문서를 만들거나 배포하지 않는다.
+- 유사도 검색만으로 후보를 찾으면 **검색/경로 탐색**이고, 검색 문맥을 모델이 초안 생성·수정에 사용하면 **RAG(검색 증강 생성)**에 해당한다.
 
-## System boundaries, security, and provenance
+## 시스템 경계·보안·출처
 
-- **Core engine (planned):** Portable library for contracts, the three editorial modules, validation rules, and revision orchestration.
-- **Adapters (later):** CLI for local use; MCP for agents; optional editor/CI integrations.
-- **Skill (later):** Task-specific guidelines and examples, not the enforcement mechanism.
-- **Untrusted inputs and provenance:** Treat source documents, retrieval results, and model outputs as untrusted input. Ignore prompt-injection instructions embedded in text being edited. Keep immutable source snapshots and associate extracted units and findings with content hashes. Avoid remote uploads by default; make model/provider selection and data retention explicit before any external processing. Do not use automated editing to settle factual disputes when no trusted source can determine the truth.
+- **코어 엔진(계획):** 계약, 세 편집 모듈, 검증 규칙, 수정 제어를 담는 이식 가능한 라이브러리.
+- **어댑터(향후):** 로컬 CLI, 에이전트용 MCP, 선택적 편집기·CI 연동.
+- **Skill(향후):** 작업 지침과 예시이며 검증 강제 장치는 아니다.
+- **신뢰할 수 없는 입력:** 원본 문서·검색 결과·모델 출력을 비신뢰 데이터로 취급한다. 편집 대상 글에 포함된 프롬프트 주입 지시는 따르지 않는다. 원본 스냅샷을 변경 불가능하게 보존하고 추출 정보·검토 결과에 콘텐츠 해시를 연결한다. 원격 업로드는 기본으로 피하고 외부 모델 선택·데이터 보존 정책을 사용자에게 명시한다. 신뢰할 원자료가 없을 때 자동 편집으로 사실 분쟁을 확정하지 않는다.
 
-## Open decisions
+## 미결정 사항
 
-- Executable representation and extraction policy for the [proposed unit/element relationships](data-model-and-interfaces.md#informationunit-and-informationassessment), including cross-paragraph linking in `Information Extraction & Analysis`.
-- Granularity rules for unit segmentation (clause, sentence, claim, or paragraph) across extraction and organization.
-- Protocol for surfacing and resolving contract purpose misidentification when user prompts are brief.
-- Document profile representation for audience, purpose, and scope embeddings in `Information Organization`.
-- Evaluation protocol for candidate retrieval quality and cross-document misrouting risks.
-- Korean morphology analyzer and register false-positive handling in `Expression Refinement` and `Rule Validators`.
-- How to measure reader usefulness without rewarding shorter output by default.
-- Whether semantic warnings block delivery or allow a labeled `REVIEW` state.
+- [정보·요소 관계 모델](data-model-and-interfaces.md#informationunit과-informationassessment)의 실행 표현, 추출 정책, 문단 간 연결
+- 정보 단위의 분할 수준(절·문장·주장·문단)
+- 짧은 사용자 요청에서 문서 목적 오판을 드러내고 해결하는 절차
+- 독자·목적·범위의 문서 프로필과 임베딩 표현
+- 후보 검색 품질 및 문서 간 오배치 위험의 평가 방식
+- 한국어 형태소 분석·문체 검사 오탐 처리
+- 무조건 글을 줄이지 않으면서 독자 유용성을 평가하는 방법
+- 의미적 경고를 배포 차단으로 처리할지 `REVIEW`를 허용할지에 대한 정책
