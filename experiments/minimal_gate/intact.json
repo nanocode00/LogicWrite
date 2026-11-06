@@ -1,0 +1,41 @@
+{
+  "contract": {
+    "audience": "설치 사용자",
+    "purpose": "설치를 시작한다",
+    "document_type": "installation_guide",
+    "output_scopes": [
+      {
+        "scope_id": "current",
+        "document_id": "guide"
+      }
+    ]
+  },
+  "source": {
+    "id": "before",
+    "document_id": "guide",
+    "content": "설치 대기시간은 30초다. 🚀",
+    "sha256": "99b6790614c89c3cbcbf35247aa34965de90d153f4a8286885654087f4cbdfb7"
+  },
+  "candidate": {
+    "id": "after",
+    "document_id": "guide",
+    "content": "설치 대기시간은 30초다. 🚀",
+    "sha256": "99b6790614c89c3cbcbf35247aa34965de90d153f4a8286885654087f4cbdfb7"
+  },
+  "protected_literals": [
+    {
+      "id": "timeout",
+      "scope_id": "current",
+      "source_span": {
+        "snapshot_id": "before",
+        "start": 9,
+        "end": 11
+      },
+      "output_span": {
+        "snapshot_id": "after",
+        "start": 9,
+        "end": 11
+      }
+    }
+  ]
+}
