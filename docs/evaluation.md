@@ -52,6 +52,25 @@ Keep existing action labels, annotation rationales, gold information-unit segmen
 
 All evaluation arms must receive the same selected facts and contract. Preparing the bundles requires checking the selected context and snapshot references case by case; agreement on this composition does not assert that all 20 bundles are already complete or approved. Their serialization, final expected judgments and freeze approval remain later steps.
 
+### Agreed answer criteria and judgment dimensions
+
+For each information unit and applicable output scope, record the following dimensions independently. A single compatibility action must not substitute for the full judgment.
+
+| Judgment dimension | What the answer must distinguish |
+| --- | --- |
+| Relevance | How the information serves the specified reader task, rather than merely sharing a topic or being useful somewhere. |
+| Importance | Whether the information is necessary, useful or optional for that scope, with contextual reasons. Low importance alone does not authorize deletion. |
+| Information preservation | What must survive, where it must remain available and which conditions need local exposure. Preserve required numbers, attribution and provenance across the affected scopes. |
+| Cross-document transfer | Whether another document is an appropriate home, its role/context and any unresolved preconditions. A MOVE candidate is not a completed transfer or permission to remove source text. |
+| Intra-document placement | Suitable sections, grouping and relative order, including defensible alternatives within the same document; do not classify this as cross-document MOVE. |
+| Expression | Whether wording can remain unchanged or needs REVISE/COMPRESS; separate required corrections from optional improvements and preserve meaning. |
+
+Apply four kinds of answer criteria to each applicable judgment: **mandatory conditions** that must hold; **acceptable alternatives** that may differ while satisfying the task; **incorrect decisions** that violate meaning, evidence or contract constraints; and **unresolved matters** where supplied evidence calls for uncertainty or FLAG/REVIEW. Explain non-applicability where appropriate rather than forcing an edit or inventing a finding for every dimension. An optional suggestion and a justified unchanged choice can both be acceptable.
+
+For example, RW-003 can combine relevant but optional information with preservation in the README, no required cross-document transfer, either current placement or consolidation into the existing later section, and optional expression changes. A different defensible unit segmentation is acceptable if it accounts for the same claims, conditions and provenance; matching gold unit IDs or exact replacement text is not the target.
+
+Source assertions, additional evidence and reviewer findings must be distinguishable and connected to their own supporting locations. These answer-organization principles are agreed; the per-case answer contents, serialization and final freeze approval remain pending. No fixture fields, labels, scores or gold status are changed by this agreement.
+
 ## Baselines
 
 After M0 human review, prepare comparisons using identical source facts, draft snapshots, and writing contracts. Execute B2 only when the validator and revision controller exist:
