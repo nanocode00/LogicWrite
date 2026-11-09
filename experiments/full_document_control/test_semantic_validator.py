@@ -873,6 +873,243 @@ class SemanticFidelityValidatorTests(unittest.TestCase):
         self.assertEqual(check_hypothetical[0], 'unresolved')
         self.assertEqual(check_hypothetical[1], 'AMBIGUOUS_SOURCE_EVIDENCE')
 
+    # ------------------------------------------------------------------
+    # 10. Required Field Coverage, Targeted Retry & Schema Stabilization
+    # ------------------------------------------------------------------
+    def test_model_omits_preservation_field_and_recovers_via_targeted_retry(self):
+        """When a model evaluator omits /units/0/assessment/preservation on first response,
+        the validator prompts specifically for the missing field, merges the response without
+        shrinking coverage or overwriting prior valid judgments, and achieves full coverage.
+        """
+        initial_called = []
+        retry_called = []
+
+        def omitting_responder(w_idx, sw, prompt_text, att):
+            # Check if this is a missing-fields retry prompt
+            if 'missing_field_paths' in prompt_text or 'FOLLOW-UP SEMANTIC REVIEW' in prompt_text:
+                retry_called.append((w_idx, att))
+                # Provide judgment ONLY for the missing preservation field
+                return {
+                    'input_sha256': sw.get('input_sha256') or pipeline.canonical_json_digest(self.rw001_bundle),
+                    'snapshot_id': self.rw001_bundle['document_snapshot']['snapshot_id'],
+                    'snapshot_sha256': self.rw001_bundle['document_snapshot']['sha256'],
+                    'analysis_sha256': self.rw001_analysis['analysis_sha256'],
+                    'semantic_window_id': sw['semantic_window_id'],
+                    'unit_reviews': [
+                        {
+                            'unit_id': 'u-rw-heading',
+                            'field_judgments': [
+                                {
+                                    'field_path': '/units/0/assessment/preservation',
+                                    'semantic_judgment': 'supported',
+                                    'error_category': None,
+                                    'evidence_quotes': [
+                                        {'block_id': 'B001', 'quote': '### Why PKG Instead Of DMG?', 'occurrence': 0}
+                                    ],
+                                    'rationale': 'Preservation choice retain_current is faithful to document heading.',
+                                }
+                            ],
+                        }
+                    ],
+                    'block_omission_reviews': [],
+                }
+
+            initial_called.append((w_idx, att))
+            base_resp = pipeline.build_stub_semantic_response_from_audit(
+                self.rw001_bundle, self.rw001_analysis, window_index=w_idx
+            )
+            # Omit /units/0/assessment/preservation
+            for ur in base_resp['unit_reviews']:
+                ur['field_judgments'] = [
+                    fj for fj in ur['field_judgments']
+                    if fj['field_path'] != '/units/0/assessment/preservation'
+                ]
+            return base_resp
+
+        report = pipeline.validate_semantic_fidelity(
+            self.rw001_bundle,
+            self.rw001_analysis,
+            semantic_responder=omitting_responder,
+            combine_with_deterministic_audit=False,
+            max_attempts=2,
+        )
+        self.assertTrue(len(retry_called) > 0, 'Targeted missing-field retry must be called')
+        self.assertTrue(report['coverage_summary']['is_complete'])
+        self.assertEqual(report['coverage_summary']['unreviewed_field_paths'], [])
+        self.assertEqual(report['overall_judgment'], 'supported')
+
+    def test_model_omits_fields_and_exhausts_retries_leaves_incomplete_coverage_review(self):
+        """When a model evaluator omits a required field and still omits it on retry,
+        it is flagged as INCOMPLETE_SEMANTIC_COVERAGE and held as unresolved (REVIEW).
+        """
+        def persistent_omitting_responder(w_idx, sw, prompt_text, att):
+            base_resp = pipeline.build_stub_semantic_response_from_audit(
+                self.rw001_bundle, self.rw001_analysis, window_index=w_idx
+            )
+            for ur in base_resp['unit_reviews']:
+                ur['field_judgments'] = [
+                    fj for fj in ur['field_judgments']
+                    if fj['field_path'] != '/units/0/assessment/preservation'
+                ]
+            return base_resp
+
+        report = pipeline.validate_semantic_fidelity(
+            self.rw001_bundle,
+            self.rw001_analysis,
+            semantic_responder=persistent_omitting_responder,
+            combine_with_deterministic_audit=False,
+            max_attempts=2,
+        )
+        self.assertFalse(report['coverage_summary']['is_complete'])
+        self.assertIn('/units/0/assessment/preservation', report['coverage_summary']['unreviewed_field_paths'])
+        self.assertEqual(report['overall_judgment'], 'unresolved')
+        incomplete_findings = [f for f in report['findings'] if f['error_category'] == 'INCOMPLETE_SEMANTIC_COVERAGE']
+        self.assertTrue(len(incomplete_findings) > 0)
+
+    def test_error_category_alias_normalization_and_unmapped_category_handling(self):
+        """Error category aliases ('overstatement') are normalized to standard categories ('CLAIM_OVERSTATEMENT').
+        Unrecognized categories are treated as schema parse errors (retryable) rather than confirmed document failures.
+        """
+        # 1. Alias normalization
+        norm = pipeline._semantic_validator.normalize_semantic_error_category('overstatement')
+        self.assertEqual(norm, 'CLAIM_OVERSTATEMENT')
+        self.assertEqual(
+            pipeline._semantic_validator.normalize_semantic_error_category('polarity_reversal'),
+            'POLARITY_REVERSAL',
+        )
+
+        def alias_responder(w_idx, _sw, _prompt, _att):
+            resp = pipeline.build_stub_semantic_response_from_audit(
+                self.rw001_bundle, self.rw001_analysis, window_index=w_idx
+            )
+            for ur in resp['unit_reviews']:
+                if ur['unit_id'] == 'u-install-reqs':
+                    for fj in ur['field_judgments']:
+                        if fj['field_path'] == '/units/2/statement':
+                            fj['semantic_judgment'] = 'overstated'
+                            fj['error_category'] = 'overstatement'  # alias!
+            return resp
+
+        report = pipeline.validate_semantic_fidelity(
+            self.rw001_bundle,
+            self.rw001_analysis,
+            semantic_responder=alias_responder,
+            combine_with_deterministic_audit=False,
+        )
+        self.assertEqual(report['overall_judgment'], 'overstated')
+        overstated_findings = [f for f in report['findings'] if f['error_category'] == 'CLAIM_OVERSTATEMENT']
+        self.assertTrue(len(overstated_findings) > 0)
+
+    # ------------------------------------------------------------------
+    # 11. Trust Boundary Enforcement (Evidence vs Report Discrepancy & Tampering)
+    # ------------------------------------------------------------------
+    def test_tampering_both_report_and_embedded_records_rejected_against_trusted_evidence(self):
+        """Counterexample: An attacker manipulates BOTH the semantic report and its embedded evaluator_records
+        to remove a model-detected error.
+        - When verified against gate's trusted execution evidence, it is rejected with DISCREPANT_EXECUTION_RECORD.
+        - When an external report is presented without trusted execution evidence, it is held at UNVERIFIED_MODEL_EXECUTION_RECORD.
+        """
+        cases = eval_cases.build_semantic_evaluation_cases()
+        eval12 = next(c for c in cases if c['eval_case_id'] == 'EVAL-12-BOUNDARY-SUBTLE-SEQUENTIAL-SHIFT-FN')
+        b12, a12 = eval12['input_bundle'], eval12['analysis_result']
+        stub_eval12 = eval_cases.make_stub_model_responder_for_eval_case(eval12)
+
+        # 1. Legitimate execution produces report and trusted evidence
+        legit_report, trusted_evidence = pipeline.validate_semantic_fidelity_with_evidence(
+            b12,
+            a12,
+            semantic_responder=stub_eval12,
+        )
+        self.assertEqual(legit_report['overall_judgment'], 'overstated')
+
+        # Gate verification with trusted evidence succeeds in identifying the error and passing integrity
+        integ_legit = pipeline.verify_semantic_report_integrity(
+            b12, a12, legit_report, trusted_execution_evidence=trusted_evidence
+        )
+        self.assertTrue(integ_legit['valid'])
+
+        # 2. Attacker forges BOTH report AND embedded evaluator_records
+        forged_report = copy.deepcopy(legit_report)
+        forged_report['overall_judgment'] = 'supported'
+        forged_report['findings'] = []
+        for ij in forged_report['item_judgments']:
+            if ij['field_path'] == '/units/1/statement':
+                ij['semantic_judgment'] = 'supported'
+                ij['error_category'] = None
+
+        # Attacker also tampers raw_response inside evaluator_records to match forged claims
+        if 'evaluator_records' in forged_report:
+            for rec in forged_report['evaluator_records']:
+                rec_json = json.loads(rec['raw_response'])
+                for ur in rec_json.get('unit_reviews', []):
+                    for fj in ur.get('field_judgments', []):
+                        if fj.get('field_path') == '/units/1/statement':
+                            fj['semantic_judgment'] = 'supported'
+                            fj['error_category'] = None
+                tampered_bytes = json.dumps(rec_json, ensure_ascii=False).encode('utf-8')
+                rec['raw_response'] = tampered_bytes.decode('utf-8')
+                rec['response_sha256'] = pipeline.digest_bytes(tampered_bytes)
+
+        forged_body = {k: v for k, v in forged_report.items() if k != 'semantic_report_sha256'}
+        forged_report['semantic_report_sha256'] = pipeline.canonical_json_digest(forged_body)
+
+        # A: Verifying against gate's trusted execution evidence catches discrepancy!
+        integ_check = pipeline.verify_semantic_report_integrity(
+            b12, a12, forged_report, trusted_execution_evidence=trusted_evidence
+        )
+        self.assertFalse(integ_check['valid'])
+        self.assertEqual(integ_check['code'], 'DISCREPANT_EXECUTION_RECORD')
+
+        # B: Verifying without trusted execution evidence refuses to trust embedded records!
+        integ_no_evidence = pipeline.verify_semantic_report_integrity(
+            b12, a12, forged_report, trusted_execution_evidence=None
+        )
+        self.assertFalse(integ_no_evidence['valid'])
+        self.assertEqual(integ_no_evidence['code'], 'UNVERIFIED_MODEL_EXECUTION_RECORD')
+
+    def test_corrupted_trusted_execution_record_rejected(self):
+        """When trusted execution evidence has mismatched artifact binding or corrupted digests,
+        verification rejects with CORRUPTED_EXECUTION_RECORD.
+        """
+        cases = eval_cases.build_semantic_evaluation_cases()
+        eval12 = next(c for c in cases if c['eval_case_id'] == 'EVAL-12-BOUNDARY-SUBTLE-SEQUENTIAL-SHIFT-FN')
+        b12, a12 = eval12['input_bundle'], eval12['analysis_result']
+        stub_eval12 = eval_cases.make_stub_model_responder_for_eval_case(eval12)
+
+        legit_report, trusted_evidence = pipeline.validate_semantic_fidelity_with_evidence(
+            b12,
+            a12,
+            semantic_responder=stub_eval12,
+        )
+
+        corrupted_evidence = copy.deepcopy(trusted_evidence)
+        corrupted_evidence['input_sha256'] = '0' * 64
+
+        integ_check = pipeline.verify_semantic_report_integrity(
+            b12, a12, legit_report, trusted_execution_evidence=corrupted_evidence
+        )
+        self.assertFalse(integ_check['valid'])
+        self.assertEqual(integ_check['code'], 'CORRUPTED_EXECUTION_RECORD')
+
+    def test_multi_evaluator_live_conflict_protocol_holds_at_review(self):
+        """When two independent evaluators conflict on a judgment, the validator records
+        EVALUATOR_JUDGMENT_CONFLICT and holds as unresolved (REVIEW).
+        """
+        cases = eval_cases.build_semantic_evaluation_cases()
+        eval14 = next(c for c in cases if c['eval_case_id'] == 'EVAL-14-INTER-EVALUATOR-CONFLICT-HOLD')
+        b14, a14 = eval14['input_bundle'], eval14['analysis_result']
+        responders = eval_cases.make_stub_model_responder_for_eval_case(eval14)
+
+        report = pipeline.validate_semantic_fidelity(
+            b14,
+            a14,
+            semantic_responder=responders,
+            combine_with_deterministic_audit=False,
+        )
+        self.assertEqual(report['overall_judgment'], 'unresolved')
+        finding_cats = {f['error_category'] for f in report['findings']}
+        self.assertIn('EVALUATOR_JUDGMENT_CONFLICT', finding_cats)
+
 
 if __name__ == '__main__':
     unittest.main()

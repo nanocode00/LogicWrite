@@ -2587,12 +2587,45 @@ def validate_semantic_fidelity(
     )
 
 
-def verify_semantic_report_integrity(input_bundle, analysis_result, semantic_report, *, evaluator_raw_responses=None):
+normalize_semantic_error_category = _semantic_validator.normalize_semantic_error_category
+
+
+def validate_semantic_fidelity_with_evidence(
+    input_bundle,
+    analysis_result,
+    *,
+    semantic_responder=None,
+    max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
+    max_attempts=1,
+    combine_with_deterministic_audit=True,
+):
+    """Execute semantic fidelity validation and return both (report, trusted_execution_evidence)."""
+    rep = validate_semantic_fidelity(
+        input_bundle,
+        analysis_result,
+        semantic_responder=semantic_responder,
+        max_prompt_chars=max_prompt_chars,
+        max_attempts=max_attempts,
+        combine_with_deterministic_audit=combine_with_deterministic_audit,
+    )
+    ev = _semantic_validator._TRUSTED_EVIDENCE_REGISTRY.get(rep.get('semantic_report_sha256'))
+    return rep, ev
+
+
+def verify_semantic_report_integrity(
+    input_bundle,
+    analysis_result,
+    semantic_report,
+    *,
+    trusted_execution_evidence=None,
+    evaluator_raw_responses=None,
+):
     """Independently verify digest, upstream bindings, codepoint spans, field paths, and findings of a SemanticFidelityReport."""
     return _semantic_validator.verify_semantic_report_integrity(
         input_bundle,
         analysis_result,
         semantic_report,
+        trusted_execution_evidence=trusted_execution_evidence,
         evaluator_raw_responses=evaluator_raw_responses,
         verify_self_digest_fn=verify_self_digest,
         canonical_json_digest_fn=canonical_json_digest,
@@ -2613,6 +2646,7 @@ def validate_analysis_gate(
     *,
     plan=None,
     semantic_report=None,
+    trusted_execution_evidence=None,
     semantic_responder=None,
     run_semantic_validation=False,
     max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
@@ -2827,7 +2861,7 @@ def validate_analysis_gate(
 
     if should_run_semantic and blocked_by is None and ok_analysis_digest:
         if active_semantic_report is None:
-            active_semantic_report = validate_semantic_fidelity(
+            active_semantic_report, trusted_execution_evidence = validate_semantic_fidelity_with_evidence(
                 input_bundle,
                 analysis_result,
                 semantic_responder=semantic_responder,
@@ -2836,19 +2870,34 @@ def validate_analysis_gate(
             )
             sem_integrity = {'valid': True, 'code': None, 'reason': None, 'invalidated': False}
         else:
-            sem_integrity = verify_semantic_report_integrity(input_bundle, analysis_result, active_semantic_report)
+            sem_integrity = verify_semantic_report_integrity(
+                input_bundle,
+                analysis_result,
+                active_semantic_report,
+                trusted_execution_evidence=trusted_execution_evidence,
+            )
 
         if not sem_integrity['valid']:
-            sem_status = 'violated'
-            sem_reason = f"{sem_integrity['code']}: {sem_integrity['reason']}"
+            code = sem_integrity['code']
+            if code == 'UNVERIFIED_MODEL_EXECUTION_RECORD':
+                sem_status = 'unresolved'
+                sev = 'UNRESOLVED'
+                req_human = True
+                ret_stage = 'human_or_semantic_review'
+            else:
+                sem_status = 'violated'
+                sev = 'ERROR'
+                req_human = False
+                ret_stage = 'information_extraction_analysis'
+            sem_reason = f"{code}: {sem_integrity['reason']}"
             findings.append(make_finding(
-                sem_integrity['code'],
-                'ERROR',
+                code,
+                sev,
                 sem_integrity['reason'],
                 responsible_component='validation_gate',
                 origin_ref=analysis_sha256,
-                repair_recommendation='Re-run independent semantic fidelity validator without tampering or using stale artifacts',
-                requires_human_review=False,
+                repair_recommendation='Re-run independent semantic fidelity validator with trusted execution evidence or without tampering',
+                requires_human_review=req_human,
                 blocking=True,
                 evidence=[sem_integrity],
             ))

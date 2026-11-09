@@ -136,6 +136,35 @@ python3 experiments/full_document_control/pipeline.py run \
    - 주요 8대 의미 오류 전수 탐지 및 게이트 `FAIL` 차단 (TP 8건, FP 0건, Holds 2건).
    - 모델이 일부 필드를 생략한 경우 Coverage Tracker가 `INCOMPLETE_SEMANTIC_COVERAGE`(`REVIEW`)로 안전하게 보류함을 실환경에서 입증. 전체 결과는 `runs/live_semantic_eval_summary.json`에 보존.
 
+## 17. 의미 검증기 최종 안정화 및 실모델 2차 재평가
+
+1. **필수 필드 누락 및 응답 스키마 안정화:**
+   - 평가 창(window)마다 검토해야 하는 전체 필드 경로(`required_field_paths`)를 프롬프트 본문 및 지시문에 명시적으로 제공: `statement`, `elements`, `relations`, `assessment.exposure`, `assessment.reason`, `assessment.preservation`, 블록별 누락 검사.
+   - 첫 번째 응답에서 필수 필드가 누락된 경우 누락 필드만을 대상으로 하는 제한적 재검토(`_render_semantic_missing_fields_prompt`, 최대 2회 제한)를 자동 수행.
+   - 재검토 응답은 이전의 유효한 판정을 덮어쓰거나 축소하지 않고 누락 필드만 안전하게 보완.
+   - 모델의 오류 범주 별칭(`overstatement` -> `CLAIM_OVERSTATEMENT`, `polarity` -> `POLARITY_REVERSAL` 등)을 표준 범주로 정규화(`normalize_semantic_error_category`).
+   - 비표준 오류 범주는 재시도 가능한 스키마 파싱 오류로 처리하며, 문서 자체의 확정적 의미 왜곡(`FAIL`)으로 오인하지 않도록 명확히 분리.
+
+2. **평가 실행 증거의 신뢰 경계 논리적 분리 및 강화:**
+   - 검증 보고서(`SemanticFidelityReport`)와 평가 실행 증거(`EvaluatorExecutionEvidence`)를 논리적으로 분리하고, 게이트가 직접 관리하는 신뢰 증거(`trusted_execution_evidence`)를 기준으로 보고서의 진위를 검증.
+   - 외부에서 전달된 보고서 내부의 `evaluator_records`만으로 신뢰성을 확정하지 않으며, 독립적인 신뢰 증거가 없으면 `UNVERIFIED_MODEL_EXECUTION_RECORD`(`REVIEW`)로 보류.
+   - 실패 유형을 정밀하게 구분:
+     - 기록 부재: `MISSING_EXECUTION_RECORD` / `UNVERIFIED_MODEL_EXECUTION_RECORD` (`unresolved` → `REVIEW`)
+     - 기록 손상 / 바인딩 불일치: `CORRUPTED_EXECUTION_RECORD` (`FAIL`)
+     - 보고서-원시 증거 간 불일치 / 조작: `DISCREPANT_EXECUTION_RECORD` (`FAIL`)
+     - 실제 문서 의미 위반: `SEMANTIC_FIDELITY_FAILURE` (`FAIL`)
+   - `ValidationGate`와 `ExecutionController`에 일관된 신뢰 경계 적용.
+
+3. **실제 LLM(`gemini-3.8-flash-low`) 14개 벤치마크 2차 평가 결과:**
+   - 실행 결과: `experiments/full_document_control/runs/live_eval_gemini_3_8_flash_v2/` 및 `live_semantic_eval_v2_summary.json`.
+   - 총 14개 사례 전수 실행 (총 소요 시간: 1187.28초).
+   - **TP 9건:** EVAL-03~10 8대 의미 오류 전수 탐지 및 EVAL-12(선후 관계 왜곡)를 모델 단독으로 정확히 탐지(`det_src: model_evaluator`, `error_category: CLAIM_OVERSTATEMENT`)하여 `FAIL` 차단 성공. (FN 0건 달성).
+   - **TN 3건:** 정상 사례 3건(EVAL-01, EVAL-02, EVAL-13) 모두 누락 필드 재검토를 통해 완전 검토(`coverage_complete: true`) 및 `supported` 판정 획득. (첫 구현 불변조건에 따라 게이트 상태는 `REVIEW`로 대기).
+   - **FP 0건:** 정상 사례 오탐 없음.
+   - **FN 0건:** 놓친 의미 왜곡 없음.
+   - **Holds 1건:** EVAL-11(원문 모호성) 정확히 `unresolved`(`REVIEW`) 보류.
+   - 단일 평가자 13개 사례(EVAL-01~13)에서 100% 설계 의도 일치 달성. EVAL-14는 독립 복수 평가자 프로토콜로 분리 실행.
+
 ## 한계
 
 - 프롬프트 예산(`max_prompt_chars`)은 오프라인에서 제공자별 토크나이저를 직접 호출하지 않으므로 유니코드 코드 포인트 길이를 기준으로 상한을 강제하며(`budget_policy.token_vs_char_policy`), 한국어·UTF-8 다중 토큰 특성을 고려해 보수적으로 설정해야 한다.

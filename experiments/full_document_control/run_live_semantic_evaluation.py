@@ -21,11 +21,17 @@ def run_live_semantic_benchmark(
     model='gemini-3.8-flash-low',
     executable='agy',
     timeout_sec=90,
-    output_dir='experiments/full_document_control/runs/live_eval_gemini_3_8_flash',
-    summary_file='experiments/full_document_control/runs/live_semantic_eval_summary.json',
+    max_semantic_attempts=2,
+    case_id_filter=None,
+    output_dir='experiments/full_document_control/runs/live_eval_gemini_3_8_flash_v2',
+    summary_file='experiments/full_document_control/runs/live_semantic_eval_v2_summary.json',
 ):
     os.makedirs(output_dir, exist_ok=True)
-    cases = semantic_eval_cases.build_semantic_evaluation_cases()
+    all_cases = semantic_eval_cases.build_semantic_evaluation_cases()
+    if case_id_filter:
+        cases = [c for c in all_cases if c['eval_case_id'] in case_id_filter]
+    else:
+        cases = all_cases
 
     case_summaries = {}
     tp = 0
@@ -34,8 +40,11 @@ def run_live_semantic_benchmark(
     fn = 0
     unresolved_holds = 0
     disagreements = []
+    total_schema_parse_failures = 0
+    total_missing_field_omissions = 0
 
-    print(f'Starting live semantic evaluation of {len(cases)} cases using model {model!r}...')
+    print(f'Starting live semantic evaluation v2 of {len(cases)} cases using model {model!r}...')
+    print(f'Configuration: max_semantic_attempts={max_semantic_attempts}, output_dir={output_dir}')
     benchmark_start = time.monotonic()
 
     for idx, c in enumerate(cases):
@@ -52,39 +61,64 @@ def run_live_semantic_benchmark(
         prompt_records = []
         raw_response_records = []
 
-        def live_responder(w_idx, sw, prompt_text, attempt_no):
-            sw_id = sw['semantic_window_id']
-            prompt_file = os.path.join(case_dir, f'window_{w_idx}_{sw_id}_attempt_{attempt_no}.prompt.txt')
-            with open(prompt_file, 'w', encoding='utf-8') as pf:
-                pf.write(prompt_text)
-            prompt_records.append({'window_index': w_idx, 'window_id': sw_id, 'attempt': attempt_no, 'path': prompt_file})
+        def make_responder(label='evaluator_1', prompt_prefix=''):
+            def live_responder(w_idx, sw, prompt_text, attempt_no):
+                sw_id = sw['semantic_window_id']
+                p_text = (prompt_prefix + '\n' + prompt_text) if prompt_prefix else prompt_text
+                p_filename = f'{label}_win_{w_idx}_{sw_id}_att_{attempt_no}.prompt.txt'
+                prompt_file = os.path.join(case_dir, p_filename)
+                with open(prompt_file, 'w', encoding='utf-8') as pf:
+                    pf.write(p_text)
+                prompt_records.append({
+                    'evaluator': label,
+                    'window_index': w_idx,
+                    'window_id': sw_id,
+                    'attempt': attempt_no,
+                    'path': prompt_file,
+                })
 
-            res = pipeline.call_cli_provider(
-                prompt_text,
-                executable=executable,
-                model=model,
-                timeout=timeout_sec,
+                res = pipeline.call_cli_provider(
+                    p_text,
+                    executable=executable,
+                    model=model,
+                    timeout=timeout_sec,
+                )
+
+                r_filename = f'{label}_win_{w_idx}_{sw_id}_att_{attempt_no}.response.txt'
+                resp_file = os.path.join(case_dir, r_filename)
+                with open(resp_file, 'wb') as rf:
+                    rf.write(res.get('stdout') or b'')
+                raw_response_records.append({
+                    'evaluator': label,
+                    'window_index': w_idx,
+                    'window_id': sw_id,
+                    'attempt': attempt_no,
+                    'path': resp_file,
+                    'returncode': res.get('returncode'),
+                    'seconds': res.get('seconds'),
+                })
+                return res
+            return live_responder
+
+        if cid == 'EVAL-14-INTER-EVALUATOR-CONFLICT-HOLD':
+            # Case 14 tests multi-evaluator protocol: run two independent evaluator passes
+            # Pass 1: Standard reviewer
+            # Pass 2: Strict skeptic auditor (independent invocation)
+            responder_1 = make_responder('evaluator_1')
+            responder_2 = make_responder(
+                'evaluator_2',
+                prompt_prefix='[INDEPENDENT ADVERSARIAL AUDIT PASS: Review with high scrutiny for subtle overstatements or modalities.]',
             )
-
-            resp_file = os.path.join(case_dir, f'window_{w_idx}_{sw_id}_attempt_{attempt_no}.response.txt')
-            with open(resp_file, 'wb') as rf:
-                rf.write(res.get('stdout') or b'')
-            raw_response_records.append({
-                'window_index': w_idx,
-                'window_id': sw_id,
-                'attempt': attempt_no,
-                'path': resp_file,
-                'returncode': res.get('returncode'),
-                'seconds': res.get('seconds'),
-            })
-
-            return res
+            semantic_responder_arg = [responder_1, responder_2]
+        else:
+            semantic_responder_arg = make_responder('evaluator_1')
 
         gate_report = pipeline.validate_analysis_gate(
             bundle,
             analysis,
-            semantic_responder=live_responder,
+            semantic_responder=semantic_responder_arg,
             run_semantic_validation=True,
+            max_semantic_attempts=max_semantic_attempts,
         )
         elapsed = time.monotonic() - case_start
         sem_report = gate_report.get('semantic_report') or {}
@@ -97,6 +131,50 @@ def run_live_semantic_benchmark(
         actual_paths = sorted({
             f['field_path'] for f in sem_report.get('findings', []) if f.get('field_path')
         })
+
+        # Run independent deterministic audit to isolate rule detection vs model detection
+        det_audit = pipeline._semantic_validator.run_deterministic_semantic_audit(
+            bundle,
+            analysis,
+            extract_anchor_tokens_fn=pipeline._extract_anchor_tokens,
+            parse_blocks_fn=pipeline.parse_markdown_blocks,
+        )
+        det_errors = [f for f in det_audit['findings'] if f['semantic_judgment'] != 'supported']
+        detected_by_det = bool(det_errors)
+
+        # Check model pass detection
+        model_errors = [
+            it for it in sem_report.get('item_judgments', [])
+            if it.get('detector') in {'model_evaluator', 'multi_evaluator_reconciler'}
+            and it.get('semantic_judgment') != 'supported'
+        ]
+        detected_by_model = bool(model_errors)
+
+        if detected_by_det and detected_by_model:
+            detection_source = 'both'
+        elif detected_by_det:
+            detection_source = 'deterministic_rule'
+        elif detected_by_model:
+            detection_source = 'model_evaluator'
+        else:
+            detection_source = 'none'
+
+        cov = sem_report.get('coverage_summary', {})
+        unreviewed_fields = cov.get('unreviewed_field_paths', [])
+        is_cov_complete = cov.get('is_complete', False)
+        if unreviewed_fields:
+            total_missing_field_omissions += len(unreviewed_fields)
+
+        # Count schema errors from window records
+        schema_errors_in_case = sum(
+            1 for rec in sem_report.get('window_records', [])
+            if rec.get('error_code') in {
+                'INVALID_SEMANTIC_RESPONSE_SCHEMA',
+                'INVALID_SEMANTIC_ERROR_CATEGORY',
+                'SEMANTIC_MODEL_RESPONSE_PARSE_ERROR',
+            }
+        )
+        total_schema_parse_failures += schema_errors_in_case
 
         expect_is_error = expected_j in {'contradicted', 'overstated'}
         actual_is_error = actual_j in {'contradicted', 'overstated'}
@@ -119,14 +197,20 @@ def run_live_semantic_benchmark(
         else:
             classification = 'JUDGMENT_DIVERGENCE'
 
-        # Verify integrity of produced report
-        integrity_check = pipeline.verify_semantic_report_integrity(bundle, analysis, sem_report)
+        # Verify integrity of produced report with gate-managed trusted evidence
+        evidence_store = pipeline._semantic_validator._TRUSTED_EVIDENCE_REGISTRY.get(sem_report.get('semantic_report_sha256'))
+        integrity_check = pipeline.verify_semantic_report_integrity(
+            bundle, analysis, sem_report, trusted_execution_evidence=evidence_store
+        )
 
         # Save gate and semantic reports
         with open(os.path.join(case_dir, 'gate_report.json'), 'w', encoding='utf-8') as gf:
             json.dump(gate_report, gf, ensure_ascii=False, indent=2)
         with open(os.path.join(case_dir, 'semantic_report.json'), 'w', encoding='utf-8') as sf:
             json.dump(sem_report, sf, ensure_ascii=False, indent=2)
+        if evidence_store:
+            with open(os.path.join(case_dir, 'trusted_evidence.json'), 'w', encoding='utf-8') as ef:
+                json.dump(evidence_store, ef, ensure_ascii=False, indent=2)
 
         meta = {
             'eval_case_id': cid,
@@ -142,10 +226,16 @@ def run_live_semantic_benchmark(
             'manual_expected_field_paths': c['manual_expected_field_paths'],
             'actual_field_paths': actual_paths,
             'classification': classification,
+            'detected_by_deterministic_audit': detected_by_det,
+            'detected_by_model_evaluator': detected_by_model,
+            'detection_source': detection_source,
+            'schema_parse_failures': schema_errors_in_case,
+            'unreviewed_fields_count': len(unreviewed_fields),
+            'unreviewed_fields': unreviewed_fields,
+            'coverage_complete': is_cov_complete,
             'elapsed_seconds': round(elapsed, 3),
             'integrity_valid': integrity_check.get('valid', False),
             'integrity_code': integrity_check.get('code'),
-            'coverage_complete': sem_report.get('coverage_summary', {}).get('is_complete', False),
             'prompt_files': [p['path'] for p in prompt_records],
             'response_files': [r['path'] for r in raw_response_records],
         }
@@ -153,7 +243,7 @@ def run_live_semantic_benchmark(
             json.dump(meta, mf, ensure_ascii=False, indent=2)
 
         case_summaries[cid] = meta
-        print(f'   -> actual: {actual_j!r} (expected: {expected_j!r}) | gate: {gate_state} | class: {classification} ({elapsed:.1f}s)')
+        print(f'   -> actual: {actual_j!r} (expected: {expected_j!r}) | gate: {gate_state} | class: {classification} | det_src: {detection_source} | cov: {is_cov_complete} ({elapsed:.1f}s)')
 
         if classification in {'FALSE_POSITIVE', 'FALSE_NEGATIVE', 'JUDGMENT_DIVERGENCE'} or c.get('is_boundary_disagreement_case'):
             disagreements.append({
@@ -164,17 +254,21 @@ def run_live_semantic_benchmark(
                 'actual_overall_judgment': actual_j,
                 'description': c['description'],
                 'actual_error_categories': actual_cats,
+                'detection_source': detection_source,
+                'unreviewed_fields': unreviewed_fields,
             })
 
     total_benchmark_sec = round(time.monotonic() - benchmark_start, 2)
     summary_data = {
         'benchmark_metadata': {
+            'run_id': 'live_eval_gemini_3_8_flash_v2',
             'model': model,
             'executable': executable,
             'total_cases': len(cases),
             'total_elapsed_seconds': total_benchmark_sec,
             'timestamp_iso': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
-            'validator_version': sem_report.get('validator_version', 'v1'),
+            'validator_version': sem_report.get('validator_version', 'semantic-fidelity-validator-v1'),
+            'max_semantic_attempts': max_semantic_attempts,
         },
         'metrics': {
             'true_positives': tp,
@@ -182,6 +276,8 @@ def run_live_semantic_benchmark(
             'false_positives': fp,
             'false_negatives': fn,
             'unresolved_holds': unresolved_holds,
+            'total_schema_parse_failures': total_schema_parse_failures,
+            'total_missing_field_omissions': total_missing_field_omissions,
         },
         'case_summaries': case_summaries,
         'disagreements': disagreements,
@@ -191,9 +287,10 @@ def run_live_semantic_benchmark(
         json.dump(summary_data, sum_f, ensure_ascii=False, indent=2)
 
     print('\n============================================================')
-    print('Live Semantic Evaluation Complete!')
+    print('Live Semantic Evaluation v2 Complete!')
     print(f'Total Time: {total_benchmark_sec}s | Cases: {len(cases)}')
     print(f'TP: {tp} | TN: {tn} | FP: {fp} | FN: {fn} | Holds: {unresolved_holds}')
+    print(f'Schema Failures: {total_schema_parse_failures} | Unreviewed Field Omissions: {total_missing_field_omissions}')
     print(f'Summary written to {summary_file}')
     print('============================================================')
     return summary_data

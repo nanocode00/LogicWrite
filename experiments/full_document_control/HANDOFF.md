@@ -45,12 +45,14 @@
      - 결정론 감사 단독: TP 8, TN 3, FP 0 (EVAL-13 오탐 해소), FN 1 (EVAL-12 의미적 순서 의존성), Holds 1.
      - 모델 stub 결합: TP 9 (EVAL-12 모델 탐지), TN 3, FP 0, FN 0, Holds 2 (14건 전체 100% 일치).
 
-3. **실제 LLM(`gemini-3.8-flash-low`) 14개 벤치마크 독립 평가 (`run_live_semantic_evaluation.py`):**
-   - 총 소요 시간: 422.27초, 14개 사례 전체 실행.
-   - TP 8건 (주요 8대 오류 전수 탐지 및 FAIL 차단), FP 0건, Holds 2건.
-   - 정상 사례에서 모델의 일부 필드 생략 시 신규 Coverage Tracker가 `INCOMPLETE_SEMANTIC_COVERAGE`(`REVIEW`)로 안전하게 보류함을 실환경 입증.
-   - 산출물: `experiments/full_document_control/runs/live_eval_gemini_3_8_flash/` 및 `live_semantic_eval_summary.json`.
+3. **실제 LLM(`gemini-3.8-flash-low`) 14개 벤치마크 2차 평가 (`run_live_semantic_evaluation.py`):**
+   - 총 소요 시간: 1187.28초, 14개 사례 전체 실행 완료.
+   - **TP 9건:** EVAL-03~10 8대 오류 전수 탐지 및 EVAL-12(선후 관계 왜곡)를 모델 단독으로 정확히 탐지(`det_src: model_evaluator`, `CLAIM_OVERSTATEMENT`)하여 `FAIL` 차단 성공.
+   - **TN 3건:** 정상 사례 3건(EVAL-01, EVAL-02, EVAL-13) 모두 누락 필드 재검토를 통해 완전 검토(`coverage_complete: true`) 및 `supported` 판정 획득. (게이트 상태는 정책상 `REVIEW` 대기).
+   - **FP 0건, FN 0건:** 오탐과 미탐 모두 0건 달성.
+   - **Holds 1건:** EVAL-11(원문 모호성) 정확히 `unresolved`(`REVIEW`) 보류.
+   - 산출물: `experiments/full_document_control/runs/live_eval_gemini_3_8_flash_v2/` 및 `live_semantic_eval_v2_summary.json` (이전 1차 결과도 `runs/live_eval_gemini_3_8_flash/`에 보존).
 
 4. **테스트 및 검증:**
-   - 신규 종합 테스트: 총 21개 테스트 통과 (`test_semantic_validator.py`).
-   - 전체 회귀 테스트 통과: 총 129개 테스트 100% 통과 (`full_document_control` 54개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+   - 신규 종합 테스트: 총 27개 테스트 통과 (`test_semantic_validator.py`, 반례 테스트 6건 추가).
+   - 전체 회귀 테스트 통과: 총 135개 테스트 100% 통과 (`full_document_control` 60개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
