@@ -1651,3 +1651,725 @@ def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
     report['report_sha256'] = canonical_json_digest(report)
     return report
 
+
+# ============================================================================
+# Stage 3: Stage Execution Controller & Organization Boundary Adapter
+# ============================================================================
+
+COMPONENT_TO_STAGE = {
+    'contract_resolver': 'contract_resolution',
+    'information_extraction_analysis': 'information_extraction_analysis',
+    'validation_gate': 'validation_gate',
+}
+
+
+class StageTransitionBlockedError(RuntimeError):
+    def __init__(self, reason, *, decision):
+        super().__init__(reason)
+        self.decision = decision
+
+
+def can_advance_to_organization(input_bundle, analysis_result, validation_report, *, plan=None):
+    """Code-enforced transition guard between Information Extraction & Analysis and Information Organization."""
+    if not isinstance(input_bundle, dict) or not isinstance(analysis_result, dict) or not isinstance(validation_report, dict):
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': 'INVALID_STAGE_INPUTS: input_bundle, analysis_result, and validation_report must be objects',
+            'invalidation': None,
+            'return_to_stage': 'information_extraction_analysis',
+            'responsible_component': 'information_extraction_analysis',
+        }
+
+    try:
+        validate_input_bundle(input_bundle)
+    except InvalidArtifactError as error:
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': f'INVALID_INPUT_BUNDLE: {error.code}: {error}',
+            'invalidation': None,
+            'return_to_stage': 'contract_resolution',
+            'responsible_component': 'contract_resolver',
+        }
+
+    expected_plan = plan or build_validation_plan(input_bundle)
+    current_input_sha = canonical_json_digest(input_bundle)
+    current_contract_sha = canonical_json_digest(input_bundle['writing_contract'])
+    current_snap_sha = input_bundle['document_snapshot']['sha256']
+    current_analysis_sha = analysis_result.get('analysis_sha256')
+
+    checked = validation_report.get('checked_artifacts')
+    report_plan = validation_report.get('plan')
+    changed = []
+    if not isinstance(checked, dict):
+        changed.append('checked_artifacts_missing')
+    else:
+        if checked.get('input_sha256') != current_input_sha:
+            changed.append('input_bundle')
+        if checked.get('contract_sha256') != current_contract_sha:
+            changed.append('writing_contract')
+        if checked.get('snapshot_sha256') != current_snap_sha:
+            changed.append('document_snapshot')
+        if checked.get('analysis_sha256') != current_analysis_sha:
+            changed.append('analysis_result')
+    if not isinstance(report_plan, dict) or report_plan.get('plan_sha256') != expected_plan.get('plan_sha256'):
+        changed.append('validation_plan')
+
+    if (analysis_result.get('input_sha256') != current_input_sha or
+            analysis_result.get('contract_sha256') != current_contract_sha or
+            analysis_result.get('snapshot_sha256') != current_snap_sha):
+        if 'analysis_binding' not in changed:
+            changed.append('analysis_binding')
+
+    if changed:
+        invalidation = {
+            'invalidated': True,
+            'changed_components': changed,
+            'stale_report_sha256': validation_report.get('report_sha256'),
+            'stale_analysis_sha256': checked.get('analysis_sha256') if isinstance(checked, dict) else None,
+            'current_input_sha256': current_input_sha,
+            'current_contract_sha256': current_contract_sha,
+            'current_snapshot_sha256': current_snap_sha,
+            'reason': 'ValidationReport or AnalysisResult invalidated because upstream artifacts/plan changed: ' + ', '.join(changed),
+        }
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': 'STALE_VALIDATION_REPORT_INVALIDATED: ' + ', '.join(changed),
+            'invalidation': invalidation,
+            'return_to_stage': 'contract_resolution' if 'writing_contract' in changed else 'information_extraction_analysis',
+            'responsible_component': 'contract_resolver' if 'writing_contract' in changed else 'information_extraction_analysis',
+        }
+
+    # Independently re-reconcile the report's check_results against the expected ValidationPlan.
+    reconciled = reconcile_validation_plan(expected_plan, validation_report.get('check_results'), checked)
+    gate_state = reconciled['gate_state']
+    if gate_state != 'PASS' or reconciled['execution_state'] != 'completed' or not reconciled['delivery_approved']:
+        findings = validation_report.get('findings') if isinstance(validation_report.get('findings'), list) else []
+        primary_comp = 'information_extraction_analysis'
+        for f in findings:
+            if isinstance(f, dict) and f.get('responsible_component'):
+                primary_comp = f['responsible_component']
+                break
+        return_stage = (
+            'human_or_semantic_review'
+            if gate_state == 'REVIEW'
+            else COMPONENT_TO_STAGE.get(primary_comp, 'information_extraction_analysis')
+        )
+        return {
+            'allowed': False,
+            'gate_state': gate_state,
+            'reason': f'STAGE_TRANSITION_BLOCKED: gate_state is {gate_state} (PASS required)',
+            'diagnostics': reconciled['diagnostics'],
+            'invalidation': None,
+            'return_to_stage': return_stage,
+            'responsible_component': primary_comp,
+        }
+
+    return {
+        'allowed': True,
+        'gate_state': 'PASS',
+        'reason': 'All required ValidationPlan checks passed and artifact digests match',
+        'diagnostics': [],
+        'invalidation': None,
+        'return_to_stage': None,
+        'responsible_component': None,
+    }
+
+
+class OrganizationBoundaryAdapter:
+    """Minimal observable test adapter for the Information Organization boundary.
+
+    Never executes unless the independent Validation Gate report is PASS and bound to current artifacts.
+    """
+
+    def __init__(self):
+        self.invocations = []
+        self.blocked_attempts = []
+
+    def enter_organization_stage(self, input_bundle, analysis_result, validation_report, *, plan=None):
+        decision = can_advance_to_organization(input_bundle, analysis_result, validation_report, plan=plan)
+        if not decision['allowed']:
+            record = {
+                'status': 'blocked',
+                'gate_state': decision['gate_state'],
+                'reason': decision['reason'],
+                'return_to_stage': decision['return_to_stage'],
+                'invalidation': decision['invalidation'],
+                'analysis_sha256': analysis_result.get('analysis_sha256') if isinstance(analysis_result, dict) else None,
+                'report_sha256': validation_report.get('report_sha256') if isinstance(validation_report, dict) else None,
+            }
+            self.blocked_attempts.append(record)
+            raise StageTransitionBlockedError(decision['reason'], decision=decision)
+
+        invocation = {
+            'status': 'invoked',
+            'case_id': input_bundle['case_id'],
+            'snapshot_id': input_bundle['document_snapshot']['snapshot_id'],
+            'snapshot_sha256': input_bundle['document_snapshot']['sha256'],
+            'contract_id': input_bundle['writing_contract']['contract_id'],
+            'contract_sha256': canonical_json_digest(input_bundle['writing_contract']),
+            'analysis_sha256': analysis_result['analysis_sha256'],
+            'report_sha256': validation_report['report_sha256'],
+            'received_unit_ids': [u['id'] for u in analysis_result.get('units', [])],
+        }
+        self.invocations.append(invocation)
+        return invocation
+
+
+def _synthesize_failed_analysis(input_bundle, error_Message, *, code, responsible_component, response_sha256s):
+    snap = input_bundle['document_snapshot']
+    contract = input_bundle['writing_contract']
+    blocks = parse_markdown_blocks(snap)
+    windows = plan_extraction_windows(snap, blocks)
+    body = {
+        'record_kind': 'experimental_full_document_analysis_failed_candidate',
+        'version': VERSION,
+        'case_id': input_bundle['case_id'],
+        'input_sha256': canonical_json_digest(input_bundle),
+        'contract_id': contract['contract_id'],
+        'contract_version': contract['version'],
+        'contract_sha256': canonical_json_digest(contract),
+        'snapshot_id': snap['snapshot_id'],
+        'snapshot_version': snap['version'],
+        'snapshot_sha256': snap['sha256'],
+        'window_count': len(windows),
+        'processed_window_ids': [],
+        'expected_window_ids': [w['window_id'] for w in windows],
+        'response_sha256s': response_sha256s,
+        'blocks': blocks,
+        'units': [],
+        'requirement_bindings': [],
+        'coverage_ledger': [],
+        'alignment': {'status': 'needs_review', 'reason': 'Failed candidate: ' + error_Message},
+        'unresolved_questions': [],
+        'assembly_error': {
+            'code': code,
+            'message': error_Message,
+            'responsible_component': responsible_component,
+        },
+        'semantic_fidelity': 'not_run',
+        'delivery_approved': False,
+    }
+    body['analysis_sha256'] = canonical_json_digest(body)
+    return body
+
+
+class ExecutionController:
+    """Programmatic controller enforcing DocumentSnapshot -> Extraction & Analysis -> Validation Gate -> Organization."""
+
+    def __init__(self, *, max_attempts=2, organization_adapter=None):
+        need(type(max_attempts) is int and 1 <= max_attempts <= 5,
+             'max_attempts must be an integer between 1 and 5',
+             responsible_component='validation_gate')
+        self.max_attempts = max_attempts
+        self.organization_adapter = organization_adapter or OrganizationBoundaryAdapter()
+        self.invalidation_log = []
+        self.attempt_history = []
+        self._active_state = None
+
+    def check_and_invalidate_prior_state(self, input_bundle, plan=None):
+        if self._active_state is None:
+            return None
+        expected_plan = plan or build_validation_plan(input_bundle)
+        current_input_sha = canonical_json_digest(input_bundle)
+        current_contract_sha = canonical_json_digest(input_bundle['writing_contract'])
+        current_snap_sha = input_bundle['document_snapshot']['sha256']
+        current_plan_sha = expected_plan['plan_sha256']
+
+        changed = []
+        if self._active_state['input_sha256'] != current_input_sha:
+            changed.append('input_bundle')
+        if self._active_state['contract_sha256'] != current_contract_sha:
+            changed.append('writing_contract')
+        if self._active_state['snapshot_sha256'] != current_snap_sha:
+            changed.append('document_snapshot')
+        if self._active_state['plan_sha256'] != current_plan_sha:
+            changed.append('validation_plan')
+
+        if changed:
+            entry = {
+                'event': 'upstream_change_invalidation',
+                'changed_components': changed,
+                'invalidated_analysis_sha256': self._active_state['analysis_sha256'],
+                'invalidated_report_sha256': self._active_state['report_sha256'],
+                'previous_snapshot_sha256': self._active_state['snapshot_sha256'],
+                'current_snapshot_sha256': current_snap_sha,
+                'previous_contract_sha256': self._active_state['contract_sha256'],
+                'current_contract_sha256': current_contract_sha,
+                'reason': 'Invalidated prior analysis and validation report due to change in: ' + ', '.join(changed),
+            }
+            self.invalidation_log.append(entry)
+            self._active_state = None
+            return entry
+        return None
+
+    def attempt_reuse_validation_report(self, input_bundle, analysis_result, prior_validation_report, *, plan=None):
+        """Verify whether a prior ValidationReport can be reused for input_bundle and advance to Organization."""
+        expected_plan = plan or build_validation_plan(input_bundle)
+        self.check_and_invalidate_prior_state(input_bundle, expected_plan)
+        try:
+            invocation = self.organization_adapter.enter_organization_stage(
+                input_bundle, analysis_result, prior_validation_report, plan=expected_plan
+            )
+            return {
+                'record_kind': 'experimental_controller_reuse_decision',
+                'version': VERSION,
+                'gate_state': 'PASS',
+                'execution_state': 'completed',
+                'next_stage_allowed': True,
+                'next_stage_invoked': True,
+                'organization_invocation': invocation,
+                'invalidated': False,
+                'invalidation_log': list(self.invalidation_log),
+            }
+        except StageTransitionBlockedError as error:
+            decision = error.decision
+            if decision.get('invalidation'):
+                self.invalidation_log.append(decision['invalidation'])
+            return {
+                'record_kind': 'experimental_controller_reuse_decision',
+                'version': VERSION,
+                'gate_state': decision['gate_state'],
+                'execution_state': 'completed',
+                'next_stage_allowed': False,
+                'next_stage_invoked': False,
+                'blocked_reason': decision['reason'],
+                'return_to_stage': decision['return_to_stage'],
+                'responsible_component': decision['responsible_component'],
+                'invalidated': decision.get('invalidation') is not None,
+                'invalidation': decision.get('invalidation'),
+                'invalidation_log': list(self.invalidation_log),
+            }
+
+    def run(self, input_bundle, model_responder, *, max_window_chars=None, plan=None):
+        """Execute DocumentSnapshot -> Extraction & Analysis -> Validation Gate -> Next Stage Control."""
+        try:
+            validate_input_bundle(input_bundle)
+        except InvalidArtifactError as error:
+            return {
+                'record_kind': 'experimental_execution_controller_result',
+                'version': VERSION,
+                'gate_state': 'FAIL',
+                'execution_state': 'completed',
+                'last_gate_state': 'FAIL',
+                'stop_reason': None,
+                'delivery_approved': False,
+                'next_stage_allowed': False,
+                'next_stage_invoked': False,
+                'return_to_stage': 'contract_resolution',
+                'responsible_component': error.responsible_component,
+                'failure_reasons': [f'{error.code}: {error}'],
+                'attempts_used': 0,
+                'max_attempts': self.max_attempts,
+                'attempt_history': [],
+                'invalidation_log': list(self.invalidation_log),
+                'analysis': None,
+                'validation_report': None,
+            }
+
+        expected_plan = plan or build_validation_plan(input_bundle)
+        self.check_and_invalidate_prior_state(input_bundle, expected_plan)
+
+        snapshot = input_bundle['document_snapshot']
+        blocks = parse_markdown_blocks(snapshot)
+        windows = plan_extraction_windows(snapshot, blocks, max_window_chars=max_window_chars)
+
+        last_analysis = None
+        last_report = None
+        last_gate_state = None
+
+        for attempt_no in range(1, self.max_attempts + 1):
+            window_responses_raw = []
+            response_sha256s = []
+            parse_failure = None
+
+            for idx, window in enumerate(windows):
+                prompt_text = build_window_prompt(
+                    input_bundle, window_index=idx, max_window_chars=max_window_chars
+                )
+                raw_resp = model_responder(idx, window, prompt_text, attempt_no)
+                raw_bytes = raw_resp.encode('utf-8') if isinstance(raw_resp, str) else raw_resp
+                window_responses_raw.append(raw_bytes)
+                response_sha256s.append(digest_bytes(raw_bytes))
+
+            try:
+                analysis = assemble_document_analysis(
+                    input_bundle, window_responses_raw, max_window_chars=max_window_chars
+                )
+                report = validate_analysis_gate(input_bundle, analysis, plan=expected_plan)
+            except ResponseParseError as error:
+                parse_failure = str(error)
+                analysis = _synthesize_failed_analysis(
+                    input_bundle,
+                    parse_failure,
+                    code='MODEL_RESPONSE_PARSE_ERROR',
+                    responsible_component='information_extraction_analysis',
+                    response_sha256s=response_sha256s,
+                )
+                report = {
+                    'record_kind': 'experimental_validation_gate_report_not_adopted_schema',
+                    'version': VERSION,
+                    'plan': expected_plan,
+                    'checked_artifacts': {
+                        'input_sha256': canonical_json_digest(input_bundle),
+                        'contract_id': input_bundle['writing_contract']['contract_id'],
+                        'contract_version': input_bundle['writing_contract']['version'],
+                        'contract_sha256': canonical_json_digest(input_bundle['writing_contract']),
+                        'snapshot_id': snapshot['snapshot_id'],
+                        'snapshot_version': snapshot['version'],
+                        'snapshot_sha256': snapshot['sha256'],
+                        'analysis_sha256': analysis['analysis_sha256'],
+                    },
+                    'check_results': [],
+                    'findings': [
+                        make_finding(
+                            'MODEL_RESPONSE_PARSE_ERROR',
+                            'ERROR',
+                            parse_failure,
+                            responsible_component='information_extraction_analysis',
+                            origin_ref=analysis['analysis_sha256'],
+                            repair_recommendation='Return to information_extraction_analysis and emit valid JSON',
+                        )
+                    ],
+                    'gate_state': 'STOPPED',
+                    'execution_state': 'stopped',
+                    'last_gate_state': last_gate_state,
+                    'diagnostics': ['MODEL_RESPONSE_PARSE_ERROR: ' + parse_failure],
+                    'delivery_approved': False,
+                    'next_stage_allowed': False,
+                }
+                report['report_sha256'] = canonical_json_digest(report)
+            except InvalidArtifactError as error:
+                analysis = _synthesize_failed_analysis(
+                    input_bundle,
+                    str(error),
+                    code=error.code,
+                    responsible_component=error.responsible_component,
+                    response_sha256s=response_sha256s,
+                )
+                report = validate_analysis_gate(input_bundle, analysis, plan=expected_plan)
+                report['findings'].insert(0, make_finding(
+                    error.code,
+                    'ERROR',
+                    str(error),
+                    responsible_component=error.responsible_component,
+                    origin_ref=analysis['analysis_sha256'],
+                    repair_recommendation=f'Return to {error.responsible_component} to fix {error.code}',
+                    requires_human_review=False,
+                    blocking=True,
+                    evidence=error.evidence,
+                ))
+                report['report_sha256'] = canonical_json_digest(report)
+
+            last_analysis = analysis
+            last_report = report
+            gate_state = report['gate_state']
+            if gate_state == 'FAIL' or report.get('last_gate_state') == 'FAIL':
+                last_gate_state = 'FAIL'
+            elif last_gate_state is None:
+                last_gate_state = gate_state
+
+            # Determine responsible component and return_to_stage from findings/decision.
+            decision = can_advance_to_organization(input_bundle, analysis, report, plan=expected_plan)
+            failure_reasons = [
+                f"{f['rule_id']}: {f['message']}" for f in report.get('findings', [])
+                if f.get('severity') in {'ERROR', 'UNRESOLVED'}
+            ] or list(report.get('diagnostics', []))
+
+            attempt_record = {
+                'attempt': attempt_no,
+                'response_sha256s': response_sha256s,
+                'analysis_sha256': analysis['analysis_sha256'],
+                'report_sha256': report['report_sha256'],
+                'gate_state': gate_state,
+                'execution_state': report['execution_state'],
+                'next_stage_allowed': decision['allowed'],
+                'responsible_component': decision['responsible_component'],
+                'return_to_stage': decision['return_to_stage'],
+                'failure_reasons': failure_reasons,
+            }
+            self.attempt_history.append(attempt_record)
+
+            if gate_state == 'PASS' and decision['allowed']:
+                invocation = self.organization_adapter.enter_organization_stage(
+                    input_bundle, analysis, report, plan=expected_plan
+                )
+                self._active_state = {
+                    'input_sha256': canonical_json_digest(input_bundle),
+                    'contract_sha256': canonical_json_digest(input_bundle['writing_contract']),
+                    'snapshot_sha256': snapshot['sha256'],
+                    'plan_sha256': expected_plan['plan_sha256'],
+                    'analysis_sha256': analysis['analysis_sha256'],
+                    'report_sha256': report['report_sha256'],
+                }
+                return {
+                    'record_kind': 'experimental_execution_controller_result',
+                    'version': VERSION,
+                    'gate_state': 'PASS',
+                    'execution_state': 'completed',
+                    'last_gate_state': 'PASS',
+                    'stop_reason': None,
+                    'delivery_approved': True,
+                    'next_stage_allowed': True,
+                    'next_stage_invoked': True,
+                    'organization_invocation': invocation,
+                    'return_to_stage': None,
+                    'responsible_component': None,
+                    'failure_reasons': [],
+                    'attempts_used': attempt_no,
+                    'max_attempts': self.max_attempts,
+                    'attempt_history': list(self.attempt_history),
+                    'invalidation_log': list(self.invalidation_log),
+                    'analysis': analysis,
+                    'validation_report': report,
+                }
+
+            # Always record that the next stage boundary blocked this non-PASS result.
+            try:
+                self.organization_adapter.enter_organization_stage(
+                    input_bundle, analysis, report, plan=expected_plan
+                )
+            except StageTransitionBlockedError:
+                pass
+
+            if gate_state == 'REVIEW':
+                self._active_state = {
+                    'input_sha256': canonical_json_digest(input_bundle),
+                    'contract_sha256': canonical_json_digest(input_bundle['writing_contract']),
+                    'snapshot_sha256': snapshot['sha256'],
+                    'plan_sha256': expected_plan['plan_sha256'],
+                    'analysis_sha256': analysis['analysis_sha256'],
+                    'report_sha256': report['report_sha256'],
+                }
+                return {
+                    'record_kind': 'experimental_execution_controller_result',
+                    'version': VERSION,
+                    'gate_state': 'REVIEW',
+                    'execution_state': 'completed',
+                    'last_gate_state': 'REVIEW',
+                    'stop_reason': 'AWAITING_SEMANTIC_OR_HUMAN_REVIEW',
+                    'delivery_approved': False,
+                    'next_stage_allowed': False,
+                    'next_stage_invoked': False,
+                    'return_to_stage': decision['return_to_stage'],
+                    'responsible_component': decision['responsible_component'],
+                    'failure_reasons': failure_reasons,
+                    'attempts_used': attempt_no,
+                    'max_attempts': self.max_attempts,
+                    'attempt_history': list(self.attempt_history),
+                    'invalidation_log': list(self.invalidation_log),
+                    'analysis': analysis,
+                    'validation_report': report,
+                }
+
+            # For FAIL or STOPPED: if more attempts remain, invalidate failed attempt artifacts before retrying.
+            if attempt_no < self.max_attempts:
+                self.invalidation_log.append({
+                    'event': 'failed_attempt_invalidation',
+                    'attempt': attempt_no,
+                    'invalidated_analysis_sha256': analysis['analysis_sha256'],
+                    'invalidated_report_sha256': report['report_sha256'],
+                    'return_to_stage': decision['return_to_stage'],
+                    'reason': f'Attempt {attempt_no} ended with {gate_state}; invalidating before retry',
+                })
+
+        # Retry budget exhausted without reaching PASS or REVIEW.
+        final_decision = can_advance_to_organization(input_bundle, last_analysis, last_report, plan=expected_plan)
+        final_reasons = [
+            f"{f['rule_id']}: {f['message']}" for f in last_report.get('findings', [])
+            if f.get('severity') in {'ERROR', 'UNRESOLVED'}
+        ] or list(last_report.get('diagnostics', []))
+
+        return {
+            'record_kind': 'experimental_execution_controller_result',
+            'version': VERSION,
+            'gate_state': 'STOPPED',
+            'execution_state': 'stopped',
+            'last_gate_state': last_gate_state,
+            'stop_reason': f'MAX_ATTEMPTS_EXCEEDED ({self.max_attempts})',
+            'delivery_approved': False,
+            'next_stage_allowed': False,
+            'next_stage_invoked': False,
+            'return_to_stage': final_decision['return_to_stage'],
+            'responsible_component': final_decision['responsible_component'],
+            'failure_reasons': final_reasons,
+            'attempts_used': self.max_attempts,
+            'max_attempts': self.max_attempts,
+            'attempt_history': list(self.attempt_history),
+            'invalidation_log': list(self.invalidation_log),
+            'analysis': last_analysis,
+            'validation_report': last_report,
+        }
+
+
+def literal_markdown_block(value):
+    if not isinstance(value, str):
+        value = json.dumps(value, ensure_ascii=False, indent=2)
+    return ['    ' + line for line in value.splitlines()] or ['    ']
+
+
+def render_markdown_report(controller_result):
+    lines = [
+        '# 전체 문서 정보 추출·검증·실행 제어 결과',
+        '',
+        f"- 최종 게이트 상태: `{controller_result['gate_state']}`",
+        f"- 실행 상태: `{controller_result['execution_state']}`",
+        f"- 마지막 게이트 판정(`last_gate_state`): `{controller_result.get('last_gate_state')}`",
+        f"- 전달 승인(`delivery_approved`): `{controller_result['delivery_approved']}`",
+        f"- 다음 단계 허용(`next_stage_allowed`): `{controller_result['next_stage_allowed']}`",
+        f"- 다음 단계 실제 호출(`next_stage_invoked`): `{controller_result['next_stage_invoked']}`",
+        f"- 시도 횟수: `{controller_result['attempts_used']} / {controller_result['max_attempts']}`",
+        f"- 복귀 대상 단계(`return_to_stage`): `{controller_result.get('return_to_stage')}`",
+        '',
+        '> 주의: 구조·블록 범위·출처·보호 정보 추적 통과는 의미적 정확성 확증이 아니며, 의미 검토 미실행 시 `REVIEW`로 다음 단계 진행을 차단한다.',
+        '',
+    ]
+
+    def add_section(label, content):
+        lines.extend([f'**{label}**', '', *literal_markdown_block(content), ''])
+
+    report = controller_result.get('validation_report')
+    if isinstance(report, dict):
+        lines.extend(['## 검증 게이트 결과', ''])
+        add_section('검증 대상 산출물 다이제스트', report.get('checked_artifacts', {}))
+        add_section('필수 검사 결과 행', report.get('check_results', []))
+        add_section('검증 발견 사항(findings)', report.get('findings', []))
+
+    analysis = controller_result.get('analysis')
+    if isinstance(analysis, dict):
+        lines.extend(['## 전체 문서 블록 범위 장부(coverage_ledger)', ''])
+        add_section('블록별 처리 상태', analysis.get('coverage_ledger', []))
+        lines.extend(['## 필수 보호 정보 바인딩(requirement_bindings)', ''])
+        add_section('보호 정보 추적 결과', analysis.get('requirement_bindings', []))
+        lines.extend(['## 추출된 정보 단위 요약', ''])
+        for idx, unit in enumerate(analysis.get('units', []), start=1):
+            lines.extend([f'### 정보 단위 {idx}', ''])
+            add_section('단위 ID 및 출처 블록 — 미검증 모델/분석 데이터', {
+                'id': unit.get('id'),
+                'origin_block_ids': unit.get('origin_block_ids'),
+                'statement': unit.get('statement'),
+                'relations': unit.get('relations'),
+                'assessment': unit.get('assessment'),
+            })
+
+    if controller_result.get('invalidation_log'):
+        lines.extend(['## 무효화 기록(invalidation_log)', ''])
+        add_section('산출물 무효화 내역', controller_result['invalidation_log'])
+
+    return '\n'.join(lines) + '\n'
+
+
+def call_cli_provider(prompt_text, *, executable, model, timeout=180):
+    import subprocess
+    import tempfile
+    import time
+
+    started = time.monotonic()
+    with tempfile.TemporaryDirectory(prefix='logicwrite-fulldoc-') as work:
+        command = [
+            executable, '--print', prompt_text, '--model', model,
+            '--disable-slash-commands', '--mode', 'plan',
+            '--output-format', 'text', '--print-timeout', f'{timeout}s',
+        ]
+        result = subprocess.run(command, cwd=work, capture_output=True, timeout=timeout + 15)
+        return {
+            'stdout': result.stdout,
+            'stderr': result.stderr,
+            'returncode': result.returncode,
+            'seconds': time.monotonic() - started,
+        }
+
+
+def main(argv=None):
+    import argparse
+    from pathlib import Path
+    import shutil
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest='command', required=True)
+
+    p_prompt = sub.add_parser('prompt', help='Emit extraction prompt for a full-document input bundle')
+    p_prompt.add_argument('input', type=Path)
+    p_prompt.add_argument('--window-index', type=int, default=0)
+    p_prompt.add_argument('--max-window-chars', type=int, default=None)
+
+    p_run = sub.add_parser('run', help='Run full-document extraction, validation gate, and stage execution control')
+    p_run.add_argument('--input', type=Path, required=True)
+    p_run.add_argument('--response', type=Path, action='append',
+                       help='Pre-recorded window response JSON file(s). If omitted, invokes --provider CLI.')
+    p_run.add_argument('--provider', default='agy')
+    p_run.add_argument('--model', default='gemini-4-argon-medium')
+    p_run.add_argument('--max-attempts', type=int, default=1)
+    p_run.add_argument('--max-window-chars', type=int, default=None)
+    p_run.add_argument('--save-run-dir', type=Path, default=None)
+    p_run.add_argument('--markdown', action='store_true')
+
+    args = parser.parse_args(argv)
+    try:
+        bundle = load_json_bytes(args.input.read_bytes())
+        if args.command == 'prompt':
+            print(build_window_prompt(bundle, window_index=args.window_index, max_window_chars=args.max_window_chars))
+            return 0
+
+        controller = ExecutionController(max_attempts=args.max_attempts)
+        if args.response:
+            raw_files = [p.read_bytes() for p in args.response]
+
+            def file_responder(window_idx, _window, _prompt, _attempt):
+                if window_idx >= len(raw_files):
+                    raise InvalidArtifactError(f'Missing response file for window index {window_idx}')
+                return raw_files[window_idx]
+
+            result = controller.run(bundle, file_responder, max_window_chars=args.max_window_chars)
+        else:
+            executable = shutil.which(args.provider)
+            if not executable:
+                parser.exit(2, f'Provider executable not found: {args.provider}\n')
+            if args.save_run_dir is not None:
+                args.save_run_dir.mkdir(parents=True, exist_ok=False)
+
+            def live_responder(window_idx, window, prompt_text, attempt_no):
+                obs = call_cli_provider(prompt_text, executable=executable, model=args.model)
+                if args.save_run_dir is not None:
+                    prefix = f"attempt-{attempt_no}-{window['window_id']}"
+                    (args.save_run_dir / f'{prefix}.prompt.txt').write_text(prompt_text)
+                    (args.save_run_dir / f'{prefix}.response.txt').write_bytes(obs['stdout'])
+                    (args.save_run_dir / f'{prefix}.stderr.txt').write_bytes(obs['stderr'])
+                    meta = {
+                        'attempt': attempt_no,
+                        'window_id': window['window_id'],
+                        'returncode': obs['returncode'],
+                        'seconds': obs['seconds'],
+                        'requested_model': args.model,
+                        'prompt_sha256': digest_text(prompt_text),
+                        'response_sha256': digest_bytes(obs['stdout']),
+                    }
+                    (args.save_run_dir / f'{prefix}.meta.json').write_text(
+                        json.dumps(meta, ensure_ascii=True, indent=2) + '\n'
+                    )
+                if obs['returncode'] != 0:
+                    raise ResponseParseError(f"Provider exited with code {obs['returncode']}")
+                return obs['stdout']
+
+            result = controller.run(bundle, live_responder, max_window_chars=args.max_window_chars)
+            if args.save_run_dir is not None:
+                (args.save_run_dir / 'controller_result.json').write_text(
+                    json.dumps(result, ensure_ascii=True, indent=2) + '\n'
+                )
+                (args.save_run_dir / 'controller_report.md').write_text(render_markdown_report(result))
+
+        if args.markdown:
+            print(render_markdown_report(result))
+        else:
+            print(json.dumps(result, ensure_ascii=True, indent=2))
+        return 0
+    except (OSError, ValueError, UnicodeError, RecursionError) as error:
+        parser.exit(2, f'Full-document pipeline error: {error}\n')
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
+
+

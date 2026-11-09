@@ -478,6 +478,327 @@ class Stage2ValidationGateTests(unittest.TestCase):
         self.assertTrue(any(d.startswith('CHECK_RESULT_MISSING:') for d in reconciled['diagnostics']))
 
 
+class Stage3And4ControllerE2ETests(unittest.TestCase):
+    def test_scenario_1_normal_full_document_input_and_block_range_tracking(self):
+        bundle = load_sample_bundle()
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        controller = pipeline.ExecutionController(max_attempts=2, organization_adapter=adapter)
+        resp = make_valid_window_response(bundle)
+        result = controller.run(bundle, lambda _idx, _win, _prompt, _att: json.dumps(resp))
+
+        self.assertEqual(result['gate_state'], 'REVIEW')
+        self.assertEqual(result['execution_state'], 'completed')
+        self.assertEqual(result['attempts_used'], 1)
+        blocks = result['analysis']['blocks']
+        self.assertEqual(blocks[0]['start'], 0)
+        self.assertEqual(blocks[-1]['end'], len(bundle['document_snapshot']['content']))
+        for a, b in zip(blocks, blocks[1:]):
+            self.assertEqual(a['end'], b['start'])
+        ledger = result['analysis']['coverage_ledger']
+        self.assertEqual(len(ledger), len(blocks))
+        excluded = [row for row in ledger if row['status'] == 'excluded']
+        self.assertEqual(len(excluded), 8)  # 7 blank separators + 1 thematic_break
+        self.assertTrue(all(bool(row['exclusion_reason']) for row in excluded))
+
+    def test_scenario_2_missing_and_duplicate_block_handling(self):
+        bundle = load_sample_bundle()
+        # Missing block B009 -> fails gate and exhausts 1 attempt -> STOPPED with last_gate_state == 'FAIL'
+        resp_missing = make_valid_window_response(bundle)
+        resp_missing['block_coverage'] = [b for b in resp_missing['block_coverage'] if b['block_id'] != 'B009']
+        resp_missing['units'] = [u for u in resp_missing['units'] if u['id'] != 'u-code-install']
+
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        controller = pipeline.ExecutionController(max_attempts=1, organization_adapter=adapter)
+        res_missing = controller.run(bundle, lambda _i, _w, _p, _a: json.dumps(resp_missing))
+        self.assertEqual(res_missing['gate_state'], 'STOPPED')
+        self.assertEqual(res_missing['last_gate_state'], 'FAIL')
+        self.assertEqual(res_missing['return_to_stage'], 'information_extraction_analysis')
+        self.assertFalse(res_missing['next_stage_invoked'])
+        self.assertEqual(len(adapter.invocations), 0)
+        self.assertEqual(len(adapter.blocked_attempts), 1)
+
+        # Duplicate block B003
+        resp_dup = make_valid_window_response(bundle)
+        resp_dup['block_coverage'].append(
+            {'block_id': 'B003', 'status': 'extracted', 'unit_ids': ['u-timeout'], 'unresolved_reason': None}
+        )
+        controller_dup = pipeline.ExecutionController(max_attempts=1)
+        res_dup = controller_dup.run(bundle, lambda _i, _w, _p, _a: json.dumps(resp_dup))
+        self.assertEqual(res_dup['gate_state'], 'STOPPED')
+        self.assertEqual(res_dup['last_gate_state'], 'FAIL')
+        self.assertTrue(any('EXTRACTABLE_BLOCK_DUPLICATED' in r for r in res_dup['failure_reasons']))
+
+    def test_scenario_3_cross_block_claims_and_conditions(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        units_by_id = {u['id']: u for u in analysis['units']}
+
+        # B015 condition qualifies B003 claim
+        cond_offline = units_by_id['u-cond-offline-cache']
+        self.assertEqual(cond_offline['origin_block_ids'], ['B015'])
+        self.assertEqual(units_by_id['u-runtime-overview']['origin_block_ids'], ['B003'])
+        self.assertTrue(any(
+            r['kind'] == 'qualifies' and r['target_unit_id'] == 'u-runtime-overview' and r['cross_block']
+            for r in cond_offline['relations']
+        ))
+
+        # B015 condition qualifies B007 table entry
+        cond_macos = units_by_id['u-cond-macos-manual']
+        self.assertEqual(cond_macos['origin_block_ids'], ['B015'])
+        self.assertEqual(units_by_id['u-table-macos']['origin_block_ids'], ['B007'])
+        self.assertTrue(any(
+            r['kind'] == 'qualifies' and r['target_unit_id'] == 'u-table-macos' and r['cross_block']
+            for r in cond_macos['relations']
+        ))
+
+        # Multi-window split still preserves cross-block relations across windows
+        w_blocks = pipeline.parse_markdown_blocks(bundle['document_snapshot'])
+        windows = pipeline.plan_extraction_windows(bundle['document_snapshot'], w_blocks, max_window_chars=200)
+        self.assertEqual(len(windows), 4)
+        full_units_by_block = {}
+        for u in resp['units']:
+            bid = u['quotes'][0]['block_id']
+            full_units_by_block.setdefault(bid, []).append(u)
+        cov_by_block = {c['block_id']: c for c in resp['block_coverage']}
+
+        window_payloads = []
+        for w in windows:
+            w_units = [u for bid in w['target_block_ids'] for u in full_units_by_block.get(bid, [])]
+            w_cov = [cov_by_block[bid] for bid in w['target_block_ids']]
+            window_payloads.append(json.dumps({
+                'input_sha256': resp['input_sha256'],
+                'snapshot_id': resp['snapshot_id'],
+                'snapshot_sha256': resp['snapshot_sha256'],
+                'window_id': w['window_id'],
+                'block_coverage': w_cov,
+                'units': w_units,
+                'alignment': resp['alignment'],
+                'unresolved_questions': [],
+            }))
+        merged = pipeline.assemble_document_analysis(bundle, window_payloads, max_window_chars=200)
+        merged_report = pipeline.validate_analysis_gate(bundle, merged)
+        self.assertEqual(merged_report['gate_state'], 'REVIEW')
+        by_id = {r['check_id']: r['status'] for r in merged_report['check_results']}
+        self.assertEqual(by_id['BLOCK_COVERAGE'], 'passed')
+        self.assertEqual(by_id['PROTECTED_TRACEABILITY'], 'passed')
+
+    def test_scenario_4_important_info_in_code_block_table_and_list(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        units_by_id = {u['id']: u for u in analysis['units']}
+
+        # Table (B007), Code block (B009), List (B015) all have verified spans and elements
+        self.assertEqual(units_by_id['u-table-ubuntu']['source_spans'][0]['block_kind'], 'table')
+        self.assertEqual(units_by_id['u-code-install']['source_spans'][0]['block_kind'], 'code_block')
+        self.assertEqual(units_by_id['u-cond-offline-cache']['source_spans'][0]['block_kind'], 'list')
+
+        bindings = {b['requirement_id']: b for b in analysis['requirement_bindings']}
+        self.assertTrue(bindings['req-linux-package']['satisfied'])
+        self.assertTrue(bindings['req-install-port']['satisfied'])
+        self.assertTrue(bindings['req-offline-cache-condition']['satisfied'])
+        self.assertTrue(bindings['req-macos-manual-update']['satisfied'])
+
+    def test_scenario_5_invalid_source_reference_and_missing_protected_info(self):
+        bundle = load_sample_bundle()
+        # Invalid quote in B009
+        bad_quote_resp = make_valid_window_response(bundle)
+        for u in bad_quote_resp['units']:
+            if u['id'] == 'u-code-install':
+                u['quotes'][0]['quote'] = './install.sh --port 9999'
+
+        controller = pipeline.ExecutionController(max_attempts=1)
+        res_bad_quote = controller.run(bundle, lambda _i, _w, _p, _a: json.dumps(bad_quote_resp))
+        self.assertEqual(res_bad_quote['gate_state'], 'STOPPED')
+        self.assertEqual(res_bad_quote['last_gate_state'], 'FAIL')
+        self.assertEqual(res_bad_quote['return_to_stage'], 'information_extraction_analysis')
+        self.assertFalse(res_bad_quote['next_stage_invoked'])
+        self.assertTrue(any('QUOTE_NOT_FOUND_IN_BLOCK' in r for r in res_bad_quote['failure_reasons']))
+
+        # Protected unit marked as omit_candidate
+        omit_resp = make_valid_window_response(bundle)
+        for u in omit_resp['units']:
+            if u['id'] == 'u-timeout':
+                u['assessment']['preservation'] = 'omit_candidate'
+        controller_omit = pipeline.ExecutionController(max_attempts=1)
+        res_omit = controller_omit.run(bundle, lambda _i, _w, _p, _a: json.dumps(omit_resp))
+        self.assertEqual(res_omit['gate_state'], 'STOPPED')
+        self.assertEqual(res_omit['last_gate_state'], 'FAIL')
+        self.assertTrue(any('PROTECTED_TRACEABILITY_VIOLATION' in r for r in res_omit['failure_reasons']))
+
+    def test_scenario_6_missing_required_check_results(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        full_report = pipeline.validate_analysis_gate(bundle, analysis)
+
+        # Strip PROTECTED_TRACEABILITY and SEMANTIC_FIDELITY from check_results
+        incomplete_report = copy.deepcopy(full_report)
+        incomplete_report['check_results'] = [
+            r for r in incomplete_report['check_results']
+            if r['check_id'] not in {'PROTECTED_TRACEABILITY', 'SEMANTIC_FIDELITY'}
+        ]
+        # Even if caller spoofs gate_state='PASS' and delivery_approved=True on the incomplete report:
+        incomplete_report['gate_state'] = 'PASS'
+        incomplete_report['delivery_approved'] = True
+
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        controller = pipeline.ExecutionController(organization_adapter=adapter)
+        reuse_res = controller.attempt_reuse_validation_report(bundle, analysis, incomplete_report)
+        self.assertEqual(reuse_res['gate_state'], 'STOPPED')
+        self.assertFalse(reuse_res['next_stage_allowed'])
+        self.assertFalse(reuse_res['next_stage_invoked'])
+        self.assertEqual(len(adapter.invocations), 0)
+        self.assertEqual(len(adapter.blocked_attempts), 1)
+
+    def test_scenario_7_stale_validation_report_reuse_after_input_or_contract_change(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        controller = pipeline.ExecutionController(max_attempts=1, organization_adapter=adapter)
+        first_run = controller.run(bundle, lambda _i, _w, _p, _a: json.dumps(resp))
+        prior_analysis = first_run['analysis']
+        prior_report = first_run['validation_report']
+
+        # Case A: DocumentSnapshot content changes
+        modified_doc_bundle = copy.deepcopy(bundle)
+        modified_doc_bundle['document_snapshot']['version'] = '2'
+        modified_doc_bundle['document_snapshot']['content'] = (
+            modified_doc_bundle['document_snapshot']['content'].replace('30초', '60초')
+        )
+        modified_doc_bundle['document_snapshot']['sha256'] = pipeline.digest_text(
+            modified_doc_bundle['document_snapshot']['content']
+        )
+        reuse_doc = controller.attempt_reuse_validation_report(
+            modified_doc_bundle, prior_analysis, prior_report
+        )
+        self.assertEqual(reuse_doc['gate_state'], 'FAIL')
+        self.assertTrue(reuse_doc['invalidated'])
+        self.assertFalse(reuse_doc['next_stage_allowed'])
+        self.assertFalse(reuse_doc['next_stage_invoked'])
+        self.assertEqual(reuse_doc['return_to_stage'], 'information_extraction_analysis')
+        self.assertIn('document_snapshot', reuse_doc['invalidation']['changed_components'])
+        self.assertGreaterEqual(len(controller.invalidation_log), 1)
+
+        # Case B: WritingContract changes
+        modified_contract_bundle = copy.deepcopy(bundle)
+        modified_contract_bundle['writing_contract']['version'] = '2'
+        modified_contract_bundle['writing_contract']['purpose'] = '내부 아키텍처 의사결정 이력을 보존한다.'
+        reuse_contract = controller.attempt_reuse_validation_report(
+            modified_contract_bundle, prior_analysis, prior_report
+        )
+        self.assertEqual(reuse_contract['gate_state'], 'FAIL')
+        self.assertTrue(reuse_contract['invalidated'])
+        self.assertFalse(reuse_contract['next_stage_invoked'])
+        self.assertEqual(reuse_contract['return_to_stage'], 'contract_resolution')
+        self.assertIn('writing_contract', reuse_contract['invalidation']['changed_components'])
+
+    def test_scenario_8_failed_or_unverified_analysis_blocked_from_next_stage(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        review_report = pipeline.validate_analysis_gate(bundle, analysis)
+
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        # 1. Direct call to OrganizationBoundaryAdapter with REVIEW report is blocked
+        with self.assertRaises(pipeline.StageTransitionBlockedError):
+            adapter.enter_organization_stage(bundle, analysis, review_report)
+        self.assertEqual(len(adapter.invocations), 0)
+        self.assertEqual(len(adapter.blocked_attempts), 1)
+        self.assertEqual(adapter.blocked_attempts[0]['gate_state'], 'REVIEW')
+
+        # 2. Retry loop: attempt 1 fails (missing block), attempt 2 fixes block -> reaches REVIEW (still blocked from Organization),
+        #    and verifies finite retry budget when all attempts fail.
+        bad_resp = make_valid_window_response(bundle)
+        bad_resp['block_coverage'] = [b for b in bad_resp['block_coverage'] if b['block_id'] != 'B001']
+        bad_resp['units'] = [u for u in bad_resp['units'] if u['id'] != 'u-heading-main']
+
+        controller_recover = pipeline.ExecutionController(max_attempts=2, organization_adapter=adapter)
+        res_recover = controller_recover.run(
+            bundle,
+            lambda _i, _w, _p, attempt: json.dumps(bad_resp if attempt == 1 else resp),
+        )
+        self.assertEqual(res_recover['attempts_used'], 2)
+        self.assertEqual(res_recover['gate_state'], 'REVIEW')
+        self.assertEqual(res_recover['attempt_history'][0]['gate_state'], 'FAIL')
+        self.assertEqual(res_recover['attempt_history'][1]['gate_state'], 'REVIEW')
+        self.assertEqual(len(res_recover['invalidation_log']), 1)
+        self.assertFalse(res_recover['next_stage_invoked'])
+        self.assertEqual(len(adapter.invocations), 0)
+
+        # 3. Exhausting max_attempts=2 when both attempts fail -> STOPPED with last_gate_state='FAIL'
+        controller_exhaust = pipeline.ExecutionController(max_attempts=2)
+        res_exhaust = controller_exhaust.run(bundle, lambda _i, _w, _p, _a: json.dumps(bad_resp))
+        self.assertEqual(res_exhaust['attempts_used'], 2)
+        self.assertEqual(res_exhaust['gate_state'], 'STOPPED')
+        self.assertEqual(res_exhaust['execution_state'], 'stopped')
+        self.assertEqual(res_exhaust['last_gate_state'], 'FAIL')
+        self.assertIn('MAX_ATTEMPTS_EXCEEDED', res_exhaust['stop_reason'])
+        self.assertFalse(res_exhaust['next_stage_invoked'])
+
+    def test_scenario_9_structural_pass_never_mistaken_for_semantic_pass(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        report = pipeline.validate_analysis_gate(bundle, analysis)
+
+        # All 4 structural checks pass, but SEMANTIC_FIDELITY is not_run -> gate_state is REVIEW, never PASS
+        deterministic = [r for r in report['check_results'] if r['kind'] == 'deterministic']
+        self.assertEqual(len(deterministic), 4)
+        self.assertTrue(all(r['status'] == 'passed' for r in deterministic))
+        sem = [r for r in report['check_results'] if r['check_id'] == 'SEMANTIC_FIDELITY'][0]
+        self.assertEqual(sem['status'], 'not_run')
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        self.assertFalse(report['delivery_approved'])
+        self.assertFalse(report['next_stage_allowed'])
+
+        # Even if someone mutates report['gate_state'] = 'PASS' without SEMANTIC_FIDELITY actually passing,
+        # can_advance_to_organization re-reconciles check_results and blocks transition!
+        forged_report = copy.deepcopy(report)
+        forged_report['gate_state'] = 'PASS'
+        forged_report['delivery_approved'] = True
+        forged_report['next_stage_allowed'] = True
+        decision = pipeline.can_advance_to_organization(bundle, analysis, forged_report)
+        self.assertFalse(decision['allowed'])
+        self.assertEqual(decision['gate_state'], 'REVIEW')
+
+    def test_cli_prompt_and_run_modes(self):
+        import subprocess
+        import sys
+        import tempfile
+
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        with tempfile.TemporaryDirectory() as tmp:
+            resp_path = Path(tmp) / 'response.json'
+            resp_path.write_text(json.dumps(resp))
+
+            prompt_proc = subprocess.run(
+                [sys.executable, str(HERE / 'pipeline.py'), 'prompt', str(SAMPLE_INPUT_PATH)],
+                capture_output=True, text=True, check=True,
+            )
+            self.assertIn('WINDOW_INPUT_JSON:', prompt_proc.stdout)
+
+            run_proc = subprocess.run(
+                [sys.executable, str(HERE / 'pipeline.py'), 'run',
+                 '--input', str(SAMPLE_INPUT_PATH), '--response', str(resp_path)],
+                capture_output=True, text=True, check=True,
+            )
+            run_json = json.loads(run_proc.stdout)
+            self.assertEqual(run_json['gate_state'], 'REVIEW')
+            self.assertFalse(run_json['next_stage_invoked'])
+
+            md_proc = subprocess.run(
+                [sys.executable, str(HERE / 'pipeline.py'), 'run',
+                 '--input', str(SAMPLE_INPUT_PATH), '--response', str(resp_path), '--markdown'],
+                capture_output=True, text=True, check=True,
+            )
+            self.assertIn('# 전체 문서 정보 추출·검증·실행 제어 결과', md_proc.stdout)
+
+
 if __name__ == '__main__':
     unittest.main()
+
+
 
