@@ -21,26 +21,36 @@
      7. `RELATION_DISTORTION`: 관계 종류 왜곡, 결론→전제 supports 역방향 연결(RW-001 E-REL-A1/A2), 역방향 qualifies, 근거 앵커 미공유.
      8. `ASSESSMENT_RATIONALE_DISTORTION`: 단위 statement는 정확하더라도 `assessment.exposure`나 `assessment.reason`에서만 의미를 확대하는 오류(RW-001 E-REQ-B2 회귀 방지).
      9. `AMBIGUOUS_SOURCE_EVIDENCE` / `UNVERIFIED_EVALUATOR_QUOTE` / `EVALUATOR_JUDGMENT_CONFLICT` / `INCOMPLETE_SEMANTIC_COVERAGE` → `unresolved`(`REVIEW`).
+   - **보고서 위조·은폐 방어 (P1):**
+     - SHA-256 다이제스트는 내용 무결성 확인용이며 평가자 신뢰성 증명이 아님을 명시.
+     - 모델 평가기를 사용한 보고서는 원시 실행 기록(`evaluator_records` / `evaluator_raw_responses`)으로 재구성하여 검증. 신뢰 가능한 기록이 없으면 `UNVERIFIED_MODEL_EXECUTION_RECORD`(`REVIEW`) 보류.
+     - 모델이 찾은 오류를 보고서에서 삭제/조작한 경우 `FORGED_OR_OMITTED_SEMANTIC_FINDINGS`로 차단.
+   - **정확한 필드 단위 검토 범위 추적 (P1):**
+     - `get_required_semantic_field_paths()`로 단위 ID뿐만 아니라 `statement`, `elements`, `relations`, `assessment.exposure`, `assessment.reason`, `assessment.preservation`, 블록별 누락 검사 경로를 완전 열거.
+     - 일부 필드만 반환된 경우 단위 검토 완료를 불허하고 `INCOMPLETE_SEMANTIC_COVERAGE`(`REVIEW`, `is_complete: false`)로 처리.
+   - **규칙 기반 오탐 해소 (P2, EVAL-13):**
+     - `_check_polarity_reversal`에서 양보절 대조 표현(`하더라도 ... 지원하지 않으므로`)을 인식해 오탐을 해소하고 FP를 0건으로 개선.
    - **평가자 인용구 및 필드 경로 코드 재검증:**
      - 모델 평가자가 제출한 모든 인용구를 `resolve_block_quotes()`를 통해 원본 `DocumentSnapshot` 코드 포인트 구간에 대해 엄격히 재검증. 조작되거나 일치하지 않는 인용구는 `UNVERIFIED_EVALUATOR_QUOTE`로 보류.
      - 모든 필드 경로는 RFC 6901 JSON Pointer로 `AnalysisResult`에 실제 존재하는지 재검증.
    - **자기승인 거부 및 1차 구현 자동 PASS 금지 불변조건:**
      - 모델이 `passed: true`, `delivery_approved: true`, `gate_state: "PASS"`를 출력해도 무단 승인 시도(`UNAUTHORIZED_EVALUATOR_APPROVAL_CLAIM`)로 거부(`FAIL`).
      - 첫 구현 정책에 따라 모든 항목이 `supported`로 판정되어도 자동 `PASS`하지 않고 `REVIEW`(`SEMANTIC_SUPPORTED_AWAITING_APPROVAL`) 상태를 유지하여 독립적인 사람/정책 검토를 강제.
-   - **다중 창 프롬프트 예산 상한 및 미검토 범위 추적:**
-     - `max_prompt_chars` 상한 내에서 의미 검토 창을 분할하고, 예산 초과나 응답 누락으로 검토되지 못한 단위/블록은 `INCOMPLETE_SEMANTIC_COVERAGE`(`unresolved` → `REVIEW`)로 기록.
-   - **위·변조 방어 및 업스트림 산출물 무효화:**
-     - `SemanticFidelityReport`에 SHA-256 자기 다이제스트(`semantic_report_sha256`) 및 업스트림 산출물(`input_sha256`, `contract_sha256`, `snapshot_sha256`, `analysis_sha256`) 바인딩 강제.
+   - **업스트림 산출물 무효화:**
      - 원문, 계약, 분석 결과가 변경되면 기존 의미 검증 결과는 `STALE_SEMANTIC_REPORT_INVALIDATED`로 즉시 무효화.
-     - 독립 결정론적 의미 감사를 항상 병행 재수행하여, 위조된 외부 보고서가 결정론적 오류를 은폐할 수 없도록 차단.
 
 2. **고정 벤치마크 및 회귀 테스트 세트 (`experiments/full_document_control/semantic_eval_cases.py`):**
-   - FD-001 및 RW-001 패키징 의사결정 노트를 기반으로 14개 고정 사례 구축 (기존 골드 파일 변경 없음).
-   - 정상 사례 2건, 8대 오류 유형별 사례 8건, 원문 모호성 보류 1건, 미탐/오탐/모델충돌 경계 사례 3건.
-   - **평가 결과:**
-     - 결정론 감사 단독 모드: TP 8, TN 2, FP 1, FN 1 (의미적 순서 의존성 미탐), unresolved hold 1 (총 14건 중 13건 일치).
-     - 모델 stub 결합 모드: TP 9, TN 2, FP 1, FN 0, unresolved hold 2 (총 14건 중 13건 일치, FN 해소).
+   - FD-001 및 RW-001 패키징 의사결정 노트를 기반으로 14개 고정 사례 구축.
+   - **개선 후 벤치마크 결과:**
+     - 결정론 감사 단독: TP 8, TN 3, FP 0 (EVAL-13 오탐 해소), FN 1 (EVAL-12 의미적 순서 의존성), Holds 1.
+     - 모델 stub 결합: TP 9 (EVAL-12 모델 탐지), TN 3, FP 0, FN 0, Holds 2 (14건 전체 100% 일치).
 
-3. **테스트 및 검증:**
-   - 신규 17개 종합 테스트 (`experiments/full_document_control/test_semantic_validator.py`)
-   - 기존 108개 테스트 전체 통과 유지: 총 125개 테스트 100% 통과 (`full_document_control` 50개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+3. **실제 LLM(`gemini-3.8-flash-low`) 14개 벤치마크 독립 평가 (`run_live_semantic_evaluation.py`):**
+   - 총 소요 시간: 422.27초, 14개 사례 전체 실행.
+   - TP 8건 (주요 8대 오류 전수 탐지 및 FAIL 차단), FP 0건, Holds 2건.
+   - 정상 사례에서 모델의 일부 필드 생략 시 신규 Coverage Tracker가 `INCOMPLETE_SEMANTIC_COVERAGE`(`REVIEW`)로 안전하게 보류함을 실환경 입증.
+   - 산출물: `experiments/full_document_control/runs/live_eval_gemini_3_8_flash/` 및 `live_semantic_eval_summary.json`.
+
+4. **테스트 및 검증:**
+   - 신규 종합 테스트: 총 21개 테스트 통과 (`test_semantic_validator.py`).
+   - 전체 회귀 테스트 통과: 총 129개 테스트 100% 통과 (`full_document_control` 54개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).

@@ -4,6 +4,7 @@ Verifies whether extracted & analyzed InformationUnits, elements, relations, and
 faithfully preserve the meaning of the source DocumentSnapshot under the WritingContract.
 """
 import copy
+import hashlib
 import json
 import re
 
@@ -383,9 +384,41 @@ def _check_modality_overstatement(source_text, target_text):
 
 
 def _check_polarity_reversal(source_text, target_text):
+    """Check for polarity reversal between source and target text.
+
+    Returns:
+      (judgment, category, rationale) or None
+      - ('contradicted', 'POLARITY_REVERSAL', msg) for definite polarity reversal
+      - ('unresolved', 'AMBIGUOUS_SOURCE_EVIDENCE', msg) for ambiguous/hypothetical context
+      - None when no reversal or when normal concessive contrast is recognized
+    """
     for src_pat, rev_pat, desc in POLARITY_REVERSAL_RULES:
         if src_pat.search(source_text) and rev_pat.search(target_text):
-            return desc
+            # Check for concessive contrast clause (e.g. "지원한다 하더라도 ... 지원하지 않으므로")
+            concessive_match = re.search(
+                r'(?:하더라도|할지라도|에도\s*불구하고|이라\s*해도|다고\s*해도|가정하더라도|'
+                r'\beven\s+if\b|\beven\s+though\b|\balthough\b)',
+                target_text,
+                re.IGNORECASE,
+            )
+            has_explicit_negation = bool(
+                src_pat.search(target_text)
+                or re.search(
+                    r'지원하지\s*않|필요하지\s*않|불필요|없이|동작하지\s*않|불가능|덮어쓰지\s*않|'
+                    r'\bdoes\s+not\b|\bnot\s+need\b|\bnon-blocking\b',
+                    target_text,
+                    re.IGNORECASE,
+                )
+            )
+            if concessive_match and has_explicit_negation:
+                # Concessive contrast: contrasts general/external behavior while preserving source negation for this specific build/system
+                continue
+
+            # Check if target is purely hypothetical or asking an editorial question
+            if re.search(r'(?:가정할\s*때|전제할\s*경우|\bhypothetically\b|\bassuming\b)', target_text, re.IGNORECASE):
+                return 'unresolved', 'AMBIGUOUS_SOURCE_EVIDENCE', f'{desc} (가정·조건부 서술이 포함되어 확정 극성 반전 대신 unresolved로 보류)'
+
+            return 'contradicted', 'POLARITY_REVERSAL', desc
     return None
 
 
@@ -572,6 +605,52 @@ def _check_relation_semantics(unit, u_idx, rel, r_idx, units_by_id, blocks_by_id
     return 'supported', None, '관계 종류·방향·대상이 원문 문맥 및 근거 설명과 부합함'
 
 
+def get_required_semantic_field_paths(analysis_result, extractable_blocks):
+    """Enumerate all required RFC 6901 JSON pointer paths for semantic review:
+    - /units/{i}/statement
+    - /units/{i}/elements/{j}/value
+    - /units/{i}/relations/{k}/reason
+    - /units/{i}/assessment/exposure
+    - /units/{i}/assessment/reason
+    - /units/{i}/assessment/preservation
+    - /blocks/{b} for each extractable block
+    """
+    required_paths = set()
+    unit_field_paths = {}
+    units = analysis_result.get('units') if isinstance(analysis_result.get('units'), list) else []
+    for u_idx, u in enumerate(units):
+        if not isinstance(u, dict):
+            continue
+        uid = u.get('id', f'unit-{u_idx}')
+        paths_for_u = [
+            f'/units/{u_idx}/statement',
+            f'/units/{u_idx}/assessment/exposure',
+            f'/units/{u_idx}/assessment/reason',
+            f'/units/{u_idx}/assessment/preservation',
+        ]
+        elements = u.get('elements') if isinstance(u.get('elements'), list) else []
+        for e_idx, _ in enumerate(elements):
+            paths_for_u.append(f'/units/{u_idx}/elements/{e_idx}/value')
+        relations = u.get('relations') if isinstance(u.get('relations'), list) else []
+        for r_idx, _ in enumerate(relations):
+            paths_for_u.append(f'/units/{u_idx}/relations/{r_idx}/reason')
+        unit_field_paths[uid] = paths_for_u
+        required_paths.update(paths_for_u)
+
+    block_paths = {}
+    for b_idx, b in enumerate(extractable_blocks):
+        bid = b.get('block_id') if isinstance(b, dict) else str(b)
+        bp = f'/blocks/{b_idx}'
+        block_paths[bid] = bp
+        required_paths.add(bp)
+
+    return {
+        'required_paths': required_paths,
+        'unit_field_paths': unit_field_paths,
+        'block_paths': block_paths,
+    }
+
+
 def run_deterministic_semantic_audit(input_bundle, analysis_result, *, extract_anchor_tokens_fn, parse_blocks_fn):
     """Perform bidirectional deterministic semantic fidelity checks (Analysis -> Source and Source -> Analysis)."""
     snapshot = input_bundle['document_snapshot']
@@ -668,9 +747,9 @@ def run_deterministic_semantic_audit(input_bundle, analysis_result, *, extract_a
         if over_msg:
             stmt_errors.append(('overstated', 'CLAIM_OVERSTATEMENT', over_msg))
 
-        pol_msg = _check_polarity_reversal(source_quote_text, stmt)
-        if pol_msg:
-            stmt_errors.append(('contradicted', 'POLARITY_REVERSAL', pol_msg))
+        pol_res = _check_polarity_reversal(source_quote_text, stmt)
+        if pol_res:
+            stmt_errors.append(pol_res)
 
         cond_msg = _check_condition_loss(source_quote_text, stmt, unit, units)
         if cond_msg:
@@ -776,9 +855,10 @@ def run_deterministic_semantic_audit(input_bundle, analysis_result, *, extract_a
             if over_f:
                 field_errors.append(('overstated', 'ASSESSMENT_RATIONALE_DISTORTION', over_f))
 
-            pol_f = _check_polarity_reversal(source_quote_text, fval)
-            if pol_f:
-                field_errors.append(('contradicted', 'ASSESSMENT_RATIONALE_DISTORTION', pol_f))
+            pol_res = _check_polarity_reversal(source_quote_text, fval)
+            if pol_res:
+                sem_j, err_c, msg = pol_res
+                field_errors.append((sem_j, 'ASSESSMENT_RATIONALE_DISTORTION' if err_c == 'POLARITY_REVERSAL' else err_c, msg))
 
             cond_f = _check_condition_loss(source_quote_text, fval, unit, units)
             if cond_f:
@@ -835,11 +915,23 @@ def run_deterministic_semantic_audit(input_bundle, analysis_result, *, extract_a
                 semantic_judgment='contradicted',
                 error_category='CONDITION_LOSS',
                 source_spans=spans,
-                analysis_excerpt=pres_val,
+                analysis_excerpt=str(pres_val or ''),
                 rationale=(
                     f'현재 문서에 유지(retain_current)되는 주장을 한정(qualifies)하는 조건 단위({uid})를 '
                     f'omit_candidate로 생략하여 주장의 필수 조건 노출을 손실함'
                 ),
+            )
+        else:
+            add_item_judgment(
+                unit_id=uid,
+                block_ids=block_ids,
+                field_path=pres_path,
+                check_direction='analysis_to_source',
+                semantic_judgment='supported',
+                error_category=None,
+                source_spans=spans,
+                analysis_excerpt=str(pres_val or ''),
+                rationale='assessment.preservation이 필수 조건 단위를 부당하게 생략하지 않음',
             )
 
     # -----------------------------------------------------------------------
@@ -1060,6 +1152,7 @@ def _serialize_unit_for_semantic_prompt(u_idx, unit):
             'scope_id': unit.get('assessment', {}).get('scope_id'),
             'relevance': unit.get('assessment', {}).get('relevance'),
             'importance': unit.get('assessment', {}).get('importance'),
+            'preservation_path': f'/units/{u_idx}/assessment/preservation',
             'preservation': unit.get('assessment', {}).get('preservation'),
             'exposure_path': f'/units/{u_idx}/assessment/exposure',
             'exposure': unit.get('assessment', {}).get('exposure'),
@@ -1558,12 +1651,13 @@ def _verify_and_parse_semantic_window_response(
         code='STALE_SEMANTIC_ANALYSIS_BINDING',
         responsible_component='validation_gate',
     )
-    need_fn(
-        parsed['semantic_window_id'] == expected_window['semantic_window_id'],
-        f"Semantic response window_id mismatch: expected {expected_window['semantic_window_id']}, got {parsed['semantic_window_id']}",
-        code='SEMANTIC_WINDOW_ID_MISMATCH',
-        responsible_component='validation_gate',
-    )
+    if expected_window is not None:
+        need_fn(
+            parsed['semantic_window_id'] == expected_window['semantic_window_id'],
+            f"Semantic response window_id mismatch: expected {expected_window['semantic_window_id']}, got {parsed['semantic_window_id']}",
+            code='SEMANTIC_WINDOW_ID_MISMATCH',
+            responsible_component='validation_gate',
+        )
     need_fn(
         isinstance(parsed['unit_reviews'], list) and isinstance(parsed['block_omission_reviews'], list),
         'unit_reviews and block_omission_reviews must be lists',
@@ -1574,6 +1668,7 @@ def _verify_and_parse_semantic_window_response(
     verified_items = []
     reviewed_unit_ids = set()
     reviewed_block_ids = set()
+    reviewed_field_paths = set()
 
     if unauthorized_approval:
         verified_items.append({
@@ -1675,6 +1770,7 @@ def _verify_and_parse_semantic_window_response(
                 continue
 
             # Re-verify evidence_quotes against DocumentSnapshot in code!
+            reviewed_field_paths.add(fpath)
             if not isinstance(ev_quotes, list) or not ev_quotes:
                 verified_items.append({
                     'unit_id': uid,
@@ -1716,6 +1812,7 @@ def _verify_and_parse_semantic_window_response(
             elif sem_j == 'unresolved' and resolved_cat is None:
                 resolved_cat = 'AMBIGUOUS_SOURCE_EVIDENCE'
 
+            reviewed_field_paths.add(fpath)
             verified_items.append({
                 'unit_id': uid,
                 'block_ids': sorted({s['block_id'] for s in verified_spans}),
@@ -1730,10 +1827,10 @@ def _verify_and_parse_semantic_window_response(
             })
 
     # Verify block_omission_reviews (backward check: source -> analysis)
+    extractable_blocks_list = [b for b in blocks_by_id.values() if b.get('extractable')]
     blocks_index_map = {
         b['block_id']: (idx, b)
-        for idx, b in enumerate(blocks_by_id.values())
-        if b.get('extractable')
+        for idx, b in enumerate(extractable_blocks_list)
     }
     for b_rev in parsed['block_omission_reviews']:
         need_fn(
@@ -1779,6 +1876,7 @@ def _verify_and_parse_semantic_window_response(
         )
 
         reviewed_block_ids.add(bid)
+        reviewed_field_paths.add(bpath)
         default_block_span = [{
             'snapshot_id': snapshot['snapshot_id'],
             'snapshot_sha256': snapshot['sha256'],
@@ -1823,6 +1921,7 @@ def _verify_and_parse_semantic_window_response(
                     'detector': 'model_response_verifier',
                 })
                 continue
+            reviewed_field_paths.add(bpath)
             verified_items.append({
                 'unit_id': None,
                 'block_ids': [bid],
@@ -1836,6 +1935,7 @@ def _verify_and_parse_semantic_window_response(
                 'detector': 'model_evaluator',
             })
         else:
+            reviewed_field_paths.add(bpath)
             verified_items.append({
                 'unit_id': None,
                 'block_ids': [bid],
@@ -1853,6 +1953,7 @@ def _verify_and_parse_semantic_window_response(
         'verified_items': verified_items,
         'reviewed_unit_ids': reviewed_unit_ids,
         'reviewed_block_ids': reviewed_block_ids,
+        'reviewed_field_paths': reviewed_field_paths,
         'unauthorized_approval': unauthorized_approval,
     }
 
@@ -1943,7 +2044,13 @@ def validate_semantic_fidelity(
         responders = [semantic_responder]
         adapter_kind = 'model_evaluator_adapter'
 
+    req_info = get_required_semantic_field_paths(analysis_result, [b for b in blocks if b['extractable']])
+    required_paths = req_info['required_paths']
+    unit_field_paths = req_info['unit_field_paths']
+    block_paths = req_info['block_paths']
+
     window_records = []
+    evaluator_records = []
     model_pass_results = []
     execution_stopped = False
     stop_error_code = None
@@ -1953,6 +2060,7 @@ def validate_semantic_fidelity(
         pass_verified_items = []
         pass_reviewed_units = set()
         pass_reviewed_blocks = set()
+        pass_reviewed_paths = set()
         pass_failed = False
 
         for w_idx, sw in enumerate(sem_windows):
@@ -2033,6 +2141,7 @@ def validate_semantic_fidelity(
                     pass_verified_items.extend(verified_win['verified_items'])
                     pass_reviewed_units.update(verified_win['reviewed_unit_ids'])
                     pass_reviewed_blocks.update(verified_win['reviewed_block_ids'])
+                    pass_reviewed_paths.update(verified_win.get('reviewed_field_paths', set()))
                     window_records.append({
                         'evaluator_index': r_idx,
                         'semantic_window_id': sw_id,
@@ -2047,6 +2156,15 @@ def validate_semantic_fidelity(
                         'timed_out': obs_timed_out,
                         'error_code': None,
                         'error_message': None,
+                    })
+                    evaluator_records.append({
+                        'evaluator_index': r_idx,
+                        'semantic_window_id': sw_id,
+                        'window_index': w_idx,
+                        'attempt': attempt_no,
+                        'prompt_sha256': prompt_sha256,
+                        'response_sha256': resp_sha,
+                        'raw_response': raw_bytes.decode('utf-8', errors='replace'),
                     })
                     window_succeeded = True
                     break
@@ -2110,6 +2228,7 @@ def validate_semantic_fidelity(
             'verified_items': pass_verified_items,
             'reviewed_unit_ids': pass_reviewed_units,
             'reviewed_block_ids': pass_reviewed_blocks,
+            'reviewed_field_paths': pass_reviewed_paths,
             'failed': pass_failed,
         })
         if execution_stopped:
@@ -2250,41 +2369,60 @@ def validate_semantic_fidelity(
         # Compute actual reviewed vs unreviewed units and blocks across all model passes
         planned_unreviewed_units = set(sem_windows[0]['unreviewed_unit_ids']) if sem_windows else set()
         planned_unreviewed_blocks = set(sem_windows[0]['unreviewed_block_ids']) if sem_windows else set()
-        actual_reviewed_units = (
-            set.intersection(*(p['reviewed_unit_ids'] for p in model_pass_results))
+
+        actual_reviewed_field_paths = (
+            set.intersection(*(p['reviewed_field_paths'] for p in model_pass_results))
             if model_pass_results
             else set()
-        ) - planned_unreviewed_units
-        actual_reviewed_blocks = (
-            set.intersection(*(p['reviewed_block_ids'] for p in model_pass_results))
-            if model_pass_results
-            else set()
-        ) - planned_unreviewed_blocks
+        )
+        unreviewed_field_paths = sorted(required_paths - actual_reviewed_field_paths)
 
-        reviewed_unit_ids = [uid for uid in all_unit_ids if uid in actual_reviewed_units]
-        unreviewed_unit_ids = [uid for uid in all_unit_ids if uid not in actual_reviewed_units]
-        reviewed_block_ids = [bid for bid in extractable_block_ids if bid in actual_reviewed_blocks]
-        unreviewed_block_ids = [bid for bid in extractable_block_ids if bid not in actual_reviewed_blocks]
+        reviewed_unit_ids = [
+            uid for uid in all_unit_ids
+            if uid not in planned_unreviewed_units
+            and all(p in actual_reviewed_field_paths for p in unit_field_paths.get(uid, []))
+        ]
+        unreviewed_unit_ids = [uid for uid in all_unit_ids if uid not in reviewed_unit_ids]
 
-    # If any unit or extractable block was left unreviewed (and execution didn't already stop),
+        reviewed_block_ids = [
+            bid for bid in extractable_block_ids
+            if bid not in planned_unreviewed_blocks
+            and block_paths.get(bid) in actual_reviewed_field_paths
+        ]
+        unreviewed_block_ids = [bid for bid in extractable_block_ids if bid not in reviewed_block_ids]
+
+    if not responders:
+        actual_reviewed_field_paths = set(required_paths)
+        unreviewed_field_paths = []
+
+    # If any unit, extractable block, or required field path was left unreviewed (and execution didn't already stop),
     # record an explicit INCOMPLETE_SEMANTIC_COVERAGE unresolved finding!
-    if (unreviewed_unit_ids or unreviewed_block_ids) and not execution_stopped:
+    if (unreviewed_unit_ids or unreviewed_block_ids or unreviewed_field_paths) and not execution_stopped:
         already_logged_incomplete = any(
             f['error_category'] == 'INCOMPLETE_SEMANTIC_COVERAGE' for f in final_findings
         )
         if not already_logged_incomplete:
+            missing_parts = []
+            if unreviewed_field_paths:
+                missing_parts.append(f'필수 필드 경로 {len(unreviewed_field_paths)}개({unreviewed_field_paths[:4]})')
+            if unreviewed_unit_ids:
+                missing_parts.append(f'정보 단위({unreviewed_unit_ids})')
+            if unreviewed_block_ids:
+                missing_parts.append(f'원문 블록({unreviewed_block_ids})')
+            missing_desc = ', '.join(missing_parts)
+
             record_final_item({
                 'unit_id': unreviewed_unit_ids[0] if unreviewed_unit_ids else None,
                 'block_ids': list(unreviewed_block_ids),
-                'field_path': '/units' if unreviewed_unit_ids else '/blocks',
+                'field_path': unreviewed_field_paths[0] if unreviewed_field_paths else ('/units' if unreviewed_unit_ids else '/blocks'),
                 'check_direction': 'analysis_to_source',
                 'semantic_judgment': 'unresolved',
                 'error_category': 'INCOMPLETE_SEMANTIC_COVERAGE',
                 'source_spans': [],
-                'analysis_excerpt': '',
+                'analysis_excerpt': f'Unreviewed fields: {unreviewed_field_paths[:5]}',
                 'rationale': (
-                    f'일부 정보 단위({unreviewed_unit_ids}) 또는 원문 블록({unreviewed_block_ids})이 '
-                    f'예산 제한 또는 응답 누락으로 의미 검토되지 않음'
+                    f'의미 검토 범위가 불완전함: {missing_desc}가 '
+                    f'예산 제한 또는 모델 응답 누락으로 검토되지 않아 INCOMPLETE_SEMANTIC_COVERAGE로 보류함'
                 ),
                 'detector': 'coverage_tracker',
             })
@@ -2319,6 +2457,7 @@ def validate_semantic_fidelity(
         not execution_stopped
         and len(unreviewed_unit_ids) == 0
         and len(unreviewed_block_ids) == 0
+        and len(unreviewed_field_paths) == 0
         and bool(all_unit_ids)
     )
 
@@ -2380,6 +2519,7 @@ def validate_semantic_fidelity(
             else None
         ),
         'window_records': window_records,
+        'evaluator_records': evaluator_records,
         'checked_items': {
             'unit_ids': list(reviewed_unit_ids),
             'field_paths': checked_field_paths,
@@ -2393,9 +2533,13 @@ def validate_semantic_fidelity(
             'total_units': len(all_unit_ids),
             'reviewed_unit_ids': list(reviewed_unit_ids),
             'unreviewed_unit_ids': list(unreviewed_unit_ids),
-            'reviewed_field_count': len(checked_field_paths),
+            'required_field_count': len(required_paths),
+            'reviewed_field_count': len(actual_reviewed_field_paths & required_paths),
+            'unreviewed_field_count': len(unreviewed_field_paths),
+            'unreviewed_field_paths': list(unreviewed_field_paths),
+            'reviewed_field_paths': sorted(actual_reviewed_field_paths),
             'reviewed_relation_count': len(checked_relation_paths),
-            'forward_analysis_to_source_complete': len(unreviewed_unit_ids) == 0 and bool(all_unit_ids),
+            'forward_analysis_to_source_complete': len(unreviewed_unit_ids) == 0 and len(unreviewed_field_paths) == 0 and bool(all_unit_ids),
             'backward_source_to_analysis_complete': len(unreviewed_block_ids) == 0 and bool(extractable_block_ids),
             'is_complete': coverage_complete,
         },
@@ -2417,11 +2561,17 @@ def verify_semantic_report_integrity(
     analysis_result,
     semantic_report,
     *,
+    evaluator_raw_responses=None,
     verify_self_digest_fn,
     canonical_json_digest_fn,
     parse_blocks_fn,
     extract_anchor_tokens_fn,
     nonempty_text_fn,
+    digest_bytes_fn=None,
+    load_json_bytes_fn=None,
+    resolve_block_quotes_fn=None,
+    need_fn=None,
+    invalid_artifact_err_cls=None,
 ):
     """Independently verify that a SemanticFidelityReport is authentic, untampered, bound to current artifacts,
     has valid codepoint spans and field_paths, and does not hide deterministic semantic violations.
@@ -2648,6 +2798,97 @@ def verify_semantic_report_integrity(
             'invalidated': False,
             'changed_components': [],
         }
+
+    # Defense against Report Forgery / Concealment of Model-Only Errors
+    adapter_kind = (semantic_report.get('execution_config') or {}).get('adapter_kind', 'deterministic_auditor')
+    if adapter_kind != 'deterministic_auditor':
+        # Report relies on model evaluator judgments.
+        # Find raw execution records:
+        raw_responses = evaluator_raw_responses
+        records = semantic_report.get('evaluator_records') or []
+        if raw_responses is None and records:
+            raw_responses = [r.get('raw_response') for r in records if r.get('raw_response') is not None]
+
+        if not raw_responses or len(raw_responses) == 0:
+            return {
+                'valid': False,
+                'code': 'UNVERIFIED_MODEL_EXECUTION_RECORD',
+                'reason': (
+                    'Cannot independently verify or approve SemanticFidelityReport with model evaluator claims '
+                    'without trusted evaluator response records or raw execution responses; held as unresolved'
+                ),
+                'invalidated': False,
+                'changed_components': [],
+            }
+
+        _digest_fn = digest_bytes_fn or (lambda b: hashlib.sha256(b).hexdigest())
+        _load_json_fn = load_json_bytes_fn or (lambda b: json.loads(b.decode('utf-8')))
+
+        # Check response digests against records
+        if records:
+            for idx, r in enumerate(records):
+                if idx < len(raw_responses):
+                    raw_b = raw_responses[idx].encode('utf-8') if isinstance(raw_responses[idx], str) else raw_responses[idx]
+                    calc_sha = _digest_fn(raw_b)
+                    if calc_sha != r.get('response_sha256'):
+                        return {
+                            'valid': False,
+                            'code': 'SEMANTIC_RESPONSE_DIGEST_MISMATCH',
+                            'reason': (
+                                f"Evaluator response digest mismatch on window {r.get('semantic_window_id')}: "
+                                f"calculated {calc_sha} != recorded {r.get('response_sha256')}"
+                            ),
+                            'invalidated': False,
+                            'changed_components': [],
+                        }
+
+        # If helper functions are available, re-parse and reconstruct model evaluation
+        if resolve_block_quotes_fn is not None and need_fn is not None and invalid_artifact_err_cls is not None:
+            reconstructed_model_items = []
+            for raw_resp in raw_responses:
+                raw_b = raw_resp.encode('utf-8') if isinstance(raw_resp, str) else raw_resp
+                parsed_win = _verify_and_parse_semantic_window_response(
+                    raw_b,
+                    input_sha256=expected_input_sha,
+                    snapshot=snap,
+                    blocks_by_id=blocks_by_id,
+                    analysis_result=analysis_result,
+                    analysis_sha256=actual_analysis_sha,
+                    expected_window=None,
+                    load_json_bytes_fn=_load_json_fn,
+                    resolve_block_quotes_fn=resolve_block_quotes_fn,
+                    nonempty_text_fn=nonempty_text_fn,
+                    need_fn=need_fn,
+                    invalid_artifact_err_cls=invalid_artifact_err_cls,
+                )
+                reconstructed_model_items.extend(parsed_win['verified_items'])
+
+            model_errors = [m for m in reconstructed_model_items if m.get('semantic_judgment') != 'supported']
+            report_findings = semantic_report.get('findings') or []
+            report_finding_keys = {
+                (f.get('field_path'), f.get('semantic_judgment')) for f in report_findings
+            }
+            for me in model_errors:
+                key = (me.get('field_path'), me.get('semantic_judgment'))
+                if key not in report_finding_keys:
+                    return {
+                        'valid': False,
+                        'code': 'FORGED_OR_OMITTED_SEMANTIC_FINDINGS',
+                        'reason': (
+                            f"Supplied semantic_report omitted or suppressed model-verified error on {me.get('field_path')}: "
+                            f"{me.get('error_category')} ({me.get('semantic_judgment')})"
+                        ),
+                        'invalidated': False,
+                        'changed_components': [],
+                    }
+            if model_errors and semantic_report.get('overall_judgment') == 'supported':
+                return {
+                    'valid': False,
+                    'code': 'FORGED_OR_OMITTED_SEMANTIC_FINDINGS',
+                    'reason': 'Supplied semantic_report claims overall_judgment="supported" but verified evaluator response contains model-detected errors',
+                    'invalidated': False,
+                    'changed_components': [],
+                }
 
     return {
         'valid': True,

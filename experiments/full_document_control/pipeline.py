@@ -2587,17 +2587,23 @@ def validate_semantic_fidelity(
     )
 
 
-def verify_semantic_report_integrity(input_bundle, analysis_result, semantic_report):
+def verify_semantic_report_integrity(input_bundle, analysis_result, semantic_report, *, evaluator_raw_responses=None):
     """Independently verify digest, upstream bindings, codepoint spans, field paths, and findings of a SemanticFidelityReport."""
     return _semantic_validator.verify_semantic_report_integrity(
         input_bundle,
         analysis_result,
         semantic_report,
+        evaluator_raw_responses=evaluator_raw_responses,
         verify_self_digest_fn=verify_self_digest,
         canonical_json_digest_fn=canonical_json_digest,
         parse_blocks_fn=parse_markdown_blocks,
         extract_anchor_tokens_fn=_extract_anchor_tokens,
         nonempty_text_fn=nonempty_text,
+        digest_bytes_fn=digest_bytes,
+        load_json_bytes_fn=load_json_bytes,
+        resolve_block_quotes_fn=resolve_block_quotes,
+        need_fn=need,
+        invalid_artifact_err_cls=InvalidArtifactError,
     )
 
 

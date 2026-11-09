@@ -660,8 +660,8 @@ class SemanticFidelityValidatorTests(unittest.TestCase):
             det_res['metrics'],
             {
                 'true_positives': 8,
-                'true_negatives': 2,
-                'false_positives': 1,
+                'true_negatives': 3,
+                'false_positives': 0,
                 'false_negatives': 1,
                 'unresolved_holds': 1,
             },
@@ -670,8 +670,8 @@ class SemanticFidelityValidatorTests(unittest.TestCase):
             comb_res['metrics'],
             {
                 'true_positives': 9,
-                'true_negatives': 2,
-                'false_positives': 1,
+                'true_negatives': 3,
+                'false_positives': 0,
                 'false_negatives': 0,
                 'unresolved_holds': 2,
             },
@@ -680,6 +680,198 @@ class SemanticFidelityValidatorTests(unittest.TestCase):
         self.assertIn('EVAL-12-BOUNDARY-SUBTLE-SEQUENTIAL-SHIFT-FN', disagreement_ids)
         self.assertIn('EVAL-13-BOUNDARY-CONTRAST-CLAUSE-IN-REASON-FP', disagreement_ids)
         self.assertIn('EVAL-14-INTER-EVALUATOR-CONFLICT-HOLD', disagreement_ids)
+
+    # ------------------------------------------------------------------
+    # 7. Defense against Forgery / Concealment of Model-Only Errors
+    # ------------------------------------------------------------------
+    def test_defense_against_forged_report_omitting_model_only_errors(self):
+        """Minimal counterexample: Model finds subtle sequential shift (EVAL-12), attacker strips it and recomputes digest.
+        Integrity verifier must detect tampering via raw execution record or reject unverified model reports.
+        """
+        eval_cases_list = eval_cases.build_semantic_evaluation_cases()
+        eval12 = next(c for c in eval_cases_list if c['eval_case_id'] == 'EVAL-12-BOUNDARY-SUBTLE-SEQUENTIAL-SHIFT-FN')
+        b12 = eval12['input_bundle']
+        a12 = eval12['analysis_result']
+
+        # 1. Deterministic audit alone passes because sequential shift is outside keyword rules
+        det_audit = pipeline.run_deterministic_semantic_audit(b12, a12)
+        det_non_sup = [it for it in det_audit['item_judgments'] if it['semantic_judgment'] != 'supported']
+        self.assertEqual(det_non_sup, [])
+
+        # 2. Legitimate run with model evaluator detects the error
+        stub_eval12 = eval_cases.make_stub_model_responder_for_eval_case(eval12)
+        real_report = pipeline.validate_semantic_fidelity(
+            b12,
+            a12,
+            semantic_responder=stub_eval12,
+        )
+        self.assertEqual(real_report['overall_judgment'], 'overstated')
+        self.assertEqual(len(real_report['findings']), 1)
+        self.assertEqual(real_report['findings'][0]['error_category'], 'CLAIM_OVERSTATEMENT')
+        self.assertEqual(real_report['findings'][0]['field_path'], '/units/1/statement')
+        self.assertTrue(pipeline.verify_semantic_report_integrity(b12, a12, real_report)['valid'])
+
+        # 3. Forgery Attempt A: Strip finding, set overall_judgment='supported', recompute sha256 (leaving evaluator_records)
+        forged_report_a = copy.deepcopy(real_report)
+        forged_report_a['overall_judgment'] = 'supported'
+        forged_report_a['findings'] = []
+        for ij in forged_report_a['item_judgments']:
+            if ij['field_path'] == '/units/1/statement':
+                ij['semantic_judgment'] = 'supported'
+                ij['error_category'] = None
+        forged_body_a = {k: v for k, v in forged_report_a.items() if k != 'semantic_report_sha256'}
+        forged_report_a['semantic_report_sha256'] = pipeline.canonical_json_digest(forged_body_a)
+
+        # Self-digest passes, but reconstruction from raw execution records reveals the stripped error!
+        check_a = pipeline.verify_semantic_report_integrity(b12, a12, forged_report_a)
+        self.assertFalse(check_a['valid'])
+        self.assertEqual(check_a['code'], 'FORGED_OR_OMITTED_SEMANTIC_FINDINGS')
+
+        # 4. Forgery Attempt B: Strip finding AND delete evaluator_records to conceal raw response
+        forged_report_b = copy.deepcopy(forged_report_a)
+        del forged_report_b['evaluator_records']
+        forged_body_b = {k: v for k, v in forged_report_b.items() if k != 'semantic_report_sha256'}
+        forged_report_b['semantic_report_sha256'] = pipeline.canonical_json_digest(forged_body_b)
+
+        # Without trusted execution records, report with model evaluator claims cannot be approved!
+        check_b = pipeline.verify_semantic_report_integrity(b12, a12, forged_report_b)
+        self.assertFalse(check_b['valid'])
+        self.assertEqual(check_b['code'], 'UNVERIFIED_MODEL_EXECUTION_RECORD')
+
+        # 5. Forgery Attempt C: Tamper with raw_response payload in evaluator_records
+        forged_report_c = copy.deepcopy(real_report)
+        forged_report_c['evaluator_records'][0]['raw_response'] = '{"tampered": true}'
+        forged_body_c = {k: v for k, v in forged_report_c.items() if k != 'semantic_report_sha256'}
+        forged_report_c['semantic_report_sha256'] = pipeline.canonical_json_digest(forged_body_c)
+
+        check_c = pipeline.verify_semantic_report_integrity(b12, a12, forged_report_c)
+        self.assertFalse(check_c['valid'])
+        self.assertEqual(check_c['code'], 'SEMANTIC_RESPONSE_DIGEST_MISMATCH')
+
+    # ------------------------------------------------------------------
+    # 8. Accurate Semantic Review Coverage Tracking & Partial Omission
+    # ------------------------------------------------------------------
+    def test_accurate_field_path_coverage_tracking_and_incomplete_coverage_review(self):
+        """When model evaluator only reviews statement and omits assessment/elements/relations,
+        coverage tracker flags INCOMPLETE_SEMANTIC_COVERAGE and holds at unresolved (REVIEW).
+        """
+        def partial_fields_responder(w_idx, _sw, _prompt, _att):
+            full_resp = pipeline.build_stub_semantic_response_from_audit(
+                self.rw001_bundle, self.rw001_analysis, window_index=w_idx
+            )
+            # Deliberately prune all field judgments except statement
+            for ur in full_resp['unit_reviews']:
+                ur['field_judgments'] = [
+                    fj for fj in ur['field_judgments'] if fj['field_path'].endswith('/statement')
+                ]
+            return full_resp
+
+        gate_report = pipeline.validate_analysis_gate(
+            self.rw001_bundle,
+            self.rw001_analysis,
+            semantic_responder=partial_fields_responder,
+            run_semantic_validation=True,
+        )
+        sem_report = gate_report['semantic_report']
+        cov = sem_report['coverage_summary']
+
+        self.assertFalse(cov['is_complete'])
+        self.assertFalse(cov['forward_analysis_to_source_complete'])
+        self.assertGreater(cov['unreviewed_field_count'], 0)
+        self.assertTrue(any(p.endswith('/assessment/reason') for p in cov['unreviewed_field_paths']))
+        self.assertTrue(any(p.endswith('/assessment/exposure') for p in cov['unreviewed_field_paths']))
+
+        # Must record INCOMPLETE_SEMANTIC_COVERAGE finding and hold at unresolved (REVIEW)
+        error_cats = {f['error_category'] for f in sem_report['findings']}
+        self.assertIn('INCOMPLETE_SEMANTIC_COVERAGE', error_cats)
+        self.assertEqual(sem_report['overall_judgment'], 'unresolved')
+        self.assertEqual(gate_report['gate_state'], 'REVIEW')
+        self.assertFalse(gate_report['delivery_approved'])
+
+    def test_rw001_assessment_distortion_cannot_claim_supported_with_partial_coverage(self):
+        """Statement is accurate but assessment.reason escalates to factual package behavior (RW-001).
+        If only statement is evaluated, system CANNOT claim supported or complete coverage.
+        """
+        # Build RW-001 analysis where statement is faithful but assessment.reason overstates
+        rw_bundle = self.rw001_bundle
+        rw_resp = copy.deepcopy(self.rw001_resp)
+        for u in rw_resp['units']:
+            if u['id'] == 'u-install-reqs':
+                # Statement preserves modality
+                u['statement'] = 'The macOS package needs to install a menu bar runtime and bundle Node/cloudflared helpers.'
+                # But assessment.reason escalates to verified package behavior!
+                u['assessment']['reason'] = (
+                    'Knowing that the macOS package actually installs a menu bar runtime under Applications '
+                    'is essential factual package behavior for downstream configuration.'
+                )
+        rw_analysis = pipeline.assemble_document_analysis(rw_bundle, [json.dumps(rw_resp)])
+
+        # If a responder only evaluates statement (marking it supported):
+        def statement_only_responder(w_idx, _sw, _prompt, _att):
+            resp = pipeline.build_stub_semantic_response_from_audit(rw_bundle, rw_analysis, window_index=w_idx)
+            for ur in resp['unit_reviews']:
+                ur['field_judgments'] = [
+                    fj for fj in ur['field_judgments'] if fj['field_path'].endswith('/statement')
+                ]
+            return resp
+
+        # Test model-only partial review (without deterministic auditor overriding the omitted field):
+        partial_model_only = pipeline.validate_semantic_fidelity(
+            rw_bundle,
+            rw_analysis,
+            semantic_responder=statement_only_responder,
+            combine_with_deterministic_audit=False,
+            max_prompt_chars=4000,
+        )
+        self.assertFalse(partial_model_only['coverage_summary']['is_complete'])
+        self.assertNotEqual(partial_model_only['overall_judgment'], 'supported')
+        self.assertIn('INCOMPLETE_SEMANTIC_COVERAGE', {f['error_category'] for f in partial_model_only['findings']})
+
+        # When combined with deterministic audit, deterministic audit catches the distortion in assessment.reason
+        # AND coverage tracker flags the incomplete model coverage:
+        partial_gate = pipeline.validate_analysis_gate(
+            rw_bundle,
+            rw_analysis,
+            semantic_responder=statement_only_responder,
+            run_semantic_validation=True,
+        )
+        partial_sem = partial_gate['semantic_report']
+        self.assertFalse(partial_sem['coverage_summary']['is_complete'])
+        self.assertEqual(partial_sem['overall_judgment'], 'overstated')
+        self.assertEqual(partial_gate['gate_state'], 'FAIL')
+        finding_cats = {f['error_category'] for f in partial_sem['findings']}
+        self.assertIn('ASSESSMENT_RATIONALE_DISTORTION', finding_cats)
+        self.assertIn('INCOMPLETE_SEMANTIC_COVERAGE', finding_cats)
+
+    # ------------------------------------------------------------------
+    # 9. Concessive Contrast Clause (EVAL-13 Fix & True Negative Preservation)
+    # ------------------------------------------------------------------
+    def test_concessive_contrast_clause_distinction(self):
+        """Concessive contrast clauses in explanations must not be falsely flagged as polarity reversals,
+        while definite polarity reversals must still be caught (no false negatives).
+        """
+        source = 'macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다.'
+
+        # 1. Normal concessive contrast explanation: contrasts general case while preserving negative fact
+        faithful_explanation = (
+            '일반적인 정식 패키지가 자동 업데이트를 지원한다 하더라도 이 macOS 초기 실험 빌드는 지원하지 않으므로 수동 재설치가 필요하다.'
+        )
+        check_faithful = pipeline._semantic_validator._check_polarity_reversal(source, faithful_explanation)
+        self.assertIsNone(check_faithful)
+
+        # 2. Definite polarity reversal: directly claims auto-update is supported
+        contradicted_claim = 'macOS 패키지는 자동 업데이트를 지원하며 최신 런타임을 자동으로 유지한다.'
+        check_contradicted = pipeline._semantic_validator._check_polarity_reversal(source, contradicted_claim)
+        self.assertIsNotNone(check_contradicted)
+        self.assertEqual(check_contradicted[0], 'contradicted')
+        self.assertEqual(check_contradicted[1], 'POLARITY_REVERSAL')
+
+        # 3. Ambiguous hypothetical framing downgrades to unresolved rather than hard contradicted
+        hypothetical_claim = '자동 업데이트를 지원한다고 가정할 때의 동작 방식을 고려한다.'
+        check_hypothetical = pipeline._semantic_validator._check_polarity_reversal(source, hypothetical_claim)
+        self.assertIsNotNone(check_hypothetical)
+        self.assertEqual(check_hypothetical[0], 'unresolved')
+        self.assertEqual(check_hypothetical[1], 'AMBIGUOUS_SOURCE_EVIDENCE')
 
 
 if __name__ == '__main__':

@@ -114,6 +114,28 @@ python3 experiments/full_document_control/pipeline.py run \
   - 업스트림 산출물(`input_bundle`, `contract`, `snapshot`, `analysis_result`) 변경 시 검증 보고서는 즉시 무효화.
   - 독립 결정론적 감사를 항상 병행하여 위조 보고서의 오류 은폐를 차단.
 
+## 16. 의미 검증기 신뢰성 보완 및 실제 LLM 평가 (P1, P2)
+
+1. **의미 검증 보고서 위조·은폐 방어 (P1):**
+   - 로컬 신뢰 경계(local trust boundary)를 명시하고 외부 전달 `SemanticFidelityReport`를 자기 SHA-256 다이제스트만으로 신뢰하지 않음. SHA-256은 전송 중 내용 무결성(tamper-detection) 확인용일 뿐 평가자의 신뢰성이나 진위 증명이 아님.
+   - 모델 평가기를 사용한 보고서는 원시 실행 기록(`evaluator_records` / `evaluator_raw_responses`)을 대조하여 동일 입력·설정·응답으로 재구성 검증함. 신뢰 가능한 실행 기록이 없으면 `UNVERIFIED_MODEL_EXECUTION_RECORD`(`unresolved` → `REVIEW`)로 보류.
+   - 모델이 발견한 오류(EVAL-12 선후관계 왜곡 등)를 보고서에서 삭제하고 `supported`로 조작하거나 다이제스트를 재계산한 경우, 원시 응답 재구성을 통해 `FORGED_OR_OMITTED_SEMANTIC_FINDINGS`로 즉시 거부.
+
+2. **의미 검토 범위의 정확한 추적 (P1):**
+   - 정보 단위 ID뿐만 아니라 필드 경로 수준의 필수 검사 목록(`get_required_semantic_field_paths()`)을 생성: `statement`, `elements`(`value`), `relations`(`reason`), `assessment`(`exposure`, `reason`, `preservation`), 원문 블록별 누락 검사(`/blocks/{b}`).
+   - 모델 평가기가 일부 필드만 반환하거나 생략한 경우 단위를 검토 완료로 집계하지 않고 `INCOMPLETE_SEMANTIC_COVERAGE`(`unresolved` → `REVIEW`, `is_complete: false`)로 처리.
+   - 단위 `statement`는 정확하나 `assessment.reason`/`exposure`에서만 실제 패키지 동작으로 왜곡하는 사례(RW-001)에서 검사 범위 부족 상태로 `overall_judgment: supported`가 나오는 것을 방지.
+
+3. **규칙 기반 오탐과 확정 실패 구분 (P2, EVAL-13 해결):**
+   - 정상적인 설명에 사용되는 양보절 대조 표현(`...지원한다 하더라도 ... 지원하지 않으므로...`)을 극성 반전 오탐(False Positive)에서 제외.
+   - 근거가 불충분하거나 가설적 맥락은 확정 `contradicted`(`FAIL`) 대신 `unresolved`(`REVIEW`)로 보류.
+   - 14개 고정 벤치마크에서 오탐(FP)을 0건으로 해소하고, 실제 오류 탐지율(TP)과 정상 사례 보존(TN)을 유지함.
+
+4. **실제 LLM(`gemini-3.8-flash-low`) 14개 벤치마크 독립 평가:**
+   - 14개 평가 사례 전체를 로컬 CLI(`agy`) 및 `gemini-3.8-flash-low`로 실시간 실행 완료 (`experiments/full_document_control/runs/live_eval_gemini_3_8_flash/`).
+   - 주요 8대 의미 오류 전수 탐지 및 게이트 `FAIL` 차단 (TP 8건, FP 0건, Holds 2건).
+   - 모델이 일부 필드를 생략한 경우 Coverage Tracker가 `INCOMPLETE_SEMANTIC_COVERAGE`(`REVIEW`)로 안전하게 보류함을 실환경에서 입증. 전체 결과는 `runs/live_semantic_eval_summary.json`에 보존.
+
 ## 한계
 
 - 프롬프트 예산(`max_prompt_chars`)은 오프라인에서 제공자별 토크나이저를 직접 호출하지 않으므로 유니코드 코드 포인트 길이를 기준으로 상한을 강제하며(`budget_policy.token_vs_char_policy`), 한국어·UTF-8 다중 토큰 특성을 고려해 보수적으로 설정해야 한다.
