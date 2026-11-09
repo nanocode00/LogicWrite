@@ -2459,7 +2459,159 @@ def verify_canonical_plan_policy(candidate_plan):
     return True, None
 
 
-def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
+# ============================================================================
+# Stage 2B: Independent Semantic Fidelity Validator Integration
+# ============================================================================
+
+import importlib.util as _importlib_util
+from pathlib import Path as _Path
+
+_SEMANTIC_VALIDATOR_PATH = _Path(__file__).resolve().parent / 'semantic_validator.py'
+_sem_spec = _importlib_util.spec_from_file_location('full_document_semantic_validator', _SEMANTIC_VALIDATOR_PATH)
+_semantic_validator = _importlib_util.module_from_spec(_sem_spec)
+_sem_spec.loader.exec_module(_semantic_validator)
+
+SEMANTIC_VALIDATOR_VERSION = _semantic_validator.SEMANTIC_VALIDATOR_VERSION
+SEMANTIC_JUDGMENTS = _semantic_validator.SEMANTIC_JUDGMENTS
+SEMANTIC_ERROR_CATEGORIES = _semantic_validator.SEMANTIC_ERROR_CATEGORIES
+resolve_json_pointer = _semantic_validator.resolve_json_pointer
+
+
+def run_deterministic_semantic_audit(input_bundle, analysis_result):
+    """Execute bidirectional deterministic semantic fidelity checks (analysis -> source and source -> analysis)."""
+    validate_input_bundle(input_bundle)
+    return _semantic_validator.run_deterministic_semantic_audit(
+        input_bundle,
+        analysis_result,
+        extract_anchor_tokens_fn=_extract_anchor_tokens,
+        parse_blocks_fn=parse_markdown_blocks,
+    )
+
+
+def plan_semantic_review_windows(
+    input_bundle,
+    analysis_result,
+    *,
+    max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
+):
+    """Plan prompt-budget-bounded windows for independent model semantic review."""
+    return _semantic_validator.plan_semantic_review_windows(
+        input_bundle,
+        analysis_result,
+        max_prompt_chars=max_prompt_chars,
+        min_max_prompt_chars=MIN_MAX_PROMPT_CHARS,
+        validate_input_bundle_fn=validate_input_bundle,
+        parse_blocks_fn=parse_markdown_blocks,
+        compact_contract_fn=_compact_contract_for_prompt,
+        serialize_block_fn=_serialize_block_for_prompt,
+        canonical_json_digest_fn=canonical_json_digest,
+        need_fn=need,
+    )
+
+
+def build_semantic_review_prompt(
+    input_bundle,
+    analysis_result,
+    *,
+    window_index=0,
+    max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
+):
+    """Build a prompt-budget-bounded semantic review prompt for a semantic review window."""
+    windows = plan_semantic_review_windows(
+        input_bundle,
+        analysis_result,
+        max_prompt_chars=max_prompt_chars,
+    )
+    need(0 <= window_index < len(windows), f'Invalid semantic window_index {window_index}')
+    return windows[window_index]['prompt_text']
+
+
+def build_stub_semantic_response_from_audit(
+    input_bundle,
+    analysis_result,
+    *,
+    window_index=0,
+    max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
+):
+    """Build a valid candidate model semantic review response for a window from the deterministic audit."""
+    windows = plan_semantic_review_windows(
+        input_bundle,
+        analysis_result,
+        max_prompt_chars=max_prompt_chars,
+    )
+    need(0 <= window_index < len(windows), f'Invalid semantic window_index {window_index}')
+    audit_res = run_deterministic_semantic_audit(input_bundle, analysis_result)
+    return _semantic_validator.build_stub_semantic_response_from_audit(
+        input_bundle,
+        analysis_result,
+        semantic_window=windows[window_index],
+        audit_result=audit_res,
+        canonical_json_digest_fn=canonical_json_digest,
+    )
+
+
+def validate_semantic_fidelity(
+    input_bundle,
+    analysis_result,
+    *,
+    semantic_responder=None,
+    max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
+    max_attempts=1,
+    combine_with_deterministic_audit=True,
+):
+    """Execute independent bidirectional Semantic Fidelity Validation and produce a signed SemanticFidelityReport."""
+    return _semantic_validator.validate_semantic_fidelity(
+        input_bundle,
+        analysis_result,
+        semantic_responder=semantic_responder,
+        max_prompt_chars=max_prompt_chars,
+        min_max_prompt_chars=MIN_MAX_PROMPT_CHARS,
+        max_attempts=max_attempts,
+        combine_with_deterministic_audit=combine_with_deterministic_audit,
+        validate_input_bundle_fn=validate_input_bundle,
+        parse_blocks_fn=parse_markdown_blocks,
+        compact_contract_fn=_compact_contract_for_prompt,
+        serialize_block_fn=_serialize_block_for_prompt,
+        resolve_block_quotes_fn=resolve_block_quotes,
+        extract_anchor_tokens_fn=_extract_anchor_tokens,
+        canonical_json_digest_fn=canonical_json_digest,
+        digest_bytes_fn=digest_bytes,
+        digest_text_fn=digest_text,
+        load_json_bytes_fn=load_json_bytes,
+        nonempty_text_fn=nonempty_text,
+        sanitize_error_text_fn=sanitize_error_text,
+        need_fn=need,
+        invalid_artifact_err_cls=InvalidArtifactError,
+        response_parse_err_cls=ResponseParseError,
+        provider_call_err_cls=ProviderCallError,
+    )
+
+
+def verify_semantic_report_integrity(input_bundle, analysis_result, semantic_report):
+    """Independently verify digest, upstream bindings, codepoint spans, field paths, and findings of a SemanticFidelityReport."""
+    return _semantic_validator.verify_semantic_report_integrity(
+        input_bundle,
+        analysis_result,
+        semantic_report,
+        verify_self_digest_fn=verify_self_digest,
+        canonical_json_digest_fn=canonical_json_digest,
+        parse_blocks_fn=parse_markdown_blocks,
+        extract_anchor_tokens_fn=_extract_anchor_tokens,
+        nonempty_text_fn=nonempty_text,
+    )
+
+
+def validate_analysis_gate(
+    input_bundle,
+    analysis_result,
+    *,
+    plan=None,
+    semantic_report=None,
+    semantic_responder=None,
+    run_semantic_validation=False,
+    max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
+    max_semantic_attempts=1,
+):
     """Independently validate a full-document AnalysisResult against input_bundle and ValidationPlan."""
     canonical_plan = build_validation_plan(input_bundle)
     if plan is None:
@@ -2663,12 +2815,163 @@ def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
             blocking=True,
             evidence=[cw_review],
         ))
-    if alignment_state == 'needs_review' or semantic_questions or cw_incomplete:
-        sem_status = 'unresolved'
-        sem_reason = 'Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required'
+
+    should_run_semantic = bool(run_semantic_validation or semantic_responder is not None or semantic_report is not None)
+    active_semantic_report = semantic_report
+
+    if should_run_semantic and blocked_by is None and ok_analysis_digest:
+        if active_semantic_report is None:
+            active_semantic_report = validate_semantic_fidelity(
+                input_bundle,
+                analysis_result,
+                semantic_responder=semantic_responder,
+                max_prompt_chars=max_prompt_chars,
+                max_attempts=max_semantic_attempts,
+            )
+            sem_integrity = {'valid': True, 'code': None, 'reason': None, 'invalidated': False}
+        else:
+            sem_integrity = verify_semantic_report_integrity(input_bundle, analysis_result, active_semantic_report)
+
+        if not sem_integrity['valid']:
+            sem_status = 'violated'
+            sem_reason = f"{sem_integrity['code']}: {sem_integrity['reason']}"
+            findings.append(make_finding(
+                sem_integrity['code'],
+                'ERROR',
+                sem_integrity['reason'],
+                responsible_component='validation_gate',
+                origin_ref=analysis_sha256,
+                repair_recommendation='Re-run independent semantic fidelity validator without tampering or using stale artifacts',
+                requires_human_review=False,
+                blocking=True,
+                evidence=[sem_integrity],
+            ))
+            sem_evidence = [{
+                'semantic_report_integrity': sem_integrity,
+                'unresolved_questions': semantic_questions,
+                'alignment_status': alignment_state,
+                'cross_window_relation_review': cw_review,
+            }]
+        else:
+            for sf in active_semantic_report.get('findings', []):
+                findings.append(make_finding(
+                    sf.get('error_category') or 'SEMANTIC_FIDELITY_FINDING',
+                    sf.get('severity', 'ERROR'),
+                    sf.get('rationale', 'Semantic fidelity issue detected'),
+                    responsible_component=sf.get('responsible_component', 'information_extraction_analysis'),
+                    origin_ref=sf.get('field_path') or analysis_sha256,
+                    repair_recommendation=(
+                        f"Return to {sf.get('return_to_stage', 'information_extraction_analysis')} "
+                        f"to resolve {sf.get('error_category')} at {sf.get('field_path') or 'document'}"
+                    ),
+                    requires_human_review=bool(sf.get('requires_human_review', True)),
+                    blocking=bool(sf.get('blocking', True)),
+                    evidence=[sf],
+                ))
+
+            sem_exec_state = active_semantic_report.get('execution_state')
+            overall_j = active_semantic_report.get('overall_judgment')
+
+            if overall_j in {'contradicted', 'overstated'}:
+                sem_status = 'violated'
+                err_cats = sorted({
+                    sf.get('error_category')
+                    for sf in active_semantic_report.get('findings', [])
+                    if sf.get('semantic_judgment') in {'contradicted', 'overstated'} and sf.get('error_category')
+                })
+                sem_reason = (
+                    f"Semantic fidelity violation ({overall_j}): {', '.join(err_cats)}"
+                    if err_cats
+                    else f'Semantic fidelity violation ({overall_j})'
+                )
+            elif sem_exec_state == 'stopped':
+                sem_status = 'unresolved'
+                stop_err = active_semantic_report.get('stop_error') or {}
+                sem_reason = (
+                    f"Semantic evaluator execution incomplete ({stop_err.get('code', 'SEMANTIC_EXECUTION_STOPPED')}): "
+                    f"{stop_err.get('message', 'Semantic validator stopped')}; hold at REVIEW"
+                )
+            elif overall_j == 'unresolved' or alignment_state == 'needs_review' or semantic_questions or cw_incomplete:
+                sem_status = 'unresolved'
+                unres_cats = sorted({
+                    sf.get('error_category')
+                    for sf in active_semantic_report.get('findings', [])
+                    if sf.get('error_category')
+                })
+                sem_reason = (
+                    f"Semantic fidelity unresolved ({', '.join(unres_cats)}): hold at REVIEW"
+                    if unres_cats
+                    else 'Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required'
+                )
+                if not active_semantic_report.get('findings'):
+                    findings.append(make_finding(
+                        'SEMANTIC_REVIEW_REQUIRED',
+                        'UNRESOLVED',
+                        sem_reason,
+                        responsible_component='validation_gate',
+                        origin_ref=analysis_sha256,
+                        repair_recommendation='Hold at REVIEW for human/semantic verification; do not auto-advance to Organization',
+                        requires_human_review=True,
+                        blocking=True,
+                    ))
+            else:
+                # First-implementation invariant: even when all checked items are 'supported' with complete coverage,
+                # automatic PASS is not granted without independent human/policy approval.
+                sem_status = 'unresolved'
+                sem_reason = (
+                    "Independent semantic validator judged all checked items 'supported' with complete coverage, "
+                    "but automatic PASS is disabled in first implementation; awaiting human/policy approval (REVIEW)"
+                )
+                findings.append(make_finding(
+                    'SEMANTIC_SUPPORTED_AWAITING_APPROVAL',
+                    'UNRESOLVED',
+                    sem_reason,
+                    responsible_component='validation_gate',
+                    origin_ref=active_semantic_report.get('semantic_report_sha256'),
+                    repair_recommendation='Obtain human or independent policy approval before advancing to Information Organization',
+                    requires_human_review=True,
+                    blocking=True,
+                    evidence=[{
+                        'semantic_report_sha256': active_semantic_report.get('semantic_report_sha256'),
+                        'overall_judgment': overall_j,
+                        'judgment_counts': active_semantic_report.get('judgment_counts'),
+                        'coverage_summary': active_semantic_report.get('coverage_summary'),
+                    }],
+                ))
+
+            sem_evidence = [{
+                'semantic_report_sha256': active_semantic_report.get('semantic_report_sha256'),
+                'validator_version': active_semantic_report.get('validator_version'),
+                'overall_judgment': overall_j,
+                'judgment_counts': active_semantic_report.get('judgment_counts'),
+                'coverage_summary': active_semantic_report.get('coverage_summary'),
+                'unresolved_questions': semantic_questions,
+                'alignment_status': alignment_state,
+                'cross_window_relation_review': cw_review,
+            }]
     else:
-        sem_status = 'not_run'
-        sem_reason = 'Independent semantic verification not executed; structural checks alone cannot grant PASS'
+        if alignment_state == 'needs_review' or semantic_questions or cw_incomplete:
+            sem_status = 'unresolved'
+            sem_reason = 'Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required'
+        else:
+            sem_status = 'not_run'
+            sem_reason = 'Independent semantic verification not executed; structural checks alone cannot grant PASS'
+
+        sem_evidence = [{
+            'unresolved_questions': semantic_questions,
+            'alignment_status': alignment_state,
+            'cross_window_relation_review': cw_review,
+        }]
+        findings.append(make_finding(
+            'SEMANTIC_REVIEW_REQUIRED',
+            'UNRESOLVED',
+            sem_reason,
+            responsible_component='validation_gate',
+            origin_ref=analysis_sha256,
+            repair_recommendation='Hold at REVIEW for human/semantic verification; do not auto-advance to Organization',
+            requires_human_review=True,
+            blocking=True,
+        ))
 
     rows.append({
         'check_id': 'SEMANTIC_FIDELITY',
@@ -2676,24 +2979,10 @@ def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
         'kind': 'semantic',
         'status': sem_status,
         'reason': sem_reason,
-        'evidence': [{
-            'unresolved_questions': semantic_questions,
-            'alignment_status': alignment_state,
-            'cross_window_relation_review': cw_review,
-        }],
+        'evidence': sem_evidence,
         'checked_snapshot_sha256': snap_sha256,
         'checked_analysis_sha256': analysis_sha256,
     })
-    findings.append(make_finding(
-        'SEMANTIC_REVIEW_REQUIRED',
-        'UNRESOLVED',
-        sem_reason,
-        responsible_component='validation_gate',
-        origin_ref=analysis_sha256,
-        repair_recommendation='Hold at REVIEW for human/semantic verification; do not auto-advance to Organization',
-        requires_human_review=True,
-        blocking=True,
-    ))
 
     reconciled = reconcile_validation_plan(plan, rows, checked_artifacts)
     if isinstance(analysis_result, dict) and not ok_analysis_digest:
@@ -2730,6 +3019,8 @@ def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
         'delivery_approved': reconciled['delivery_approved'],
         'next_stage_allowed': reconciled['next_stage_allowed'],
     }
+    if active_semantic_report is not None:
+        report['semantic_report'] = active_semantic_report
     report['report_sha256'] = canonical_json_digest(report)
     return report
 
@@ -2855,16 +3146,31 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
         if 'analysis_binding' not in changed:
             changed.append('analysis_binding')
 
+    supplied_sem_report = validation_report.get('semantic_report')
+    if supplied_sem_report is not None:
+        sem_integrity = verify_semantic_report_integrity(input_bundle, analysis_result, supplied_sem_report)
+        if sem_integrity.get('invalidated'):
+            for comp in sem_integrity.get('changed_components', []):
+                if comp not in changed:
+                    changed.append(comp)
+            if 'semantic_report' not in changed:
+                changed.append('semantic_report')
+
     if changed:
         invalidation = {
             'invalidated': True,
             'changed_components': changed,
             'stale_report_sha256': validation_report.get('report_sha256'),
             'stale_analysis_sha256': checked.get('analysis_sha256') if isinstance(checked, dict) else None,
+            'stale_semantic_report_sha256': (
+                supplied_sem_report.get('semantic_report_sha256')
+                if isinstance(supplied_sem_report, dict)
+                else None
+            ),
             'current_input_sha256': current_input_sha,
             'current_contract_sha256': current_contract_sha,
             'current_snapshot_sha256': current_snap_sha,
-            'reason': 'ValidationReport or AnalysisResult invalidated because upstream artifacts/plan changed: ' + ', '.join(changed),
+            'reason': 'ValidationReport, SemanticFidelityReport, or AnalysisResult invalidated because upstream artifacts/plan changed: ' + ', '.join(changed),
         }
         return {
             'allowed': False,
@@ -2873,6 +3179,17 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
             'invalidation': invalidation,
             'return_to_stage': 'contract_resolution' if 'writing_contract' in changed else 'information_extraction_analysis',
             'responsible_component': 'contract_resolver' if 'writing_contract' in changed else 'information_extraction_analysis',
+        }
+
+    if supplied_sem_report is not None and not sem_integrity.get('valid'):
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': f"{sem_integrity['code']}: {sem_integrity['reason']}",
+            'diagnostics': [f"{sem_integrity['code']}: {sem_integrity['reason']}"],
+            'invalidation': None,
+            'return_to_stage': 'validation_gate',
+            'responsible_component': 'validation_gate',
         }
 
     # First reconcile the supplied report's rows against canonical_plan to catch missing/duplicate rows (e.g. STOPPED).
@@ -2898,7 +3215,12 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
         )
 
     # Independently re-execute the Validation Gate against input_bundle, analysis_result, and canonical_plan.
-    fresh_report = validate_analysis_gate(input_bundle, analysis_result, plan=canonical_plan)
+    fresh_report = validate_analysis_gate(
+        input_bundle,
+        analysis_result,
+        plan=canonical_plan,
+        semantic_report=supplied_sem_report,
+    )
     fresh_by_id = {r['check_id']: r['status'] for r in fresh_report['check_results']}
     supplied_rows = validation_report.get('check_results') if isinstance(validation_report.get('check_results'), list) else []
 
@@ -2957,12 +3279,12 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
             'responsible_component': 'validation_gate',
         }
 
-    # Furthermore, in this prototype no independent semantic verifier exists, so SEMANTIC_FIDELITY cannot be passed.
+    # In this first implementation, automatic PASS from SEMANTIC_FIDELITY is disabled without independent policy approval.
     if fresh_by_id.get('SEMANTIC_FIDELITY') != 'passed':
         return {
             'allowed': False,
             'gate_state': 'REVIEW',
-            'reason': 'STAGE_TRANSITION_BLOCKED: SEMANTIC_FIDELITY is not independently verified',
+            'reason': 'STAGE_TRANSITION_BLOCKED: SEMANTIC_FIDELITY is not independently approved for PASS',
             'diagnostics': ['SEMANTIC_FIDELITY_NOT_VERIFIED', *extra_diagnostics],
             'invalidation': None,
             'return_to_stage': 'human_or_semantic_review',
@@ -3236,6 +3558,9 @@ class ExecutionController:
         max_window_chars=None,
         max_prompt_chars=DEFAULT_MAX_PROMPT_CHARS,
         cross_window_responder=None,
+        semantic_responder=None,
+        enable_semantic_validation=False,
+        max_semantic_attempts=1,
         plan=None,
     ):
         """Execute DocumentSnapshot -> Extraction & Analysis -> Validation Gate -> Next Stage Control."""
@@ -3743,7 +4068,17 @@ class ExecutionController:
                         analysis['completed_window_ids'] = list(completed_window_ids)
                         analysis_body = {k: v for k, v in analysis.items() if k != 'analysis_sha256'}
                         analysis['analysis_sha256'] = canonical_json_digest(analysis_body)
-                        report = validate_analysis_gate(input_bundle, analysis, plan=expected_plan)
+                        report = validate_analysis_gate(
+                            input_bundle,
+                            analysis,
+                            plan=expected_plan,
+                            semantic_responder=semantic_responder,
+                            run_semantic_validation=bool(
+                                enable_semantic_validation or semantic_responder is not None
+                            ),
+                            max_prompt_chars=max_prompt_chars,
+                            max_semantic_attempts=max_semantic_attempts,
+                        )
                 except ResponseParseError as error:
                     parse_failure = sanitize_error_text(error)
                     analysis = _synthesize_failed_analysis(
@@ -3835,6 +4170,7 @@ class ExecutionController:
                 if f.get('severity') in {'ERROR', 'UNRESOLVED'}
             ] or [sanitize_error_text(d) for d in report.get('diagnostics', [])]
 
+            sem_rep = report.get('semantic_report') if isinstance(report, dict) else None
             attempt_record = {
                 'attempt': attempt_no,
                 'response_sha256s': response_sha256s,
@@ -3848,6 +4184,8 @@ class ExecutionController:
                 'window_records': list(window_records),
                 'analysis_sha256': analysis['analysis_sha256'],
                 'report_sha256': report['report_sha256'],
+                'semantic_report_sha256': sem_rep.get('semantic_report_sha256') if isinstance(sem_rep, dict) else None,
+                'semantic_window_records': list(sem_rep.get('window_records', [])) if isinstance(sem_rep, dict) else [],
                 'gate_state': gate_state,
                 'execution_state': report['execution_state'],
                 'next_stage_allowed': decision['allowed'],
@@ -3873,7 +4211,7 @@ class ExecutionController:
                     'analysis_sha256': analysis['analysis_sha256'],
                     'report_sha256': report['report_sha256'],
                 }
-                return {
+                res_obj = {
                     'record_kind': 'experimental_execution_controller_result',
                     'version': VERSION,
                     'gate_state': 'PASS',
@@ -3894,6 +4232,9 @@ class ExecutionController:
                     'analysis': analysis,
                     'validation_report': report,
                 }
+                if sem_rep is not None:
+                    res_obj['semantic_report'] = sem_rep
+                return res_obj
 
             # Always record that the next stage boundary blocked this non-PASS result.
             try:
@@ -3912,7 +4253,7 @@ class ExecutionController:
                     'analysis_sha256': analysis['analysis_sha256'],
                     'report_sha256': report['report_sha256'],
                 }
-                return {
+                res_obj = {
                     'record_kind': 'experimental_execution_controller_result',
                     'version': VERSION,
                     'gate_state': 'REVIEW',
@@ -3932,6 +4273,9 @@ class ExecutionController:
                     'analysis': analysis,
                     'validation_report': report,
                 }
+                if sem_rep is not None:
+                    res_obj['semantic_report'] = sem_rep
+                return res_obj
 
             # For FAIL or STOPPED: if more attempts remain, invalidate failed attempt artifacts before retrying.
             if attempt_no < self.max_attempts:
@@ -3940,6 +4284,9 @@ class ExecutionController:
                     'attempt': attempt_no,
                     'invalidated_analysis_sha256': analysis['analysis_sha256'],
                     'invalidated_report_sha256': report['report_sha256'],
+                    'invalidated_semantic_report_sha256': (
+                        sem_rep.get('semantic_report_sha256') if isinstance(sem_rep, dict) else None
+                    ),
                     'return_to_stage': attempt_record['return_to_stage'],
                     'reason': f'Attempt {attempt_no} ended with {gate_state}; invalidating before retry',
                 })
@@ -3951,8 +4298,9 @@ class ExecutionController:
             if f.get('severity') in {'ERROR', 'UNRESOLVED'}
         ] or [sanitize_error_text(d) for d in last_report.get('diagnostics', [])]
         last_attempt_rec = self.attempt_history[-1] if self.attempt_history else {}
+        last_sem_rep = last_report.get('semantic_report') if isinstance(last_report, dict) else None
 
-        return {
+        res_obj = {
             'record_kind': 'experimental_execution_controller_result',
             'version': VERSION,
             'gate_state': 'STOPPED',
@@ -3976,6 +4324,9 @@ class ExecutionController:
             'analysis': last_analysis,
             'validation_report': last_report,
         }
+        if last_sem_rep is not None:
+            res_obj['semantic_report'] = last_sem_rep
+        return res_obj
 
 
 def literal_markdown_block(value):
@@ -4010,6 +4361,21 @@ def render_markdown_report(controller_result):
         add_section('검증 대상 산출물 다이제스트', report.get('checked_artifacts', {}))
         add_section('필수 검사 결과 행', report.get('check_results', []))
         add_section('검증 발견 사항(findings)', report.get('findings', []))
+
+    sem_rep = controller_result.get('semantic_report') or (
+        report.get('semantic_report') if isinstance(report, dict) else None
+    )
+    if isinstance(sem_rep, dict):
+        lines.extend(['## 독립 의미 충실도 검증 결과(semantic_report)', ''])
+        add_section('의미 검증 요약 및 범위', {
+            'validator_version': sem_rep.get('validator_version'),
+            'semantic_report_sha256': sem_rep.get('semantic_report_sha256'),
+            'overall_judgment': sem_rep.get('overall_judgment'),
+            'judgment_counts': sem_rep.get('judgment_counts'),
+            'coverage_summary': sem_rep.get('coverage_summary'),
+        })
+        if sem_rep.get('findings'):
+            add_section('의미 왜곡·누락·보류 발견 사항', sem_rep.get('findings', []))
 
     analysis = controller_result.get('analysis')
     if isinstance(analysis, dict):
@@ -4097,6 +4463,11 @@ def main(argv=None):
                        help='Pre-recorded window response JSON file(s). If omitted, invokes --provider CLI.')
     p_run.add_argument('--cross-window-response', type=Path, default=None,
                        help='Optional pre-recorded cross-window relation response JSON file.')
+    p_run.add_argument('--semantic-validation', action='store_true',
+                       help='Execute independent Semantic Fidelity Validation after structural checks.')
+    p_run.add_argument('--semantic-response', type=Path, action='append',
+                       help='Optional pre-recorded semantic review window response JSON file(s).')
+    p_run.add_argument('--max-semantic-attempts', type=int, default=1)
     p_run.add_argument('--provider', default='agy')
     p_run.add_argument('--model', default='gemini-4-argon-medium')
     p_run.add_argument('--max-attempts', type=int, default=1)
@@ -4135,10 +4506,22 @@ def main(argv=None):
                 cw_raw_bytes = args.cross_window_response.read_bytes()
                 file_cw_responder = lambda _prompt, _attempt: cw_raw_bytes
 
+            file_sem_responder = None
+            if args.semantic_response:
+                sem_raw_files = [p.read_bytes() for p in args.semantic_response]
+
+                def file_sem_responder(window_idx, _sw, _prompt, _attempt):
+                    if window_idx >= len(sem_raw_files):
+                        raise InvalidArtifactError(f'Missing semantic response file for window index {window_idx}')
+                    return sem_raw_files[window_idx]
+
             result = controller.run(
                 bundle,
                 file_responder,
                 cross_window_responder=file_cw_responder,
+                semantic_responder=file_sem_responder,
+                enable_semantic_validation=bool(args.semantic_validation or args.semantic_response),
+                max_semantic_attempts=args.max_semantic_attempts,
                 max_window_chars=args.max_window_chars,
                 max_prompt_chars=args.max_prompt_chars,
             )
@@ -4195,10 +4578,37 @@ def main(argv=None):
                     )
                 return obs
 
+            def live_semantic_responder(window_idx, sw, prompt_text, sem_attempt_no):
+                if args.semantic_response and window_idx < len(args.semantic_response):
+                    return args.semantic_response[window_idx].read_bytes()
+                obs = call_cli_provider(prompt_text, executable=executable, model=args.model)
+                if args.save_run_dir is not None:
+                    prefix = f"semantic-attempt-{sem_attempt_no}-{sw['semantic_window_id']}"
+                    (args.save_run_dir / f'{prefix}.prompt.txt').write_text(prompt_text)
+                    (args.save_run_dir / f'{prefix}.response.txt').write_bytes(obs['stdout'])
+                    (args.save_run_dir / f'{prefix}.stderr.txt').write_bytes(obs['stderr'])
+                    meta = {
+                        'attempt': sem_attempt_no,
+                        'semantic_window_id': sw['semantic_window_id'],
+                        'returncode': obs['returncode'],
+                        'timed_out': obs.get('timed_out', False),
+                        'seconds': obs['seconds'],
+                        'requested_model': args.model,
+                        'prompt_sha256': digest_text(prompt_text),
+                        'response_sha256': digest_bytes(obs['stdout']),
+                    }
+                    (args.save_run_dir / f'{prefix}.meta.json').write_text(
+                        json.dumps(meta, ensure_ascii=True, indent=2) + '\n'
+                    )
+                return obs
+
             result = controller.run(
                 bundle,
                 live_responder,
                 cross_window_responder=live_cross_window_responder,
+                semantic_responder=(live_semantic_responder if (args.semantic_validation or args.semantic_response) else None),
+                enable_semantic_validation=bool(args.semantic_validation or args.semantic_response),
+                max_semantic_attempts=args.max_semantic_attempts,
                 max_window_chars=args.max_window_chars,
                 max_prompt_chars=args.max_prompt_chars,
             )

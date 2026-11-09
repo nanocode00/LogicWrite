@@ -91,6 +91,29 @@ python3 experiments/full_document_control/pipeline.py run \
     - **다중 창 실패 응답 해시 격리:** `W001` 성공 후 `W002`가 응답 바이트 생성 전 실패(잘못된 반환 타입, 빈 stdout 타임아웃 등)할 때 `W001`의 `response_sha256`이 `W002` 실패 기록에 섞이지 않음을 검증
     - **모든 추출 대상 블록 예산 초과 시 `REVIEW` 보류:** 문서의 추출 가능 블록 전부가 프롬프트 예산을 초과해 보류(`OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET`)된 경우 `units == []`라도 `FAIL`이 아닌 `REVIEW`(`BLOCK_COVERAGE`, `UNIT_AND_SPAN_INTEGRITY`, `PROTECTED_TRACEABILITY`, `SEMANTIC_FIDELITY` 모두 `unresolved`, 후속 단계 차단)로 일관되게 판정하며, 일반 블록에서 빈 `units`를 반환한 경우 `EMPTY_WINDOW_UNITS` / `EMPTY_UNITS`(`FAIL` / `STOPPED`)로 거부함을 검증
 
+## 15. 독립 의미 충실도 검증기 (`SemanticFidelityValidator`)
+
+- **목적:** 구조·출처·블록 범위·보호 정보 검사 통과가 의미적 진실을 보장하지 못하는 한계를 해결하기 위해, `DocumentSnapshot + WritingContract + AnalysisResult → Semantic Fidelity Review → Validation Gate` 경계에서 작동하는 독립 평가기를 구현함.
+- **양방향 검사:**
+  - `analysis_to_source`: 분석 결과의 `units` statement, `elements`, `relations`, `assessment`(reason, exposure, preservation)가 원본 스냅샷의 의미를 충실히 보존하는지 검사.
+  - `source_to_analysis`: 원본 스냅샷의 추출 대상 블록 내 필수 한계·조건 절이 분석 결과에서 누락되지 않았는지 역방향 검사(`CRITICAL_OMISSION`).
+- **8대 의미 오류 범주 및 보류:**
+  1. `CLAIM_OVERSTATEMENT`: 설치 요구사항이나 계획을 실제 검증된 패키지/런타임 동작 사실로 왜곡하는 오류 (RW-001 E-REQ-A1/A2 핵심 회귀).
+  2. `POLARITY_REVERSAL`: 긍정/부정, 가능/불가능, 지원/미지원 반전.
+  3. `CONDITION_LOSS`: 릴리스 범위 조건(`For this release`), 캐시 조건 생략 및 일반화, 한정 조건 단위의 부당한 `omit_candidate` 생략.
+  4. `QUANTITY_OR_SCOPE_DISTORTION`: 수치·단위(30초→30분), 버전, 포트 번호, 비교/적용 대상(Ubuntu↔macOS, PKG↔DMG) 왜곡.
+  5. `UNSUPPORTED_ADDITION`: 원문에 없는 암호화, 데몬, 정량 성능 향상 수치 조작.
+  6. `CRITICAL_OMISSION`: 원문 블록 내 필수 조건·한계 절의 추출 결과 누락.
+  7. `RELATION_DISTORTION`: 관계 종류 왜곡, 결론→전제 supports 역방향 연결(RW-001 E-REL-A1/A2), 역방향 qualifies.
+  8. `ASSESSMENT_RATIONALE_DISTORTION`: 단위 statement는 정확하더라도 `assessment.exposure`나 `assessment.reason`에서만 의미를 확대하는 오류(RW-001 E-REQ-B2 회귀).
+  9. `AMBIGUOUS_SOURCE_EVIDENCE` / `UNVERIFIED_EVALUATOR_QUOTE` / `EVALUATOR_JUDGMENT_CONFLICT` / `INCOMPLETE_SEMANTIC_COVERAGE` → `unresolved`(`REVIEW`).
+- **보안 및 불변조건:**
+  - 평가자 응답은 검증 후보일 뿐 승인 권한이 없음. 모델이 `passed: true`, `delivery_approved: true`, `gate_state: "PASS"`를 출력해도 무단 승인 시도(`UNAUTHORIZED_EVALUATOR_APPROVAL_CLAIM`)로 거부(`FAIL`).
+  - 첫 구현 정책: 모든 항목이 `supported`로 판정되어도 자동 `PASS`를 허용하지 않고 `REVIEW`(`SEMANTIC_SUPPORTED_AWAITING_APPROVAL`)로 보류하여 사람/독립 정책 승인을 강제.
+  - 모델 제출 인용구는 `resolve_block_quotes()`로 원본 `DocumentSnapshot` 코드 포인트 구간에 대해 엄격히 재검증 (`UNVERIFIED_EVALUATOR_QUOTE` 보류).
+  - 업스트림 산출물(`input_bundle`, `contract`, `snapshot`, `analysis_result`) 변경 시 검증 보고서는 즉시 무효화.
+  - 독립 결정론적 감사를 항상 병행하여 위조 보고서의 오류 은폐를 차단.
+
 ## 한계
 
 - 프롬프트 예산(`max_prompt_chars`)은 오프라인에서 제공자별 토크나이저를 직접 호출하지 않으므로 유니코드 코드 포인트 길이를 기준으로 상한을 강제하며(`budget_policy.token_vs_char_policy`), 한국어·UTF-8 다중 토큰 특성을 고려해 보수적으로 설정해야 한다.
