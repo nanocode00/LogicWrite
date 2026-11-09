@@ -2,7 +2,7 @@
 
 이 문서는 **제안된 진행 순서**이며 납기 약속이 아니다. 각 단계는 완료 기준을 충족한 경우에만 다음으로 넘어간다.
 
-> **현재 상태:** M0 진행 중. 설계 문서, 합성 예시 12건(`tests/fixtures/cases.json`), 공개 저장소 기반 잠정 후보 20건(`tests/fixtures/real-world-candidates.json`, [설명](real-world-candidates.md))가 있다. 별도의 [최소 검증 게이트 실험](../experiments/minimal_gate/README.md)이 추가됐지만 정식 검증기나 M1 완료를 뜻하지 않는다. 정식 검증기·모듈 파이프라인·CLI·MCP 서버·베이스라인 실험은 아직 구현 또는 수행되지 않았다.
+> **현재 상태:** M0 진행 중. 설계 문서, 합성 예시 12건(`tests/fixtures/cases.json`), 공개 저장소 기반 잠정 후보 20건(`tests/fixtures/real-world-candidates.json`, [설명](real-world-candidates.md))가 있다. 별도의 [최소 검증 게이트 실험](../experiments/minimal_gate/README.md)과 [정보 추출·분석 실험](../experiments/extraction_analysis/README.md)이 추가됐지만 정식 검증기나 M1 완료를 뜻하지 않는다. 정식 검증기·모듈 파이프라인·CLI·MCP 서버·베이스라인 실험은 아직 구현 또는 수행되지 않았다.
 
 ## M0 — 근거와 평가 기반 마련 (진행 중)
 
