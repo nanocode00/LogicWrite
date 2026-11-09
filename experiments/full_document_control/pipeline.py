@@ -626,6 +626,241 @@ def resolve_block_quotes(quotes, blocks_by_id, snapshot):
     return spans
 
 
+ANCHOR_TOKEN_RE = re.compile(r'[가-힣]{2,}|[A-Za-z0-9]{2,}')
+STOPWORD_TOKENS = {
+    '있다', '한다', '대한', '통해', '위해', '경우', '항목', '단위', '블록', '정보', '내용',
+    '설명', '관한', '있는', '에서', '으로', '이다', '및', '수행한다', '동작한다', '지원하지',
+    '않으며', '존재할', '때만', '초기', '있으며', '해당', '대한', '관련', '조건', '주장',
+    '제약', '한정한다', '부가한다', '전제로', '함께', '따라', '의해',
+}
+BILINGUAL_SYNONYMS = {
+    'local': '로컬',
+    '로컬': '로컬',
+    'pkg': '패키지',
+    'package': '패키지',
+    '패키지': '패키지',
+    'install': '설치',
+    '설치': '설치',
+    'macos': 'macos',
+    'ubuntu': 'ubuntu',
+    'linux': 'linux',
+    'cache': '캐시',
+    '캐시': '캐시',
+    'offline': '오프라인',
+    '오프라인': '오프라인',
+}
+SUBSTANTIVE_CLAIM_ELEMENT_KINDS = {'claim', 'identifier', 'quantity', 'attribution', 'time_scope'}
+
+
+def _extract_anchor_tokens(text):
+    if not isinstance(text, str):
+        return set()
+    tokens = set()
+    for raw_tok in ANCHOR_TOKEN_RE.findall(text):
+        lower = raw_tok.lower()
+        if re.match(r'^[buw]\d{3}$', lower):
+            continue
+        if lower in STOPWORD_TOKENS or raw_tok in STOPWORD_TOKENS:
+            continue
+        canonical = BILINGUAL_SYNONYMS.get(lower, lower)
+        tokens.add(canonical)
+        # Add 2- and 3-char Korean prefix stems to handle particles (e.g. 런타임은 -> 런타임, 모드는 -> 모드)
+        if '가' <= raw_tok[0] <= '힣' and len(raw_tok) >= 2:
+            stem2 = raw_tok[:2]
+            if stem2 not in STOPWORD_TOKENS:
+                tokens.add(BILINGUAL_SYNONYMS.get(stem2, stem2))
+            if len(raw_tok) >= 3:
+                stem3 = raw_tok[:3]
+                if stem3 not in STOPWORD_TOKENS:
+                    tokens.add(BILINGUAL_SYNONYMS.get(stem3, stem3))
+    return tokens
+
+
+def _element_spans_within_unit_spans(element_spans, unit_spans):
+    if not isinstance(element_spans, list) or not element_spans or not isinstance(unit_spans, list) or not unit_spans:
+        return False
+    for es in element_spans:
+        if not isinstance(es, dict):
+            return False
+        ebid = es.get('block_id')
+        estart, eend = es.get('start'), es.get('end')
+        if type(estart) is not int or type(eend) is not int:
+            return False
+        contained = any(
+            isinstance(us, dict) and us.get('block_id') == ebid and
+            type(us.get('start')) is int and type(us.get('end')) is int and
+            us['start'] <= estart < eend <= us['end']
+            for us in unit_spans
+        )
+        if not contained:
+            return False
+    return True
+
+
+def _unit_source_quote_text(unit):
+    spans = unit.get('source_spans') if isinstance(unit.get('source_spans'), list) else []
+    quotes = [s.get('quote', '') for s in spans if isinstance(s, dict) and isinstance(s.get('quote'), str)]
+    el_vals = [
+        el.get('value', '') for el in unit.get('elements', [])
+        if isinstance(el, dict) and isinstance(el.get('value'), str)
+    ]
+    return ' '.join(quotes + el_vals)
+
+
+def _is_substantive_claim_unit(unit, blocks_by_id):
+    if not isinstance(unit, dict):
+        return False
+    if unit.get('assessment', {}).get('preservation') == 'omit_candidate':
+        return False
+    spans = unit.get('source_spans') if isinstance(unit.get('source_spans'), list) else []
+    if not spans:
+        return False
+    block_kinds = {
+        blocks_by_id[s['block_id']]['kind']
+        for s in spans
+        if isinstance(s, dict) and s.get('block_id') in blocks_by_id
+    }
+    if not block_kinds or block_kinds == {'heading'}:
+        return False
+    elements = unit.get('elements') if isinstance(unit.get('elements'), list) else []
+    return any(
+        isinstance(el, dict) and el.get('kind') in SUBSTANTIVE_CLAIM_ELEMENT_KINDS
+        for el in elements
+    )
+
+
+def _evaluate_condition_link(req, matched_units, units_by_id, all_units, blocks_by_id):
+    """Verify structural correspondence between a required condition element, its unit, and its linked claim unit.
+
+    Returns a dict with:
+      - status: 'satisfied' | 'unresolved' | 'violated'
+      - reason: explanation if not satisfied
+      - verified_links: list of verified link dicts
+      - link_verification: 'structural_correspondence_only_not_semantic_proof' | 'unresolved' | 'failed'
+    """
+    if not req.get('requires_condition_link'):
+        return {
+            'status': 'satisfied',
+            'reason': None,
+            'verified_links': [],
+            'link_verification': 'not_required',
+        }
+
+    expected_lit = req['expected_literal']
+    expected_kind = req['kind']
+    candidate_links = []
+    ambiguous_links = []
+    rejection_reasons = []
+
+    for uid in matched_units:
+        cond_unit = units_by_id.get(uid)
+        if not isinstance(cond_unit, dict):
+            continue
+        unit_spans = cond_unit.get('source_spans', [])
+        matching_els = [
+            el for el in cond_unit.get('elements', [])
+            if isinstance(el, dict) and el.get('kind') == expected_kind and expected_lit in el.get('value', '')
+        ]
+        if not matching_els:
+            continue
+        for mel in matching_els:
+            if not _element_spans_within_unit_spans(mel.get('source_spans'), unit_spans):
+                return {
+                    'status': 'violated',
+                    'reason': f"Condition element {uid}.{mel.get('id')} source_spans fall outside unit {uid} source_spans",
+                    'verified_links': [],
+                    'link_verification': 'failed',
+                }
+
+        cond_tokens = _extract_anchor_tokens(_unit_source_quote_text(cond_unit))
+        # Collect candidate relations:
+        # 1) cond_unit --qualifies--> claim_unit
+        # 2) claim_unit --depends_on--> cond_unit
+        directional_pairs = []
+        for rel in cond_unit.get('relations', []):
+            if not isinstance(rel, dict):
+                continue
+            target_id = rel.get('target_unit_id')
+            if rel.get('kind') == 'qualifies' and target_id in units_by_id and target_id != uid:
+                directional_pairs.append(('qualifies', units_by_id[target_id], rel))
+            elif rel.get('kind') in RELATIONS:
+                rejection_reasons.append(
+                    f"Relation {uid} --{rel.get('kind')}--> {target_id} is not an outgoing 'qualifies' link from condition"
+                )
+
+        for other in all_units:
+            if not isinstance(other, dict) or other.get('id') == uid:
+                continue
+            for rel in other.get('relations', []):
+                if not isinstance(rel, dict) or rel.get('target_unit_id') != uid:
+                    continue
+                if rel.get('kind') == 'depends_on':
+                    directional_pairs.append(('depends_on', other, rel))
+                else:
+                    rejection_reasons.append(
+                        f"Incoming relation {other.get('id')} --{rel.get('kind')}--> {uid} is not 'depends_on'"
+                    )
+
+        for direction_kind, claim_unit, rel in directional_pairs:
+            claim_id = claim_unit['id']
+            if not _is_substantive_claim_unit(claim_unit, blocks_by_id):
+                rejection_reasons.append(
+                    f"Target unit {claim_id} is not a substantive non-heading, non-omitted claim unit"
+                )
+                continue
+
+            claim_tokens = _extract_anchor_tokens(_unit_source_quote_text(claim_unit))
+            reason_tokens = _extract_anchor_tokens(rel.get('reason', ''))
+            cond_reason_overlap = sorted(cond_tokens & reason_tokens)
+            claim_reason_overlap = sorted(claim_tokens & reason_tokens)
+            source_anchor_overlap = sorted(cond_tokens & claim_tokens)
+
+            if not cond_reason_overlap or not claim_reason_overlap:
+                rejection_reasons.append(
+                    f"Relation reason between {uid} and {claim_id} does not ground both condition source tokens and target claim source tokens"
+                )
+                continue
+
+            link_info = {
+                'condition_unit_id': uid,
+                'target_claim_unit_id': claim_id,
+                'relation_kind': direction_kind,
+                'condition_reason_overlap': cond_reason_overlap,
+                'claim_reason_overlap': claim_reason_overlap,
+                'source_anchor_overlap': source_anchor_overlap,
+            }
+            if source_anchor_overlap:
+                candidate_links.append(link_info)
+            else:
+                ambiguous_links.append(link_info)
+
+    if candidate_links:
+        return {
+            'status': 'satisfied',
+            'reason': None,
+            'verified_links': candidate_links,
+            'link_verification': 'structural_correspondence_only_not_semantic_proof',
+        }
+    if ambiguous_links:
+        return {
+            'status': 'unresolved',
+            'reason': (
+                f"Required condition {req['id']} has relation to claim unit {[x['target_claim_unit_id'] for x in ambiguous_links]} "
+                "with reason overlap, but condition and claim source spans share no direct anchor tokens; requires human review"
+            ),
+            'verified_links': ambiguous_links,
+            'link_verification': 'unresolved',
+        }
+    detail = '; '.join(rejection_reasons) if rejection_reasons else 'no valid qualifies/depends_on relation to a substantive claim unit'
+    return {
+        'status': 'violated',
+        'reason': f"Required condition {req['id']} lacks valid condition-to-claim link ({detail})",
+        'verified_links': [],
+        'link_verification': 'failed',
+    }
+
+
+
 def assemble_document_analysis(input_bundle, window_responses_raw, *, max_window_chars=None):
     """Aggregate one or more window extraction responses into a single full-document AnalysisResult."""
     validate_input_bundle(input_bundle)
@@ -757,6 +992,9 @@ def assemble_document_analysis(input_bundle, window_responses_raw, *, max_window
                  f'Invalid element kind or value in {uid}.{el_id}',
                  code='INVALID_ELEMENT_KIND_OR_VALUE')
             el_spans = resolve_block_quotes(el['quotes'], blocks_by_id, snapshot)
+            need(_element_spans_within_unit_spans(el_spans, unit_spans),
+                 f'Element {uid}.{el_id} source_spans fall outside unit {uid} source_spans',
+                 code='ELEMENT_SPAN_NOT_IN_UNIT_SPAN')
             need(any(el['value'] in s['quote'] for s in el_spans),
                  f"Element literal {el['value']!r} not contained in its quotes ({uid}.{el_id})",
                  code='ELEMENT_LITERAL_UNSUPPORTED')
@@ -909,29 +1147,17 @@ def assemble_document_analysis(input_bundle, window_responses_raw, *, max_window
                     matched_elements.append({'unit_id': unit['id'], 'element_id': el['id']})
         matched_units = sorted(set(matched_units))
 
-        # Check condition link if required by contract.
-        condition_linked = True
-        if req.get('requires_condition_link'):
-            condition_linked = False
-            for uid in matched_units:
-                u = units_by_id[uid]
-                has_outgoing = any(r['kind'] in {'qualifies', 'depends_on'} for r in u['relations'])
-                has_incoming = any(
-                    r['kind'] in {'qualifies', 'depends_on'} and r['target_unit_id'] == uid
-                    for other in normalized_units for r in other['relations']
-                )
-                if has_outgoing or has_incoming:
-                    condition_linked = True
-                    break
-
         omitted = any(units_by_id[uid]['assessment']['preservation'] == 'omit_candidate' for uid in matched_units)
+        cond_eval = _evaluate_condition_link(req, matched_units, units_by_id, normalized_units, blocks_by_id)
+        condition_linked = cond_eval['status'] == 'satisfied'
+
         unmet_reason = None
         if not matched_elements:
             unmet_reason = f"Required literal {expected_lit!r} ({req['kind']}) not traced in extracted elements"
         elif omitted:
             unmet_reason = f"Unit carrying required information {req['id']} marked as omit_candidate"
-        elif not condition_linked:
-            unmet_reason = f"Required condition {req['id']} lacks qualifies/depends_on relation link"
+        elif cond_eval['status'] != 'satisfied':
+            unmet_reason = cond_eval['reason']
 
         requirement_bindings.append({
             'requirement_id': req['id'],
@@ -942,6 +1168,9 @@ def assemble_document_analysis(input_bundle, window_responses_raw, *, max_window
             'unit_ids': matched_units,
             'element_refs': matched_elements,
             'condition_linked': condition_linked,
+            'condition_link_status': cond_eval['status'],
+            'verified_condition_links': cond_eval['verified_links'],
+            'link_verification': cond_eval['link_verification'],
             'omitted': omitted,
             'satisfied': unmet_reason is None,
             'unmet_reason': unmet_reason,
@@ -1378,6 +1607,9 @@ def _check_unit_and_span_integrity(input_bundle, analysis):
                 need(es.get('snapshot_id') == snap['snapshot_id'] and es.get('snapshot_sha256') == snap['sha256'],
                      f'Element {uid}.{el_id} span has stale snapshot ref',
                      code='STALE_ELEMENT_SNAPSHOT_REF')
+            need(_element_spans_within_unit_spans(el_spans, spans),
+                 f'Element {uid}.{el_id} source_spans fall outside unit {uid} source_spans',
+                 code='ELEMENT_SPAN_NOT_IN_UNIT_SPAN')
             need(any(el['value'] in es['quote'] for es in el_spans),
                  f"Element {uid}.{el_id} value {el['value']!r} not found in its verified source_spans",
                  code='ELEMENT_VALUE_NOT_IN_SPAN')
@@ -1410,11 +1642,15 @@ def _check_unit_and_span_integrity(input_bundle, analysis):
 
 def _check_protected_traceability(input_bundle, analysis):
     contract = input_bundle['writing_contract']
+    snap = input_bundle['document_snapshot']
+    blocks = parse_markdown_blocks(snap)
+    blocks_by_id = {b['block_id']: b for b in blocks}
     units = analysis.get('units') if isinstance(analysis.get('units'), list) else []
     units_by_id = {u['id']: u for u in units if isinstance(u, dict) and nonempty_text(u.get('id'))}
 
     evidence = []
     unmet = []
+    unresolved_links = []
     for req in contract['required_information']:
         req_id = req['id']
         expected_lit = req['expected_literal']
@@ -1433,22 +1669,8 @@ def _check_protected_traceability(input_bundle, analysis):
             units_by_id[uid].get('assessment', {}).get('preservation') == 'omit_candidate'
             for uid in matched_units
         )
-        condition_linked = True
-        if req.get('requires_condition_link'):
-            condition_linked = False
-            for uid in matched_units:
-                u = units_by_id[uid]
-                has_out = any(
-                    r.get('kind') in {'qualifies', 'depends_on'} and r.get('target_unit_id') in units_by_id
-                    for r in u.get('relations', [])
-                )
-                has_in = any(
-                    r.get('kind') in {'qualifies', 'depends_on'} and r.get('target_unit_id') == uid
-                    for other in units for r in other.get('relations', [])
-                )
-                if has_out or has_in:
-                    condition_linked = True
-                    break
+        cond_eval = _evaluate_condition_link(req, matched_units, units_by_id, units, blocks_by_id)
+        condition_linked = cond_eval['status'] == 'satisfied'
 
         record = {
             'requirement_id': req_id,
@@ -1457,6 +1679,9 @@ def _check_protected_traceability(input_bundle, analysis):
             'matched_units': matched_units,
             'matched_elements': matched_elements,
             'condition_linked': condition_linked,
+            'condition_link_status': cond_eval['status'],
+            'verified_condition_links': cond_eval['verified_links'],
+            'link_verification': cond_eval['link_verification'],
             'omitted': omitted,
         }
         evidence.append(record)
@@ -1464,8 +1689,14 @@ def _check_protected_traceability(input_bundle, analysis):
             unmet.append(f"{req_id}: missing literal {expected_lit!r} ({expected_kind})")
         elif omitted:
             unmet.append(f"{req_id}: unit {matched_units} marked omit_candidate")
-        elif not condition_linked:
-            unmet.append(f"{req_id}: required condition link (qualifies/depends_on) missing")
+        elif cond_eval['status'] == 'violated':
+            unmet.append(f"{req_id}: {cond_eval['reason']}")
+        elif cond_eval['status'] == 'unresolved':
+            unresolved_links.append({
+                'requirement_id': req_id,
+                'reason': cond_eval['reason'],
+                'candidate_links': cond_eval['verified_links'],
+            })
 
     if unmet:
         raise InvalidArtifactError(
@@ -1474,13 +1705,49 @@ def _check_protected_traceability(input_bundle, analysis):
             responsible_component='information_extraction_analysis',
             evidence=evidence,
         )
-    return evidence
+    return evidence, unresolved_links
+
+
+def verify_self_digest(artifact, digest_field):
+    """Verify that an artifact's embedded SHA-256 matches its actual content (excluding the digest field itself)."""
+    if not isinstance(artifact, dict):
+        return False, None
+    claimed = artifact.get(digest_field)
+    if not nonempty_text(claimed):
+        return False, None
+    body = {k: v for k, v in artifact.items() if k != digest_field}
+    actual = canonical_json_digest(body)
+    return claimed == actual, actual
+
+
+def verify_canonical_plan_policy(candidate_plan):
+    """Verify that candidate_plan does not alter fixed ValidationPlan policy, required check IDs, or check versions."""
+    if not isinstance(candidate_plan, dict):
+        return False, 'ValidationPlan must be an object'
+    ok_digest, _ = verify_self_digest(candidate_plan, 'plan_sha256')
+    if not ok_digest:
+        return False, 'ValidationPlan plan_sha256 is missing or does not match plan contents'
+    if candidate_plan.get('version') != VALIDATION_PLAN_VERSION:
+        return False, f"ValidationPlan version {candidate_plan.get('version')!r} != {VALIDATION_PLAN_VERSION!r}"
+    if candidate_plan.get('boundary') != 'analysis_to_organization':
+        return False, f"Unsupported ValidationPlan boundary: {candidate_plan.get('boundary')!r}"
+    req_checks = candidate_plan.get('required_checks')
+    if not isinstance(req_checks, list):
+        return False, 'ValidationPlan required_checks must be a list'
+    actual_tuples = [
+        (c.get('check_id'), c.get('check_version'), c.get('kind'))
+        for c in req_checks if isinstance(c, dict)
+    ]
+    if actual_tuples != list(GATE_CHECKS):
+        return False, 'ValidationPlan required_checks do not match canonical GATE_CHECKS policy'
+    return True, None
 
 
 def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
     """Independently validate a full-document AnalysisResult against input_bundle and ValidationPlan."""
+    canonical_plan = build_validation_plan(input_bundle)
     if plan is None:
-        plan = build_validation_plan(input_bundle)
+        plan = canonical_plan
 
     input_sha256 = canonical_json_digest(input_bundle) if isinstance(input_bundle, dict) else None
     snap = input_bundle.get('document_snapshot', {}) if isinstance(input_bundle, dict) else {}
@@ -1502,6 +1769,20 @@ def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
     rows = []
     findings = []
     blocked_by = None
+
+    # Verify self-digest of analysis_result before running checks.
+    ok_analysis_digest, computed_analysis_sha = verify_self_digest(analysis_result, 'analysis_sha256')
+    if isinstance(analysis_result, dict) and not ok_analysis_digest:
+        findings.append(make_finding(
+            'ANALYSIS_DIGEST_TAMPERED',
+            'ERROR',
+            f'Analysis artifact content does not match its analysis_sha256 ({analysis_sha256} != {computed_analysis_sha})',
+            responsible_component='information_extraction_analysis',
+            origin_ref=analysis_sha256,
+            repair_recommendation='Re-run extraction and analysis without mutating the artifact after creation',
+            requires_human_review=False,
+            blocking=True,
+        ))
 
     deterministic_validators = (
         ('SNAPSHOT_AND_CONTRACT', _check_snapshot_and_contract),
@@ -1547,6 +1828,27 @@ def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
                 else:
                     status = 'passed'
                     reason = 'All document blocks covered without gaps, overlaps, omissions, or duplicates'
+            elif check_id == 'PROTECTED_TRACEABILITY':
+                evidence, unresolved_links = out
+                if unresolved_links:
+                    status = 'unresolved'
+                    reason = 'Unconfirmed condition-to-claim correspondence requires human review: ' + '; '.join(
+                        item['reason'] for item in unresolved_links
+                    )
+                    findings.append(make_finding(
+                        'UNCONFIRMED_CONDITION_CORRESPONDENCE',
+                        'UNRESOLVED',
+                        reason,
+                        responsible_component='information_extraction_analysis',
+                        origin_ref=analysis_sha256,
+                        repair_recommendation='Review condition-to-claim relation target correspondence before advancing',
+                        requires_human_review=True,
+                        blocking=True,
+                        evidence=unresolved_links,
+                    ))
+                else:
+                    status = 'passed'
+                    reason = 'PROTECTED_TRACEABILITY deterministic verification passed (structural correspondence only)'
             else:
                 evidence = out or []
                 status = 'passed'
@@ -1634,6 +1936,26 @@ def validate_analysis_gate(input_bundle, analysis_result, *, plan=None):
     ))
 
     reconciled = reconcile_validation_plan(plan, rows, checked_artifacts)
+    if isinstance(analysis_result, dict) and not ok_analysis_digest:
+        reconciled['diagnostics'].append(
+            f'ANALYSIS_DIGEST_TAMPERED: claimed {analysis_sha256}, actual {computed_analysis_sha}'
+        )
+        reconciled['gate_state'] = 'STOPPED' if reconciled['execution_state'] == 'stopped' else 'FAIL'
+        if reconciled['execution_state'] == 'stopped':
+            reconciled['last_gate_state'] = 'FAIL'
+        reconciled['delivery_approved'] = False
+        reconciled['next_stage_allowed'] = False
+
+    # Enforce canonical policy: if caller passed a weakened custom plan, override gate_state to FAIL.
+    ok_policy, policy_err = verify_canonical_plan_policy(plan)
+    if not ok_policy:
+        reconciled['diagnostics'].append('UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE: ' + policy_err)
+        reconciled['gate_state'] = 'STOPPED' if reconciled['execution_state'] == 'stopped' else 'FAIL'
+        if reconciled['execution_state'] == 'stopped':
+            reconciled['last_gate_state'] = 'FAIL'
+        reconciled['delivery_approved'] = False
+        reconciled['next_stage_allowed'] = False
+
     report = {
         'record_kind': 'experimental_validation_gate_report_not_adopted_schema',
         'version': VERSION,
@@ -1670,7 +1992,11 @@ class StageTransitionBlockedError(RuntimeError):
 
 
 def can_advance_to_organization(input_bundle, analysis_result, validation_report, *, plan=None):
-    """Code-enforced transition guard between Information Extraction & Analysis and Information Organization."""
+    """Code-enforced transition guard between Information Extraction & Analysis and Information Organization.
+
+    Never trusts external gate_state, delivery_approved, next_stage_allowed, check_results, or recomputed SHA-256 alone.
+    Independently re-verifies the artifacts against the canonical ValidationPlan before permitting transition.
+    """
     if not isinstance(input_bundle, dict) or not isinstance(analysis_result, dict) or not isinstance(validation_report, dict):
         return {
             'allowed': False,
@@ -1693,14 +2019,61 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
             'responsible_component': 'contract_resolver',
         }
 
-    expected_plan = plan or build_validation_plan(input_bundle)
+    canonical_plan = build_validation_plan(input_bundle)
+    if plan is not None:
+        ok_caller_plan, plan_err = verify_canonical_plan_policy(plan)
+        if not ok_caller_plan:
+            return {
+                'allowed': False,
+                'gate_state': 'FAIL',
+                'reason': f'UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE: {plan_err}',
+                'diagnostics': [f'UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE: {plan_err}'],
+                'invalidation': None,
+                'return_to_stage': 'validation_gate',
+                'responsible_component': 'validation_gate',
+            }
+
+    report_plan = validation_report.get('plan')
+    if not isinstance(report_plan, dict):
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': 'REPORT_PLAN_MISSING: validation_report missing plan object',
+            'invalidation': None,
+            'return_to_stage': 'validation_gate',
+            'responsible_component': 'validation_gate',
+        }
+    ok_rep_plan_policy, rep_plan_err = verify_canonical_plan_policy(report_plan)
+    if not ok_rep_plan_policy:
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': f'UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE: {rep_plan_err}',
+            'diagnostics': [f'UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE: {rep_plan_err}'],
+            'invalidation': None,
+            'return_to_stage': 'validation_gate',
+            'responsible_component': 'validation_gate',
+        }
+
+    # Check content-to-digest self-integrity of analysis_result before checking upstream bindings.
+    ok_analysis_digest, actual_analysis_sha = verify_self_digest(analysis_result, 'analysis_sha256')
+    if not ok_analysis_digest:
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': f'ANALYSIS_DIGEST_TAMPERED: analysis_sha256 ({analysis_result.get("analysis_sha256")}) != actual ({actual_analysis_sha})',
+            'diagnostics': ['ANALYSIS_DIGEST_TAMPERED'],
+            'invalidation': None,
+            'return_to_stage': 'information_extraction_analysis',
+            'responsible_component': 'information_extraction_analysis',
+        }
+
     current_input_sha = canonical_json_digest(input_bundle)
     current_contract_sha = canonical_json_digest(input_bundle['writing_contract'])
     current_snap_sha = input_bundle['document_snapshot']['sha256']
     current_analysis_sha = analysis_result.get('analysis_sha256')
 
     checked = validation_report.get('checked_artifacts')
-    report_plan = validation_report.get('plan')
     changed = []
     if not isinstance(checked, dict):
         changed.append('checked_artifacts_missing')
@@ -1713,7 +2086,7 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
             changed.append('document_snapshot')
         if checked.get('analysis_sha256') != current_analysis_sha:
             changed.append('analysis_result')
-    if not isinstance(report_plan, dict) or report_plan.get('plan_sha256') != expected_plan.get('plan_sha256'):
+    if report_plan.get('plan_sha256') != canonical_plan.get('plan_sha256'):
         changed.append('validation_plan')
 
     if (analysis_result.get('input_sha256') != current_input_sha or
@@ -1742,11 +2115,57 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
             'responsible_component': 'contract_resolver' if 'writing_contract' in changed else 'information_extraction_analysis',
         }
 
-    # Independently re-reconcile the report's check_results against the expected ValidationPlan.
-    reconciled = reconcile_validation_plan(expected_plan, validation_report.get('check_results'), checked)
-    gate_state = reconciled['gate_state']
-    if gate_state != 'PASS' or reconciled['execution_state'] != 'completed' or not reconciled['delivery_approved']:
-        findings = validation_report.get('findings') if isinstance(validation_report.get('findings'), list) else []
+    # First reconcile the supplied report's rows against canonical_plan to catch missing/duplicate rows (e.g. STOPPED).
+    supplied_reconciled = reconcile_validation_plan(canonical_plan, validation_report.get('check_results'), checked)
+    if supplied_reconciled['gate_state'] == 'STOPPED':
+        return {
+            'allowed': False,
+            'gate_state': 'STOPPED',
+            'reason': 'STAGE_TRANSITION_BLOCKED: supplied ValidationReport is incomplete or STOPPED',
+            'diagnostics': supplied_reconciled['diagnostics'],
+            'invalidation': None,
+            'return_to_stage': 'validation_gate',
+            'responsible_component': 'validation_gate',
+        }
+
+    # Verify report_sha256 self-integrity. Even if report_sha256 was recomputed by an external caller,
+    # we STILL independently re-run validate_analysis_gate below!
+    ok_report_digest, actual_report_sha = verify_self_digest(validation_report, 'report_sha256')
+    extra_diagnostics = []
+    if not ok_report_digest:
+        extra_diagnostics.append(
+            f'REPORT_DIGEST_TAMPERED: report_sha256 ({validation_report.get("report_sha256")}) != actual ({actual_report_sha})'
+        )
+
+    # Independently re-execute the Validation Gate against input_bundle, analysis_result, and canonical_plan.
+    fresh_report = validate_analysis_gate(input_bundle, analysis_result, plan=canonical_plan)
+    fresh_by_id = {r['check_id']: r['status'] for r in fresh_report['check_results']}
+    supplied_rows = validation_report.get('check_results') if isinstance(validation_report.get('check_results'), list) else []
+
+    forged_checks = []
+    for row in supplied_rows:
+        if not isinstance(row, dict):
+            continue
+        cid = row.get('check_id')
+        supplied_status = row.get('status')
+        independent_status = fresh_by_id.get(cid)
+        if cid in fresh_by_id and supplied_status != independent_status:
+            forged_checks.append(f'{cid}(supplied={supplied_status}, independent={independent_status})')
+
+    if forged_checks:
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': 'FORGED_OR_TAMPERED_CHECK_RESULTS: ' + ', '.join(forged_checks),
+            'diagnostics': ['FORGED_OR_TAMPERED_CHECK_RESULTS: ' + ', '.join(forged_checks), *extra_diagnostics],
+            'invalidation': None,
+            'return_to_stage': 'validation_gate',
+            'responsible_component': 'validation_gate',
+        }
+
+    gate_state = fresh_report['gate_state']
+    if gate_state != 'PASS' or fresh_report['execution_state'] != 'completed' or not fresh_report['delivery_approved']:
+        findings = fresh_report.get('findings') if isinstance(fresh_report.get('findings'), list) else []
         primary_comp = 'information_extraction_analysis'
         for f in findings:
             if isinstance(f, dict) and f.get('responsible_component'):
@@ -1760,17 +2179,40 @@ def can_advance_to_organization(input_bundle, analysis_result, validation_report
         return {
             'allowed': False,
             'gate_state': gate_state,
-            'reason': f'STAGE_TRANSITION_BLOCKED: gate_state is {gate_state} (PASS required)',
-            'diagnostics': reconciled['diagnostics'],
+            'reason': f'STAGE_TRANSITION_BLOCKED: independent gate_state is {gate_state} (PASS required)',
+            'diagnostics': [*fresh_report['diagnostics'], *extra_diagnostics],
             'invalidation': None,
             'return_to_stage': return_stage,
             'responsible_component': primary_comp,
         }
 
+    if not ok_report_digest:
+        return {
+            'allowed': False,
+            'gate_state': 'FAIL',
+            'reason': extra_diagnostics[0],
+            'diagnostics': extra_diagnostics,
+            'invalidation': None,
+            'return_to_stage': 'validation_gate',
+            'responsible_component': 'validation_gate',
+        }
+
+    # Furthermore, in this prototype no independent semantic verifier exists, so SEMANTIC_FIDELITY cannot be passed.
+    if fresh_by_id.get('SEMANTIC_FIDELITY') != 'passed':
+        return {
+            'allowed': False,
+            'gate_state': 'REVIEW',
+            'reason': 'STAGE_TRANSITION_BLOCKED: SEMANTIC_FIDELITY is not independently verified',
+            'diagnostics': ['SEMANTIC_FIDELITY_NOT_VERIFIED', *extra_diagnostics],
+            'invalidation': None,
+            'return_to_stage': 'human_or_semantic_review',
+            'responsible_component': 'validation_gate',
+        }
+
     return {
         'allowed': True,
         'gate_state': 'PASS',
-        'reason': 'All required ValidationPlan checks passed and artifact digests match',
+        'reason': 'All required ValidationPlan checks independently verified as passed and artifact digests match',
         'diagnostics': [],
         'invalidation': None,
         'return_to_stage': None,

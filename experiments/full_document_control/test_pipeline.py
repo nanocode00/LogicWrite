@@ -1,12 +1,15 @@
 import copy
+import importlib.util
 import json
 from pathlib import Path
 import unittest
 
-from experiments.full_document_control import pipeline
-
 HERE = Path(__file__).resolve().parent
 SAMPLE_INPUT_PATH = HERE / 'sample_input.json'
+
+_SPEC = importlib.util.spec_from_file_location('full_document_control_pipeline', HERE / 'pipeline.py')
+pipeline = importlib.util.module_from_spec(_SPEC)
+_SPEC.loader.exec_module(pipeline)
 
 
 def load_sample_bundle():
@@ -797,8 +800,250 @@ class Stage3And4ControllerE2ETests(unittest.TestCase):
             self.assertIn('# 전체 문서 정보 추출·검증·실행 제어 결과', md_proc.stdout)
 
 
+class P1_1GateForgeryDefenseTests(unittest.TestCase):
+    def test_forged_semantic_fidelity_passed_with_recomputed_sha256_is_blocked(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        report = pipeline.validate_analysis_gate(bundle, analysis)
+
+        # Forger sets every check_results row (including SEMANTIC_FIDELITY) to 'passed',
+        # sets gate_state='PASS', delivery_approved=True, next_stage_allowed=True,
+        # and recomputes report_sha256 so the report looks hash-consistent.
+        forged = copy.deepcopy(report)
+        for row in forged['check_results']:
+            row['status'] = 'passed'
+            row['reason'] = 'Forged external pass'
+        forged['findings'] = []
+        forged['diagnostics'] = []
+        forged['gate_state'] = 'PASS'
+        forged['delivery_approved'] = True
+        forged['next_stage_allowed'] = True
+        forged_body = {k: v for k, v in forged.items() if k != 'report_sha256'}
+        forged['report_sha256'] = pipeline.canonical_json_digest(forged_body)
+
+        decision = pipeline.can_advance_to_organization(bundle, analysis, forged)
+        self.assertFalse(decision['allowed'])
+        self.assertEqual(decision['gate_state'], 'FAIL')
+        self.assertIn('FORGED_OR_TAMPERED_CHECK_RESULTS', decision['reason'])
+        self.assertIn('SEMANTIC_FIDELITY(supplied=passed, independent=not_run)', decision['reason'])
+
+        # Direct call to OrganizationBoundaryAdapter must also block
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        with self.assertRaises(pipeline.StageTransitionBlockedError):
+            adapter.enter_organization_stage(bundle, analysis, forged)
+        self.assertEqual(len(adapter.invocations), 0)
+        self.assertEqual(len(adapter.blocked_attempts), 1)
+        self.assertEqual(adapter.blocked_attempts[0]['gate_state'], 'FAIL')
+
+    def test_mutated_analysis_body_with_or_without_recomputed_digests_is_blocked(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        report = pipeline.validate_analysis_gate(bundle, analysis)
+
+        # Case 1: Mutate analysis body without updating analysis_sha256 -> ANALYSIS_DIGEST_TAMPERED
+        tampered_analysis = copy.deepcopy(analysis)
+        tampered_analysis['units'][0]['statement'] = '조작된 주장 본문'
+        dec_no_rehash = pipeline.can_advance_to_organization(bundle, tampered_analysis, report)
+        self.assertFalse(dec_no_rehash['allowed'])
+        self.assertEqual(dec_no_rehash['gate_state'], 'FAIL')
+        self.assertIn('ANALYSIS_DIGEST_TAMPERED', dec_no_rehash['reason'])
+
+        # Case 2: Mutate analysis body (remove protected element), recompute analysis_sha256,
+        # update report checked_artifacts + check_results to claim all passed, and recompute report_sha256.
+        tampered_rehashed = copy.deepcopy(analysis)
+        for u in tampered_rehashed['units']:
+            if u['id'] == 'u-code-install':
+                u['elements'] = []
+        body_without_sha = {k: v for k, v in tampered_rehashed.items() if k != 'analysis_sha256'}
+        new_analysis_sha = pipeline.canonical_json_digest(body_without_sha)
+        tampered_rehashed['analysis_sha256'] = new_analysis_sha
+
+        forged_report = copy.deepcopy(report)
+        forged_report['checked_artifacts']['analysis_sha256'] = new_analysis_sha
+        for row in forged_report['check_results']:
+            row['checked_analysis_sha256'] = new_analysis_sha
+            row['status'] = 'passed'
+        forged_report['gate_state'] = 'PASS'
+        forged_report['delivery_approved'] = True
+        forged_report['next_stage_allowed'] = True
+        rep_body = {k: v for k, v in forged_report.items() if k != 'report_sha256'}
+        forged_report['report_sha256'] = pipeline.canonical_json_digest(rep_body)
+
+        dec_rehashed = pipeline.can_advance_to_organization(bundle, tampered_rehashed, forged_report)
+        self.assertFalse(dec_rehashed['allowed'])
+        self.assertEqual(dec_rehashed['gate_state'], 'FAIL')
+        self.assertIn('FORGED_OR_TAMPERED_CHECK_RESULTS', dec_rehashed['reason'])
+        self.assertIn('PROTECTED_TRACEABILITY(supplied=passed, independent=violated)', dec_rehashed['reason'])
+
+    def test_custom_or_weakened_validation_plan_cannot_bypass_required_or_semantic_checks(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+
+        # Caller constructs a weakened ValidationPlan that omits SEMANTIC_FIDELITY (or marks it optional)
+        weak_plan = pipeline.build_validation_plan(bundle)
+        weak_plan['required_checks'] = [
+            c for c in weak_plan['required_checks'] if c['check_id'] != 'SEMANTIC_FIDELITY'
+        ]
+        weak_plan_body = {k: v for k, v in weak_plan.items() if k != 'plan_sha256'}
+        weak_plan['plan_sha256'] = pipeline.canonical_json_digest(weak_plan_body)
+
+        # validate_analysis_gate rejects weakened plan immediately
+        weak_report = pipeline.validate_analysis_gate(bundle, analysis, plan=weak_plan)
+        self.assertEqual(weak_report['gate_state'], 'FAIL')
+        self.assertFalse(weak_report['delivery_approved'])
+        self.assertTrue(any('UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE' in d for d in weak_report['diagnostics']))
+
+        # Even if caller hand-crafts a report claiming PASS under weak_plan and calls OrganizationBoundaryAdapter directly:
+        forged_under_weak = copy.deepcopy(weak_report)
+        forged_under_weak['plan'] = weak_plan
+        forged_under_weak['gate_state'] = 'PASS'
+        forged_under_weak['delivery_approved'] = True
+        forged_under_weak['next_stage_allowed'] = True
+        rep_body = {k: v for k, v in forged_under_weak.items() if k != 'report_sha256'}
+        forged_under_weak['report_sha256'] = pipeline.canonical_json_digest(rep_body)
+
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        with self.assertRaises(pipeline.StageTransitionBlockedError) as ctx:
+            adapter.enter_organization_stage(bundle, analysis, forged_under_weak, plan=weak_plan)
+        self.assertEqual(ctx.exception.decision['gate_state'], 'FAIL')
+        self.assertIn('UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE', ctx.exception.decision['reason'])
+        self.assertEqual(len(adapter.invocations), 0)
+
+
+class P2_2ConditionLinkCorrespondenceTests(unittest.TestCase):
+    def test_unrelated_or_wrong_direction_or_non_claim_target_fails_condition_link(self):
+        bundle = load_sample_bundle()
+
+        # 1. Condition unit has only 'supports' relation instead of 'qualifies'/'depends_on' -> FAIL
+        resp_supports = make_valid_window_response(bundle)
+        for u in resp_supports['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                u['relations'] = [
+                    {
+                        'kind': 'supports',
+                        'target_unit_id': 'u-runtime-overview',
+                        'reason': 'B003의 외부 업로드 없는 로컬 실행 주장을 보충한다.',
+                    }
+                ]
+        analysis_supports = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_supports)])
+        report_supports = pipeline.validate_analysis_gate(bundle, analysis_supports)
+        self.assertEqual(report_supports['gate_state'], 'FAIL')
+        by_id = {r['check_id']: r for r in report_supports['check_results']}
+        self.assertEqual(by_id['PROTECTED_TRACEABILITY']['status'], 'violated')
+
+        # 2. Condition unit 'qualifies' a heading unit ('u-heading-main') instead of a substantive claim -> FAIL
+        resp_heading = make_valid_window_response(bundle)
+        for u in resp_heading['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                u['relations'] = [
+                    {
+                        'kind': 'qualifies',
+                        'target_unit_id': 'u-heading-main',
+                        'reason': '로컬 런타임 제목을 한정한다.',
+                    }
+                ]
+        analysis_heading = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_heading)])
+        report_heading = pipeline.validate_analysis_gate(bundle, analysis_heading)
+        self.assertEqual(report_heading['gate_state'], 'FAIL')
+
+        # 3. Reversed direction: claim 'qualifies' condition (instead of condition 'qualifies' claim or claim 'depends_on' condition) -> FAIL
+        resp_reversed = make_valid_window_response(bundle)
+        for u in resp_reversed['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                u['relations'] = []
+            if u['id'] == 'u-runtime-overview':
+                u['relations'] = [
+                    {
+                        'kind': 'qualifies',
+                        'target_unit_id': 'u-cond-offline-cache',
+                        'reason': '역방향 qualifies 관계 테스트',
+                    }
+                ]
+        analysis_reversed = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_reversed)])
+        report_reversed = pipeline.validate_analysis_gate(bundle, analysis_reversed)
+        self.assertEqual(report_reversed['gate_state'], 'FAIL')
+
+        # 4. Valid inverse direction: claim 'depends_on' condition unit -> passes structural correspondence
+        resp_depends = make_valid_window_response(bundle)
+        for u in resp_depends['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                u['relations'] = []
+            if u['id'] == 'u-runtime-overview':
+                u['relations'] = [
+                    {
+                        'kind': 'depends_on',
+                        'target_unit_id': 'u-cond-offline-cache',
+                        'reason': 'B003의 로컬 런타임 실행 주장은 B015의 오프라인 캐시 조건에 의존한다.',
+                    }
+                ]
+        analysis_depends = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_depends)])
+        report_depends = pipeline.validate_analysis_gate(bundle, analysis_depends)
+        by_id_dep = {r['check_id']: r for r in report_depends['check_results']}
+        self.assertEqual(by_id_dep['PROTECTED_TRACEABILITY']['status'], 'passed')
+        self.assertEqual(report_depends['gate_state'], 'REVIEW')
+
+    def test_ambiguous_or_ungrounded_condition_link_holds_at_unresolved_review(self):
+        bundle = load_sample_bundle()
+        # 1. Ungrounded relation reason (does not reference both condition and target claim source tokens) -> FAIL
+        resp_ungrounded = make_valid_window_response(bundle)
+        for u in resp_ungrounded['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                u['relations'] = [
+                    {
+                        'kind': 'qualifies',
+                        'target_unit_id': 'u-runtime-overview',
+                        'reason': '기타 일반 항목 참조',
+                    }
+                ]
+        analysis_ungrounded = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_ungrounded)])
+        report_ungrounded = pipeline.validate_analysis_gate(bundle, analysis_ungrounded)
+        self.assertEqual(report_ungrounded['gate_state'], 'FAIL')
+
+        # 2. Condition unit 'u-cond-offline-cache' links via 'qualifies' to an unrelated claim ('u-timeout' in B003)
+        # that shares no source lexical anchors with the offline cache condition -> status='unresolved' -> REVIEW
+        resp_unrelated_claim = make_valid_window_response(bundle)
+        for u in resp_unrelated_claim['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                u['relations'] = [
+                    {
+                        'kind': 'qualifies',
+                        'target_unit_id': 'u-timeout',
+                        'reason': 'B003의 30초 제한 시간 주장에 대해 오프라인 캐시 조건을 한정한다.',
+                    }
+                ]
+        analysis_unrel = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_unrelated_claim)])
+        bindings = {b['requirement_id']: b for b in analysis_unrel['requirement_bindings']}
+        self.assertFalse(bindings['req-offline-cache-condition']['satisfied'])
+        self.assertEqual(bindings['req-offline-cache-condition']['condition_link_status'], 'unresolved')
+
+        report_unrel = pipeline.validate_analysis_gate(bundle, analysis_unrel)
+        by_id = {r['check_id']: r for r in report_unrel['check_results']}
+        self.assertEqual(by_id['PROTECTED_TRACEABILITY']['status'], 'unresolved')
+        self.assertEqual(report_unrel['gate_state'], 'REVIEW')
+        self.assertTrue(any(
+            f['rule_id'] == 'UNCONFIRMED_CONDITION_CORRESPONDENCE' and f['severity'] == 'UNRESOLVED'
+            for f in report_unrel['findings']
+        ))
+
+    def test_element_span_outside_unit_span_is_rejected(self):
+        bundle = load_sample_bundle()
+        resp_bad_el_span = make_valid_window_response(bundle)
+        for u in resp_bad_el_span['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                # Element quotes a different block (B003) not covered by the unit's own quotes (B015)
+                u['elements'][0]['value'] = '30초'
+                u['elements'][0]['quotes'] = [{'block_id': 'B003', 'quote': '기본 요청 제한 시간은 30초다.', 'occurrence': 0}]
+        with self.assertRaises(pipeline.InvalidArtifactError) as ctx:
+            pipeline.assemble_document_analysis(bundle, [json.dumps(resp_bad_el_span)])
+        self.assertEqual(ctx.exception.code, 'ELEMENT_SPAN_NOT_IN_UNIT_SPAN')
+
+
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
