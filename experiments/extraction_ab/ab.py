@@ -20,6 +20,13 @@ class ResponseParseError(ValueError):
     pass
 
 
+class ProviderFailure(RuntimeError):
+    def __init__(self, stage, response_raw, returncode):
+        super().__init__('Provider failed: ' + stage + ' exit ' + str(returncode))
+        self.stage = stage
+        self.response_raw = response_raw
+
+
 def response_json(raw):
     try:
         return base.load(raw)
@@ -191,7 +198,8 @@ def run_experiment(raw, output, *, executable, model, repeats=2, timeout=180):
                             requested_model=model, stage=stage)
             write_json(directory/(stage + '.meta.json'), observed)
             print('Completed pair ' + str(repetition) + ' ' + stage + ': exit ' + str(observed['returncode']), flush=True)
-            base.need(observed['returncode'] == 0, 'Provider failed: ' + stage + ' exit ' + str(observed['returncode']))
+            if observed['returncode'] != 0:
+                raise ProviderFailure(stage, stdout, observed['returncode'])
             return stdout
         for arm in (['A', 'B'] if repetition % 2 else ['B', 'A']):
             response_raw = b''
@@ -206,11 +214,13 @@ def run_experiment(raw, output, *, executable, model, repeats=2, timeout=180):
                     assembled_raw = stitch(raw, inventory_raw, response_raw)
                     (directory/'B.assembled.json').write_bytes(assembled_raw)
                     report = base.analyze(raw, assembled_raw)
+            except ProviderFailure as error:
+                report = failure(raw, error.response_raw, error)
+                report['failed_stage'] = error.stage
             except ResponseParseError as error:
                 report = failure(raw, response_raw, error)
             except (ValueError, UnicodeError, TypeError, KeyError, RecursionError) as error:
-                provider_failed = 'Provider failed:' in str(error)
-                report = failure(raw, response_raw, error, 'STOPPED' if provider_failed else 'FAIL')
+                report = failure(raw, response_raw, error, 'FAIL')
             write_json(directory/(arm + '.report.json'), report)
             (directory/(arm + '.review.md')).write_text(base.render(report).encode('utf-8', errors='backslashreplace').decode())
             pair[arm] = {'gate_state': report['gate_state'], 'delivery_approved': False,

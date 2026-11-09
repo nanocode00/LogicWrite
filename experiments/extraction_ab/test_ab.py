@@ -131,6 +131,46 @@ class ABTests(unittest.TestCase):
             self.assertFalse((out/'pair-1/B2.response.txt').exists())
             self.assertEqual((out/'input.json').read_bytes(), self.raw)
 
+    def test_malformed_b2_is_stopped_without_repair_or_assembled_output(self):
+        inventory_raw, _ = responses(self.module, self.raw)
+        outputs = [json.dumps(fixture.proposal(self.raw)).encode(), inventory_raw, b'{"assessments":[']
+        def fake(prompt, **options):
+            return {'stdout': outputs.pop(0), 'stderr': b'', 'returncode': 0, 'seconds': 0.01}
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(self.module, 'call_model', side_effect=fake):
+            out = Path(d)/'run'; summary = self.module.run_experiment(self.raw, out, executable='stub', model='stub', repeats=1)
+            self.assertEqual(outputs, [])
+            self.assertEqual(summary['pairs'][0]['B']['gate_state'], 'STOPPED')
+            self.assertFalse((out/'pair-1/B.assembled.json').exists())
+            self.assertEqual((out/'pair-1/B2.response.txt').read_bytes(), b'{"assessments":[')
+
+    def test_failed_a_and_b1_reports_bind_failed_stage_stdout(self):
+        outputs = [b'partial failed A', b'partial failed B1']
+        def fake(prompt, **options):
+            return {'stdout': outputs.pop(0), 'stderr': b'failure', 'returncode': 7, 'seconds': 0.01}
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(self.module, 'call_model', side_effect=fake):
+            out = Path(d)/'run'; self.module.run_experiment(self.raw, out, executable='stub', model='stub', repeats=1)
+            for arm, stage in [('A', 'A'), ('B', 'B1')]:
+                report = json.loads((out/f'pair-1/{arm}.report.json').read_text())
+                observed = json.loads((out/f'pair-1/{stage}.meta.json').read_text())
+                self.assertEqual(report['gate_state'], 'STOPPED')
+                self.assertEqual(report['response_sha256'], observed['response_sha256'])
+                self.assertEqual(report['failed_stage'], stage)
+
+    def test_failed_b2_report_binds_b2_not_previous_inventory(self):
+        inventory_raw, _ = responses(self.module, self.raw)
+        outputs = [json.dumps(fixture.proposal(self.raw)).encode(), inventory_raw, b'partial failed B2']
+        def fake(prompt, **options):
+            raw = outputs.pop(0)
+            return {'stdout': raw, 'stderr': b'', 'returncode': 124 if not outputs else 0, 'seconds': 0.01}
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(self.module, 'call_model', side_effect=fake):
+            out = Path(d)/'run'; self.module.run_experiment(self.raw, out, executable='stub', model='stub', repeats=1)
+            report = json.loads((out/'pair-1/B.report.json').read_text())
+            observed = json.loads((out/'pair-1/B2.meta.json').read_text())
+            self.assertEqual(report['response_sha256'], observed['response_sha256'])
+            self.assertNotEqual(report['response_sha256'], self.module.base.digest(inventory_raw))
+            self.assertEqual(report['gate_state'], 'STOPPED')
+            self.assertEqual(report['failed_stage'], 'B2')
+
     def test_runner_success_uses_three_calls_and_keeps_review(self):
         inventory_raw, evaluation = responses(self.module, self.raw)
         outputs = [json.dumps(fixture.proposal(self.raw)).encode(), inventory_raw, json.dumps(evaluation).encode()]

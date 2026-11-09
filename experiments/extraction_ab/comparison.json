@@ -1,0 +1,443 @@
+{
+  "record_kind": "descriptive_ab_observations_not_gold_or_semantic_validation",
+  "case_id": "RW-001",
+  "input_sha256": "f7256434ef3780caf6d1863185f2100ee9035b0c8f4adbc1ebe9b3f5abc0d960",
+  "protocol_sha256": "51a0f0a937fa89f8414a3ea80649ce0d04427c702118363a2d2130c648447ffd",
+  "runner_sha256": "9cc9fbb73e9a4c12a3879036b86c53817f37e9969e06d87f929def1a26ed0f5c",
+  "post_run_runner_sha256": "f3cd59d7b4e2bc896cb06d8c231a8702af9019f4873a901dc257cc70ab6d4924",
+  "baseline_sha256": "5fd13b9cd49c6fbfc358d55f8dd284e22ad8aebd6051edc3296c227d359fc9c8",
+  "requested_model": "gemini-4-argon-medium",
+  "resolved_model_revision": "not_reported",
+  "started_at_utc": "2026-11-09T00:22:40.863779+00:00",
+  "ended_at_utc": "2026-11-09T00:25:56.495718+00:00",
+  "reviewer_kind": "Codex model follow-up; independent human review pending",
+  "semantic_quality_scored": false,
+  "delivery_approved": false,
+  "pairs": [
+    {
+      "repetition": 1,
+      "calls": [
+        {
+          "stage": "A",
+          "requested_model": "gemini-4-argon-medium",
+          "returncode": 0,
+          "seconds": 31.70066607184708,
+          "started_at_utc": "2026-11-09T00:22:41.081710+00:00",
+          "ended_at_utc": "2026-11-09T00:23:12.759760+00:00",
+          "prompt_sha256": "02a7f7a408ce9416db0e7b0523f175c98b6b24bdb8320f0453cd173644db914b",
+          "response_sha256": "f568a6a6f19ad0594f36a05b7134dce42bd79cac806609404953ac6b687d7033"
+        },
+        {
+          "stage": "B1",
+          "requested_model": "gemini-4-argon-medium",
+          "returncode": 0,
+          "seconds": 22.48204832104966,
+          "started_at_utc": "2026-11-09T00:23:12.761213+00:00",
+          "ended_at_utc": "2026-11-09T00:23:35.224464+00:00",
+          "prompt_sha256": "442ef1f830e6c50caf8931fff062f86e1a5d5fc19aae192c81433e597ee2b05a",
+          "response_sha256": "ba207b295786d8ade92173854e6e3c79dfdb56313e6e3599249cd2ce9bf0c8a6"
+        },
+        {
+          "stage": "B2",
+          "requested_model": "gemini-4-argon-medium",
+          "returncode": 0,
+          "seconds": 31.34236258501187,
+          "started_at_utc": "2026-11-09T00:23:35.225943+00:00",
+          "ended_at_utc": "2026-11-09T00:24:06.550610+00:00",
+          "prompt_sha256": "58fabd0adbff64195551d86102d923bf6aed892bdde1f82ab3d64ac3c7563940",
+          "response_sha256": "43065bb5511fdc4177ac799fb5845f54f6459145c005b063a9974c64df30b6f7"
+        }
+      ],
+      "arms": {
+        "A": {
+          "gate_state": "REVIEW",
+          "source_references": "passed",
+          "semantic_fidelity": "not_run",
+          "report_sha256": "ea969e836c323375a6f70688b570d2e28fb1e40ddc05ccef5f0998f652fd09ae",
+          "findings": [
+            "SEMANTIC_REVIEW_REQUIRED: literal source matches do not establish faithful/complete extraction"
+          ],
+          "units": [
+            {
+              "id": "u1",
+              "statement": "For the current macOS release, the PKG installer format is chosen over DMG because a DMG is better suited to simple drag-and-drop apps whereas PKG provides beginners a clearer install-and-open path.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "supports",
+                  "target_unit_id": "u2",
+                  "reason": "The packaging choice of PKG is justified by the technical installation actions described in u2."
+                }
+              ]
+            },
+            {
+              "id": "u2",
+              "statement": "The macOS application installation needs to install a menu bar runtime under Applications, bundle Node and cloudflared helpers, and run a non-blocking post-install Doctor.",
+              "assessment": {
+                "relevance": "relevant",
+                "importance": "useful",
+                "preservation": "undecided"
+              },
+              "relations": [
+                {
+                  "kind": "supports",
+                  "target_unit_id": "u1",
+                  "reason": "These three installation requirements explain why the app cannot simply use a basic drag-and-drop DMG and instead uses PKG."
+                }
+              ]
+            },
+            {
+              "id": "u3",
+              "statement": "A signed and notarized DMG may still be added in a future release for a more consumer-style download.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "qualifies",
+                  "target_unit_id": "u1",
+                  "reason": "Qualifies the current choice of PKG over DMG as specific to the current release stage rather than permanent, noting that a signed/notarized DMG could be added later."
+                }
+              ]
+            }
+          ]
+        },
+        "B": {
+          "gate_state": "STOPPED",
+          "source_references": "not_run",
+          "semantic_fidelity": "not_run",
+          "report_sha256": "04083324435f2bc3e338b41930de11061763e6a40eed5f67824687bed18ab22d",
+          "findings": [
+            "Expecting ',' delimiter: line 1 column 2694 (char 2693)"
+          ],
+          "units": []
+        }
+      },
+      "extraction_b1": [
+        {
+          "id": "u1",
+          "statement": "For this release, PKG is a better fit than DMG.",
+          "relations": []
+        },
+        {
+          "id": "u2",
+          "statement": "A DMG is nicer for drag-and-drop apps.",
+          "relations": [
+            {
+              "kind": "qualifies",
+              "target_unit_id": "u1",
+              "reason": "Concedes the case where DMG is preferable before stating this app's installation requirements."
+            }
+          ]
+        },
+        {
+          "id": "u3",
+          "statement": "This app needs to install a menu bar runtime under Applications, bundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.",
+          "relations": [
+            {
+              "kind": "supports",
+              "target_unit_id": "u1",
+              "reason": "Explains the installation requirements that make PKG a better fit than a drag-and-drop DMG for this release."
+            },
+            {
+              "kind": "qualifies",
+              "target_unit_id": "u2",
+              "reason": "Contrasts this app's multi-step installation needs with simple drag-and-drop apps."
+            }
+          ]
+        },
+        {
+          "id": "u4",
+          "statement": "PKG gives beginners a clearer \"install and open\" path.",
+          "relations": [
+            {
+              "kind": "supports",
+              "target_unit_id": "u1",
+              "reason": "Provides an additional usability reason why PKG is the better fit."
+            }
+          ]
+        },
+        {
+          "id": "u5",
+          "statement": "A signed/notarized DMG can still be added later for a more consumer-style download.",
+          "relations": [
+            {
+              "kind": "qualifies",
+              "target_unit_id": "u1",
+              "reason": "Notes that choosing PKG for this release does not preclude adding a signed/notarized DMG in a future release."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "calls": [
+        {
+          "stage": "A",
+          "requested_model": "gemini-4-argon-medium",
+          "returncode": 0,
+          "seconds": 33.17268694611266,
+          "started_at_utc": "2026-11-09T00:25:23.340576+00:00",
+          "ended_at_utc": "2026-11-09T00:25:56.494577+00:00",
+          "prompt_sha256": "02a7f7a408ce9416db0e7b0523f175c98b6b24bdb8320f0453cd173644db914b",
+          "response_sha256": "39e7fc0b1dd9410e57e8768806101e0d92df9f55d03766a5888cea4acc9f98d8"
+        },
+        {
+          "stage": "B1",
+          "requested_model": "gemini-4-argon-medium",
+          "returncode": 0,
+          "seconds": 35.14994979929179,
+          "started_at_utc": "2026-11-09T00:24:06.552459+00:00",
+          "ended_at_utc": "2026-11-09T00:24:41.681015+00:00",
+          "prompt_sha256": "442ef1f830e6c50caf8931fff062f86e1a5d5fc19aae192c81433e597ee2b05a",
+          "response_sha256": "a5f0740195d715c8ca10a9d73a1889b009573e45dbef90a48fa23cf8f0dac24c"
+        },
+        {
+          "stage": "B2",
+          "requested_model": "gemini-4-argon-medium",
+          "returncode": 0,
+          "seconds": 41.69943161634728,
+          "started_at_utc": "2026-11-09T00:24:41.682496+00:00",
+          "ended_at_utc": "2026-11-09T00:25:23.338460+00:00",
+          "prompt_sha256": "6914ff3a3e4491a651eabb97b8dfc2f3361d51df4f443747206b9e46f097fb2f",
+          "response_sha256": "05b6a375c72c04b74bffae1519c6c603100e0e52351775bbc072f7042e6b08f9"
+        }
+      ],
+      "arms": {
+        "A": {
+          "gate_state": "REVIEW",
+          "source_references": "passed",
+          "semantic_fidelity": "not_run",
+          "report_sha256": "fea4b029c5b7a55a048859cdcf3dc1b6180889f21a1198bdcc16f6a45171aea0",
+          "findings": [
+            "SEMANTIC_REVIEW_REQUIRED: literal source matches do not establish faithful/complete extraction"
+          ],
+          "units": [
+            {
+              "id": "unit-1",
+              "statement": "The section addresses the design rationale for choosing a PKG installer instead of a DMG for this release because PKG is asserted to be the better fit.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "supports",
+                  "target_unit_id": "unit-2",
+                  "reason": "Unit-2 provides the technical installation requirements that explain why PKG is asserted to be a better fit than DMG."
+                },
+                {
+                  "kind": "supports",
+                  "target_unit_id": "unit-3",
+                  "reason": "Unit-3 provides the user-experience rationale for why PKG is asserted to be a better fit."
+                }
+              ]
+            },
+            {
+              "id": "unit-2",
+              "statement": "Although a DMG is described as nicer for drag-and-drop apps, this app needs to install a menu bar runtime under Applications, bundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.",
+              "assessment": {
+                "relevance": "uncertain",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "supports",
+                  "target_unit_id": "unit-1",
+                  "reason": "Explains the technical actions required during installation that motivate choosing PKG over DMG."
+                }
+              ]
+            },
+            {
+              "id": "unit-3",
+              "statement": "PKG is asserted to give beginners a clearer \"install and open\" path.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "omit_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "supports",
+                  "target_unit_id": "unit-1",
+                  "reason": "Provides the beginner usability justification for why PKG is the better fit for this release."
+                }
+              ]
+            },
+            {
+              "id": "unit-4",
+              "statement": "A signed/notarized DMG can still be added later for a more consumer-style download.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "qualifies",
+                  "target_unit_id": "unit-1",
+                  "reason": "Clarifies that choosing PKG for this release does not preclude adding a signed/notarized DMG in a future release."
+                }
+              ]
+            }
+          ]
+        },
+        "B": {
+          "gate_state": "REVIEW",
+          "source_references": "passed",
+          "semantic_fidelity": "not_run",
+          "report_sha256": "37e68d033e35339700615347879c8e64a0a38af721fcd19e10d6b86b5199e77d",
+          "findings": [
+            "SEMANTIC_REVIEW_REQUIRED: literal source matches do not establish faithful/complete extraction"
+          ],
+          "units": [
+            {
+              "id": "u1",
+              "statement": "For this release, PKG is a better fit than DMG.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": []
+            },
+            {
+              "id": "u2",
+              "statement": "A DMG is nicer for drag-and-drop apps.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "qualifies",
+                  "target_unit_id": "u1",
+                  "reason": "Concedes the use case where DMG is nicer before contrasting it with this application's installation requirements."
+                }
+              ]
+            },
+            {
+              "id": "u3",
+              "statement": "This app needs to install a menu bar runtime under Applications, bundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.",
+              "assessment": {
+                "relevance": "relevant",
+                "importance": "useful",
+                "preservation": "retain_current"
+              },
+              "relations": [
+                {
+                  "kind": "supports",
+                  "target_unit_id": "u1",
+                  "reason": "Provides the technical installation requirements that make PKG the better fit over DMG for this release."
+                },
+                {
+                  "kind": "qualifies",
+                  "target_unit_id": "u2",
+                  "reason": "Contrasts this app's multi-step installation requirements with simple drag-and-drop apps."
+                }
+              ]
+            },
+            {
+              "id": "u4",
+              "statement": "PKG gives beginners a clearer \"install and open\" path.",
+              "assessment": {
+                "relevance": "uncertain",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "supports",
+                  "target_unit_id": "u1",
+                  "reason": "Explains the usability advantage for beginners that supports choosing PKG over DMG."
+                }
+              ]
+            },
+            {
+              "id": "u5",
+              "statement": "A signed/notarized DMG can still be added later for a more consumer-style download.",
+              "assessment": {
+                "relevance": "irrelevant",
+                "importance": "optional",
+                "preservation": "preserve_elsewhere_candidate"
+              },
+              "relations": [
+                {
+                  "kind": "qualifies",
+                  "target_unit_id": "u1",
+                  "reason": "Clarifies that preferring PKG for this release does not rule out adding a signed/notarized DMG in a future release."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "extraction_b1": [
+        {
+          "id": "u1",
+          "statement": "For this release, PKG is a better fit than DMG.",
+          "relations": []
+        },
+        {
+          "id": "u2",
+          "statement": "A DMG is nicer for drag-and-drop apps.",
+          "relations": [
+            {
+              "kind": "qualifies",
+              "target_unit_id": "u1",
+              "reason": "Concedes the use case where DMG is nicer before contrasting it with this application's installation requirements."
+            }
+          ]
+        },
+        {
+          "id": "u3",
+          "statement": "This app needs to install a menu bar runtime under Applications, bundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.",
+          "relations": [
+            {
+              "kind": "supports",
+              "target_unit_id": "u1",
+              "reason": "Provides the technical installation requirements that make PKG the better fit over DMG for this release."
+            },
+            {
+              "kind": "qualifies",
+              "target_unit_id": "u2",
+              "reason": "Contrasts this app's multi-step installation requirements with simple drag-and-drop apps."
+            }
+          ]
+        },
+        {
+          "id": "u4",
+          "statement": "PKG gives beginners a clearer \"install and open\" path.",
+          "relations": [
+            {
+              "kind": "supports",
+              "target_unit_id": "u1",
+              "reason": "Explains the usability advantage for beginners that supports choosing PKG over DMG."
+            }
+          ]
+        },
+        {
+          "id": "u5",
+          "statement": "A signed/notarized DMG can still be added later for a more consumer-style download.",
+          "relations": [
+            {
+              "kind": "qualifies",
+              "target_unit_id": "u1",
+              "reason": "Clarifies that preferring PKG for this release does not rule out adding a signed/notarized DMG in a future release."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
