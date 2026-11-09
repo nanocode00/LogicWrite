@@ -2588,6 +2588,11 @@ def validate_semantic_fidelity(
 
 
 normalize_semantic_error_category = _semantic_validator.normalize_semantic_error_category
+plan_semantic_missing_fields_retry_prompts = _semantic_validator.plan_semantic_missing_fields_retry_prompts
+register_trusted_execution_evidence = _semantic_validator.register_trusted_execution_evidence
+get_trusted_execution_evidence = _semantic_validator.get_trusted_execution_evidence
+clear_trusted_evidence_registry = _semantic_validator.clear_trusted_evidence_registry
+invalidate_trusted_evidence_for_artifacts = _semantic_validator.invalidate_trusted_evidence_for_artifacts
 
 
 def validate_semantic_fidelity_with_evidence(
@@ -2608,7 +2613,7 @@ def validate_semantic_fidelity_with_evidence(
         max_attempts=max_attempts,
         combine_with_deterministic_audit=combine_with_deterministic_audit,
     )
-    ev = _semantic_validator._TRUSTED_EVIDENCE_REGISTRY.get(rep.get('semantic_report_sha256'))
+    ev = get_trusted_execution_evidence(rep.get('semantic_report_sha256'))
     return rep, ev
 
 
@@ -3563,6 +3568,11 @@ class ExecutionController:
             }
             self.invalidation_log.append(entry)
             self._active_state = None
+            invalidate_trusted_evidence_for_artifacts(
+                snapshot_sha=current_snap_sha,
+                contract_sha=current_contract_sha,
+                input_sha=current_input_sha,
+            )
             return entry
         return None
 

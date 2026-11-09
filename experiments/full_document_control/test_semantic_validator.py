@@ -1110,6 +1110,352 @@ class SemanticFidelityValidatorTests(unittest.TestCase):
         finding_cats = {f['error_category'] for f in report['findings']}
         self.assertIn('EVALUATOR_JUDGMENT_CONFLICT', finding_cats)
 
+    # ------------------------------------------------------------------
+    # 12. P1-1 Evidence Origin & Provenance Defense Tests
+    # ------------------------------------------------------------------
+    def test_external_forged_evidence_and_report_pair_rejected_as_discrepant(self):
+        """P1-1: An external caller fabricates BOTH semantic_report and trusted_execution_evidence,
+        modifying model-detected errors to 'supported' and recomputing all SHA-256 digests.
+        Verification against the gate-managed execution boundary catches the divergence with DISCREPANT_EXECUTION_RECORD.
+        """
+        cases = eval_cases.build_semantic_evaluation_cases()
+        eval12 = next(c for c in cases if c['eval_case_id'] == 'EVAL-12-BOUNDARY-SUBTLE-SEQUENTIAL-SHIFT-FN')
+        b12, a12 = eval12['input_bundle'], eval12['analysis_result']
+        stub_eval12 = eval_cases.make_stub_model_responder_for_eval_case(eval12)
+
+        # 1. Authentic execution inside gate execution boundary
+        legit_report, trusted_evidence = pipeline.validate_semantic_fidelity_with_evidence(
+            b12, a12, semantic_responder=stub_eval12
+        )
+        self.assertEqual(legit_report['overall_judgment'], 'overstated')
+
+        # 2. Attacker fabricates matching forged report and forged execution evidence
+        forged_report = copy.deepcopy(legit_report)
+        forged_report['overall_judgment'] = 'supported'
+        forged_report['findings'] = []
+        for ij in forged_report['item_judgments']:
+            if ij['field_path'] == '/units/1/statement':
+                ij['semantic_judgment'] = 'supported'
+                ij['error_category'] = None
+
+        forged_evidence = copy.deepcopy(trusted_evidence)
+        for rec in forged_report['evaluator_records']:
+            rec_json = json.loads(rec['raw_response'])
+            for ur in rec_json.get('unit_reviews', []):
+                for fj in ur.get('field_judgments', []):
+                    if fj.get('field_path') == '/units/1/statement':
+                        fj['semantic_judgment'] = 'supported'
+                        fj['error_category'] = None
+            tampered_bytes = json.dumps(rec_json, ensure_ascii=False).encode('utf-8')
+            rec['raw_response'] = tampered_bytes.decode('utf-8')
+            rec['response_sha256'] = pipeline.digest_bytes(tampered_bytes)
+
+        forged_evidence['records'] = copy.deepcopy(forged_report['evaluator_records'])
+        forged_ev_body = {k: v for k, v in forged_evidence.items() if k != 'evidence_sha256'}
+        forged_evidence['evidence_sha256'] = pipeline.canonical_json_digest(forged_ev_body)
+        forged_report['evidence_sha256'] = forged_evidence['evidence_sha256']
+        forged_body = {k: v for k, v in forged_report.items() if k != 'semantic_report_sha256'}
+        forged_report['semantic_report_sha256'] = pipeline.canonical_json_digest(forged_body)
+
+        # 3. Passing forged evidence directly to verify_semantic_report_integrity is rejected!
+        integ_check = pipeline.verify_semantic_report_integrity(
+            b12, a12, forged_report, trusted_execution_evidence=forged_evidence
+        )
+        self.assertFalse(integ_check['valid'])
+        self.assertEqual(integ_check['code'], 'DISCREPANT_EXECUTION_RECORD')
+
+        # 4. Gate blocks transition
+        gate_rep = pipeline.validate_analysis_gate(
+            b12, a12, semantic_report=forged_report, trusted_execution_evidence=forged_evidence
+        )
+        self.assertEqual(gate_rep['gate_state'], 'FAIL')
+
+    def test_unauthenticated_external_evidence_without_boundary_record_held_as_unverified(self):
+        """P1-1: When an external caller submits a model-based report and evidence out-of-band without
+        any authentic execution record in the gate boundary (or after process reset),
+        the validator refuses to authenticate it and holds at UNVERIFIED_MODEL_EXECUTION_RECORD (REVIEW).
+        """
+        cases = eval_cases.build_semantic_evaluation_cases()
+        eval12 = next(c for c in cases if c['eval_case_id'] == 'EVAL-12-BOUNDARY-SUBTLE-SEQUENTIAL-SHIFT-FN')
+        b12, a12 = eval12['input_bundle'], eval12['analysis_result']
+        stub_eval12 = eval_cases.make_stub_model_responder_for_eval_case(eval12)
+
+        legit_report, trusted_evidence = pipeline.validate_semantic_fidelity_with_evidence(
+            b12, a12, semantic_responder=stub_eval12
+        )
+        pipeline.clear_trusted_evidence_registry()
+
+        integ_check = pipeline.verify_semantic_report_integrity(
+            b12, a12, legit_report, trusted_execution_evidence=trusted_evidence
+        )
+        self.assertFalse(integ_check['valid'])
+        self.assertEqual(integ_check['code'], 'UNVERIFIED_MODEL_EXECUTION_RECORD')
+
+        gate_rep = pipeline.validate_analysis_gate(
+            b12, a12, semantic_report=legit_report, trusted_execution_evidence=trusted_evidence
+        )
+        self.assertEqual(gate_rep['gate_state'], 'REVIEW')
+
+    def test_upstream_artifact_change_invalidates_trusted_execution_evidence(self):
+        """P1-1: When upstream artifacts (snapshot, contract, analysis) change,
+        prior trusted execution evidence is invalidated and cannot be reused to pass the gate.
+        """
+        cases = eval_cases.build_semantic_evaluation_cases()
+        eval12 = next(c for c in cases if c['eval_case_id'] == 'EVAL-12-BOUNDARY-SUBTLE-SEQUENTIAL-SHIFT-FN')
+        b12, a12 = eval12['input_bundle'], eval12['analysis_result']
+        stub_eval12 = eval_cases.make_stub_model_responder_for_eval_case(eval12)
+
+        legit_report, trusted_evidence = pipeline.validate_semantic_fidelity_with_evidence(
+            b12, a12, semantic_responder=stub_eval12
+        )
+
+        # Invalidate artifacts
+        pipeline.invalidate_trusted_evidence_for_artifacts(snapshot_sha='modified_snapshot_sha_value')
+
+        integ_check = pipeline.verify_semantic_report_integrity(
+            b12, a12, legit_report, trusted_execution_evidence=trusted_evidence
+        )
+        self.assertFalse(integ_check['valid'])
+        self.assertEqual(integ_check['code'], 'UNVERIFIED_MODEL_EXECUTION_RECORD')
+
+    # ------------------------------------------------------------------
+    # 13. P1-2 Missing Fields Retry Prompt Budget Limits
+    # ------------------------------------------------------------------
+    def test_retry_prompt_budget_normal_within_limit(self):
+        """P1-2: Normal case where retry prompt for missing fields fits strictly within max_prompt_chars."""
+        bundle = self.rw001_bundle
+        analysis = self.rw001_analysis
+        snapshot = bundle['document_snapshot']
+        recorded_lengths = []
+
+        def recovering_responder(w_idx, sw, prompt, att):
+            recorded_lengths.append(len(prompt))
+            if att == 1:
+                # Omit preservation only for unit 0
+                resp = pipeline.build_stub_semantic_response_from_audit(bundle, analysis, window_index=w_idx)
+                for ur in resp['unit_reviews']:
+                    if ur['unit_id'] == 'u-rw-heading':
+                        ur['field_judgments'] = [
+                            fj for fj in ur['field_judgments']
+                            if not fj['field_path'].endswith('/assessment/preservation')
+                        ]
+                return resp
+            else:
+                # Return missing preservation
+                return {
+                    'case_id': bundle['case_id'],
+                    'input_sha256': pipeline.canonical_json_digest(bundle),
+                    'snapshot_id': snapshot['snapshot_id'],
+                    'snapshot_sha256': snapshot['sha256'],
+                    'analysis_sha256': analysis['analysis_sha256'],
+                    'semantic_window_id': sw['semantic_window_id'],
+                    'window_index': w_idx,
+                    'unit_reviews': [{
+                        'unit_id': 'u-rw-heading',
+                        'field_judgments': [{
+                            'field_path': '/units/0/assessment/preservation',
+                            'semantic_judgment': 'supported',
+                            'rationale': 'Matches heading',
+                            'evidence_quotes': ['### Why PKG Instead Of DMG?'],
+                        }],
+                    }],
+                    'block_omission_reviews': [],
+                }
+
+        report = pipeline.validate_semantic_fidelity(
+            bundle,
+            analysis,
+            semantic_responder=recovering_responder,
+            max_prompt_chars=16000,
+            max_attempts=2,
+            combine_with_deterministic_audit=False,
+        )
+        self.assertTrue(len(recorded_lengths) >= 2)
+        for plen in recorded_lengths:
+            self.assertLessEqual(plen, 16000)
+        self.assertTrue(report['coverage_summary']['is_complete'])
+
+    def test_retry_prompt_budget_overflow_prevented_across_multiple_omissions(self):
+        """P1-2: When multiple fields are omitted, the validator strictly enforces that
+        every prompt delivered to responder across all attempts has length <= max_prompt_chars.
+        """
+        bundle = eval_cases.build_rw001_full_doc_bundle()
+        snapshot = bundle['document_snapshot']
+        analysis = pipeline.assemble_document_analysis(
+            bundle, [json.dumps(eval_cases.make_rw001_faithful_window_response(bundle))]
+        )
+
+        # Add multiple elements to create high missing field count
+        for i, u in enumerate(analysis['units']):
+            for j in range(15):
+                u.setdefault('elements', []).append({
+                    'element_index': len(u['elements']),
+                    'mention': f'test-element-{i}-{j}',
+                    'field_path': f'/units/{i}/elements/{len(u["elements"])}/mention',
+                })
+        analysis['analysis_sha256'] = pipeline.canonical_json_digest(
+            {k: v for k, v in analysis.items() if k != 'analysis_sha256'}
+        )
+
+        limit = 11300
+        recorded_prompts = []
+
+        def omitting_responder(w_idx, sw, prompt, att):
+            recorded_prompts.append((sw['semantic_window_id'], att, len(prompt)))
+            u0 = sw['target_units'][0]
+            return {
+                'case_id': bundle['case_id'],
+                'input_sha256': pipeline.canonical_json_digest(bundle),
+                'snapshot_id': snapshot['snapshot_id'],
+                'snapshot_sha256': snapshot['sha256'],
+                'analysis_sha256': analysis['analysis_sha256'],
+                'semantic_window_id': sw['semantic_window_id'],
+                'window_index': w_idx,
+                'unit_reviews': [{
+                    'unit_id': u0['id'],
+                    'field_judgments': [{
+                        'field_path': f'/units/{u0["unit_index"]}/statement',
+                        'semantic_judgment': 'supported',
+                        'rationale': 'ok',
+                        'evidence_quotes': ['### Why PKG Instead Of DMG?'],
+                    }],
+                }],
+                'block_omission_reviews': [],
+            }
+
+        report = pipeline.validate_semantic_fidelity(
+            bundle,
+            analysis,
+            semantic_responder=omitting_responder,
+            max_prompt_chars=limit,
+            max_attempts=2,
+            combine_with_deterministic_audit=False,
+        )
+
+        self.assertTrue(len(recorded_prompts) > 0)
+        for wid, att, plen in recorded_prompts:
+            self.assertLessEqual(plen, limit, f"Prompt for {wid} attempt {att} ({plen}) exceeded limit {limit}")
+
+    def test_retry_prompt_partitioning_across_windows_succeeds(self):
+        """P1-2: When missing field paths exceed budget in a single prompt,
+        plan_semantic_missing_fields_retry_prompts partitions them across bounded prompts.
+        """
+        bundle = eval_cases.build_rw001_full_doc_bundle()
+        snapshot = bundle['document_snapshot']
+        blocks = pipeline.parse_markdown_blocks(snapshot)
+        blocks_by_id = {b['block_id']: b for b in blocks}
+        analysis = pipeline.assemble_document_analysis(
+            bundle, [json.dumps(eval_cases.make_rw001_faithful_window_response(bundle))]
+        )
+
+        for i, u in enumerate(analysis['units']):
+            for j in range(15):
+                u.setdefault('elements', []).append({
+                    'element_index': len(u['elements']),
+                    'mention': f'test-element-{i}-{j}',
+                    'field_path': f'/units/{i}/elements/{len(u["elements"])}/mention',
+                })
+        analysis['analysis_sha256'] = pipeline.canonical_json_digest(
+            {k: v for k, v in analysis.items() if k != 'analysis_sha256'}
+        )
+
+        limit = 11300
+        windows = pipeline.plan_semantic_review_windows(bundle, analysis, max_prompt_chars=limit)
+        sw1 = windows[1]
+        missing_paths = list(sw1['required_field_paths'])
+
+        partitions, unpart = pipeline.plan_semantic_missing_fields_retry_prompts(
+            snapshot,
+            blocks_by_id,
+            pipeline._compact_contract_for_prompt(bundle['writing_contract']),
+            input_sha256=pipeline.canonical_json_digest(bundle),
+            analysis_sha256=analysis['analysis_sha256'],
+            semantic_window_id=sw1['semantic_window_id'],
+            window_index=1,
+            total_windows=len(windows),
+            target_unit_entries=sw1['target_units'],
+            target_block_ids=sw1['target_block_ids'],
+            missing_field_paths=missing_paths,
+            case_id=bundle['case_id'],
+            max_prompt_chars=limit,
+            serialize_block_fn=pipeline._serialize_block_for_prompt,
+            max_retry_calls=2,
+        )
+
+        self.assertGreater(len(partitions), 1)
+        self.assertLessEqual(len(partitions), 2)
+        for p in partitions:
+            self.assertLessEqual(len(p['prompt_text']), limit)
+
+    def test_unpartitionable_single_field_held_as_unresolved_without_model_call(self):
+        """P1-2: When even a single missing field candidate cannot fit within max_prompt_chars,
+        the model is NOT called for it, and it is safely held as unreviewed (INCOMPLETE_SEMANTIC_COVERAGE -> REVIEW).
+        """
+        bundle = eval_cases.build_rw001_full_doc_bundle()
+        snapshot = bundle['document_snapshot']
+        blocks = pipeline.parse_markdown_blocks(snapshot)
+        blocks_by_id = {b['block_id']: b for b in blocks}
+        analysis = pipeline.assemble_document_analysis(
+            bundle, [json.dumps(eval_cases.make_rw001_faithful_window_response(bundle))]
+        )
+
+        # Set max_prompt_chars unrealistically low for retry planning
+        partitions, unpart = pipeline.plan_semantic_missing_fields_retry_prompts(
+            snapshot,
+            blocks_by_id,
+            pipeline._compact_contract_for_prompt(bundle['writing_contract']),
+            input_sha256=pipeline.canonical_json_digest(bundle),
+            analysis_sha256=analysis['analysis_sha256'],
+            semantic_window_id='SW001',
+            window_index=0,
+            total_windows=1,
+            target_unit_entries=[analysis['units'][0]],
+            target_block_ids=['B001'],
+            missing_field_paths=['/units/0/statement'],
+            case_id=bundle['case_id'],
+            max_prompt_chars=500,  # cannot fit even single unit envelope
+            serialize_block_fn=pipeline._serialize_block_for_prompt,
+        )
+
+        self.assertEqual(len(partitions), 0)
+        self.assertIn('/units/0/statement', unpart)
+
+    def test_retry_failure_preserves_prior_valid_judgments(self):
+        """P1-2: When an evaluator's retry attempt fails, prior valid judgments from attempt 1
+        are preserved without corruption, and unreviewed fields leave coverage incomplete (REVIEW).
+        """
+        bundle = self.rw001_bundle
+        analysis = self.rw001_analysis
+
+        def failing_retry_responder(w_idx, sw, prompt, att):
+            if att == 1:
+                resp = pipeline.build_stub_semantic_response_from_audit(bundle, analysis, window_index=w_idx)
+                # Keep unit 0 intact, but strip unit 1
+                resp['unit_reviews'] = [ur for ur in resp['unit_reviews'] if ur['unit_id'] == 'u-rw-heading']
+                return resp
+            else:
+                raise pipeline.ResponseParseError("Simulated LLM network or syntax failure on retry")
+
+        report = pipeline.validate_semantic_fidelity(
+            bundle,
+            analysis,
+            semantic_responder=failing_retry_responder,
+            max_attempts=2,
+            combine_with_deterministic_audit=False,
+        )
+
+        # Prior valid judgments for unit 0 statement are preserved!
+        u0_judgments = [
+            ij for ij in report['item_judgments']
+            if ij['field_path'] == '/units/0/statement' and ij['semantic_judgment'] == 'supported'
+        ]
+        self.assertTrue(len(u0_judgments) > 0)
+
+        # But overall report is held at review due to incomplete coverage
+        self.assertEqual(report['overall_judgment'], 'unresolved')
+        cov_findings = [f for f in report['findings'] if f['error_category'] == 'INCOMPLETE_SEMANTIC_COVERAGE']
+        self.assertTrue(len(cov_findings) > 0)
+
 
 if __name__ == '__main__':
     unittest.main()
