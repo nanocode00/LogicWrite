@@ -1041,9 +1041,275 @@ class P2_2ConditionLinkCorrespondenceTests(unittest.TestCase):
         self.assertEqual(ctx.exception.code, 'ELEMENT_SPAN_NOT_IN_UNIT_SPAN')
 
 
+class P1_2PromptBudgetAndCrossWindowTests(unittest.TestCase):
+    def test_long_document_multi_window_prompts_strictly_obey_max_prompt_chars_without_repeating_full_doc(self):
+        bundle = load_sample_bundle()
+        long_bundle = copy.deepcopy(bundle)
+        extra_sections = []
+        for idx in range(1, 26):
+            extra_sections.append(
+                f'## 추가 운영 섹션 {idx}\n\n'
+                f'이 문단은 섹션 {idx}의 상세 운영 지침과 설정 파라미터를 설명하며, '
+                f'전체 문서 분할 시 문맥 예산 상한(max_prompt_chars) 준수 여부를 검증하기 위한 본문 블록이다. '
+                f'노드 식별자는 node-{idx:02d}이며 점검 주기는 {idx * 5}분이다.\n'
+            )
+        long_bundle['document_snapshot']['content'] = (
+            long_bundle['document_snapshot']['content'].rstrip('\n') + '\n\n' + '\n'.join(extra_sections)
+        )
+        long_bundle['document_snapshot']['sha256'] = pipeline.digest_text(
+            long_bundle['document_snapshot']['content']
+        )
+
+        blocks = pipeline.parse_markdown_blocks(long_bundle['document_snapshot'])
+        extractable = [b for b in blocks if b['extractable']]
+        self.assertGreater(len(extractable), 50)
+
+        budget_chars = 5200
+        windows = pipeline.plan_extraction_windows(
+            long_bundle['document_snapshot'],
+            blocks,
+            max_window_chars=600,
+            max_prompt_chars=budget_chars,
+            writing_contract=long_bundle['writing_contract'],
+            case_id=long_bundle['case_id'],
+            input_sha256=pipeline.canonical_json_digest(long_bundle),
+        )
+        self.assertGreater(len(windows), 6)
+
+        for idx, win in enumerate(windows):
+            prompt = pipeline.build_window_prompt(
+                long_bundle,
+                window_index=idx,
+                max_window_chars=600,
+                max_prompt_chars=budget_chars,
+            )
+            self.assertLessEqual(len(prompt), budget_chars)
+            # Context blocks are bounded local neighbors/headings, never all non-target blocks in the document
+            self.assertLessEqual(len(win['context_block_ids']), 3)
+            self.assertIn('token_vs_char_policy', win['budget_policy'])
+
+    def test_oversized_single_block_is_held_as_unresolved_and_never_sent_unbounded(self):
+        bundle = load_sample_bundle()
+        oversized_bundle = copy.deepcopy(bundle)
+        giant_paragraph = '초대형 단일 블록 본문 데이터입니다. ' * 260  # ~4680 chars in a single paragraph block
+        oversized_bundle['document_snapshot']['content'] = (
+            oversized_bundle['document_snapshot']['content'].rstrip('\n') + '\n\n' + giant_paragraph + '\n'
+        )
+        oversized_bundle['document_snapshot']['sha256'] = pipeline.digest_text(
+            oversized_bundle['document_snapshot']['content']
+        )
+
+        budget_chars = 7500
+        blocks = pipeline.parse_markdown_blocks(oversized_bundle['document_snapshot'])
+        giant_block_id = blocks[-1]['block_id']
+        windows = pipeline.plan_extraction_windows(
+            oversized_bundle['document_snapshot'],
+            blocks,
+            max_prompt_chars=budget_chars,
+            writing_contract=oversized_bundle['writing_contract'],
+            case_id=oversized_bundle['case_id'],
+            input_sha256=pipeline.canonical_json_digest(oversized_bundle),
+        )
+        all_oversized = [bid for w in windows for bid in w.get('oversized_block_ids', [])]
+        self.assertIn(giant_block_id, all_oversized)
+
+        # Prompt for every window remains <= budget_chars and does not include the giant paragraph text
+        for idx in range(len(windows)):
+            prompt = pipeline.build_window_prompt(
+                oversized_bundle, window_index=idx, max_prompt_chars=budget_chars
+            )
+            self.assertLessEqual(len(prompt), budget_chars)
+            self.assertNotIn(giant_paragraph, prompt)
+
+        # Assembling analysis marks the oversized block as status='unresolved' with OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET
+        resp = make_valid_window_response(oversized_bundle)
+        analysis = pipeline.assemble_document_analysis(
+            oversized_bundle, [json.dumps(resp)], max_prompt_chars=budget_chars
+        )
+        ledger_by_id = {row['block_id']: row for row in analysis['coverage_ledger']}
+        self.assertEqual(ledger_by_id[giant_block_id]['status'], 'unresolved')
+        self.assertEqual(
+            ledger_by_id[giant_block_id]['unresolved_reason'],
+            'OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET',
+        )
+        report = pipeline.validate_analysis_gate(oversized_bundle, analysis)
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        by_id = {r['check_id']: r['status'] for r in report['check_results']}
+        self.assertEqual(by_id['BLOCK_COVERAGE'], 'unresolved')
+
+    def test_cross_window_relation_reconciliation_path_links_split_windows(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        w_blocks = pipeline.parse_markdown_blocks(bundle['document_snapshot'])
+        windows = pipeline.plan_extraction_windows(
+            bundle['document_snapshot'], w_blocks, max_window_chars=200
+        )
+        full_units_by_block = {}
+        for u in copy.deepcopy(resp['units']):
+            # Simulate windows extracted without cross-window relations initially
+            u['relations'] = [r for r in u['relations'] if u['id'] == 'u-timeout']
+            bid = u['quotes'][0]['block_id']
+            full_units_by_block.setdefault(bid, []).append(u)
+        cov_by_block = {c['block_id']: c for c in resp['block_coverage']}
+
+        window_payloads = []
+        for w in windows:
+            w_units = [u for bid in w['target_block_ids'] for u in full_units_by_block.get(bid, [])]
+            w_cov = [cov_by_block[bid] for bid in w['target_block_ids']]
+            window_payloads.append(json.dumps({
+                'input_sha256': resp['input_sha256'],
+                'snapshot_id': resp['snapshot_id'],
+                'snapshot_sha256': resp['snapshot_sha256'],
+                'window_id': w['window_id'],
+                'block_coverage': w_cov,
+                'units': w_units,
+                'alignment': resp['alignment'],
+                'unresolved_questions': [],
+            }))
+
+        cw_prompt = pipeline.build_cross_window_relation_prompt(
+            bundle, resp['units'], max_prompt_chars=4800
+        )
+        self.assertLessEqual(len(cw_prompt), 4800)
+        self.assertIn('CROSS_WINDOW_INPUT_JSON:', cw_prompt)
+
+        cw_response = json.dumps({
+            'input_sha256': resp['input_sha256'],
+            'snapshot_id': resp['snapshot_id'],
+            'snapshot_sha256': resp['snapshot_sha256'],
+            'cross_window_relations': [
+                {
+                    'source_unit_id': 'u-code-install',
+                    'kind': 'depends_on',
+                    'target_unit_id': 'u-table-ubuntu',
+                    'reason': '표에 정의된 Linux 패키지 아카이브를 입력으로 사용한다.',
+                },
+                {
+                    'source_unit_id': 'u-cond-offline-cache',
+                    'kind': 'qualifies',
+                    'target_unit_id': 'u-runtime-overview',
+                    'reason': 'B003의 외부 업로드 없는 로컬 실행 주장에 대해 오프라인 캐시 선행 조건을 한정한다.',
+                },
+                {
+                    'source_unit_id': 'u-cond-macos-manual',
+                    'kind': 'qualifies',
+                    'target_unit_id': 'u-table-macos',
+                    'reason': 'B007 표의 macOS 패키지 항목에 대해 자동 업데이트 미지원 제약을 한정한다.',
+                },
+            ],
+        })
+        merged = pipeline.assemble_document_analysis(
+            bundle,
+            window_payloads,
+            max_window_chars=200,
+            cross_window_relations_raw=cw_response,
+        )
+        report = pipeline.validate_analysis_gate(bundle, merged)
+        by_id = {r['check_id']: r['status'] for r in report['check_results']}
+        self.assertEqual(by_id['PROTECTED_TRACEABILITY'], 'passed')
+        self.assertEqual(report['gate_state'], 'REVIEW')
+
+
+class P2_1StructuredModelFailureHandlingTests(unittest.TestCase):
+    def test_provider_failure_and_timeout_and_secret_redaction_are_handled_without_unhandled_exception(self):
+        bundle = load_sample_bundle()
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        controller = pipeline.ExecutionController(max_attempts=2, organization_adapter=adapter)
+
+        def failing_responder(_idx, _win, _prompt, attempt):
+            if attempt == 1:
+                return {
+                    'stdout': b'partial failure payload',
+                    'stderr': b'Auth failed: Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 api_key=sk-proj1234567890abcdef',
+                    'returncode': 17,
+                    'timed_out': False,
+                    'seconds': 0.12,
+                }
+            raise TimeoutError('Provider timed out with token=ghp_1234567890abcdef123456')
+
+        result = controller.run(bundle, failing_responder)
+        self.assertEqual(result['gate_state'], 'STOPPED')
+        self.assertEqual(result['execution_state'], 'stopped')
+        self.assertEqual(result['attempts_used'], 2)
+        self.assertFalse(result['next_stage_allowed'])
+        self.assertFalse(result['next_stage_invoked'])
+        self.assertEqual(len(adapter.invocations), 0)
+        self.assertEqual(len(adapter.blocked_attempts), 2)
+
+        # Verify attempt 1 recorded provider exit code 17 and response sha256
+        att1 = result['attempt_history'][0]
+        self.assertEqual(att1['failed_window_id'], 'W001')
+        self.assertEqual(att1['failed_stage'], 'information_extraction_analysis')
+        self.assertEqual(att1['window_records'][0]['returncode'], 17)
+        self.assertEqual(att1['window_records'][0]['error_code'], 'MODEL_PROVIDER_EXIT_ERROR')
+        self.assertEqual(
+            att1['window_records'][0]['response_sha256'],
+            pipeline.digest_bytes(b'partial failure payload'),
+        )
+
+        # Verify attempt 2 recorded timeout
+        att2 = result['attempt_history'][1]
+        self.assertTrue(att2['window_records'][0]['timed_out'])
+        self.assertEqual(att2['window_records'][0]['error_code'], 'MODEL_CALL_TIMEOUT')
+
+        # Verify secrets were redacted everywhere in serialized result
+        serialized = json.dumps(result, ensure_ascii=False)
+        self.assertNotIn('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9', serialized)
+        self.assertNotIn('sk-proj1234567890abcdef', serialized)
+        self.assertNotIn('ghp_1234567890abcdef123456', serialized)
+        self.assertIn('[REDACTED]', serialized)
+
+    def test_partial_multi_window_failure_preserves_prior_succeeded_window_records(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        w_blocks = pipeline.parse_markdown_blocks(bundle['document_snapshot'])
+        windows = pipeline.plan_extraction_windows(
+            bundle['document_snapshot'], w_blocks, max_window_chars=200
+        )
+        self.assertEqual(len(windows), 4)
+
+        full_units_by_block = {}
+        for u in resp['units']:
+            bid = u['quotes'][0]['block_id']
+            full_units_by_block.setdefault(bid, []).append(u)
+        cov_by_block = {c['block_id']: c for c in resp['block_coverage']}
+
+        def partial_window_responder(idx, w, _prompt, _attempt):
+            if idx == 0:
+                w_units = [u for bid in w['target_block_ids'] for u in full_units_by_block.get(bid, [])]
+                w_cov = [cov_by_block[bid] for bid in w['target_block_ids']]
+                return json.dumps({
+                    'input_sha256': resp['input_sha256'],
+                    'snapshot_id': resp['snapshot_id'],
+                    'snapshot_sha256': resp['snapshot_sha256'],
+                    'window_id': w['window_id'],
+                    'block_coverage': w_cov,
+                    'units': w_units,
+                    'alignment': resp['alignment'],
+                    'unresolved_questions': [],
+                })
+            # Fail on W002 (idx == 1) with malformed JSON or provider error
+            return '{malformed json in W002 with secret=my_super_secret_val'
+
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        controller = pipeline.ExecutionController(max_attempts=1, organization_adapter=adapter)
+        res = controller.run(bundle, partial_window_responder, max_window_chars=200)
+
+        self.assertEqual(res['gate_state'], 'STOPPED')
+        self.assertFalse(res['next_stage_invoked'])
+        self.assertEqual(len(adapter.invocations), 0)
+
+        att = res['attempt_history'][0]
+        self.assertEqual(att['completed_window_ids'], ['W001'])
+        self.assertEqual(att['failed_window_id'], 'W002')
+        self.assertEqual(len(att['window_records']), 2)
+        self.assertEqual(att['window_records'][0]['window_id'], 'W001')
+        self.assertEqual(att['window_records'][0]['status'], 'succeeded')
+        self.assertEqual(att['window_records'][1]['window_id'], 'W002')
+        self.assertEqual(att['window_records'][1]['status'], 'failed')
+        self.assertEqual(att['window_records'][1]['error_code'], 'MODEL_RESPONSE_PARSE_ERROR')
+        self.assertNotIn('my_super_secret_val', json.dumps(res, ensure_ascii=False))
+
+
 if __name__ == '__main__':
     unittest.main()
-
-
-
-

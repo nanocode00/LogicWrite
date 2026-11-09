@@ -11,15 +11,17 @@
 1. **전체 Markdown 문서 스냅샷 처리 (`DocumentSnapshot` → 블록 분할 → 정보 추출·통합):**
    - 원문 전체와 UTF-8 SHA-256 다이제스트를 고정(`coverage: "complete"`)하고, 0부터 시작하는 유니코드 코드 포인트 반개구간 `[start, end)`으로 제목(`heading`), 문단(`paragraph`), 표(`table`), 코드 블록(`code_block`), 목록(`list`), 인용(`blockquote`)과 비대상 구분자(`blank`, `thematic_break`), 미지원 문법(`unsupported`)을 빈틈·겹침 없이 분할한다.
    - 제외 블록에는 `exclusion_reason`을 남기고, 미지원 문법(예: 닫히지 않은 코드 펜스, 원시 HTML 블록, 각주/링크 정의 등)은 조용히 버리거나 완료로 처리하지 않고 `unsupported`(`unresolved`)로 기록한다.
-   - 문맥 길이에 맞춰 여러 창(window)으로 나누더라도 각 창은 단일 `DocumentSnapshot` 다이제스트, 전체 블록 개요(`document_block_outline`), 문맥 블록을 유지하며 독립된 문서처럼 취급하지 않는다.
-   - 블록 내부 및 블록 경계를 가로지르는 주장·조건 관계(`qualifies`, `depends_on`, `supports` 등)와 계약상 필수 보호 정보(`required_information`)를 문서 전체 단위 목록(`units`), `requirement_bindings`, `coverage_ledger`로 통합한다.
+   - 문맥 길이에 맞춰 여러 창(window)으로 나누더라도 각 창은 단일 `DocumentSnapshot` 다이제스트와 블록 개요를 유지하며 독립된 문서처럼 취급하지 않는다. 이때 전체 원문을 매 호출마다 반복 전달하지 않고 인접 블록·상위 제목 문맥만 포함해 렌더링된 프롬프트 전체 크기(`max_prompt_chars`)를 엄격히 제한하며, 단일 블록이 예산을 초과하면 무제한 전달하지 않고 `OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET`(`unresolved` → `REVIEW`)으로 명시적 보류한다. 또한 분할된 창 사이의 교차 관계를 별도 사후 통합(`build_cross_window_relation_prompt` / `cross_window_relations_raw`)으로 연결할 수 있다.
+   - 블록 내부 및 블록 경계를 가로지르는 주장·조건 관계(`qualifies`, `depends_on`, `supports` 등)와 계약상 필수 보호 정보(`required_information`)를 문서 전체 단위 목록(`units`), `requirement_bindings`, `coverage_ledger`로 통합한다. 보호 조건 연결(`requires_condition_link`)은 조건 요소 스팬이 단위 스팬 내부에 속하는지, 관계 방향(`조건 --qualifies--> 주장` 또는 `주장 --depends_on--> 조건`)과 실질 주장 단위 여부, 관계 이유(`reason`) 및 출처 어휘 앵커 대응을 검증하되, 이를 의미적 진실의 증명으로 주장하지 않고(`structural_correspondence_only_not_semantic_proof`) 모호한 연결은 `unresolved`(`REVIEW`)로 보류한다.
    - **전체 블록을 처리했다는 범위 추적(`BLOCK_COVERAGE`)과 의미 정보를 올바르게 추출했다는 판단(`SEMANTIC_FIDELITY`)을 엄격히 구별한다.**
 
 2. **독립 검증 게이트와 단계 실행 제어 (`Validation Gate` + `ExecutionController`):**
-   - 고정된 `ValidationPlan`(`SNAPSHOT_AND_CONTRACT`, `BLOCK_COVERAGE`, `UNIT_AND_SPAN_INTEGRITY`, `PROTECTED_TRACEABILITY`, `SEMANTIC_FIDELITY`)에 따라 각 필수 검사의 실행 여부·버전·산출물 다이제스트를 대조한다.
+   - 고정된 `ValidationPlan`(`SNAPSHOT_AND_CONTRACT`, `BLOCK_COVERAGE`, `UNIT_AND_SPAN_INTEGRITY`, `PROTECTED_TRACEABILITY`, `SEMANTIC_FIDELITY`)에 따라 각 필수 검사의 실행 여부·버전·산출물 다이제스트를 대조하며, 호출자가 임의로 변조·약화한 `ValidationPlan`(`UNAUTHORIZED_VALIDATION_PLAN_OVERRIDE`)을 거부한다.
+   - 외부에서 전달된 `ValidationReport`의 `gate_state`, `delivery_approved`, `next_stage_allowed`, 개별 검사 상태(`SEMANTIC_FIDELITY: "passed"` 등)나 재계산된 SHA-256 다이제스트만으로 후속 단계 진입을 승인하지 않는다. `can_advance_to_organization()` 및 `OrganizationBoundaryAdapter`는 진입 직전에 `analysis_sha256`·`plan_sha256`·`report_sha256` 내용 무결성을 검증하고 신뢰 가능한 입력·계약·분석 결과를 바탕으로 독립 검증 게이트를 재수행해 위조된 검사 결과(`FORGED_OR_TAMPERED_CHECK_RESULTS`)를 차단한다.
    - 모델 출력에 포함된 자기승인(`gate_state: "PASS"`, `delivery_approved: true`) 시도는 무결성 위반(`FAIL`)으로 거부한다.
    - 결정론적 구조·참조·보호 정보 검사가 모두 통과해도 `SEMANTIC_FIDELITY`가 미검증(`not_run` 또는 `unresolved`)이면 항상 `REVIEW`(`delivery_approved: false`, `next_stage_allowed: false`)를 유지한다.
    - `ExecutionController`와 다음 단계 경계 어댑터(`OrganizationBoundaryAdapter`)는 `PASS` 외 모든 상태(`REVIEW`, `FAIL`, `STOPPED`)의 후속 단계 진입을 코드로 차단한다.
+   - 모델/제공자 호출 실패(비정상 종료 코드, 타임아웃, 잘못된 JSON, 다중 창 부분 실행 실패)를 구조화된 예외 처리로 포착해 워크플로가 비제어 예외로 중단되지 않도록 보장한다. 이전 성공 창(`completed_window_ids`)과 실패 창(`failed_window_id`)의 실행 기록(`window_records`), 응답 다이제스트, 종료 코드/타임아웃 여부를 보존하고 원시 오류 문자열의 비밀정보(토큰, API 키, 비밀번호 등)를 마스킹(`[REDACTED]`)한다.
    - 입력 스냅샷·작성 계약·검증 계획이 바뀌면 기존 분석 및 검증 보고서를 즉시 무효화(`invalidation_log`)하고 재사용을 거부한다.
    - 재시도 횟수 상한(`max_attempts`)을 강제하며, 한도 도달 시 마지막 결함 상태(`last_gate_state: "FAIL"`)와 복귀 대상 단계(`return_to_stage`), 실패 근거를 보존한 채 `STOPPED`로 종료한다.
 
@@ -79,8 +81,14 @@ python3 experiments/full_document_control/pipeline.py run \
 7. 입력 스냅샷 또는 작성 계약 변경 후 이전 검증 보고서 재사용 시도 무효화(`STALE_VALIDATION_REPORT_INVALIDATED`)
 8. 실패(`FAIL`), 중단(`STOPPED`), 미검증(`REVIEW`) 분석 결과의 `OrganizationBoundaryAdapter` 진입 차단 및 유한 재시도 상한(`max_attempts`) 강제
 9. 결정론적 구조 검사 4종이 모두 `passed`여도 `SEMANTIC_FIDELITY`가 `not_run`/`unresolved`이면 `REVIEW`로 남아 의미적 `PASS`로 오인되지 않음을 확인
+10. **P1-1 (보고서 위조·변조 방어):** `SEMANTIC_FIDELITY: "passed"` 위조 및 `report_sha256` 재계산, 분석 본문 변조 후 다이제스트 재계산, 필수 검사를 제외한 임의 `ValidationPlan` 교체, `OrganizationBoundaryAdapter` 직접 호출 우회 시도를 모두 독립 재검증으로 차단
+11. **P1-2 (전체 프롬프트 문맥 예산 제한):** 긴 문서 다중 창 분할 시 지시문·계약·블록 개요·인접 문맥·대상 블록을 포함한 전체 프롬프트 길이(`max_prompt_chars`) 준수, 초대형 단일 블록 명시적 보류(`OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET` → `REVIEW`), 창 간 관계 사후 통합(`build_cross_window_relation_prompt`) 검증
+12. **P2-1 (모델 호출 실패 구조화 처리):** 제공자 비정상 종료, 타임아웃, 다중 창 부분 실행 실패(`W001` 성공 후 `W002` 실패), 원시 오류 로그 내 비밀정보 마스킹(`[REDACTED]`) 및 재시도 상한 준수 검증
+13. **P2-2 (보호 조건 연결 대응 검증):** 무관한 `supports` 관계, 제목 블록/역방향 `qualifies` 연결, 단위 스팬 외부의 요소 스팬(`ELEMENT_SPAN_NOT_IN_UNIT_SPAN`), 근거 없는 관계 이유(`FAIL`) 및 출처 어휘 앵커 미공유 모호 연결(`unresolved` → `REVIEW`) 구분 검증
 
 ## 한계
+
+- 프롬프트 예산(`max_prompt_chars`)은 오프라인에서 제공자별 토크나이저를 직접 호출하지 않으므로 유니코드 코드 포인트 길이를 기준으로 상한을 강제하며(`budget_policy.token_vs_char_policy`), 한국어·UTF-8 다중 토큰 특성을 고려해 보수적으로 설정해야 한다.
 
 - 블록 전체 범위와 필수 문자열·관계 연결이 확인되어도 정규화된 문장(`statement`)이나 판단 이유(`reason`/`exposure`)에서 발생하는 미묘한 의미 왜곡·주장 범위 확대를 결정론적 검사만으로 완벽히 잡아낼 수는 없으므로 `SEMANTIC_FIDELITY`를 자동 `PASS`로 처리하지 않는다.
 - 현재 Markdown 파서는 줄 단위 블록 구조(제목, 문단, 파이프 표, 펜스 코드 블록, 목록, 인용, 구분선, 공백)를 다루며, 중첩 복합 구조나 원시 HTML/각주 등은 `unsupported`로 분류해 사람 검토(`REVIEW`)로 보류한다.
