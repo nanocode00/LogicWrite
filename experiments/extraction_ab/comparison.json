@@ -439,5 +439,161 @@
         }
       ]
     }
-  ]
+  ],
+  "supporting_excerpts": {
+    "purpose": "source locators for existing observations 2 and 3; not gold or semantic validation",
+    "source_reference": {
+      "input_file": "docs/reviews/diagnostic-gold-draft/RW-001.input.json",
+      "input_sha256": "f7256434ef3780caf6d1863185f2100ee9035b0c8f4adbc1ebe9b3f5abc0d960",
+      "field_path": "/passages/2/text",
+      "passage_id": "target",
+      "passage_sha256": "2d2365c6d6210f6feb7488e53c269a167c53c96b4a8dc0e47ff206cbb2e8788a",
+      "declared_original_lines": [
+        79,
+        80
+      ],
+      "excerpt": "this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor."
+    },
+    "items": [
+      {
+        "id": "E-REQ-A1",
+        "repetition": 1,
+        "stage": "A",
+        "unit_id": "u2",
+        "response_file": "runs/RW-001-20261109/pair-1/A.response.txt",
+        "response_sha256": "f568a6a6f19ad0594f36a05b7134dce42bd79cac806609404953ac6b687d7033",
+        "field_path": "/units/1/assessment/exposure",
+        "field_sha256": "d218f4a183eaa72cb59bbb0fa304094fe0652852aac4ed1cd25116e4bb36e325",
+        "excerpt": "If retained in the README, the fact that the macOS PKG installs a menu bar runtime under Applications, bundles Node/cloudflared helpers, and runs a post-install Doctor",
+        "excerpt_start": 0,
+        "excerpt_end": 167,
+        "excerpt_offset_basis": "decoded_field_unicode_codepoints_half_open",
+        "related_fields": [],
+        "status": "verbatim_model_excerpt_not_verified_installation_fact"
+      },
+      {
+        "id": "E-REQ-A2",
+        "repetition": 2,
+        "stage": "A",
+        "unit_id": "unit-2",
+        "response_file": "runs/RW-001-20261109/pair-2/A.response.txt",
+        "response_sha256": "39e7fc0b1dd9410e57e8768806101e0d92df9f55d03766a5888cea4acc9f98d8",
+        "field_path": "/units/1/assessment/reason",
+        "field_sha256": "0e49f328ff7627169b0b7c17fef2815502bd7d1e266b90f99e4d59d15e29f318",
+        "excerpt": "However, the embedded facts about what gets installed under Applications and that a post-install Doctor runs may help a first-time macOS user understand what the `.pkg` installer does.",
+        "excerpt_start": 178,
+        "excerpt_end": 362,
+        "excerpt_offset_basis": "decoded_field_unicode_codepoints_half_open",
+        "related_fields": [],
+        "status": "verbatim_model_excerpt_not_verified_installation_fact"
+      },
+      {
+        "id": "E-REQ-B2-EXPOSURE",
+        "repetition": 2,
+        "stage": "B2",
+        "unit_id": "u3",
+        "response_file": "runs/RW-001-20261109/pair-2/B2.response.txt",
+        "response_sha256": "05b6a375c72c04b74bffae1519c6c603100e0e52351775bbc072f7042e6b08f9",
+        "field_path": "/assessments/2/assessment/exposure",
+        "field_sha256": "8e8737b048e67067ad804cca92c877830ccc5bb1769c1c000cfcfcf1ac5ae8d0",
+        "excerpt": "Expose the factual package behaviors—that the macOS installer places a menu bar runtime under Applications, bundles Node/cloudflared helpers, and runs a non-blocking post-install Doctor—near the macOS package entry",
+        "excerpt_start": 0,
+        "excerpt_end": 214,
+        "excerpt_offset_basis": "decoded_field_unicode_codepoints_half_open",
+        "related_fields": [],
+        "status": "verbatim_model_excerpt_not_verified_installation_fact"
+      },
+      {
+        "id": "E-REQ-B2-REASON",
+        "repetition": 2,
+        "stage": "B2",
+        "unit_id": "u3",
+        "response_file": "runs/RW-001-20261109/pair-2/B2.response.txt",
+        "response_sha256": "05b6a375c72c04b74bffae1519c6c603100e0e52351775bbc072f7042e6b08f9",
+        "field_path": "/assessments/2/assessment/reason",
+        "field_sha256": "29be0e8704b141c354108a1078af40b87f59b351b2d52cb52e396d0e69586f6c",
+        "excerpt": "Knowing that the package installs a menu bar runtime in Applications, includes Node/cloudflared helpers, and triggers a post-install Doctor helps users understand what the macOS package contains and what to expect during and immediately after installation.",
+        "excerpt_start": 131,
+        "excerpt_end": 387,
+        "excerpt_offset_basis": "decoded_field_unicode_codepoints_half_open",
+        "related_fields": [],
+        "status": "verbatim_model_excerpt_not_verified_installation_fact"
+      },
+      {
+        "id": "E-REL-A1",
+        "repetition": 1,
+        "stage": "A",
+        "unit_id": "u1",
+        "response_file": "runs/RW-001-20261109/pair-1/A.response.txt",
+        "response_sha256": "f568a6a6f19ad0594f36a05b7134dce42bd79cac806609404953ac6b687d7033",
+        "field_path": "/units/0/relations/0/reason",
+        "field_sha256": "de81011dc2ae8954790abf88f0864aa2ac47d4c2a8dc10e3bd82c77565fcdb65",
+        "excerpt": "The packaging choice of PKG is justified by the technical installation actions described in u2.",
+        "excerpt_start": 0,
+        "excerpt_end": 95,
+        "excerpt_offset_basis": "decoded_field_unicode_codepoints_half_open",
+        "related_fields": [
+          {
+            "field_path": "/units/0/relations/0/kind",
+            "value": "supports"
+          },
+          {
+            "field_path": "/units/0/relations/0/target_unit_id",
+            "value": "u2"
+          }
+        ],
+        "status": "verbatim_model_excerpt_not_verified_installation_fact"
+      },
+      {
+        "id": "E-REL-A2-REQUIREMENT",
+        "repetition": 2,
+        "stage": "A",
+        "unit_id": "unit-1",
+        "response_file": "runs/RW-001-20261109/pair-2/A.response.txt",
+        "response_sha256": "39e7fc0b1dd9410e57e8768806101e0d92df9f55d03766a5888cea4acc9f98d8",
+        "field_path": "/units/0/relations/0/reason",
+        "field_sha256": "63db0b6c8d5c11449c4c8f89dd6cb485d94e43974c3dabd6938b0ffa15ec0444",
+        "excerpt": "Unit-2 provides the technical installation requirements that explain why PKG is asserted to be a better fit than DMG.",
+        "excerpt_start": 0,
+        "excerpt_end": 117,
+        "excerpt_offset_basis": "decoded_field_unicode_codepoints_half_open",
+        "related_fields": [
+          {
+            "field_path": "/units/0/relations/0/kind",
+            "value": "supports"
+          },
+          {
+            "field_path": "/units/0/relations/0/target_unit_id",
+            "value": "unit-2"
+          }
+        ],
+        "status": "verbatim_model_excerpt_not_verified_installation_fact"
+      },
+      {
+        "id": "E-REL-A2-USABILITY",
+        "repetition": 2,
+        "stage": "A",
+        "unit_id": "unit-1",
+        "response_file": "runs/RW-001-20261109/pair-2/A.response.txt",
+        "response_sha256": "39e7fc0b1dd9410e57e8768806101e0d92df9f55d03766a5888cea4acc9f98d8",
+        "field_path": "/units/0/relations/1/reason",
+        "field_sha256": "b19f2d6a5f0ecad94cde12743307b7fcbc520e8beb740f21ae3176a3e7d83ee8",
+        "excerpt": "Unit-3 provides the user-experience rationale for why PKG is asserted to be a better fit.",
+        "excerpt_start": 0,
+        "excerpt_end": 89,
+        "excerpt_offset_basis": "decoded_field_unicode_codepoints_half_open",
+        "related_fields": [
+          {
+            "field_path": "/units/0/relations/1/kind",
+            "value": "supports"
+          },
+          {
+            "field_path": "/units/0/relations/1/target_unit_id",
+            "value": "unit-3"
+          }
+        ],
+        "status": "verbatim_model_excerpt_not_verified_installation_fact"
+      }
+    ]
+  }
 }

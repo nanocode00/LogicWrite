@@ -63,6 +63,80 @@ A 반복 1 u1은 u2를 supports 대상으로 가리키면서 이유에는 “패
 
 A 반복 2 unit-1→unit-2 및 unit-1→unit-3도 각각 대상이 선택을 설명하는 이유라고 쓰면서 화살표를 반대로 둔다. 반면 B1 두 반복의 요구사항 u3→선택 u1, 초보자 이점 u4→선택 u1은 이유와 방향이 맞는다. 이것은 본 사례의 관계 표현에서 관찰한 개선 가능성이다. 모든 관계가 의미적으로 검증됐거나 supports 순환을 일반적으로 금지해야 한다는 결론은 아니다. 다음 프롬프트에서는 관계의 방향 정의도 양쪽에 동일하게 명시할 필요가 있다.
 
+### 관찰 2·3의 직접 발췌와 응답 위치
+
+아래는 **미검증 모델 텍스트의 짧은 발췌**다. A/B의 실제 설치 동작이 참인지 거짓인지를 판정한 자료가 아니다. 사용자도 로컬 원시 응답과 주요 관찰의 일치를 확인했지만, 이는 정식 독립 사람 의미 검수·골드 승인과 구별하며 `semantic_fidelity: not_run`, 의미 검토 pending 및 `delivery_approved: false`를 유지한다.
+
+원문 대조 위치는 기존 `RW-001.input.json`의 `/passages/2/text`(target, 선언된 원문 79–80행)다. 파일 SHA-256은 위 입력 digest와 같고, passage SHA-256은 `2d2365c6d6210f6feb7488e53c269a167c53c96b4a8dc0e47ff206cbb2e8788a`다. 핵심은 원문이 **this app needs to**라고 서술한다는 점이다. 주어진 문맥만으로 그 요구가 macOS PKG에서 실제 이행됐다고 확정할 수 없다.
+
+각 `field_path`는 원시 응답을 JSON으로 해석한 뒤 적용하는 JSON Pointer다. B의 발췌는 결합 보고서가 아니라 **반복 2 B2의 원시 평가 응답**에서 가져왔다. 응답 SHA-256은 원시 파일 바이트 기준이며 파일 이름·반복·단계·단위 ID와 함께 [비교 관측 JSON](comparison.json)의 `supporting_excerpts`에도 기록했다. 발췌 시작/끝은 원시 파일 오프셋이 아니라 **해석된 해당 필드 문자열의 Unicode codepoint 반개구간**이다. `field_sha256`은 해석된 해당 필드 문자열의 UTF-8 digest이며 원시 응답 파일 SHA-256과 구별한다. 생략 부호를 원문에 삽입하지 않았다. 원시 파일 전체와 개인 실행 기록은 Git에 추가하지 않으므로 외부 검토자는 공개된 구간의 판단 근거를 읽고, 전체 응답 대조는 같은 digest의 로컬 기록으로 수행한다.
+
+#### E-REQ-A1
+
+출처: 반복 1, 단계 `A`, 단위 `u2`; `runs/RW-001-20261109/pair-1/A.response.txt`.
+
+응답 SHA-256: `f568a6a6f19ad0594f36a05b7134dce42bd79cac806609404953ac6b687d7033`. 필드: `/units/1/assessment/exposure`.
+
+    If retained in the README, the fact that the macOS PKG installs a menu bar runtime under Applications, bundles Node/cloudflared helpers, and runs a post-install Doctor
+
+#### E-REQ-A2
+
+출처: 반복 2, 단계 `A`, 단위 `unit-2`; `runs/RW-001-20261109/pair-2/A.response.txt`.
+
+응답 SHA-256: `39e7fc0b1dd9410e57e8768806101e0d92df9f55d03766a5888cea4acc9f98d8`. 필드: `/units/1/assessment/reason`.
+
+    However, the embedded facts about what gets installed under Applications and that a post-install Doctor runs may help a first-time macOS user understand what the `.pkg` installer does.
+
+#### E-REQ-B2-EXPOSURE
+
+출처: 반복 2, 단계 `B2`, 단위 `u3`; `runs/RW-001-20261109/pair-2/B2.response.txt`.
+
+응답 SHA-256: `05b6a375c72c04b74bffae1519c6c603100e0e52351775bbc072f7042e6b08f9`. 필드: `/assessments/2/assessment/exposure`.
+
+    Expose the factual package behaviors—that the macOS installer places a menu bar runtime under Applications, bundles Node/cloudflared helpers, and runs a non-blocking post-install Doctor—near the macOS package entry
+
+#### E-REQ-B2-REASON
+
+출처: 반복 2, 단계 `B2`, 단위 `u3`; `runs/RW-001-20261109/pair-2/B2.response.txt`.
+
+응답 SHA-256: `05b6a375c72c04b74bffae1519c6c603100e0e52351775bbc072f7042e6b08f9`. 필드: `/assessments/2/assessment/reason`.
+
+    Knowing that the package installs a menu bar runtime in Applications, includes Node/cloudflared helpers, and triggers a post-install Doctor helps users understand what the macOS package contains and what to expect during and immediately after installation.
+
+#### E-REL-A1
+
+출처: 반복 1, 단계 `A`, 단위 `u1`; `runs/RW-001-20261109/pair-1/A.response.txt`.
+
+응답 SHA-256: `f568a6a6f19ad0594f36a05b7134dce42bd79cac806609404953ac6b687d7033`. 필드: `/units/0/relations/0/reason`.
+
+연결 필드: `/units/0/relations/0/kind` = `supports`, `/units/0/relations/0/target_unit_id` = `u2`.
+
+    The packaging choice of PKG is justified by the technical installation actions described in u2.
+
+#### E-REL-A2-REQUIREMENT
+
+출처: 반복 2, 단계 `A`, 단위 `unit-1`; `runs/RW-001-20261109/pair-2/A.response.txt`.
+
+응답 SHA-256: `39e7fc0b1dd9410e57e8768806101e0d92df9f55d03766a5888cea4acc9f98d8`. 필드: `/units/0/relations/0/reason`.
+
+연결 필드: `/units/0/relations/0/kind` = `supports`, `/units/0/relations/0/target_unit_id` = `unit-2`.
+
+    Unit-2 provides the technical installation requirements that explain why PKG is asserted to be a better fit than DMG.
+
+#### E-REL-A2-USABILITY
+
+출처: 반복 2, 단계 `A`, 단위 `unit-1`; `runs/RW-001-20261109/pair-2/A.response.txt`.
+
+응답 SHA-256: `39e7fc0b1dd9410e57e8768806101e0d92df9f55d03766a5888cea4acc9f98d8`. 필드: `/units/0/relations/1/reason`.
+
+연결 필드: `/units/0/relations/1/kind` = `supports`, `/units/0/relations/1/target_unit_id` = `unit-3`.
+
+    Unit-3 provides the user-experience rationale for why PKG is asserted to be a better fit.
+
+관찰 2의 A 반복 1 발췌는 `If retained`라는 제안의 조건도 보존했다. 문제 삼는 부분은 KEEP이 확정됐다는 뜻이 아니라, 그 조건절 안에서 요구사항을 `the fact that ... installs`로 취급하는 것이다. A 반복 2의 `embedded facts`와 B2의 `factual package behaviors`/`Knowing that ... installs`도 같은 종류의 범위 확대 가능성을 직접 확인할 수 있게 한다.
+
+관찰 3에서는 E-REL-A1의 실제 연결이 u1→u2인데, 자연어 이유는 u2가 u1의 선택을 정당화한다고 설명한다. E-REL-A2-REQUIREMENT와 E-REL-A2-USABILITY도 각각 unit-1→unit-2/unit-3 연결에 대상 단위가 선택의 근거를 제공한다고 쓴다. 관계 방향에 관한 관찰은 이 **필드 값과 설명의 대응**에 근거하며, 설치 동작의 진실성이나 모든 supports 관계의 정확성을 확정한 것이 아니다.
+
 ### 관찰 4 — A 반복 2의 omit_candidate에는 보존 의무 판단의 근거가 부족하다
 
 A 반복 2 unit-3은 초보자 이점 주장을 omit_candidate로 두고, 설치 행동 지시가 아니라는 이유를 제시한다. 이는 현재 노출 필요성이 낮다는 근거이며 다른 역할의 의사결정 기록에도 보존할 필요가 없다는 근거는 아니다. 기존 입력의 임의 폐기 금지와 공통 모델의 omit_candidate 설명에 비추어 추가 근거가 필요하다.
