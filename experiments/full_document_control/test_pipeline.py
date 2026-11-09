@@ -362,5 +362,122 @@ class Stage1FullDocumentTests(unittest.TestCase):
         self.assertEqual(len(cross_block_rels), 3)
 
 
+class Stage2ValidationGateTests(unittest.TestCase):
+    def test_valid_structure_passes_deterministic_checks_but_remains_review(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+        report = pipeline.validate_analysis_gate(bundle, analysis)
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        self.assertEqual(report['execution_state'], 'completed')
+        self.assertFalse(report['delivery_approved'])
+        self.assertFalse(report['next_stage_allowed'])
+        by_id = {r['check_id']: r['status'] for r in report['check_results']}
+        self.assertEqual(by_id['SNAPSHOT_AND_CONTRACT'], 'passed')
+        self.assertEqual(by_id['BLOCK_COVERAGE'], 'passed')
+        self.assertEqual(by_id['UNIT_AND_SPAN_INTEGRITY'], 'passed')
+        self.assertEqual(by_id['PROTECTED_TRACEABILITY'], 'passed')
+        self.assertEqual(by_id['SEMANTIC_FIDELITY'], 'not_run')
+
+    def test_missing_and_duplicate_blocks_fail_block_coverage_gate(self):
+        bundle = load_sample_bundle()
+        # 1. Missing block B005
+        resp_missing = make_valid_window_response(bundle)
+        resp_missing['block_coverage'] = [
+            b for b in resp_missing['block_coverage'] if b['block_id'] != 'B005'
+        ]
+        resp_missing['units'] = [
+            u for u in resp_missing['units'] if u['id'] != 'u-heading-env'
+        ]
+        analysis_missing = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_missing)])
+        report_missing = pipeline.validate_analysis_gate(bundle, analysis_missing)
+        self.assertEqual(report_missing['gate_state'], 'FAIL')
+        by_id = {r['check_id']: r for r in report_missing['check_results']}
+        self.assertEqual(by_id['BLOCK_COVERAGE']['status'], 'violated')
+        self.assertIn('EXTRACTABLE_BLOCK_MISSING', by_id['BLOCK_COVERAGE']['reason'])
+
+        # 2. Duplicate block B001
+        resp_dup = make_valid_window_response(bundle)
+        resp_dup['block_coverage'].append(dict(resp_dup['block_coverage'][0]))
+        analysis_dup = pipeline.assemble_document_analysis(bundle, [json.dumps(resp_dup)])
+        report_dup = pipeline.validate_analysis_gate(bundle, analysis_dup)
+        self.assertEqual(report_dup['gate_state'], 'FAIL')
+        by_id_dup = {r['check_id']: r for r in report_dup['check_results']}
+        self.assertEqual(by_id_dup['BLOCK_COVERAGE']['status'], 'violated')
+        self.assertIn('EXTRACTABLE_BLOCK_DUPLICATED', by_id_dup['BLOCK_COVERAGE']['reason'])
+
+    def test_bad_span_or_missing_protected_info_or_unlinked_condition_fails_gate(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+
+        # Tamper with a span offset in analysis
+        bad_span_analysis = copy.deepcopy(analysis)
+        bad_span_analysis['units'][1]['source_spans'][0]['end'] += 1
+        report_bad_span = pipeline.validate_analysis_gate(bundle, bad_span_analysis)
+        self.assertEqual(report_bad_span['gate_state'], 'FAIL')
+        by_id = {r['check_id']: r for r in report_bad_span['check_results']}
+        self.assertEqual(by_id['UNIT_AND_SPAN_INTEGRITY']['status'], 'violated')
+
+        # Remove cross-block condition relation on u-cond-offline-cache
+        unlinked_analysis = copy.deepcopy(analysis)
+        for u in unlinked_analysis['units']:
+            if u['id'] == 'u-cond-offline-cache':
+                u['relations'] = []
+        report_unlinked = pipeline.validate_analysis_gate(bundle, unlinked_analysis)
+        self.assertEqual(report_unlinked['gate_state'], 'FAIL')
+        by_id_unlinked = {r['check_id']: r for r in report_unlinked['check_results']}
+        self.assertEqual(by_id_unlinked['PROTECTED_TRACEABILITY']['status'], 'violated')
+        self.assertIn('req-offline-cache-condition', by_id_unlinked['PROTECTED_TRACEABILITY']['reason'])
+
+        # Remove protected literal from code block unit
+        missing_lit_analysis = copy.deepcopy(analysis)
+        for u in missing_lit_analysis['units']:
+            if u['id'] == 'u-code-install':
+                u['elements'] = []
+        report_missing_lit = pipeline.validate_analysis_gate(bundle, missing_lit_analysis)
+        self.assertEqual(report_missing_lit['gate_state'], 'FAIL')
+        by_id_lit = {r['check_id']: r for r in report_missing_lit['check_results']}
+        self.assertEqual(by_id_lit['PROTECTED_TRACEABILITY']['status'], 'violated')
+        self.assertIn('req-install-port', by_id_lit['PROTECTED_TRACEABILITY']['reason'])
+
+    def test_model_self_approval_and_missing_check_results_are_rejected(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        analysis = pipeline.assemble_document_analysis(bundle, [json.dumps(resp)])
+
+        # Self-approval injection in analysis artifact
+        spoofed = copy.deepcopy(analysis)
+        spoofed['delivery_approved'] = True
+        report_spoof = pipeline.validate_analysis_gate(bundle, spoofed)
+        self.assertEqual(report_spoof['gate_state'], 'FAIL')
+        self.assertFalse(report_spoof['delivery_approved'])
+
+        # Missing required check row -> STOPPED, preserving last_gate_state='FAIL' if a violation occurred
+        plan = pipeline.build_validation_plan(bundle)
+        checked = {
+            'snapshot_sha256': bundle['document_snapshot']['sha256'],
+            'analysis_sha256': analysis['analysis_sha256'],
+        }
+        partial_rows = [
+            {
+                'check_id': 'SNAPSHOT_AND_CONTRACT',
+                'check_version': '1',
+                'status': 'violated',
+                'reason': 'Digest mismatch',
+                'evidence': [],
+                'checked_snapshot_sha256': checked['snapshot_sha256'],
+                'checked_analysis_sha256': checked['analysis_sha256'],
+            }
+        ]
+        reconciled = pipeline.reconcile_validation_plan(plan, partial_rows, checked)
+        self.assertEqual(reconciled['gate_state'], 'STOPPED')
+        self.assertEqual(reconciled['execution_state'], 'stopped')
+        self.assertEqual(reconciled['last_gate_state'], 'FAIL')
+        self.assertFalse(reconciled['delivery_approved'])
+        self.assertTrue(any(d.startswith('CHECK_RESULT_MISSING:') for d in reconciled['diagnostics']))
+
+
 if __name__ == '__main__':
     unittest.main()
+
