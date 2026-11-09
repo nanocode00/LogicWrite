@@ -85,6 +85,11 @@ python3 experiments/full_document_control/pipeline.py run \
 11. **P1-2 (전체 프롬프트 문맥 예산 제한):** 긴 문서 다중 창 분할 시 지시문·계약·블록 개요·인접 문맥·대상 블록을 포함한 전체 프롬프트 길이(`max_prompt_chars`) 준수, 초대형 단일 블록 명시적 보류(`OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET` → `REVIEW`), 창 간 관계 사후 통합(`build_cross_window_relation_prompt`) 검증
 12. **P2-1 (모델 호출 실패 구조화 처리):** 제공자 비정상 종료, 타임아웃, 다중 창 부분 실행 실패(`W001` 성공 후 `W002` 실패), 원시 오류 로그 내 비밀정보 마스킹(`[REDACTED]`) 및 재시도 상한 준수 검증
 13. **P2-2 (보호 조건 연결 대응 검증):** 무관한 `supports` 관계, 제목 블록/역방향 `qualifies` 연결, 단위 스팬 외부의 요소 스팬(`ELEMENT_SPAN_NOT_IN_UNIT_SPAN`), 근거 없는 관계 이유(`FAIL`) 및 출처 어휘 앵커 미공유 모호 연결(`unresolved` → `REVIEW`) 구분 검증
+14. **최종 경계 사례 1–4 검증:**
+    - **계약 필수 제약 보존 및 예산 초과 실패:** 프롬프트 예산 축약 시에도 `audience`, `purpose`, `output_scopes`, `required_information`, `constraints` 등 필수 계약 필드를 조용히 생략하지 않으며, 계약 자체가 예산을 초과하면 `CONTRACT_EXCEEDS_PROMPT_BUDGET`(`FAIL`, `return_to_stage: "contract_resolution"`)으로 명시적 실패 처리
+    - **교차 창 관계 분석 실행 경로 및 미검토 범위 추적:** 다중 창 실행에서 교차 창 관계 분석의 실행 여부(`cross_window_relation_review.status`: `not_run` / `completed` / `partial_budget_truncated`), 검토 단위(`reviewed_unit_ids`), 예산 초과 제외 단위(`omitted_unit_ids`), 미실행/부분 제외 시 `CROSS_WINDOW_RELATION_REVIEW_INCOMPLETE`(`UNRESOLVED`) 보고 및 CLI(`--provider`, `--cross-window-response`, `--output`) 연결 검증
+    - **다중 창 실패 응답 해시 격리:** `W001` 성공 후 `W002`가 응답 바이트 생성 전 실패(잘못된 반환 타입, 빈 stdout 타임아웃 등)할 때 `W001`의 `response_sha256`이 `W002` 실패 기록에 섞이지 않음을 검증
+    - **모든 추출 대상 블록 예산 초과 시 `REVIEW` 보류:** 문서의 추출 가능 블록 전부가 프롬프트 예산을 초과해 보류(`OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET`)된 경우 `units == []`라도 `FAIL`이 아닌 `REVIEW`(`BLOCK_COVERAGE`, `UNIT_AND_SPAN_INTEGRITY`, `PROTECTED_TRACEABILITY`, `SEMANTIC_FIDELITY` 모두 `unresolved`, 후속 단계 차단)로 일관되게 판정하며, 일반 블록에서 빈 `units`를 반환한 경우 `EMPTY_WINDOW_UNITS` / `EMPTY_UNITS`(`FAIL` / `STOPPED`)로 거부함을 검증
 
 ## 한계
 

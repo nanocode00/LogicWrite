@@ -1310,6 +1310,460 @@ class P2_1StructuredModelFailureHandlingTests(unittest.TestCase):
         self.assertEqual(att['window_records'][1]['error_code'], 'MODEL_RESPONSE_PARSE_ERROR')
         self.assertNotIn('my_super_secret_val', json.dumps(res, ensure_ascii=False))
 
+    def test_edge_case_1_contract_compaction_preserves_required_fields_or_fails_explicitly(self):
+        # Case A: Tight prompt budget where document outline must be compacted,
+        # but writing_contract must still preserve audience, purpose, output_scopes (with goal),
+        # required_information, and constraints without silent omission.
+        bundle = load_sample_bundle()
+        bundle['writing_contract']['constraints'] = list(bundle['writing_contract']['constraints']) + [
+            '추출 단계에서 원문 조건과 한계 문장을 임의로 일반화하거나 생략하지 않는다.',
+            '설치 명령과 환경 요구사항의 리터럴 문자열을 원문 그대로 유지한다.',
+        ]
+        extra_paras = '\n\n'.join(
+            f'## 추가 섹션 {i}\n\n추가 문단 {i}: ' + ('배경 설명 텍스트입니다. ' * 6)
+            for i in range(1, 12)
+        )
+        new_content = bundle['document_snapshot']['content'].rstrip('\n') + '\n\n' + extra_paras + '\n'
+        bundle['document_snapshot']['content'] = new_content
+        bundle['document_snapshot']['sha256'] = pipeline.digest_text(new_content)
+
+        blocks = pipeline.parse_markdown_blocks(bundle['document_snapshot'])
+        windows = pipeline.plan_extraction_windows(
+            bundle['document_snapshot'],
+            blocks,
+            max_window_chars=400,
+            max_prompt_chars=5000,
+            writing_contract=bundle['writing_contract'],
+            case_id=bundle['case_id'],
+            input_sha256=pipeline.canonical_json_digest(bundle),
+        )
+        self.assertGreater(len(windows), 1)
+        for idx in range(len(windows)):
+            prompt = pipeline.build_window_prompt(
+                bundle, window_index=idx, max_window_chars=400, max_prompt_chars=5000
+            )
+            self.assertLessEqual(len(prompt), 5000)
+            payload_json = prompt.split('WINDOW_INPUT_JSON:\n', 1)[1].strip()
+            payload = json.loads(payload_json)
+            contract_in_prompt = payload['writing_contract']
+            orig_contract = bundle['writing_contract']
+            self.assertEqual(contract_in_prompt.get('audience'), orig_contract['audience'])
+            self.assertEqual(contract_in_prompt.get('purpose'), orig_contract['purpose'])
+            self.assertEqual(contract_in_prompt.get('constraints'), orig_contract['constraints'])
+            self.assertEqual(
+                contract_in_prompt.get('required_information'),
+                orig_contract['required_information'],
+            )
+            self.assertEqual(
+                contract_in_prompt.get('output_scopes'),
+                orig_contract['output_scopes'],
+            )
+
+        # Case B: Contract itself is so large that required fields cannot fit in max_prompt_chars.
+        # Must fail explicitly (CONTRACT_EXCEEDS_PROMPT_BUDGET), never silently drop constraints.
+        huge_contract_bundle = copy.deepcopy(bundle)
+        huge_contract_bundle['writing_contract']['constraints'] = [
+            f'필수 계약 제약사항 {i}: ' + ('절대 생략 불가 보호 조건 설명 텍스트 ' * 8)
+            for i in range(1, 25)
+        ]
+        with self.assertRaises(pipeline.InvalidArtifactError) as ctx:
+            pipeline.plan_extraction_windows(
+                huge_contract_bundle['document_snapshot'],
+                blocks,
+                max_window_chars=500,
+                max_prompt_chars=3600,
+                writing_contract=huge_contract_bundle['writing_contract'],
+                case_id=huge_contract_bundle['case_id'],
+                input_sha256=pipeline.canonical_json_digest(huge_contract_bundle),
+            )
+        self.assertEqual(ctx.exception.code, 'CONTRACT_EXCEEDS_PROMPT_BUDGET')
+
+        controller = pipeline.ExecutionController(max_attempts=1)
+        res = controller.run(
+            huge_contract_bundle,
+            lambda *_a: '{}',
+            max_window_chars=500,
+            max_prompt_chars=3600,
+        )
+        self.assertEqual(res['gate_state'], 'FAIL')
+        self.assertEqual(res['return_to_stage'], 'contract_resolution')
+        rule_ids = {f['rule_id'] for f in res['validation_report']['findings']}
+        self.assertIn('CONTRACT_EXCEEDS_PROMPT_BUDGET', rule_ids)
+
+    def test_edge_case_2_cross_window_relation_execution_and_cli_wiring(self):
+        import os
+        import tempfile
+
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        blocks = pipeline.parse_markdown_blocks(bundle['document_snapshot'])
+        windows = pipeline.plan_extraction_windows(
+            bundle['document_snapshot'], blocks, max_window_chars=200
+        )
+        self.assertEqual(len(windows), 4)
+
+        full_units_by_block = {}
+        for u in resp['units']:
+            bid = u['quotes'][0]['block_id']
+            full_units_by_block.setdefault(bid, []).append(u)
+        cov_by_block = {c['block_id']: c for c in resp['block_coverage']}
+
+        def per_window_responder(_idx, w, prompt, _attempt):
+            self.assertLessEqual(len(prompt), pipeline.DEFAULT_MAX_PROMPT_CHARS)
+            w_units = [u for bid in w['target_block_ids'] for u in full_units_by_block.get(bid, [])]
+            w_cov = [cov_by_block[bid] for bid in w['target_block_ids']]
+            return json.dumps({
+                'input_sha256': resp['input_sha256'],
+                'snapshot_id': resp['snapshot_id'],
+                'snapshot_sha256': resp['snapshot_sha256'],
+                'window_id': w['window_id'],
+                'block_coverage': w_cov,
+                'units': w_units,
+                'alignment': resp['alignment'],
+                'unresolved_questions': [],
+            }, ensure_ascii=False)
+
+        # Case A: Multi-window run WITHOUT cross_window_responder must explicitly report not_run
+        controller = pipeline.ExecutionController(max_attempts=1)
+        res_no_cw = controller.run(bundle, per_window_responder, max_window_chars=200)
+        self.assertEqual(res_no_cw['gate_state'], 'REVIEW')
+        cw_review = res_no_cw['analysis'].get('cross_window_relation_review', {})
+        self.assertEqual(cw_review.get('status'), 'not_run')
+        self.assertFalse(cw_review.get('executed', True))
+        finding_rules = {f['rule_id'] for f in res_no_cw['validation_report']['findings']}
+        self.assertIn('CROSS_WINDOW_RELATION_REVIEW_INCOMPLETE', finding_rules)
+
+        # Case B: Multi-window run where unit summaries exceed cross-window prompt budget
+        many_units_by_block = copy.deepcopy(full_units_by_block)
+        first_bid = windows[0]['target_block_ids'][0]
+        base_unit = copy.deepcopy(many_units_by_block[first_bid][0])
+        for extra_idx in range(1, 35):
+            u_copy = copy.deepcopy(base_unit)
+            u_copy['id'] = f'u-extra-{extra_idx:02d}'
+            u_copy['statement'] = (
+                f'추가 교차 창 테스트 명제 {extra_idx}: '
+                + ('원문 범위 내에서 문맥 예산 초과 여부를 확인하기 위한 긴 요약 설명입니다. ' * 2)
+            )[:195]
+            u_copy['relations'] = []
+            many_units_by_block[first_bid].append(u_copy)
+
+        def many_units_responder(_idx, w, _prompt, _attempt):
+            w_units = [u for bid in w['target_block_ids'] for u in many_units_by_block.get(bid, [])]
+            w_cov = [cov_by_block[bid] for bid in w['target_block_ids']]
+            return json.dumps({
+                'input_sha256': resp['input_sha256'],
+                'snapshot_id': resp['snapshot_id'],
+                'snapshot_sha256': resp['snapshot_sha256'],
+                'window_id': w['window_id'],
+                'block_coverage': w_cov,
+                'units': w_units,
+                'alignment': resp['alignment'],
+                'unresolved_questions': [],
+            }, ensure_ascii=False)
+
+        cw_prompts = []
+
+        def stub_cw_responder(cw_prompt, _attempt):
+            cw_prompts.append(cw_prompt)
+            self.assertLessEqual(len(cw_prompt), 4800)
+            return json.dumps({
+                'input_sha256': resp['input_sha256'],
+                'snapshot_id': resp['snapshot_id'],
+                'snapshot_sha256': resp['snapshot_sha256'],
+                'cross_window_relations': [],
+            })
+
+        res_trunc = controller.run(
+            bundle,
+            many_units_responder,
+            cross_window_responder=stub_cw_responder,
+            max_window_chars=200,
+            max_prompt_chars=4800,
+        )
+        self.assertEqual(len(cw_prompts), 1)
+        cw_trunc_review = res_trunc['analysis'].get('cross_window_relation_review', {})
+        self.assertEqual(cw_trunc_review.get('status'), 'partial_budget_truncated')
+        self.assertTrue(cw_trunc_review.get('executed'))
+        self.assertGreater(len(cw_trunc_review.get('omitted_unit_ids', [])), 0)
+        trunc_rules = {f['rule_id'] for f in res_trunc['validation_report']['findings']}
+        self.assertIn('CROSS_WINDOW_RELATION_REVIEW_INCOMPLETE', trunc_rules)
+
+        # Case C: Multi-window run where cross_window_responder fails -> STOPPED
+        def failing_cw_responder(_cw_prompt, _attempt):
+            return '{broken cross window json'
+
+        res_cw_fail = controller.run(
+            bundle,
+            per_window_responder,
+            cross_window_responder=failing_cw_responder,
+            max_window_chars=200,
+        )
+        self.assertEqual(res_cw_fail['gate_state'], 'STOPPED')
+        self.assertEqual(
+            res_cw_fail['attempt_history'][0]['failed_stage'],
+            'cross_window_relation_analysis',
+        )
+
+        # Case D: CLI main() with a stub provider executable on a multi-window run invokes cross-window relation analysis
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            stub_provider = tmp_path / 'stub_provider.py'
+            window_map = {}
+            for w in windows:
+                w_units = copy.deepcopy([
+                    u for bid in w['target_block_ids'] for u in full_units_by_block.get(bid, [])
+                ])
+                for u in w_units:
+                    if u['id'] == 'u-code-install':
+                        u['relations'] = []
+                w_cov = [cov_by_block[bid] for bid in w['target_block_ids']]
+                window_map[w['window_id']] = {
+                    'input_sha256': resp['input_sha256'],
+                    'snapshot_id': resp['snapshot_id'],
+                    'snapshot_sha256': resp['snapshot_sha256'],
+                    'window_id': w['window_id'],
+                    'block_coverage': w_cov,
+                    'units': w_units,
+                    'alignment': resp['alignment'],
+                    'unresolved_questions': [],
+                }
+            stub_data_file = tmp_path / 'stub_responses.json'
+            stub_data_file.write_text(
+                json.dumps({
+                    'windows': window_map,
+                    'cross_window': {
+                        'input_sha256': resp['input_sha256'],
+                        'snapshot_id': resp['snapshot_id'],
+                        'snapshot_sha256': resp['snapshot_sha256'],
+                        'cross_window_relations': [
+                            {
+                                'source_unit_id': 'u-code-install',
+                                'kind': 'depends_on',
+                                'target_unit_id': 'u-table-ubuntu',
+                                'reason': '표에 정의된 Linux 패키지 아카이브를 입력으로 사용한다.',
+                            }
+                        ],
+                    },
+                }, ensure_ascii=False),
+                encoding='utf-8',
+            )
+            stub_provider.write_text(
+                '#!/usr/bin/env python3\n'
+                'import json, sys\n'
+                f'data = json.loads(open({str(stub_data_file)!r}, encoding="utf-8").read())\n'
+                'prompt = sys.argv[sys.argv.index("--print") + 1] if "--print" in sys.argv else sys.stdin.read()\n'
+                f'assert len(prompt) <= {pipeline.DEFAULT_MAX_PROMPT_CHARS}\n'
+                'if "CROSS_WINDOW_INPUT_JSON:" in prompt:\n'
+                '    print(json.dumps(data["cross_window"], ensure_ascii=False))\n'
+                'else:\n'
+                '    payload = json.loads(prompt.split("WINDOW_INPUT_JSON:\\n", 1)[1].strip())\n'
+                '    wid = payload["window"]["window_id"]\n'
+                '    print(json.dumps(data["windows"][wid], ensure_ascii=False))\n',
+                encoding='utf-8',
+            )
+            stub_provider.chmod(0o755)
+
+            import contextlib
+            import io
+
+            out_json_path = tmp_path / 'cli_out.json'
+            old_env = os.environ.get('PATH', '')
+            os.environ['PATH'] = f'{tmpdir}:{old_env}'
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    rc = pipeline.main([
+                        'run',
+                        '--input',
+                        str(SAMPLE_INPUT_PATH),
+                        '--provider',
+                        'stub_provider.py',
+                        '--max-window-chars',
+                        '200',
+                        '--output',
+                        str(out_json_path),
+                    ])
+            finally:
+                os.environ['PATH'] = old_env
+
+            self.assertEqual(rc, 0)
+            cli_result = json.loads(out_json_path.read_text(encoding='utf-8'))
+            self.assertEqual(
+                cli_result['analysis']['cross_window_relation_review']['status'],
+                'completed',
+            )
+            u_install = [u for u in cli_result['analysis']['units'] if u['id'] == 'u-code-install'][0]
+            self.assertEqual(
+                u_install['relations'],
+                [
+                    {
+                        'kind': 'depends_on',
+                        'target_unit_id': 'u-table-ubuntu',
+                        'reason': '표에 정의된 Linux 패키지 아카이브를 입력으로 사용한다.',
+                        'cross_block': True,
+                    }
+                ],
+            )
+
+    def test_edge_case_3_multi_window_failure_response_hash_isolation(self):
+        bundle = load_sample_bundle()
+        resp = make_valid_window_response(bundle)
+        blocks = pipeline.parse_markdown_blocks(bundle['document_snapshot'])
+        windows = pipeline.plan_extraction_windows(
+            bundle['document_snapshot'], blocks, max_window_chars=200
+        )
+        self.assertEqual(len(windows), 4)
+
+        full_units_by_block = {}
+        for u in resp['units']:
+            bid = u['quotes'][0]['block_id']
+            full_units_by_block.setdefault(bid, []).append(u)
+        cov_by_block = {c['block_id']: c for c in resp['block_coverage']}
+
+        def make_w1_json(w):
+            w_units = [u for bid in w['target_block_ids'] for u in full_units_by_block.get(bid, [])]
+            w_cov = [cov_by_block[bid] for bid in w['target_block_ids']]
+            return json.dumps({
+                'input_sha256': resp['input_sha256'],
+                'snapshot_id': resp['snapshot_id'],
+                'snapshot_sha256': resp['snapshot_sha256'],
+                'window_id': w['window_id'],
+                'block_coverage': w_cov,
+                'units': w_units,
+                'alignment': resp['alignment'],
+                'unresolved_questions': [],
+            }, ensure_ascii=False)
+
+        w1_bytes = make_w1_json(windows[0]).encode('utf-8')
+        w1_sha = pipeline.digest_bytes(w1_bytes)
+        controller = pipeline.ExecutionController(max_attempts=1)
+
+        # Case A: W001 succeeds, W002 returns wrong type (None) -> W002 response_sha256 must be None, NOT w1_sha
+        res_wrong_type = controller.run(
+            bundle,
+            lambda idx, w, _p, _a: make_w1_json(w) if idx == 0 else None,
+            max_window_chars=200,
+        )
+        att_a = res_wrong_type['attempt_history'][0]
+        self.assertEqual(att_a['completed_window_ids'], ['W001'])
+        self.assertEqual(att_a['failed_window_id'], 'W002')
+        self.assertEqual(att_a['window_records'][0]['response_sha256'], w1_sha)
+        self.assertIsNone(att_a['window_records'][1]['response_sha256'])
+        self.assertEqual(att_a['response_sha256s'], [w1_sha])
+
+        # Case B: W001 succeeds, W002 returns malformed JSON bytes -> W002 response_sha256 is W002's own sha
+        w2_bad_bytes = b'{malformed json for W002'
+        w2_bad_sha = pipeline.digest_bytes(w2_bad_bytes)
+        res_bad_json = controller.run(
+            bundle,
+            lambda idx, w, _p, _a: make_w1_json(w) if idx == 0 else w2_bad_bytes,
+            max_window_chars=200,
+        )
+        att_b = res_bad_json['attempt_history'][0]
+        self.assertEqual(att_b['window_records'][0]['response_sha256'], w1_sha)
+        self.assertEqual(att_b['window_records'][1]['response_sha256'], w2_bad_sha)
+        self.assertNotEqual(w1_sha, w2_bad_sha)
+        self.assertEqual(att_b['response_sha256s'], [w1_sha, w2_bad_sha])
+
+        # Case C: W001 succeeds, W002 times out with no stdout -> W002 response_sha256 is None
+        res_timeout = controller.run(
+            bundle,
+            lambda idx, w, _p, _a: make_w1_json(w)
+            if idx == 0
+            else {
+                'stdout': b'',
+                'stderr': b'timeout waiting for W002',
+                'returncode': None,
+                'timed_out': True,
+            },
+            max_window_chars=200,
+        )
+        att_c = res_timeout['attempt_history'][0]
+        self.assertEqual(att_c['window_records'][0]['response_sha256'], w1_sha)
+        self.assertIsNone(att_c['window_records'][1]['response_sha256'])
+        self.assertTrue(att_c['window_records'][1]['timed_out'])
+        self.assertEqual(att_c['response_sha256s'], [w1_sha])
+
+    def test_edge_case_4_all_extractable_blocks_oversized_vs_invalid_empty_units(self):
+        # Case A: Every extractable block exceeds max_prompt_chars -> held as REVIEW (unresolved), NOT FAIL
+        bundle = load_sample_bundle()
+        giant_para = (
+            '초대형 단일 문단(로컬 에이전트 런타임 v0.4.0, 30초, '
+            'logicwrite-agent --install --profile local-dev, '
+            '오프라인 환경 사전 캐시 필요, macOS 자동 업데이트 미지원): '
+            + ('문맥 예산을 초과하는 단일 블록 본문입니다. ' * 160)
+        )
+        new_content = giant_para + '\n'
+        bundle['document_snapshot']['content'] = new_content
+        bundle['document_snapshot']['sha256'] = pipeline.digest_text(new_content)
+
+        adapter = pipeline.OrganizationBoundaryAdapter()
+        controller = pipeline.ExecutionController(max_attempts=1, organization_adapter=adapter)
+        model_calls = []
+
+        def should_not_be_called(*args):
+            model_calls.append(args)
+            return '{}'
+
+        res_all_oversized = controller.run(
+            bundle,
+            should_not_be_called,
+            max_window_chars=500,
+            max_prompt_chars=4800,
+        )
+        self.assertEqual(len(model_calls), 0)
+        self.assertEqual(res_all_oversized['analysis']['units'], [])
+        self.assertEqual(res_all_oversized['gate_state'], 'REVIEW')
+        self.assertFalse(res_all_oversized['delivery_approved'])
+        self.assertFalse(res_all_oversized['next_stage_allowed'])
+        self.assertFalse(res_all_oversized['next_stage_invoked'])
+        self.assertEqual(len(adapter.invocations), 0)
+
+        check_map = {
+            c['check_id']: c['status']
+            for c in res_all_oversized['validation_report']['check_results']
+        }
+        self.assertEqual(check_map['BLOCK_COVERAGE'], 'unresolved')
+        self.assertEqual(check_map['UNIT_AND_SPAN_INTEGRITY'], 'unresolved')
+        self.assertEqual(check_map['PROTECTED_TRACEABILITY'], 'unresolved')
+        self.assertEqual(check_map['SEMANTIC_FIDELITY'], 'unresolved')
+
+        # Case B: Normal extractable blocks exist, but model returns empty units -> must still fail (STOPPED / FAIL)
+        normal_bundle = load_sample_bundle()
+        normal_resp = make_valid_window_response(normal_bundle)
+        normal_resp['units'] = []
+        res_empty_model = controller.run(
+            normal_bundle,
+            lambda *_a: json.dumps(normal_resp, ensure_ascii=False),
+        )
+        self.assertEqual(res_empty_model['gate_state'], 'STOPPED')
+        self.assertEqual(res_empty_model['last_gate_state'], 'FAIL')
+        empty_codes = [f['rule_id'] for f in res_empty_model['validation_report']['findings']]
+        self.assertIn('EMPTY_WINDOW_UNITS', empty_codes)
+
+        # Direct gate validation on an analysis with empty units for a non-oversized document must also fail
+        valid_analysis = pipeline.assemble_document_analysis(
+            normal_bundle,
+            [json.dumps(make_valid_window_response(normal_bundle), ensure_ascii=False)],
+        )
+        tampered_empty_analysis = copy.deepcopy(valid_analysis)
+        tampered_empty_analysis['units'] = []
+        for row in tampered_empty_analysis['coverage_ledger']:
+            if row['status'] == 'extracted':
+                row['status'] = 'unresolved'
+                row['extracted_unit_ids'] = []
+                row['unresolved_reason'] = 'Model skipped block without oversized budget hold'
+        tampered_empty_analysis['analysis_sha256'] = pipeline.canonical_json_digest(
+            {k: v for k, v in tampered_empty_analysis.items() if k != 'analysis_sha256'}
+        )
+        direct_report = pipeline.validate_analysis_gate(normal_bundle, tampered_empty_analysis)
+        self.assertEqual(direct_report['gate_state'], 'FAIL')
+        direct_check_map = {
+            c['check_id']: c['status'] for c in direct_report['check_results']
+        }
+        self.assertEqual(direct_check_map['UNIT_AND_SPAN_INTEGRITY'], 'violated')
+        direct_codes = [f['rule_id'] for f in direct_report['findings']]
+        self.assertIn('EMPTY_UNITS', direct_codes)
+
 
 if __name__ == '__main__':
     unittest.main()

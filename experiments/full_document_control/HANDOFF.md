@@ -2,7 +2,7 @@
 
 - **브랜치:** `prototype/full-document-control`
 - **디렉터리:** `experiments/full_document_control/`
-- **현재 단계:** PR #10 코드 검토 보완 항목 (`P1-1`, `P1-2`, `P2-1`, `P2-2`) 구현 및 재검증 완료
+- **현재 단계:** PR #10 코드 검토 보완 항목 (`P1-1`, `P1-2`, `P2-1`, `P2-2`) 및 최종 경계 사례 4건 검증·보완 완료
 
 ## 단계 계획 및 보완 이력
 
@@ -13,6 +13,11 @@
 3. **PR #10 보완 2 (`P1-2`, `P2-1` 완료):**
    - `P1-2`: `plan_extraction_windows()` 및 `build_window_prompt()`에서 지시문·계약·블록 개요·인접 문맥·대상 블록을 포함한 실제 렌더링 프롬프트 전체 크기 상한(`max_prompt_chars`) 강제. 전체 원문을 매 호출에 반복하지 않고 인접 블록과 상위 제목만 제한적으로 포함하며, 단일 블록이 예산을 초과하면 무제한 전달하지 않고 `oversized_block_ids`(`OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET` → `unresolved` → `REVIEW`)로 보류. 다중 창 분할 시 창 간 조건·의존 관계를 연결하는 `build_cross_window_relation_prompt()` 및 `cross_window_relations_raw` 통합 경로 추가. 문자 수 예산과 토큰 예산의 차이를 `budget_policy`에 명시.
    - `P2-1`: `ExecutionController.run()` 내부 `model_responder` 호출을 구조화된 예외 처리로 감싸 제공자 비정상 종료(`MODEL_PROVIDER_EXIT_ERROR`), 타임아웃(`MODEL_CALL_TIMEOUT`), 잘못된 응답(`MODEL_RESPONSE_PARSE_ERROR`), 다중 창 부분 실행 실패 시 비제어 예외 없이 `STOPPED` 반환. 이전 성공 창 기록(`completed_window_ids`, `window_records`)과 실패 창/단계·응답 다이제스트·종료 코드를 보존하고, `sanitize_error_text()`로 원시 로그 내 비밀정보(Bearer 토큰, API 키, 비밀번호 등)를 마스킹(`[REDACTED]`).
+4. **PR #10 최종 경계 사례 4건 검증 및 보완 완료:**
+   - **경계 사례 1 (Writing Contract 축약 시 필수 제약 보존 및 예산 초과 명시 실패):** `_compact_contract_for_prompt()`가 `audience`, `purpose`, `output_scopes`, `required_information`, `constraints`, `document_type`, `language`, `register` 등 필수 계약 필드를 조용히 생략하지 않도록 수정하고, 필수 계약만으로 `max_prompt_chars`를 초과하면 `CONTRACT_EXCEEDS_PROMPT_BUDGET`(`return_to_stage: "contract_resolution"`, `FAIL`)으로 명시적 실패 처리.
+   - **경계 사례 2 (교차 창 관계 분석의 실제 실행 경로 및 미검토 범위 추적):** `plan_cross_window_relation_prompt()`로 프롬프트 예산 내 검토 단위(`reviewed_unit_ids`)와 예산 초과 제외 단위(`omitted_unit_ids`)를 구분하고, `assemble_document_analysis()`에 `cross_window_relation_review`(`not_applicable_single_window`, `not_run`, `completed`, `partial_budget_truncated`)를 기록. 미실행(`not_run`) 또는 일부 단위 예산 제외(`partial_budget_truncated`) 시 검증 게이트에서 `CROSS_WINDOW_RELATION_REVIEW_INCOMPLETE`(`UNRESOLVED`)를 보고하며, CLI `main()`에서 `--provider` 다중 창 실행 시 교차 창 관계 분석 호출 및 `--cross-window-response` / `--output` 옵션을 연결.
+   - **경계 사례 3 (다중 창 실행에서 실패 응답 해시 격리):** `ExecutionController.run()`의 창 루프 시작 시마다 `window_resp_sha = None`으로 초기화하여 `W001` 성공 후 `W002`가 응답 바이트 생성 전에 실패(잘못된 반환 타입, 빈 stdout 타임아웃 등)할 때 `W001`의 `response_sha256`이 `W002` 실패 기록에 오염되지 않도록 수정.
+   - **경계 사례 4 (모든 추출 대상 블록이 예산을 초과하는 경우 `REVIEW` 보류):** `_all_extractable_blocks_held_oversized()`를 통해 문서의 추출 대상 블록 전부가 프롬프트 예산 초과(`OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET`)로 보류되어 `units == []`가 된 경우 `UNIT_AND_SPAN_INTEGRITY`와 `PROTECTED_TRACEABILITY`를 `violated`(`FAIL`)가 아닌 `unresolved`(`REVIEW`, `ALL_EXTRACTABLE_BLOCKS_HELD_OVERSIZED`)로 판정하고, 일반 추출 가능 블록에서 빈 `units`를 반환한 경우에는 기존과 동일하게 `EMPTY_WINDOW_UNITS` / `EMPTY_UNITS`(`FAIL` / `STOPPED`)로 거부.
 
 ## 변경 파일
 
@@ -31,11 +36,12 @@
 - `0a0f002`: prototype: implement stage execution controller, boundary adapter, and E2E tests
 - `ac5fedb`: docs: add full-document control README, handoff record, and live execution summary
 - `00e5346`: fix(full-document-control): prevent gate bypass via report forgery and tighten condition link verification (P1-1, P2-2)
-- PR #10 보완 커밋 2: 프롬프트 문맥 예산 상한 강제, 모델 호출 실패 구조화 처리 및 문서 갱신 (`P1-2`, `P2-1`)
+- `abac34a`: fix(full-document-control): enforce total prompt budget and structured model failure handling (P1-2, P2-1)
+- 최종 경계 사례 보완 커밋: 계약 필수 제약 보존, 교차 창 관계 분석 CLI 연결 및 미검토 범위 추적, 다중 창 실패 해시 격리, 전체 블록 예산 초과 보류 시 `REVIEW` 판정
 
 ## 테스트 결과
 
-- 총 104개 테스트 통과 (`full_document_control` 29개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개)
+- 총 108개 테스트 통과 (`full_document_control` 33개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개)
 
 ## 미해결 문제
 
