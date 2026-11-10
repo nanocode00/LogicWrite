@@ -1,6 +1,6 @@
 # 전체 문서 처리 및 실행 제어 프로토타입
 
-상태: **전체 Markdown 문서 스냅샷의 블록 범위 관리, 독립 검증 게이트, 단계 실행 제어를 시험하는 실행 가능한 프로토타입**. 정식 공통 스키마 동결, Information Organization / Expression Refinement 본구현, 자동 의미 검증 엔진, 문서 전달 승인을 뜻하지 않는다.
+상태: **전체 Markdown 문서 스냅샷의 블록 범위 관리, 독립 검증 게이트, 단계 실행 제어를 시험하는 실행 가능한 프로토타입**. Information Organization 및 Expression Refinement의 후보 계획·Preview 프로토타입도 포함한다. 정식 공통 스키마 동결, 전체 문서 의미 보존 증명, 문서 전달 승인을 뜻하지 않는다.
 
 ## 목적과 해결하려는 구조적 한계
 
@@ -171,4 +171,10 @@ python3 experiments/full_document_control/pipeline.py run \
 
 - 블록 전체 범위와 필수 문자열·관계 연결이 확인되어도 정규화된 문장(`statement`)이나 판단 이유(`reason`/`exposure`)에서 발생하는 미묘한 의미 왜곡·주장 범위 확대를 결정론적 검사만으로 완벽히 잡아낼 수는 없으므로 `SEMANTIC_FIDELITY`를 자동 `PASS`로 처리하지 않는다.
 - 현재 Markdown 파서는 줄 단위 블록 구조(제목, 문단, 파이프 표, 펜스 코드 블록, 목록, 인용, 구분선, 공백)를 다루며, 중첩 복합 구조나 원시 HTML/각주 등은 `unsupported`로 분류해 사람 검토(`REVIEW`)로 보류한다.
-- Information Organization 및 Expression Refinement의 실제 편집 로직은 포함하지 않으며, 경계 어댑터(`OrganizationBoundaryAdapter`)로 단계 전환 통제만 검증한다.
+- Information Organization의 후보 계획·독립 배치 검증과 [Expression Refinement Preview](EXPRESSION.md)는 구현되어 있다. 전체 문서 재구성·파일 적용·최종 승인 실행은 미구현이며, 기존 경계 어댑터(`OrganizationBoundaryAdapter`)의 단계 전환 정책은 유지한다.
+
+
+## 18. Expression Refinement Preview
+
+- [Expression Refinement 실행·계약·예시·검증 한계](EXPRESSION.md): 실제 원문 범위의 `REVISE`/`COMPRESS`, 문체·명시 용어 변환, 어댑터 인터페이스와 독립 검증. 전체 문서 결과를 재구성하지 않으므로 Preview만 생성한다.
+- 구현: [`expression.py`](expression.py), [`expression_validator.py`](expression_validator.py), [`test_expression.py`](test_expression.py). 기존 Validation Gate·Organization·Semantic Fidelity Validator의 승인 정책은 변경하지 않는다.
