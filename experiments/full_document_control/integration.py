@@ -68,11 +68,15 @@ class RevisionController:
     def __init__(self, artifacts=None):
         self.artifacts = artifacts if artifacts is not None else {}
 
-    def revalidate(self, bundle, analysis, org, preview, result, **kwargs):
+    def revalidate(self, bundle, analysis, org, preview, result, *, approval_record=None,
+                   approval_evidence_source=None, **kwargs):
         audit = pipeline.validate_final_output(bundle, analysis, org, preview, result, **kwargs)
         report = audit['structural_report']
         findings = report['findings'] + audit['semantic_report']['findings']
-        return {'report': report, 'semantic_report': audit['semantic_report'], 'final_audit': audit,
+        approval_report = pipeline.validate_final_approval_policy(bundle, analysis, org, preview, result, audit,
+            approval_record, destination_snapshots=kwargs.get('destination_snapshots'),
+            evidence_source=approval_evidence_source)
+        return {'report': report, 'semantic_report': audit['semantic_report'], 'final_audit': audit, 'approval_report': approval_report,
                 'controller': self.stop(findings) if audit['gate_state'] == 'FAIL' else None}
 
     def stop(self, findings):
@@ -87,7 +91,7 @@ class RevisionController:
             module, invalidated = 'information_extraction_analysis', ['analysis', 'organization', 'expression', 'reconstruction', 'final_report']
         else:
             module, invalidated = 'reconstruction', ['reconstruction', 'final_report']
-        invalidated += ['final_semantic_report', 'final_audit']
+        invalidated += ['final_semantic_report', 'final_audit', 'approval_request', 'approval_report']
         for name in invalidated:
             self.artifacts.pop(name, None)
         return {'state': 'STOPPED', 'last_gate_state': 'FAIL' if any(f.get('severity') == 'ERROR' for f in findings) else 'REVIEW',
@@ -98,10 +102,11 @@ class RevisionController:
 
 def run_pipeline(bundle, *, responses=None, analysis=None, organization_plan=None,
                  generator=None, operations=None, destination_snapshots=None,
-                 final_semantic_reviewer=None, max_final_review_chars=48000, final_review_timeout=30):
+                 final_semantic_reviewer=None, max_final_review_chars=48000, final_review_timeout=30,
+                 approval_record=None, approval_evidence_source=None):
     outcome = {'execution_mode': 'isolated_candidate', 'status': 'STOPPED', 'source_ref': copy.deepcopy(bundle.get('document_snapshot', {})),
                'analysis': None, 'analysis_report': None, 'organization_plan': None, 'expression_preview': None,
-               'revision_result': None, 'final_report': None, 'final_semantic_report': None, 'final_audit': None, 'controller': None,
+               'revision_result': None, 'final_report': None, 'final_semantic_report': None, 'final_audit': None, 'approval_report': None, 'controller': None,
                'stage_transition_allowed': False, 'delivery_approved': False}
     try:
         analysis = analysis if analysis is not None else analyze_source(bundle, responses)
@@ -122,8 +127,10 @@ def run_pipeline(bundle, *, responses=None, analysis=None, organization_plan=Non
                     destination_snapshots=destination_snapshots, reviewer=final_semantic_reviewer,
                     max_review_chars=max_final_review_chars, timeout_seconds=final_review_timeout)
         final = audit['structural_report']
+        approval_report = pipeline.validate_final_approval_policy(bundle, analysis, org, preview, revision, audit,
+            approval_record, destination_snapshots=destination_snapshots, evidence_source=approval_evidence_source)
         outcome.update(revision_result=revision, final_report=final, final_semantic_report=audit['semantic_report'],
-                       final_audit=audit, status=audit['gate_state'])
+                       final_audit=audit, approval_report=approval_report, status=audit['gate_state'])
         if (audit['gate_state'] == 'FAIL' or revision['delivery_state'] != 'candidate'
                 or any(f['rule_id'] == 'GENERATION_ERROR' for f in final['findings'])):
             outcome['status'] = 'STOPPED'

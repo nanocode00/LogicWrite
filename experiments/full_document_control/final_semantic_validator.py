@@ -10,6 +10,7 @@ import math
 import queue
 import re
 import threading
+import time
 import uuid
 from decimal import Decimal
 
@@ -24,6 +25,7 @@ VERSION = 'final-output-semantic-validation-v1'
 CHECKS = ('CLAIM_FACTS', 'QUANTITY_SCOPE', 'POLARITY_CONDITIONS', 'ADDITIONS_OMISSIONS',
           'CONTRADICTIONS', 'MOVE_CONSOLIDATION', 'PROVENANCE')
 _RECEIPTS = {}
+_RECEIPT_CREATED_AT = {}
 
 
 def _binding(bundle, analysis, org, preview, result, destinations):
@@ -343,6 +345,7 @@ def validate_final_semantics(bundle, analysis, org, preview, result, *, destinat
     expression.seal(report, 'report_sha256')
     if current:
         _RECEIPTS[report['report_sha256']] = copy.deepcopy(report)
+        _RECEIPT_CREATED_AT[report['report_sha256']] = time.monotonic()
     return report
 
 
@@ -362,6 +365,22 @@ def verify_final_semantic_report(bundle, analysis, org, preview, result, report,
     return {'valid': bool(valid), 'gate_state': report['gate_state'] if valid else 'FAIL',
             'execution_evidence_matches_current_inputs': bool(valid),
             'reason': None if valid else 'FORGED_STALE_OR_UNREGISTERED_FINAL_SEMANTIC_REPORT'}
+
+
+def has_fresh_execution_receipt(report, max_age_seconds):
+    """Check process-local receipt age without trusting caller timestamps.
+
+    Approval policy uses a stricter freshness limit than ordinary report
+    inspection. Missing timing state (including after restart) fails closed.
+    """
+    try:
+        created = _RECEIPT_CREATED_AT[report['report_sha256']]
+        age = time.monotonic() - created
+        return (_RECEIPTS.get(report['report_sha256']) == report
+                and type(max_age_seconds) is int and max_age_seconds > 0
+                and 0 <= age < max_age_seconds)
+    except (KeyError, TypeError, ValueError):
+        return False
 
 
 def validate_final_audit(bundle, analysis, org, preview, result, **kwargs):

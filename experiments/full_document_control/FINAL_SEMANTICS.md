@@ -1,6 +1,6 @@
 # 2-A: 전체 출력 의미 충실도 검증
 
-현재 구현은 Python 표준 라이브러리를 사용하는 격리 후보 감사다. `supported`도 REVIEW이며 `delivery_approved`와 `stage_transition_allowed`는 항상 false다. 실제 파일 반영과 사람/정책 최종 승인은 2-B 범위다. M0~M4 완료 기준과 평가 성능을 변경하지 않는다. 이번 변경에서는 **실제 LLM 평가를 수행하지 않았다**. 테스트의 모델 응답은 합성 콜백이다.
+현재 구현은 Python 표준 라이브러리를 사용하는 격리 후보 감사다. `supported`도 REVIEW이며 `delivery_approved`와 `stage_transition_allowed`는 항상 false다. 2-B의 별도 [승인 계약·정책 검사](../../docs/final-approval-policy.md)가 이 감사를 소비한다. 실제 승인 발급과 파일 반영은 비활성화되어 있다. M0~M4 완료 기준과 평가 성능을 변경하지 않는다. 이번 변경에서는 **실제 LLM 평가를 수행하지 않았다**. 테스트의 모델 응답은 합성 콜백이다.
 
 ## 책임과 실행 순서
 
