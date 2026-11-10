@@ -79,6 +79,14 @@ class RevisionController:
         return {'report': report, 'semantic_report': audit['semantic_report'], 'final_audit': audit, 'approval_report': approval_report,
                 'controller': self.stop(findings) if audit['gate_state'] == 'FAIL' else None}
 
+    def repair(self, bundle, *, adapters=None, destination_snapshots=None, reviewer=None,
+               max_attempts=3, budget_seconds=60, adapter_timeout=10):
+        """Opt-in bounded candidate repair; no approval issuance or file application."""
+        from repair_loop import RepairLoop
+        return RepairLoop(max_attempts=max_attempts, budget_seconds=budget_seconds,
+                          adapter_timeout=adapter_timeout).run(bundle, self.artifacts,
+            adapters=adapters, destination_snapshots=destination_snapshots, reviewer=reviewer)
+
     def stop(self, findings):
         errors = [f for f in findings if f.get('severity') == 'ERROR']
         findings = errors or findings
