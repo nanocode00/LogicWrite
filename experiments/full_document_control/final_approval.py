@@ -120,6 +120,26 @@ def _unresolved(request, record, snapshots):
     return [item for key, item in required.items() if key not in resolved]
 
 
+def _current_validation_gate(bundle, analysis, org, preview, result, audit, destinations):
+    """Separate current violations from approval evidence availability/freshness."""
+    structural = final_validator.validate_final_result(bundle, analysis, org, preview, result,
+                                                       destination_snapshots=destinations)
+    if structural['gate_state'] == 'FAIL':
+        return 'FAIL'
+    if semantic.verify_final_audit(bundle, analysis, org, preview, result, audit,
+                                   destination_snapshots=destinations)['valid']:
+        # Receipt authenticity binds the judgment to current inputs even when
+        # its age no longer permits approval. Expiry does not erase violations.
+        current_semantic = audit['semantic_report']
+    else:
+        # Never trust an unauthenticated model verdict. Recheck only what the
+        # existing validator can independently establish, without a model call.
+        # This new execution cannot restore the submitted audit's lost receipt.
+        current_semantic = semantic.validate_final_semantics(bundle, analysis, org, preview, result,
+                                                            destination_snapshots=destinations)
+    return 'FAIL' if any(row['status'] == 'violated' for row in current_semantic['checks'].values()) else 'REVIEW'
+
+
 def evaluate_final_approval(bundle, analysis, org, preview, result, audit, decision_record=None, *,
                             destination_snapshots=None, evidence_source=None):
     """Verify current validation and an explicit human decision; fail closed.
@@ -135,6 +155,15 @@ def evaluate_final_approval(bundle, analysis, org, preview, result, audit, decis
               'request': None, 'decision_record': None, 'evidence_observation': {},
               'unresolved_items': [], 'findings': []}
     def finish(state, reason):
+        # Every exit, including failed lookup/invalid evidence, preserves what
+        # can still be independently confirmed about the current candidate.
+        try:
+            if _current_validation_gate(bundle, analysis, org, preview, result, audit, destination_snapshots) == 'FAIL':
+                report['gate_state'] = 'FAIL'
+        except Exception:
+            # An unavailable recheck is not proof of a semantic violation and
+            # must not erase a FAIL already established earlier.
+            pass
         report['policy_state'] = state
         report['findings'].append({'rule_id': reason})
         return expression.seal(report, 'report_sha256')

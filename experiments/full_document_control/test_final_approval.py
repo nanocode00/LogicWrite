@@ -360,3 +360,66 @@ class ApprovalTests(unittest.TestCase):
         with patch.dict(semantic._RECEIPT_CREATED_AT, {}, clear=True):
             report = self.evaluate(record, evidence_source=self.source)
         self.assertEqual(report['policy_state'], 'INVALID')
+
+    def assert_invalid_gate(self, report, gate):
+        self.assertEqual(report['policy_state'], 'INVALID')
+        self.assertEqual(report['gate_state'], gate)
+        self.assertEqual(report['findings'][0]['rule_id'], 'VALIDATION_EVIDENCE_INVALID_OR_LOST')
+        self.assertFalse(report['issuance_enabled'])
+        self.assertFalse(report['delivery_approved'])
+        self.assertFalse(report['stage_transition_allowed'])
+
+    def test_structural_fail_survives_lost_execution_receipt(self):
+        self.result['output_snapshots'][0]['content'] += 'invented claim'
+        expression.seal(self.result, 'revision_sha256')
+        self.audit = self.audit_now()
+        original_audit = copy.deepcopy(self.audit)
+        with patch.dict(semantic._RECEIPTS, {}, clear=True):
+            report = self.evaluate()
+        self.assert_invalid_gate(report, 'FAIL')
+        self.assertEqual(self.audit, original_audit)
+
+    def test_authenticated_semantic_violation_survives_expired_receipt(self):
+        def contradicted(request):
+            response = supported(request)
+            response['reviews'][0]['judgment'] = 'contradicted'
+            return response
+        self.audit = self.audit_now(contradicted)
+        self.assertEqual(self.audit['structural_report']['gate_state'], 'REVIEW')
+        original_audit = copy.deepcopy(self.audit)
+        with patch.object(semantic.time, 'monotonic', return_value=time.monotonic() + 901):
+            report = self.evaluate()
+        self.assert_invalid_gate(report, 'FAIL')
+        self.assertEqual(self.audit, original_audit)
+
+    def test_normal_candidate_with_lost_receipt_stays_review(self):
+        with patch.dict(semantic._RECEIPTS, {}, clear=True):
+            report = self.evaluate()
+        self.assert_invalid_gate(report, 'REVIEW')
+
+    def test_forged_semantic_violation_does_not_escalate_to_fail(self):
+        self.audit['semantic_report']['checks']['CLAIM_FACTS']['status'] = 'violated'
+        expression.seal(self.audit['semantic_report'], 'report_sha256')
+        expression.seal(self.audit, 'report_sha256')
+        self.assert_invalid_gate(self.evaluate(), 'REVIEW')
+
+    def test_lost_model_violation_receipt_requires_independent_confirmation(self):
+        def contradicted(request):
+            response = supported(request)
+            response['reviews'][0]['judgment'] = 'contradicted'
+            return response
+        self.audit = self.audit_now(contradicted)
+        with patch.dict(semantic._RECEIPTS, {}, clear=True):
+            report = self.evaluate()
+        self.assert_invalid_gate(report, 'REVIEW')
+
+    def test_current_structural_fail_survives_failed_authority_lookup(self):
+        record = self.record()
+        def mutate_and_fail(record_id):
+            self.result['output_snapshots'][0]['content'] += 'invented claim'
+            raise RuntimeError('private authority error')
+        with patch.object(self.source, 'lookup', side_effect=mutate_and_fail):
+            report = self.evaluate(record, evidence_source=self.source)
+        self.assertEqual(report['policy_state'], 'INVALID')
+        self.assertEqual(report['gate_state'], 'FAIL')
+        self.assertNotIn('private authority error', str(report))
