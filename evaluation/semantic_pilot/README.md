@@ -11,3 +11,5 @@ python3 -m unittest discover -s evaluation/semantic_pilot -p test_validate.py
 ```
 
 검사는 구조와 무결성만 확인한다. 의미 판정 정확도·Core PASS를 입증하지 않는다. 파일럿 manifest는 전건 provisional을 강제한다. 이후 사람 검수 데이터의 승격은 별도 데이터 버전과 manifest 정책 검토가 필요하다.
+
+[단일 사용자 + AI 반례 검토 v1](user_review_v1/README.md)은 별도 기록에서 개발용 골드 적격을 관리한다. 기존 12건과 독립 복수 검수 기준은 유지하며, AI 반론은 사람 판정으로 세지 않는다.

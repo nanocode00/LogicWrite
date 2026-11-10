@@ -1,0 +1,12 @@
+{
+  "event_id": null,
+  "kind": "user_initial",
+  "actor_type": "human",
+  "actor_id": null,
+  "recorded_at": null,
+  "payload": {
+    "form": null,
+    "human_confirmed": null,
+    "ai_proposal_exposure": null
+  }
+}
