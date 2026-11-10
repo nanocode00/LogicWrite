@@ -1,0 +1,11 @@
+{
+  "event_id": null,
+  "kind": "reopen",
+  "actor_type": "human",
+  "actor_id": null,
+  "recorded_at": null,
+  "payload": {
+    "reason": null,
+    "human_confirmed": null
+  }
+}

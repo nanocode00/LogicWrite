@@ -1,0 +1,19 @@
+{
+  "event_id": null,
+  "kind": "ai_counterreview",
+  "actor_type": "ai",
+  "actor_id": null,
+  "recorded_at": null,
+  "payload": {
+    "model": null,
+    "separate_review": null,
+    "initial_event_id": null,
+    "review_scope": [
+      "counterexamples",
+      "missing_conditions",
+      "contradictions"
+    ],
+    "challenges": [],
+    "no_challenge_reason": null
+  }
+}

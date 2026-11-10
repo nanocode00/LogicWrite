@@ -1,0 +1,75 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-009",
+  "input_path": "inputs/SP-009.json",
+  "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "MISSING_DESTINATION"
+  ],
+  "findings": [
+    {
+      "error_type": "MISSING_DESTINATION",
+      "severity": "undetermined",
+      "reason": "이동과 링크를 포함한 수정 후보를 먼저 생성한 뒤 목적지·링크·정보 보존을 사후 검사할 수 있다. 현재 제공된 후보에는 목적지 원문과 수정 결과가 없어 전체 의미 보존의 최종 판정이 검증 대기 상태다. 이는 후보 생성 금지나 이동 자체의 의미 위반 판정이 아니다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 2982,
+          "end": 3381,
+          "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3007,
+          "end": 3046,
+          "quote": "See [packaging decision](PACKAGING.md)."
+        }
+      ]
+    }
+  ],
+  "rationale": "이동과 링크를 포함한 수정 후보를 먼저 생성한 뒤 목적지·링크·정보 보존을 사후 검사할 수 있다. 현재 제공된 후보에는 목적지 원문과 수정 결과가 없어 전체 의미 보존의 최종 판정이 검증 대기 상태다. 이는 후보 생성 금지나 이동 자체의 의미 위반 판정이 아니다.",
+  "acceptable_alternatives": [
+    "원본·목적지 수정 후보를 먼저 구성한 뒤 링크 해소와 양쪽 전체 문서의 정보·조건 보존을 검사하는 흐름을 허용한다. 목적지 확인을 모든 후보 생성의 선행조건으로 요구하지 않는다.",
+    "목적지 결과가 미제공된 현재 입력에서는 최종 의미 보존 판정을 보류한다. 링크 존재만으로 보존을 확정하거나 목적지 미제공만으로 정보 손실을 확정하지 않는다."
+  ],
+  "review_questions": [
+    "수정 후보 생성과 최종 의미 보존 판정을 구별했는지 확인한다.",
+    "사후에 PACKAGING.md의 수정 전후 전체 스냅샷을 확보하고, 링크가 해당 문서로 연결되는지와 이동한 정보·조건 및 기존 목적지 정보가 보존됐는지를 각각 확인한다."
+  ],
+  "reviews": [
+    {
+      "reviewer_id": "repository-user",
+      "reviewer_type": "human",
+      "reviewed_at": "2026-11-10",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+      "judgment": "UNRESOLVED",
+      "rationale": "대화 중 사용자 의견의 Codex 요약: 수정을 먼저 진행하고 링크·목적지 검사를 나중에 수행하는 것이 좋다. 확인을 후보 생성 선행조건으로 두면 순환 대기가 생길 수 있다. 목적지 결과 미제공 상태에서는 최종 의미 보존 검증을 기다리는 것으로 설명한 데 동의했다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 2982,
+          "end": 3381,
+          "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3007,
+          "end": 3046,
+          "quote": "See [packaging decision](PACKAGING.md)."
+        }
+      ],
+      "blinded_to_ai_proposal": false
+    }
+  ],
+  "disagreements": [],
+  "adjudication": null
+}

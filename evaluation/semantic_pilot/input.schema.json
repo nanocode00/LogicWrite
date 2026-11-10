@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LogicWrite semantic pilot input v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^SP-[0-9]{3}$"
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_kind": {
+      "enum": [
+        "public_source_based",
+        "controlled_synthetic"
+      ]
+    },
+    "construction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "availability": {
+            "enum": [
+              "complete",
+              "partial",
+              "not_provided"
+            ]
+          },
+          "content": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "public_git",
+                  "controlled_synthetic"
+                ]
+              },
+              "repository": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "git_blob_sha": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{40}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "snapshot_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "snapshot_sha256": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "captured_on": {
+                "type": "string",
+                "pattern": "^2026-[0-9]{2}-[0-9]{2}$"
+              }
+            },
+            "required": [
+              "kind",
+              "repository",
+              "path",
+              "version",
+              "git_blob_sha",
+              "url",
+              "snapshot_path",
+              "snapshot_sha256",
+              "captured_on"
+            ]
+          }
+        },
+        "required": [
+          "document_id",
+          "version",
+          "availability",
+          "content",
+          "sha256",
+          "provenance"
+        ]
+      },
+      "minItems": 1
+    },
+    "candidate_documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "availability": {
+            "enum": [
+              "complete",
+              "partial",
+              "not_provided"
+            ]
+          },
+          "content": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "public_git",
+                  "controlled_synthetic"
+                ]
+              },
+              "repository": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "git_blob_sha": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{40}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "snapshot_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "snapshot_sha256": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "captured_on": {
+                "type": "string",
+                "pattern": "^2026-[0-9]{2}-[0-9]{2}$"
+              }
+            },
+            "required": [
+              "kind",
+              "repository",
+              "path",
+              "version",
+              "git_blob_sha",
+              "url",
+              "snapshot_path",
+              "snapshot_sha256",
+              "captured_on"
+            ]
+          }
+        },
+        "required": [
+          "document_id",
+          "version",
+          "availability",
+          "content",
+          "sha256",
+          "provenance"
+        ]
+      },
+      "minItems": 1
+    },
+    "writing_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contract_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audience": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "output_document_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "required_information": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "exposure": {
+                "enum": [
+                  "same_document",
+                  "linked_document",
+                  "pending_contract"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "description",
+              "exposure"
+            ]
+          },
+          "minItems": 1
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "contract_id",
+        "version",
+        "audience",
+        "purpose",
+        "language",
+        "output_document_ids",
+        "required_information",
+        "constraints"
+      ]
+    },
+    "missing_context": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "supplied_observations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "case_id",
+    "task",
+    "source_kind",
+    "construction",
+    "source_documents",
+    "candidate_documents",
+    "writing_contract",
+    "missing_context",
+    "supplied_observations"
+  ]
+}

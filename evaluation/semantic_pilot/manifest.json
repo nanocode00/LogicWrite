@@ -1,0 +1,157 @@
+{
+  "schema_version": "0.1.0",
+  "dataset_id": "logicwrite-final-semantics-pilot-v0.1",
+  "created_on": "2026-11-10",
+  "base_commit": "ee3c2703c5b5327a6a90d246070e748361fad881",
+  "split": "development_only",
+  "status": "provisional_not_gold",
+  "case_count": 12,
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "title": "공개 README: 릴리스 한정의 동의 표현",
+      "source_kind": "public_source_based",
+      "expected_judgment": "PRESERVED",
+      "input_path": "inputs/SP-001.json",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+      "answer_path": "answers/SP-001.json",
+      "answer_sha256": "3b49835432602afeeb2d9ee8bc599df144bf222ad420da4b424d489d5ace24f5",
+      "source_family": "nanocode00/chatgpt2codex:README@dcc9ed7e"
+    },
+    {
+      "case_id": "SP-002",
+      "title": "정상 문서 내 재배치",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "PRESERVED",
+      "input_path": "inputs/SP-002.json",
+      "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+      "answer_path": "answers/SP-002.json",
+      "answer_sha256": "1fdade5d0cd7cb7417cb3003f4c65624cd9d89476dcb07e8ef31595abe5c1018",
+      "source_family": "controlled-synthetic-002"
+    },
+    {
+      "case_id": "SP-003",
+      "title": "문서 간 MOVE: 양쪽 전체 문서",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "PRESERVED",
+      "input_path": "inputs/SP-003.json",
+      "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+      "answer_path": "answers/SP-003.json",
+      "answer_sha256": "a17d58d75d7a5ae5e51947d3c400dc7704cafb24d0ec71138ad0623b09352b7a",
+      "source_family": "controlled-synthetic-003"
+    },
+    {
+      "case_id": "SP-004",
+      "title": "중복 통합: 고유 한정 유지",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "PRESERVED",
+      "input_path": "inputs/SP-004.json",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+      "answer_path": "answers/SP-004.json",
+      "answer_sha256": "93d7df2becfc01e73f8e436ddd1013556fd2cc9f33fdd3cc9499ee9055e7cbf5",
+      "source_family": "controlled-synthetic-004"
+    },
+    {
+      "case_id": "SP-005",
+      "title": "공개 README: 미래 가능성→현재 제공",
+      "source_kind": "public_source_based",
+      "expected_judgment": "VIOLATION",
+      "input_path": "inputs/SP-005.json",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+      "answer_path": "answers/SP-005.json",
+      "answer_sha256": "e2ada0d4f01186eee1fa152689bc3bc9c81be5e672a404c723a6559dedb023a6",
+      "source_family": "nanocode00/chatgpt2codex:README@dcc9ed7e"
+    },
+    {
+      "case_id": "SP-006",
+      "title": "부정 반전·수치 단위 왜곡",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "VIOLATION",
+      "input_path": "inputs/SP-006.json",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+      "answer_path": "answers/SP-006.json",
+      "answer_sha256": "a113ee6bfeadb15a8efc79a945972cc16384285d82ffc9fb8c1e7928f9bb6a55",
+      "source_family": "controlled-synthetic-006"
+    },
+    {
+      "case_id": "SP-007",
+      "title": "필수 조건 손실",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "VIOLATION",
+      "input_path": "inputs/SP-007.json",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+      "answer_path": "answers/SP-007.json",
+      "answer_sha256": "1cc0408ec604c9de06624ed4286792464a03a38d9599b7a4d3d041d7086f7d35",
+      "source_family": "controlled-synthetic-007"
+    },
+    {
+      "case_id": "SP-008",
+      "title": "근거 없는 일반화 추가",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "VIOLATION",
+      "input_path": "inputs/SP-008.json",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "answer_path": "answers/SP-008.json",
+      "answer_sha256": "577bb0dd699f900a2d5ad649802288fb65b230f3bb45b62c400129b4106759b3",
+      "source_family": "controlled-synthetic-008"
+    },
+    {
+      "case_id": "SP-009",
+      "title": "MOVE 목적지 결과 미제공",
+      "source_kind": "public_source_based",
+      "expected_judgment": "UNRESOLVED",
+      "input_path": "inputs/SP-009.json",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+      "answer_path": "answers/SP-009.json",
+      "answer_sha256": "96dffb466d2fbea7cc5066c0597c9c3e541caf1798e9ca21bdbf2d914584a8c7",
+      "source_family": "nanocode00/chatgpt2codex:README@dcc9ed7e"
+    },
+    {
+      "case_id": "SP-010",
+      "title": "원문 기준 버전 미확정",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "UNRESOLVED",
+      "input_path": "inputs/SP-010.json",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+      "answer_path": "answers/SP-010.json",
+      "answer_sha256": "7b6389fdb70835c42eaf34a9a1e07e84567ad4a21cf0c9ed0c6fb9bf2666a885",
+      "source_family": "controlled-synthetic-010"
+    },
+    {
+      "case_id": "SP-011",
+      "title": "현지 노출 계약 미확정",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "UNRESOLVED",
+      "input_path": "inputs/SP-011.json",
+      "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+      "answer_path": "answers/SP-011.json",
+      "answer_sha256": "d140c21ef3945bafc9f3bdbca2fed2cbe3eccf060f57876a5de0a51391b1c52f",
+      "source_family": "controlled-synthetic-011"
+    },
+    {
+      "case_id": "SP-012",
+      "title": "수정 결과 전송 중 절단",
+      "source_kind": "controlled_synthetic",
+      "expected_judgment": "UNRESOLVED",
+      "input_path": "inputs/SP-012.json",
+      "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+      "answer_path": "answers/SP-012.json",
+      "answer_sha256": "af4af0521b1e1ebcf819a65c968f5eb2d6ab53d998b43215785935ea4cb58dc5",
+      "source_family": "controlled-synthetic-012"
+    }
+  ],
+  "source_snapshots": [
+    {
+      "path": "sources/chatgpt2codex-README.md",
+      "sha256": "46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0"
+    }
+  ],
+  "excluded_holdout_repositories": [
+    "nanocode00/chatgpt2codex",
+    "nanocode00/resume",
+    "nanocode00/QuotaTray",
+    "nanocode00/project3-planning",
+    "nanocode00/mallo-intro",
+    "nanocode00/LogicWrite"
+  ]
+}
