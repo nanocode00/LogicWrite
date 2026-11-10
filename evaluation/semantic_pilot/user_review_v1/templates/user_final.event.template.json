@@ -1,0 +1,18 @@
+{
+  "event_id": null,
+  "kind": "user_final",
+  "actor_type": "human",
+  "actor_id": null,
+  "recorded_at": null,
+  "payload": {
+    "counterreview_event_id": null,
+    "judgment": null,
+    "rationale": null,
+    "evidence": [],
+    "responses": [],
+    "unresolved_issues": [],
+    "approve_for_development_gold": null,
+    "confidence_limitations": [],
+    "human_confirmed": null
+  }
+}

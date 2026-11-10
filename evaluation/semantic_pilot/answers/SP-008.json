@@ -1,0 +1,73 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-008",
+  "input_path": "inputs/SP-008.json",
+  "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "UNSUPPORTED_ADDITION"
+  ],
+  "findings": [
+    {
+      "error_type": "UNSUPPORTED_ADDITION",
+      "severity": "major",
+      "reason": "사용자의 추가 사실 제공이나 삽입 지시 없이 에이전트가 모든 환경 2배 개선이라는 주장을 임의로 추가했다. 실험 A 단일 실행의 120ms 관측만으로는 일반화 범위와 개선 배율을 뒷받침할 수 없다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "report",
+          "start": 0,
+          "end": 60,
+          "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "report",
+          "start": 61,
+          "end": 84,
+          "quote": "모든 환경에서 응답 성능이 2배 향상됐다."
+        }
+      ]
+    }
+  ],
+  "rationale": "사용자의 추가 사실 제공이나 삽입 지시 없이 에이전트가 모든 환경 2배 개선이라는 주장을 임의로 추가했다. 실험 A 단일 실행의 120ms 관측만으로는 일반화 범위와 개선 배율을 뒷받침할 수 없다.",
+  "acceptable_alternatives": [
+    "관측 범위를 실험 A 단일 실행으로 유지한 요약은 허용한다. 모든 환경 2배 개선은 별도 근거 없이는 허용하지 않는다."
+  ],
+  "review_questions": [
+    "사용자 추가 정보·삽입 지시가 없다는 명시 전제 아래에서, 일반화 범위와 개선 배율이 근거를 넘었는지 확인한다. 사용자 요구가 다른 사례에는 이 판정을 그대로 적용하지 않는다."
+  ],
+  "reviews": [
+    {
+      "reviewer_id": "repository-user",
+      "reviewer_type": "human",
+      "reviewed_at": "2026-11-10",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "judgment": "VIOLATION",
+      "rationale": "대화 중 사용자 의견의 Codex 요약: 과도한 주장 추가다. 단, 사용자가 추가 사실이나 삽입 지시를 제공하지 않고 에이전트가 임의로 추가했다는 전제에 한정한다. 이 전제를 입력에 명시하는 데 동의했다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "report",
+          "start": 0,
+          "end": 60,
+          "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "report",
+          "start": 61,
+          "end": 84,
+          "quote": "모든 환경에서 응답 성능이 2배 향상됐다."
+        }
+      ],
+      "blinded_to_ai_proposal": false
+    }
+  ],
+  "disagreements": [],
+  "adjudication": null
+}
