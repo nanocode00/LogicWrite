@@ -171,10 +171,16 @@ python3 experiments/full_document_control/pipeline.py run \
 
 - 블록 전체 범위와 필수 문자열·관계 연결이 확인되어도 정규화된 문장(`statement`)이나 판단 이유(`reason`/`exposure`)에서 발생하는 미묘한 의미 왜곡·주장 범위 확대를 결정론적 검사만으로 완벽히 잡아낼 수는 없으므로 `SEMANTIC_FIDELITY`를 자동 `PASS`로 처리하지 않는다.
 - 현재 Markdown 파서는 줄 단위 블록 구조(제목, 문단, 파이프 표, 펜스 코드 블록, 목록, 인용, 구분선, 공백)를 다루며, 중첩 복합 구조나 원시 HTML/각주 등은 `unsupported`로 분류해 사람 검토(`REVIEW`)로 보류한다.
-- Information Organization의 후보 계획·독립 배치 검증과 [Expression Refinement Preview](EXPRESSION.md)는 구현되어 있다. 전체 문서 재구성·파일 적용·최종 승인 실행은 미구현이며, 기존 경계 어댑터(`OrganizationBoundaryAdapter`)의 단계 전환 정책은 유지한다.
+- Information Organization의 후보 계획·독립 배치 검증과 [Expression Refinement Preview](EXPRESSION.md)는 구현되어 있다. [전체 문서 후보 통합](INTEGRATION.md)은 별도 읽기 전용 경로로 구현되어 있으며, 파일 적용·최종 승인 실행은 미구현이다. 기존 경계 어댑터(`OrganizationBoundaryAdapter`)의 단계 전환 정책은 유지한다.
 
 
 ## 18. Expression Refinement Preview
 
 - [Expression Refinement 실행·계약·예시·검증 한계](EXPRESSION.md): 실제 원문 범위의 `REVISE`/`COMPRESS`, 문체·명시 용어 변환, 어댑터 인터페이스와 독립 검증. 전체 문서 결과를 재구성하지 않으므로 Preview만 생성한다.
 - 구현: [`expression.py`](expression.py), [`expression_validator.py`](expression_validator.py), [`test_expression.py`](test_expression.py). 기존 Validation Gate·Organization·Semantic Fidelity Validator의 승인 정책은 변경하지 않는다.
+
+
+## 19. 전체 문서 후보 통합
+
+- [실행 방법·재구성 계약·최종 검사·한계](INTEGRATION.md): Markdown 파일 → 분석/기존 게이트 → 격리된 조직화·표현 후보 → 원본 span 기반 전체 문서 후보 → 독립 최종 검사. 후보 생성 성공과 최종 의미 승인을 분리한다.
+- 구현: [`integration.py`](integration.py), [`reconstruction.py`](reconstruction.py), [`final_validator.py`](final_validator.py), [`test_integration.py`](test_integration.py). 기존 모듈 승인 경계·평가 데이터는 변경하지 않는다.
