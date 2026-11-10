@@ -3,7 +3,7 @@
 > 상태: 별도 설계안 (구현·성능 검증 전)  
 > 작성일: 2026-11-09  
 > 적용 범위: 한국어 기술 문서 / 기존 LogicWrite Core 비변경 원칙  
-> 독립 작업 원칙: 진행 중인 Semantic Fidelity Validator 프로토타입과 병렬로 설계하되, 해당 작업 파일·브랜치·평가 결과를 변경하지 않는다.
+> 현행화: 2026-11-10, PR #15까지의 Core는 별도 실행 프로토타입이다. 이 확장은 여전히 미구현이다. 실제 API는 [현재 실행 인터페이스](data-model-and-interfaces.md#current-runtime-interfaces), 우선순위는 [로드맵](roadmap.md)을 따른다. Core 코드·평가·승인 정책은 이 설계로 변경하지 않는다.
 
 ## 1. 결정 요약
 
@@ -69,7 +69,7 @@ logicwrite/
 - validate_revision(revision_ref, expected_plan_ref) -> ValidationReportRef
 - invalidate(changed_refs) -> affected artifact refs
 
-**중요:** 현재 구현된 메서드와 향후 계획된 메서드를 구분해야 한다. 구현이 없는 organize/refine/validate_revision은 명시적인 NOT_IMPLEMENTED/REVIEW 경계로 표시한다. 임의로 PASS를 출력하는 mock을 데모 성공으로 표시하지 않는다. 단위 테스트에서만 fake를 사용한다.
+**중요:** 위 CorePort는 제안이며 실제 클래스/메서드는 없다. 현재 `generate_organization_plan`, `generate_revision_result`, `validate_final_result`는 각각 제한된 계획/Preview/최종 구조 검증 API다. 이를 승인된 organize/refine/validate_revision 실행으로 매핑하지 않는다. 승인 실행이 없는 경계는 명시적인 NOT_IMPLEMENTED/REVIEW로 표시한다. 임의로 PASS를 출력하는 mock을 데모 성공으로 표시하지 않는다. 단위 테스트에서만 fake를 사용한다.
 
 ### 4.2 RetrievalPort
 
@@ -280,7 +280,7 @@ logicwrite evaluate --fixture demo-01 --rag on --orchestrator langgraph
 - [ ] CorePort 추상 인터페이스와 현재 실험 파이프라인용 어댑터 작성
 - [ ] CorePort 호출 결과를 값 객체로 전달하고 gate 판정은 기존 게이트에 위임
 - [ ] 선택적 모듈 활성화 구성과 C0/C1/C2/C3 진입점 추가
-- [ ] 현재 semantic-validator 미완료 상태를 REVIEW로 투명하게 유지
+- [ ] 분석 의미 검증 supported와 최종 출력 의미 검토/승인 미완료의 REVIEW를 구분해 유지
 - 완료: 가짜 PASS 없이 C0/C2가 같은 Core 게이트 판정을 재현
 
 ### X2 — LangGraph 최소 실제 구현
@@ -319,7 +319,7 @@ logicwrite evaluate --fixture demo-01 --rag on --orchestrator langgraph
 10. 입력의 중요한 주장·조건을 Top-K 검색 범위로 축소하지 않는다.
 11. 검색 증강으로 수정한 후보가 독립 검사에서 새 주장 확대를 발견하면 차단한다.
 12. checkpoint 재개 시 반복 부작용이나 검증 우회가 없다.
-13. 현재 미구현 organize/refine 경계는 PASS/완료로 위장하지 않는다.
+13. 제안 CorePort의 organize/refine 승인 실행은 기존 계획/Preview API와 구별하고 PASS/완료로 위장하지 않는다.
 14. C0~C3의 평가 입력·모델·계약·인덱스 버전이 기록된다.
 
 ## 11. 위험 및 선결정
@@ -327,8 +327,8 @@ logicwrite evaluate --fixture demo-01 --rag on --orchestrator langgraph
 - **선결정 A:** 별도 문서가 2개 이상이어야 문서 간 검색을 정직하게 시연할 수 있다. 1개 문서 전체 보존 문제를 RAG로 해결한다고 주장하지 않는다.
 - **선결정 B:** RAG 도입 전에 검색 대상의 접근 권한과 최신성의 책임을 정한다.
 - **선결정 C:** LangGraph는 실행 흐름 어댑터이며 Core의 gate 규칙을 복제하지 않는다.
-- **선결정 D:** 현재 진행 중인 의미 검증기 결과를 선행조건으로 기다리지 않고 포트·검색·오케스트레이터를 독립 개발하되, 통합 PASS는 실제 검증기 준비 전까지 보류한다.
-- **선결정 E:** 저장소에 아직 미구현인 조직화·표현 수정이 있으므로, 과제 초기 데모는 *검색 근거 사용 및 그래프 제어의 정직한 부분 시연*으로 범위를 고정한다.
+- **선결정 D:** 포트·검색·오케스트레이터는 별도 개발하되, 기존 분석 의미 검증만으로 최종 출력 승인이 있다고 간주하지 않는다. 통합 PASS는 전체 의미 검토·명시 승인 경계가 준비될 때까지 보류한다.
+- **선결정 E:** 저장소의 조직화·표현 수정은 제한된 계획/Preview 프로토타입이며 승인된 일반 실행이 아니므로, 과제 초기 데모는 *검색 근거 사용 및 그래프 제어의 정직한 부분 시연*으로 범위를 고정한다.
 
 ## 12. 참조
 
@@ -338,4 +338,4 @@ logicwrite evaluate --fixture demo-01 --rag on --orchestrator langgraph
 - LangGraph 공식 interrupts: https://docs.langchain.com/oss/python/langgraph/interrupts
 - LangGraph 공식 persistence: https://docs.langchain.com/oss/python/langgraph/persistence
 
-> 이 문서는 **과제용 확장 설계**이며, 기존 코어 로드맵의 M0~M4 완료 판정, 기존 평가 자료/스키마, 현재 진행 중인 Semantic Fidelity Validator 파일을 변경하지 않는다.
+> 이 문서는 **과제용 확장 설계**이며, 기존 코어 로드맵의 M0~M4 완료 판정, 기존 평가 자료/스키마, 기존 Semantic Fidelity Validator 코드·평가·승인 정책을 변경하지 않는다.

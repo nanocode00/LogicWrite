@@ -1,6 +1,6 @@
 # Expression Refinement 프로토타입
 
-`expression.py`는 실제 원문 범위에 대한 표현 수정 후보를 생성하고, `expression_validator.py`는 현재 입력·배치·결과 텍스트를 독립 재검증한다. 전체 문서 재구성 및 승인 실행 경로는 미구현이다. 결과는 항상 `delivery_state: preview`, `output_snapshots: []`이며, 위반은 `FAIL`, 나머지는 `REVIEW`다. `expression_checks_state`와 최종 전달 승인은 별개다.
+`expression.py`는 실제 원문 범위에 대한 표현 수정 후보를 생성하고, `expression_validator.py`는 현재 입력·배치·결과 텍스트를 독립 재검증한다. 이 모듈 자체는 발췌 Preview만 생성한다. PR #15의 전체 후보 재구성·최종 구조 검증은 별도 [INTEGRATION](INTEGRATION.md) 경로이며, 승인 실행은 여전히 미구현이다. 결과는 항상 `delivery_state: preview`, `output_snapshots: []`이며, 위반은 `FAIL`, 나머지는 `REVIEW`다. `expression_checks_state`와 최종 전달 승인은 별개다.
 
 ## 실행과 생성 인터페이스
 
@@ -132,7 +132,7 @@ assert preview['validation_report']['gate_state'] == 'REVIEW'
 | 다중 문서 출력과 배치 | 입력 resolver는 단일 concrete scope를 요구하지만 Organization은 여러 scope·목적지 스냅샷을 처리. 기존 코드의 차이를 수정하거나 완화하지 않음 |
 | 풍부한 문체·terminology·constraints | 기존 WritingContract는 `register` 및 문자열 constraints 목록을 사용. 이번의 접두 문자열 지시문은 실험용 문법이며 resolver를 변경하지 않음 |
 | ExpressionPlan 항목 목록 | 버전·참조·공통 제약을 담은 계획 객체 안의 `entries` 목록으로 구현 |
-| candidate는 모든 관련 문서의 완전한 스냅샷 | 문서 재조립·다중 문서 원자적 적용을 미구현했으므로 preview만 반환 |
+| candidate는 모든 관련 문서의 완전한 스냅샷 | 이 모듈은 preview만 반환. 별도 Reconstruction은 전체 후보를 만들 수 있지만 다중 문서의 실제 파일 적용·승인은 미구현 |
 | 최종 의미·전체 문서 검증 후 전달 후보 | 자체 검사는 별도 상태로 보고하지만 최종 승인 실행은 NOT_IMPLEMENTED/REVIEW |
 
 테스트 수와 최신 검증 결과는 [HANDOFF](HANDOFF.md)의 Expression Refinement 절을 참조한다. 기존 평가 데이터·실제 LLM 평가 결과는 변경하지 않는다.

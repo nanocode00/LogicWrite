@@ -1,8 +1,174 @@
 # 공통 데이터 모델과 모듈 인터페이스
 
-> **구현 준비 단계의 논리 설계 제안.** [세 모듈 아키텍처](architecture.md)에 기반하지만 실행 가능한 스키마나 채택된 평가 데이터 형식은 아니다. 파이프라인·검증기·LLM·검색 서비스·어댑터는 아직 구현되지 않았다. 기존 7개 액션과 평가 스키마 `0.1.0`은 변경하지 않는다. M0 독립 사람 검토·홀드아웃 분리·스키마 동결도 미완료다.
+> **논리 설계와 실행 프로토타입을 구분하는 문서.** [현재 실행 인터페이스](#current-runtime-interfaces)는 PR #15 기준의 실제 API다. 그 아래 공통 자료형은 장기 설계 제안이며 채택된 실행 스키마가 아니다. 기존 7개 액션·평가 스키마 `0.1.0`, M0 독립 검토·홀드아웃·스키마 동결 상태는 유지한다.
+
+<a id="current-runtime-interfaces"></a>
+
+## 현재 실행 인터페이스
+
+**기준: 2026-11-10, `main` `c770276` (PR #15까지 병합).** 이 절은 실제 Python API와 프로토타입 지원 범위의 단일 참조다. 아래 [논리 설계](#범위와-설계-선택)는 장기 계약이며, 실제 입력으로 그대로 전달할 수 없다. 코드·기존 계약·평가 스키마는 이 문서 갱신으로 변경하지 않는다.
+
+### 구현 상태와 호출 관계
+
+| 구성 | 현재 제공 | 미완료·평가 경계 |
+| --- | --- | --- |
+| Writing Contract | 필수 필드·문자값·단일 구체적 scope·전체 스냅샷 검증 | 사용자 의도 해석·목적 복구 Resolver, 공통 스키마 동결 |
+| Information Extraction & Analysis | 블록/창 분할, 모델 응답 조립, 정확 인용·요소·관계·필수 정보 추적 | 의미적 완전성·중요도 판단의 일반 품질 평가 |
+| Information Organization | 후보 배치·MOVE 목적지·의존 조건·중복 통합 계획과 독립 검증 | 일반 의미 기반 구조 재설계, 승인된 전체 실행 |
+| Expression Refinement | 원문 범위에 묶인 생성기 Preview, 제한된 문체·용어·압축과 독립 검사 | 범용 윤문 품질, 의미 동등성·전체 문서 승인 |
+| Reconstruction | 원본 전체 범위 유지, 제한된 패치·문단 배치·MOVE·동일 문단 통합 후보 | 새 제목/새 문서·부분 블록 재구성·일반 제거 실행 |
+| Validation Gate / Semantic Fidelity | 필수 검사 대조, 분석↔원문 양방향 의미 검토, 독립 최종 구조 검사 | 최종 **출력 문서** 의미 검토·사람/정책 승인 |
+| Revision Controller | 추출 재시도·상위 변경 무효화, 최종 후보의 진단·재검증·중단 | 담당 모듈의 자동 수정→하위 재생성→전체 재검증 루프 |
+
+실제 코드는 `experiments/` 아래의 Python 표준 라이브러리 프로토타입이다. 정식 `logicwrite` 패키지·공개 SDK·MCP 서버·RAG·LangGraph는 없다. 실험용 CLI는 존재한다.
+
+```text
+pipeline.ExecutionController.run
+  → 추출 responder → assemble_document_analysis → validate_analysis_gate
+  → can_advance_to_organization / OrganizationBoundaryAdapter (REVIEW 진입 차단)
+
+integration.run_pipeline (execution_mode: isolated_candidate)
+  → analyze_source 또는 제공된 analysis → validate_analysis_gate
+  → FAIL/STOPPED: 중단
+  → REVIEW: generate_organization_plan → generate_revision_result
+  → reconstruct_documents → validate_final_result → REVIEW 또는 진단·STOPPED
+```
+
+두 경로는 승인 권한을 공유해서 우회하지 않는다. 격리 후보를 계산해도 `stage_transition_allowed`와 `delivery_approved`는 `false`다. 분석 의미 검증기가 `supported`를 반환해도 사람/정책 승인이 없어 `REVIEW`이며, 최종 검증기는 별도로 `semantic_fidelity: not_run`을 반환한다. 분석의 의미 검토는 수정 후 전체 출력의 의미 검토를 대신하지 않는다.
+
+### 입력: Writing Contract와 DocumentSnapshot
+
+실제 입력 검증 함수는 [`pipeline.validate_input_bundle(data)`](../experiments/full_document_control/pipeline.py)다. 예시는 [`sample_input.json`](../experiments/full_document_control/sample_input.json)을 기준으로 한다.
+
+| 객체 | 실제 필수 키·값 |
+| --- | --- |
+| InputBundle | `case_id`, `writing_contract`, `document_snapshot` |
+| WritingContract | `contract_id`, `version`, `document_type`, `audience`, `purpose`, `language`, `register` (비어 있지 않은 문자열), `output_scopes`, `required_information`, `constraints` |
+| output_scopes | 정확히 **한 개**의 `{scope_id, document_id}`. 기본 분석 경로에서는 논리 설계의 `kind/target`, 그룹·역할을 받지 않음 |
+| required_information 항목 | `id`, `description`, `expected_literal`, `kind`, `scope_id`; 선택 `requires_condition_link: bool`. ID 중복 금지, scope는 위 선언과 동일 |
+| constraints | 비어 있지 않은 문자열의 목록(목록 자체는 비어 있어도 됨). Expression은 `TERM: 원어 => 목표어`, `PRESERVE: 값`, `FORBID: 값`, `EXCLUDE_BLOCK: 블록ID`만 구조적으로 해석. 기타 자연어 제약은 미해결 의무 |
+| DocumentSnapshot | `snapshot_id`, `document_id`, `version`, `coverage: complete`, `media_type: text/markdown`, `content`, `sha256`; 선택 `source_record`. 문서 ID는 계약과 같아야 함 |
+
+`kind`는 `claim/condition/quantity/attribution/identifier/time_scope`다. 알 수 없는 키, 빈 필드, 불일치 해시/문서 ID, 발췌 스냅샷 등은 `InvalidArtifactError` 대상이며 호출 제어기가 실패/중단 진단으로 변환한다. 문체 문자열의 존재 검사는 문체 지원 전체를 보장하지 않는다. 오프셋은 원문 문자열의 유니코드 코드 포인트 `[start,end)`, 텍스트 해시는 UTF-8 SHA-256이며 JSON 산출물 해시는 코드의 정규 직렬화를 따른다.
+
+[`integration.markdown_bundle(text, contract)`](../experiments/full_document_control/integration.py)는 문자열과 계약으로 InputBundle을 만든다. 입력 검증·의미 분석·승인은 별도 호출 책임이다. 입력 계약에 논리 설계의 `intent`, `terminology`, `source_material`을 추가하면 현 검증기는 거부한다.
+
+### Information Extraction & Analysis
+
+구현: [`pipeline.py`](../experiments/full_document_control/pipeline.py). 발췌 전용 [`analyze.py`](../experiments/extraction_analysis/analyze.py)의 RW-001 실험과 전체 문서 API를 구분한다.
+
+- `parse_markdown_blocks(snapshot)` → 전체 원문의 빈틈·겹침 없는 블록 목록. 줄 기반 제목·문단·목록·표·펜스 코드·인용을 지원하며 공백/구분자는 제외 이유, 미지원 문법은 보류를 기록한다.
+- `plan_extraction_windows(...)`, `build_window_prompt(bundle, ...)` → 문맥 예산 안의 창과 프롬프트. 초과 단일 블록은 `unresolved`로 보류한다.
+- `assemble_document_analysis(input_bundle, window_responses_raw, *, max_window_chars=None, max_prompt_chars=12000, cross_window_relations_raw=None)` → AnalysisResult. 원시 JSON 문자열/바이트 목록을 입력으로 받는다. 창 응답은 `input_sha256`, `snapshot_id`, `snapshot_sha256`, `window_id`, `block_coverage`, `units`, `alignment`, `unresolved_questions`를 포함한다. 선택적 교차 창 관계 응답도 현재 원문에 고정돼야 한다.
+- 응답 단위는 `id`, `statement`, `quotes`, `elements`, `relations`, `assessment`를 갖는다. 인용은 `{block_id, quote, occurrence}`로 해석하고 코드가 `source_spans`를 계산한다. assessment는 `scope_id`, `relevance`, `importance`, `preservation`, `exposure`, `reason`, `uncertainty`다. 열거값은 코드 상수와 프롬프트가 원본이다.
+- 결과 주요 필드: `version: full-document-control-prototype-v1`, `input_sha256`, 계약/스냅샷 ID·버전·해시, `blocks`, `units`(각 단위 내부 assessment), `requirement_bindings`, `coverage_ledger`, `alignment`, 창·예산·응답 기록, `semantic_fidelity: not_run`, `delivery_approved: false`, `analysis_sha256`.
+
+조립은 인용·참조·필수 문자값·조건 연결의 구조 대응을 검증한다. 원문 주장이 실제 실행 사실임을 입증하지 않는다. 잘못된 JSON·중복 ID·오래된 입력·인용 불일치 등은 예외, 처리되지 않은 범위·불확실 관계는 게이트의 보류/실패로 연결된다. `integration.analyze_source(bundle, responses=None)`의 기본값은 **미검토 원문 블록 목록**이며 일반적인 주장·의미 분석기가 아니다.
+
+### Information Organization
+
+구현: [`organization.py`](../experiments/full_document_control/organization.py).
+
+- `generate_organization_plan(input_bundle, analysis_result, *, candidate_actions=None, consolidation_candidates=None, destination_snapshots=None, execution_mode='preview', run_id='org-run-preview', validation_report=None)` → `org-plan-v1`.
+- 결과는 `meta`, `analysis_ref`, `placements`, `consolidation_groups`, `destination_reviews`, `affected_documents`, `findings`, `plan_sha256`를 갖는다. 각 placement는 단위·scope, `disposition`(`placed/omitted/blocked/flagged`), `action`, 목적지·섹션·순서의 `targets`, 보호 요소와 판단 근거를 기록한다. 내부 계획 action은 `KEEP/MOVE/REMOVE/FLAG/CONSOLIDATE`이며 기존 보고용 7개 액션과 동일한 열거형이 아니다.
+- `validate_organization_plan(input_bundle, analysis_result, plan, *, validation_report=None, destination_snapshots=None, semantic_reviewer=None)` → `org-validation-report-v1`: `gate_state`, `is_valid`, 상위 승인 상태, `check_results`, `diagnostics`, `findings`, 참조 해시. `is_valid: true`는 승인과 다르다.
+- `create_organization_plan_preview(...)`는 계획과 검증 보고서를 묶는다. `execute_authorized_organization(...)`은 기존 경계 어댑터를 통과해야 하며 `REVIEW`에서는 `StageTransitionBlockedError`로 차단된다. 허용 가지도 파일 편집 실행기가 아니다.
+
+계획 생성은 원문/계약/분석 해시 불일치를 거부한다. 독립 검증은 전 단위 추적, 필수 정보, 출력 범위, 실제 목적지 내용·조건 의존성·통합 호환성, 승인 위조를 검사한다. 목적지 미확정·의미 동등성 미확인은 `REVIEW`, 확인된 위반은 `FAIL`이다. 단순 문장 정규화나 배치 휴리스틱은 일반적인 의미 재구성 능력의 증거가 아니다.
+
+### Expression Refinement
+
+구현: [`expression.py`](../experiments/full_document_control/expression.py), [`expression_validator.py`](../experiments/full_document_control/expression_validator.py). 사용 예시·제약은 [EXPRESSION](../experiments/full_document_control/EXPRESSION.md).
+
+- `build_expression_plan(bundle, analysis, organization_plan, *, operations=None, destination_snapshots=None, validation_report=None)` → `expression-plan-v1`: 상위 참조·constraints·단위별 `entries`·`plan_sha256`.
+- `generate_revision_result(bundle, analysis, organization_plan, *, generator=None, operations=None, destination_snapshots=None, validation_report=None)` → `revision-result-v1`. `operations`는 `{unit_id: KEEP|REVISE|COMPRESS}`. generator는 callable 또는 `.generate(request)`이며 `{text: str}`을 반환한다. request에는 단위 ID, before, operation, 제외 여부, constraints, protected_elements, relations, source_span이 들어간다. 생성기는 배치·검증·승인 권한이 없다.
+- 결과: `meta`, `organization_ref`, `expression_plan`, `output_snapshots: []`, `preview_fragments`(발췌), `change_set`, `trace`, `findings`, `delivery_state: preview`, `revision_sha256`, 승인/진입 불가 필드.
+- `validate_expression_result(bundle, analysis, organization_plan, result, *, destination_snapshots=None, validation_report=None)` → `expression_checks_state`, `semantic_fidelity: unresolved`, `full_document_validation: not_run`, `gate_state: REVIEW|FAIL`, findings·참조/보고서 해시. 상위 계획도 재검증한다.
+- `create_expression_preview(...)`는 결과·보고서를 묶는다. `execute_authorized_expression(...)`은 현재 `status: NOT_IMPLEMENTED`를 반환한다. PR #15의 최종 구조 검증은 별도 API이며 이 함수가 승인 실행으로 바뀐 것이 아니다.
+
+기본 `DeterministicGenerator`는 제한된 한국어 종결어미, 명시 용어 치환, 반복 단어 정리만 수행한다. 제목·표·코드·인용 및 인라인 보호 구간은 예외를 적용한다. 생성기 실패 시 원문을 보존하고 `GENERATION_ERROR`를 기록하며 승인 주장·보호 요소 손실은 차단한다. 실행 receipt는 프로세스 내부의 최소 기록이며 영속 승인/외부 호출자 인증이 아니다.
+
+### Reconstruction과 독립 최종 검증
+
+구현: [`reconstruction.py`](../experiments/full_document_control/reconstruction.py), [`final_validator.py`](../experiments/full_document_control/final_validator.py). 세부 지원표·CLI 계약 예시는 [INTEGRATION](../experiments/full_document_control/INTEGRATION.md).
+
+- `reconstruct_documents(bundle, analysis, org, preview, *, destination_snapshots=None)` → `full-document-reconstruction-v1`. 전체 원문과 목적지, 검증 가능한 패치·문단 배치·정확 동일 문단 통합을 묶는다.
+- 결과는 Expression 결과와 구별되는 `analysis_ref`, `organization_ref`, `expression_plan`, `expression_preview_sha256`, `source_refs`, `output_snapshots`, `preview_fragments`, `change_set`, `trace`, `block_ledger`, `findings`, `revision_sha256`를 갖는다. `delivery_state: candidate`는 모든 전체 출력이 존재하는 후보, `preview`는 전체 출력이 없는 보류다. 둘 다 전달 승인이 아니다.
+- `validate_final_result(bundle, analysis, org, preview, result, *, destination_snapshots=None)` → `final-document-validation-v1`. 고정 `checks`, `check_versions`, `gate_state: REVIEW|FAIL`, `semantic_fidelity: not_run`, findings·상위 참조·`report_sha256`; 승인/단계 진입은 false.
+- `verify_final_report(bundle, analysis, org, preview, result, report, **kwargs)` → `{valid, gate_state, reason}`. 현재 입력으로 다시 검사해 결과 전체를 대조한다. `valid: true`는 문서 승인과 다르다.
+
+고정 검사군은 `SNAPSHOT_INTEGRITY`, `FULL_COVERAGE`, `PROTECTED_INFORMATION`, `ORGANIZATION_FIDELITY`, `EXPRESSION_FIDELITY`, `BIDIRECTIONAL_TRACE`, `CROSS_DOCUMENT_INTEGRITY`, `APPROVAL_BOUNDARY`다. 확인된 위반은 FAIL, 전체 후보가 없거나 의미/배치 해석·승인이 미완료면 unresolved/REVIEW다. 최종 PASS 경로는 없다.
+
+기본 분석은 단일 scope만 받지만 Organization/재구성의 하위 API는 바인딩된 입력과 `destination_snapshots`로 제한된 복수 문서 후보를 다룬다. 이 경로에서 원본·목적지·출력 ID는 현재 계약의 구체적인 `document_id` 또는 `target.document_id`에 선언돼야 한다. 역할만으로 문서를 만들지 않는다. 목적지 전체의 기존 내용은 보존하되 의미를 재분석·통합하지 않는다. 일반 다중 scope 입력을 분석부터 승인까지 처리하는 파일 E2E는 미구현이다.
+
+### Validation Gate와 Semantic Fidelity Validator
+
+실제 호출 진입점은 [`pipeline.py`](../experiments/full_document_control/pipeline.py)의 wrapper다. [`semantic_validator.py`](../experiments/full_document_control/semantic_validator.py)의 하위 구현은 helper 함수를 주입받으며 별도 공개 SDK가 아니다.
+
+- `build_validation_plan(input_bundle=None)` → `full-doc-validation-plan-v1`. 분석 검사군은 `SNAPSHOT_AND_CONTRACT`, `BLOCK_COVERAGE`, `UNIT_AND_SPAN_INTEGRITY`, `PROTECTED_TRACEABILITY`, `SEMANTIC_FIDELITY`다.
+- `validate_analysis_gate(input_bundle, analysis_result, *, plan=None, semantic_report=None, trusted_execution_evidence=None, semantic_responder=None, run_semantic_validation=False, max_prompt_chars=12000, max_semantic_attempts=1)` → `plan`, `checked_artifacts`, `check_results`, `findings`, `gate_state`, `execution_state`, `last_gate_state`, `diagnostics`, `delivery_approved`, `next_stage_allowed`, `report_sha256` 등. 승인 필드는 게이트가 계산한 결과이며 호출자가 설정할 권한이 없다.
+- `reconcile_validation_plan(plan, check_results, checked_artifacts=None)`는 필수 검사 누락/실행 오류를 `STOPPED`, 버전·참조·중복 등의 무결성 위반을 `FAIL`, 미해결을 `REVIEW`로 집계한다. 중단과 위반이 함께 있으면 `last_gate_state: FAIL`을 보존한다. 모든 필수 행의 passed가 일반 집계기의 PASS 조건이지만 현재 의미 승인 정책은 자동 PASS를 허용하지 않는다.
+- `validate_semantic_fidelity(input_bundle, analysis_result, *, semantic_responder=None, max_prompt_chars=12000, max_attempts=1, combine_with_deterministic_audit=True)` → 의미 보고서. `validate_semantic_fidelity_with_evidence(...)`는 `(report, evidence)`를 반환한다. responder는 `(window_index, semantic_window, prompt_text, attempt_no)`를 받아 원시 JSON을 반환한다.
+- 의미 응답은 현재 `input_sha256`, `snapshot_id`, `snapshot_sha256`, `analysis_sha256`, `semantic_window_id`, `unit_reviews`, `block_omission_reviews`에 고정된다. 모델의 인용과 RFC 6901 필드 경로, statement·elements·relations·assessment 및 원문 블록 누락 검토를 코드가 재확인한다.
+- 보고서 주요 필드: `target_artifacts`, `execution_config`, `execution_state`, `window_records`, `evaluator_records`, `checked_items`, `coverage_summary`, `item_judgments`, `findings`, `overall_judgment`, `recommended_gate_state`, `evidence_sha256`, `semantic_report_sha256`, `delivery_approved: false`. 판정은 `supported/overstated/contradicted/unresolved`이며 게이트 상태와 다르다.
+
+실행 기록은 검증기 내부 실행 경계에서 등록한다. 외부 딕셔너리·자체 재해시·모델의 PASS 주장으로 승인할 수 없다. 누락 필드 재검토는 예산 제한 안에서 수행하고 범위 미완료·평가자 충돌·근거 모호성은 보류한다. `supported`도 `SEMANTIC_SUPPORTED_AWAITING_APPROVAL`로 REVIEW다. 보고서가 현재 원문·계약·분석과 달라지면 무효화한다. 이 검증은 **분석 결과↔원문** 대상이며 재구성된 출력 전체의 품질 평가와 구별한다.
+
+### 실행·수정 제어와 확장 연결 경계
+
+| API | 입력·출력 및 책임 | 실패·미구현 경계 |
+| --- | --- | --- |
+| `pipeline.ExecutionController(max_attempts=2).run(input_bundle, model_responder, ...)` | responder `(window_index, window, prompt_text, attempt_no)` → 원시 응답; 추출·게이트·시도 이력·책임 모듈·무효화·다음 단계 결정 반환. `max_attempts`는 1~5 | FAIL/실행 오류의 제한 추출 재시도, REVIEW는 보류. 모든 모듈의 자동 수정을 뜻하지 않음 |
+| `check_and_invalidate_prior_state(input_bundle, plan=None)` / `attempt_reuse_validation_report(...)` | 원문·계약·계획 변경을 확인하고 재사용/진입 여부 검증 | 오래된 보고서나 허위 승인으로 진입 불가 |
+| `integration.run_pipeline(bundle, *, responses=None, analysis=None, organization_plan=None, generator=None, operations=None, destination_snapshots=None)` | 분석·보고서·계획·표현 Preview·재구성·최종 보고서·controller를 포함한 격리 후보 결과 | 상위 FAIL/STOPPED, 생성 오류·재구성 보류·최종 FAIL이면 STOPPED. REVIEW 후보 계산은 승인된 전환이 아님 |
+| `integration.RevisionController(artifacts=None).stop(findings)` | `state: STOPPED`, `last_gate_state`, `responsible_module`, `invalidated_artifacts`, `retry_count: 0`, reason 반환 | 저장된 하위 산출물 제거만 수행; 수정·자동 재호출 없음 |
+| `RevisionController.revalidate(bundle, analysis, org, preview, result, **kwargs)` | `{report, controller}`; 최종 검증 재실행, FAIL이면 중단 | 수정된 입력/결과는 호출자가 제공해야 함 |
+
+실제 파일 반영 경계: integration CLI는 Markdown/계약을 읽고 stdout에 JSON을 출력한다. 입력 문서 덮어쓰기·배포·승인 명령은 없다. 기존 `pipeline.py run`의 `--output`/`--save-run-dir`는 진단/실행 기록 저장이며 원본 문서 반영과 구별한다.
+
+RAG·LangGraph 연결은 [별도 확장 설계](rag-langgraph-assignment-design.md)의 **제안 포트**다. 현재 Core의 콜백·스냅샷·산출물·검증 API를 감싸는 어댑터는 아직 없다. 검색 결과를 output_scopes나 required_information에 자동 추가하거나 상위 게이트를 통과한 것으로 바꾸지 않는다. 검색은 근거 후보, LangGraph는 호출·재시도·중단만 소유하며 모든 승인 판단은 Core에 남긴다. 다음 구현 우선순위는 [로드맵](roadmap.md)을 따른다.
+
+### 논리 설계와 실행 스키마의 주요 차이
+
+| 아래 논리 설계 | 현재 실행 프로토타입 |
+| --- | --- |
+| 공통 `ArtifactRef`/`ArtifactMeta`, `content_digest` | 모듈별 ID·version·`*_sha256` 필드. 공통 참조 객체로 통일되지 않음 |
+| 근거가 있는 intent/용어/자료·그룹별 계약 | 문자열 중심 계약·단일 scope·expected_literal. `source_material`/`intent_resolution` 등은 입력 불가 |
+| `AnalysisResult.assessments`와 범위별 다중 평가 | `units[].assessment`에 평가 하나. 일반 다중 scope 분석 미지원 |
+| 일반 배치·의미 통합·재작성 및 전체 RevisionResult | 제한된 Organization 계획, `revision-result-v1` 발췌와 `full-document-reconstruction-v1` 전체 후보가 별도 |
+| 범위별 적용 조건을 확장하는 공통 ValidationPlan | 분석 게이트의 고정 5개 검사와 최종 검증의 별도 고정 8개 검사. 자동 최종 PASS 없음 |
+| 원인 모듈 자동 수정·하위 재생성·전달 | 추출 재시도와 진단/무효화/재검증/중단. 승인된 파일 적용 없음 |
+
+### 현행화 근거와 검증
+
+| 병합 PR | 현재 코드/문서에서 확인한 결과 |
+| --- | --- |
+| [#1](https://github.com/nanocode00/LogicWrite/pull/1) · [#2](https://github.com/nanocode00/LogicWrite/pull/2) | 프로젝트 기반·합성 12건·잠정 실제 후보 20건. 독립 사람 검토 골드 아님 |
+| [#3](https://github.com/nanocode00/LogicWrite/pull/3) · [#4](https://github.com/nanocode00/LogicWrite/pull/4) | 세 모듈 책임과 공통 논리 계약 설계. 정식 실행 스키마 동결 아님 |
+| [#5](https://github.com/nanocode00/LogicWrite/pull/5) · [#6](https://github.com/nanocode00/LogicWrite/pull/6) | 실제 후보 재검토·한국어 중심 간단 기획서 |
+| [#7](https://github.com/nanocode00/LogicWrite/pull/7) · [#8](https://github.com/nanocode00/LogicWrite/pull/8) | 최소 게이트·RW-001 발췌 추출/분석 실행 실험 |
+| [#9](https://github.com/nanocode00/LogicWrite/pull/9) | RW-001 추출/평가 분리 A/B와 근거 보고. 홀드아웃 또는 전체 문서 품질 비교 아님 |
+| [#10](https://github.com/nanocode00/LogicWrite/pull/10) · [#11](https://github.com/nanocode00/LogicWrite/pull/11) | 전체 문서 블록/창·게이트·실행 제어, 독립 분석 의미 검증과 고정 회귀 사례 |
+| [#12](https://github.com/nanocode00/LogicWrite/pull/12) | 프로젝트/선택형 RAG·LangGraph 과제 기획. 확장 코드 없음 |
+| [#13](https://github.com/nanocode00/LogicWrite/pull/13) · [#14](https://github.com/nanocode00/LogicWrite/pull/14) | Organization 계획·목적지 검증 및 Expression Preview·독립 검증 |
+| [#15](https://github.com/nanocode00/LogicWrite/pull/15) | 전체 후보 재구성·독립 최종 구조 검증·안전 중단·계약 문서 범위 강제 |
+
+2026-11-10 위 기준 코드에서 아래 명령을 실행해 **314개 통과**를 확인했다. 이 수치는 회귀 테스트 수이며 의미 검증기 단독 테스트 수, 실제 LLM 평가 수, 원격 CI 결과가 아니다.
+
+```bash
+python3 -m unittest discover -s experiments/minimal_gate -p 'test_*.py'          # 31
+python3 -m unittest discover -s experiments/extraction_analysis -p 'test_*.py'  # 27
+python3 -m unittest discover -s experiments/extraction_ab -p 'test_*.py'        # 17
+python3 -m unittest discover -s experiments/full_document_control -p 'test_*.py' # 239
+```
+
+문서의 INTEGRATION 계약 예시로 현 기획서 Markdown을 CLI에서 실행해 `REVIEW/candidate`, 원본 바이트 불변, 반복 실행 후보 스냅샷 일치를 확인했다. 같은 프로세스의 최종 보고서 재검증, REVIEW의 Organization 진입 차단, Expression 승인 실행의 `NOT_IMPLEMENTED`도 확인했다.
+
+고정 의미 사례 14건은 개발·회귀용이며 독립 홀드아웃이 아니다. 기존 실제 LLM v2 로컬 요약 기록은 TP 9/TN 3/FP 0/FN 0/hold 1의 단일 평가자 13건과 EVAL-14 평가자 충돌 시나리오를 구분한다. EVAL-14 단일 평가자 결과는 `JUDGMENT_DIVERGENCE`로 기록돼 14건 전부 일치했다고 보고할 수 없다. 해당 `runs/` 원시 기록은 Git에 포함되지 않아 새 체크아웃만으로 기존 결과를 재현할 수 없다. 이번 현행화에서는 과거 요약 파일만 확인했으며 실제 LLM을 재실행하거나 원시 응답 전체를 재심사하지 않았다. 독립 검토·홀드아웃·품질/비용 평가는 여전히 미완료다.
 
 ## 범위와 설계 선택
+
+이하 자료형·복구 정책·수작업 예시는 **논리 설계**다. 현재 구현 여부와 필드 차이는 위 실행 인터페이스를 우선 참조한다.
 
 엔진에서 정보는 문단·파일·표현 변경과 독립적으로 존재한다. 한 문단에 서로 다른 판단이 필요한 정보가 여럿 있을 수 있고, 한 정보 단위가 여러 위치에 걸칠 수도 있다. **정보 단위**는 해석에 필요한 조건을 포함해 독립적으로 평가할 수 있는 가장 작은 주장·지시이며, 반드시 한 문장은 아니다. 조건을 별도 단위로 추출할 수는 있지만 그 조건이 필요한 주장을 조건 없이 전달해서는 안 된다.
 
@@ -338,4 +504,4 @@ RW-013의 문서 간 이동 제안은 목적지가 미확정이어도 목적지 
 | 기존 대표 액션 7개를 보고용으로 유지 | 대표 라벨의 동률 선택, 평가셋 매핑, 사람 검토 후 마이그레이션 정책 |
 | 매체 중립적 스냅샷·그룹 모델 | 대화·스트리밍 어댑터. 응답 생성·가로채기 미구현 |
 
-구현 언어, LLM·임베딩 제공자, 벡터 DB, 수치 임계값도 아직 정하지 않았다. 요구사항·평가 정책·로드맵은 각 문서의 책임으로 유지한다. 이 문서는 모듈 사이에 오가는 데이터의 논리적 계약을 제시할 뿐 M0의 완료를 선언하지 않는다.
+정식 구현의 언어·제공자·벡터 DB·수치 임계값은 동결하지 않았다. 현재 실험은 Python과 주입형 콜백/로컬 모델 CLI를 사용한다. 요구사항·평가 정책·로드맵은 각 문서의 책임으로 유지한다. 이 문서는 모듈 사이에 오가는 데이터의 논리적 계약을 제시할 뿐 M0의 완료를 선언하지 않는다.

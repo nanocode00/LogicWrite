@@ -1,6 +1,6 @@
 # 전체 문서 후보 파이프라인 통합
 
-기준은 PR #14 병합 커밋 `8792bff`이다. 기존 `pipeline.py`, `organization.py`, `expression.py`, `expression_validator.py`, `semantic_validator.py`의 승인 정책을 변경하지 않고 읽기 전용 **격리 후보 경로**를 추가했다. 파일 반영·승인된 단계 전환·최종 의미 승인 경로는 구현하지 않았다.
+구현 출발점은 PR #14 병합 커밋 `8792bff`이며 현재 설명 기준은 PR #15 병합 `c770276`이다. 실제 API·설계 차이·최신 회귀 수치는 [현재 실행 인터페이스](../../docs/data-model-and-interfaces.md#current-runtime-interfaces)를 참조한다. 기존 `pipeline.py`, `organization.py`, `expression.py`, `expression_validator.py`, `semantic_validator.py`의 승인 정책을 변경하지 않고 읽기 전용 **격리 후보 경로**를 추가했다. 파일 반영·승인된 단계 전환·최종 의미 승인 경로는 구현하지 않았다.
 
 ## 실행 경로와 범위
 
@@ -42,7 +42,7 @@ python3 experiments/full_document_control/integration.py document.md writing-con
 }
 ```
 
-실행 확인: 원본 4,614바이트 불변, 전체 후보 문서 1개, 문체 변환 범위 10개. 스냅샷·전체 범위·보호 문자값·양방향 추적·문서 집합 검사는 passed, 배치 해석·표현 의미·승인은 unresolved, 최종 REVIEW였다. 이 결과는 기획서의 사실·의미가 모두 검증되었다는 평가가 아니다.
+PR #15 당시 실행 기록(현행화 전 기획서): 원본 4,614바이트 불변, 전체 후보 문서 1개, 문체 변환 범위 10개. 스냅샷·전체 범위·보호 문자값·양방향 추적·문서 집합 검사는 passed, 배치 해석·표현 의미·승인은 unresolved, 최종 REVIEW였다. 이 결과는 기획서의 사실·의미가 모두 검증되었다는 평가가 아니다.
 
 ## 전체 문서 재구성 규칙
 
@@ -93,4 +93,4 @@ python3 experiments/full_document_control/integration.py document.md writing-con
 - 범위 원장은 검증 가능한 문자열/배치 대응이지 일반적인 의미 보존 증명이 아니다. Markdown 파서는 기존 지원 범위(줄 단위 제목·문단·목록·펜스 코드·표·인용 등)에 한정된다.
 - 검증 실패의 진단·책임 모듈 식별·하위 산출물 무효화·새 입력 재검증까지 지원한다. 자동 수정/재시도·LangGraph·RAG·파일 반영·배포는 없다.
 
-검증 명령과 최신 수치는 [HANDOFF](HANDOFF.md)의 최종 통합 절을 참조한다. 기존 골드셋·평가 자료·실제 LLM 의미 평가 결과는 변경하지 않는다.
+검증 명령과 최신 수치는 [현재 실행 인터페이스](../../docs/data-model-and-interfaces.md#현행화-근거와-검증), 다음 작업 인수인계는 [HANDOFF](HANDOFF.md)를 참조한다. 기존 골드셋·평가 자료·실제 LLM 의미 평가 결과는 변경하지 않는다.
