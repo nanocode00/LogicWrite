@@ -41,7 +41,33 @@
   "review_questions": [
     "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
   ],
-  "reviews": [],
+  "reviews": [
+    {
+      "reviewer_id": "repository-user",
+      "reviewer_type": "human",
+      "reviewed_at": "2026-11-10",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+      "judgment": "PRESERVED",
+      "rationale": "대화 중 사용자 의견의 Codex 요약: 같은 API·같은 설정이라는 설명 아래 고유 정보 손실 없이 중복을 통합했다는 판단에 동의했다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "config",
+          "start": 0,
+          "end": 63,
+          "quote": "# 요청 설정\n\nAPI 요청 제한 시간은 30초다.\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "config",
+          "start": 0,
+          "end": 42,
+          "quote": "# 요청 설정\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+        }
+      ],
+      "blinded_to_ai_proposal": false
+    }
+  ],
   "disagreements": [],
   "adjudication": null
 }

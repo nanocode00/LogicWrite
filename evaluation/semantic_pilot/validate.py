@@ -135,7 +135,7 @@ def validate_dataset(root=ROOT):
         answer = read_json(root, row['answer_path'])
         require(row['case_id'] == inp['case_id'] == answer['case_id'], 'manifest ID mismatch')
         require(row['source_kind'] == inp['source_kind'] and row['expected_judgment'] == answer['expected_judgment'], 'manifest metadata mismatch')
-        require(answer['status'] == 'provisional' and not answer['reviews'] and not answer['disagreements'], 'this pilot must remain unreviewed')
+        require(answer['status'] == 'provisional', 'this pilot must remain provisional')
         has_public = any(d['provenance']['kind'] == 'public_git' for d in inp['source_documents'])
         require(has_public == (inp['source_kind'] == 'public_source_based'), 'source kind/provenance mismatch')
         validate_pair(inp, answer, root)

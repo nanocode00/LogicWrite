@@ -79,6 +79,13 @@ class IntegrityTests(unittest.TestCase):
         self.answer.update(status='reviewed', reviews=self.human_reviews())
         self.assertTrue(validate_pair(self.input, self.answer, ROOT))
 
+    def test_two_guided_reviews_cannot_promote_status(self):
+        self.answer.update(status='reviewed', reviews=self.human_reviews())
+        for review in self.answer['reviews']:
+            review['blinded_to_ai_proposal'] = False
+        with self.assertRaisesRegex(ValueError, 'two blinded human reviews'):
+            validate_pair(self.input, self.answer, ROOT)
+
     def test_adjudicated_pair_retains_ai_proposal(self):
         self.answer.update(status='adjudicated', reviews=self.human_reviews(),
                            gold_eligible=True, adjudication={

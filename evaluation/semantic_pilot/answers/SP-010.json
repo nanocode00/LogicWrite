@@ -48,7 +48,40 @@
   "review_questions": [
     "두 스냅샷 중 기준 원문으로 승인한 버전을 확인한다. 최신 번호만으로 승인 버전을 추정하지 않는다."
   ],
-  "reviews": [],
+  "reviews": [
+    {
+      "reviewer_id": "repository-user",
+      "reviewer_type": "human",
+      "reviewed_at": "2026-11-10",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+      "judgment": "UNRESOLVED",
+      "rationale": "대화 중 사용자 의견의 Codex 요약: 가능하면 나중에 작성된 자료를 기준 후보로 삼는 것이 좋으나 사람 확인이 필요하다고 판단했다. 버전 번호만으로 작성 시점·승인 여부를 확정하지 않는다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "policy-v1",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 30초다."
+        },
+        {
+          "side": "source",
+          "document_id": "policy-v2",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 60초다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "policy",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 60초다."
+        }
+      ],
+      "blinded_to_ai_proposal": false
+    }
+  ],
   "disagreements": [],
   "adjudication": null
 }

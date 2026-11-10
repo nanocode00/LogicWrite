@@ -41,7 +41,33 @@
   "review_questions": [
     "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
   ],
-  "reviews": [],
+  "reviews": [
+    {
+      "reviewer_id": "repository-user",
+      "reviewer_type": "human",
+      "reviewed_at": "2026-11-10",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+      "judgment": "PRESERVED",
+      "rationale": "대화 중 사용자 의견의 Codex 요약: 의미는 보존됐으며 문체·표현이 바뀐 경우로 판단했다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 3011,
+          "end": 3055,
+          "quote": "For this release, **PKG is the better fit**."
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3011,
+          "end": 3054,
+          "quote": "**PKG is the better fit for this release**."
+        }
+      ],
+      "blinded_to_ai_proposal": false
+    }
+  ],
   "disagreements": [],
   "adjudication": null
 }
