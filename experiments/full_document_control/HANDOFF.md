@@ -72,3 +72,53 @@
 5. **테스트 및 검증:**
    - 의미 검증기 종합 테스트: 총 36개 테스트 통과 (`test_semantic_validator.py`, P1 반례 테스트 9건 추가).
    - 전체 회귀 테스트 통과: 총 144개 테스트 100% 통과 (`full_document_control` 69개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+
+## 6. Information Organization(정보 재구성) 모듈 구현 완료
+
+- **브랜치:** `prototype/information-organization` (기준: `main` `0ed1577`)
+- **디렉터리:** `experiments/full_document_control/`
+- **현재 단계:** `OrganizationPlan` 생성기, 7대 결정론적 검증 불변조건을 갖춘 독립 계획 검증기(`validate_organization_plan`), Validation Gate와의 Plan Preview 및 Authorized Execution 분리 연동, 종합 테스트 11건 및 기존 회귀 144건 호환성 유지(총 155개 테스트 100% 통과).
+
+### 주요 구현 내용
+
+1. **독립 정보 재구성 모듈 (`experiments/full_document_control/organization.py`):**
+   - **OrganizationPlan 구조화 생성 (`generate_organization_plan`):**
+     - `analysis_ref`: 입력 `AnalysisResult`에 대한 바인딩 해시(`analysis_sha256`, `snapshot_sha256`, `contract_sha256`) 및 스냅샷/계약 ID 추적.
+     - `placements`: 모든 정보 단위(InformationUnit)에 대해 논리 섹션(`section_path`), 상대 순서(`relative_order`), 조건 인접성(`anchor_relative_position`, `anchor_unit_id`), 계약 보호 의무(`contract_protection`), 처리 방식(`disposition`: `placed`/`omitted`/`blocked`/`flagged`, `action`: `KEEP`/`MOVE`/`REMOVE`/`FLAG`/`CONSOLIDATE`)을 추적.
+     - `consolidation_groups`: 의미적 중복 정보에 대한 통합 후보. 수치, 버전, 플랫폼 대상, 조건의 차이가 있는 경우 통합을 원천 차단(`blocked: True`, `INCOMPATIBLE_CONSOLIDATION_CANDIDATE`).
+     - `destination_reviews`: 계약상 선언된 `output_scopes`에 대해 실제 문서 스냅샷이 로드된 검증된 문맥(`verified_context`)과 잠정적 역할(`destination_role`)을 구분.
+     - `affected_documents`: 원본 및 목적지 전체 문서 범위와 변경 대상 스냅샷 다이제스트 집합 추적.
+     - `findings`: 검증 결함, 차단 사유, 사람 검토 필요 항목(`PLAN_PREVIEW_ONLY`, `UNVERIFIED_DESTINATION_CONTEXT` 등)의 구조화된 기록.
+   - **정보 재배치 세부 규칙:**
+     1. **문서 내부 배치:** 제목/개요, 설치/환경, 운영 제약/주의사항 등의 논리 섹션으로 분류하고, 주장을 한정하는 조건 단위는 해당 주장 바로 앞 또는 인접(`anchor_relative_position: before|within`)에 배치.
+     2. **중복 통합 및 불변조건 보존:** 단순 문자열 유사도에 의존하지 않고, 단위 내 `elements`의 수치, 버전, 조건, 플랫폼 대상을 엄격히 비교. 상이한 수치(30초 vs 60초), 상이한 버전/패키지(Linux vs macOS), 한정 조건 유무의 차이가 있는 경우 통합 후보를 차단(`blocked: True`)하고 개별 배치로 보존.
+     3. **문서 간 MOVE:** 계약의 `output_scopes`에 선언되고 스냅샷 문맥이 검증된 대상 문서로만 이동 후보 생성. 미선언 목적지는 즉시 `UNAUTHORIZED_DESTINATION_SCOPE` 차단. 실존 스냅샷이 없는 잠정 역할(`destination_role`)은 확정 이동을 불허하고 제안/검토 보류(`UNVERIFIED_DESTINATION_CONTEXT`)로 유지.
+     4. **필수 정보 보존:** 계약상 `required_information`에 바인딩된 단위 및 이를 한정하는 조건 단위는 삭제(`omitted`/`REMOVE`) 시도를 원천 차단하고 `MANDATORY_INFORMATION_PRESERVATION_VIOLATION`으로 보존 강제.
+     5. **미확정 결과 보류:** 목적지 문맥이나 보존 근거가 부족하면 `FLAG`/`REVIEW`로 남겨 무단 확정을 차단.
+
+2. **독립 결정론적 계획 검증기 (`validate_organization_plan`):**
+   - 7대 핵심 검사:
+     1. `ORGANIZATION_INPUT_INTEGRITY`: `analysis_ref` 다이제스트 일치 및 계획 자체 SHA-256 무결성 검증. 분석 결과 변경 시 `STALE_ANALYSIS_PLAN_INVALIDATED`로 재사용 거부.
+     2. `ALL_UNITS_TRACKED`: 입력 단위 전수 추적. 일부 단위 누락(`UNIT_OMITTED_FROM_ORGANIZATION_PLAN`) 또는 중복 배치(`DUPLICATE_UNIT_PLACEMENT`) 탐지.
+     3. `MANDATORY_INFORMATION_PRESERVED`: 계약 필수 정보 및 연결 조건의 누락(`REQUIRED_INFORMATION_DROPPED`) 차단.
+     4. `ALLOWED_OUTPUT_SCOPES`: 계약상 선언되지 않은 임의 목적지 참조(`UNAUTHORIZED_DESTINATION_SCOPE`) 차단.
+     5. `DESTINATION_REVIEW_INTEGRITY`: 미검증 문맥 또는 잠정 역할로의 무단 확정 배치(`UNVERIFIED_DESTINATION_CONFIRMED_MOVE`) 차단.
+     6. `CONSOLIDATION_FIDELITY`: 불일치 조건/수치/버전의 부당 통합(`INCOMPATIBLE_CONSOLIDATION_CANDIDATE`) 차단.
+     7. `ANTI_FORGERY_AND_APPROVAL_BOUNDS`: 게이트 승인 없는 자가 승인 주장(`UNAUTHORIZED_ORGANIZATION_APPROVAL_CLAIM`) 차단.
+
+3. **Validation Gate 연동 및 실행 경계 분리:**
+   - **Plan Preview:** 미승인(또는 `REVIEW` 상태인) 분석 결과에 대해서도 격리된 후보 계획을 생성할 수 있으나, `preview_only: True`, `delivery_approved: False`, `stage_transition_allowed: False`를 명시하며 후속 단계 진입으로 위장하지 않음 (`create_organization_plan_preview`).
+   - **Authorized Execution:** 실제 단계 전환은 기존 `OrganizationBoundaryAdapter` 및 `can_advance_to_organization`을 통과한 경우에만 허용. 현재 정책상 게이트가 `REVIEW`를 유지하므로, 실제 단계 전환 시도는 안전하게 `StageTransitionBlockedError`를 발생시키고 차단 기록(`blocked_attempts`)을 남김 (`execute_authorized_organization`).
+
+4. **설계 문서와 실제 코드 구현 간의 차이 기록:**
+   - `AnalysisResult` 구조: 설계 문서(`docs/data-model-and-interfaces.md`)에서는 최상위 `assessments` 배열을 제안했으나, 실제 구현(`pipeline.py`)에서는 각 단위 내부(`unit['assessment']`)에 평가가 직접 포함되어 있음. 본 모듈은 실제 구현 스키마를 준수함.
+   - `output_scopes` 표현: 설계 문서에서는 `{scope_id, kind, target: {document_id | destination_role}}` 중첩 구조를 제안했으나, 기존 프로토타입(`pipeline.py`, `sample_input.json`)에서는 `{scope_id, document_id}` 평면 구조를 요구하고 1개 범위로 제한했음. 본 모듈은 두 형식을 모두 정규화하여 지원(`parse_output_scope_entry`)하고 다중 범위 및 잠정 역할을 안전하게 처리함.
+   - 게이트 통과 정책: `SemanticFidelityValidator`에서 모든 항목이 `supported` 판정을 받더라도 현재 정책상 `REVIEW`(`SEMANTIC_SUPPORTED_AWAITING_APPROVAL`)로 보류되므로, Organization 진입 경계는 승인을 강제하거나 완화하지 않고 안전하게 차단/프리뷰 경로로 분리함.
+
+5. **테스트 및 검증:**
+   - 신규 모듈 종합 테스트: 총 11개 시나리오 100% 통과 (`test_organization.py`).
+   - 전체 회귀 테스트 통과: 총 155개 테스트 100% 통과 (`full_document_control` 80개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+
+### 다음 단계 (재개 지점)
+- Expression Refinement(표현 수정) 모듈 프로토타입 구현 및 OrganizationPlan 기반 수정 계획(`ExpressionPlan`, `RevisionResult`) 연동.
+- 다중 문서 스냅샷 로더 및 실제 cross-document 변경 세트 어댑터 확장.
