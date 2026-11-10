@@ -4708,6 +4708,18 @@ def verify_final_output_report(bundle, analysis, org, preview, result, report, *
     return final_semantic_validator.verify_final_audit(bundle, analysis, org, preview, result, report, **kwargs)
 
 
+def build_final_approval_request(bundle, analysis, org, preview, result, audit, **kwargs):
+    """Prepare bound review data; it is not approval or authentication."""
+    import final_approval
+    return final_approval.build_approval_request(bundle, analysis, org, preview, result, audit, **kwargs)
+
+
+def validate_final_approval_policy(bundle, analysis, org, preview, result, audit, decision_record=None, **kwargs):
+    """Evaluate a separate test-only approval policy; real issuance is disabled."""
+    import final_approval
+    return final_approval.evaluate_final_approval(bundle, analysis, org, preview, result, audit, decision_record, **kwargs)
+
+
 if __name__ == '__main__':
     raise SystemExit(main())
 

@@ -1,6 +1,6 @@
 # 전체 문서 Core 프로토타입
 
-**기준: 2026-11-10, PR #15 병합 `c770276`.** 전체 Markdown의 블록/창 분할·추출 응답 조립, 독립 분석 의미 검증, Organization 계획, Expression Preview, 제한된 전체 후보 재구성과 독립 최종 구조 검증을 제공한다. Python 표준 라이브러리 기반 실험이며 정식 SDK·CLI·MCP 완성이 아니다.
+**기준: 2026-11-10, PR #18 병합 `d752c4b` 기반 Core 2-B.** 전체 Markdown의 블록/창 분할·추출 응답 조립, 독립 분석 의미 검증, Organization 계획, Expression Preview, 제한된 전체 후보 재구성과 독립 최종 구조 검증을 제공한다. Python 표준 라이브러리 기반 실험이며 정식 SDK·CLI·MCP 완성이 아니다.
 
 ## 지원 범위와 승인 경계
 
@@ -8,7 +8,7 @@
 - 분석 의미 검증은 **AnalysisResult↔원문** 대상이다. 모델 보조 검토가 supported여도 사람/정책 승인 대기 때문에 REVIEW다.
 - Organization은 후보 배치·실제 목적지·필수 조건·통합 호환성을 검사한다. Expression은 원문 범위의 발췌 Preview와 제한된 문체·용어·압축을 제공한다.
 - Reconstruction은 검증 가능한 패치·완전 문단 배치/MOVE·정확 동일 문단 통합을 전체 원문에 반영한 **후보**를 만든다. 일반 의미 기반 재구성·새 문서/제목·부분 블록 구조 편집은 지원하지 않는다.
-- 최종 검증은 실제 전체 출력·범위 원장·추적·계약 문서 집합을 대조한다. **수정 후 전체 출력 의미 검토와 최종 승인 절차는 미구현**이므로 `semantic_fidelity: not_run`, 최종 REVIEW(위반 시 FAIL)를 유지한다.
+- 최종 검증은 실제 전체 출력·범위 원장·추적·계약 문서 집합을 대조한다. 전체 출력 의미 결과는 별도 `final_semantic_report`에 기록하고, 고정 구조 보고서의 `semantic_fidelity: not_run`은 유지한다. 별도 [최종 승인 정책](../../docs/final-approval-policy.md)은 명시적 사람 결정·근거와 독립 출처 기록을 검증한다. 실제 승인 발급은 비활성화되어 테스트 정책 성공도 최종 REVIEW(위반 시 FAIL)다.
 - 기존 승인 경로는 REVIEW에서 다음 단계 진입을 차단한다. 별도 `isolated_candidate` 경로의 후보 계산은 승인된 전환이 아니다. 파일 반영·자동 수정 루프·RAG·LangGraph는 없다.
 
 실제 API·입출력 스키마·실패 상태·호출 관계의 단일 참조는 [현재 실행 인터페이스](../../docs/data-model-and-interfaces.md#current-runtime-interfaces)다. [EXPRESSION](EXPRESSION.md)은 Preview 사용법, [INTEGRATION](INTEGRATION.md)은 전체 후보 CLI/재구성 지원표, [HANDOFF](HANDOFF.md)는 다음 작업 인수인계를 담당한다.
