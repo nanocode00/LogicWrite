@@ -91,6 +91,80 @@ python3 experiments/full_document_control/pipeline.py run \
     - **다중 창 실패 응답 해시 격리:** `W001` 성공 후 `W002`가 응답 바이트 생성 전 실패(잘못된 반환 타입, 빈 stdout 타임아웃 등)할 때 `W001`의 `response_sha256`이 `W002` 실패 기록에 섞이지 않음을 검증
     - **모든 추출 대상 블록 예산 초과 시 `REVIEW` 보류:** 문서의 추출 가능 블록 전부가 프롬프트 예산을 초과해 보류(`OVERSIZED_BLOCK_EXCEEDS_PROMPT_BUDGET`)된 경우 `units == []`라도 `FAIL`이 아닌 `REVIEW`(`BLOCK_COVERAGE`, `UNIT_AND_SPAN_INTEGRITY`, `PROTECTED_TRACEABILITY`, `SEMANTIC_FIDELITY` 모두 `unresolved`, 후속 단계 차단)로 일관되게 판정하며, 일반 블록에서 빈 `units`를 반환한 경우 `EMPTY_WINDOW_UNITS` / `EMPTY_UNITS`(`FAIL` / `STOPPED`)로 거부함을 검증
 
+## 15. 독립 의미 충실도 검증기 (`SemanticFidelityValidator`)
+
+- **목적:** 구조·출처·블록 범위·보호 정보 검사 통과가 의미적 진실을 보장하지 못하는 한계를 해결하기 위해, `DocumentSnapshot + WritingContract + AnalysisResult → Semantic Fidelity Review → Validation Gate` 경계에서 작동하는 독립 평가기를 구현함.
+- **양방향 검사:**
+  - `analysis_to_source`: 분석 결과의 `units` statement, `elements`, `relations`, `assessment`(reason, exposure, preservation)가 원본 스냅샷의 의미를 충실히 보존하는지 검사.
+  - `source_to_analysis`: 원본 스냅샷의 추출 대상 블록 내 필수 한계·조건 절이 분석 결과에서 누락되지 않았는지 역방향 검사(`CRITICAL_OMISSION`).
+- **8대 의미 오류 범주 및 보류:**
+  1. `CLAIM_OVERSTATEMENT`: 설치 요구사항이나 계획을 실제 검증된 패키지/런타임 동작 사실로 왜곡하는 오류 (RW-001 E-REQ-A1/A2 핵심 회귀).
+  2. `POLARITY_REVERSAL`: 긍정/부정, 가능/불가능, 지원/미지원 반전.
+  3. `CONDITION_LOSS`: 릴리스 범위 조건(`For this release`), 캐시 조건 생략 및 일반화, 한정 조건 단위의 부당한 `omit_candidate` 생략.
+  4. `QUANTITY_OR_SCOPE_DISTORTION`: 수치·단위(30초→30분), 버전, 포트 번호, 비교/적용 대상(Ubuntu↔macOS, PKG↔DMG) 왜곡.
+  5. `UNSUPPORTED_ADDITION`: 원문에 없는 암호화, 데몬, 정량 성능 향상 수치 조작.
+  6. `CRITICAL_OMISSION`: 원문 블록 내 필수 조건·한계 절의 추출 결과 누락.
+  7. `RELATION_DISTORTION`: 관계 종류 왜곡, 결론→전제 supports 역방향 연결(RW-001 E-REL-A1/A2), 역방향 qualifies.
+  8. `ASSESSMENT_RATIONALE_DISTORTION`: 단위 statement는 정확하더라도 `assessment.exposure`나 `assessment.reason`에서만 의미를 확대하는 오류(RW-001 E-REQ-B2 회귀).
+  9. `AMBIGUOUS_SOURCE_EVIDENCE` / `UNVERIFIED_EVALUATOR_QUOTE` / `EVALUATOR_JUDGMENT_CONFLICT` / `INCOMPLETE_SEMANTIC_COVERAGE` → `unresolved`(`REVIEW`).
+- **보안 및 불변조건:**
+  - 평가자 응답은 검증 후보일 뿐 승인 권한이 없음. 모델이 `passed: true`, `delivery_approved: true`, `gate_state: "PASS"`를 출력해도 무단 승인 시도(`UNAUTHORIZED_EVALUATOR_APPROVAL_CLAIM`)로 거부(`FAIL`).
+  - 첫 구현 정책: 모든 항목이 `supported`로 판정되어도 자동 `PASS`를 허용하지 않고 `REVIEW`(`SEMANTIC_SUPPORTED_AWAITING_APPROVAL`)로 보류하여 사람/독립 정책 승인을 강제.
+  - 모델 제출 인용구는 `resolve_block_quotes()`로 원본 `DocumentSnapshot` 코드 포인트 구간에 대해 엄격히 재검증 (`UNVERIFIED_EVALUATOR_QUOTE` 보류).
+  - 업스트림 산출물(`input_bundle`, `contract`, `snapshot`, `analysis_result`) 변경 시 검증 보고서는 즉시 무효화.
+  - 독립 결정론적 감사를 항상 병행하여 위조 보고서의 오류 은폐를 차단.
+
+## 16. 의미 검증기 신뢰성 보완 및 실제 LLM 평가 (P1, P2)
+
+1. **의미 검증 보고서 위조·은폐 방어 (P1):**
+   - 로컬 신뢰 경계(local trust boundary)를 명시하고 외부 전달 `SemanticFidelityReport`를 자기 SHA-256 다이제스트만으로 신뢰하지 않음. SHA-256은 전송 중 내용 무결성(tamper-detection) 확인용일 뿐 평가자의 신뢰성이나 진위 증명이 아님.
+   - 모델 평가기를 사용한 보고서는 원시 실행 기록(`evaluator_records` / `evaluator_raw_responses`)을 대조하여 동일 입력·설정·응답으로 재구성 검증함. 신뢰 가능한 실행 기록이 없으면 `UNVERIFIED_MODEL_EXECUTION_RECORD`(`unresolved` → `REVIEW`)로 보류.
+   - 모델이 발견한 오류(EVAL-12 선후관계 왜곡 등)를 보고서에서 삭제하고 `supported`로 조작하거나 다이제스트를 재계산한 경우, 원시 응답 재구성을 통해 `FORGED_OR_OMITTED_SEMANTIC_FINDINGS`로 즉시 거부.
+
+2. **의미 검토 범위의 정확한 추적 (P1):**
+   - 정보 단위 ID뿐만 아니라 필드 경로 수준의 필수 검사 목록(`get_required_semantic_field_paths()`)을 생성: `statement`, `elements`(`value`), `relations`(`reason`), `assessment`(`exposure`, `reason`, `preservation`), 원문 블록별 누락 검사(`/blocks/{b}`).
+   - 모델 평가기가 일부 필드만 반환하거나 생략한 경우 단위를 검토 완료로 집계하지 않고 `INCOMPLETE_SEMANTIC_COVERAGE`(`unresolved` → `REVIEW`, `is_complete: false`)로 처리.
+   - 단위 `statement`는 정확하나 `assessment.reason`/`exposure`에서만 실제 패키지 동작으로 왜곡하는 사례(RW-001)에서 검사 범위 부족 상태로 `overall_judgment: supported`가 나오는 것을 방지.
+
+3. **규칙 기반 오탐과 확정 실패 구분 (P2, EVAL-13 해결):**
+   - 정상적인 설명에 사용되는 양보절 대조 표현(`...지원한다 하더라도 ... 지원하지 않으므로...`)을 극성 반전 오탐(False Positive)에서 제외.
+   - 근거가 불충분하거나 가설적 맥락은 확정 `contradicted`(`FAIL`) 대신 `unresolved`(`REVIEW`)로 보류.
+   - 14개 고정 벤치마크에서 오탐(FP)을 0건으로 해소하고, 실제 오류 탐지율(TP)과 정상 사례 보존(TN)을 유지함.
+
+4. **실제 LLM(`gemini-3.8-flash-low`) 14개 벤치마크 독립 평가:**
+   - 14개 평가 사례 전체를 로컬 CLI(`agy`) 및 `gemini-3.8-flash-low`로 실시간 실행 완료 (`experiments/full_document_control/runs/live_eval_gemini_3_8_flash/`).
+   - 주요 8대 의미 오류 전수 탐지 및 게이트 `FAIL` 차단 (TP 8건, FP 0건, Holds 2건).
+   - 모델이 일부 필드를 생략한 경우 Coverage Tracker가 `INCOMPLETE_SEMANTIC_COVERAGE`(`REVIEW`)로 안전하게 보류함을 실환경에서 입증. 전체 결과는 `runs/live_semantic_eval_summary.json`에 보존.
+
+## 17. 의미 검증기 최종 안정화 및 실모델 2차 재평가
+
+1. **필수 필드 누락 및 응답 스키마 안정화:**
+   - 평가 창(window)마다 검토해야 하는 전체 필드 경로(`required_field_paths`)를 프롬프트 본문 및 지시문에 명시적으로 제공: `statement`, `elements`, `relations`, `assessment.exposure`, `assessment.reason`, `assessment.preservation`, 블록별 누락 검사.
+   - 첫 번째 응답에서 필수 필드가 누락된 경우 누락 필드만을 대상으로 하는 제한적 재검토(`_render_semantic_missing_fields_prompt`, 최대 2회 제한)를 자동 수행.
+   - 재검토 응답은 이전의 유효한 판정을 덮어쓰거나 축소하지 않고 누락 필드만 안전하게 보완.
+   - 모델의 오류 범주 별칭(`overstatement` -> `CLAIM_OVERSTATEMENT`, `polarity` -> `POLARITY_REVERSAL` 등)을 표준 범주로 정규화(`normalize_semantic_error_category`).
+   - 비표준 오류 범주는 재시도 가능한 스키마 파싱 오류로 처리하며, 문서 자체의 확정적 의미 왜곡(`FAIL`)으로 오인하지 않도록 명확히 분리.
+
+2. **평가 실행 증거의 신뢰 경계 논리적 분리 및 강화:**
+   - 검증 보고서(`SemanticFidelityReport`)와 평가 실행 증거(`EvaluatorExecutionEvidence`)를 논리적으로 분리하고, 게이트가 직접 관리하는 신뢰 증거(`trusted_execution_evidence`)를 기준으로 보고서의 진위를 검증.
+   - 외부에서 전달된 보고서 내부의 `evaluator_records`만으로 신뢰성을 확정하지 않으며, 독립적인 신뢰 증거가 없으면 `UNVERIFIED_MODEL_EXECUTION_RECORD`(`REVIEW`)로 보류.
+   - 실패 유형을 정밀하게 구분:
+     - 기록 부재: `MISSING_EXECUTION_RECORD` / `UNVERIFIED_MODEL_EXECUTION_RECORD` (`unresolved` → `REVIEW`)
+     - 기록 손상 / 바인딩 불일치: `CORRUPTED_EXECUTION_RECORD` (`FAIL`)
+     - 보고서-원시 증거 간 불일치 / 조작: `DISCREPANT_EXECUTION_RECORD` (`FAIL`)
+     - 실제 문서 의미 위반: `SEMANTIC_FIDELITY_FAILURE` (`FAIL`)
+   - `ValidationGate`와 `ExecutionController`에 일관된 신뢰 경계 적용.
+
+3. **실제 LLM(`gemini-3.8-flash-low`) 14개 벤치마크 2차 평가 결과:**
+   - 실행 결과: `experiments/full_document_control/runs/live_eval_gemini_3_8_flash_v2/` 및 `live_semantic_eval_v2_summary.json`.
+   - 총 14개 사례 전수 실행 (총 소요 시간: 1187.28초).
+   - **TP 9건:** EVAL-03~10 8대 의미 오류 전수 탐지 및 EVAL-12(선후 관계 왜곡)를 모델 단독으로 정확히 탐지(`det_src: model_evaluator`, `error_category: CLAIM_OVERSTATEMENT`)하여 `FAIL` 차단 성공. (FN 0건 달성).
+   - **TN 3건:** 정상 사례 3건(EVAL-01, EVAL-02, EVAL-13) 모두 누락 필드 재검토를 통해 완전 검토(`coverage_complete: true`) 및 `supported` 판정 획득. (첫 구현 불변조건에 따라 게이트 상태는 `REVIEW`로 대기).
+   - **FP 0건:** 정상 사례 오탐 없음.
+   - **FN 0건:** 놓친 의미 왜곡 없음.
+   - **Holds 1건:** EVAL-11(원문 모호성) 정확히 `unresolved`(`REVIEW`) 보류.
+   - 단일 평가자 13개 사례(EVAL-01~13)에서 100% 설계 의도 일치 달성. EVAL-14는 독립 복수 평가자 프로토콜로 분리 실행.
+
 ## 한계
 
 - 프롬프트 예산(`max_prompt_chars`)은 오프라인에서 제공자별 토크나이저를 직접 호출하지 않으므로 유니코드 코드 포인트 길이를 기준으로 상한을 강제하며(`budget_policy.token_vs_char_policy`), 한국어·UTF-8 다중 토큰 특성을 고려해 보수적으로 설정해야 한다.
