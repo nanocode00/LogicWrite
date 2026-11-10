@@ -31,7 +31,7 @@ class RepairTests(unittest.TestCase):
     def test_actual_generation_error_repair_reconstruct_validate(self):
         self.break_expression()
         result = self.run_loop()
-        self.assertEqual(result['termination_reason'], 'CANDIDATE_VALIDATED')
+        self.assertEqual(result['termination_reason'], 'VALIDATION_INCOMPLETE')
         self.assertEqual(len(result['attempts']), 1)
         row = result['attempts'][0]
         self.assertIn('GENERATION_ERROR', {f['rule_id'] for f in row['before_validation']['structural_report']['findings']})
@@ -130,7 +130,7 @@ class RepairTests(unittest.TestCase):
         expression.seal(self.artifacts['analysis'], 'analysis_sha256')
         result = repair.RepairLoop().run(self.bundle, self.artifacts,
             adapters={'analysis': lambda r: {'candidate': good}})
-        self.assertEqual(result['termination_reason'], 'CANDIDATE_VALIDATED')
+        self.assertEqual(result['termination_reason'], 'VALIDATION_INCOMPLETE')
         self.assertEqual(result['attempts'][0]['regenerated'], ['organization', 'expression', 'reconstruction'])
         self.assertEqual(result['attempts'][0]['target_module'], 'analysis')
 
@@ -145,7 +145,7 @@ class RepairTests(unittest.TestCase):
         expression.seal(self.artifacts['reconstruction'], 'revision_sha256')
         result = repair.RepairLoop().run(self.bundle, self.artifacts,
             adapters={'reconstruction': lambda r: {'candidate': original}})
-        self.assertEqual(result['termination_reason'], 'CANDIDATE_VALIDATED')
+        self.assertEqual(result['termination_reason'], 'VALIDATION_INCOMPLETE')
         self.assertEqual(result['attempts'][0]['regenerated'], [])
 
     def test_synthetic_multiple_steps_and_cycle_policy(self):
@@ -158,6 +158,7 @@ class RepairTests(unittest.TestCase):
                 audit = original(self.bundle, *(self.artifacts[k] for k in repair.STAGES))
                 n = len(calls)
                 calls.append(n)
+                audit['structural_report']['checks'].update({str(i): 'violated' if i < max(0, 2-n) else 'passed' for i in range(2)})
                 audit['structural_report']['findings'] = [
                     {'rule_id': 'UNIT_TRACE_INVALID', 'check_id': str(i), 'severity': 'ERROR'}
                     for i in range(max(0, 2-n))]
@@ -172,7 +173,7 @@ class RepairTests(unittest.TestCase):
                     adapters={'reconstruction': adapter})
         result = run(False)
         self.assertEqual(len(result['attempts']), 2)
-        self.assertEqual(result['termination_reason'], 'CANDIDATE_VALIDATED')
+        self.assertEqual(result['termination_reason'], 'VALIDATION_INCOMPLETE')
         limited = run(False, 1)
         self.assertEqual(limited['termination_reason'], 'MAX_ATTEMPTS')
         self.assertEqual(len(limited['attempts']), 1)
@@ -222,6 +223,36 @@ class RepairTests(unittest.TestCase):
         result = repair.run_repair_pipeline(self.bundle, generator=slow, adapter_timeout=.01)
         self.assertEqual(result['termination_reason'], 'INITIAL_TIMEOUT')
         self.assertIsNone(result['final_audit'])
+
+    def test_real_violation_to_unresolved_stays_unconfirmed(self):
+        original = copy.deepcopy(self.artifacts['reconstruction'])
+        self.artifacts['reconstruction']['trace'][0]['unit_refs'] = ['unknown']
+        expression.seal(self.artifacts['reconstruction'], 'revision_sha256')
+        result = repair.RepairLoop().run(self.bundle, self.artifacts,
+            adapters={'reconstruction': lambda _: {'candidate': original}})
+        row = result['attempts'][0]
+        self.assertEqual(row['before_validation']['semantic_report']['checks']['PROVENANCE']['status'], 'violated')
+        self.assertEqual(row['after_validation']['semantic_report']['checks']['PROVENANCE']['status'], 'unresolved')
+        self.assertTrue(row['unconfirmed'])
+        self.assertEqual(row['judgment'], 'validation_incomplete')
+        self.assertEqual(result['status'], 'REVIEW')
+        self.assertEqual(result['termination_reason'], 'VALIDATION_INCOMPLETE')
+        self.assertFalse(result['delivery_approved'])
+
+    def test_revalidation_exception_cannot_reuse_audit(self):
+        self.break_expression()
+        original = repair.pipeline.validate_final_output
+        calls = []
+        def validate(*args, **kwargs):
+            if calls:
+                raise RuntimeError('validation failed')
+            calls.append(1)
+            return original(*args, **kwargs)
+        with patch.object(repair.pipeline, 'validate_final_output', side_effect=validate):
+            result = self.run_loop()
+        self.assertEqual(result['termination_reason'], 'EXECUTION_ERROR')
+        self.assertIsNone(result['final_audit'])
+        self.assertFalse(result['delivery_approved'])
 
     def test_bad_limits(self):
         for config in ({'max_attempts': True}, {'max_attempts': -1}, {'budget_seconds': float('nan')}, {'adapter_timeout': 0}):

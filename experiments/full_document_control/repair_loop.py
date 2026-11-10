@@ -65,11 +65,66 @@ def diagnose(findings):
     return min(stages, key=STAGES.index)
 
 
+def _evidence_identity(value):
+    if isinstance(value, list):
+        return [_evidence_identity(v) for v in value]
+    if isinstance(value, dict):
+        # Only grounded spans may move. Keep document, quote, side, unit and
+        # other semantic identifiers; never normalize arbitrary error metadata.
+        moving_span = (value.get('side') == 'output'
+                       and all(k in value for k in ('document_id', 'quote', 'start', 'end')))
+        ignored = {'start', 'end', 'snapshot_sha256', 'snapshot_id', 'version'} if moving_span else set()
+        return {k: _evidence_identity(v) for k, v in value.items() if k not in ignored}
+    return value
+
+
+def _has_grounded_span(value):
+    if isinstance(value, list):
+        return any(_has_grounded_span(v) for v in value)
+    return (isinstance(value, dict) and value.get('side') in {'source', 'output'}
+            and isinstance(value.get('document_id'), str) and bool(value['document_id'])
+            and isinstance(value.get('quote'), str) and bool(value['quote'])
+            and type(value.get('start')) is int and type(value.get('end')) is int)
+
+
+def _violation_records(audit):
+    records, counts = {}, {}
+    for report in ('structural_report', 'semantic_report'):
+        for f in audit[report]['findings']:
+            if f.get('severity') != 'ERROR':
+                continue
+            evidence = _evidence_identity(f.get('evidence', []))
+            identity = {k: v for k, v in f.items() if k not in {'severity', 'message', 'evidence'}}
+            identity.update(report=report, evidence=evidence)
+            # Without stable evidence retain the message: different ungrounded
+            # errors cannot safely be assumed identical.
+            if not _has_grounded_span(f.get('evidence', [])):
+                identity['message'] = f.get('message')
+            key = pipeline.canonical_json_digest(identity)
+            counts[key] = counts.get(key, 0) + 1
+            records[key + ':' + str(counts[key])] = (report, f.get('check_id'))
+    return records
+
+
 def violations(audit):
-    # Preserve check identity and grounded evidence, independent of report/run IDs.
-    return {pipeline.canonical_json_digest({k: f[k] for k in ('check_id', 'rule_id', 'evidence', 'message') if k in f})
-            for report in ('structural_report', 'semantic_report') for f in audit[report]['findings']
-            if f.get('severity') == 'ERROR'}
+    # Occurrence indices preserve multiplicity, including identical quotes.
+    return set(_violation_records(audit))
+
+
+def compare_progress(before, after):
+    old, new = _violation_records(before), _violation_records(after)
+    resolved, unconfirmed = [], []
+    for key in old.keys() - new.keys():
+        report, check = old[key]
+        value = after[report]['checks'].get(check)
+        status = value.get('status') if isinstance(value, dict) else value
+        verified = status in {'passed', 'supported'}
+        if 'upstream_report' in before and 'upstream_report' not in after and check is None:
+            verified = True  # Current upstream gate was rerun before full validation.
+        (resolved if verified else unconfirmed).append(key)
+    return {'resolved': sorted(resolved), 'unconfirmed': sorted(unconfirmed),
+            'introduced': sorted(new.keys()-old.keys()),
+            'unresolved_increased': sorted(newly_unresolved(before, after))}
 
 
 def unresolved(audit):
@@ -78,9 +133,7 @@ def unresolved(audit):
 
 
 def newly_unresolved(before, after):
-    previously_violated = {('structure', k) for k, v in before['structural_report']['checks'].items() if v == 'violated'} | {
-        ('semantic', k) for k, v in before['semantic_report']['checks'].items() if v['status'] == 'violated'}
-    return unresolved(after) - unresolved(before) - previously_violated
+    return unresolved(after) - unresolved(before)
 
 
 def effective_hash(artifacts):
@@ -147,7 +200,7 @@ class RepairLoop:
                 findings = audit['structural_report']['findings'] + audit['semantic_report']['findings']
                 target = diagnose(findings)
                 if target is None:
-                    reason = 'CANDIDATE_VALIDATED' if (not violations(audit) and state['reconstruction'].get('delivery_state') == 'candidate'
+                    reason = ('VALIDATION_INCOMPLETE' if unresolved(audit) else 'CANDIDATE_VALIDATED') if (not violations(audit) and state['reconstruction'].get('delivery_state') == 'candidate'
                         and not any(f.get('rule_id') == 'GENERATION_RECORD_UNVERIFIED' for f in findings)) else 'NO_TRUSTED_REPAIR_POINT'
                     break
                 adapter = adapters.get(target)
@@ -199,8 +252,9 @@ class RepairLoop:
                 row['after_validation'] = copy.deepcopy(audit)
                 fingerprint = effective_hash(state)
                 row['after_candidate_sha256'] = fingerprint
-                old, new = violations(before), violations(audit)
-                row.update(resolved=sorted(old-new), introduced=sorted(new-old), unresolved_increased=sorted(newly_unresolved(before, audit)))
+                new = violations(audit)
+                delta = compare_progress(before, audit)
+                row.update(delta)
                 if changed():
                     reason = 'INPUT_CHANGED'; break
                 if remaining() <= 0:
@@ -208,13 +262,15 @@ class RepairLoop:
                 if fingerprint in seen:
                     row['judgment'] = 'repeated'; reason = 'REPEATED_STATE'; break
                 seen.add(fingerprint)
-                if new-old or newly_unresolved(before, audit):
+                if delta['introduced']:
                     row['judgment'] = 'worsened'; reason = 'WORSENED'; break
-                row['judgment'] = 'violations_resolved' if old-new else 'no_verified_progress'
+                if delta['unconfirmed'] or delta['unresolved_increased']:
+                    row['judgment'] = 'validation_incomplete'; reason = 'VALIDATION_INCOMPLETE'; break
+                row['judgment'] = 'violations_resolved' if delta['resolved'] else 'no_verified_progress'
                 if not new and state['reconstruction'].get('delivery_state') == 'candidate' and not any(
                         f.get('rule_id') in {'GENERATION_ERROR', 'GENERATION_RECORD_UNVERIFIED'} for f in audit['structural_report']['findings']):
-                    reason = 'CANDIDATE_VALIDATED'; break
-                if not old-new:
+                    reason = 'VALIDATION_INCOMPLETE' if unresolved(audit) else 'CANDIDATE_VALIDATED'; break
+                if not delta['resolved']:
                     reason = 'NO_VERIFIED_PROGRESS'; break
         except Exception:
             reason = 'EXECUTION_ERROR'
@@ -229,7 +285,7 @@ class RepairLoop:
         if reason == 'INPUT_CHANGED':
             audit = None
             state.clear()
-        status = 'REVIEW' if reason == 'CANDIDATE_VALIDATED' else 'FAIL' if audit and violations(audit) else 'STOPPED'
+        status = 'FAIL' if audit and violations(audit) else 'REVIEW' if reason in {'CANDIDATE_VALIDATED', 'VALIDATION_INCOMPLETE'} else 'STOPPED'
         return {'status': status, 'termination_reason': reason, 'attempts': history,
                 'artifacts': state, 'final_audit': audit, 'elapsed_seconds': time.monotonic()-start,
                 'delivery_approved': False, 'stage_transition_allowed': False}

@@ -1,6 +1,6 @@
 """Run: python3 experiments/full_document_control/repair_example.py
 
-Offline generation failure -> deterministic repair -> reconstruction -> full audit.
+Offline generation failure -> deterministic repair -> reconstruction -> full audit -> explicit incomplete semantic review.
 This synthetic example is not a gold-set evaluation or delivery authorization.
 """
 import json
@@ -22,7 +22,7 @@ def main():
         'attempts': len(result['attempts']), 'delivery_approved': result['delivery_approved'],
         'stage_transition_allowed': result['stage_transition_allowed'],
         'regenerated': result['attempts'][0]['regenerated']}, indent=2))
-    return 0 if result['termination_reason'] == 'CANDIDATE_VALIDATED' and not result['delivery_approved'] else 1
+    return 0 if result['termination_reason'] == 'VALIDATION_INCOMPLETE' and not result['delivery_approved'] else 1
 
 
 if __name__ == '__main__':
