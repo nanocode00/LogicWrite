@@ -59,7 +59,7 @@ python3 experiments/full_document_control/integration.py document.md writing-con
 | 중복 통합 | 기존 검증기의 compatible 그룹에 속한 정확히 같은 독립 문단만 지정된 primary에 대응. secondary 원문 범위도 alias로 보존·추적. 다른 KEEP 발생 위치를 해당 그룹으로 지울 수 없음 |
 | 제거/잠정 목적지/부분 블록 이동 | 독립적인 실제 제거 승인 실행기가 없거나 안전한 문서 구성을 확정할 수 없어 Preview/REVIEW로 보류 |
 
-원본·목적지 스냅샷은 `snapshot_id`, `document_id`, `version`, `coverage: complete`, `media_type: text/markdown`, 실제 content·sha256이 필요하다. 목적지의 불완전 발췌를 전체 문서로 간주하지 않는다. 후보 스냅샷 ID·버전은 원본 버전과 내용 해시에서 결정되므로 동일 입력의 전체 후보 텍스트·다이제스트는 반복 실행에서도 같다. Expression 실행 기록 ID는 매 실행 달라지므로 전체 감사 JSON의 바이트 동일성까지 보장하지 않는다.
+원본·목적지 스냅샷은 `snapshot_id`, `document_id`, `version`, `coverage: complete`, `media_type: text/markdown`, 실제 content·sha256이 필요하다. 원본 및 `destination_snapshots`의 ID는 Writing Contract `output_scopes`의 구체적인 `document_id` 또는 `target.document_id`에 선언되어야 한다. `destination_role`만으로 문서 ID를 만들지 않는다. 미선언 입력은 Reconstruction에서 오류와 빈 출력 Preview로 반환하고, Final Validator는 수집기와 별도로 현재 계약의 입력/출력 ID를 대조해 FAIL로 처리한다. 스냅샷 문맥이 불완전해도 확정된 범위 위반을 REVIEW로 낮추지 않는다. 목적지의 불완전 발췌를 전체 문서로 간주하지 않는다. `destination_snapshots`는 명시적 출력 대상이며 분석용 참고자료 컬렉션이 아니다. `source_material` 등 참고 문맥이 자동으로 출력으로 복사되지 않는다. 선언된 목적지를 읽었다고 실제 텍스트 수정을 요구하지는 않으며, 변경 없는 문서는 KEEP으로 원장을 유지한다. 이 구분은 새 참고 문서 로더나 검색 기능을 도입하지 않는다. 후보 스냅샷 ID·버전은 원본 버전과 내용 해시에서 결정되므로 동일 입력의 전체 후보 텍스트·다이제스트는 반복 실행에서도 같다. Expression 실행 기록 ID는 매 실행 달라지므로 전체 감사 JSON의 바이트 동일성까지 보장하지 않는다.
 
 ## RevisionResult와 최종 검사
 
@@ -80,7 +80,7 @@ python3 experiments/full_document_control/integration.py document.md writing-con
 | ORGANIZATION_FIDELITY | 원본 블록/조각 순서, 명시 기준점/기존 섹션, 단위의 실제 문서 및 통합 구성원/primary 위치 |
 | EXPRESSION_FIDELITY | 기존 독립 Expression 검사와 실제 결과 연결. 전체 문서 의미 검토는 not_run/unresolved |
 | BIDIRECTIONAL_TRACE | 원본을 덮는 원장과 전체 출력을 덮는 원장, unit/element 목록, 길이 변화까지 반영한 정확한 전후 좌표 |
-| CROSS_DOCUMENT_INTEGRITY | 모든 문서 동시 존재, 실제 MOVE 배치, 목적지 기존 내용 유지, 원본 관계를 통한 조건 보존, 안전한 추가 경계 |
+| CROSS_DOCUMENT_INTEGRITY | 계약에 선언된 구체적 입력/출력 문서 ID, 모든 문서 동시 존재, 실제 MOVE 배치, 목적지 기존 내용 유지, 원본 관계를 통한 조건 보존, 안전한 추가 경계 |
 | APPROVAL_BOUNDARY | 허위 PASS·전달 승인 차단. 고정 검사 누락·변조·오래된 보고서는 재검증 비교로 거부 |
 
 구조 검사 `passed`와 최종 `gate_state: PASS`는 구별된다. 필수 의미 검토·사람 승인 절차가 없어 **이 구현에서 최종 PASS/전달 승인은 없다**. 모든 후보는 REVIEW 또는 확인된 위반에 따른 FAIL이다. 검사를 실행할 전체 문서가 없으면 해당 검사를 unresolved로 남긴다. 제어기는 실행을 중단한 경우 STOPPED와 last_gate_state·책임 모듈·무효화 대상을 별도로 반환한다.

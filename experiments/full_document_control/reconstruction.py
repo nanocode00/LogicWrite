@@ -17,13 +17,35 @@ class IncompleteSnapshot(ValueError):
     pass
 
 
+class OutputScopeError(ValueError):
+    def __init__(self, rule_id):
+        self.rule_id = rule_id
+        super().__init__(rule_id)
+
+
+def validate_document_scopes(bundle, destinations):
+    """Output snapshots are explicit targets, not arbitrary reference material."""
+    allowed = set()
+    for scope in bundle['writing_contract']['output_scopes']:
+        parsed = organization.parse_output_scope_entry(scope)
+        if parsed and isinstance(parsed['document_id'], str) and parsed['document_id'].strip():
+            allowed.add(parsed['document_id'])
+    if bundle['document_snapshot']['document_id'] not in allowed:
+        raise OutputScopeError('UNAUTHORIZED_SOURCE_DOCUMENT')
+    for snap in destinations:
+        if snap['document_id'] not in allowed:
+            raise OutputScopeError('UNAUTHORIZED_DESTINATION_DOCUMENT')
+
+
 def issue(rule, message, severity='WARNING'):
     return {'rule_id': rule, 'message': message, 'severity': severity}
 
 
 def source_documents(bundle, destinations):
+    destinations = list(destinations or [])
+    validate_document_scopes(bundle, destinations)
     documents = {}
-    for snap in [bundle['document_snapshot']] + list(destinations or []):
+    for snap in [bundle['document_snapshot']] + destinations:
         doc = snap['document_id']
         if doc in documents or not snap.get('version') or not snap.get('content'):
             raise ValueError('Invalid or duplicate complete document snapshot')
@@ -86,6 +108,8 @@ def reconstruct_documents(bundle, analysis, org, preview, *, destination_snapsho
             findings.extend(f for f in validation['findings'] if f['severity'] == 'ERROR')
             return expression.seal(result, 'revision_sha256')
         _construct(bundle, analysis, org, preview, docs, result)
+    except OutputScopeError as exc:
+        findings.append(issue(exc.rule_id, 'Document is not a concrete output scope in the Writing Contract', 'ERROR'))
     except IncompleteSnapshot:
         findings.append(issue('FULL_SNAPSHOT_UNAVAILABLE', 'Complete source/destination snapshot metadata is unavailable'))
     except (KeyError, ValueError, TypeError, IndexError):

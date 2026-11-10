@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -434,6 +435,142 @@ class ReconstructionTests(unittest.TestCase):
         report = self.report(result)
         self.assertEqual(report['gate_state'], 'FAIL')
         self.assertIn('UNAUTHORIZED_FINAL_APPROVAL', {f['rule_id'] for f in report['findings']})
+
+    def rogue_snapshot(self, doc='doc-undeclared'):
+        content = '# 참고 자료\n\n출력 계약에 없는 문서다.\n'
+        return {'snapshot_id': doc + ':v1', 'document_id': doc, 'version': '1',
+                'coverage': 'complete', 'media_type': 'text/markdown',
+                'content': content, 'sha256': pipeline.digest_text(content)}
+
+    def assert_scope_error(self, result, code):
+        report = self.report(result)
+        self.assertEqual(report['gate_state'], 'FAIL')
+        self.assertIn(code, {f['rule_id'] for f in report['findings']})
+        self.assertFalse(report['delivery_approved'])
+        self.assertNotIn('passed', report['checks'].values())
+
+    def test_undeclared_destination_rejected_by_reconstruction(self):
+        self.snaps = [self.rogue_snapshot()]
+        result = self.candidate()
+        self.assertEqual(result['delivery_state'], 'preview')
+        self.assertEqual(result['output_snapshots'], [])
+        self.assertIn('UNAUTHORIZED_DESTINATION_DOCUMENT', {f['rule_id'] for f in result['findings']})
+        self.assert_scope_error(result, 'UNAUTHORIZED_DESTINATION_DOCUMENT')
+
+    def test_undeclared_output_rejected_after_recomputed_revision_digest(self):
+        result = self.candidate()
+        result['output_snapshots'].append(self.rogue_snapshot())
+        self.seal(result)
+        self.assert_scope_error(result, 'UNAUTHORIZED_OUTPUT_DOCUMENT')
+
+    def test_source_document_must_be_declared_in_contract(self):
+        result = self.candidate()
+        self.bundle['document_snapshot']['document_id'] = 'forged-source'
+        held = self.candidate()
+        self.assertEqual(held['output_snapshots'], [])
+        self.assertIn('UNAUTHORIZED_SOURCE_DOCUMENT', {f['rule_id'] for f in held['findings']})
+        self.assert_scope_error(result, 'UNAUTHORIZED_SOURCE_DOCUMENT')
+
+    def test_declared_and_undeclared_destinations_reject_entire_candidate(self):
+        self.setup_move()
+        self.snaps.append(self.rogue_snapshot())
+        result = self.candidate()
+        self.assertEqual(result['output_snapshots'], [])
+        self.assert_scope_error(result, 'UNAUTHORIZED_DESTINATION_DOCUMENT')
+
+    def test_unchanged_undeclared_snapshot_is_not_an_output_exception(self):
+        self.snaps = [self.rogue_snapshot()]
+        result = self.candidate()
+        self.assertNotIn('doc-undeclared', {s['document_id'] for s in result['output_snapshots']})
+        self.assert_scope_error(result, 'UNAUTHORIZED_DESTINATION_DOCUMENT')
+
+    def test_forged_destination_id_and_recomputed_content_digest(self):
+        self.setup_move()
+        result = self.candidate()
+        self.snaps[0]['document_id'] = 'forged-destination'
+        self.snaps[0]['content'] += '추가'
+        self.snaps[0]['sha256'] = pipeline.digest_text(self.snaps[0]['content'])
+        self.assert_scope_error(result, 'UNAUTHORIZED_DESTINATION_DOCUMENT')
+
+    def test_duplicate_destination_id_still_rejected(self):
+        self.setup_move()
+        self.snaps.append(copy.deepcopy(self.snaps[0]))
+        result = self.candidate()
+        self.assertEqual(result['delivery_state'], 'preview')
+        self.assertEqual(self.report(result)['gate_state'], 'FAIL')
+
+    def test_role_only_scope_does_not_authorize_arbitrary_document_id(self):
+        self.bundle['writing_contract']['output_scopes'].append({
+             'scope_id': 'reference-role', 'kind': 'document', 'destination_role': '참고자료'})
+        self.analysis['contract_sha256'] = pipeline.canonical_json_digest(self.bundle['writing_contract'])
+        self.analysis['input_sha256'] = pipeline.canonical_json_digest(self.bundle)
+        self.seal(self.analysis, 'analysis_sha256')
+        self.org = organization.generate_organization_plan(self.bundle, self.analysis)
+        self.regenerate()
+        self.snaps = [self.rogue_snapshot('role:참고자료')]
+        result = self.candidate()
+        self.assertEqual(result['output_snapshots'], [])
+        self.assert_scope_error(result, 'UNAUTHORIZED_DESTINATION_DOCUMENT')
+
+    def test_declared_unused_destination_remains_unchanged(self):
+        self.setup_move()
+        self.org = organization.generate_organization_plan(self.bundle, self.analysis, destination_snapshots=self.snaps)
+        self.regenerate()
+        result = self.candidate()
+        self.assertEqual(result['delivery_state'], 'candidate')
+        dest = next(s for s in result['output_snapshots'] if s['document_id'] == 'doc-dest')
+        self.assertEqual(dest['content'], self.snaps[0]['content'])
+        self.assertEqual(self.report(result)['gate_state'], 'REVIEW')
+
+    def test_reference_material_not_automatically_promoted_to_output(self):
+        self.bundle['source_material'] = [self.rogue_snapshot()]
+        result = self.candidate()
+        self.assertEqual({s['document_id'] for s in result['output_snapshots']}, {'doc-guide'})
+        self.assertEqual(self.report(result)['gate_state'], 'REVIEW')
+
+    def test_scope_violation_not_downgraded_by_missing_snapshot_metadata(self):
+        rogue = self.rogue_snapshot()
+        rogue.pop('coverage')
+        self.snaps = [rogue]
+        result = self.candidate()
+        result['delivery_approved'] = True
+        self.seal(result)
+        self.assert_scope_error(result, 'UNAUTHORIZED_DESTINATION_DOCUMENT')
+        self.assertIn('UNAUTHORIZED_FINAL_APPROVAL', {f['rule_id'] for f in self.report(result)['findings']})
+
+    def test_final_scope_check_independent_of_source_document_collector(self):
+        result = self.candidate()
+        rogue = self.rogue_snapshot()
+        self.snaps = [rogue]
+        result['output_snapshots'].append(copy.deepcopy(rogue))
+        self.seal(result)
+        # Simulate a faulty collector that accepts the unwanted destination.
+        documents = {'doc-guide': self.bundle['document_snapshot'], rogue['document_id']: rogue}
+        with patch.object(reconstruction, 'source_documents', return_value=documents):
+            self.assert_scope_error(result, 'UNAUTHORIZED_DESTINATION_DOCUMENT')
+            self.assert_scope_error(result, 'UNAUTHORIZED_OUTPUT_DOCUMENT')
+
+    def test_duplicate_output_document_still_rejected(self):
+        result = self.candidate()
+        result['output_snapshots'].append(copy.deepcopy(result['output_snapshots'][0]))
+        self.seal(result)
+        self.assertEqual(self.report(result)['gate_state'], 'FAIL')
+
+    def test_nested_concrete_scope_document_remains_supported(self):
+        self.setup_move()
+        scope = self.bundle['writing_contract']['output_scopes'][1]
+        scope['target'] = {'document_id': scope.pop('document_id')}
+        self.analysis['contract_sha256'] = pipeline.canonical_json_digest(self.bundle['writing_contract'])
+        self.analysis['input_sha256'] = pipeline.canonical_json_digest(self.bundle)
+        self.seal(self.analysis, 'analysis_sha256')
+        moved = [u['id'] for u in self.analysis['units'][1:]]
+        self.org = organization.generate_organization_plan(self.bundle, self.analysis,
+                  candidate_actions={uid: {'action': 'MOVE', 'target_scope_id': 'dest'} for uid in moved},
+                  destination_snapshots=self.snaps)
+        self.regenerate()
+        result = self.candidate()
+        self.assertEqual(result['delivery_state'], 'candidate')
+        self.assertEqual(self.report(result)['gate_state'], 'REVIEW')
 
 
 class EndToEndTests(unittest.TestCase):

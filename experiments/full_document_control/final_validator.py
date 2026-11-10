@@ -44,6 +44,34 @@ def validate_final_result(bundle, analysis, org, preview, result, *, destination
 def _validate(bundle, analysis, org, preview, result, destinations, finding):
     if expression_validator._approval_claim(result):
         finding('APPROVAL_BOUNDARY', 'UNAUTHORIZED_FINAL_APPROVAL', 'Candidate cannot authorize PASS or delivery')
+    # Recompute the contract boundary here, before collecting documents or taking
+    # the incomplete-preview path. Neither collector output nor hashes authorize IDs.
+    allowed = set()
+    for scope in bundle['writing_contract']['output_scopes']:
+        if not isinstance(scope, dict):
+            continue
+        target = scope.get('target')
+        location = target if isinstance(target, dict) else scope
+        document_id = location.get('document_id')
+        if isinstance(scope.get('scope_id'), str) and scope['scope_id'] and isinstance(document_id, str) and document_id.strip():
+            allowed.add(document_id)
+    scope_violation = False
+    if bundle['document_snapshot']['document_id'] not in allowed:
+        finding('CROSS_DOCUMENT_INTEGRITY', 'UNAUTHORIZED_SOURCE_DOCUMENT', 'Source document is outside the current contract')
+        scope_violation = True
+    for snap in destinations or []:
+        if snap['document_id'] not in allowed:
+            finding('CROSS_DOCUMENT_INTEGRITY', 'UNAUTHORIZED_DESTINATION_DOCUMENT', 'Destination document is outside the current contract')
+            scope_violation = True
+    for snap in result.get('output_snapshots', []) if isinstance(result, dict) else []:
+        if snap['document_id'] not in allowed:
+            finding('CROSS_DOCUMENT_INTEGRITY', 'UNAUTHORIZED_OUTPUT_DOCUMENT', 'Output document is outside the current contract')
+            scope_violation = True
+    if scope_violation:
+        for check in CHECKS:
+            if check != 'CROSS_DOCUMENT_INTEGRITY':
+                finding(check, 'OUTPUT_SCOPE_MISMATCH', 'Document scope violation prevents this check from running', 'WARNING')
+        return
     docs = reconstruction.source_documents(bundle, destinations)
     source_doc = bundle['document_snapshot']['document_id']
     source = docs[source_doc]

@@ -180,3 +180,13 @@
 - **테스트:** 신규 E2E/통합 테스트 44개와 기존 256개, 총 **300개 통과**(full_document_control 225, minimal_gate 31, extraction_analysis 27, extraction_ab 17). 실제 Markdown 파일 CLI, 입력 바이트 불변, 동일 입력 후보 내용 일치, 문체/압축, 원자적 MOVE/통합, 조건·부정·수치 손실, 범위/추적/승인/보고서 무결성 및 안전 중단을 포함한다. `git diff --check` 통과.
 - **검토 근거:** 독립 검토가 제시한 블록 순서·목적지 내용·통합 구성원·공백 구문·반복 문장 출처·미종결 목적지 코드 펜스 문제는 모두 실패 반례 확인 후 수정했다. 마지막 독립 재확인 호출은 도구 측 위험 분류로 중단되어 완료 근거에 포함하지 않았다. 최종 수치는 로컬 전체 테스트 결과이며 원격 CI·일반 문서 의미 보존 성능·최종 독립 승인 근거가 아니다.
 - **차이/한계:** 파일 추출 입력은 기존 단일-scope 계약 그대로다. 다중 문서 API는 이미 바인딩된 상위 분석/계획과 완전한 목적지 스냅샷을 받으며 다중 문서의 자동 의미 분석·승인 경로는 없다. 추상 섹션은 유일한 실제 제목으로 해석되지 않으면 unresolved다. 문단 부분 구조 편집·의미적 통합·전체 문서의 사실/모순/가독성 판단·자동 수정/재시도·파일 적용·RAG·LangGraph는 미구현이다. 상세 계약과 사용법은 INTEGRATION.md를 단일 참조로 사용한다.
+
+
+## 11. PR #15 출력 문서 범위 검증 보완 (2026-11-10)
+
+- **기준/범위:** `d83a8b4`, 기존 `prototype/final-pipeline-integration`. Reconstruction·Final Validator·통합 테스트 및 실행/HANDOFF 문서만 보완하며 기존 Analysis/Organization/Expression/승인 정책은 변경하지 않는다.
+- **입력 검증:** `source_documents()`가 문서 등록 전에 별도 계약 검사로 구체적인 허용 문서 ID를 구성한다. 미선언 원본은 `UNAUTHORIZED_SOURCE_DOCUMENT`, 미선언 목적지는 `UNAUTHORIZED_DESTINATION_DOCUMENT` 오류와 빈 출력 Preview로 반환한다. 역할만 선언된 scope를 임의 ID로 구체화하지 않는다. 중복·다이제스트·버전·완전성 검사는 기존대로 유지한다.
+- **독립 최종 검증:** 수집기 결과를 신뢰하지 않고 현재 계약을 직접 다시 읽어 입력 원본/목적지 및 모든 output_snapshots ID를 검사한다. 미선언 출력은 `UNAUTHORIZED_OUTPUT_DOCUMENT`로 FAIL이다. 범위 위반은 불완전한 스냅샷·Preview에서도 FAIL을 유지하고 미실행 검사를 passed로 표시하지 않는다. 동반된 승인 위조도 별도로 보존한다. 기존 문서 누락·중복 및 원자적 ChangeSet 검사를 유지한다.
+- **문맥 구분:** destination_snapshots는 명시적 출력 대상이며 참고자료 로더가 아니다. source_material 등 참고 문맥을 자동으로 출력으로 승격하지 않는다. 선언된 미수정 목적지는 기존 내용을 KEEP으로 보존할 수 있다. 참고자료 로딩·검색 기능은 추가하지 않았다.
+- **검증:** 신규 14개 중 수정 전 9개 실패를 재현한 뒤 보완했다. 원본 불일치·선언/미선언 혼합·미수정 미선언 문서·ID/해시 변경·역할 전용 scope·수집기 오류와 독립된 최종 검사·중복 목적지/출력·참고자료 비승격·선언된 미사용 목적지·중첩 target 문서 참조를 포함한다. 기존 300개와 신규 14개, 총 **314개 통과**(full_document_control 239, minimal_gate 31, extraction_analysis 27, extraction_ab 17). `git diff --check` 통과. 정상 단일 문서/MOVE/중복 통합 및 최종 REVIEW 경계는 유지한다.
+- **한계:** 허용 여부는 호출자가 제공한 현재 Writing Contract의 구체적 ID를 기준으로 하며 계약 작성자 인증을 추가하지 않는다. 기존 단일-scope 파일 분석 제약, 전체 의미 검토·사람 승인·파일 반영 미구현 등 통합 프로토타입의 한계는 그대로다. 상세 정책은 [INTEGRATION.md](INTEGRATION.md)를 참조한다.
