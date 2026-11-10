@@ -90,9 +90,9 @@
       "source_kind": "controlled_synthetic",
       "expected_judgment": "VIOLATION",
       "input_path": "inputs/SP-008.json",
-      "input_sha256": "c2417e52f431d34465d92e6666e127c374100c9a0b47a0c3938b8b556b816517",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
       "answer_path": "answers/SP-008.json",
-      "answer_sha256": "d14f1116ae156d0b85ca152d53b387aa39c2f0ff9f2246d4440cf8aeb1098dc5",
+      "answer_sha256": "63d5ef6ee68c2431a0986b7f7590926b81ee145fb00ccc569862de2b5bb8f86d",
       "source_family": "controlled-synthetic-008"
     },
     {
@@ -103,7 +103,7 @@
       "input_path": "inputs/SP-009.json",
       "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
       "answer_path": "answers/SP-009.json",
-      "answer_sha256": "6441bc9512ac4162f2780f0bd9b13bc240486bcfaf8bc9eaec7edb26e25cb818",
+      "answer_sha256": "8007acd6e99b21c0a142bba6ae3e98c32e8464794fc57ac510f277f1181f17b8",
       "source_family": "nanocode00/chatgpt2codex:README@dcc9ed7e"
     },
     {

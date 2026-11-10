@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "case_id": "SP-008",
   "input_path": "inputs/SP-008.json",
-  "input_sha256": "c2417e52f431d34465d92e6666e127c374100c9a0b47a0c3938b8b556b816517",
+  "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
   "status": "provisional",
   "label_origin": "ai_proposal",
   "gold_eligible": false,
@@ -15,7 +15,7 @@
     {
       "error_type": "UNSUPPORTED_ADDITION",
       "severity": "major",
-      "reason": "기존 정보를 남겨도 모든 환경 2배 개선이라는 추가 주장을 뒷받침할 비교·반복 관측은 없다.",
+      "reason": "사용자의 추가 사실 제공이나 삽입 지시 없이 에이전트가 모든 환경 2배 개선이라는 주장을 임의로 추가했다. 실험 A 단일 실행의 120ms 관측만으로는 일반화 범위와 개선 배율을 뒷받침할 수 없다.",
       "evidence": [
         {
           "side": "source",
@@ -34,12 +34,12 @@
       ]
     }
   ],
-  "rationale": "기존 정보를 남겨도 모든 환경 2배 개선이라는 추가 주장을 뒷받침할 비교·반복 관측은 없다.",
+  "rationale": "사용자의 추가 사실 제공이나 삽입 지시 없이 에이전트가 모든 환경 2배 개선이라는 주장을 임의로 추가했다. 실험 A 단일 실행의 120ms 관측만으로는 일반화 범위와 개선 배율을 뒷받침할 수 없다.",
   "acceptable_alternatives": [
     "관측 범위를 실험 A 단일 실행으로 유지한 요약은 허용한다. 모든 환경 2배 개선은 별도 근거 없이는 허용하지 않는다."
   ],
   "review_questions": [
-    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+    "사용자 추가 정보·삽입 지시가 없다는 명시 전제 아래에서, 일반화 범위와 개선 배율이 근거를 넘었는지 확인한다. 사용자 요구가 다른 사례에는 이 판정을 그대로 적용하지 않는다."
   ],
   "reviews": [],
   "disagreements": [],
