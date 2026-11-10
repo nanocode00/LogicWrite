@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-003",
+  "input_path": "inputs/SP-003.json",
+  "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "CROSS_DOCUMENT_MOVE"
+  ],
+  "findings": [
+    {
+      "error_type": "CROSS_DOCUMENT_MOVE",
+      "severity": "none",
+      "reason": "계약은 조건의 링크 노출과 목적지 보존을 허용한다. 두 문서 전체에서 조건과 기존 목적지 정보가 남았다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "install",
+          "start": 19,
+          "end": 49,
+          "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "maintenance",
+          "start": 24,
+          "end": 54,
+          "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "install",
+          "start": 19,
+          "end": 60,
+          "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+        }
+      ]
+    }
+  ],
+  "rationale": "계약은 조건의 링크 노출과 목적지 보존을 허용한다. 두 문서 전체에서 조건과 기존 목적지 정보가 남았다.",
+  "acceptable_alternatives": [
+    "캐시 조건을 설치 문서에 그대로 두거나, 목적지에 보존하고 설치 문서에서 명확하게 링크하는 구성 모두 허용한다."
+  ],
+  "review_questions": [
+    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

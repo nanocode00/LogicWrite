@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-011",
+  "input_path": "inputs/SP-011.json",
+  "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "CONTRACT_EXPOSURE_AMBIGUITY"
+  ],
+  "findings": [
+    {
+      "error_type": "CONTRACT_EXPOSURE_AMBIGUITY",
+      "severity": "undetermined",
+      "reason": "전체 묶음에는 조건이 남았으나 설치 페이지에서 조건 전문을 즉시 보여야 하는지는 미확정이다. 단순 구조 선호가 아니라 명시적으로 미해결인 필수 노출 요구를 확인해야 한다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "install",
+          "start": 0,
+          "end": 37,
+          "quote": "# 설치\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "install",
+          "start": 0,
+          "end": 45,
+          "quote": "# 설치\n\n오프라인 검색 조건은 [상세 안내](details.md)를 참조한다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "details",
+          "start": 0,
+          "end": 40,
+          "quote": "# 상세 안내\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+        }
+      ]
+    }
+  ],
+  "rationale": "전체 묶음에는 조건이 남았으나 설치 페이지에서 조건 전문을 즉시 보여야 하는지는 미확정이다. 단순 구조 선호가 아니라 명시적으로 미해결인 필수 노출 요구를 확인해야 한다.",
+  "acceptable_alternatives": [
+    "링크 노출을 승인하면 보존, 현지 전문 노출이 필수이면 의무 위반이다. 현재 계약으로는 보류한다."
+  ],
+  "review_questions": [
+    "사용자에게 캐시 조건의 설치 페이지 현지 노출 의무를 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-010",
+  "input_path": "inputs/SP-010.json",
+  "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "SOURCE_VERSION_AMBIGUITY"
+  ],
+  "findings": [
+    {
+      "error_type": "SOURCE_VERSION_AMBIGUITY",
+      "severity": "undetermined",
+      "reason": "동일 역할의 두 원문이 충돌하고 어느 버전에서 수정했는지 승인 정보가 없다. v1 기준이면 위반이고 v2 기준이면 보존이므로 보류한다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "policy-v1",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 30초다."
+        },
+        {
+          "side": "source",
+          "document_id": "policy-v2",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 60초다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "policy",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 60초다."
+        }
+      ]
+    }
+  ],
+  "rationale": "동일 역할의 두 원문이 충돌하고 어느 버전에서 수정했는지 승인 정보가 없다. v1 기준이면 위반이고 v2 기준이면 보존이므로 보류한다.",
+  "acceptable_alternatives": [
+    "v1 기준이면 수치 변경 위반, v2 기준이면 보존으로 판단할 수 있다. 기준 승인 전에는 어느 쪽도 단정하지 않는다."
+  ],
+  "review_questions": [
+    "두 스냅샷 중 기준 원문으로 승인한 버전을 확인한다. 최신 번호만으로 승인 버전을 추정하지 않는다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

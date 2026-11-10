@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-006",
+  "input_path": "inputs/SP-006.json",
+  "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "NEGATION_REVERSAL",
+    "QUANTITY_UNIT_CHANGE"
+  ],
+  "findings": [
+    {
+      "error_type": "NEGATION_REVERSAL",
+      "severity": "major",
+      "reason": "실험 빌드 자동 업데이트 미지원이 지원으로 반전됐다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "settings",
+          "start": 6,
+          "end": 31,
+          "quote": "실험 빌드는 자동 업데이트를 지원하지 않는다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "settings",
+          "start": 6,
+          "end": 27,
+          "quote": "실험 빌드는 자동 업데이트를 지원한다."
+        }
+      ]
+    },
+    {
+      "error_type": "QUANTITY_UNIT_CHANGE",
+      "severity": "major",
+      "reason": "API 요청 제한 시간이 30초에서 30분으로 바뀌었다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "settings",
+          "start": 32,
+          "end": 51,
+          "quote": "API 요청 제한 시간은 30초다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "settings",
+          "start": 28,
+          "end": 48,
+          "quote": "API 요청 제한 시간은 30분이다."
+        }
+      ]
+    }
+  ],
+  "rationale": "미지원이 지원으로 반전되고 초가 분으로 바뀌었다. 두 오류를 별도로 기록한다.",
+  "acceptable_alternatives": [
+    "30초 또는 30 seconds처럼 같은 단위·값을 허용한다. 자동 업데이트 미지원은 부정의 동의 표현으로 바꿀 수 있다."
+  ],
+  "review_questions": [
+    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

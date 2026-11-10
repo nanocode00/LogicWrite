@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-005",
+  "input_path": "inputs/SP-005.json",
+  "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "MODALITY_SCOPE_CHANGE",
+    "UNSUPPORTED_ADDITION"
+  ],
+  "findings": [
+    {
+      "error_type": "MODALITY_SCOPE_CHANGE",
+      "severity": "major",
+      "reason": "나중에 추가할 수 있다는 가능성을 지금 제공한다는 주장으로 바꾸었다. 실제 DMG 존재 여부와 무관하게 제공 근거의 범위를 넘는다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 3296,
+          "end": 3379,
+          "quote": "A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3296,
+          "end": 3371,
+          "quote": "A signed/notarized DMG\nis available now for a more consumer-style download."
+        }
+      ]
+    },
+    {
+      "error_type": "UNSUPPORTED_ADDITION",
+      "severity": "major",
+      "reason": "나중에 추가할 수 있다는 가능성을 지금 제공한다는 주장으로 바꾸었다. 실제 DMG 존재 여부와 무관하게 제공 근거의 범위를 넘는다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 3296,
+          "end": 3379,
+          "quote": "A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3296,
+          "end": 3371,
+          "quote": "A signed/notarized DMG\nis available now for a more consumer-style download."
+        }
+      ]
+    }
+  ],
+  "rationale": "나중에 추가할 수 있다는 가능성을 지금 제공한다는 주장으로 바꾸었다. 실제 DMG 존재 여부와 무관하게 제공 근거의 범위를 넘는다.",
+  "acceptable_alternatives": [
+    "can still be added later 또는 may be offered later처럼 미래 가능성을 유지한다. 현재 제공을 입증한 별도 자료가 없는 이 입력에서는 is available now를 허용하지 않는다."
+  ],
+  "review_questions": [
+    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

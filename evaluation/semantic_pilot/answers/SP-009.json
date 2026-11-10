@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-009",
+  "input_path": "inputs/SP-009.json",
+  "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "MISSING_DESTINATION"
+  ],
+  "findings": [
+    {
+      "error_type": "MISSING_DESTINATION",
+      "severity": "undetermined",
+      "reason": "README에서 선택 이유가 사라졌지만 계약은 목적지 이동을 허용한다. 목적지 원문·결과가 없어 전체 보존도 손실도 확정할 수 없다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 2982,
+          "end": 3381,
+          "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3007,
+          "end": 3046,
+          "quote": "See [packaging decision](PACKAGING.md)."
+        }
+      ]
+    }
+  ],
+  "rationale": "README에서 선택 이유가 사라졌지만 계약은 목적지 이동을 허용한다. 목적지 원문·결과가 없어 전체 보존도 손실도 확정할 수 없다.",
+  "acceptable_alternatives": [
+    "목적지 전체를 확인하기 전에는 전체 보존을 보류한다. 원문 유지 후보를 별도 제시할 수 있으나 현재 후보의 정답을 정상으로 바꾸는 근거는 아니다."
+  ],
+  "review_questions": [
+    "PACKAGING.md의 수정 전후 전체 스냅샷과 링크 목적지 역할을 확보한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

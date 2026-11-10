@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-008",
+  "input_path": "inputs/SP-008.json",
+  "input_sha256": "c2417e52f431d34465d92e6666e127c374100c9a0b47a0c3938b8b556b816517",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "UNSUPPORTED_ADDITION"
+  ],
+  "findings": [
+    {
+      "error_type": "UNSUPPORTED_ADDITION",
+      "severity": "major",
+      "reason": "기존 정보를 남겨도 모든 환경 2배 개선이라는 추가 주장을 뒷받침할 비교·반복 관측은 없다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "report",
+          "start": 0,
+          "end": 60,
+          "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "report",
+          "start": 61,
+          "end": 84,
+          "quote": "모든 환경에서 응답 성능이 2배 향상됐다."
+        }
+      ]
+    }
+  ],
+  "rationale": "기존 정보를 남겨도 모든 환경 2배 개선이라는 추가 주장을 뒷받침할 비교·반복 관측은 없다.",
+  "acceptable_alternatives": [
+    "관측 범위를 실험 A 단일 실행으로 유지한 요약은 허용한다. 모든 환경 2배 개선은 별도 근거 없이는 허용하지 않는다."
+  ],
+  "review_questions": [
+    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

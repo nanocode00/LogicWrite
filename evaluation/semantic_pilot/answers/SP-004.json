@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-004",
+  "input_path": "inputs/SP-004.json",
+  "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "DEDUPLICATION"
+  ],
+  "findings": [
+    {
+      "error_type": "DEDUPLICATION",
+      "severity": "none",
+      "reason": "같은 30초 주장의 중복을 통합하면서 유일한 한정 정보도 보존했다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "config",
+          "start": 0,
+          "end": 63,
+          "quote": "# 요청 설정\n\nAPI 요청 제한 시간은 30초다.\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "config",
+          "start": 0,
+          "end": 42,
+          "quote": "# 요청 설정\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+        }
+      ]
+    }
+  ],
+  "rationale": "같은 30초 주장의 중복을 통합하면서 유일한 한정 정보도 보존했다.",
+  "acceptable_alternatives": [
+    "30초 문장을 하나 또는 둘로 남겨도 의미 판정은 정상이다. 재시도와 무관하다는 한정은 유지한다."
+  ],
+  "review_questions": [
+    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

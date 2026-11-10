@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-007",
+  "input_path": "inputs/SP-007.json",
+  "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "REQUIRED_CONDITION_LOSS"
+  ],
+  "findings": [
+    {
+      "error_type": "REQUIRED_CONDITION_LOSS",
+      "severity": "major",
+      "reason": "7일 한정은 남았지만 캐시 선행조건이 빠져 무조건 검색 가능한 것으로 읽힌다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "offline",
+          "start": 11,
+          "end": 32,
+          "quote": "캐시가 있는 경우에만 검색할 수 있다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "offline",
+          "start": 11,
+          "end": 20,
+          "quote": "검색할 수 있다."
+        }
+      ]
+    }
+  ],
+  "rationale": "7일 한정은 남았지만 캐시 선행조건이 빠져 무조건 검색 가능한 것으로 읽힌다.",
+  "acceptable_alternatives": [
+    "캐시가 있어야 검색 가능하다 등 필요조건을 유지한다. 7일 한정도 보존한다."
+  ],
+  "review_questions": [
+    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

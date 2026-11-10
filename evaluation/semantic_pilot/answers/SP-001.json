@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-001",
+  "input_path": "inputs/SP-001.json",
+  "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "PARAPHRASE"
+  ],
+  "findings": [
+    {
+      "error_type": "PARAPHRASE",
+      "severity": "none",
+      "reason": "한정 표현의 위치만 바꾸고 나머지 전체 문서는 유지했다. 실제 설치 동작은 평가하지 않는다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 3011,
+          "end": 3055,
+          "quote": "For this release, **PKG is the better fit**."
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3011,
+          "end": 3054,
+          "quote": "**PKG is the better fit for this release**."
+        }
+      ]
+    }
+  ],
+  "rationale": "한정 표현의 위치만 바꾸고 나머지 전체 문서는 유지했다. 실제 설치 동작은 평가하지 않는다.",
+  "acceptable_alternatives": [
+    "For this release를 문장 앞·뒤에 두는 표현을 모두 허용한다. 원문 그대로 유지해도 정상이다."
+  ],
+  "review_questions": [
+    "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}
