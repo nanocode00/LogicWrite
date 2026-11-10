@@ -35,7 +35,16 @@ ORGANIZATION_REPORT_VERSION = 'org-validation-report-v1'
 
 DISPOSITIONS = {'placed', 'omitted', 'blocked', 'flagged'}
 ACTIONS = {'KEEP', 'MOVE', 'REMOVE', 'FLAG', 'CONSOLIDATE'}
-DESTINATION_STATUSES = {'verified_context', 'unverified_role', 'unauthorized', 'nonexistent'}
+DESTINATION_STATUSES = {
+    'verified_context',
+    'unverified_role',
+    'unverified_context',
+    'corrupted_destination_snapshot',
+    'invalid_destination_version',
+    'missing_destination_content',
+    'unauthorized',
+    'nonexistent',
+}
 COMPATIBILITY_STATUSES = {
     'compatible',
     'conflicting_conditions',
@@ -43,6 +52,8 @@ COMPATIBILITY_STATUSES = {
     'conflicting_versions',
     'conflicting_platforms',
     'incompatible_scopes',
+    'distinct_claims',
+    'unverified_semantic_equivalence',
 }
 
 ORGANIZATION_GATE_CHECKS = (
@@ -81,6 +92,15 @@ def verify_self_digest(artifact, digest_field):
     body = {k: v for k, v in artifact.items() if k != digest_field}
     actual = canonical_json_digest(body)
     return claimed == actual, actual
+
+
+def normalize_statement(text):
+    """Normalize statement text for deterministic semantic equivalence check."""
+    if not isinstance(text, str):
+        return ''
+    text = re.sub(r'\s+', ' ', text.strip())
+    text = re.sub(r'[.\s]+$', '', text)
+    return text
 
 
 # ============================================================================
@@ -154,7 +174,10 @@ def make_organization_finding(
 # ============================================================================
 
 def evaluate_destination_scope(scope_entry, input_bundle, *, destination_snapshots=None):
-    """Evaluate destination scope for verified context vs unverified provisional role."""
+    """Evaluate destination scope for verified context vs unverified provisional role.
+
+    Independently inspects target snapshot identifier, content digest (sha256), and version.
+    """
     parsed = parse_output_scope_entry(scope_entry)
     if not parsed:
         return {
@@ -168,6 +191,8 @@ def evaluate_destination_scope(scope_entry, input_bundle, *, destination_snapsho
             'allows_confirmed_move': False,
             'prerequisites': 'Valid scope declaration in WritingContract.output_scopes',
             'notes': 'Invalid or unparseable scope entry',
+            'snapshot_meta': None,
+            'error': 'Invalid scope entry',
             'evidence': [],
         }
 
@@ -184,28 +209,64 @@ def evaluate_destination_scope(scope_entry, input_bundle, *, destination_snapsho
     if isinstance(input_bundle.get('source_material'), list):
         dest_snaps.extend(input_bundle['source_material'])
 
-    has_known_target_content = False
-    for sm in dest_snaps:
-        if isinstance(sm, dict) and sm.get('document_id') == doc_id and sm.get('content'):
-            has_known_target_content = True
-            break
+    target_snapshot_meta = None
+    target_snapshot_error = None
 
     if is_current_source:
         verification_status = 'verified_context'
         allows_confirmed_move = True
         notes = 'Primary source document scope with verified snapshot context.'
-    elif doc_id and has_known_target_content:
-        verification_status = 'verified_context'
-        allows_confirmed_move = True
-        notes = f'Verified external document context for destination {doc_id}.'
+        target_snapshot_meta = {
+            'snapshot_id': snap.get('snapshot_id'),
+            'sha256': snap.get('sha256'),
+            'version': snap.get('version'),
+        }
     elif doc_id:
-        verification_status = 'unverified_context'
-        allows_confirmed_move = False
-        notes = f'Concrete destination document {doc_id} declared, but target snapshot context is not loaded.'
+        matched_sm = None
+        for sm in dest_snaps:
+            if isinstance(sm, dict) and sm.get('document_id') == doc_id:
+                matched_sm = sm
+                break
+
+        if matched_sm is not None:
+            content = matched_sm.get('content')
+            claimed_sha = matched_sm.get('sha256')
+            version = matched_sm.get('version')
+
+            if not isinstance(content, str) or not content.strip():
+                verification_status = 'missing_destination_content'
+                allows_confirmed_move = False
+                notes = f'Destination snapshot for {doc_id} is empty or missing text content.'
+                target_snapshot_error = notes
+            elif not version or not str(version).strip():
+                verification_status = 'invalid_destination_version'
+                allows_confirmed_move = False
+                notes = f'Destination snapshot for {doc_id} lacks a valid non-empty version.'
+                target_snapshot_error = notes
+            else:
+                actual_sha = digest_text(content)
+                if claimed_sha != actual_sha:
+                    verification_status = 'corrupted_destination_snapshot'
+                    allows_confirmed_move = False
+                    notes = f'Destination snapshot digest mismatch for {doc_id} (claimed={claimed_sha}, actual={actual_sha}).'
+                    target_snapshot_error = notes
+                else:
+                    verification_status = 'verified_context'
+                    allows_confirmed_move = True
+                    notes = f'Verified external document context for destination {doc_id} (sha256={actual_sha}, version={version}).'
+                    target_snapshot_meta = {
+                        'snapshot_id': matched_sm.get('snapshot_id', f'snap-{doc_id}'),
+                        'sha256': actual_sha,
+                        'version': str(version),
+                    }
+        else:
+            verification_status = 'unverified_context'
+            allows_confirmed_move = False
+            notes = f'Concrete destination document {doc_id} declared, but target snapshot context is not loaded.'
     elif dest_role:
         verification_status = 'unverified_role'
         allows_confirmed_move = False
-        notes = f'Provisional destination role "{dest_role}". Cannot confirm completed MOVE without concrete document snapshot.'
+        notes = f'Provisional destination role "{dest_role}". Concrete document snapshot required before confirmed MOVE.'
     else:
         verification_status = 'unauthorized'
         allows_confirmed_move = False
@@ -222,6 +283,8 @@ def evaluate_destination_scope(scope_entry, input_bundle, *, destination_snapsho
         'allows_confirmed_move': allows_confirmed_move,
         'prerequisites': 'Requires verified concrete document context before publishing moves' if not allows_confirmed_move else 'None',
         'notes': notes,
+        'snapshot_meta': target_snapshot_meta,
+        'error': target_snapshot_error,
         'evidence': [{'scope_id': scope_id, 'document_id': doc_id, 'destination_role': dest_role}],
     }
 
@@ -261,11 +324,11 @@ def _extract_element_signatures(unit):
     }
 
 
-def check_consolidation_compatibility(unit_a, unit_b):
+def check_consolidation_compatibility(unit_a, unit_b, *, semantic_reviewer=None):
     """Determine whether two InformationUnits can be consolidated without semantic/condition loss.
 
     Strictly forbids consolidation when members carry differing conditions, quantities,
-    version identifiers, or platform scopes.
+    version identifiers, platform scopes, or when substantive claims are distinct.
     """
     sig_a = _extract_element_signatures(unit_a)
     sig_b = _extract_element_signatures(unit_b)
@@ -304,8 +367,6 @@ def check_consolidation_compatibility(unit_a, unit_b):
     conds_a = set(sig_a['conditions'])
     conds_b = set(sig_b['conditions'])
     if conds_a != conds_b and (conds_a or conds_b):
-        # If one unit has an explicit operational constraint/condition that the other does not express,
-        # consolidating them poses a severe risk of dropping the qualifier.
         return {
             'compatible': False,
             'status': 'conflicting_conditions',
@@ -313,7 +374,52 @@ def check_consolidation_compatibility(unit_a, unit_b):
             'conflicting_elements': list(conds_a ^ conds_b),
         }
 
-    # Merge elements preserving distinct element identities
+    # 5. Semantic equivalence check of the substantive claim statements
+    stmt_a = unit_a.get('statement', '')
+    stmt_b = unit_b.get('statement', '')
+    norm_a = normalize_statement(stmt_a)
+    norm_b = normalize_statement(stmt_b)
+
+    # Check element-level claim values
+    claims_a = {str(e.get('value', '')).strip() for e in unit_a.get('elements', []) if e.get('kind') == 'claim'}
+    claims_b = {str(e.get('value', '')).strip() for e in unit_b.get('elements', []) if e.get('kind') == 'claim'}
+
+    if semantic_reviewer is not None and callable(semantic_reviewer):
+        review_result = semantic_reviewer(unit_a, unit_b)
+        if not review_result.get('equivalent'):
+            return {
+                'compatible': False,
+                'status': review_result.get('status', 'unverified_semantic_equivalence'),
+                'reason': review_result.get('reason', 'Semantic reviewer did not certify equivalence of statements'),
+                'conflicting_elements': [],
+            }
+    else:
+        # Deterministic verification of semantic equivalence
+        exact_stmt_match = bool(norm_a and norm_a == norm_b)
+        exact_claims_match = bool(claims_a and claims_a == claims_b)
+        substantive_match = exact_stmt_match or (exact_claims_match and (norm_a in norm_b or norm_b in norm_a))
+
+        if not substantive_match:
+            words_a = set(norm_a.split())
+            words_b = set(norm_b.split())
+            jaccard = len(words_a & words_b) / max(len(words_a | words_b), 1)
+
+            if jaccard < 0.4 and not exact_claims_match:
+                return {
+                    'compatible': False,
+                    'status': 'distinct_claims',
+                    'reason': f"Units express distinct substantive claims ('{stmt_a}' vs '{stmt_b}')",
+                    'conflicting_elements': [],
+                }
+            else:
+                return {
+                    'compatible': False,
+                    'status': 'unverified_semantic_equivalence',
+                    'reason': f"Units have lexical similarity but semantic equivalence cannot be established deterministically without semantic review ('{stmt_a}' vs '{stmt_b}')",
+                    'conflicting_elements': [],
+                }
+
+    # Merge elements preserving distinct element identities and provenance
     merged_elements = list(unit_a.get('elements', []))
     existing_ids = {e.get('id') for e in merged_elements}
     existing_vals = {(e.get('kind'), str(e.get('value')).strip()) for e in merged_elements}
@@ -328,7 +434,7 @@ def check_consolidation_compatibility(unit_a, unit_b):
     return {
         'compatible': True,
         'status': 'compatible',
-        'reason': 'Units express equivalent information with compatible conditions, quantities, and versions.',
+        'reason': 'Units express equivalent information with verified semantic equivalence and compatible conditions, quantities, and versions.',
         'merged_elements': merged_elements,
     }
 
@@ -525,18 +631,29 @@ def generate_organization_plan(
 
         primary_uid = cand_uids[0]
         group_id = cand.get('id') or f'cg-{idx + 1:03d}'
+        member_contribs = [
+            {
+                'unit_id': u['id'],
+                'statement': u.get('statement', ''),
+                'origin_block_ids': u.get('origin_block_ids', []),
+                'source_spans': u.get('source_spans', []),
+                'quotes': u.get('quotes', []),
+                'contributed_element_ids': [e['id'] for e in u.get('elements', [])],
+                'contributed_elements': [dict(e) for e in u.get('elements', [])],
+                'is_protected': u['id'] in protected_unit_ids,
+                'bound_requirement_ids': bound_requirements_by_unit.get(u['id'], []),
+            }
+            for u in member_units
+        ]
+
         if not compat_result['compatible']:
-            # Blocked consolidation: preserve as blocked candidate, do NOT merge
             cg_entry = {
                 'id': group_id,
                 'member_unit_ids': cand_uids,
                 'equivalence_basis': cand.get('equivalence_basis', 'Proposed duplicate consolidation'),
                 'compatibility_status': compat_result['status'],
                 'retained_elements': [e['id'] for e in member_units[0].get('elements', [])],
-                'member_contributions': [
-                    {'unit_id': u['id'], 'contributed_element_ids': [e['id'] for e in u.get('elements', [])]}
-                    for u in member_units
-                ],
+                'member_contributions': member_contribs,
                 'target': {'scope_id': primary_source_scope, 'primary_unit_id': primary_uid},
                 'rationale': {
                     'reason': compat_result['reason'],
@@ -555,7 +672,6 @@ def generate_organization_plan(
                 blocking=False,
             ))
         else:
-            # Compatible consolidation
             all_retained_elements = compat_result.get('merged_elements', member_units[0].get('elements', []))
             cg_entry = {
                 'id': group_id,
@@ -563,10 +679,7 @@ def generate_organization_plan(
                 'equivalence_basis': cand.get('equivalence_basis', 'Verified semantic redundancy with compatible elements'),
                 'compatibility_status': 'compatible',
                 'retained_elements': [e['id'] for e in all_retained_elements],
-                'member_contributions': [
-                    {'unit_id': u['id'], 'contributed_element_ids': [e['id'] for e in u.get('elements', [])]}
-                    for u in member_units
-                ],
+                'member_contributions': member_contribs,
                 'target': {'scope_id': primary_source_scope, 'primary_unit_id': primary_uid},
                 'rationale': {
                     'reason': 'Consolidated semantically redundant units while preserving all constituent elements and conditions.',
@@ -642,7 +755,6 @@ def generate_organization_plan(
         # Handling Omission / Removal Request
         if action_desire == 'REMOVE' or preservation == 'omit_candidate':
             if is_protected:
-                # OMISSION BLOCKED!
                 findings.append(make_organization_finding(
                     'MANDATORY_INFORMATION_PRESERVATION_VIOLATION',
                     'ERROR',
@@ -717,7 +829,6 @@ def generate_organization_plan(
             dest_review = declared_scopes_by_id.get(target_scope_id)
 
             if not dest_review:
-                # Target scope is NOT declared in WritingContract.output_scopes!
                 findings.append(make_organization_finding(
                     'UNAUTHORIZED_DESTINATION_SCOPE',
                     'ERROR',
@@ -751,9 +862,7 @@ def generate_organization_plan(
                 })
                 continue
 
-            # Target scope is declared, check if verified vs role-only
             if not dest_review['allows_confirmed_move']:
-                # Unverified context or destination_role provisional target
                 findings.append(make_organization_finding(
                     'UNVERIFIED_DESTINATION_CONTEXT',
                     'WARNING',
@@ -809,6 +918,7 @@ def generate_organization_plan(
                 continue
 
             # Verified concrete destination scope
+            snap_meta = dest_review.get('snapshot_meta') or {}
             placements.append({
                 'id': f'plc-{uid}',
                 'unit_id': uid,
@@ -848,7 +958,7 @@ def generate_organization_plan(
                 'document_id': dest_review.get('document_id'),
                 'role': 'destination',
                 'status': 'candidate_destination',
-                'snapshot_sha256': None,
+                'snapshot_sha256': snap_meta.get('sha256'),
                 'unit_count': 0,
             })['unit_count'] += 1
             continue
@@ -952,21 +1062,50 @@ def validate_organization_plan(
     plan,
     *,
     validation_report=None,
+    destination_snapshots=None,
+    semantic_reviewer=None,
 ):
     """Independently validate an OrganizationPlan against deterministic invariants.
 
     Checks:
-    1. Input and analysis artifact binding integrity
+    1. Input and analysis artifact binding integrity (P2 digest re-verification)
     2. Complete coverage and tracking of all InformationUnits
     3. Mandatory information and protected condition preservation
     4. Strict confinement to declared output scopes
-    5. Destination review and MOVE proposal integrity
-    6. Semantic consolidation fidelity without condition/quantity loss
-    7. Anti-forgery defenses against unauthenticated self-approval claims
+    5. Independent MOVE destination verification (P1 concrete snapshot checks)
+    6. Semantic consolidation fidelity without condition/quantity loss (P1 semantic equivalence)
+    7. Anti-forgery defenses against unauthenticated self-approval claims (P1 upstream gate verification)
     """
     diagnostics = []
     check_results = []
     blocking_violations = []
+    review_reasons = []
+
+    # 0. Check upstream validation report through pipeline.can_advance_to_organization
+    upstream_decision = None
+    upstream_gate_state = 'REVIEW'
+    upstream_allowed = False
+    forged_upstream_approval = False
+
+    if validation_report is None:
+        upstream_gate_state = 'REVIEW'
+        upstream_allowed = False
+        review_reasons.append('UPSTREAM_GATE_REPORT_NOT_PROVIDED: No upstream ValidationReport supplied; awaiting gate review')
+    else:
+        try:
+            upstream_decision = pipeline.can_advance_to_organization(input_bundle, analysis_result, validation_report)
+            upstream_gate_state = upstream_decision.get('gate_state', 'REVIEW')
+            upstream_allowed = bool(upstream_decision.get('allowed', False))
+
+            if validation_report.get('gate_state') == 'PASS' and not upstream_allowed:
+                forged_upstream_approval = True
+                blocking_violations.append(
+                    f"FORGED_UPSTREAM_GATE_APPROVAL: Supplied ValidationReport claims PASS, but independent gate check returned {upstream_gate_state} ({upstream_decision.get('reason')})"
+                )
+        except Exception as e:
+            upstream_gate_state = 'FAIL'
+            upstream_allowed = False
+            blocking_violations.append(f'UPSTREAM_GATE_VERIFICATION_ERROR: {str(e)}')
 
     # 1. ORGANIZATION_INPUT_INTEGRITY
     input_ok = True
@@ -982,19 +1121,52 @@ def validate_organization_plan(
             input_ok = False
             input_reasons.append(f'PLAN_DIGEST_CORRUPTED: claimed {plan.get("plan_sha256")} != actual {actual_plan_sha}')
 
-        # Check analysis_ref binding
-        analysis_ref = plan.get('analysis_ref', {})
-        if analysis_ref.get('analysis_sha256') != analysis_result.get('analysis_sha256'):
+        # P2: Independently recalculate AnalysisResult body digest
+        ok_analysis_self, actual_analysis_sha = verify_self_digest(analysis_result, 'analysis_sha256')
+        if not ok_analysis_self or analysis_result.get('analysis_sha256') != actual_analysis_sha:
             input_ok = False
-            input_reasons.append('STALE_ANALYSIS_PLAN_INVALIDATED: plan.analysis_ref does not match current analysis_sha256')
+            input_reasons.append(
+                f'ANALYSIS_DIGEST_CORRUPTED: analysis_result body modified without recomputing analysis_sha256 '
+                f'(claimed={analysis_result.get("analysis_sha256")}, actual={actual_analysis_sha})'
+            )
 
+        # DocumentSnapshot integrity & binding
         snap = input_bundle.get('document_snapshot', {})
+        if not isinstance(snap, dict) or not snap.get('content') or not snap.get('sha256'):
+            input_ok = False
+            input_reasons.append('INVALID_SNAPSHOT: missing snapshot content or sha256')
+        else:
+            actual_snap_sha = digest_text(snap['content'])
+            if snap['sha256'] != actual_snap_sha:
+                input_ok = False
+                input_reasons.append(f'SNAPSHOT_DIGEST_CORRUPTED: claimed {snap["sha256"]} != actual {actual_snap_sha}')
+
+            if analysis_result.get('snapshot_sha256') != snap.get('sha256'):
+                input_ok = False
+                input_reasons.append('STALE_SNAPSHOT_BINDING: analysis_result.snapshot_sha256 does not match input_bundle DocumentSnapshot')
+
+        # WritingContract integrity & binding
+        contract = input_bundle.get('writing_contract', {})
+        if not isinstance(contract, dict):
+            input_ok = False
+            input_reasons.append('INVALID_WRITING_CONTRACT: writing_contract must be an object')
+        else:
+            expected_contract_sha = canonical_json_digest(contract)
+            if analysis_result.get('contract_sha256') != expected_contract_sha:
+                input_ok = False
+                input_reasons.append('STALE_CONTRACT_BINDING: analysis_result.contract_sha256 does not match writing_contract')
+
+        # Check plan analysis_ref binding against verified actual values
+        analysis_ref = plan.get('analysis_ref', {})
+        if analysis_ref.get('analysis_sha256') != actual_analysis_sha:
+            input_ok = False
+            input_reasons.append('STALE_ANALYSIS_PLAN_INVALIDATED: plan.analysis_ref does not match actual analysis_sha256')
+
         if analysis_ref.get('snapshot_sha256') != snap.get('sha256'):
             input_ok = False
             input_reasons.append('STALE_SNAPSHOT_BINDING: plan.analysis_ref snapshot_sha256 does not match input_bundle')
 
-        contract = input_bundle.get('writing_contract', {})
-        if analysis_ref.get('contract_sha256') != canonical_json_digest(contract):
+        if analysis_ref.get('contract_sha256') != expected_contract_sha:
             input_ok = False
             input_reasons.append('STALE_CONTRACT_BINDING: plan.analysis_ref contract_sha256 does not match writing_contract')
 
@@ -1056,6 +1228,8 @@ def validate_organization_plan(
             for uid in binding.get('unit_ids', []):
                 plc = placements_by_uid.get(uid)
                 if not plc:
+                    mandatory_ok = False
+                    mandatory_reasons.append(f'REQUIRED_INFORMATION_MISSING: Unit {uid} bound to {req_id} is missing from placements')
                     continue
                 if plc.get('disposition') == 'omitted' or plc.get('action') == 'REMOVE':
                     mandatory_ok = False
@@ -1065,7 +1239,7 @@ def validate_organization_plan(
             for link in binding.get('verified_condition_links', []):
                 cond_uid = link.get('condition_unit_id')
                 cond_plc = placements_by_uid.get(cond_uid)
-                if cond_plc and (cond_plc.get('disposition') == 'omitted' or cond_plc.get('action') == 'REMOVE'):
+                if not cond_plc or cond_plc.get('disposition') == 'omitted' or cond_plc.get('action') == 'REMOVE':
                     mandatory_ok = False
                     mandatory_reasons.append(f'REQUIRED_CONDITION_DROPPED: Condition unit {cond_uid} qualifying {req_id} marked as omitted/removed')
 
@@ -1109,34 +1283,70 @@ def validate_organization_plan(
     if not scopes_ok:
         blocking_violations.extend(scopes_reasons)
 
-    # 5. DESTINATION_REVIEW_INTEGRITY
+    # 5. DESTINATION_REVIEW_INTEGRITY (P1 Independent Destination Verification)
     dest_ok = True
     dest_reasons = []
-    dest_reviews = plan.get('destination_reviews', []) if isinstance(plan, dict) else []
-    dest_reviews_by_scope = {r.get('scope_id'): r for r in dest_reviews if isinstance(r, dict)}
+
+    # Independently re-evaluate all declared destination scopes
+    independent_dest_reviews = {}
+    for sc in declared_scopes:
+        rev = evaluate_destination_scope(sc, input_bundle, destination_snapshots=destination_snapshots)
+        independent_dest_reviews[rev['scope_id']] = rev
+
+    # Catch forged allows_confirmed_move in plan's destination_reviews
+    plan_dest_reviews = plan.get('destination_reviews', []) if isinstance(plan, dict) else []
+    for p_rev in plan_dest_reviews:
+        if not isinstance(p_rev, dict):
+            continue
+        sc_id = p_rev.get('scope_id')
+        ind_rev = independent_dest_reviews.get(sc_id)
+        if not ind_rev:
+            dest_ok = False
+            dest_reasons.append(f'UNAUTHORIZED_DESTINATION_REVIEW: Scope "{sc_id}" in destination_reviews is not declared in WritingContract')
+        elif p_rev.get('allows_confirmed_move') and not ind_rev.get('allows_confirmed_move'):
+            dest_ok = False
+            dest_reasons.append(
+                f'FORGED_DESTINATION_REVIEW_APPROVAL: Plan claims allows_confirmed_move=True for "{sc_id}", but independent verification is {ind_rev.get("verification_status")}'
+            )
 
     for plc in placements:
         if not isinstance(plc, dict):
             continue
-        if plc.get('action') == 'MOVE' and plc.get('disposition') == 'placed':
-            for tgt in plc.get('targets', []):
-                t_scope = tgt.get('scope_id')
-                rev = dest_reviews_by_scope.get(t_scope)
-                if not rev or not rev.get('allows_confirmed_move'):
-                    dest_ok = False
-                    dest_reasons.append(
-                        f'UNVERIFIED_DESTINATION_CONFIRMED_MOVE: Unit {plc.get("unit_id")} confirmed placed into unverified or role-only destination "{t_scope}"'
+        action = plc.get('action')
+        disposition = plc.get('disposition')
+        targets = plc.get('targets', [])
+
+        for tgt in targets:
+            tgt_scope = tgt.get('scope_id')
+            ind_rev = independent_dest_reviews.get(tgt_scope)
+
+            if not ind_rev:
+                dest_ok = False
+                dest_reasons.append(f'UNAUTHORIZED_DESTINATION_SCOPE: Target references undeclared scope "{tgt_scope}"')
+                continue
+
+            if action == 'MOVE':
+                if disposition == 'placed':
+                    if not ind_rev.get('allows_confirmed_move'):
+                        dest_ok = False
+                        status_reason = ind_rev.get('error') or ind_rev.get('verification_status')
+                        dest_reasons.append(
+                            f'UNVERIFIED_DESTINATION_CONFIRMED_MOVE: Unit {plc.get("unit_id")} confirmed placed into destination "{tgt_scope}" ({ind_rev.get("verification_status")}: {status_reason})'
+                        )
+                elif disposition in {'blocked', 'flagged'}:
+                    review_reasons.append(
+                        f'UNVERIFIED_MOVE_PROPOSAL: Unit {plc.get("unit_id")} proposed for MOVE to provisional destination "{tgt_scope}" ({ind_rev.get("verification_status")})'
                     )
 
     check_results.append({
         'check_id': 'DESTINATION_REVIEW_INTEGRITY',
         'status': 'passed' if dest_ok else 'violated',
-        'reason': '; '.join(dest_reasons) if not dest_ok else 'All MOVE candidates adhere to destination verification bounds',
+        'reason': '; '.join(dest_reasons) if not dest_ok else 'All MOVE candidates adhere to independently verified destination bounds',
     })
     if not dest_ok:
         blocking_violations.extend(dest_reasons)
 
-    # 6. CONSOLIDATION_FIDELITY
+    # 6. CONSOLIDATION_FIDELITY (P1 Semantic Equivalence Verification)
     cons_ok = True
     cons_reasons = []
     units_by_id = {u['id']: u for u in raw_units if isinstance(u, dict) and u.get('id')}
@@ -1149,52 +1359,57 @@ def validate_organization_plan(
         is_blocked = grp.get('blocked', False)
         status = grp.get('compatibility_status')
 
-        # Check member units exist
         m_units = [units_by_id[uid] for uid in m_uids if uid in units_by_id]
         if len(m_units) != len(m_uids):
             cons_ok = False
             cons_reasons.append(f'CONSOLIDATION_UNKNOWN_MEMBER: Group {grp.get("id")} contains nonexistent units')
             continue
 
-        # Re-check compatibility independently
         for i in range(len(m_units)):
             for j in range(i + 1, len(m_units)):
-                compat = check_consolidation_compatibility(m_units[i], m_units[j])
+                compat = check_consolidation_compatibility(m_units[i], m_units[j], semantic_reviewer=semantic_reviewer)
                 if not compat['compatible']:
                     if not is_blocked or status == 'compatible':
                         cons_ok = False
                         cons_reasons.append(
-                            f'INCOMPATIBLE_CONSOLIDATION_CANDIDATE: Group {grp.get("id")} merged incompatible units ({compat["reason"]})'
+                            f'INCOMPATIBLE_CONSOLIDATION_CANDIDATE: Group {grp.get("id")} merged units without verified semantic equivalence ({compat["reason"]})'
                         )
                         break
+                    elif compat.get('status') == 'unverified_semantic_equivalence':
+                        review_reasons.append(
+                            f'UNVERIFIED_SEMANTIC_EQUIVALENCE: Group {grp.get("id")} held for human/model review ({compat["reason"]})'
+                        )
             if not cons_ok:
                 break
 
     check_results.append({
         'check_id': 'CONSOLIDATION_FIDELITY',
         'status': 'passed' if cons_ok else 'violated',
-        'reason': '; '.join(cons_reasons) if not cons_ok else 'Consolidation candidates preserve all conditions, quantities, and versions',
+        'reason': '; '.join(cons_reasons) if not cons_ok else 'Consolidation candidates preserve all conditions, quantities, versions, and semantic equivalence',
     })
     if not cons_ok:
         blocking_violations.extend(cons_reasons)
 
-    # 7. ANTI_FORGERY_AND_APPROVAL_BOUNDS
+    # 7. ANTI_FORGERY_AND_APPROVAL_BOUNDS (P1 Gate Approval Defense)
     sec_ok = True
     sec_reasons = []
     meta = plan.get('meta', {}) if isinstance(plan, dict) else {}
 
     # Reject model or plan claiming execution authorization on its own
     if meta.get('delivery_approved') is True or meta.get('stage_transition_allowed') is True:
-        # Only allowed if validation_report is supplied and independently PASS
-        if not validation_report or validation_report.get('gate_state') != 'PASS' or not validation_report.get('delivery_approved'):
+        if not upstream_allowed:
             sec_ok = False
-            sec_reasons.append('UNAUTHORIZED_ORGANIZATION_APPROVAL_CLAIM: Plan claims delivery_approved or stage_transition_allowed without valid Validation Gate approval')
+            sec_reasons.append('UNAUTHORIZED_ORGANIZATION_APPROVAL_CLAIM: Plan claims delivery_approved or stage_transition_allowed without valid independent Validation Gate approval')
 
-    # If Validation Gate is REVIEW, plan MUST be preview_only
-    if validation_report and validation_report.get('gate_state') == 'REVIEW':
-        if not meta.get('preview_only'):
-            sec_ok = False
-            sec_reasons.append('UNAUTHORIZED_STAGE_EXECUTION: Validation Gate is REVIEW; OrganizationPlan must be marked preview_only=True')
+    # If plan is preview_only, it must never claim stage_transition_allowed
+    if meta.get('preview_only') and (meta.get('delivery_approved') or meta.get('stage_transition_allowed')):
+        sec_ok = False
+        sec_reasons.append('PREVIEW_PLAN_CANNOT_CLAIM_STAGE_APPROVAL: Preview plans cannot claim delivery_approved or stage_transition_allowed')
+
+    # Reject forged upstream report
+    if forged_upstream_approval:
+        sec_ok = False
+        sec_reasons.append('FORGED_UPSTREAM_GATE_APPROVAL: Upstream ValidationReport claimed PASS but independent gate check failed')
 
     check_results.append({
         'check_id': 'ANTI_FORGERY_AND_APPROVAL_BOUNDS',
@@ -1204,34 +1419,56 @@ def validate_organization_plan(
     if not sec_ok:
         blocking_violations.extend(sec_reasons)
 
-    # Determine overall organization gate state
+    # 8. Reflect all blocking and review findings (P1 Finding Reflection)
+    plan_findings = plan.get('findings', []) if isinstance(plan, dict) else []
+    for f in plan_findings:
+        if not isinstance(f, dict):
+            continue
+        rule_id = f.get('rule_id', 'UNKNOWN_RULE')
+        msg = f.get('message', '')
+        if f.get('blocking') is True or f.get('severity') == 'ERROR':
+            blocking_violations.append(f'REPORTED_BLOCKING_FINDING: {rule_id}: {msg}')
+        elif f.get('action') in {'REVIEW', 'FLAG'} or f.get('severity') == 'WARNING':
+            review_reasons.append(f'REPORTED_REVIEW_FINDING: {rule_id}: {msg}')
+
+    # Overall organization gate state calculation
     all_passed = all(r['status'] == 'passed' for r in check_results)
-    any_violated = any(r['status'] == 'violated' for r in check_results)
+    any_violated = any(r['status'] == 'violated' for r in check_results) or bool(blocking_violations)
+    is_preview = bool(meta.get('preview_only') or meta.get('execution_mode') == 'preview')
 
     if any_violated:
         org_gate_state = 'FAIL'
-    elif validation_report and validation_report.get('gate_state') == 'REVIEW':
-        # Upstream gate is in REVIEW, organization outcome remains in REVIEW
+    elif upstream_gate_state in {'FAIL', 'STOPPED'}:
+        org_gate_state = upstream_gate_state
+    elif upstream_gate_state == 'REVIEW' or validation_report is None:
         org_gate_state = 'REVIEW'
-    elif not all_passed:
+    elif is_preview or bool(review_reasons) or not all_passed:
         org_gate_state = 'REVIEW'
-    else:
+    elif upstream_allowed and all_passed and not is_preview:
         org_gate_state = 'PASS'
+    else:
+        org_gate_state = 'REVIEW'
 
     diagnostics.extend(blocking_violations)
+
+    is_valid = (org_gate_state != 'FAIL')
+    delivery_approved = (org_gate_state == 'PASS' and not is_preview and upstream_allowed)
+    next_stage_allowed = (org_gate_state == 'PASS' and not is_preview and upstream_allowed)
 
     report = {
         'version': ORGANIZATION_REPORT_VERSION,
         'producer': ORGANIZATION_VERSION,
         'gate_state': org_gate_state,
-        'is_valid': (org_gate_state != 'FAIL'),
-        'delivery_approved': (org_gate_state == 'PASS' and not meta.get('preview_only')),
-        'next_stage_allowed': (org_gate_state == 'PASS' and not meta.get('preview_only')),
+        'is_valid': is_valid,
+        'delivery_approved': delivery_approved,
+        'next_stage_allowed': next_stage_allowed,
+        'upstream_gate_state': upstream_gate_state,
+        'upstream_approved': upstream_allowed,
         'plan_sha256': plan.get('plan_sha256') if isinstance(plan, dict) else None,
         'analysis_sha256': analysis_result.get('analysis_sha256') if isinstance(analysis_result, dict) else None,
         'check_results': check_results,
         'diagnostics': diagnostics,
-        'findings': plan.get('findings', []) if isinstance(plan, dict) else [],
+        'findings': plan_findings,
     }
 
     report['report_sha256'] = canonical_json_digest(report)
@@ -1249,6 +1486,8 @@ def create_organization_plan_preview(
     validation_report=None,
     candidate_actions=None,
     consolidation_candidates=None,
+    destination_snapshots=None,
+    semantic_reviewer=None,
 ):
     """Generate an isolated, safe candidate plan preview.
 
@@ -1260,6 +1499,7 @@ def create_organization_plan_preview(
         analysis_result,
         candidate_actions=candidate_actions,
         consolidation_candidates=consolidation_candidates,
+        destination_snapshots=destination_snapshots,
         execution_mode='preview',
         validation_report=validation_report,
     )
@@ -1268,6 +1508,8 @@ def create_organization_plan_preview(
         analysis_result,
         plan,
         validation_report=validation_report,
+        destination_snapshots=destination_snapshots,
+        semantic_reviewer=semantic_reviewer,
     )
     return {
         'plan': plan,

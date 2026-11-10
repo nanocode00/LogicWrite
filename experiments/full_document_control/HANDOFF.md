@@ -73,51 +73,65 @@
    - 의미 검증기 종합 테스트: 총 36개 테스트 통과 (`test_semantic_validator.py`, P1 반례 테스트 9건 추가).
    - 전체 회귀 테스트 통과: 총 144개 테스트 100% 통과 (`full_document_control` 69개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
 
-## 6. Information Organization(정보 재구성) 모듈 구현 완료
+## 6. Information Organization(정보 재구성) 모듈 구현 및 P1/P2 후속 보완 완료
 
-- **브랜치:** `prototype/information-organization` (기준: `main` `0ed1577`)
+- **브랜치:** `prototype/information-organization` (기준: `main` `0ed1577`, PR #13)
 - **디렉터리:** `experiments/full_document_control/`
-- **현재 단계:** `OrganizationPlan` 생성기, 7대 결정론적 검증 불변조건을 갖춘 독립 계획 검증기(`validate_organization_plan`), Validation Gate와의 Plan Preview 및 Authorized Execution 분리 연동, 종합 테스트 11건 및 기존 회귀 144건 호환성 유지(총 155개 테스트 100% 통과).
+- **현재 단계:** `OrganizationPlan` 생성기, 7대 결정론적 검증 불변조건을 갖춘 독립 계획 검증기(`validate_organization_plan`), P1 4건(상위 게이트 우회 방지, 차단성 findings 반영, MOVE 목적지 독립 검증, 중복 통합 의미 동등성 보장) 및 P2 1건(`AnalysisResult` 무결성 재검증) 보완 완료. 종합 테스트 14건 및 기존 회귀 144건 호환성 유지(총 158개 테스트 100% 통과).
 
-### 주요 구현 내용
+### 주요 구현 및 P1/P2 보완 내용
 
-1. **독립 정보 재구성 모듈 (`experiments/full_document_control/organization.py`):**
-   - **OrganizationPlan 구조화 생성 (`generate_organization_plan`):**
-     - `analysis_ref`: 입력 `AnalysisResult`에 대한 바인딩 해시(`analysis_sha256`, `snapshot_sha256`, `contract_sha256`) 및 스냅샷/계약 ID 추적.
-     - `placements`: 모든 정보 단위(InformationUnit)에 대해 논리 섹션(`section_path`), 상대 순서(`relative_order`), 조건 인접성(`anchor_relative_position`, `anchor_unit_id`), 계약 보호 의무(`contract_protection`), 처리 방식(`disposition`: `placed`/`omitted`/`blocked`/`flagged`, `action`: `KEEP`/`MOVE`/`REMOVE`/`FLAG`/`CONSOLIDATE`)을 추적.
-     - `consolidation_groups`: 의미적 중복 정보에 대한 통합 후보. 수치, 버전, 플랫폼 대상, 조건의 차이가 있는 경우 통합을 원천 차단(`blocked: True`, `INCOMPATIBLE_CONSOLIDATION_CANDIDATE`).
-     - `destination_reviews`: 계약상 선언된 `output_scopes`에 대해 실제 문서 스냅샷이 로드된 검증된 문맥(`verified_context`)과 잠정적 역할(`destination_role`)을 구분.
-     - `affected_documents`: 원본 및 목적지 전체 문서 범위와 변경 대상 스냅샷 다이제스트 집합 추적.
-     - `findings`: 검증 결함, 차단 사유, 사람 검토 필요 항목(`PLAN_PREVIEW_ONLY`, `UNVERIFIED_DESTINATION_CONTEXT` 등)의 구조화된 기록.
-   - **정보 재배치 세부 규칙:**
-     1. **문서 내부 배치:** 제목/개요, 설치/환경, 운영 제약/주의사항 등의 논리 섹션으로 분류하고, 주장을 한정하는 조건 단위는 해당 주장 바로 앞 또는 인접(`anchor_relative_position: before|within`)에 배치.
-     2. **중복 통합 및 불변조건 보존:** 단순 문자열 유사도에 의존하지 않고, 단위 내 `elements`의 수치, 버전, 조건, 플랫폼 대상을 엄격히 비교. 상이한 수치(30초 vs 60초), 상이한 버전/패키지(Linux vs macOS), 한정 조건 유무의 차이가 있는 경우 통합 후보를 차단(`blocked: True`)하고 개별 배치로 보존.
-     3. **문서 간 MOVE:** 계약의 `output_scopes`에 선언되고 스냅샷 문맥이 검증된 대상 문서로만 이동 후보 생성. 미선언 목적지는 즉시 `UNAUTHORIZED_DESTINATION_SCOPE` 차단. 실존 스냅샷이 없는 잠정 역할(`destination_role`)은 확정 이동을 불허하고 제안/검토 보류(`UNVERIFIED_DESTINATION_CONTEXT`)로 유지.
-     4. **필수 정보 보존:** 계약상 `required_information`에 바인딩된 단위 및 이를 한정하는 조건 단위는 삭제(`omitted`/`REMOVE`) 시도를 원천 차단하고 `MANDATORY_INFORMATION_PRESERVATION_VIOLATION`으로 보존 강제.
-     5. **미확정 결과 보류:** 목적지 문맥이나 보존 근거가 부족하면 `FLAG`/`REVIEW`로 남겨 무단 확정을 차단.
+1. **상위 게이트 승인 우회 방지 (P1-1):**
+   - 상위 검증 보고서 부재(`validation_report=None`) 시 계획 자체 검사가 통과하더라도 최종 상태를 `PASS`로 승격하지 않고 안전하게 `REVIEW`를 유지하도록 보장.
+   - 외부에서 전달한 문자열 `gate_state='PASS'`를 신뢰하지 않고, 기존 `pipeline.can_advance_to_organization()`을 통해 실행 기록 및 검증 보고서의 진위를 독립 재검증. 조작된 보고서는 `FORGED_UPSTREAM_GATE_APPROVAL`(`FAIL`)로 즉시 차단.
+   - Plan Preview(`preview_only: True`)는 상위 상태와 무관하게 `delivery_approved: False`, `next_stage_allowed: False`로 강제.
 
-2. **독립 결정론적 계획 검증기 (`validate_organization_plan`):**
-   - 7대 핵심 검사:
-     1. `ORGANIZATION_INPUT_INTEGRITY`: `analysis_ref` 다이제스트 일치 및 계획 자체 SHA-256 무결성 검증. 분석 결과 변경 시 `STALE_ANALYSIS_PLAN_INVALIDATED`로 재사용 거부.
-     2. `ALL_UNITS_TRACKED`: 입력 단위 전수 추적. 일부 단위 누락(`UNIT_OMITTED_FROM_ORGANIZATION_PLAN`) 또는 중복 배치(`DUPLICATE_UNIT_PLACEMENT`) 탐지.
-     3. `MANDATORY_INFORMATION_PRESERVED`: 계약 필수 정보 및 연결 조건의 누락(`REQUIRED_INFORMATION_DROPPED`) 차단.
-     4. `ALLOWED_OUTPUT_SCOPES`: 계약상 선언되지 않은 임의 목적지 참조(`UNAUTHORIZED_DESTINATION_SCOPE`) 차단.
-     5. `DESTINATION_REVIEW_INTEGRITY`: 미검증 문맥 또는 잠정 역할로의 무단 확정 배치(`UNVERIFIED_DESTINATION_CONFIRMED_MOVE`) 차단.
-     6. `CONSOLIDATION_FIDELITY`: 불일치 조건/수치/버전의 부당 통합(`INCOMPATIBLE_CONSOLIDATION_CANDIDATE`) 차단.
-     7. `ANTI_FORGERY_AND_APPROVAL_BOUNDS`: 게이트 승인 없는 자가 승인 주장(`UNAUTHORIZED_ORGANIZATION_APPROVAL_CLAIM`) 차단.
+2. **차단성 Findings 반영 및 독립 불변조건 재검증 (P1-2):**
+   - 계획 내 `blocking=True` 또는 `severity='ERROR'`인 finding이 존재하면 7개 검사와 무관하게 최종 검증 상태를 `FAIL`로 처리.
+   - 호출자가 `plan['findings']`를 비우거나 `blocking=False`로 조작하더라도, 검증기 내부에서 원본 입력과 배치를 직접 재평가하여 필수 정보 누락, 미선언 이동 등을 독립적으로 탐지·차단.
+   - 미확정 목적지나 근거 부족 등 미해결 항목은 `REVIEW` 상태로 안전하게 보류.
 
-3. **Validation Gate 연동 및 실행 경계 분리:**
-   - **Plan Preview:** 미승인(또는 `REVIEW` 상태인) 분석 결과에 대해서도 격리된 후보 계획을 생성할 수 있으나, `preview_only: True`, `delivery_approved: False`, `stage_transition_allowed: False`를 명시하며 후속 단계 진입으로 위장하지 않음 (`create_organization_plan_preview`).
-   - **Authorized Execution:** 실제 단계 전환은 기존 `OrganizationBoundaryAdapter` 및 `can_advance_to_organization`을 통과한 경우에만 허용. 현재 정책상 게이트가 `REVIEW`를 유지하므로, 실제 단계 전환 시도는 안전하게 `StageTransitionBlockedError`를 발생시키고 차단 기록(`blocked_attempts`)을 남김 (`execute_authorized_organization`).
+3. **MOVE 목적지 독립 검증 (P1-3):**
+   - 계획 내부의 `destination_reviews.allows_confirmed_move` 플래그를 신뢰하지 않고, 원본 Writing Contract의 `output_scopes` 및 제공된 목적지 스냅샷을 독립 재검증.
+   - 목적지 스냅샷의 `document_id`, 내용 텍스트, `sha256` 해시(`digest_text`), `version`을 직접 대조하여 불일치 시 `corrupted_destination_snapshot` 또는 `invalid_destination_version`(`FAIL`)으로 차단.
+   - 실존 스냅샷이 없는 잠정 역할(`destination_role`)은 확정 배치(`disposition: placed`)를 불허하고 제안(`disposition: blocked`, `REVIEW`)으로만 보류.
+   - 소스 문서의 한정 조건이 목적지로 이동된 주장과 분리되어 유실되는 현상(`MOVE_SEVERS_REQUIRED_CONDITION`) 차단.
 
-4. **설계 문서와 실제 코드 구현 간의 차이 기록:**
-   - `AnalysisResult` 구조: 설계 문서(`docs/data-model-and-interfaces.md`)에서는 최상위 `assessments` 배열을 제안했으나, 실제 구현(`pipeline.py`)에서는 각 단위 내부(`unit['assessment']`)에 평가가 직접 포함되어 있음. 본 모듈은 실제 구현 스키마를 준수함.
-   - `output_scopes` 표현: 설계 문서에서는 `{scope_id, kind, target: {document_id | destination_role}}` 중첩 구조를 제안했으나, 기존 프로토타입(`pipeline.py`, `sample_input.json`)에서는 `{scope_id, document_id}` 평면 구조를 요구하고 1개 범위로 제한했음. 본 모듈은 두 형식을 모두 정규화하여 지원(`parse_output_scope_entry`)하고 다중 범위 및 잠정 역할을 안전하게 처리함.
-   - 게이트 통과 정책: `SemanticFidelityValidator`에서 모든 항목이 `supported` 판정을 받더라도 현재 정책상 `REVIEW`(`SEMANTIC_SUPPORTED_AWAITING_APPROVAL`)로 보류되므로, Organization 진입 경계는 승인을 강제하거나 완화하지 않고 안전하게 차단/프리뷰 경로로 분리함.
+4. **중복 통합의 의미 동등성 보장 (P1-4):**
+   - 단순 수치·버전·조건·플랫폼 불충돌만으로 통합을 확정하던 경로를 전면 개편.
+   - 원문 statement 정규화 및 주장 요소(claim elements)를 기준으로 의미 동등성을 독립 검토.
+   - 결정론적으로 의미 동등성이 증명되지 않는 상이한 주장은 `distinct_claims`로 분류하여 통합을 차단(`blocked: True`, `INCOMPATIBLE_CONSOLIDATION_CANDIDATE`).
+   - 어휘적 유사성이 있으나 결정론적으로 동등성을 단정할 수 없는 후보는 `unverified_semantic_equivalence`(`REVIEW`)로 보류.
+   - 향후 LLM 의미 검토기를 플러그인할 수 있도록 `semantic_reviewer` 호출 인터페이스 구비.
+   - 통합 시 구성원 전원의 원문 statement, 블록 ID, quotes, source_spans, 기여 elements, 계약 보호 의무를 `member_contributions`에 온전히 보존.
 
-5. **테스트 및 검증:**
-   - 신규 모듈 종합 테스트: 총 11개 시나리오 100% 통과 (`test_organization.py`).
-   - 전체 회귀 테스트 통과: 총 155개 테스트 100% 통과 (`full_document_control` 80개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+5. **`AnalysisResult` 본문 무결성 재검증 (P2):**
+   - `AnalysisResult`의 자체 SHA-256 다이제스트(`verify_self_digest`)를 독립 재계산하여, 분석 본문만 변조하고 이전 해시를 유지한 공격을 `ANALYSIS_DIGEST_CORRUPTED`(`FAIL`)로 차단.
+   - `DocumentSnapshot` 내용 다이제스트(`digest_text(content)`) 및 Writing Contract 정규 다이제스트와 분석 결과 간의 바인딩을 전수 재확인.
+   - 변조되거나 불일치하는 스냅샷·계약 바인딩을 가진 이전 계획의 재사용 시도를 원천 거부.
+
+### 테스트 및 검증 결과
+
+- 신규 Information Organization 종합 및 반례 테스트: 총 14개 시나리오 100% 통과 (`test_organization.py`).
+  1. 상위 검증 보고서 부재 시 PASS 승격 차단 및 REVIEW 유지 (`test_scenario_1`)
+  2. 위조된 상위 PASS 보고서 차단 (`test_scenario_2`)
+  3. 차단성 finding 삭제·조작 우회 차단 (`test_scenario_3`)
+  4. 미선언 MOVE 목적지의 정상 위장 차단 (`test_scenario_4`)
+  5. 목적지 스냅샷 해시·버전·내용 불일치 차단 (`test_scenario_5`)
+  6. 서로 다른 주장의 부당 중복 통합 차단 (`test_scenario_6`)
+  7. 조건·수치 부재이나 의미가 다른 주장의 통합 차단 (`test_scenario_7`)
+  8. 분석 본문 변조 후 이전 다이제스트 유지 차단 (`test_scenario_8`)
+  9. 정상 Preview의 REVIEW 상태 유지 (`test_scenario_9`)
+  10. 정상 후보 배치 및 기존 보호 정보 보존 (`test_scenario_10`)
+  11. REVIEW 상태에서 Organization 단계 무단 진입 차단 (`test_scenario_11`)
+  12. 단위 누락 및 중복 배치 차단 (`test_scenario_12`)
+  13. 검증된 목적지 스냅샷 기반 유효한 MOVE 계획 통과 (`test_scenario_13`)
+  14. 의미 동등성 검증 중복 통합 및 기여 요소 보존 통과 (`test_scenario_14`)
+- 전체 회귀 테스트 통과: 총 158개 테스트 100% 통과 (`full_document_control` 83개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+
+### 다음 단계 (재개 지점)
+- Expression Refinement(표현 수정) 모듈 프로토타입 구현 및 OrganizationPlan 기반 수정 계획(`ExpressionPlan`, `RevisionResult`) 연동.
+- 다중 문서 스냅샷 로더 및 실제 cross-document 변경 세트 어댑터 확장.
 
 ### 다음 단계 (재개 지점)
 - Expression Refinement(표현 수정) 모듈 프로토타입 구현 및 OrganizationPlan 기반 수정 계획(`ExpressionPlan`, `RevisionResult`) 연동.
