@@ -54,13 +54,14 @@
    - 산출물: `experiments/full_document_control/runs/live_eval_gemini_3_8_flash_v2/` 및 `live_semantic_eval_v2_summary.json` (이전 1차 결과도 `runs/live_eval_gemini_3_8_flash/`에 보존).
 
 4. **최종 P1 2건 안정화 보완 (실행 증거 출처 검증 및 재검토 예산 상한):**
-   - **실행 증거 출처 검증 강제 (P1-1):**
+   - **실행 증거 출처 검증 및 등록 경로 엄격 제한 (P1-1):**
      - `trusted_execution_evidence` 인자 이름이나 외부 딕셔너리의 자체 해시만으로 실행 기록을 신뢰하지 않도록 출처 검증 경계를 강화.
-     - 검증 게이트 실행 경계(`validate_semantic_fidelity`)에서 생성된 정품 증거를 인메모리 신뢰 레지스트리(`_TRUSTED_EVIDENCE_REGISTRY`)에 바인딩 키와 함께 보관.
+     - 검증 증거 등록 경로는 검증 게이트의 실제 실행 경계([`validate_semantic_fidelity`](file:///home/honorbear/LogicWrite/experiments/full_document_control/semantic_validator.py#L2200)) 내부로 엄격히 제한되며, 내부 전용 실행 토큰(`_INTERNAL_EXECUTION_TOKEN`)을 통해서만 인메모리 신뢰 레지스트리([`_TRUSTED_EVIDENCE_REGISTRY`](file:///home/honorbear/LogicWrite/experiments/full_document_control/semantic_validator.py#L11))에 등록됩니다.
+     - 외부 호출자가 `register_trusted_execution_evidence()`를 통해 위조된 증거를 임의 등록하려는 시도는 무시/거부(`return False`)되며, 자체 계산된 해시를 가진 딕셔너리를 직접 주입할 수 없습니다.
      - 호출자가 보고서와 증거의 SHA-256을 모두 다시 계산하여 조작된 쌍을 제출하는 경우 게이트 신뢰 기록과의 불일치를 감지하여 `DISCREPANT_EXECUTION_RECORD`(`FAIL`)로 차단.
      - 게이트 경계의 실행 기록이 존재하지 않거나 프로세스 재시작 등으로 출처가 인증되지 않은 외부 제출물은 `UNVERIFIED_MODEL_EXECUTION_RECORD`(`REVIEW`)로 안전하게 보류.
      - 업스트림 원문, 계약, 분석 결과가 변경되면 기존 증거는 즉시 무효화(`invalidate_trusted_evidence_for_artifacts`).
-     - **신뢰 기록 보존 범위 및 프로세스 재시작 시 동작:** 신뢰 기록은 현재 세션/프로세스 수명 동안 인메모리로 유지됩니다. 프로세스 재시작 시 레지스트리는 초기화되므로, 외부 모델 보고서 단독으로는 승인될 수 없으며 게이트가 관할하는 현재 프로세스 경계 내에서 독립 재검증을 수행해야 `supported` 승인 후보로 전환됩니다. SHA-256은 내용 무결성 검증용이며 외부 주체의 신원 인증 수단이 아닙니다.
+     - **신뢰 기록 보존 범위, 프로세스 재시작 시 동작 및 한계:** 신뢰 기록은 현재 세션/프로세스 수명 동안 인메모리로 유지됩니다. 프로세스 재시작 시 레지스트리는 초기화되므로, 외부 모델 보고서 단독으로는 승인될 수 없으며 게이트가 관할하는 현재 프로세스 경계 내에서 독립 재검증을 수행해야 `supported` 승인 후보로 전환됩니다. SHA-256은 내용 무결성 검증용이며 외부 주체의 신원 인증 수단이 아닙니다. 또한 동일 Python 프로세스 내에서 임의 코드를 실행하여 전역 딕셔너리를 직접 조작하는 공격자는 언어 런타임 특성상 완전히 방어할 수 없으므로, 향후 프로덕션 환경에서는 프로세스 격리 및 서명 기반 증명 체계가 권장됩니다.
    - **누락 필드 재검토 프롬프트 예산 상한 강제 (P1-2):**
      - 최초 평가와 누락 필드 재검토 모두에 동일한 `max_prompt_chars` 상한을 엄격히 강제.
      - 재검토 지시문, 계약, 대상 단위, 원문 블록, 누락 필드 경로 목록을 모두 합산해 상한 초과 여부를 사전에 계산.
@@ -69,5 +70,5 @@
      - 재검토 실패나 분할 보류 시에도 1차 응답에서 이미 확인된 유효 판정을 덮어쓰거나 축소하지 않고 그대로 보존.
 
 5. **테스트 및 검증:**
-   - 의미 검증기 종합 테스트: 총 35개 테스트 통과 (`test_semantic_validator.py`, P1 반례 테스트 8건 추가).
-   - 전체 회귀 테스트 통과: 총 143개 테스트 100% 통과 (`full_document_control` 68개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+   - 의미 검증기 종합 테스트: 총 36개 테스트 통과 (`test_semantic_validator.py`, P1 반례 테스트 9건 추가).
+   - 전체 회귀 테스트 통과: 총 144개 테스트 100% 통과 (`full_document_control` 69개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).

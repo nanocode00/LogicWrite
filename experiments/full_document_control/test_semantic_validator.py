@@ -1157,14 +1157,21 @@ class SemanticFidelityValidatorTests(unittest.TestCase):
         forged_body = {k: v for k, v in forged_report.items() if k != 'semantic_report_sha256'}
         forged_report['semantic_report_sha256'] = pipeline.canonical_json_digest(forged_body)
 
-        # 3. Passing forged evidence directly to verify_semantic_report_integrity is rejected!
+        # 3. Attempting to register forged evidence via public/external function is rejected!
+        reg_res = pipeline.register_trusted_execution_evidence(
+            forged_evidence, forged_report['semantic_report_sha256']
+        )
+        self.assertFalse(reg_res)
+        self.assertIsNone(pipeline.get_trusted_execution_evidence(forged_report['semantic_report_sha256']))
+
+        # 4. Passing forged evidence directly to verify_semantic_report_integrity is rejected!
         integ_check = pipeline.verify_semantic_report_integrity(
             b12, a12, forged_report, trusted_execution_evidence=forged_evidence
         )
         self.assertFalse(integ_check['valid'])
         self.assertEqual(integ_check['code'], 'DISCREPANT_EXECUTION_RECORD')
 
-        # 4. Gate blocks transition
+        # 5. Gate blocks transition
         gate_rep = pipeline.validate_analysis_gate(
             b12, a12, semantic_report=forged_report, trusted_execution_evidence=forged_evidence
         )
@@ -1217,6 +1224,27 @@ class SemanticFidelityValidatorTests(unittest.TestCase):
         )
         self.assertFalse(integ_check['valid'])
         self.assertEqual(integ_check['code'], 'UNVERIFIED_MODEL_EXECUTION_RECORD')
+
+    def test_external_arbitrary_evidence_registration_attempt_rejected(self):
+        """P1: External callers cannot register arbitrary dictionaries into the trusted evidence registry.
+        Attempting to register external evidence fails, leaving registry clean, and external submissions remain unverified.
+        """
+        pipeline.clear_trusted_evidence_registry()
+        fake_dict = {
+            'evidence_version': 'semantic-evidence-v1',
+            'input_sha256': 'a' * 64,
+            'snapshot_sha256': 'b' * 64,
+            'analysis_sha256': 'c' * 64,
+            'contract_sha256': 'd' * 64,
+            'validator_version': 'semantic-fidelity-validator-v1',
+            'adapter_kind': 'model_evaluator_adapter',
+            'records': [],
+            'evidence_sha256': 'e' * 64,
+        }
+        res = pipeline.register_trusted_execution_evidence(fake_dict, 'fake_report_sha')
+        self.assertFalse(res)
+        self.assertIsNone(pipeline.get_trusted_execution_evidence('fake_report_sha'))
+        self.assertIsNone(pipeline.get_trusted_execution_evidence(binding_tuple=('a'*64, 'b'*64, 'c'*64, 'd'*64)))
 
     # ------------------------------------------------------------------
     # 13. P1-2 Missing Fields Retry Prompt Budget Limits
