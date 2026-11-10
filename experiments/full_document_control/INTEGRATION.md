@@ -1,10 +1,10 @@
 # 전체 문서 후보 파이프라인 통합
 
-구현 출발점은 PR #14 병합 커밋 `8792bff`이며 현재 설명 기준은 PR #15 병합 `c770276`이다. 실제 API·설계 차이·최신 회귀 수치는 [현재 실행 인터페이스](../../docs/data-model-and-interfaces.md#current-runtime-interfaces)를 참조한다. 기존 `pipeline.py`, `organization.py`, `expression.py`, `expression_validator.py`, `semantic_validator.py`의 승인 정책을 변경하지 않고 읽기 전용 **격리 후보 경로**를 추가했다. 파일 반영·승인된 단계 전환·최종 의미 승인 경로는 구현하지 않았다.
+구현 출발점은 PR #14 병합 커밋 `8792bff`이며 이번 2-A 구현의 기준은 PR #16 병합 `ee3c270`이다. 실제 API·설계 차이·최신 회귀 수치는 [현재 실행 인터페이스](../../docs/data-model-and-interfaces.md#current-runtime-interfaces)를 참조한다. 기존 `pipeline.py`, `organization.py`, `expression.py`, `expression_validator.py`, `semantic_validator.py`의 승인 정책을 변경하지 않고 읽기 전용 **격리 후보 경로**를 추가했다. 파일 반영·승인된 단계 전환·최종 의미 승인 경로는 구현하지 않았다.
 
 ## 실행 경로와 범위
 
-`Markdown + WritingContract → 기존 분석 조립/게이트 → Organization Preview → Expression Preview → 전체 후보 재구성 → 독립 최종 검증 → 진단/중단`
+`Markdown + WritingContract → 기존 분석 조립/게이트 → Organization Preview → Expression Preview → 전체 후보 재구성 → 독립 최종 구조 검증 → 전체 출력 의미 검증 → 종합 감사/중단`
 
 | 파일/API | 실제 역할 |
 | --- | --- |
@@ -14,6 +14,7 @@
 | `reconstruction.reconstruct_documents(bundle, analysis, org, preview, destination_snapshots=...)` | 원본 전체를 범위별로 유지하고 해석 가능한 수정·배치를 반영한 전체 스냅샷 또는 보류 Preview 반환 |
 | `final_validator.validate_final_result(...)` | 원본·실제 출력·계획·범위 원장·trace를 대조. 생성기의 자기 평가나 계획 findings만으로 통과시키지 않음 |
 | `final_validator.verify_final_report(...)` | 현재 입력으로 재검증해 고정 검사군·버전·결과 전체를 비교. 해시를 다시 계산한 허위 보고서도 거부 |
+| `pipeline.validate_final_output(...)` / `verify_final_output_report(...)` | 구조 보고서와 [전체 출력 의미 보고서](FINAL_SEMANTICS.md)를 결합·검증. 기존 `final_report`는 구조 결과로 유지하고 `final_semantic_report`·`final_audit` 추가. supported도 REVIEW, 두 승인 필드는 false |
 | `integration.RevisionController` | 원인 모듈 식별, 저장된 하위 산출물 무효화, 현재 입력 재검증, 안전한 중단. 자동 재시도는 수행하지 않음 |
 
 기본 분석은 실제 파일에서 생성한 **원문 블록 목록**이지 일반적인 주장·관계의 의미 분석 모델이 아니다. 기존 `required_information`을 충족하지 못하거나 필수 조건 연결을 확립하지 못하면 기존 게이트가 실패하고 이후 후보 생성을 중단한다. 승인 조건을 맞추려고 요구사항이나 검사 결과를 바꾸지 않는다. 기존 추출기의 기록된 창별 응답을 `--response`로 제공할 수도 있으며 현재 입력·창 참조에 맞아야 한다.
@@ -89,7 +90,7 @@ PR #15 당시 실행 기록(현행화 전 기획서): 원본 4,614바이트 불�
 
 - 기존 분석 입력 검증기는 단일 concrete scope만 허용한다. 파일 E2E는 이 계약을 그대로 준수한다. 다중 문서 재구성 API는 이미 바인딩된 AnalysisResult/OrganizationPlan과 전체 목적지 스냅샷으로 동작하지만, 다중 scope 파일의 분석부터 승인까지 자동 수행하는 경로는 없다. 기존 승인 경로를 우회하는 정식 실행으로 표시하지 않는다.
 - 기존 OrganizationPlan의 추상 section_path는 실제 제목으로 해석되지 않을 수 있다. 이 경우 원문 배치를 유지하고 ORGANIZATION_FIDELITY를 unresolved로 기록한다. 부분 블록 구조 편집·새 제목·소스 없는 새 문서는 생성하지 않는다.
-- 목적지 기존 내용은 그대로 보존하며 재분석/의미 통합하지 않는다. 전체 문서의 사실성·상충 주장·한국어 문법·조건의 실제 가독성/인접성·의미 동일성을 증명하는 모델/사람 절차는 미구현이다.
+- 목적지 기존 내용은 그대로 보존하며 재분석/의미 통합하지 않는다. 전체 문서의 사실성·상충 주장·조건의 실제 문맥·의미 동일성은 [2-A 선택적 모델 감사](FINAL_SEMANTICS.md) 대상이지만 진실이나 정확도를 증명하지 않는다. 실제 LLM 평가는 수행하지 않았으며 사람/정책 최종 승인은 2-B에 남긴다.
 - 범위 원장은 검증 가능한 문자열/배치 대응이지 일반적인 의미 보존 증명이 아니다. Markdown 파서는 기존 지원 범위(줄 단위 제목·문단·목록·펜스 코드·표·인용 등)에 한정된다.
 - 검증 실패의 진단·책임 모듈 식별·하위 산출물 무효화·새 입력 재검증까지 지원한다. 자동 수정/재시도·LangGraph·RAG·파일 반영·배포는 없다.
 

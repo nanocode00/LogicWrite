@@ -69,8 +69,11 @@ class RevisionController:
         self.artifacts = artifacts if artifacts is not None else {}
 
     def revalidate(self, bundle, analysis, org, preview, result, **kwargs):
-        report = final_validator.validate_final_result(bundle, analysis, org, preview, result, **kwargs)
-        return {'report': report, 'controller': self.stop(report['findings']) if report['gate_state'] == 'FAIL' else None}
+        audit = pipeline.validate_final_output(bundle, analysis, org, preview, result, **kwargs)
+        report = audit['structural_report']
+        findings = report['findings'] + audit['semantic_report']['findings']
+        return {'report': report, 'semantic_report': audit['semantic_report'], 'final_audit': audit,
+                'controller': self.stop(findings) if audit['gate_state'] == 'FAIL' else None}
 
     def stop(self, findings):
         errors = [f for f in findings if f.get('severity') == 'ERROR']
@@ -84,6 +87,7 @@ class RevisionController:
             module, invalidated = 'information_extraction_analysis', ['analysis', 'organization', 'expression', 'reconstruction', 'final_report']
         else:
             module, invalidated = 'reconstruction', ['reconstruction', 'final_report']
+        invalidated += ['final_semantic_report', 'final_audit']
         for name in invalidated:
             self.artifacts.pop(name, None)
         return {'state': 'STOPPED', 'last_gate_state': 'FAIL' if any(f.get('severity') == 'ERROR' for f in findings) else 'REVIEW',
@@ -93,10 +97,11 @@ class RevisionController:
 
 
 def run_pipeline(bundle, *, responses=None, analysis=None, organization_plan=None,
-                 generator=None, operations=None, destination_snapshots=None):
+                 generator=None, operations=None, destination_snapshots=None,
+                 final_semantic_reviewer=None, max_final_review_chars=48000, final_review_timeout=30):
     outcome = {'execution_mode': 'isolated_candidate', 'status': 'STOPPED', 'source_ref': copy.deepcopy(bundle.get('document_snapshot', {})),
                'analysis': None, 'analysis_report': None, 'organization_plan': None, 'expression_preview': None,
-               'revision_result': None, 'final_report': None, 'controller': None,
+               'revision_result': None, 'final_report': None, 'final_semantic_report': None, 'final_audit': None, 'controller': None,
                'stage_transition_allowed': False, 'delivery_approved': False}
     try:
         analysis = analysis if analysis is not None else analyze_source(bundle, responses)
@@ -113,12 +118,16 @@ def run_pipeline(bundle, *, responses=None, analysis=None, organization_plan=Non
                         operations=operations, destination_snapshots=destination_snapshots)
         outcome['expression_preview'] = preview
         revision = reconstruction.reconstruct_documents(bundle, analysis, org, preview, destination_snapshots=destination_snapshots)
-        final = final_validator.validate_final_result(bundle, analysis, org, preview, revision, destination_snapshots=destination_snapshots)
-        outcome.update(revision_result=revision, final_report=final, status=final['gate_state'])
-        if (final['gate_state'] == 'FAIL' or revision['delivery_state'] != 'candidate'
+        audit = pipeline.validate_final_output(bundle, analysis, org, preview, revision,
+                    destination_snapshots=destination_snapshots, reviewer=final_semantic_reviewer,
+                    max_review_chars=max_final_review_chars, timeout_seconds=final_review_timeout)
+        final = audit['structural_report']
+        outcome.update(revision_result=revision, final_report=final, final_semantic_report=audit['semantic_report'],
+                       final_audit=audit, status=audit['gate_state'])
+        if (audit['gate_state'] == 'FAIL' or revision['delivery_state'] != 'candidate'
                 or any(f['rule_id'] == 'GENERATION_ERROR' for f in final['findings'])):
             outcome['status'] = 'STOPPED'
-            outcome['controller'] = RevisionController().stop(final['findings'])
+            outcome['controller'] = RevisionController().stop(final['findings'] + audit['semantic_report']['findings'])
     except Exception:
         # Fixed error codes only: provider/source exceptions may contain secrets.
         outcome['controller'] = RevisionController().stop([{'rule_id': 'EXTRACTION_OR_UPSTREAM_EXECUTION_ERROR', 'severity': 'ERROR'}])
