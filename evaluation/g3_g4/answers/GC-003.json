@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-003",
+  "input_path": "inputs/GC-003.json",
+  "input_sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "INCOMPLETE_CANDIDATE"
+  ],
+  "findings": [
+    {
+      "error_type": "INCOMPLETE_CANDIDATE",
+      "severity": "undetermined",
+      "reason": "후반 기능·복제 안내가 실제로 빠졌는지 전송에서만 빠졌는지 판단할 전체 결과가 없다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 1574,
+          "end": 1616,
+          "quote": "Requests officially supports Python 3.10+."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 1574,
+          "end": 1616,
+          "quote": "Requests officially supports Python 3.10+."
+        }
+      ]
+    }
+  ],
+  "rationale": "후반 기능·복제 안내가 실제로 빠졌는지 전송에서만 빠졌는지 판단할 전체 결과가 없다.",
+  "acceptable_alternatives": [
+    "부족한 전체 결과 또는 목적지 자료를 확보하기 전에는 정상이나 손실을 단정하지 않는다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

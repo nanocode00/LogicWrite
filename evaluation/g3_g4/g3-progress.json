@@ -1,0 +1,347 @@
+{
+  "schema_version": "1.0.0",
+  "base_commit": "7b9166de9c019153ceb326aef8912380ddc60d71",
+  "status": "preparation_only",
+  "priority_order": [
+    "SP-003",
+    "SP-011",
+    "SP-009",
+    "SP-010",
+    "SP-012"
+  ],
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "input_path": "../semantic_pilot/inputs/SP-001.json",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+      "answer_path": "../semantic_pilot/answers/SP-001.json",
+      "answer_sha256": "3b49835432602afeeb2d9ee8bc599df144bf222ad420da4b424d489d5ace24f5",
+      "existing_ai_judgment": "PRESERVED",
+      "existing_user_judgment": "PRESERVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-001.workflow.json",
+      "prepared_workflow_sha256": "d5923ef0a693e5e81e9cb07039f9795311cf3707e0b5149b3e641f4943763a2f",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": false,
+      "questions": [
+        "기존 사용자 의견을 현재 입력에서 확인하고 AI 반례 검토 대상으로 승인",
+        "별도 AI 검토 후 사용자가 모든 반론에 응답하고 최종 판정 여부 결정"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-002",
+      "input_path": "../semantic_pilot/inputs/SP-002.json",
+      "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+      "answer_path": "../semantic_pilot/answers/SP-002.json",
+      "answer_sha256": "1fdade5d0cd7cb7417cb3003f4c65624cd9d89476dcb07e8ef31595abe5c1018",
+      "existing_ai_judgment": "PRESERVED",
+      "existing_user_judgment": "PRESERVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-002.workflow.json",
+      "prepared_workflow_sha256": "d6d4a0722f7b0364fa5bac2503d3d0b0e1686cb280ed0bc26515aeea995ad648",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": false,
+      "questions": [
+        "기존 사용자 의견을 현재 입력에서 확인하고 AI 반례 검토 대상으로 승인",
+        "별도 AI 검토 후 사용자가 모든 반론에 응답하고 최종 판정 여부 결정"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-003",
+      "input_path": "../semantic_pilot/inputs/SP-003.json",
+      "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+      "answer_path": "../semantic_pilot/answers/SP-003.json",
+      "answer_sha256": "a17d58d75d7a5ae5e51947d3c400dc7704cafb24d0ec71138ad0623b09352b7a",
+      "existing_ai_judgment": "PRESERVED",
+      "existing_user_judgment": "UNRESOLVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-003.workflow.json",
+      "prepared_workflow_sha256": "e80849dd1901edd331c3c02896fc275bdbbcb789e98a456346e09e56b1aa9400",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": true,
+      "questions": [
+        "기능·첫 사용 문맥과 캐시 준비 시점",
+        "현지 노출 의무 및 링크 허용 계약 자체의 타당성"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-004",
+      "input_path": "../semantic_pilot/inputs/SP-004.json",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+      "answer_path": "../semantic_pilot/answers/SP-004.json",
+      "answer_sha256": "93d7df2becfc01e73f8e436ddd1013556fd2cc9f33fdd3cc9499ee9055e7cbf5",
+      "existing_ai_judgment": "PRESERVED",
+      "existing_user_judgment": "PRESERVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-004.workflow.json",
+      "prepared_workflow_sha256": "821731d5cd04942883d6730fbe0ba0e946127f75cfcae0f77e3a67687e278f89",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": false,
+      "questions": [
+        "기존 사용자 의견을 현재 입력에서 확인하고 AI 반례 검토 대상으로 승인",
+        "별도 AI 검토 후 사용자가 모든 반론에 응답하고 최종 판정 여부 결정"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-005",
+      "input_path": "../semantic_pilot/inputs/SP-005.json",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+      "answer_path": "../semantic_pilot/answers/SP-005.json",
+      "answer_sha256": "e2ada0d4f01186eee1fa152689bc3bc9c81be5e672a404c723a6559dedb023a6",
+      "existing_ai_judgment": "VIOLATION",
+      "existing_user_judgment": "VIOLATION",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-005.workflow.json",
+      "prepared_workflow_sha256": "fa526648c48cf7a4d2f5244bb8386a343097cff3ac76e28d9c0ed3e510c2e202",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": false,
+      "questions": [
+        "기존 사용자 의견을 현재 입력에서 확인하고 AI 반례 검토 대상으로 승인",
+        "별도 AI 검토 후 사용자가 모든 반론에 응답하고 최종 판정 여부 결정"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-006",
+      "input_path": "../semantic_pilot/inputs/SP-006.json",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+      "answer_path": "../semantic_pilot/answers/SP-006.json",
+      "answer_sha256": "a113ee6bfeadb15a8efc79a945972cc16384285d82ffc9fb8c1e7928f9bb6a55",
+      "existing_ai_judgment": "VIOLATION",
+      "existing_user_judgment": "VIOLATION",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-006.workflow.json",
+      "prepared_workflow_sha256": "3a687a4d732d321667ba9632871ffddd9386d5b746bf2ba5da5352032803fa4f",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": false,
+      "questions": [
+        "기존 사용자 의견을 현재 입력에서 확인하고 AI 반례 검토 대상으로 승인",
+        "별도 AI 검토 후 사용자가 모든 반론에 응답하고 최종 판정 여부 결정"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-007",
+      "input_path": "../semantic_pilot/inputs/SP-007.json",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+      "answer_path": "../semantic_pilot/answers/SP-007.json",
+      "answer_sha256": "1cc0408ec604c9de06624ed4286792464a03a38d9599b7a4d3d041d7086f7d35",
+      "existing_ai_judgment": "VIOLATION",
+      "existing_user_judgment": "VIOLATION",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-007.workflow.json",
+      "prepared_workflow_sha256": "5cc6f2002b37c3a388c16bafbbcc1a617450911c41235126aff4559e06f39a7f",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": false,
+      "questions": [
+        "기존 사용자 의견을 현재 입력에서 확인하고 AI 반례 검토 대상으로 승인",
+        "별도 AI 검토 후 사용자가 모든 반론에 응답하고 최종 판정 여부 결정"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-008",
+      "input_path": "../semantic_pilot/inputs/SP-008.json",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "answer_path": "../semantic_pilot/answers/SP-008.json",
+      "answer_sha256": "577bb0dd699f900a2d5ad649802288fb65b230f3bb45b62c400129b4106759b3",
+      "existing_ai_judgment": "VIOLATION",
+      "existing_user_judgment": "VIOLATION",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-008.workflow.json",
+      "prepared_workflow_sha256": "a3156490430f29aad2fab527ec7648f7b2312df1193cddbfc5e501efad8c8c22",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": false,
+      "questions": [
+        "기존 사용자 의견을 현재 입력에서 확인하고 AI 반례 검토 대상으로 승인",
+        "별도 AI 검토 후 사용자가 모든 반론에 응답하고 최종 판정 여부 결정"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-009",
+      "input_path": "../semantic_pilot/inputs/SP-009.json",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+      "answer_path": "../semantic_pilot/answers/SP-009.json",
+      "answer_sha256": "96dffb466d2fbea7cc5066c0597c9c3e541caf1798e9ca21bdbf2d914584a8c7",
+      "existing_ai_judgment": "UNRESOLVED",
+      "existing_user_judgment": "UNRESOLVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-009.workflow.json",
+      "prepared_workflow_sha256": "8425d4eedd757e9628e6f611875c247ef77426a1c9000a38bfcfa0c16d097f65",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": true,
+      "questions": [
+        "수정 후보 구성 후 목적지 전후 스냅샷 확보",
+        "링크 해소와 목적지의 정보·조건 보존을 별도로 검사"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-010",
+      "input_path": "../semantic_pilot/inputs/SP-010.json",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+      "answer_path": "../semantic_pilot/answers/SP-010.json",
+      "answer_sha256": "7b6389fdb70835c42eaf34a9a1e07e84567ad4a21cf0c9ed0c6fb9bf2666a885",
+      "existing_ai_judgment": "UNRESOLVED",
+      "existing_user_judgment": "UNRESOLVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-010.workflow.json",
+      "prepared_workflow_sha256": "ea7c0648fa836d144c3cf7ea0acfaffab9f62592aa25d4d7fa212ee09e72462b",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": true,
+      "questions": [
+        "실제 작성 시점·적용 범위·권한자의 기준 원문 승인",
+        "나중 작성 자료 우선 참고와 승인 확정의 구별"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-011",
+      "input_path": "../semantic_pilot/inputs/SP-011.json",
+      "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+      "answer_path": "../semantic_pilot/answers/SP-011.json",
+      "answer_sha256": "d140c21ef3945bafc9f3bdbca2fed2cbe3eccf060f57876a5de0a51391b1c52f",
+      "existing_ai_judgment": "UNRESOLVED",
+      "existing_user_judgment": "UNRESOLVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-011.workflow.json",
+      "prepared_workflow_sha256": "1de35a278fe5dd1abc39e5eeec364d4c83ff4d8008008fbdde5f2bca89d83aed",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": true,
+      "questions": [
+        "SP-003과 같은 문맥 부족",
+        "SP-003과 중복되는지 및 실제 차이"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    },
+    {
+      "case_id": "SP-012",
+      "input_path": "../semantic_pilot/inputs/SP-012.json",
+      "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+      "answer_path": "../semantic_pilot/answers/SP-012.json",
+      "answer_sha256": "af4af0521b1e1ebcf819a65c968f5eb2d6ab53d998b43215785935ea4cb58dc5",
+      "existing_ai_judgment": "UNRESOLVED",
+      "existing_user_judgment": "UNRESOLVED",
+      "existing_user_review_pointer": "/reviews/0",
+      "existing_user_blinded": false,
+      "historical_review_status": "guided_user_review_completed",
+      "prepared_workflow_path": "prepared/SP-012.workflow.json",
+      "prepared_workflow_sha256": "788455f91fa780a486cfac1223ad63f3397a506c4e98a08a7df94ebf518abfb9",
+      "new_workflow_level": "ai_provisional",
+      "development_gold_eligible": false,
+      "ai_counterreview_status": "not_run",
+      "user_final_status": "not_confirmed",
+      "priority": true,
+      "questions": [
+        "절단되지 않은 최종 결과와 해시 재확보",
+        "누락을 추정하지 않고 보류 유지 가능성 검토"
+      ],
+      "next_step": "사용자가 기존 의견·노출 여부를 확인해 최초 판단 이벤트 작성; 이후 별도 AI 반례 검토; 사용자 최종 판단"
+    }
+  ],
+  "derivative_policy": "입력·문맥을 변경하면 별도 새 ID와 별도 manifest 사용. 기존 사례와 판정은 보존. 본 작업에서 사용자 문맥을 임의 확정하지 않음.",
+  "derivative_drafts": [
+    {
+      "suggested_id": "SP-013",
+      "parent_case_ids": [
+        "SP-003",
+        "SP-011"
+      ],
+      "needed_context": "첫 실행에 캐시 준비가 필수인 실제/통제 문맥을 사용자에게 확인",
+      "status": "design_only_no_input_created"
+    },
+    {
+      "suggested_id": "SP-014",
+      "parent_case_ids": [
+        "SP-003",
+        "SP-011"
+      ],
+      "needed_context": "선택 기능이며 링크 안내가 충분한 문맥을 사용자에게 확인",
+      "status": "design_only_no_input_created"
+    },
+    {
+      "suggested_id": "SP-015",
+      "parent_case_ids": [
+        "SP-009"
+      ],
+      "needed_context": "목적지 전후 전체 및 링크 해소 근거",
+      "status": "design_only_no_input_created"
+    },
+    {
+      "suggested_id": "SP-016",
+      "parent_case_ids": [
+        "SP-010"
+      ],
+      "needed_context": "승인 기준 버전·작성 시점",
+      "status": "design_only_no_input_created"
+    },
+    {
+      "suggested_id": "SP-017",
+      "parent_case_ids": [
+        "SP-012"
+      ],
+      "needed_context": "절단되지 않은 결과 전체",
+      "status": "design_only_no_input_created"
+    }
+  ]
+}

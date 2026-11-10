@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-008",
+  "input_path": "inputs/GC-008.json",
+  "input_sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "BEHAVIOR_REVERSAL"
+  ],
+  "findings": [
+    {
+      "error_type": "BEHAVIOR_REVERSAL",
+      "severity": "major",
+      "reason": "프로그램 종료를 계속 실행으로 바꿨다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 2050,
+          "end": 2165,
+          "quote": "{func}`version_option` adds a `--version` option which immediately prints the version number and exits the program."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 2050,
+          "end": 2177,
+          "quote": "{func}`version_option` adds a `--version` option which immediately prints the version number and continues running the program."
+        }
+      ]
+    }
+  ],
+  "rationale": "프로그램 종료를 계속 실행으로 바꿨다.",
+  "acceptable_alternatives": [
+    "같은 주장·수치·조건·범위를 보존한 다른 표현·배치도 허용한다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

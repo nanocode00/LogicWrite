@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-012",
+  "input_path": "inputs/GC-012.json",
+  "input_sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "MISSING_DESTINATION"
+  ],
+  "findings": [
+    {
+      "error_type": "MISSING_DESTINATION",
+      "severity": "undetermined",
+      "reason": "reload·quit·flag·signal 설명이 목적지로 옮겨졌는지 전체 결과가 없어 보존 판정을 보류한다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 425,
+          "end": 1033,
+          "quote": "## Reload\n\n```\nPUT  /-/reload\nPOST /-/reload\n```\n\nThis endpoint triggers a reload of the Prometheus configuration and rule files. It's disabled by default and can be enabled via the `--web.enable-lifecycle` flag.\n\nAlternatively, a configuration reload can be triggered by sending a `SIGHUP` to the Prometheus process.\n\n\n## Quit\n\n```\nPUT  /-/quit\nPOST /-/quit\n```\n\nThis endpoint triggers a graceful shutdown of Prometheus. It's disabled by default and can be enabled via the `--web.enable-lifecycle` flag.\n\nAlternatively, a graceful shutdown can be triggered by sending a `SIGTERM` to the Prometheus process.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 450,
+          "end": 484,
+          "quote": "See [reload and quit](details.md)."
+        }
+      ]
+    }
+  ],
+  "rationale": "reload·quit·flag·signal 설명이 목적지로 옮겨졌는지 전체 결과가 없어 보존 판정을 보류한다.",
+  "acceptable_alternatives": [
+    "부족한 전체 결과 또는 목적지 자료를 확보하기 전에는 정상이나 손실을 단정하지 않는다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

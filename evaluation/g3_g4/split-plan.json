@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "split_unit": "upstream_repository_and_source_family",
+  "known_development_families": [
+    "nanocode00/chatgpt2codex",
+    "nanocode00/resume",
+    "nanocode00/QuotaTray",
+    "nanocode00/project3-planning",
+    "nanocode00/mallo-intro",
+    "nanocode00/LogicWrite",
+    "pallets/click",
+    "encode/httpx",
+    "prometheus/prometheus",
+    "psf/requests"
+  ],
+  "new_candidates_split": "development_only",
+  "holdout_collection_status": "planned_not_collected",
+  "holdout_content_or_labels_in_this_repository": false,
+  "holdout_sources": [],
+  "policy": [
+    "원문·upstream·fork·mirror·번역·인용 파생 계열을 통째로 한 split에 배정한다.",
+    "지금 개발 에이전트가 읽고 후보·잠정 답안을 작성한 12건과 4계열을 홀드아웃으로 재분류하지 않는다.",
+    "별도 관리자가 다른 저장소·원문 계열을 수집하고 권한이 분리된 보관소에 원문·사람 정답을 보관한다.",
+    "관리자가 개발 자료와 저장소·원문 해시 및 의미적 근접 복제 여부를 대조한 뒤 원문/정답을 개발 에이전트에 노출하지 않는다.",
+    "홀드아웃 사람 정답과 입력·정답 해시·표본 기준은 검증기 예측 열람 전에 고정한다.",
+    "평가 오류를 보고 튜닝한 사례·관련 계열은 개발용으로 이관하고 더 이상 독립 홀드아웃으로 보고하지 않는다.",
+    "같은 계열 3개 후보는 독립 원문 3개로 세지 않는다. 검토 방식·수준과 단일 사람 검토 한계를 결과에 기록한다."
+  ],
+  "next_holdout_target": {
+    "families_minimum": 4,
+    "candidate_count": 12,
+    "label_balance_target": {
+      "PRESERVED": 4,
+      "VIOLATION": 4,
+      "UNRESOLVED": 4
+    },
+    "status": "planning_target_not_actual_data"
+  }
+}

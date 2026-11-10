@@ -1,0 +1,136 @@
+[
+  {
+    "source_id": "click",
+    "repository": "pallets/click",
+    "family": "pallets/click",
+    "commit": "8abb77a8432e03ed14a95f972b44f905279415a7",
+    "captured_on": "2026-11-10",
+    "spdx": "BSD-3-Clause",
+    "document_type": "cli_reference",
+    "document": {
+      "path": "docs/option-decorators.md",
+      "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+      "local_path": "sources/click-document.txt",
+      "sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+      "git_blob_sha": "9a2e33e498f6b3ca8dae40f22f8457c1e6614b6c",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "license": {
+      "path": "LICENSE.txt",
+      "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/LICENSE.txt",
+      "local_path": "sources/click-license.txt",
+      "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d",
+      "git_blob_sha": "d12a849186982399c537c5b9a8fd77bf2edd5eab",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "repository_id": 19103692,
+    "is_fork": false,
+    "upstream_repository": "pallets/click",
+    "family_review": "GitHub upstream identity checked; mirrors/translations require additional curator screening",
+    "notice": null
+  },
+  {
+    "source_id": "httpx",
+    "repository": "encode/httpx",
+    "family": "encode/httpx",
+    "commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+    "captured_on": "2026-11-10",
+    "spdx": "BSD-3-Clause",
+    "document_type": "configuration_guide",
+    "document": {
+      "path": "docs/advanced/timeouts.md",
+      "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+      "local_path": "sources/httpx-document.txt",
+      "sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+      "git_blob_sha": "aedcfb627f5139901638ebf8de30216c2640591e",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "license": {
+      "path": "LICENSE.md",
+      "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/LICENSE.md",
+      "local_path": "sources/httpx-license.txt",
+      "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d",
+      "git_blob_sha": "ab79d16a3f4c6c894c028d1f7431811e8711b42b",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "repository_id": 179492861,
+    "is_fork": false,
+    "upstream_repository": "encode/httpx",
+    "family_review": "GitHub upstream identity checked; mirrors/translations require additional curator screening",
+    "notice": null
+  },
+  {
+    "source_id": "prometheus",
+    "repository": "prometheus/prometheus",
+    "family": "prometheus/prometheus",
+    "commit": "bd517f6636ce1b6263dada9dfecb3fe92c84d96f",
+    "captured_on": "2026-11-10",
+    "spdx": "Apache-2.0",
+    "document_type": "operations_api",
+    "document": {
+      "path": "docs/management_api.md",
+      "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+      "local_path": "sources/prometheus-document.txt",
+      "sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+      "git_blob_sha": "ecc46fad8808977d575fe6a646282b58540ac064",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "license": {
+      "path": "LICENSE",
+      "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/LICENSE",
+      "local_path": "sources/prometheus-license.txt",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "repository_id": 6838921,
+    "is_fork": false,
+    "upstream_repository": "prometheus/prometheus",
+    "family_review": "GitHub upstream identity checked; mirrors/translations require additional curator screening",
+    "notice": {
+      "path": "NOTICE",
+      "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/NOTICE",
+      "local_path": "sources/prometheus-notice.txt",
+      "sha256": "ac9e304462a58a4d71b6488423d4447e614c8b31d517fe24345016522c102a78",
+      "git_blob_sha": "b82d284fb1990d45cc1a8f567e0f54580b75fd37",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    }
+  },
+  {
+    "source_id": "requests",
+    "repository": "psf/requests",
+    "family": "psf/requests",
+    "commit": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+    "captured_on": "2026-11-10",
+    "spdx": "Apache-2.0",
+    "document_type": "readme",
+    "document": {
+      "path": "README.md",
+      "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+      "local_path": "sources/requests-document.txt",
+      "sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+      "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "license": {
+      "path": "LICENSE",
+      "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/LICENSE",
+      "local_path": "sources/requests-license.txt",
+      "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+      "git_blob_sha": "67db8588217f266eb561f75fae738656325deac9",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    },
+    "repository_id": 1362490,
+    "is_fork": false,
+    "upstream_repository": "psf/requests",
+    "family_review": "GitHub upstream identity checked; mirrors/translations require additional curator screening",
+    "notice": {
+      "path": "NOTICE",
+      "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/NOTICE",
+      "local_path": "sources/requests-notice.txt",
+      "sha256": "f5110972dedad2b4e9d314518daf3b7d72d6e02e499acd802181de6f74571dcc",
+      "git_blob_sha": "1ff62db688277b77c83c1766dac7f165364d3528",
+      "blob_verified_via": "GitHub contents API at exact commit"
+    }
+  }
+]

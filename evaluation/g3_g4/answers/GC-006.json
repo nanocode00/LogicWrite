@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-006",
+  "input_path": "inputs/GC-006.json",
+  "input_sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "INCOMPLETE_CANDIDATE"
+  ],
+  "findings": [
+    {
+      "error_type": "INCOMPLETE_CANDIDATE",
+      "severity": "undetermined",
+      "reason": "connect/read/write/pool 설명은 제공된 접두부 뒤에 있다. 최종 전체가 없어 누락 여부를 단정할 수 없다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 61,
+          "end": 153,
+          "quote": "The default behavior is to raise a `TimeoutException` after 5 seconds of\nnetwork inactivity."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 61,
+          "end": 153,
+          "quote": "The default behavior is to raise a `TimeoutException` after 5 seconds of\nnetwork inactivity."
+        }
+      ]
+    }
+  ],
+  "rationale": "connect/read/write/pool 설명은 제공된 접두부 뒤에 있다. 최종 전체가 없어 누락 여부를 단정할 수 없다.",
+  "acceptable_alternatives": [
+    "부족한 전체 결과 또는 목적지 자료를 확보하기 전에는 정상이나 손실을 단정하지 않는다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-002",
+  "input_path": "inputs/GC-002.json",
+  "input_sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "VERSION_SCOPE_CHANGE"
+  ],
+  "findings": [
+    {
+      "error_type": "VERSION_SCOPE_CHANGE",
+      "severity": "major",
+      "reason": "지원 최소 버전을 3.10에서 3.8로 바꾸어 원문보다 지원 범위를 넓혔다. 사용자 추가 근거는 없다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 1574,
+          "end": 1616,
+          "quote": "Requests officially supports Python 3.10+."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 1574,
+          "end": 1615,
+          "quote": "Requests officially supports Python 3.8+."
+        }
+      ]
+    }
+  ],
+  "rationale": "지원 최소 버전을 3.10에서 3.8로 바꾸어 원문보다 지원 범위를 넓혔다. 사용자 추가 근거는 없다.",
+  "acceptable_alternatives": [
+    "같은 주장·수치·조건·범위를 보존한 다른 표현·배치도 허용한다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}
