@@ -4696,6 +4696,18 @@ def main(argv=None):
         parser.exit(2, f'Full-document pipeline error: {error}\n')
 
 
+def validate_final_output(bundle, analysis, org, preview, result, **kwargs):
+    """Independent structural + whole-output semantic audit; never authorizes PASS."""
+    import final_semantic_validator
+    return final_semantic_validator.validate_final_audit(bundle, analysis, org, preview, result, **kwargs)
+
+
+def verify_final_output_report(bundle, analysis, org, preview, result, report, **kwargs):
+    """Check current artifact bodies, fixed structural rules and live semantic receipt."""
+    import final_semantic_validator
+    return final_semantic_validator.verify_final_audit(bundle, analysis, org, preview, result, report, **kwargs)
+
+
 if __name__ == '__main__':
     raise SystemExit(main())
 
