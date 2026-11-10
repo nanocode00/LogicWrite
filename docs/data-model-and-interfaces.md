@@ -1,12 +1,12 @@
 # 공통 데이터 모델과 모듈 인터페이스
 
-> **논리 설계와 실행 프로토타입을 구분하는 문서.** [현재 실행 인터페이스](#current-runtime-interfaces)는 PR #15 기준의 실제 API다. 그 아래 공통 자료형은 장기 설계 제안이며 채택된 실행 스키마가 아니다. 기존 7개 액션·평가 스키마 `0.1.0`, M0 독립 검토·홀드아웃·스키마 동결 상태는 유지한다.
+> **논리 설계와 실행 프로토타입을 구분하는 문서.** [현재 실행 인터페이스](#current-runtime-interfaces)는 PR #16 병합 main 기반의 2-A 실제 API다. 그 아래 공통 자료형은 장기 설계 제안이며 채택된 실행 스키마가 아니다. 기존 7개 액션·평가 스키마 `0.1.0`, M0 독립 검토·홀드아웃·스키마 동결 상태는 유지한다.
 
 <a id="current-runtime-interfaces"></a>
 
 ## 현재 실행 인터페이스
 
-**기준: 2026-11-10, `main` `c770276` (PR #15까지 병합).** 이 절은 실제 Python API와 프로토타입 지원 범위의 단일 참조다. 아래 [논리 설계](#범위와-설계-선택)는 장기 계약이며, 실제 입력으로 그대로 전달할 수 없다. 코드·기존 계약·평가 스키마는 이 문서 갱신으로 변경하지 않는다.
+**기준: 2026-11-10, PR #16 병합 `main` `ee3c270` 기반 2-A 구현.** 이 절은 실제 Python API와 프로토타입 지원 범위의 단일 참조다. 아래 [논리 설계](#범위와-설계-선택)는 장기 계약이며, 실제 입력으로 그대로 전달할 수 없다. 코드·기존 계약·평가 스키마는 이 문서 갱신으로 변경하지 않는다.
 
 ### 구현 상태와 호출 관계
 
@@ -17,7 +17,7 @@
 | Information Organization | 후보 배치·MOVE 목적지·의존 조건·중복 통합 계획과 독립 검증 | 일반 의미 기반 구조 재설계, 승인된 전체 실행 |
 | Expression Refinement | 원문 범위에 묶인 생성기 Preview, 제한된 문체·용어·압축과 독립 검사 | 범용 윤문 품질, 의미 동등성·전체 문서 승인 |
 | Reconstruction | 원본 전체 범위 유지, 제한된 패치·문단 배치·MOVE·동일 문단 통합 후보 | 새 제목/새 문서·부분 블록 재구성·일반 제거 실행 |
-| Validation Gate / Semantic Fidelity | 필수 검사 대조, 분석↔원문 양방향 의미 검토, 독립 최종 구조 검사 | 최종 **출력 문서** 의미 검토·사람/정책 승인 |
+| Validation Gate / Semantic Fidelity | 필수 검사 대조, 분석↔원문 양방향 의미 검토, 독립 최종 구조 검사, 전체 출력 의미 감사·선택적 모델 검토 | 전체 출력 의미 품질 평가·사람/정책 승인 |
 | Revision Controller | 추출 재시도·상위 변경 무효화, 최종 후보의 진단·재검증·중단 | 담당 모듈의 자동 수정→하위 재생성→전체 재검증 루프 |
 
 실제 코드는 `experiments/` 아래의 Python 표준 라이브러리 프로토타입이다. 정식 `logicwrite` 패키지·공개 SDK·MCP 서버·RAG·LangGraph는 없다. 실험용 CLI는 존재한다.
@@ -31,10 +31,11 @@ integration.run_pipeline (execution_mode: isolated_candidate)
   → analyze_source 또는 제공된 analysis → validate_analysis_gate
   → FAIL/STOPPED: 중단
   → REVIEW: generate_organization_plan → generate_revision_result
-  → reconstruct_documents → validate_final_result → REVIEW 또는 진단·STOPPED
+  → reconstruct_documents → validate_final_result → validate_final_semantics
+  → final_audit: REVIEW 또는 진단·STOPPED
 ```
 
-두 경로는 승인 권한을 공유해서 우회하지 않는다. 격리 후보를 계산해도 `stage_transition_allowed`와 `delivery_approved`는 `false`다. 분석 의미 검증기가 `supported`를 반환해도 사람/정책 승인이 없어 `REVIEW`이며, 최종 검증기는 별도로 `semantic_fidelity: not_run`을 반환한다. 분석의 의미 검토는 수정 후 전체 출력의 의미 검토를 대신하지 않는다.
+두 경로는 승인 권한을 공유해서 우회하지 않는다. 격리 후보를 계산해도 `stage_transition_allowed`와 `delivery_approved`는 `false`다. 분석 의미 검증기가 `supported`를 반환해도 사람/정책 승인이 없어 `REVIEW`이며, 기존 구조 검증기는 별도로 `semantic_fidelity: not_run`을 유지하고 전체 출력 의미 결과는 `final_semantic_report`에 기록한다. 분석의 의미 검토는 수정 후 전체 출력의 의미 검토를 대신하지 않는다.
 
 ### 입력: Writing Contract와 DocumentSnapshot
 
@@ -101,6 +102,17 @@ integration.run_pipeline (execution_mode: isolated_candidate)
 
 기본 분석은 단일 scope만 받지만 Organization/재구성의 하위 API는 바인딩된 입력과 `destination_snapshots`로 제한된 복수 문서 후보를 다룬다. 이 경로에서 원본·목적지·출력 ID는 현재 계약의 구체적인 `document_id` 또는 `target.document_id`에 선언돼야 한다. 역할만으로 문서를 만들지 않는다. 목적지 전체의 기존 내용은 보존하되 의미를 재분석·통합하지 않는다. 일반 다중 scope 입력을 분석부터 승인까지 처리하는 파일 E2E는 미구현이다.
 
+### 전체 출력 의미 검증 (2-A)
+
+구현: [`final_semantic_validator.py`](../experiments/full_document_control/final_semantic_validator.py). 실제 콜백/보고서 형식·제약·2-B 경계는 [전체 출력 의미 검증](../experiments/full_document_control/FINAL_SEMANTICS.md)을 참조한다. 위 구조 검증기의 고정 8개 검사와 `semantic_fidelity: not_run` 보고서는 그대로 유지하며 새 의미 결과를 별도로 반환한다.
+
+- `validate_final_semantics(bundle, analysis, org, preview, result, *, destination_snapshots=None, reviewer=None, max_review_chars=48000, timeout_seconds=30)` → `final-output-semantic-validation-v1`: 실제 전체 `output_snapshots`와 원본·목적지 전체를 비교. `checks`, 위치가 검증된 `evidence`, `findings`, `coverage`, `snapshot_refs`, 현재 본문 전체의 `binding_sha256`, `execution`, `report_sha256`를 반환한다.
+- `reviewer(request)` → dict 또는 JSON 문자열/바이트. 전체 원본·출력, 계약·관계·원장과 고정 검사 목록을 전달한다. 검토 예산을 초과하면 일부 문서만 보내지 않고 unresolved다. 모델의 문서/해시/범위/인용·판정·검사 누락을 독립 재검증하며 실제 의미 판단의 정확도를 보장하지 않는다.
+- `verify_final_semantic_report(..., report, *, destination_snapshots=None)` → `{valid, gate_state, reason, execution_evidence_matches_current_inputs}`. 현재 입력 본문·계약·계획·후보와 프로세스 내부 실행 receipt 전체를 대조한다. 다른 프로세스에 저장된 JSON만으로 실행을 인증하지 않는다.
+- `pipeline.validate_final_output(..., **kwargs)` / `verify_final_output_report(..., report, **kwargs)` → 두 독립 보고서를 묶은 `final-output-audit-v1` / 검증 결과. 구조 FAIL은 의미 supported로 덮어쓰지 않는다. 구조 FAIL이면 reviewer를 호출하지 않으며 기존 실패와 의미 미실행을 보존한다. 실행 중 입력 변경으로 증거가 무효화된 보고서는 입력 원복 후에도 재사용하지 못한다. 두 보고서 모두 `REVIEW|FAIL`만 반환하며 승인/단계 진입은 false다.
+
+숫자·단위·버전의 명백한 대체, 제한된 부정/조건 반전, 선언된 MOVE 조건의 문서 분리와 실제 위치 정합성을 확인한다. 일반 사실 동등성·문서 내부/문서 간 모순·목적지 문맥·통합 후 사실/귀속 손실은 선택적 모델 검토가 필요하다. 미실행·부분 검토·실패·시간 초과는 성공이 아니다. 실제 LLM 평가는 수행하지 않았으며 합성 콜백 회귀 검증과 구분한다. M0~M4 완료 기준·평가 성능은 변경하지 않는다.
+
 ### Validation Gate와 Semantic Fidelity Validator
 
 실제 호출 진입점은 [`pipeline.py`](../experiments/full_document_control/pipeline.py)의 wrapper다. [`semantic_validator.py`](../experiments/full_document_control/semantic_validator.py)의 하위 구현은 helper 함수를 주입받으며 별도 공개 SDK가 아니다.
@@ -120,9 +132,9 @@ integration.run_pipeline (execution_mode: isolated_candidate)
 | --- | --- | --- |
 | `pipeline.ExecutionController(max_attempts=2).run(input_bundle, model_responder, ...)` | responder `(window_index, window, prompt_text, attempt_no)` → 원시 응답; 추출·게이트·시도 이력·책임 모듈·무효화·다음 단계 결정 반환. `max_attempts`는 1~5 | FAIL/실행 오류의 제한 추출 재시도, REVIEW는 보류. 모든 모듈의 자동 수정을 뜻하지 않음 |
 | `check_and_invalidate_prior_state(input_bundle, plan=None)` / `attempt_reuse_validation_report(...)` | 원문·계약·계획 변경을 확인하고 재사용/진입 여부 검증 | 오래된 보고서나 허위 승인으로 진입 불가 |
-| `integration.run_pipeline(bundle, *, responses=None, analysis=None, organization_plan=None, generator=None, operations=None, destination_snapshots=None)` | 분석·보고서·계획·표현 Preview·재구성·최종 보고서·controller를 포함한 격리 후보 결과 | 상위 FAIL/STOPPED, 생성 오류·재구성 보류·최종 FAIL이면 STOPPED. REVIEW 후보 계산은 승인된 전환이 아님 |
+| `integration.run_pipeline(bundle, *, responses=None, analysis=None, organization_plan=None, generator=None, operations=None, destination_snapshots=None, final_semantic_reviewer=None, max_final_review_chars=48000, final_review_timeout=30)` | 분석·보고서·계획·표현 Preview·재구성·기존 구조 `final_report`·`final_semantic_report`·종합 `final_audit`·controller를 포함한 격리 후보 결과 | 상위 FAIL/STOPPED, 생성 오류·재구성 보류·최종 FAIL이면 STOPPED. REVIEW 후보 계산은 승인된 전환이 아님 |
 | `integration.RevisionController(artifacts=None).stop(findings)` | `state: STOPPED`, `last_gate_state`, `responsible_module`, `invalidated_artifacts`, `retry_count: 0`, reason 반환 | 저장된 하위 산출물 제거만 수행; 수정·자동 재호출 없음 |
-| `RevisionController.revalidate(bundle, analysis, org, preview, result, **kwargs)` | `{report, controller}`; 최종 검증 재실행, FAIL이면 중단 | 수정된 입력/결과는 호출자가 제공해야 함 |
+| `RevisionController.revalidate(bundle, analysis, org, preview, result, **kwargs)` | `{report, semantic_report, final_audit, controller}`; 구조·의미 검증 재실행, 종합 FAIL이면 중단 | 수정된 입력/결과는 호출자가 제공해야 함 |
 
 실제 파일 반영 경계: integration CLI는 Markdown/계약을 읽고 stdout에 JSON을 출력한다. 입력 문서 덮어쓰기·배포·승인 명령은 없다. 기존 `pipeline.py run`의 `--output`/`--save-run-dir`는 진단/실행 기록 저장이며 원본 문서 반영과 구별한다.
 
@@ -136,7 +148,7 @@ RAG·LangGraph 연결은 [별도 확장 설계](rag-langgraph-assignment-design.
 | 근거가 있는 intent/용어/자료·그룹별 계약 | 문자열 중심 계약·단일 scope·expected_literal. `source_material`/`intent_resolution` 등은 입력 불가 |
 | `AnalysisResult.assessments`와 범위별 다중 평가 | `units[].assessment`에 평가 하나. 일반 다중 scope 분석 미지원 |
 | 일반 배치·의미 통합·재작성 및 전체 RevisionResult | 제한된 Organization 계획, `revision-result-v1` 발췌와 `full-document-reconstruction-v1` 전체 후보가 별도 |
-| 범위별 적용 조건을 확장하는 공통 ValidationPlan | 분석 게이트의 고정 5개 검사와 최종 검증의 별도 고정 8개 검사. 자동 최종 PASS 없음 |
+| 범위별 적용 조건을 확장하는 공통 ValidationPlan | 분석 게이트의 고정 5개 검사와 최종 구조 검증의 고정 8개 검사, 별도 전체 출력 의미 7개 검사. 자동 최종 PASS 없음 |
 | 원인 모듈 자동 수정·하위 재생성·전달 | 추출 재시도와 진단/무효화/재검증/중단. 승인된 파일 적용 없음 |
 
 ### 현행화 근거와 검증
@@ -153,13 +165,13 @@ RAG·LangGraph 연결은 [별도 확장 설계](rag-langgraph-assignment-design.
 | [#13](https://github.com/nanocode00/LogicWrite/pull/13) · [#14](https://github.com/nanocode00/LogicWrite/pull/14) | Organization 계획·목적지 검증 및 Expression Preview·독립 검증 |
 | [#15](https://github.com/nanocode00/LogicWrite/pull/15) | 전체 후보 재구성·독립 최종 구조 검증·안전 중단·계약 문서 범위 강제 |
 
-2026-11-10 위 기준 코드에서 아래 명령을 실행해 **314개 통과**를 확인했다. 이 수치는 회귀 테스트 수이며 의미 검증기 단독 테스트 수, 실제 LLM 평가 수, 원격 CI 결과가 아니다.
+PR #15 기준 현행화 당시 **314개 통과** 기록을 유지한다. 2026-11-10 2-A 구현에서는 아래 명령으로 **347개 통과**(초기 신규 31개와 PR #18 검토 보완 2개)를 확인했다. 이 수치는 회귀 테스트 수이며 의미 검증기 단독 테스트 수, 실제 LLM 평가 수, 원격 CI 결과가 아니다.
 
 ```bash
 python3 -m unittest discover -s experiments/minimal_gate -p 'test_*.py'          # 31
 python3 -m unittest discover -s experiments/extraction_analysis -p 'test_*.py'  # 27
 python3 -m unittest discover -s experiments/extraction_ab -p 'test_*.py'        # 17
-python3 -m unittest discover -s experiments/full_document_control -p 'test_*.py' # 239
+python3 -m unittest discover -s experiments/full_document_control -p 'test_*.py' # 272
 ```
 
 문서의 INTEGRATION 계약 예시로 현 기획서 Markdown을 CLI에서 실행해 `REVIEW/candidate`, 원본 바이트 불변, 반복 실행 후보 스냅샷 일치를 확인했다. 같은 프로세스의 최종 보고서 재검증, REVIEW의 Organization 진입 차단, Expression 승인 실행의 `NOT_IMPLEMENTED`도 확인했다.
