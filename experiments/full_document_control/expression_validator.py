@@ -65,7 +65,8 @@ def validate_expression_result(bundle, analysis, organization_plan, result, *,
     violated = any(f['severity'] == 'ERROR' for f in findings)
     report = {'version': VERSION, 'gate_state': 'FAIL' if violated else 'REVIEW',
               'expression_checks_state': 'violated' if violated else
-                  ('unresolved' if any(f['rule_id'] in {'SEMANTIC_EQUIVALENCE_UNVERIFIED', 'CONTRACT_CONSTRAINT_UNRESOLVED'} for f in findings)
+                  ('unresolved' if any(f['rule_id'] in {'SEMANTIC_EQUIVALENCE_UNVERIFIED', 'CONTRACT_CONSTRAINT_UNRESOLVED',
+                                                         'GENERATION_ERROR', 'GENERATION_RECORD_UNVERIFIED'} for f in findings)
                    else 'passed'),
               'semantic_fidelity': 'unresolved', 'full_document_validation': 'not_run',
               'upstream_gate_state': upstream_state,
@@ -179,9 +180,27 @@ def _validate(bundle, analysis, org, result, destination_snapshots, validation_r
         if before != after and entries[uid]['operation'] == 'KEEP':
             finding('UNAUTHORIZED_EXPRESSION_OPERATION', 'KEEP cannot conceal text changes', fragment_id=fid)
         generation = fragment.get('generation', {})
-        if _approval_claim(generation):
+        # The response was reduced at execution time. Never trust its self-reported
+        # status (or a caller's recomputed revision digest) as execution evidence.
+        receipt = expression.generation_receipt(generation.get('receipt_id'))
+        verified_record = receipt['record'] if receipt else generation
+        if not receipt:
+            finding('GENERATION_RECORD_UNVERIFIED',
+                    'No local generation receipt; execution outcome is unverified', 'WARNING', fid)
+        elif (receipt['record'] != generation or receipt['run_id'] != result['meta'].get('generation_run_id')
+                or receipt['plan_sha256'] != plan.get('plan_sha256')
+                or receipt['fragment_id'] != fid or receipt['before_sha256'] != pipeline.digest_text(before)
+                or receipt['after_sha256'] != sha):
+            finding('GENERATION_RECORD_MISMATCH',
+                    'Generation signals or artifact bindings disagree with local execution', fragment_id=fid)
+        if (verified_record.get('approval_claim_detected') is True
+                or generation.get('approval_claim_detected') is True or _approval_claim(generation)):
             finding('GENERATOR_APPROVAL_CLAIM', 'Generator supplied approval fields', fragment_id=fid)
-        if generation.get('status') == 'execution_error':
+        allowed_fields = {'status', 'approval_claim_detected', 'error_code', 'receipt_id'}
+        if set(generation) - allowed_fields:
+            finding('INVALID_GENERATION_RECORD', 'Unexpected generation record fields', fragment_id=fid)
+        if (verified_record.get('status') == 'execution_error'
+                or verified_record.get('error_code') in {'INVALID_RESPONSE', 'GENERATOR_EXCEPTION'}):
             finding('GENERATION_ERROR', 'Generator failed; original excerpt must remain available', 'WARNING', fid)
             if before != after:
                 finding('EXPRESSION_TRACE_MISMATCH', 'Failed generation changed the original excerpt', fragment_id=fid)

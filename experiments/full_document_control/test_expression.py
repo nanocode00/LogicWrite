@@ -1,5 +1,9 @@
 """Source-bound Expression previews and independent anti-forgery counterexamples."""
 import copy
+from contextlib import redirect_stdout, redirect_stderr
+import io
+import logging
+from unittest.mock import patch
 import importlib.util
 import json
 import subprocess
@@ -433,6 +437,238 @@ class ExpressionTests(unittest.TestCase):
                     fragment['delivery_approved'] = True
                 self.seal(result)
                 self.assert_code(result, 'UNAUTHORIZED_EXPRESSION_APPROVAL')
+
+    def test_generator_metadata_is_not_retained(self):
+        marker = 'PRIVATE_METADATA_SENTINEL'
+        result = self.result(generator=lambda r: {'text': r['before'], 'api_key': marker,
+                              'internal_logs': [marker], 'metadata': {'token': marker}})
+        encoded = json.dumps(result)
+        self.assertNotIn(marker, encoded)
+        for fragment in result['preview_fragments']:
+            record = fragment['generation']
+            self.assertEqual(set(record), {'status', 'approval_claim_detected', 'error_code', 'receipt_id'})
+            self.assertNotIn('response', record)
+            self.assertNotIn('text', record)
+        self.assertNotIn(marker, json.dumps(self.validate(result)))
+
+    def test_ignored_nonserializable_metadata_does_not_fail_generation(self):
+        result = self.result(generator=lambda r: {'text': r['before'], 'unneeded': object()})
+        self.assertTrue(all(f['generation']['status'] == 'completed' for f in result['preview_fragments']))
+        self.assertNotIn('GENERATION_ERROR', {f['rule_id'] for f in self.validate(result)['findings']})
+
+    def test_cli_drops_response_metadata_and_adapter_prints(self):
+        marker = 'PRIVATE_CLI_SENTINEL'
+        class NoisyGenerator:
+            def generate(self, request):
+                print(marker)
+                print(marker, file=__import__('sys').stderr)
+                return {'text': request['before'], 'credential': marker, 'log': marker}
+        with tempfile.TemporaryDirectory() as directory:
+            paths = []
+            for name, obj in [('bundle', self.bundle), ('analysis', self.analysis), ('org', self.org)]:
+                path = Path(directory) / (name + '.json')
+                path.write_text(json.dumps(obj))
+                paths.append(str(path))
+            stdout, stderr = io.StringIO(), io.StringIO()
+            with patch.object(expression, 'DeterministicGenerator', NoisyGenerator), redirect_stdout(stdout), redirect_stderr(stderr):
+                self.assertEqual(expression.main(paths), 0)
+            self.assertNotIn(marker, stdout.getvalue() + stderr.getvalue())
+            self.assertEqual(json.loads(stdout.getvalue())['revision_result']['delivery_state'], 'preview')
+
+    def test_approval_signal_survives_metadata_filter(self):
+        for claim in ({'gate_state': 'PASS'}, {'delivery_approved': True},
+                      {'approved': True}, {'nested': {'passed': True}}):
+            with self.subTest(claim=claim):
+                result = self.result(generator=lambda r: {'text': r['before'], **claim})
+                self.assertTrue(all(f['generation'].get('approval_claim_detected') is True
+                                    for f in result['preview_fragments']))
+                self.assert_code(result, 'GENERATOR_APPROVAL_CLAIM')
+
+    def test_generation_error_cannot_be_passed_check(self):
+        self.bundle['writing_contract']['constraints'] = []
+        self.analysis['contract_sha256'] = pipeline.canonical_json_digest(self.bundle['writing_contract'])
+        self.seal(self.analysis, 'analysis_sha256')
+        self.org = organization.generate_organization_plan(self.bundle, self.analysis)
+        def broken(request):
+            raise RuntimeError('PRIVATE_EXCEPTION_SENTINEL')
+        result = self.result(broken)
+        self.assertTrue(all(c['before'] == c['after'] for c in result['change_set']))
+        report = self.validate(result)
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        self.assertEqual(report['expression_checks_state'], 'unresolved')
+        self.assertNotIn('PRIVATE_EXCEPTION_SENTINEL', json.dumps(result) + json.dumps(report))
+
+    def test_invalid_responses_restore_original_and_remain_unresolved(self):
+        for response in (None, [], {}, {'text': ''}, {'text': 4}):
+            with self.subTest(response=response):
+                result = self.result(generator=lambda r: response)
+                self.assertTrue(all(c['before'] == c['after'] for c in result['change_set']))
+                self.assertTrue(all(f['generation'].get('error_code') == 'INVALID_RESPONSE'
+                                    for f in result['preview_fragments']))
+                report = self.validate(result)
+                self.assertEqual(report['gate_state'], 'REVIEW')
+                self.assertEqual(report['expression_checks_state'], 'unresolved')
+
+    def test_invalid_response_does_not_hide_approval_claim(self):
+        result = self.result(generator=lambda r: {'text': None, 'delivery_approved': True})
+        self.assert_code(result, 'GENERATOR_APPROVAL_CLAIM')
+
+    def test_forged_success_receipt_rejected_even_after_rehash(self):
+        def broken(request):
+            raise RuntimeError('unavailable')
+        result = self.result(broken)
+        result['findings'] = []
+        for fragment in result['preview_fragments']:
+            fragment['generation']['status'] = 'completed'
+            fragment['generation'].pop('error_type', None)
+            fragment['generation']['error_code'] = None
+        self.seal(result)
+        self.assert_code(result, 'GENERATION_RECORD_MISMATCH')
+
+    def test_cleared_generation_and_findings_never_pass_checks(self):
+        result = self.result(generator=lambda r: None)
+        result['findings'] = []
+        for fragment in result['preview_fragments']:
+            fragment['generation'] = {}
+        self.seal(result)
+        report = self.validate(result)
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        self.assertEqual(report['expression_checks_state'], 'unresolved')
+        self.assertIn('GENERATION_RECORD_UNVERIFIED', {f['rule_id'] for f in report['findings']})
+
+    def test_removed_generation_error_finding_is_reconstructed(self):
+        result = self.result(generator=lambda r: None)
+        result['findings'] = []
+        self.seal(result)
+        self.assert_code(result, 'GENERATION_ERROR', state='REVIEW')
+        self.assertEqual(self.validate(result)['expression_checks_state'], 'unresolved')
+
+    def test_ascii_single_quote_immutable(self):
+        self.reset_source('기본 요청 제한 시간은 30초다.', "기본 요청 제한 시간은 30초다. '직접 인용'")
+        self.assert_code(self.rewrite('u-timeout', "기본 요청 제한 시간은 30초다. '수정 인용'"),
+                         'EXCLUDED_CONTEXT_MODIFIED')
+
+    def test_partial_ascii_single_quote_context_excluded(self):
+        self.reset_source('기본 요청 제한 시간은 30초다.', "'기본 요청 제한 시간은 30초다.'")
+        unit = next(u for u in self.analysis['units'] if u['id'] == 'u-timeout')
+        unit['quotes'][0]['quote'] = '기본 요청 제한 시간은 30초다.'
+        unit['source_spans'] = pipeline.resolve_block_quotes(unit['quotes'],
+                    {b['block_id']: b for b in self.analysis['blocks']}, self.bundle['document_snapshot'])
+        self.seal(self.analysis, 'analysis_sha256')
+        self.org = organization.generate_organization_plan(self.bundle, self.analysis)
+        self.assert_code(self.rewrite('u-timeout', '기본 요청 제한 시간은 30초입니다.'),
+                         'EXCLUDED_CONTEXT_MODIFIED')
+
+    def test_apostrophes_are_not_quote_pairs(self):
+        for text in ("don't change the user's defaults.", "users' settings don't change.",
+                     "O'Reilly's guide isn't outdated."):
+            with self.subTest(text=text):
+                matches = [m.group(0) for m in expression.INLINE_PROTECTED.finditer(text)]
+                self.assertEqual(matches, [])
+
+    def test_single_quote_next_to_korean_particle(self):
+        self.reset_source('기본 요청 제한 시간은 30초다.', "기본 요청 제한 시간은 30초다. '원문'을 인용한다.")
+        self.assert_code(self.rewrite('u-timeout', "기본 요청 제한 시간은 30초다. '변경'을 인용한다."),
+                         'EXCLUDED_CONTEXT_MODIFIED')
+
+    def test_unmatched_single_quote_conservatively_excluded(self):
+        self.reset_source('기본 요청 제한 시간은 30초다.', "기본 요청 제한 시간은 30초다. '닫히지 않은 인용")
+        self.assert_code(self.rewrite('u-timeout', "기본 요청 제한 시간은 30초다. '변경된 인용"),
+                         'EXCLUDED_CONTEXT_MODIFIED')
+
+    def test_code_string_with_single_quotes_still_protected(self):
+        self.reset_source('기본 요청 제한 시간은 30초다.', "기본 요청 제한 시간은 30초다. `print('value')`")
+        self.assert_code(self.rewrite('u-timeout', "기본 요청 제한 시간은 30초다. `print('other')`"),
+                         'EXCLUDED_CONTEXT_MODIFIED')
+
+    def test_approval_signal_cannot_be_cleared_with_recomputed_hash(self):
+        result = self.result(generator=lambda r: {'text': r['before'], 'approved': True})
+        result['findings'] = []
+        for fragment in result['preview_fragments']:
+            fragment['generation']['approval_claim_detected'] = False
+        self.seal(result)
+        self.assert_code(result, 'GENERATOR_APPROVAL_CLAIM')
+        self.assert_code(result, 'GENERATION_RECORD_MISMATCH')
+
+    def test_prior_run_receipts_cannot_hide_new_failure(self):
+        success = self.result()
+        failed = self.result(generator=lambda r: None)
+        failed['findings'] = []
+        for clean, broken in zip(success['preview_fragments'], failed['preview_fragments']):
+            broken['generation'] = copy.deepcopy(clean['generation'])
+        self.seal(failed)
+        self.assert_code(failed, 'GENERATION_RECORD_MISMATCH')
+
+    def test_unknown_receipts_stay_unresolved_after_export(self):
+        result = self.result()
+        for fragment in result['preview_fragments']:
+            fragment['generation']['receipt_id'] = 'unknown-process-receipt'
+        self.seal(result)
+        report = self.validate(result)
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        self.assertEqual(report['expression_checks_state'], 'unresolved')
+
+    def test_custom_exception_name_is_not_exposed(self):
+        private_exception = type('PRIVATE_EXCEPTION_CLASS_SENTINEL', (Exception,), {})
+        def broken(request):
+            raise private_exception('PRIVATE_EXCEPTION_MESSAGE_SENTINEL')
+        result = self.result(broken)
+        encoded = json.dumps(result) + json.dumps(self.validate(result))
+        self.assertNotIn('PRIVATE_EXCEPTION_', encoded)
+        self.assertTrue(all(f['generation'].get('error_code') == 'GENERATOR_EXCEPTION'
+                            for f in result['preview_fragments']))
+
+    def test_single_quoted_contraction_protected(self):
+        text = "He said 'don't change this'. The user's guide applies."
+        protected = [m.group(0) for m in expression.INLINE_PROTECTED.finditer(text)]
+        self.assertEqual(protected, ["'don't change this'"])
+
+    def test_term_edit_outside_apostrophes_is_not_excluded(self):
+        request = {'before': "don't modify the user's 런타임.", 'operation': 'REVISE',
+                   'excluded': False, 'constraints': {'register': '한다체', 'terminology': {'런타임': 'Runtime'}}}
+        self.assertEqual(expression.DeterministicGenerator().generate(request)['text'],
+                         "don't modify the user's Runtime.")
+
+    def test_preconfigured_logging_handler_does_not_leak_generator_data(self):
+        marker = 'PRIVATE_LOG_SENTINEL'
+        stream = io.StringIO()
+        logger = logging.getLogger('expression_generator_privacy_test')
+        handler = logging.StreamHandler(stream)
+        logger.addHandler(handler)
+        old_level, old_propagate = logger.level, logger.propagate
+        old_disabled = logging.root.manager.disable
+        logger.setLevel(logging.WARNING)
+        logger.propagate = False
+        try:
+            def generator(request):
+                logger.warning(marker)
+                return {'text': request['before'], 'internal_log': marker}
+            result = self.result(generator)
+            self.assertNotIn(marker, stream.getvalue() + json.dumps(result))
+            self.assertEqual(logging.root.manager.disable, old_disabled)
+        finally:
+            logger.removeHandler(handler)
+            handler.close()
+            logger.setLevel(old_level)
+            logger.propagate = old_propagate
+
+    def test_plural_possessive_inside_single_quote_remains_protected(self):
+        text = "He said 'The users' 런타임 settings are fixed.'"
+        request = {'before': text, 'operation': 'REVISE', 'excluded': False,
+                   'constraints': {'register': '한다체', 'terminology': {'런타임': 'Runtime'}}}
+        self.assertEqual(expression.DeterministicGenerator().generate(request)['text'], text)
+        self.reset_source('기본 요청 제한 시간은 30초다.', '기본 요청 제한 시간은 30초다. ' + text)
+        self.assert_code(self.rewrite('u-timeout',
+                '기본 요청 제한 시간은 30초다. ' + text.replace('런타임', 'Runtime')),
+                'EXCLUDED_CONTEXT_MODIFIED')
+
+    def test_logging_settings_restored_after_generator_exception(self):
+        old_disabled = logging.root.manager.disable
+        def broken(request):
+            raise RuntimeError('PRIVATE_ERROR_LOG_SENTINEL')
+        result = self.result(broken)
+        self.assertEqual(logging.root.manager.disable, old_disabled)
+        self.assertEqual(self.validate(result)['expression_checks_state'], 'unresolved')
 
 
 if __name__ == '__main__':

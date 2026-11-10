@@ -4,6 +4,11 @@ A generator is a callable(request) -> {'text': str}, or an object with generate.
 It proposes text only. Approval, placement and independent validation are external.
 """
 import copy
+from collections import OrderedDict
+from contextlib import redirect_stdout, redirect_stderr
+import os
+import logging
+import secrets
 from pathlib import Path
 import re
 import sys
@@ -19,7 +24,57 @@ PLAN_VERSION = 'expression-plan-v1'
 RESULT_VERSION = 'revision-result-v1'
 OPERATIONS = {'KEEP', 'REVISE', 'COMPRESS'}
 EXCLUDED_KINDS = {'heading', 'table', 'code_block', 'blockquote', 'unsupported'}
-INLINE_PROTECTED = re.compile(r'(`+)[^`\n]+\1|https?://[^\s<>]+|"[^"\n]+"|“[^”\n]+”|‘[^’\n]+’')
+# ASCII apostrophes within words are not opening quotes. A closing quote may
+# precede a Korean particle. Unclosed boundary quotes protect the rest of a line.
+ASCII_QUOTE = r"(?<![A-Za-z0-9_'])'(?:[^'\n]|(?<=[A-Za-z])'(?=[A-Za-z])|(?<=[sS])'(?=\s))+'(?![A-Za-z0-9_'])"
+ASCII_UNCLOSED_QUOTE = r"(?<![A-Za-z0-9_'])'[^\n]*$"
+INLINE_PROTECTED = re.compile(
+    r'(`+)[^`\n]+\1|https?://[^\s<>]+|"[^"\n]+"|“[^”\n]+”|‘[^’\n]+’|'
+    + ASCII_QUOTE + '|' + ASCII_UNCLOSED_QUOTE, re.MULTILINE)
+
+# Process-local execution facts, not model response archives or durable approval.
+# Eviction/restart makes old receipts unverified (REVIEW), never successful.
+_GENERATION_RECEIPTS = OrderedDict()
+_GENERATION_RECEIPT_LIMIT = 4096
+
+
+def response_claims_approval(value, seen=None):
+    """Reduce arbitrary response metadata to one boolean without retaining it."""
+    seen = set() if seen is None else seen
+    if isinstance(value, (dict, list)):
+        if id(value) in seen:
+            return False
+        seen.add(id(value))
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if ((key in {'gate_state', 'status', 'validation_state'} and item == 'PASS')
+                    or (key in {'PASS', 'approved', 'passed', 'delivery_approved',
+                                'next_stage_allowed', 'stage_transition_allowed'} and item is True)):
+                return True
+            if response_claims_approval(item, seen):
+                return True
+    elif isinstance(value, list):
+        return any(response_claims_approval(item, seen) for item in value)
+    return False
+
+
+def _register_generation_record(record, run_id, plan_sha, fragment_id, before, after):
+    # Use the canonical imported module even for spec-loaded tests and CLI __main__.
+    import expression as runtime
+    record['receipt_id'] = secrets.token_hex(16)
+    runtime._GENERATION_RECEIPTS[record['receipt_id']] = {
+        'record': dict(record), 'run_id': run_id, 'plan_sha256': plan_sha, 'fragment_id': fragment_id,
+        'before_sha256': pipeline.digest_text(before), 'after_sha256': pipeline.digest_text(after)}
+    while len(runtime._GENERATION_RECEIPTS) > runtime._GENERATION_RECEIPT_LIMIT:
+        runtime._GENERATION_RECEIPTS.popitem(last=False)
+    return record
+
+
+def generation_receipt(receipt_id):
+    """Return a copy of minimal local execution evidence; unknown IDs grant nothing."""
+    import expression as runtime
+    return copy.deepcopy(runtime._GENERATION_RECEIPTS.get(receipt_id))
+
 
 
 def seal(value, field):
@@ -172,6 +227,7 @@ def generate_revision_result(bundle, analysis, organization_plan, *, generator=N
                                  destination_snapshots=destination_snapshots, validation_report=validation_report)
     generator = generator or DeterministicGenerator()
     generate = generator.generate if hasattr(generator, 'generate') else generator
+    run_id = secrets.token_hex(16)
     fragments, changes, trace, findings = [], [], [], []
     for entry in plan['entries']:
         for index, span in enumerate(entry['source_spans']):
@@ -181,19 +237,40 @@ def generate_revision_result(bundle, analysis, organization_plan, *, generator=N
                        'excluded': entry['excluded'], 'constraints': copy.deepcopy(plan['constraints']),
                        'protected_elements': copy.deepcopy(entry['protected_elements']),
                        'relations': copy.deepcopy(entry['relations']), 'source_span': copy.deepcopy(span)}
+            approval_claim = False
+            error_code = None
+            after = before
             try:
-                response = generate(copy.deepcopy(request))
-                if not isinstance(response, dict) or not isinstance(response.get('text'), str) or not response['text'].strip():
-                    raise ValueError('Generator must return a nonempty text string')
-                # Store only JSON-safe response fields needed for the audit.
-                record = {'status': 'completed', 'response': copy.deepcopy(response)}
-                pipeline.canonical_json_digest(record)
-                after = response['text']
-            except Exception as exc:
-                after = before
-                record = {'status': 'execution_error', 'error_type': type(exc).__name__}
+                # Adapter stdout/stderr is not a revision log. Discard Python stream
+                # writes rather than mixing arbitrary adapter data into CLI JSON.
+                with open(os.devnull, 'w') as sink, redirect_stdout(sink), redirect_stderr(sink):
+                    previous_logging_disable = logging.root.manager.disable
+                    try:
+                        # Existing logging handlers retain streams, so redirects alone
+                        # cannot prevent standard logging from leaking adapter output.
+                        logging.disable(sys.maxsize)
+                        response = generate(copy.deepcopy(request))
+                        approval_claim = response_claims_approval(response)
+                        if (not isinstance(response, dict) or type(response.get('text')) is not str
+                                or not response['text'].strip()):
+                            error_code = 'INVALID_RESPONSE'
+                        else:
+                            after = response['text']
+                    finally:
+                        logging.disable(previous_logging_disable)
+                # No metadata, response copies, exception strings or text duplicates
+                # survive this boundary. The fragment content is the output authority.
+            except Exception:
+                error_code = 'GENERATOR_EXCEPTION'
+            record = {'status': 'execution_error' if error_code else 'completed',
+                      'approval_claim_detected': approval_claim, 'error_code': error_code}
+            record = _register_generation_record(record, run_id, plan['plan_sha256'], fid, before, after)
+            if error_code:
                 findings.append({'rule_id': 'GENERATION_ERROR', 'severity': 'WARNING', 'fragment_id': fid,
                                  'message': 'Original source preserved; generator failed'})
+            if approval_claim:
+                findings.append({'rule_id': 'GENERATOR_APPROVAL_CLAIM', 'severity': 'ERROR', 'fragment_id': fid,
+                                 'message': 'Generator supplied an unauthorized approval claim'})
             operation = 'KEEP' if before == after else entry['operation']
             sha = pipeline.digest_text(after)
             output_span = {'fragment_id': fid, 'snapshot_sha256': sha, 'start': 0, 'end': len(after)}
@@ -212,7 +289,7 @@ def generate_revision_result(bundle, analysis, organization_plan, *, generator=N
                           'source_spans': [copy.deepcopy(span)], 'output_spans': [copy.deepcopy(output_span)],
                           'treatment': operation, 'justification': entry['id']})
     result = {'version': RESULT_VERSION, 'meta': {'producer': VERSION, 'preview_only': True,
-              'execution_mode': 'preview', 'stage_transition_allowed': False},
+              'execution_mode': 'preview', 'stage_transition_allowed': False, 'generation_run_id': run_id},
               'organization_ref': copy.deepcopy(plan['organization_ref']), 'expression_plan': plan,
               'output_snapshots': [], 'preview_fragments': fragments, 'change_set': changes,
               'trace': trace, 'findings': findings, 'delivery_state': 'preview',

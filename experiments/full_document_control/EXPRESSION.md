@@ -25,6 +25,12 @@ python3 experiments/full_document_control/expression.py \
 
 생성기는 `callable(request) -> {"text": str}` 또는 같은 계약의 `.generate(request)` 객체다. request에는 `unit_id`, 정확한 `before`, `operation`, `excluded`, `constraints`, `protected_elements`, `relations`, `source_span`을 깊은 복사로 제공한다. 모델별 SDK는 포함하지 않는다. 어댑터 실패·잘못된 응답은 원문을 유지하고 `GENERATION_ERROR`로 보류한다. 응답의 `PASS`/전달 승인 주장은 별도 위반이며 실제 출력 검사는 항상 수행한다. 임의 Python 어댑터를 보안 샌드박스로 격리하는 기능은 없다.
 
+생성 응답에서 허용하는 데이터는 비어 있지 않은 일반 문자열 `text`와, 중첩 승인 주장의 존재 여부를 줄인 boolean 신호뿐이다. 임의 메타데이터·인증정보·내부 로그·응답 원문·예외 메시지/클래스명은 기록하지 않는다. `text`는 조각 `content`를 기준으로 기존 change_set의 전후 추적에만 사용하고 `generation`에 다시 복사하지 않는다. Python stdout/stderr 및 표준 logging은 어댑터 호출 동안 버리고 원래 로깅 설정은 예외 발생 시에도 복구한다. 이 억제는 동기식 프로토타입의 프로세스 전역 설정이며 동시 실행 격리 기능이 아니다. OS 파일 디스크립터 직접 쓰기·별도 프로세스·외부 전송을 막는 보안 샌드박스도 아니다.
+
+`preview_fragments[].generation`에는 `status`(`completed`/`execution_error`), `approval_claim_detected`(boolean), `error_code`(`null`/`INVALID_RESPONSE`/`GENERATOR_EXCEPTION`), `receipt_id`만 저장한다. 잘못된 응답에 승인 주장이 같이 있어도 신호를 남겨 위반으로 판정한다. 생성 실패는 원문을 복구해도 `GENERATION_ERROR`, `expression_checks_state: unresolved`, `gate_state: REVIEW`다(별도 확정 위반은 기존처럼 FAIL).
+
+실행 경계는 모델 응답 대신 위 최소 신호와 실행 ID·계획/입출력 다이제스트만 프로세스 내부에 보관해 재대조한다. `meta.generation_run_id`와 `receipt_id`는 승인 권한이 아니며, 다른 실행의 성공 기록을 붙이거나 실패 신호를 바꾼 경우 `GENERATION_RECORD_MISMATCH`로 차단한다. findings를 지워도 실행 기록에서 실패·승인 위반을 복원한다. 기록은 최대 4,096건이며 만료·프로세스 재시작·삭제/알 수 없는 ID로 확인할 수 없으면 `GENERATION_RECORD_UNVERIFIED`와 unresolved/REVIEW를 유지한다. 내보낸 JSON과 재계산한 해시만으로 실행 성공을 인증할 수 없으며 같은 프로세스에서 임의 Python 코드로 레지스트리를 바꾸는 공격까지 방어하지 않는다.
+
 ## 실제 수정 기능과 제약
 
 | 기능 | 구현 범위 |
@@ -34,7 +40,9 @@ python3 experiments/full_document_control/expression.py \
 | 문체 | `WritingContract.register`의 한다체·합니다체·해요체 중 구현된 종결 표현 변환. 완전한 한국어 문법·활용 분석은 아님 |
 | 용어 | 문자열 제약 `TERM: 이전표현 => 표준표현`. 이미 표준 용어인 경우 재치환하지 않음 |
 | 명시 제약 | `PRESERVE: 문자값`, `FORBID: 문자값`, `EXCLUDE_BLOCK: B003` |
-| 수정 제외 | 코드 블록·명령 블록·인용 블록·제목·표 및 명시 제외 블록 전체. 인라인 코드·URL·직접 인용도 보호. 발췌가 인라인 보호 구간의 일부만 포함하면 전체 단위를 보수적으로 수정 제외 |
+| 수정 제외 | 코드 블록·명령 블록·인용 블록·제목·표 및 명시 제외 블록 전체. 인라인 코드·URL·큰따옴표·곡선 따옴표 및 경계 ASCII 작은따옴표 인용도 보호. 발췌가 인라인 보호 구간의 일부만 포함하면 전체 단위를 보수적으로 수정 제외 |
+
+ASCII 작은따옴표는 단어 내부 아포스트로피(`don't`, `O'Reilly's`)·단독 소유격(`users'`)과 구분한다. 인용문 안의 축약형과 `users'` 같은 복수 소유격도 보호한다. 닫히지 않은 경계 따옴표는 그 줄 끝까지 보수적으로 보호한다. 정규식 기반이므로 중첩 인용·여러 줄 인용·선행 아포스트로피 축약형(`'tis`)의 완전한 언어적 구분은 보장하지 않으며 일부 산문이 과보호될 수 있다. 불명확한 결과는 기존 의미 검증 REVIEW를 유지한다.
 
 해석하지 못한 자연어 제약·문체는 `CONTRACT_CONSTRAINT_UNRESOLVED`로 보류한다. 수정 제외 구간의 표준 용어·문체를 강제로 바꾸지 않는다. 입력이 이미 목표 문체이고 반복·별칭이 없으면 기본 생성 결과가 모두 `KEEP`일 수 있다. 이는 다른 입력에서 실제 변환하는 경로가 없다는 뜻이 아니다.
 
