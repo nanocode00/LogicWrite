@@ -136,3 +136,15 @@
 ### 다음 단계 (재개 지점)
 - Expression Refinement(표현 수정) 모듈 프로토타입 구현 및 OrganizationPlan 기반 수정 계획(`ExpressionPlan`, `RevisionResult`) 연동.
 - 다중 문서 스냅샷 로더 및 실제 cross-document 변경 세트 어댑터 확장.
+
+
+## 7. PR #13 MOVE 검증 최종 P1 보완 (2026-11-10)
+
+- 기준 커밋: `066da79`, 브랜치: `prototype/information-organization`.
+- 실제 배치 대상의 문서 ID를 계약의 scope 및 원본 문서와 대조한다. `action`과 무관하게 모든 확정 배치에 목적지 스냅샷·버전·다이제스트 검증을 적용한다. `KEEP`/`CONSOLIDATE` 외부 배치, `REMOVE`+targets, 원본 scope/대상 문서 모순은 `INCONSISTENT_PLACEMENT`로 차단한다. 차단/보류된 제안은 실제 이동으로 취급하지 않는다.
+- 원본 AnalysisResult의 `qualifies`(조건→주장), `depends_on`(주장→필수 정보)와 requirement binding의 검증된 조건 연결에서 의존성을 재구성한다. 모든 주장 배치 문서에서 조건이 함께 배치되거나 검증 가능한 노출이 있어야 하며, 주장만 이동하거나 조건만 이동하여 분리되면 `MOVE_SEVERS_REQUIRED_CONDITION`으로 차단한다. 배치의 `retained_elements`에서 원본 요소 ID가 빠지는 것도 차단한다.
+- 별도 노출 증거는 주장 target의 `condition_links`로 제공한다. 필드: `condition_unit_id`, `document_id`, `snapshot_sha256`, `version`, `start`, `end`, `quote`. 인용은 해당 목적지의 독립 검증에 사용한 실제 스냅샷에서 `[start:end]`와 정확히 일치하고, 원본 조건 단위의 전체 statement여야 한다. 다른 버전/중복 스냅샷, 일부 인용, 단순 URL이나 계획의 보존 주장은 증거가 아니다.
+- `supports`는 필수 의존 관계로 취급하지 않는다. 미확정 관계 상태/신뢰도, 누락된 의존 단위는 `MOVE_DEPENDENCY_INTEGRITY: unresolved`로 기록하고 `REVIEW`를 유지한다. 상위 Validation Gate, Semantic Fidelity Validator, Preview의 단계 전환 금지 정책은 변경하지 않았다.
+- 반례 우선 검증: 최초 추가 15건 중 11건 실패(10 failures, 미구현 검사 ID로 인한 1 error), 추가 경계 6건 중 3건 실패를 확인한 뒤 수정했다. 총 21개 테스트 추가. 기존 158개 테스트를 유지하되, 기존 정상 macOS MOVE 사례는 수동 재설치 조건도 동반 이동하도록 보완했다(기존 단독 이동은 이번 P1의 실제 반례).
+- 최종 로컬 검증: full_document_control 104개, minimal_gate 31개, extraction_analysis 27개, extraction_ab 17개, 총 179개 통과. `git diff --check` 통과. 실제 문서 수정/외부 LLM 호출/후속 모듈 구현은 수행하지 않았다.
+- 구조적 한계: 원본 분석의 관계/요소 정확성은 기존 독립 의미 검증 및 상위 게이트의 책임이다. 같은 문서 내 구체적 가독성·조건 인접성의 의미 판단은 수행하지 않으며, 연결 증거는 전체 statement의 정확 인용만 인정하므로 의역·외부 URL만 있는 연결은 승인하지 않는다. 스냅샷 해시는 내용 무결성 확인이며 외부 저장소의 신원 인증이 아니다. 여기서 검증하는 것은 적용 전 후보 계획이며 실제 적용 후 문서의 의미 검증을 대체하지 않는다.

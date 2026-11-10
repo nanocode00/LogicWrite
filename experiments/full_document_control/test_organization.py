@@ -423,7 +423,8 @@ class InformationOrganizationTests(unittest.TestCase):
         plan = organization.generate_organization_plan(
             move_bundle,
             move_analysis,
-            candidate_actions={'u-table-macos': {'action': 'MOVE', 'target_scope_id': 'packaging_doc'}},
+            candidate_actions={uid: {'action': 'MOVE', 'target_scope_id': 'packaging_doc'}
+                               for uid in ('u-table-macos', 'u-cond-macos-manual')},
             destination_snapshots=verified_snap,
             validation_report=self.val_report,
         )
@@ -488,6 +489,170 @@ class InformationOrganizationTests(unittest.TestCase):
         self.assertTrue(val_res['is_valid'])
         checks_by_id = {c['check_id']: c for c in val_res['check_results']}
         self.assertEqual(checks_by_id['CONSOLIDATION_FIDELITY']['status'], 'passed')
+
+
+class MoveIntegrityTests(unittest.TestCase):
+    setUp = InformationOrganizationTests.setUp
+    # Reuse setup only, without running the inherited regression methods twice.
+    def _case(self, moved=('u-runtime-overview',), verified=True):
+        self.bundle['writing_contract']['output_scopes'].append({
+            'scope_id': 'dest', 'kind': 'document', 'document_id': 'doc-dest'})
+        self.analysis['contract_sha256'] = pipeline.canonical_json_digest(self.bundle['writing_contract'])
+        self._seal(self.analysis, 'analysis_sha256')
+        condition = next(u for u in self.analysis['units'] if u['id'] == 'u-cond-offline-cache')
+        content = '# Destination\n' + condition['statement'] + '\n'
+        self.snaps = [{'document_id': 'doc-dest', 'version': '1', 'content': content,
+                       'sha256': pipeline.digest_text(content)}] if verified else []
+        self.plan = organization.generate_organization_plan(
+            self.bundle, self.analysis, destination_snapshots=self.snaps,
+            candidate_actions={uid: {'action': 'MOVE', 'target_scope_id': 'dest'} for uid in moved})
+        return self._plc(moved[0]) if moved else None
+
+    def _seal(self, obj, field='plan_sha256'):
+        obj[field] = pipeline.canonical_json_digest({k: v for k, v in obj.items() if k != field})
+
+    def _plc(self, uid):
+        return next(p for p in self.plan['placements'] if p['unit_id'] == uid)
+
+    def _validate(self):
+        self._seal(self.plan)
+        return organization.validate_organization_plan(
+            self.bundle, self.analysis, self.plan, destination_snapshots=self.snaps)
+
+    def _assert_failure(self, code):
+        report = self._validate()
+        self.assertEqual(report['gate_state'], 'FAIL')
+        self.assertIn(code, '; '.join(report['diagnostics']))
+
+    def test_keep_disguise(self):
+        p = self._case(('u-timeout',), verified=False)
+        p.update(action='KEEP', disposition='placed')
+        self._assert_failure('INCONSISTENT_PLACEMENT')
+
+    def test_consolidate_disguise(self):
+        p = self._case(('u-timeout',))
+        p['action'] = 'CONSOLIDATE'
+        self._assert_failure('INCONSISTENT_PLACEMENT')
+
+    def test_remove_with_targets(self):
+        p = self._case(('u-timeout',))
+        p.update(action='REMOVE', disposition='omitted')
+        self._assert_failure('INCONSISTENT_PLACEMENT')
+
+    def test_rehashed_disguise_still_checks_destination(self):
+        p = self._case(('u-timeout',), verified=False)
+        p.update(action='KEEP', disposition='placed')
+        self.plan['findings'] = []
+        self._assert_failure('UNVERIFIED_DESTINATION_CONFIRMED_MOVE')
+
+    def test_claim_without_required_condition(self):
+        self._case()
+        self._assert_failure('MOVE_SEVERS_REQUIRED_CONDITION')
+
+    def test_claim_and_condition_together(self):
+        self._case(('u-runtime-overview', 'u-cond-offline-cache'))
+        self.assertTrue(self._validate()['is_valid'])
+
+    def _add_link(self):
+        snap = self.snaps[0]
+        quote = next(u['statement'] for u in self.analysis['units'] if u['id'] == 'u-cond-offline-cache')
+        start = snap['content'].index(quote)
+        self._plc('u-runtime-overview')['targets'][0]['condition_links'] = [{
+            'condition_unit_id': 'u-cond-offline-cache', 'document_id': snap['document_id'],
+            'snapshot_sha256': snap['sha256'], 'version': snap['version'],
+            'start': start, 'end': start + len(quote), 'quote': quote}]
+
+    def test_verified_destination_condition_link(self):
+        self._case()
+        self._add_link()
+        self.assertTrue(self._validate()['is_valid'])
+
+    def test_forged_condition_link(self):
+        self._case()
+        self._add_link()
+        self._plc('u-runtime-overview')['targets'][0]['condition_links'][0]['start'] = 0
+        self._assert_failure('MOVE_SEVERS_REQUIRED_CONDITION')
+
+    def test_condition_only_move(self):
+        self._case(('u-cond-offline-cache',))
+        self._assert_failure('MOVE_SEVERS_REQUIRED_CONDITION')
+
+    def test_uncertain_dependency_review(self):
+        cond = next(u for u in self.analysis['units'] if u['id'] == 'u-cond-offline-cache')
+        cond['relations'][0]['status'] = 'unresolved'
+        self._case(('u-runtime-overview', 'u-cond-offline-cache'))
+        report = self._validate()
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        checks = {c['check_id']: c for c in report['check_results']}
+        self.assertEqual(checks['MOVE_DEPENDENCY_INTEGRITY']['status'], 'unresolved')
+
+    def test_same_document_keep(self):
+        self._case(())
+        self.assertTrue(self._validate()['is_valid'])
+
+    def test_target_document_scope_mismatch(self):
+        p = self._case(('u-timeout',))
+        p['targets'][0]['document_id'] = self.bundle['document_snapshot']['document_id']
+        self._assert_failure('INCONSISTENT_PLACEMENT')
+
+    def test_placement_source_scope_mismatch(self):
+        p = self._case(('u-timeout',))
+        p['scope_id'] = 'dest'
+        self._assert_failure('INCONSISTENT_PLACEMENT')
+
+    def test_depends_on_direction(self):
+        cond = next(u for u in self.analysis['units'] if u['id'] == 'u-cond-offline-cache')
+        cond['relations'] = []
+        claim = next(u for u in self.analysis['units'] if u['id'] == 'u-runtime-overview')
+        claim['relations'].append({'kind': 'depends_on', 'target_unit_id': cond['id']})
+        self._case()
+        self._assert_failure('MOVE_SEVERS_REQUIRED_CONDITION')
+
+    def test_general_reference_does_not_require_colocation(self):
+        claim = next(u for u in self.analysis['units'] if u['id'] == 'u-timeout')
+        claim['relations'].append({'kind': 'supports', 'target_unit_id': 'u-table-ubuntu'})
+        self._case(('u-timeout',))
+        self.assertTrue(self._validate()['is_valid'])
+
+    def test_stale_link_version(self):
+        self._case()
+        self._add_link()
+        self._plc('u-runtime-overview')['targets'][0]['condition_links'][0]['version'] = 'old'
+        self._assert_failure('MOVE_SEVERS_REQUIRED_CONDITION')
+
+    def test_link_cannot_use_alternate_snapshot_for_same_document(self):
+        self._case()
+        self._add_link()
+        old = copy.deepcopy(self.snaps[0])
+        self.snaps[0].update(content='# No condition', version='2',
+                             sha256=pipeline.digest_text('# No condition'))
+        self.snaps.append(old)
+        self._assert_failure('MOVE_SEVERS_REQUIRED_CONDITION')
+
+    def test_colocated_condition_cannot_drop_elements(self):
+        self._case(('u-runtime-overview', 'u-cond-offline-cache'))
+        self._plc('u-cond-offline-cache')['targets'][0]['retained_elements'] = []
+        self._assert_failure('REQUIRED_PLACEMENT_ELEMENTS_DROPPED')
+
+    def test_numeric_uncertainty_review(self):
+        cond = next(u for u in self.analysis['units'] if u['id'] == 'u-cond-offline-cache')
+        cond['relations'][0]['confidence'] = 0.3
+        self._case(('u-runtime-overview', 'u-cond-offline-cache'))
+        checks = {c['check_id']: c for c in self._validate()['check_results']}
+        self.assertEqual(checks['MOVE_DEPENDENCY_INTEGRITY']['status'], 'unresolved')
+
+    def test_missing_dependency_endpoint_review(self):
+        claim = next(u for u in self.analysis['units'] if u['id'] == 'u-timeout')
+        claim['relations'].append({'kind': 'depends_on', 'target_unit_id': 'unknown'})
+        self._case(('u-timeout',))
+        checks = {c['check_id']: c for c in self._validate()['check_results']}
+        self.assertEqual(checks['MOVE_DEPENDENCY_INTEGRITY']['status'], 'unresolved')
+
+    def test_provisional_move_remains_review(self):
+        self._case(('u-timeout',), verified=False)
+        report = self._validate()
+        self.assertEqual(report['gate_state'], 'REVIEW')
+        self.assertFalse(report['next_stage_allowed'])
 
 
 if __name__ == '__main__':

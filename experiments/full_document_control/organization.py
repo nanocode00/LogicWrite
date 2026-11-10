@@ -1309,34 +1309,71 @@ def validate_organization_plan(
                 f'FORGED_DESTINATION_REVIEW_APPROVAL: Plan claims allows_confirmed_move=True for "{sc_id}", but independent verification is {ind_rev.get("verification_status")}'
             )
 
+    source_doc = input_bundle.get('document_snapshot', {}).get('document_id')
+    # scope_id on a placement identifies its source; targets identify resulting locations.
+    placed_documents = {}
+    targets_by_uid = {}
     for plc in placements:
         if not isinstance(plc, dict):
             continue
+        uid = plc.get('unit_id')
         action = plc.get('action')
         disposition = plc.get('disposition')
         targets = plc.get('targets', [])
+        source_review = independent_dest_reviews.get(plc.get('scope_id'), {})
+        inconsistent = source_review.get('document_id') != source_doc
+        inconsistent |= action not in {'KEEP', 'MOVE', 'CONSOLIDATE', 'REMOVE', 'FLAG'}
+        inconsistent |= disposition not in {'placed', 'omitted', 'blocked', 'flagged'}
+        inconsistent |= action == 'REMOVE' and (disposition != 'omitted' or bool(targets))
+        inconsistent |= disposition == 'omitted' and (action != 'REMOVE' or bool(targets))
+        inconsistent |= disposition == 'placed' and (not targets or action == 'FLAG')
+        inconsistent |= action in {'KEEP', 'CONSOLIDATE'} and disposition != 'placed'
+        placed_documents[uid] = {source_doc} if disposition in {'blocked', 'flagged'} else set()
+        targets_by_uid[uid] = []
 
         for tgt in targets:
             tgt_scope = tgt.get('scope_id')
             ind_rev = independent_dest_reviews.get(tgt_scope)
-
             if not ind_rev:
                 dest_ok = False
                 dest_reasons.append(f'UNAUTHORIZED_DESTINATION_SCOPE: Target references undeclared scope "{tgt_scope}"')
                 continue
-
-            if action == 'MOVE':
-                if disposition == 'placed':
-                    if not ind_rev.get('allows_confirmed_move'):
-                        dest_ok = False
-                        status_reason = ind_rev.get('error') or ind_rev.get('verification_status')
-                        dest_reasons.append(
-                            f'UNVERIFIED_DESTINATION_CONFIRMED_MOVE: Unit {plc.get("unit_id")} confirmed placed into destination "{tgt_scope}" ({ind_rev.get("verification_status")}: {status_reason})'
-                        )
-                elif disposition in {'blocked', 'flagged'}:
-                    review_reasons.append(
-                        f'UNVERIFIED_MOVE_PROPOSAL: Unit {plc.get("unit_id")} proposed for MOVE to provisional destination "{tgt_scope}" ({ind_rev.get("verification_status")})'
+            declared_doc = ind_rev.get('document_id')
+            # An explicit document identity must agree with its authoritative scope.
+            if tgt.get('document_id') is not None and tgt['document_id'] != declared_doc:
+                inconsistent = True
+            cross_document = declared_doc != source_doc or tgt.get('document_id', declared_doc) != source_doc
+            if disposition == 'placed':
+                if cross_document and action != 'MOVE':
+                    inconsistent = True
+                if action == 'MOVE' and not cross_document:
+                    inconsistent = True
+                # Check destination reality for EVERY actual placement, regardless of action.
+                if not ind_rev.get('allows_confirmed_move'):
+                    dest_ok = False
+                    status_reason = ind_rev.get('error') or ind_rev.get('verification_status')
+                    dest_reasons.append(
+                        f'UNVERIFIED_DESTINATION_CONFIRMED_MOVE: Unit {uid} placed into "{tgt_scope}" ({ind_rev.get("verification_status")}: {status_reason})'
                     )
+                else:
+                    original_unit = next((u for u in raw_units if u.get('id') == uid), {})
+                    expected_elements = {e['id'] for e in original_unit.get('elements', [])}
+                    if not expected_elements.issubset(set(tgt.get('retained_elements', []))):
+                        dest_ok = False
+                        dest_reasons.append(
+                            f'REQUIRED_PLACEMENT_ELEMENTS_DROPPED: Unit {uid} loses original elements at {tgt_scope}'
+                        )
+                    placed_documents[uid].add(declared_doc)
+                    targets_by_uid[uid].append((declared_doc, tgt))
+            elif disposition in {'blocked', 'flagged'} and cross_document:
+                review_reasons.append(
+                    f'UNVERIFIED_MOVE_PROPOSAL: Unit {uid} proposed for destination "{tgt_scope}"'
+                )
+        if inconsistent:
+            dest_ok = False
+            dest_reasons.append(
+                f'INCONSISTENT_PLACEMENT: Unit {uid} has contradictory action/disposition/source scope/targets'
+            )
 
     check_results.append({
         'check_id': 'DESTINATION_REVIEW_INTEGRITY',
@@ -1345,6 +1382,90 @@ def validate_organization_plan(
     })
     if not dest_ok:
         blocking_violations.extend(dest_reasons)
+
+    # Required dependencies come from the original analysis, never plan metadata.
+    # qualifies: condition -> claim; depends_on: claim -> prerequisite.
+    dependency_errors = []
+    dependency_holds = []
+    units_by_id = {u['id']: u for u in raw_units if isinstance(u, dict) and u.get('id')}
+    snapshots = [input_bundle.get('document_snapshot', {})] + list(destination_snapshots or [])
+    snapshots += list(input_bundle.get('source_material', []))
+
+    def condition_visible(claim_uid, condition_uid, doc):
+        """Require exact, version-bound exposure of the complete prerequisite statement.
+
+        A bare URL, unit ID, plan assertion, or a matching fragment is insufficient.
+        The evidence must occur in the actual receiving document snapshot.
+        """
+        statement = units_by_id.get(condition_uid, {}).get('statement')
+        if not statement:
+            return False
+        for target_doc, target in targets_by_uid.get(claim_uid, []):
+            if target_doc != doc:
+                continue
+            verified_meta = independent_dest_reviews.get(target.get('scope_id'), {}).get('snapshot_meta') or {}
+            for link in target.get('condition_links', []):
+                if not isinstance(link, dict) or link.get('condition_unit_id') != condition_uid:
+                    continue
+                for snap in snapshots:
+                    content = snap.get('content')
+                    start, end = link.get('start'), link.get('end')
+                    if (snap.get('document_id') == doc == link.get('document_id')
+                            and snap.get('sha256') == verified_meta.get('sha256')
+                            and str(snap.get('version')) == str(verified_meta.get('version'))
+                            and isinstance(content, str) and snap.get('version')
+                            and str(snap['version']) == str(link.get('version'))
+                            and snap.get('sha256') == link.get('snapshot_sha256') == digest_text(content)
+                            and type(start) is int and type(end) is int
+                            and 0 <= start < end <= len(content)
+                            and content[start:end] == link.get('quote') == statement):
+                        return True
+        return False
+
+    dependencies = []
+    for uid, unit in units_by_id.items():
+        for rel in unit.get('relations', []):
+            kind = rel.get('kind')
+            if kind not in {'qualifies', 'depends_on'}:
+                continue  # supports and reference links are not mandatory dependencies.
+            other = rel.get('target_unit_id')
+            claim, condition = (other, uid) if kind == 'qualifies' else (uid, other)
+            dependencies.append((claim, condition, rel))
+    # Independently generated binding evidence also protects mandatory condition links.
+    for binding in req_bindings:
+        for link in binding.get('verified_condition_links', []):
+            claim = link.get('target_claim_unit_id')
+            if claim:
+                dependencies.append((claim, link.get('condition_unit_id'), {}))
+
+    for claim, condition, rel in dependencies:
+        claim_docs = placed_documents.get(claim, set())
+        condition_docs = placed_documents.get(condition, set())
+        affected = bool((claim_docs | condition_docs) - {source_doc})
+        if not affected:
+            continue
+        uncertain = (claim not in units_by_id or condition not in units_by_id
+                     or rel.get('status', 'verified') not in {'verified', 'supported', 'confirmed'}
+                     or rel.get('uncertain') is True
+                     or bool(rel.get('uncertainty'))
+                     or ('confidence' in rel and rel['confidence'] not in {1, 'high', 'verified'}))
+        if uncertain:
+            dependency_holds.append(f'UNVERIFIED_MOVE_DEPENDENCY: {claim} depends on {condition}')
+            continue
+        # Every surviving claim location needs the prerequisite, including the source
+        # when only the condition moves. Missing/blocked conditions are not exposure.
+        for doc in claim_docs:
+            if doc not in condition_docs and not condition_visible(claim, condition, doc):
+                dependency_errors.append(
+                    f'MOVE_SEVERS_REQUIRED_CONDITION: Claim {claim} in {doc} loses prerequisite {condition}'
+                )
+    check_results.append({
+        'check_id': 'MOVE_DEPENDENCY_INTEGRITY',
+        'status': 'violated' if dependency_errors else ('unresolved' if dependency_holds else 'passed'),
+        'reason': '; '.join(dependency_errors + dependency_holds) or 'Required dependencies remain visible at every claim location',
+    })
+    blocking_violations.extend(dependency_errors)
+    review_reasons.extend(dependency_holds)
 
     # 6. CONSOLIDATION_FIDELITY (P1 Semantic Equivalence Verification)
     cons_ok = True
