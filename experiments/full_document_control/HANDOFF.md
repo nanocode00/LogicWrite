@@ -72,3 +72,79 @@
 5. **테스트 및 검증:**
    - 의미 검증기 종합 테스트: 총 36개 테스트 통과 (`test_semantic_validator.py`, P1 반례 테스트 9건 추가).
    - 전체 회귀 테스트 통과: 총 144개 테스트 100% 통과 (`full_document_control` 69개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+
+## 6. Information Organization(정보 재구성) 모듈 구현 및 P1/P2 후속 보완 완료
+
+- **브랜치:** `prototype/information-organization` (기준: `main` `0ed1577`, PR #13)
+- **디렉터리:** `experiments/full_document_control/`
+- **현재 단계:** `OrganizationPlan` 생성기, 7대 결정론적 검증 불변조건을 갖춘 독립 계획 검증기(`validate_organization_plan`), P1 4건(상위 게이트 우회 방지, 차단성 findings 반영, MOVE 목적지 독립 검증, 중복 통합 의미 동등성 보장) 및 P2 1건(`AnalysisResult` 무결성 재검증) 보완 완료. 종합 테스트 14건 및 기존 회귀 144건 호환성 유지(총 158개 테스트 100% 통과).
+
+### 주요 구현 및 P1/P2 보완 내용
+
+1. **상위 게이트 승인 우회 방지 (P1-1):**
+   - 상위 검증 보고서 부재(`validation_report=None`) 시 계획 자체 검사가 통과하더라도 최종 상태를 `PASS`로 승격하지 않고 안전하게 `REVIEW`를 유지하도록 보장.
+   - 외부에서 전달한 문자열 `gate_state='PASS'`를 신뢰하지 않고, 기존 `pipeline.can_advance_to_organization()`을 통해 실행 기록 및 검증 보고서의 진위를 독립 재검증. 조작된 보고서는 `FORGED_UPSTREAM_GATE_APPROVAL`(`FAIL`)로 즉시 차단.
+   - Plan Preview(`preview_only: True`)는 상위 상태와 무관하게 `delivery_approved: False`, `next_stage_allowed: False`로 강제.
+
+2. **차단성 Findings 반영 및 독립 불변조건 재검증 (P1-2):**
+   - 계획 내 `blocking=True` 또는 `severity='ERROR'`인 finding이 존재하면 7개 검사와 무관하게 최종 검증 상태를 `FAIL`로 처리.
+   - 호출자가 `plan['findings']`를 비우거나 `blocking=False`로 조작하더라도, 검증기 내부에서 원본 입력과 배치를 직접 재평가하여 필수 정보 누락, 미선언 이동 등을 독립적으로 탐지·차단.
+   - 미확정 목적지나 근거 부족 등 미해결 항목은 `REVIEW` 상태로 안전하게 보류.
+
+3. **MOVE 목적지 독립 검증 (P1-3):**
+   - 계획 내부의 `destination_reviews.allows_confirmed_move` 플래그를 신뢰하지 않고, 원본 Writing Contract의 `output_scopes` 및 제공된 목적지 스냅샷을 독립 재검증.
+   - 목적지 스냅샷의 `document_id`, 내용 텍스트, `sha256` 해시(`digest_text`), `version`을 직접 대조하여 불일치 시 `corrupted_destination_snapshot` 또는 `invalid_destination_version`(`FAIL`)으로 차단.
+   - 실존 스냅샷이 없는 잠정 역할(`destination_role`)은 확정 배치(`disposition: placed`)를 불허하고 제안(`disposition: blocked`, `REVIEW`)으로만 보류.
+   - 소스 문서의 한정 조건이 목적지로 이동된 주장과 분리되어 유실되는 현상(`MOVE_SEVERS_REQUIRED_CONDITION`) 차단.
+
+4. **중복 통합의 의미 동등성 보장 (P1-4):**
+   - 단순 수치·버전·조건·플랫폼 불충돌만으로 통합을 확정하던 경로를 전면 개편.
+   - 원문 statement 정규화 및 주장 요소(claim elements)를 기준으로 의미 동등성을 독립 검토.
+   - 결정론적으로 의미 동등성이 증명되지 않는 상이한 주장은 `distinct_claims`로 분류하여 통합을 차단(`blocked: True`, `INCOMPATIBLE_CONSOLIDATION_CANDIDATE`).
+   - 어휘적 유사성이 있으나 결정론적으로 동등성을 단정할 수 없는 후보는 `unverified_semantic_equivalence`(`REVIEW`)로 보류.
+   - 향후 LLM 의미 검토기를 플러그인할 수 있도록 `semantic_reviewer` 호출 인터페이스 구비.
+   - 통합 시 구성원 전원의 원문 statement, 블록 ID, quotes, source_spans, 기여 elements, 계약 보호 의무를 `member_contributions`에 온전히 보존.
+
+5. **`AnalysisResult` 본문 무결성 재검증 (P2):**
+   - `AnalysisResult`의 자체 SHA-256 다이제스트(`verify_self_digest`)를 독립 재계산하여, 분석 본문만 변조하고 이전 해시를 유지한 공격을 `ANALYSIS_DIGEST_CORRUPTED`(`FAIL`)로 차단.
+   - `DocumentSnapshot` 내용 다이제스트(`digest_text(content)`) 및 Writing Contract 정규 다이제스트와 분석 결과 간의 바인딩을 전수 재확인.
+   - 변조되거나 불일치하는 스냅샷·계약 바인딩을 가진 이전 계획의 재사용 시도를 원천 거부.
+
+### 테스트 및 검증 결과
+
+- 신규 Information Organization 종합 및 반례 테스트: 총 14개 시나리오 100% 통과 (`test_organization.py`).
+  1. 상위 검증 보고서 부재 시 PASS 승격 차단 및 REVIEW 유지 (`test_scenario_1`)
+  2. 위조된 상위 PASS 보고서 차단 (`test_scenario_2`)
+  3. 차단성 finding 삭제·조작 우회 차단 (`test_scenario_3`)
+  4. 미선언 MOVE 목적지의 정상 위장 차단 (`test_scenario_4`)
+  5. 목적지 스냅샷 해시·버전·내용 불일치 차단 (`test_scenario_5`)
+  6. 서로 다른 주장의 부당 중복 통합 차단 (`test_scenario_6`)
+  7. 조건·수치 부재이나 의미가 다른 주장의 통합 차단 (`test_scenario_7`)
+  8. 분석 본문 변조 후 이전 다이제스트 유지 차단 (`test_scenario_8`)
+  9. 정상 Preview의 REVIEW 상태 유지 (`test_scenario_9`)
+  10. 정상 후보 배치 및 기존 보호 정보 보존 (`test_scenario_10`)
+  11. REVIEW 상태에서 Organization 단계 무단 진입 차단 (`test_scenario_11`)
+  12. 단위 누락 및 중복 배치 차단 (`test_scenario_12`)
+  13. 검증된 목적지 스냅샷 기반 유효한 MOVE 계획 통과 (`test_scenario_13`)
+  14. 의미 동등성 검증 중복 통합 및 기여 요소 보존 통과 (`test_scenario_14`)
+- 전체 회귀 테스트 통과: 총 158개 테스트 100% 통과 (`full_document_control` 83개, `minimal_gate` 31개, `extraction_analysis` 27개, `extraction_ab` 17개).
+
+### 다음 단계 (재개 지점)
+- Expression Refinement(표현 수정) 모듈 프로토타입 구현 및 OrganizationPlan 기반 수정 계획(`ExpressionPlan`, `RevisionResult`) 연동.
+- 다중 문서 스냅샷 로더 및 실제 cross-document 변경 세트 어댑터 확장.
+
+### 다음 단계 (재개 지점)
+- Expression Refinement(표현 수정) 모듈 프로토타입 구현 및 OrganizationPlan 기반 수정 계획(`ExpressionPlan`, `RevisionResult`) 연동.
+- 다중 문서 스냅샷 로더 및 실제 cross-document 변경 세트 어댑터 확장.
+
+
+## 7. PR #13 MOVE 검증 최종 P1 보완 (2026-11-10)
+
+- 기준 커밋: `066da79`, 브랜치: `prototype/information-organization`.
+- 실제 배치 대상의 문서 ID를 계약의 scope 및 원본 문서와 대조한다. `action`과 무관하게 모든 확정 배치에 목적지 스냅샷·버전·다이제스트 검증을 적용한다. `KEEP`/`CONSOLIDATE` 외부 배치, `REMOVE`+targets, 원본 scope/대상 문서 모순은 `INCONSISTENT_PLACEMENT`로 차단한다. 차단/보류된 제안은 실제 이동으로 취급하지 않는다.
+- 원본 AnalysisResult의 `qualifies`(조건→주장), `depends_on`(주장→필수 정보)와 requirement binding의 검증된 조건 연결에서 의존성을 재구성한다. 모든 주장 배치 문서에서 조건이 함께 배치되거나 검증 가능한 노출이 있어야 하며, 주장만 이동하거나 조건만 이동하여 분리되면 `MOVE_SEVERS_REQUIRED_CONDITION`으로 차단한다. 배치의 `retained_elements`에서 원본 요소 ID가 빠지는 것도 차단한다.
+- 별도 노출 증거는 주장 target의 `condition_links`로 제공한다. 필드: `condition_unit_id`, `document_id`, `snapshot_sha256`, `version`, `start`, `end`, `quote`. 인용은 해당 목적지의 독립 검증에 사용한 실제 스냅샷에서 `[start:end]`와 정확히 일치하고, 원본 조건 단위의 전체 statement여야 한다. 다른 버전/중복 스냅샷, 일부 인용, 단순 URL이나 계획의 보존 주장은 증거가 아니다.
+- `supports`는 필수 의존 관계로 취급하지 않는다. 미확정 관계 상태/신뢰도, 누락된 의존 단위는 `MOVE_DEPENDENCY_INTEGRITY: unresolved`로 기록하고 `REVIEW`를 유지한다. 상위 Validation Gate, Semantic Fidelity Validator, Preview의 단계 전환 금지 정책은 변경하지 않았다.
+- 반례 우선 검증: 최초 추가 15건 중 11건 실패(10 failures, 미구현 검사 ID로 인한 1 error), 추가 경계 6건 중 3건 실패를 확인한 뒤 수정했다. 총 21개 테스트 추가. 기존 158개 테스트를 유지하되, 기존 정상 macOS MOVE 사례는 수동 재설치 조건도 동반 이동하도록 보완했다(기존 단독 이동은 이번 P1의 실제 반례).
+- 최종 로컬 검증: full_document_control 104개, minimal_gate 31개, extraction_analysis 27개, extraction_ab 17개, 총 179개 통과. `git diff --check` 통과. 실제 문서 수정/외부 LLM 호출/후속 모듈 구현은 수행하지 않았다.
+- 구조적 한계: 원본 분석의 관계/요소 정확성은 기존 독립 의미 검증 및 상위 게이트의 책임이다. 같은 문서 내 구체적 가독성·조건 인접성의 의미 판단은 수행하지 않으며, 연결 증거는 전체 statement의 정확 인용만 인정하므로 의역·외부 URL만 있는 연결은 승인하지 않는다. 스냅샷 해시는 내용 무결성 확인이며 외부 저장소의 신원 인증이 아니다. 여기서 검증하는 것은 적용 전 후보 계획이며 실제 적용 후 문서의 의미 검증을 대체하지 않는다.
