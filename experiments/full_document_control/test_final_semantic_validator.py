@@ -375,5 +375,58 @@ class FinalSemanticTests(unittest.TestCase):
                 self.mutate(before, after)
                 self.assertEqual(self.validate()['checks']['QUANTITY_SCOPE']['status'], 'violated')
 
+    def test_structural_failure_never_sends_abnormal_output_to_reviewer(self):
+        self.mutate('30초', '30분')
+        calls = []
+        def reviewer(request):
+            calls.append(request)
+            return supported(request)
+        audit = semantic.validate_final_audit(self.bundle, self.analysis, self.org, self.preview,
+                                             self.result, reviewer=reviewer)
+        report = audit['semantic_report']
+        self.assertEqual(calls, [])
+        self.assertEqual(audit['structural_report']['gate_state'], 'FAIL')
+        self.assertEqual(audit['gate_state'], 'FAIL')
+        self.assertEqual(report['gate_state'], 'FAIL')
+        self.assertEqual(report['execution']['state'], 'blocked_structural_failure')
+        self.assertIsNone(report['execution']['response_sha256'])
+        self.assertEqual(report['coverage']['reviewed_checks'], [])
+        self.assertFalse(report['coverage']['complete'])
+        structural_errors = {f['rule_id'] for f in audit['structural_report']['findings'] if f['severity'] == 'ERROR'}
+        self.assertTrue(structural_errors)
+        self.assertTrue(structural_errors.issubset({f['rule_id'] for f in report['findings']}))
+        for check in report['checks'].values():
+            self.assertNotEqual(check['status'], 'supported')
+            self.assertNotIn('model_review', check)
+            if check['status'] == 'unresolved':
+                self.assertEqual(check['unresolved_reason'], 'SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE')
+        self.assertFalse(report['delivery_approved'])
+        self.assertFalse(report['stage_transition_allowed'])
+
+    def test_detected_input_change_stays_invalid_after_input_restoration(self):
+        original = self.bundle['writing_contract']['purpose']
+        def changing(request):
+            self.bundle['writing_contract']['purpose'] = 'Changed during review'
+            return supported(request)
+        report = self.validate(reviewer=changing)
+        self.assertFalse(report['execution_evidence_matches_current_inputs'])
+        self.assertEqual(report['gate_state'], 'FAIL')
+        self.bundle['writing_contract']['purpose'] = original
+        verification = semantic.verify_final_semantic_report(self.bundle, self.analysis, self.org,
+            self.preview, self.result, report)
+        self.assertFalse(verification['valid'])
+        self.assertFalse(verification['execution_evidence_matches_current_inputs'])
+        self.assertEqual(verification['gate_state'], 'FAIL')
+        forged = copy.deepcopy(report)
+        forged['execution_evidence_matches_current_inputs'] = True
+        expression.seal(forged, 'report_sha256')
+        self.assertFalse(semantic.verify_final_semantic_report(self.bundle, self.analysis, self.org,
+            self.preview, self.result, forged)['valid'])
+        # A fresh execution on the restored input is allowed to produce REVIEW evidence.
+        fresh = self.validate(reviewer=supported)
+        self.assertEqual(fresh['gate_state'], 'REVIEW')
+        self.assertTrue(semantic.verify_final_semantic_report(self.bundle, self.analysis, self.org,
+            self.preview, self.result, fresh)['valid'])
+
 
 if __name__ == '__main__': unittest.main()

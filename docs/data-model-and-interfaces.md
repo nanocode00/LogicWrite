@@ -109,7 +109,7 @@ integration.run_pipeline (execution_mode: isolated_candidate)
 - `validate_final_semantics(bundle, analysis, org, preview, result, *, destination_snapshots=None, reviewer=None, max_review_chars=48000, timeout_seconds=30)` → `final-output-semantic-validation-v1`: 실제 전체 `output_snapshots`와 원본·목적지 전체를 비교. `checks`, 위치가 검증된 `evidence`, `findings`, `coverage`, `snapshot_refs`, 현재 본문 전체의 `binding_sha256`, `execution`, `report_sha256`를 반환한다.
 - `reviewer(request)` → dict 또는 JSON 문자열/바이트. 전체 원본·출력, 계약·관계·원장과 고정 검사 목록을 전달한다. 검토 예산을 초과하면 일부 문서만 보내지 않고 unresolved다. 모델의 문서/해시/범위/인용·판정·검사 누락을 독립 재검증하며 실제 의미 판단의 정확도를 보장하지 않는다.
 - `verify_final_semantic_report(..., report, *, destination_snapshots=None)` → `{valid, gate_state, reason, execution_evidence_matches_current_inputs}`. 현재 입력 본문·계약·계획·후보와 프로세스 내부 실행 receipt 전체를 대조한다. 다른 프로세스에 저장된 JSON만으로 실행을 인증하지 않는다.
-- `pipeline.validate_final_output(..., **kwargs)` / `verify_final_output_report(..., report, **kwargs)` → 두 독립 보고서를 묶은 `final-output-audit-v1` / 검증 결과. 구조 FAIL은 의미 supported로 덮어쓰지 않는다. 두 보고서 모두 `REVIEW|FAIL`만 반환하며 승인/단계 진입은 false다.
+- `pipeline.validate_final_output(..., **kwargs)` / `verify_final_output_report(..., report, **kwargs)` → 두 독립 보고서를 묶은 `final-output-audit-v1` / 검증 결과. 구조 FAIL은 의미 supported로 덮어쓰지 않는다. 구조 FAIL이면 reviewer를 호출하지 않으며 기존 실패와 의미 미실행을 보존한다. 실행 중 입력 변경으로 증거가 무효화된 보고서는 입력 원복 후에도 재사용하지 못한다. 두 보고서 모두 `REVIEW|FAIL`만 반환하며 승인/단계 진입은 false다.
 
 숫자·단위·버전의 명백한 대체, 제한된 부정/조건 반전, 선언된 MOVE 조건의 문서 분리와 실제 위치 정합성을 확인한다. 일반 사실 동등성·문서 내부/문서 간 모순·목적지 문맥·통합 후 사실/귀속 손실은 선택적 모델 검토가 필요하다. 미실행·부분 검토·실패·시간 초과는 성공이 아니다. 실제 LLM 평가는 수행하지 않았으며 합성 콜백 회귀 검증과 구분한다. M0~M4 완료 기준·평가 성능은 변경하지 않는다.
 
@@ -165,13 +165,13 @@ RAG·LangGraph 연결은 [별도 확장 설계](rag-langgraph-assignment-design.
 | [#13](https://github.com/nanocode00/LogicWrite/pull/13) · [#14](https://github.com/nanocode00/LogicWrite/pull/14) | Organization 계획·목적지 검증 및 Expression Preview·독립 검증 |
 | [#15](https://github.com/nanocode00/LogicWrite/pull/15) | 전체 후보 재구성·독립 최종 구조 검증·안전 중단·계약 문서 범위 강제 |
 
-PR #15 기준 현행화 당시 **314개 통과** 기록을 유지한다. 2026-11-10 2-A 구현에서는 아래 명령으로 **345개 통과**(신규 31개)를 확인했다. 이 수치는 회귀 테스트 수이며 의미 검증기 단독 테스트 수, 실제 LLM 평가 수, 원격 CI 결과가 아니다.
+PR #15 기준 현행화 당시 **314개 통과** 기록을 유지한다. 2026-11-10 2-A 구현에서는 아래 명령으로 **347개 통과**(초기 신규 31개와 PR #18 검토 보완 2개)를 확인했다. 이 수치는 회귀 테스트 수이며 의미 검증기 단독 테스트 수, 실제 LLM 평가 수, 원격 CI 결과가 아니다.
 
 ```bash
 python3 -m unittest discover -s experiments/minimal_gate -p 'test_*.py'          # 31
 python3 -m unittest discover -s experiments/extraction_analysis -p 'test_*.py'  # 27
 python3 -m unittest discover -s experiments/extraction_ab -p 'test_*.py'        # 17
-python3 -m unittest discover -s experiments/full_document_control -p 'test_*.py' # 270
+python3 -m unittest discover -s experiments/full_document_control -p 'test_*.py' # 272
 ```
 
 문서의 INTEGRATION 계약 예시로 현 기획서 Markdown을 CLI에서 실행해 `REVIEW/candidate`, 원본 바이트 불변, 반복 실행 후보 스냅샷 일치를 확인했다. 같은 프로세스의 최종 보고서 재검증, REVIEW의 Organization 진입 차단, Expression 승인 실행의 `NOT_IMPLEMENTED`도 확인했다.

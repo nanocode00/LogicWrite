@@ -265,6 +265,8 @@ def validate_final_semantics(bundle, analysis, org, preview, result, *, destinat
         structural = final_validator.validate_final_result(bundle, analysis, org, preview, result,
                                                      destination_snapshots=destination_snapshots)
         report['structural_report_sha256'] = structural['report_sha256']
+        if structural['gate_state'] == 'FAIL':
+            report['execution']['state'] = 'blocked_structural_failure'
         # The structural report is independently recomputed, never supplied by the model.
         for finding in structural['findings']:
             if finding['severity'] == 'ERROR':
@@ -285,7 +287,7 @@ def validate_final_semantics(bundle, analysis, org, preview, result, *, destinat
             _deterministic(bundle, analysis, result, docs, outputs, add, report['deterministic_audit']['literal_pairs'])
             snapshots = {(side, s['document_id']): s for side, snaps in
                          [('source', request['source_snapshots']), ('output', request['output_snapshots'])] for s in snaps}
-            if reviewer is not None:
+            if reviewer is not None and structural['gate_state'] != 'FAIL':
                 if (type(max_review_chars) is not int or max_review_chars <= 0
                         or type(timeout_seconds) not in (int, float) or not math.isfinite(timeout_seconds) or timeout_seconds <= 0):
                     report['execution']['state'] = 'invalid_config'
@@ -319,7 +321,8 @@ def validate_final_semantics(bundle, analysis, org, preview, result, *, destinat
         add('PROVENANCE', 'unresolved', 'FULL_SOURCE_UNAVAILABLE', [])
     except (KeyError, ValueError, TypeError, IndexError, AttributeError, OverflowError):
         add('PROVENANCE', 'violated', 'INVALID_FINAL_SEMANTIC_INPUT', [])
-        report['execution']['state'] = 'invalid_input_or_response'
+        if report['execution']['state'] != 'blocked_structural_failure':
+            report['execution']['state'] = 'invalid_input_or_response'
     try:
         current = report.get('binding_sha256') == _binding(bundle, analysis, org, preview, result, destination_snapshots)
     except (KeyError, ValueError, TypeError, AttributeError):
@@ -338,7 +341,7 @@ def validate_final_semantics(bundle, analysis, org, preview, result, *, destinat
     report['gate_state'] = 'FAIL' if violated else 'REVIEW'
     report['execution_evidence_matches_current_inputs'] = current
     expression.seal(report, 'report_sha256')
-    if 'binding_sha256' in report:
+    if current:
         _RECEIPTS[report['report_sha256']] = copy.deepcopy(report)
     return report
 
@@ -346,7 +349,9 @@ def validate_final_semantics(bundle, analysis, org, preview, result, *, destinat
 def verify_final_semantic_report(bundle, analysis, org, preview, result, report, *, destination_snapshots=None):
     """Verify a live receipt and current inputs; hashes alone cannot authenticate it."""
     try:
-        valid = (isinstance(report, dict) and not expression_validator._approval_claim(report)
+        valid = (isinstance(report, dict)
+                 and report.get('execution_evidence_matches_current_inputs') is True
+                 and not expression_validator._approval_claim(report)
                  and expression.organization.verify_self_digest(report, 'report_sha256')[0]
                  and _RECEIPTS.get(report['report_sha256']) == report
                  and report['binding_sha256'] == _binding(bundle, analysis, org, preview, result, destination_snapshots)

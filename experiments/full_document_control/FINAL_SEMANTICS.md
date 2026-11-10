@@ -14,7 +14,7 @@
 | `pipeline.validate_final_output` | 위 두 보고서를 `final-output-audit-v1`으로 결합. 어느 한쪽 FAIL도 종합 FAIL이며 PASS 경로는 없음 |
 | `integration.run_pipeline` | 기존 `final_report`에 구조 보고서 유지. `final_semantic_report`, `final_audit` 추가. 종합 FAIL은 controller에서 STOPPED 처리하고 `last_gate_state: FAIL` 보존 |
 
-구조 FAIL 이후에도 진단용 의미 검사는 실행할 수 있지만 구조 결과를 덮어쓰지 않는다. 전체 후보가 없는 Preview에는 모델을 호출하지 않는다. 원본과 목적지·출력 집합 또는 추적이 손상된 경우 FAIL을 보존한다.
+구조 FAIL에서는 reviewer를 호출하지 않고 `execution.state: blocked_structural_failure`로 외부 의미 검토 미실행을 기록한다. 구조 실패 근거와 결정론적 진단은 보존하고, 미검토 의미 검사는 unresolved·불완전 범위로 유지하며 종합 FAIL을 낮추지 않는다. 전체 후보가 없는 Preview에는 모델을 호출하지 않는다. 원본과 목적지·출력 집합 또는 추적이 손상된 경우 FAIL을 보존한다.
 
 ## 실제 API
 
@@ -81,7 +81,7 @@ request에는 `version`, `binding_sha256`, `request_sha256`, `instructions`, `re
 
 입력 bundle·계약·analysis·org·preview·실제 candidate·목적지 **본문 전체**를 binding에 묶는다. caller가 제출한 해시 필드만 믿지 않는다. 보고서는 실행 경계에서 프로세스 내부 receipt에 보관되며 verifier는 현재 본문 binding, 구조 재계산 결과, 원본 receipt 전체를 대조한다. 재해시한 승인/검사 삭제/판정 위조와 다른 문서·이전 버전의 보고서를 거부한다. receipt가 없는 별도 프로세스의 JSON은 인증된 실행 증거로 재사용하지 못한다.
 
-생성 시 `execution_evidence_matches_current_inputs`는 검토 직후 현재 입력 본문 binding을 다시 계산한 결과다. 검토 도중 입력이 변경되면 FAIL과 불완전 검토로 처리한다. 그 뒤 현재 입력과 맞는지는 verifier의 같은 필드를 사용해야 한다. 검증기는 모델을 다시 호출하지 않는다. 프로세스 내부 실행 기록은 외부 호출자 인증·공급자 실행 증명·영속 서명이 아니다.
+생성 시 `execution_evidence_matches_current_inputs`는 검토 직후 현재 입력 본문 binding을 다시 계산한 결과다. 검토 도중 입력이 변경되면 FAIL과 불완전 검토로 처리하고 유효한 receipt를 등록하지 않는다. `execution_evidence_matches_current_inputs: false`인 보고서는 입력을 원복해도 verifier가 거부하며 새 검증 실행이 필요하다. 그 뒤 현재 입력과 맞는지는 verifier의 같은 필드를 사용해야 한다. 검증기는 모델을 다시 호출하지 않는다. 프로세스 내부 실행 기록은 외부 호출자 인증·공급자 실행 증명·영속 서명이 아니다.
 
 시간 제한은 daemon worker의 결과 대기를 끝낸다. 늦은 응답은 보고서/receipt를 변경하지 못하지만 Python 콜백 자체의 네트워크 작업을 강제 종료하지 못한다. 공급자 어댑터도 I/O 시간 제한과 취소를 구현해야 한다.
 
