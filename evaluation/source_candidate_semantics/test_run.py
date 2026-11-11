@@ -40,6 +40,39 @@ class RunnerTests(unittest.TestCase):
         self.assertIsNone(report['accuracy'])
         self.assertEqual(len(report['excluded']), 4)
 
+    def test_mixed_violation_is_visible_but_excluded_from_accuracy(self):
+        import run
+        def mixed(request):
+            response = self.protocol_reviewer(request)
+            response['reviews'][0]['judgment'] = 'contradicted'
+            response['reviews'][1]['judgment'] = 'unresolved'
+            return response
+        predictions = run.predict(['SP-006'], reviewer=mixed)
+        report = run.compare(predictions)
+        self.assertEqual(report['evaluated_count'], 0)
+        self.assertIsNone(report['accuracy'])
+        self.assertEqual(report['reviewed_case_count'], 1)
+        self.assertEqual(report['confirmed_violation_count'], 1)
+        self.assertTrue(report['cases'][0]['violation_confirmed'])
+        self.assertEqual(report['cases'][0]['observed_classification'], 'VIOLATION')
+        self.assertFalse(report['cases'][0]['included_in_metric'])
+        self.assertFalse(report['evidence_trust']['model_execution_authenticated'])
+
+    def test_excluded_mixed_report_is_still_checked_for_forged_binding(self):
+        import run
+        def mixed(request):
+            response = self.protocol_reviewer(request)
+            response['reviews'][0]['judgment'] = 'contradicted'
+            response['reviews'][1]['judgment'] = 'unresolved'
+            return response
+        predictions = run.predict(['SP-006'], reviewer=mixed)
+        report = predictions['cases'][0]['result']['semantic_report']
+        report['execution']['request_sha256'] = '0'*64
+        report.pop('report_sha256');run.semantic.expression.seal(report, 'report_sha256')
+        predictions.pop('record_sha256');run.seal(predictions)
+        with self.assertRaises(ValueError):
+            run.compare(predictions)
+
     def test_only_full_cited_evaluation_enters_denominator(self):
         import run
         predictions = run.predict(['SP-006', 'SP-009'], reviewer=self.protocol_reviewer)
@@ -48,6 +81,24 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(report['candidate_count'], 2)
         self.assertEqual([r['case_id'] for r in report['excluded']], ['SP-009'])
         self.assertIn(report['accuracy'], (0.0, 1.0))
+
+    def test_legacy_definitive_record_without_additive_fields_still_compares(self):
+        import run
+        predictions = run.predict(['SP-006'], reviewer=self.protocol_reviewer)
+        result = predictions['cases'][0]['result']
+        for key in ('all_checks_reviewed', 'all_judgments_definitive', 'violation_confirmed',
+                    'model_execution_state', 'evidence_trust'):
+            result.pop(key)
+        report = result['semantic_report']
+        for key in ('all_checks_reviewed', 'all_judgments_definitive'):
+            report['coverage'].pop(key)
+        report.pop('violation_confirmed');report.pop('evidence_trust')
+        report.pop('report_sha256');run.semantic.expression.seal(report, 'report_sha256')
+        predictions.pop('evidence_trust')
+        predictions.pop('record_sha256');run.seal(predictions)
+        compared = run.compare(predictions)
+        self.assertEqual(compared['evaluated_count'], 1)
+        self.assertFalse(compared['evidence_trust']['model_execution_authenticated'])
 
     def test_boolean_evaluated_flag_alone_is_not_valid_model_coverage(self):
         import run

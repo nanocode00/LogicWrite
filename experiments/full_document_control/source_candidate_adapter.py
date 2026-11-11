@@ -21,6 +21,9 @@ def evaluate(raw, reviewer=None, max_review_chars=48000, timeout_seconds=30):
     result = {'version':VERSION, 'status':'unsupported','gate_state':'REVIEW',
         'semantic_judgment':'unresolved','evaluated':False,'reasons':[],
         'semantic_report':None,'contract_mapping':{},'input_sha256':None,
+        'all_checks_reviewed':False, 'all_judgments_definitive':False,
+        'violation_confirmed':False, 'model_execution_state':'not_run',
+        'evidence_trust':copy.deepcopy(semantic.EVALUATION_EVIDENCE_TRUST),
         'delivery_approved':False,'stage_transition_allowed':False}
     try:
         raw = copy.deepcopy(raw)
@@ -95,10 +98,17 @@ def evaluate(raw, reviewer=None, max_review_chars=48000, timeout_seconds=30):
             contract, context={key:raw[key] for key in ('task','source_kind','construction','missing_context','supplied_observations')},
             reviewer=reviewer,max_review_chars=max_review_chars,timeout_seconds=timeout_seconds)
         result['semantic_report']=report
+        result['all_checks_reviewed']=report['coverage']['all_checks_reviewed']
+        result['all_judgments_definitive']=report['coverage']['all_judgments_definitive']
+        result['violation_confirmed']=report['violation_confirmed']
+        result['model_execution_state']=report['execution']['state']
         result['evaluated']=report['coverage']['complete']
         result['semantic_judgment']=report['overall_judgment']
         result['gate_state']=report['gate_state']
         if result['evaluated']:result['status']='evaluated'
+        elif result['all_checks_reviewed']:
+            result['status']='partially_evaluated'
+            reasons.append('UNRESOLVED_SEMANTIC_CHECKS')
         else:reasons.append('SEMANTIC_REVIEW_'+report['execution']['state'].upper())
     except (KeyError,TypeError,ValueError,AttributeError,OverflowError):
         result['status']='invalid_input';result['reasons']=['INVALID_SP_INPUT']

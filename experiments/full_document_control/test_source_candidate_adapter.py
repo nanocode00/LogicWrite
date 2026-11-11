@@ -159,6 +159,64 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual((result['evaluated'],result['gate_state'],result['semantic_judgment']),
                          (True,'FAIL','contradicted'))
 
+    def test_mixed_confirmed_violation_and_unresolved_preserves_fail(self):
+        for judgment in ('contradicted', 'overstated'):
+            def mixed(request):
+                response = review(request)
+                response['reviews'][0]['judgment'] = judgment
+                response['reviews'][1]['judgment'] = 'unresolved'
+                return response
+            with self.subTest(judgment=judgment):
+                result = adapter.evaluate(self.raw, reviewer=mixed)
+                self.assertEqual(result['semantic_judgment'], 'contradicted')
+                self.assertEqual(result['gate_state'], 'FAIL')
+                self.assertFalse(result['evaluated'])
+                report = result['semantic_report']
+                self.assertTrue(report['coverage']['all_checks_reviewed'])
+                self.assertFalse(report['coverage']['all_judgments_definitive'])
+                self.assertFalse(report['coverage']['complete'])
+                self.assertTrue(report['violation_confirmed'])
+                self.assertEqual(result['model_execution_state'], 'completed')
+                self.assertFalse(result['delivery_approved'])
+
+    def test_unresolved_without_violation_is_review_not_supported(self):
+        def mixed(request):
+            response = review(request)
+            response['reviews'][0]['judgment'] = 'unresolved'
+            return response
+        result = adapter.evaluate(self.raw, reviewer=mixed)
+        self.assertEqual((result['semantic_judgment'], result['gate_state']), ('unresolved', 'REVIEW'))
+        self.assertTrue(result['all_checks_reviewed'])
+        self.assertFalse(result['all_judgments_definitive'])
+        self.assertFalse(result['violation_confirmed'])
+
+    def test_incomplete_or_unbound_mixed_response_does_not_confirm_violation(self):
+        def incomplete(request):
+            response = review(request, 'contradicted')
+            response['reviews'].pop()
+            return response
+        def stale(request):
+            response = review(request, 'contradicted')
+            response['request_sha256'] = '0'*64
+            return response
+        for callback in (incomplete, stale):
+            result = adapter.evaluate(self.raw, reviewer=callback)
+            self.assertEqual((result['semantic_judgment'], result['gate_state']), ('unresolved', 'REVIEW'))
+            self.assertFalse(result['violation_confirmed'])
+            self.assertFalse(result['all_checks_reviewed'])
+
+    def test_state_and_evidence_trust_never_authenticate_model_execution(self):
+        def failed(request):
+            raise RuntimeError('synthetic provider failure')
+        for callback in (None, failed, review):
+            result = adapter.evaluate(self.raw, reviewer=callback)
+            self.assertFalse(result['evidence_trust']['model_execution_authenticated'])
+            self.assertEqual(result['evidence_trust']['kind'], 'advisory')
+            if callback is not review:
+                self.assertFalse(result['all_checks_reviewed'])
+                self.assertFalse(result['violation_confirmed'])
+        self.assertEqual(adapter.evaluate(self.raw, reviewer=failed)['model_execution_state'], 'error')
+
     def test_callback_mutation_cannot_change_caller_input_or_bound_request(self):
         before=copy.deepcopy(self.raw)
         def mutate(r):

@@ -410,6 +410,11 @@ def verify_final_audit(bundle, analysis, org, preview, result, audit, *, destina
             'reason': None if valid else 'FORGED_OR_STALE_FINAL_AUDIT'}
 
 
+EVALUATION_EVIDENCE_TRUST = {
+    "kind": "advisory", "model_execution_authenticated": False,
+    "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."}
+
+
 def evaluate_snapshot_pair(source_snapshots, candidate_snapshots, writing_contract, *, context=None,
                            reviewer=None, max_review_chars=48000, timeout_seconds=30):
     """Evaluate externally supplied complete snapshots without reconstruction claims.
@@ -424,7 +429,10 @@ def evaluate_snapshot_pair(source_snapshots, candidate_snapshots, writing_contra
                                                         writing_contract, context or {}))
     checks = {check: {'status': 'unresolved'} for check in CHECKS}
     report = {'version': version, 'checks': checks,
-        'coverage': {'complete': False, 'required_checks': list(CHECKS), 'reviewed_checks': []},
+        'coverage': {'complete': False, 'all_checks_reviewed': False,
+                     'all_judgments_definitive': False,
+                     'required_checks': list(CHECKS), 'reviewed_checks': []},
+        'violation_confirmed': False, 'evidence_trust': copy.deepcopy(EVALUATION_EVIDENCE_TRUST),
         'execution': {'state': 'not_run', 'request_sha256': None, 'response_sha256': None,
                       'max_review_chars': max_review_chars, 'timeout_seconds': timeout_seconds},
         'snapshot_refs': [], 'lineage': {'available': False, 'reason': 'EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE'},
@@ -494,11 +502,16 @@ def evaluate_snapshot_pair(source_snapshots, candidate_snapshots, writing_contra
                         checks[check] = {'status': {'supported':'supported','contradicted':'violated',
                             'overstated':'violated','unresolved':'unresolved'}[row['judgment']], 'model_review':row}
                     report['coverage']['reviewed_checks'] = list(reviews)
+                    report['coverage']['all_checks_reviewed'] = True
                     report['coverage']['complete'] = all(row['judgment'] != 'unresolved' for row in reviews.values())
     except (KeyError,TypeError,ValueError,AttributeError):
         report['execution']['state'] = 'invalid_input'
     complete = report['coverage']['complete']
-    violated = complete and any(row['status'] == 'violated' for row in checks.values())
+    report['coverage']['all_judgments_definitive'] = complete
+    # Only a fully validated seven-check response can establish a violation.
+    # Definitive violations survive uncertainty in other, validly reviewed checks.
+    violated = report['coverage']['all_checks_reviewed'] and any(row['status'] == 'violated' for row in checks.values())
     report['overall_judgment'] = 'contradicted' if violated else ('supported' if complete else 'unresolved')
+    report['violation_confirmed'] = violated
     report['gate_state'] = 'FAIL' if violated else 'REVIEW'
     return expression.seal(report,'report_sha256')

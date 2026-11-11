@@ -28,11 +28,25 @@ PR #23 head `110c715` 위의 별도 개발이다. 제공된 원문·수정본·�
 | 부족한 문맥 / `pending_contract` / 부분 문서 | reviewer 호출 전 unsupported/REVIEW |
 | 모델 없음 / 예산 초과 / 실패 / 시간 초과 / 불완전 인용 | 미평가·unresolved/REVIEW |
 | 완전하고 유효한 7개 검토 모두 supported | supplied evidence에 관한 모델 보조 판정 supported, **gate REVIEW** |
-| 완전한 7개 검토 중 contradicted/overstated 존재 | 모델 보조 위반 판정 contradicted/FAIL. 사람·정책 승인과 무관 |
+| 유효한 7개 검토 중 contradicted/overstated 존재 | 다른 검토가 unresolved여도 확인된 위반을 보존해 contradicted/FAIL. 사람·정책 승인과 무관 |
 
 7개 검토는 CLAIM_FACTS, QUANTITY_SCOPE, POLARITY_CONDITIONS, ADDITIONS_OMISSIONS, CONTRADICTIONS, MOVE_CONSOLIDATION, PROVENANCE다. 각 검토에서 모든 snapshot 참조 및 비어 있지 않은 모든 원문·수정 문서의 정확한 Unicode 위치·인용을 요구한다. 일부 검토 누락·인용 불일치·모델의 승인 주장을 유효한 평가로 받아들이지 않는다. 합성 테스트 callback의 canned 답변은 프로토콜 시험이며 실사례 의미 성능 근거가 아니다.
 
 새 API는 편집 ledger, 추출 unit, 배치 계획 또는 provenance receipt를 만들지 않으며 기존 `_RECEIPTS`에 등록하지 않는다. 새 리터럴 탐지 휴리스틱도 추가하지 않았다. 실제 레거시 재구성 경로에서 수행하는 결정론적 검사와 결과를 혼합하지 않는다. 평가 보고서 해시는 무결성 바인딩이며, 사람 승인이나 외부 모델 진실성 인증이 아니다.
+
+저장된 평가 파일은 **advisory evidence**다. 자체 SHA와 요청 재계산은 입력·인용·판정의 내부 일관성을 검사할 뿐 실제 모델이 실행됐음을 인증하지 않는다. 일관된 합성 callback 응답도 같은 형식을 만들 수 있다. 검증 가능한 독립 실행 증거가 없는 현재 경로는 `evidence_trust.model_execution_authenticated=false`를 명시한다. `execution.state=completed` 역시 응답 프로토콜 검증이 완료됐다는 뜻이며 실제 provider 실행의 인증이 아니다. 이전 파일럿 호출 메타데이터나 검증 통과를 외부 실행 증명·인증된 모델 정확도로 해석하지 않는다.
+
+| 상태 필드 | 의미 / 호환성 |
+| --- | --- |
+| coverage.all_checks_reviewed / adapter.all_checks_reviewed | 7개 항목 모두 요청 바인딩·참조·인용이 유효한 응답으로 검토됨. unresolved 응답도 포함 |
+| coverage.all_judgments_definitive | 그 7개 응답 중 unresolved가 없음 |
+| coverage.complete / adapter.evaluated | 기존 의미 유지: 모든 항목이 유효하게 검토되고 판단도 모두 확정됨. 혼합 판정에서는 false |
+| violation_confirmed | 유효한 전체 7개 응답에서 contradicted/overstated가 하나 이상 있음. 모든 판단 확정 여부와 독립적 |
+| overall_judgment | 확인된 위반이 있으면 contradicted, 전부 supported이면 supported, 그 외 unresolved |
+| execution.state / adapter.model_execution_state | not_run·budget_exceeded·error·timeout·invalid_response·incomplete 등을 구별. completed는 provider 실행 인증이 아님 |
+| adapter.status=partially_evaluated | 유효한 전체 응답에 unresolved가 남음. 확인된 위반이 있으면 FAIL을 유지하며, 없으면 REVIEW |
+
+일부 항목 누락·잘못된 응답·요청 바인딩 실패는 전체 유효 검토가 아니므로 위반을 임의로 확정하지 않는다. 새 상태 필드는 추가형이며 이전 확정 판정 기록은 마이그레이션 없이 사후 비교할 수 있다. 혼합 판정은 정확도 분모에서 제외하지만 `observed_classification`, `confirmed_violation_count`에 위반을 남긴다. 사후 비교는 분모 제외 사례의 전체 응답도 다시 검증해 위조된 요청/판정이 관측 위반으로 표시되지 않게 한다.
 
 SP admission 검사는 기존 `evaluation/semantic_pilot/requirements.txt`의 `jsonschema>=4.10.3,<5`를 사용한다. 레거시 Core 경로에는 새 의존성을 주입하지 않지만, 새 어댑터와 이를 포함한 테스트 실행에는 이 평가 의존성이 필요하다.
 
@@ -76,7 +90,7 @@ SP-005→008 우선 파일럿은 실제 CLI 모델 목록에서 확인한 요청
 
 ## 재현과 다음 작업
 
-최종 전체 회귀 **571개 통과**: 기존 #23의 543개 + 어댑터 16개 + 실행·사후 비교 12개. Core 디렉터리에서는 기존 342개 + 신규 16개 = **358개 통과**다. [전체 명령·출력과 Python 파일 해시](records/all-tests.json)에 검증 당시 HEAD와 실제 테스트한 작업 트리를 구분해 기록했다. 원래 main의 평가 파일 186개와 기존 G3 manifest/판정 이력은 바이트 단위로 일치한다.
+`51dff5d` 당시 전체 회귀는 **571개 통과**(Core 358개 포함)했다. [당시 명령·출력과 Python 파일 해시](records/all-tests.json)는 해당 커밋의 역사적 기록이다. 혼합 판정 보완의 red→green·상태 구분·전체 회귀·자료 불변 결과는 [후속 검증](records/mixed-review-fix/VALIDATION.md)에 별도로 기록한다. 기존 실행 기록과 artifact manifest는 당시 커밋에 바인딩된 채 보존하며 현재 파일의 인증으로 재해석하지 않는다.
 
 초기 미구현 실패와 경계 보완의 red→green 기록은 `records/*red*.txt`와 회귀 테스트에 있다. 독립 검토가 찾은 요청 바인딩 교체·검토 응답과 요약 판정 불일치·중첩 승인 주장 수용을 각각 실패 테스트로 재현한 뒤 사후 비교에서 거부하도록 수정했다. 독립 재검토에서 차단 문제가 없음을 확인했다. 이 테스트들은 의미 성능 평가나 실제 사람 판단을 생성하지 않는다.
 

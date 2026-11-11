@@ -48,6 +48,7 @@ def predict(case_ids, *, reviewer=None, max_review_chars=48000, timeout_seconds=
         rows.append({'case_id': cid, 'input_path': str(path.relative_to(ROOT)),
                      'input_sha256': sha(path), 'result': result})
     return seal({'version': 'source-candidate-evaluation-run-v1', 'reference_labels_loaded': False,
+                 'evidence_trust': dict(semantic.EVALUATION_EVIDENCE_TRUST),
                  'dataset_role': 'development_only', 'cases': rows})
 
 
@@ -58,6 +59,7 @@ def compare(predictions):
     gold = read(GOLD)  # Reference data enters only this post-evaluation function.
     refs = {r['case_id']: r for r in gold['cases']}
     rows, excluded, eligible = [], [], []
+    reviewed_count = 0
     ids = [p['case_id'] for p in predictions['cases']]
     if len(set(ids)) != len(ids) or not set(ids) <= IDS:
         raise ValueError('Invalid prediction inventory')
@@ -78,7 +80,10 @@ def compare(predictions):
         classified = {'supported': 'PRESERVED', 'contradicted': 'VIOLATION'}.get(judgment)
         # REVIEW is an approval boundary, never an SP classification.
         include = result.get('evaluated') is True and classified is not None
-        if result.get('evaluated') is True:
+        report = result.get('semantic_report') or {}
+        reviewed = report.get('execution', {}).get('state') == 'completed'
+        violation = False
+        if result.get('evaluated') is True or reviewed or judgment in {'supported', 'contradicted'} or result.get('violation_confirmed'):
             report = result.get('semantic_report') or {}
             body = {k: v for k, v in report.items() if k != 'report_sha256'}
             coverage, execution = report.get('coverage', {}), report.get('execution', {})
@@ -97,8 +102,9 @@ def compare(predictions):
             # References never enter this preparation and no model is called.
             prepared = adapter.evaluate(raw)['semantic_report'] or {}
             expected_request = prepared.get('execution', {}).get('request_sha256')
-            derived = 'contradicted' if any(r['judgment'] in {'contradicted','overstated'}
-                                          for r in reviews.values()) else 'supported'
+            definitive = state == 'completed' and all(r['judgment'] != 'unresolved' for r in reviews.values())
+            violation = state == 'completed' and any(r['judgment'] in {'contradicted','overstated'} for r in reviews.values())
+            derived = 'contradicted' if violation else ('supported' if definitive else 'unresolved')
             expected_statuses = {key: ('violated' if row['judgment'] in {'contradicted','overstated'}
                                       else row['judgment']) for key, row in reviews.items()}
             if (report.get('report_sha256') != pipeline.canonical_json_digest(body)
@@ -108,17 +114,29 @@ def compare(predictions):
                     or execution.get('state') != 'completed' or not execution.get('request_sha256')
                     or execution['request_sha256'] != expected_request
                     or report.get('snapshot_refs') != prepared.get('snapshot_refs')
-                    or coverage.get('complete') is not True
+                    or coverage.get('complete') is not definitive
                     or set(coverage.get('reviewed_checks', [])) != set(semantic.CHECKS)
                     or state != 'completed'
-                    or any(r['judgment'] == 'unresolved' for r in reviews.values())
                     or any(checks[key].get('status') != value for key, value in expected_statuses.items())
                     or judgment != derived or judgment != report.get('overall_judgment')
                     or report.get('gate_state') != ('FAIL' if derived == 'contradicted' else 'REVIEW')
-                    or result.get('gate_state') != report.get('gate_state') or not include):
-                raise ValueError('Evaluated flag requires a complete, cited semantic review')
+                    or result.get('gate_state') != report.get('gate_state')
+                    or result.get('evaluated') is not definitive):
+                raise ValueError('Semantic verdict requires a valid, cited seven-check review')
+            # New fields are additive; old definitive records need no migration.
+            for obj, key, expected in [(coverage, 'all_checks_reviewed', True),
+                    (coverage, 'all_judgments_definitive', definitive),
+                    (report, 'violation_confirmed', violation),
+                    (result, 'all_checks_reviewed', True),
+                    (result, 'all_judgments_definitive', definitive),
+                    (result, 'violation_confirmed', violation)]:
+                if key in obj and obj[key] is not expected:
+                    raise ValueError('Semantic state flags contradict the validated review')
+            reviewed_count += 1
         summary = {'case_id': cid, 'expected': refs[cid]['user_final_judgment'],
                    'actual': classified if include else None, 'included_in_metric': include,
+                   'observed_classification': classified if reviewed else None,
+                   'violation_confirmed': violation, 'all_checks_reviewed': reviewed,
                    'prediction_pointer': f'/cases/{pos}/result',
                    'input_path': row['input_path'], 'input_sha256': row['input_sha256'],
                    'reference_pointer': '/cases/'+str(gold['cases'].index(refs[cid])),
@@ -130,12 +148,15 @@ def compare(predictions):
             eligible.append(summary)
         else:
             excluded.append({'case_id': cid, 'reasons': result.get('reasons', []),
-                             'semantic_judgment': judgment})
+                             'semantic_judgment': judgment, 'violation_confirmed': violation})
     return {'version': 'source-candidate-post-comparison-v1', 'dataset_role': 'development_only',
             'reference_manifest_path': str(GOLD.relative_to(ROOT)), 'reference_manifest_sha256': sha(GOLD),
             'prediction_record_sha256': predictions['record_sha256'],
             'metric_scope': 'complete definitive model-advisory evaluations only; excludes unsupported/abstentions',
             'gate_state_is_not_an_sp_label': True, 'candidate_count': len(rows),
+            'evidence_trust': dict(semantic.EVALUATION_EVIDENCE_TRUST),
+            'reviewed_case_count': reviewed_count,
+            'confirmed_violation_count': sum(r['violation_confirmed'] for r in rows),
             'evaluated_count': len(eligible), 'excluded': excluded,
             'accuracy': sum(r['actual'] == r['expected'] for r in eligible)/len(eligible) if eligible else None,
             'cases': rows}
