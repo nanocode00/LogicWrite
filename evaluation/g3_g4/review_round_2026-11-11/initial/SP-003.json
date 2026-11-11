@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-003",
+  "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+  "ai_proposal_sha256": "a17d58d75d7a5ae5e51947d3c400dc7704cafb24d0ec71138ad0623b09352b7a",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-003-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-003",
+          "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "UNRESOLVED",
+          "rationale": "사용자 원문 의견: 설치 안내 문서의 목적을 고려했을 때, 처음 설치하는 사용자에게 오프라인 검색 조건이 필요한지 현재 문맥으로는 충분히 판단하기 어려우므로 추가적인 문맥이 필요하다. 가 내 의견이야",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "install",
+              "start": 19,
+              "end": 49,
+              "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+            },
+            {
+              "side": "candidate",
+              "document_id": "maintenance",
+              "start": 24,
+              "end": 54,
+              "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+            },
+            {
+              "side": "candidate",
+              "document_id": "install",
+              "start": 19,
+              "end": 60,
+              "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+            }
+          ],
+          "missing_information": [
+            "원문과 후보 전체에서 조건·한정·귀속이 동등한지 사람이 확인한다."
+          ],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    }
+  ]
+}

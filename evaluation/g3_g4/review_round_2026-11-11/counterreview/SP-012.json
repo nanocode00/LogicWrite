@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-012",
+  "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+  "ai_proposal_sha256": "af4af0521b1e1ebcf819a65c968f5eb2d6ab53d998b43215785935ea4cb58dc5",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-012-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-012",
+          "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "UNRESOLVED",
+          "rationale": "사용자 원문 의견: 전체 결과를 다시 전송받고 판단해야해",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "update",
+              "start": 0,
+              "end": 41,
+              "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "update",
+              "start": 0,
+              "end": 27,
+              "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다.\n"
+            }
+          ],
+          "missing_information": [
+            "잘리지 않은 최종 결과 전체와 그 해시를 확보한다."
+          ],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-012-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-012-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "후보는 partial 상태이며 제공된 부분에는 자동 업데이트 미지원만 보인다. 수동 재설치 필요가 최종 결과에서 삭제됐는지 잘린 부분에 있는지 확정할 수 없어 전체 결과를 다시 확보한 뒤 판단하자는 의견에 반례를 찾지 못했다."
+      },
+      "previous_event_sha256": "b6d0b2b9db4038d8bc4ecf5f23b559a5dfb502d13fb6d54c7df71c635f43b19d"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-002",
+  "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+  "ai_proposal_sha256": "1fdade5d0cd7cb7417cb3003f4c65624cd9d89476dcb07e8ef31595abe5c1018",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-002-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-002",
+          "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "PRESERVED",
+          "rationale": "사용자 원문 의견: 이건 두 섹션을 우선순위대로 적절하게 다시 배열한걸로 보여.",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "guide",
+              "start": 0,
+              "end": 74,
+              "quote": "# 실행 안내\n\n## 한계\n실험 빌드는 자동 업데이트를 지원하지 않는다. 수동 재설치가 필요하다.\n\n## 시작\n설치 후 앱을 연다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "guide",
+              "start": 0,
+              "end": 74,
+              "quote": "# 실행 안내\n\n## 시작\n설치 후 앱을 연다.\n\n## 한계\n실험 빌드는 자동 업데이트를 지원하지 않는다. 수동 재설치가 필요하다.\n"
+            }
+          ],
+          "missing_information": [],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-002-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-002-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "시작과 한계 섹션의 순서만 달라진다. 자동 업데이트 미지원, 수동 재설치 필요, 설치 후 실행 안내가 모두 남아 있으며 계약에 섹션 순서 제한이 없어 재배열이라는 의견에 반례를 찾지 못했다."
+      },
+      "previous_event_sha256": "173024b23fa515b51b379e82c06c18b0209d111abb3aae24c49f6bcb38c4f99b"
+    }
+  ]
+}

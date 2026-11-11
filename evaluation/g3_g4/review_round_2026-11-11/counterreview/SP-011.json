@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-011",
+  "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+  "ai_proposal_sha256": "d140c21ef3945bafc9f3bdbca2fed2cbe3eccf060f57876a5de0a51391b1c52f",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-011-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-011",
+          "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "UNRESOLVED",
+          "rationale": "사용자 원문 의견: SP-003과 똑같이 처리하면 된다고 생각해 SP-003과 동일한 문맥 부족 의견을 뜻한다.",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "install",
+              "start": 0,
+              "end": 37,
+              "quote": "# 설치\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "install",
+              "start": 0,
+              "end": 45,
+              "quote": "# 설치\n\n오프라인 검색 조건은 [상세 안내](details.md)를 참조한다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "details",
+              "start": 0,
+              "end": 40,
+              "quote": "# 상세 안내\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+            }
+          ],
+          "missing_information": [
+            "사용자에게 캐시 조건의 설치 페이지 현지 노출 의무를 확인한다."
+          ],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-011-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-011-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "조건 전문과 링크는 보존되지만 설치 페이지 현지 노출 의무가 계약에서 명시적으로 미확정이다. 추가 문맥을 확인한다는 사용자 의견에는 반례를 찾지 못했다. 다만 SP-003은 전문의 현지 노출이 필요 없다고 이미 명시되어 있으므로 두 사례의 계약 상태가 같다는 뜻으로 해석하지 않았다."
+      },
+      "previous_event_sha256": "24ec4e4ba12a20665709cce2b90470be91cc49cee077f82eadd2b24be5897a4a"
+    }
+  ]
+}

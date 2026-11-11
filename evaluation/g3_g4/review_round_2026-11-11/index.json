@@ -1,0 +1,141 @@
+{
+  "round_id": "2026-11-11-guided-initial-and-separate-ai-counterreview",
+  "captured_at": "2026-11-11T00:35:59.867088+00:00",
+  "user_opinion_count": 12,
+  "initial_workflow_count": 11,
+  "ai_review_case_count": 12,
+  "integrated_ai_workflow_count": 11,
+  "supplemental_ai_review_cases": [
+    "SP-009"
+  ],
+  "ai_review_agent": "/root/pilot_counterreview",
+  "agent_context": "fresh agent with fork_turns=none; no conversational transcript passed, read frozen inputs and transcribed opinions",
+  "agy_attempt": "quota 429; produced no review result",
+  "raw_response": "ai-counterreview.raw.json",
+  "raw_response_format": "JSON reserialized by parent; review content and evidence retained",
+  "user_final_count": 0,
+  "development_gold_eligible_count": 0,
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-001.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-002",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-002.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-003",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-003.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 1
+    },
+    {
+      "case_id": "SP-004",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-004.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-005",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-005.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-006",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-006.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-007",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-007.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-008",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-008.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-009",
+      "counterreview": "separate_AI_completed_supplemental",
+      "workflow_status": "awaiting_explicit_user_preservation_judgment",
+      "reason": "편집 방향과 목적지 미제공 후보의 의미 판정을 구별; 사용자 라벨 미생성",
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-010",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-010.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-011",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-011.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    },
+    {
+      "case_id": "SP-012",
+      "counterreview": "separate_AI_completed",
+      "workflow_path": "counterreview/SP-012.json",
+      "workflow_status": "ai_counterreview_completed",
+      "development_gold_eligible": false,
+      "challenge_count": 0
+    }
+  ],
+  "sha256": {
+    "ai-counterreview.raw.json": "c720dc654adb1c467386b94a211ee94aca0c5987214753629d7911cf82f433f1",
+    "user-opinions.json": "216f85e83f0c2168033ca1495392d16b8d59f240be45e174927d858484161eac",
+    "initial/SP-003.json": "e63ae09bfb3e586710274f8110d51b01c022f71ee41410bd58a80b6792ffaf8b",
+    "initial/SP-005.json": "af336a5a706ecf6a43e4f3e54c0cbd3f530de7e5b39f80920026094d89cacc14",
+    "initial/SP-002.json": "7914dbc6796e1574f12a532f0307720e215173eb7adbf0deb298d59c002cd064",
+    "initial/SP-012.json": "b23ce68d75e84ccb6e5f87badb3f26c3e1d7bf9794a8684174e20426722a99a4",
+    "initial/SP-011.json": "bf7933ba3d295b22b71e4f15777ae6d71beaa89a26697f0e634953b9d8570f88",
+    "initial/SP-004.json": "ecb6d1c730f5734090c1aa6d1ca242126ed3dd28cfc6b10a6eb064d1b37eec8d",
+    "initial/SP-007.json": "e57fe92102eb415dbc7b395d2f84823f9c4f1e0c977bc4a51cc652fd88a2e03f",
+    "initial/SP-008.json": "d68fbbc24f38e7fef05cc111dece6a5b54aaf4d8427c06560f31b68c950d4cbb",
+    "initial/SP-001.json": "17043c17dee100413f9920a560b5ee573bea55b6c1dba0370f3d291737e8bb1e",
+    "initial/SP-010.json": "f214d40a1ad8f0a01dcd65da956cf7d501d94480691339eb2d9225ca01172782",
+    "initial/SP-006.json": "f7a206e5d91035af52eb28338998f29a2d266d6c89ad28880d6adfbc54eb0821",
+    "counterreview/SP-003.json": "aa755375742fd1e40e424e5dc6f42a3ed7970691486e179a3f524c3e129af550",
+    "counterreview/SP-005.json": "5cbe3b312fd505d3a6b84b36fc014725d02b31743a8764d3cccf95f7bf93dcea",
+    "counterreview/SP-002.json": "a85f806eb6f2bd349ec7411182e765ae89e267723984139de30b3ace29e6a821",
+    "counterreview/SP-012.json": "104cc0810c0b376bf9f4990d1a055ad0ce1facf12fe07198890c3c864d0e6a7c",
+    "counterreview/SP-011.json": "6dbb82200a91d5e220fa04cffd0dc3b761aa52618a6d0ad71da56ece8418dbeb",
+    "counterreview/SP-004.json": "bd91a75aeeff054e914b26c0f1094eeb0e0257e359e579a72a766a6a15e8c33c",
+    "counterreview/SP-007.json": "304c8326ed958ff39dff58ef4fa88398e3ed9ee9d82bda362d9f5917a06ee415",
+    "counterreview/SP-008.json": "b2065ec4e56514a3d266d649e7f831f9e0251112605dd7ba24ee907a8ffd1f7a",
+    "counterreview/SP-001.json": "9695d6e399868c40dd7a92860018f46766cd58fb71e71b7ef110b9b1c9134589",
+    "counterreview/SP-010.json": "9a4cb307c5af3b2ee97a5776a406833e0876017af50c6f03e0eca484abbaaafc",
+    "counterreview/SP-006.json": "4c5550e63b75c6be38497374a509c67f0e6473ec3ac38fb597837cd162a282a5"
+  }
+}
