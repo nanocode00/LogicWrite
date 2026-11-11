@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-016",
+  "input_path": "inputs/SP-016.json",
+  "input_sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "CONTROLLED_CONTEXT"
+  ],
+  "findings": [
+    {
+      "error_type": "CONTROLLED_CONTEXT",
+      "severity": "none",
+      "reason": "합성 계약이 명시한 유일한 기준은 policy-v2의 60초이며 후보도 60초다. v1의 30초는 비적용 과거 문맥이다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "policy-v1",
+          "start": 0,
+          "end": 26,
+          "quote": "# 서비스 정책\n\n요청 제한 시간은 30초다.\n"
+        },
+        {
+          "side": "source",
+          "document_id": "policy-v2",
+          "start": 0,
+          "end": 26,
+          "quote": "# 서비스 정책\n\n요청 제한 시간은 60초다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "policy",
+          "start": 0,
+          "end": 26,
+          "quote": "# 서비스 정책\n\n요청 제한 시간은 60초다.\n"
+        }
+      ]
+    }
+  ],
+  "rationale": "합성 계약이 명시한 유일한 기준은 policy-v2의 60초이며 후보도 60초다. v1의 30초는 비적용 과거 문맥이다.",
+  "acceptable_alternatives": [
+    "동일한 합성 계약과 문서 전체에 근거하여 사람이 재검토한다."
+  ],
+  "review_questions": [
+    "제공된 계약과 문서 전체만으로 판단할 수 있는가?"
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

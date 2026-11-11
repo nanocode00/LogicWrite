@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "GC-004",
+  "input_sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+  "ai_proposal_sha256": "ef5eed66a0381e64e9eda85e1704df337a4170a4fffd875327c1fde4dc9e0dd7",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": []
+}

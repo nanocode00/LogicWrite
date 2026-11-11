@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-017",
+  "input_path": "inputs/SP-017.json",
+  "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "CONTROLLED_CONTEXT"
+  ],
+  "findings": [
+    {
+      "error_type": "CONTROLLED_CONTEXT",
+      "severity": "none",
+      "reason": "절단 없는 전체 후보에 자동 업데이트 미지원과 수동 재설치 필요가 모두 보존된다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "update",
+          "start": 0,
+          "end": 41,
+          "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "update",
+          "start": 0,
+          "end": 41,
+          "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+        }
+      ]
+    }
+  ],
+  "rationale": "절단 없는 전체 후보에 자동 업데이트 미지원과 수동 재설치 필요가 모두 보존된다.",
+  "acceptable_alternatives": [
+    "동일한 합성 계약과 문서 전체에 근거하여 사람이 재검토한다."
+  ],
+  "review_questions": [
+    "제공된 계약과 문서 전체만으로 판단할 수 있는가?"
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

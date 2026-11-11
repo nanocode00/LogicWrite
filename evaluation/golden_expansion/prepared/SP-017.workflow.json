@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-017",
+  "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+  "ai_proposal_sha256": "707b39f048e9b1a65d121b77e2fcdb5f40dc3b651b580afd5bd5bb4b337c77b9",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": []
+}

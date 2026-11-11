@@ -1,0 +1,72 @@
+[
+  {
+    "repository": "pallets/click",
+    "kind": "document",
+    "url": "https://raw.githubusercontent.com/pallets/click/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+    "sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "pallets/click",
+    "kind": "license",
+    "url": "https://raw.githubusercontent.com/pallets/click/8abb77a8432e03ed14a95f972b44f905279415a7/LICENSE.txt",
+    "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "encode/httpx",
+    "kind": "document",
+    "url": "https://raw.githubusercontent.com/encode/httpx/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+    "sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "encode/httpx",
+    "kind": "license",
+    "url": "https://raw.githubusercontent.com/encode/httpx/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/LICENSE.md",
+    "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "prometheus/prometheus",
+    "kind": "document",
+    "url": "https://raw.githubusercontent.com/prometheus/prometheus/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+    "sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "prometheus/prometheus",
+    "kind": "license",
+    "url": "https://raw.githubusercontent.com/prometheus/prometheus/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "prometheus/prometheus",
+    "kind": "notice",
+    "url": "https://raw.githubusercontent.com/prometheus/prometheus/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/NOTICE",
+    "sha256": "ac9e304462a58a4d71b6488423d4447e614c8b31d517fe24345016522c102a78",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "psf/requests",
+    "kind": "document",
+    "url": "https://raw.githubusercontent.com/psf/requests/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+    "sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "psf/requests",
+    "kind": "license",
+    "url": "https://raw.githubusercontent.com/psf/requests/3c7baaa05ab4aa49cc819ce3a819d260de19c157/LICENSE",
+    "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+    "matches_pinned_local": true
+  },
+  {
+    "repository": "psf/requests",
+    "kind": "notice",
+    "url": "https://raw.githubusercontent.com/psf/requests/3c7baaa05ab4aa49cc819ce3a819d260de19c157/NOTICE",
+    "sha256": "f5110972dedad2b4e9d314518daf3b7d72d6e02e499acd802181de6f74571dcc",
+    "matches_pinned_local": true
+  }
+]
