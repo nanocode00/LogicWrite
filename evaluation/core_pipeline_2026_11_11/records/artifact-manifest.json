@@ -1,0 +1,25 @@
+{
+  "baseline_commit": "29dd271c5e367044af765cc0ff9e81db52de7160",
+  "preserved_existing_evaluation_file_count": 186,
+  "files": {
+    "evaluation/core_pipeline_2026_11_11/.gitignore": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b",
+    "evaluation/core_pipeline_2026_11_11/PLAN.md": "c036e6595cbc890f4a68c3b974dccd5f7ea5af5c58c8b0e0a61dbb445fa5ef8c",
+    "evaluation/core_pipeline_2026_11_11/README.md": "e204408d2a2bba2817ad6f5ae6facad40eae7c6778bc67e28353b3bbe92abaf2",
+    "evaluation/core_pipeline_2026_11_11/evaluate.py": "bc350c3cab91fed81136d780adee67d8b60239cd8e4879b8ee5642ef9423c4a3",
+    "evaluation/core_pipeline_2026_11_11/records/all-tests-after.json": "d8c3547e52de94c6d9c9f6ab31508b7f5d3e9cb5a2dbd343e3d780b771a62e1a",
+    "evaluation/core_pipeline_2026_11_11/records/all-tests-baseline.json": "86b2186fdccd06c3b1b814a57f04135894c83d3f05c5ffe2fdecc4e5d446e417",
+    "evaluation/core_pipeline_2026_11_11/records/baseline-pipeline.json": "4164f31777ccf159e801806bedac4e1ce3c01cf3272307af01a4e9a5bd462eb6",
+    "evaluation/core_pipeline_2026_11_11/records/baseline-tests.txt": "e732cf77402b14fe1142b379ad678a78250afec17b91cbe4b866463b53c16ca6",
+    "evaluation/core_pipeline_2026_11_11/records/baseline.json": "09261f50e7c6f1113281cf4ab999d395f1e0ee595a9772aa6cfb47ba0a192ba4",
+    "evaluation/core_pipeline_2026_11_11/records/destination-green.txt": "a6707d4eff38012da33ddc34bc6dc076a3b17151cfc9aef223c8790cbe64c3da",
+    "evaluation/core_pipeline_2026_11_11/records/destination-red.txt": "a3b5ad9e3bbc65a46ad7c628f17efc561738ef03a93a7f76d38142d1869ef1ea",
+    "evaluation/core_pipeline_2026_11_11/records/native-after.json": "23b6bad435fa5f1662672167de09780460fa8cd8e629f57b2cfb9ba072d15679",
+    "evaluation/core_pipeline_2026_11_11/records/native-before.json": "74f14c2c03e9ff41baa14aed69b1ab0e35508eae3cf56317d73e53998b6fa9b3",
+    "evaluation/core_pipeline_2026_11_11/records/sp-comparison.json": "4cbd4dacb52b221ad7697059436f07096fb6b6d09d2cd7ade6da2f5fb8e7aecc",
+    "evaluation/core_pipeline_2026_11_11/records/sp-predictions.json": "ab70b3fb83ee65b9ee564da4fe08f47c3b692b7ab4028194502ef3255c14affe",
+    "evaluation/core_pipeline_2026_11_11/run_checks.py": "765579dbde08496626b5ed7d9aa0cfa60ad2106595b027f7fe6de402e934efd3",
+    "evaluation/core_pipeline_2026_11_11/test_evaluate.py": "b7cbc9efbb2393abff81f9d3546f4841af03120b1b928a535e48138791938246",
+    "experiments/full_document_control/organization.py": "ca2bbd9a40faab637b4305221159aa70a0225efbdbdb7b3fa93a64a9f378aad5",
+    "experiments/full_document_control/test_destination_coverage.py": "14ef383305b6800cba2d681fb4ed9e0d68c205c59ac21e851515210b11e6c39d"
+  }
+}

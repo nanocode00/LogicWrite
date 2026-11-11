@@ -243,6 +243,14 @@ def evaluate_destination_scope(scope_entry, input_bundle, *, destination_snapsho
                 allows_confirmed_move = False
                 notes = f'Destination snapshot for {doc_id} lacks a valid non-empty version.'
                 target_snapshot_error = notes
+            elif 'coverage' in matched_sm and matched_sm['coverage'] != 'complete':
+                # A digest authenticates the supplied fragment, not completeness.
+                # Preserve the legacy organization-only minimal snapshot format,
+                # but never confirm MOVE when incompleteness is explicit.
+                verification_status = 'incomplete_destination_snapshot'
+                allows_confirmed_move = False
+                notes = f'Destination snapshot for {doc_id} explicitly lacks complete coverage.'
+                target_snapshot_error = notes
             else:
                 actual_sha = digest_text(content)
                 if claimed_sha != actual_sha:

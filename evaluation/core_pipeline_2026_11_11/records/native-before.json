@@ -1,0 +1,3152 @@
+{
+  "mode": "deterministic_native_core_probes",
+  "real_model": "not_run",
+  "code_root": "/home/honorbear/LogicWrite/experiments/full_document_control",
+  "cases": [
+    {
+      "case_id": "N-01-quantity-unit",
+      "expected_gate": "FAIL",
+      "actual_gate": "FAIL",
+      "structural_gate": "FAIL",
+      "semantic_gate": "FAIL",
+      "semantic_checks": {
+        "CLAIM_FACTS": {
+          "status": "unresolved",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "document",
+              "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+              "start": 6,
+              "end": 18,
+              "quote": "제한 시간은 30초다."
+            },
+            {
+              "side": "output",
+              "document_id": "document",
+              "snapshot_sha256": "ce7202079ce5f4eff24cf7af9e221ff47d5efc71fa642e153fb3072983e064cc",
+              "start": 6,
+              "end": 18,
+              "quote": "제한 시간은 30분다."
+            }
+          ],
+          "rule_ids": [
+            "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+          ],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "QUANTITY_SCOPE": {
+          "status": "violated",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "document",
+              "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+              "start": 6,
+              "end": 18,
+              "quote": "제한 시간은 30초다."
+            },
+            {
+              "side": "output",
+              "document_id": "document",
+              "snapshot_sha256": "ce7202079ce5f4eff24cf7af9e221ff47d5efc71fa642e153fb3072983e064cc",
+              "start": 6,
+              "end": 18,
+              "quote": "제한 시간은 30분다."
+            }
+          ],
+          "rule_ids": [
+            "LITERAL_QUANTITY_OR_VERSION_REPLACED"
+          ]
+        },
+        "POLARITY_CONDITIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "ADDITIONS_OMISSIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "CONTRADICTIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "MOVE_CONSOLIDATION": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "PROVENANCE": {
+          "status": "violated",
+          "evidence": [],
+          "rule_ids": [
+            "OUTPUT_SNAPSHOT_INVALID",
+            "CHANGESET_LEDGER_MISMATCH",
+            "UNAUTHORIZED_SOURCE_CHANGE",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH"
+          ]
+        }
+      },
+      "semantic_execution": "blocked_structural_failure",
+      "structural_rule_ids": [
+        "ACTUAL_PLACEMENT_MISMATCH",
+        "CHANGESET_LEDGER_MISMATCH",
+        "FINAL_APPROVAL_NOT_IMPLEMENTED",
+        "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+        "OUTPUT_SNAPSHOT_INVALID",
+        "SECTION_PATH_UNRESOLVED",
+        "UNAUTHORIZED_SOURCE_CHANGE"
+      ],
+      "approval_gate": "FAIL",
+      "approval_policy": "BLOCKED",
+      "delivery_approved": false,
+      "analysis": "올바른 구조적 안전 차단; 의미 탐지는 개별 semantic_checks만 참조",
+      "mutation": {
+        "before": "30초",
+        "after": "30분"
+      },
+      "input_bundle_sha256": "9c7e9668a36e0a998d4c4bfedefa81729f370c52dea2cc3326d9ad0ea8d96c74",
+      "output_snapshot": {
+        "document_id": "document",
+        "snapshot_id": "document:candidate:84b9805b8a53",
+        "version": "1.candidate.84b9805b8a53",
+        "coverage": "complete",
+        "media_type": "text/markdown",
+        "content": "# 안내\n\n제한 시간은 30분다.\n\n자동 업데이트를 지원하지 않음.\n\n캐시가 있을 때만 실행 가능하다.\n",
+        "sha256": "ce7202079ce5f4eff24cf7af9e221ff47d5efc71fa642e153fb3072983e064cc"
+      },
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/0",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-02-negation",
+      "expected_gate": "FAIL",
+      "actual_gate": "FAIL",
+      "structural_gate": "FAIL",
+      "semantic_gate": "FAIL",
+      "semantic_checks": {
+        "CLAIM_FACTS": {
+          "status": "unresolved",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "document",
+              "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+              "start": 20,
+              "end": 37,
+              "quote": "자동 업데이트를 지원하지 않음."
+            },
+            {
+              "side": "output",
+              "document_id": "document",
+              "snapshot_sha256": "73a915fa6417a57986cf148419cd8195f8f975a2cc0aa1b07e6730a0015585f1",
+              "start": 20,
+              "end": 33,
+              "quote": "자동 업데이트를 지원함."
+            }
+          ],
+          "rule_ids": [
+            "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+          ],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "QUANTITY_SCOPE": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "POLARITY_CONDITIONS": {
+          "status": "violated",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "document",
+              "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+              "start": 20,
+              "end": 37,
+              "quote": "자동 업데이트를 지원하지 않음."
+            },
+            {
+              "side": "output",
+              "document_id": "document",
+              "snapshot_sha256": "73a915fa6417a57986cf148419cd8195f8f975a2cc0aa1b07e6730a0015585f1",
+              "start": 20,
+              "end": 33,
+              "quote": "자동 업데이트를 지원함."
+            }
+          ],
+          "rule_ids": [
+            "LITERAL_SUPPORT_POLARITY_REVERSAL"
+          ]
+        },
+        "ADDITIONS_OMISSIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "CONTRADICTIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "MOVE_CONSOLIDATION": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "PROVENANCE": {
+          "status": "violated",
+          "evidence": [],
+          "rule_ids": [
+            "OUTPUT_SNAPSHOT_INVALID",
+            "CHANGESET_LEDGER_MISMATCH",
+            "UNAUTHORIZED_SOURCE_CHANGE",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH"
+          ]
+        }
+      },
+      "semantic_execution": "blocked_structural_failure",
+      "structural_rule_ids": [
+        "ACTUAL_PLACEMENT_MISMATCH",
+        "CHANGESET_LEDGER_MISMATCH",
+        "FINAL_APPROVAL_NOT_IMPLEMENTED",
+        "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+        "OUTPUT_SNAPSHOT_INVALID",
+        "SECTION_PATH_UNRESOLVED",
+        "UNAUTHORIZED_SOURCE_CHANGE"
+      ],
+      "approval_gate": "FAIL",
+      "approval_policy": "BLOCKED",
+      "delivery_approved": false,
+      "analysis": "올바른 구조적 안전 차단; 의미 탐지는 개별 semantic_checks만 참조",
+      "mutation": {
+        "before": "지원하지 않음",
+        "after": "지원함"
+      },
+      "input_bundle_sha256": "9c7e9668a36e0a998d4c4bfedefa81729f370c52dea2cc3326d9ad0ea8d96c74",
+      "output_snapshot": {
+        "document_id": "document",
+        "snapshot_id": "document:candidate:84b9805b8a53",
+        "version": "1.candidate.84b9805b8a53",
+        "coverage": "complete",
+        "media_type": "text/markdown",
+        "content": "# 안내\n\n제한 시간은 30초다.\n\n자동 업데이트를 지원함.\n\n캐시가 있을 때만 실행 가능하다.\n",
+        "sha256": "73a915fa6417a57986cf148419cd8195f8f975a2cc0aa1b07e6730a0015585f1"
+      },
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/1",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-03-unsupported-addition",
+      "expected_gate": "FAIL",
+      "actual_gate": "FAIL",
+      "structural_gate": "FAIL",
+      "semantic_gate": "FAIL",
+      "semantic_checks": {
+        "CLAIM_FACTS": {
+          "status": "unresolved",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "document",
+              "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+              "start": 6,
+              "end": 18,
+              "quote": "제한 시간은 30초다."
+            },
+            {
+              "side": "output",
+              "document_id": "document",
+              "snapshot_sha256": "9fe15ac38f1060754dcf1b0229abd6c8748dd86f2f9c5a8ee2f302162bc8dde2",
+              "start": 6,
+              "end": 34,
+              "quote": "제한 시간은 30초다. SOC 2 인증을 보장한다."
+            }
+          ],
+          "rule_ids": [
+            "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+          ],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "QUANTITY_SCOPE": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "POLARITY_CONDITIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "ADDITIONS_OMISSIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "CONTRADICTIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "MOVE_CONSOLIDATION": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "PROVENANCE": {
+          "status": "violated",
+          "evidence": [],
+          "rule_ids": [
+            "OUTPUT_SNAPSHOT_INVALID",
+            "CHANGESET_LEDGER_MISMATCH",
+            "UNAUTHORIZED_SOURCE_CHANGE",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH"
+          ]
+        }
+      },
+      "semantic_execution": "blocked_structural_failure",
+      "structural_rule_ids": [
+        "ACTUAL_PLACEMENT_MISMATCH",
+        "CHANGESET_LEDGER_MISMATCH",
+        "FINAL_APPROVAL_NOT_IMPLEMENTED",
+        "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+        "OUTPUT_SNAPSHOT_INVALID",
+        "SECTION_PATH_UNRESOLVED",
+        "UNAUTHORIZED_SOURCE_CHANGE"
+      ],
+      "approval_gate": "FAIL",
+      "approval_policy": "BLOCKED",
+      "delivery_approved": false,
+      "analysis": "올바른 구조적 안전 차단; 의미 탐지는 개별 semantic_checks만 참조",
+      "mutation": {
+        "before": "30초다.",
+        "after": "30초다. SOC 2 인증을 보장한다."
+      },
+      "input_bundle_sha256": "9c7e9668a36e0a998d4c4bfedefa81729f370c52dea2cc3326d9ad0ea8d96c74",
+      "output_snapshot": {
+        "document_id": "document",
+        "snapshot_id": "document:candidate:84b9805b8a53",
+        "version": "1.candidate.84b9805b8a53",
+        "coverage": "complete",
+        "media_type": "text/markdown",
+        "content": "# 안내\n\n제한 시간은 30초다. SOC 2 인증을 보장한다.\n\n자동 업데이트를 지원하지 않음.\n\n캐시가 있을 때만 실행 가능하다.\n",
+        "sha256": "9fe15ac38f1060754dcf1b0229abd6c8748dd86f2f9c5a8ee2f302162bc8dde2"
+      },
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/2",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-04-condition-loss",
+      "expected_gate": "FAIL",
+      "actual_gate": "FAIL",
+      "structural_gate": "FAIL",
+      "semantic_gate": "FAIL",
+      "semantic_checks": {
+        "CLAIM_FACTS": {
+          "status": "unresolved",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "document",
+              "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+              "start": 39,
+              "end": 57,
+              "quote": "캐시가 있을 때만 실행 가능하다."
+            },
+            {
+              "side": "output",
+              "document_id": "document",
+              "snapshot_sha256": "6d9fd29f291444154a4df7fcb5d971e0571a3c1c138247bd07397059eafb24a5",
+              "start": 39,
+              "end": 50,
+              "quote": "항상 실행 가능하다."
+            }
+          ],
+          "rule_ids": [
+            "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+          ],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "QUANTITY_SCOPE": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "POLARITY_CONDITIONS": {
+          "status": "violated",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "document",
+              "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+              "start": 39,
+              "end": 57,
+              "quote": "캐시가 있을 때만 실행 가능하다."
+            },
+            {
+              "side": "output",
+              "document_id": "document",
+              "snapshot_sha256": "6d9fd29f291444154a4df7fcb5d971e0571a3c1c138247bd07397059eafb24a5",
+              "start": 39,
+              "end": 50,
+              "quote": "항상 실행 가능하다."
+            }
+          ],
+          "rule_ids": [
+            "EXPLICIT_CONDITION_TO_ALWAYS"
+          ]
+        },
+        "ADDITIONS_OMISSIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "CONTRADICTIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "MOVE_CONSOLIDATION": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+        },
+        "PROVENANCE": {
+          "status": "violated",
+          "evidence": [],
+          "rule_ids": [
+            "OUTPUT_SNAPSHOT_INVALID",
+            "CHANGESET_LEDGER_MISMATCH",
+            "UNAUTHORIZED_SOURCE_CHANGE",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH",
+            "ACTUAL_PLACEMENT_MISMATCH"
+          ]
+        }
+      },
+      "semantic_execution": "blocked_structural_failure",
+      "structural_rule_ids": [
+        "ACTUAL_PLACEMENT_MISMATCH",
+        "CHANGESET_LEDGER_MISMATCH",
+        "FINAL_APPROVAL_NOT_IMPLEMENTED",
+        "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+        "OUTPUT_SNAPSHOT_INVALID",
+        "SECTION_PATH_UNRESOLVED",
+        "UNAUTHORIZED_SOURCE_CHANGE"
+      ],
+      "approval_gate": "FAIL",
+      "approval_policy": "BLOCKED",
+      "delivery_approved": false,
+      "analysis": "올바른 구조적 안전 차단; 의미 탐지는 개별 semantic_checks만 참조",
+      "mutation": {
+        "before": "캐시가 있을 때만 실행 가능하다.",
+        "after": "항상 실행 가능하다."
+      },
+      "input_bundle_sha256": "9c7e9668a36e0a998d4c4bfedefa81729f370c52dea2cc3326d9ad0ea8d96c74",
+      "output_snapshot": {
+        "document_id": "document",
+        "snapshot_id": "document:candidate:84b9805b8a53",
+        "version": "1.candidate.84b9805b8a53",
+        "coverage": "complete",
+        "media_type": "text/markdown",
+        "content": "# 안내\n\n제한 시간은 30초다.\n\n자동 업데이트를 지원하지 않음.\n\n항상 실행 가능하다.\n",
+        "sha256": "6d9fd29f291444154a4df7fcb5d971e0571a3c1c138247bd07397059eafb24a5"
+      },
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/3",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-05-unchanged-unapproved",
+      "expected_gate": "REVIEW",
+      "actual_gate": "REVIEW",
+      "structural_gate": "REVIEW",
+      "semantic_gate": "REVIEW",
+      "semantic_checks": {
+        "CLAIM_FACTS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+        },
+        "QUANTITY_SCOPE": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+        },
+        "POLARITY_CONDITIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+        },
+        "ADDITIONS_OMISSIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+        },
+        "CONTRADICTIONS": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+        },
+        "MOVE_CONSOLIDATION": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+        },
+        "PROVENANCE": {
+          "status": "unresolved",
+          "evidence": [],
+          "rule_ids": [],
+          "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+        }
+      },
+      "semantic_execution": "not_run",
+      "structural_rule_ids": [
+        "FINAL_APPROVAL_NOT_IMPLEMENTED",
+        "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+        "SECTION_PATH_UNRESOLVED"
+      ],
+      "approval_gate": "REVIEW",
+      "approval_policy": "UNAPPROVED",
+      "delivery_approved": false,
+      "analysis": "미해결 의미 검수 / 승인 보류",
+      "mutation": {
+        "before": "absent",
+        "after": "unused"
+      },
+      "input_bundle_sha256": "9c7e9668a36e0a998d4c4bfedefa81729f370c52dea2cc3326d9ad0ea8d96c74",
+      "output_snapshot": {
+        "document_id": "document",
+        "snapshot_id": "document:candidate:84b9805b8a53",
+        "version": "1.candidate.84b9805b8a53",
+        "coverage": "complete",
+        "media_type": "text/markdown",
+        "content": "# 안내\n\n제한 시간은 30초다.\n\n자동 업데이트를 지원하지 않음.\n\n캐시가 있을 때만 실행 가능하다.\n",
+        "sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4"
+      },
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/4",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-06-destination-None",
+      "expected_allows_move": false,
+      "actual": {
+        "scope_id": "details",
+        "kind": "document",
+        "document_id": "details",
+        "destination_role": null,
+        "verification_status": "unverified_context",
+        "audience_alignment": "unverified",
+        "purpose_alignment": "unverified",
+        "allows_confirmed_move": false,
+        "prerequisites": "Requires verified concrete document context before publishing moves",
+        "notes": "Concrete destination document details declared, but target snapshot context is not loaded.",
+        "snapshot_meta": null,
+        "error": null,
+        "evidence": [
+          {
+            "scope_id": "details",
+            "document_id": "details",
+            "destination_role": null
+          }
+        ]
+      },
+      "analysis": "올바른 탐지",
+      "input_destination_snapshots": [],
+      "module": "organization.evaluate_destination_scope",
+      "delivery_approved": false,
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/5",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-06-destination-partial",
+      "expected_allows_move": false,
+      "actual": {
+        "scope_id": "details",
+        "kind": "document",
+        "document_id": "details",
+        "destination_role": null,
+        "verification_status": "verified_context",
+        "audience_alignment": "unverified",
+        "purpose_alignment": "unverified",
+        "allows_confirmed_move": true,
+        "prerequisites": "None",
+        "notes": "Verified external document context for destination details (sha256=4a25754dee990ed8e03a1f9ccee36ac73db76980d5247d53d97d52f14d74ae0f, version=1).",
+        "snapshot_meta": {
+          "snapshot_id": "snap-details",
+          "sha256": "4a25754dee990ed8e03a1f9ccee36ac73db76980d5247d53d97d52f14d74ae0f",
+          "version": "1"
+        },
+        "error": null,
+        "evidence": [
+          {
+            "scope_id": "details",
+            "document_id": "details",
+            "destination_role": null
+          }
+        ]
+      },
+      "analysis": "미탐",
+      "input_destination_snapshots": [
+        {
+          "document_id": "details",
+          "version": "1",
+          "content": "# Details\n",
+          "sha256": "4a25754dee990ed8e03a1f9ccee36ac73db76980d5247d53d97d52f14d74ae0f",
+          "coverage": "partial"
+        }
+      ],
+      "module": "organization.evaluate_destination_scope",
+      "delivery_approved": false,
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/6",
+      "priority": "P1",
+      "fix_needed": "Reject explicit incomplete destination coverage",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-06-destination-complete",
+      "expected_allows_move": true,
+      "actual": {
+        "scope_id": "details",
+        "kind": "document",
+        "document_id": "details",
+        "destination_role": null,
+        "verification_status": "verified_context",
+        "audience_alignment": "unverified",
+        "purpose_alignment": "unverified",
+        "allows_confirmed_move": true,
+        "prerequisites": "None",
+        "notes": "Verified external document context for destination details (sha256=4a25754dee990ed8e03a1f9ccee36ac73db76980d5247d53d97d52f14d74ae0f, version=1).",
+        "snapshot_meta": {
+          "snapshot_id": "snap-details",
+          "sha256": "4a25754dee990ed8e03a1f9ccee36ac73db76980d5247d53d97d52f14d74ae0f",
+          "version": "1"
+        },
+        "error": null,
+        "evidence": [
+          {
+            "scope_id": "details",
+            "document_id": "details",
+            "destination_role": null
+          }
+        ]
+      },
+      "analysis": "올바른 탐지",
+      "input_destination_snapshots": [
+        {
+          "document_id": "details",
+          "version": "1",
+          "content": "# Details\n",
+          "sha256": "4a25754dee990ed8e03a1f9ccee36ac73db76980d5247d53d97d52f14d74ae0f",
+          "coverage": "complete"
+        }
+      ],
+      "module": "organization.evaluate_destination_scope",
+      "delivery_approved": false,
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/7",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-07-repeated",
+      "expected_termination": "REPEATED_STATE",
+      "actual_termination": "REPEATED_STATE",
+      "status": "STOPPED",
+      "attempt_count": 1,
+      "delivery_approved": false,
+      "attempts": [
+        {
+          "target_module": "expression",
+          "invalidated": [
+            "expression",
+            "reconstruction",
+            "final_report",
+            "final_semantic_report",
+            "final_audit",
+            "approval_request",
+            "approval_report"
+          ],
+          "regenerated": [
+            "reconstruction"
+          ],
+          "judgment": "repeated",
+          "termination_reason": "REPEATED_STATE"
+        }
+      ],
+      "module": "repair_loop.RepairLoop",
+      "analysis": "올바른 탐지",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/8",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-08-budget",
+      "expected_termination": "BUDGET_EXHAUSTED",
+      "actual_termination": "BUDGET_EXHAUSTED",
+      "status": "STOPPED",
+      "attempt_count": 0,
+      "delivery_approved": false,
+      "attempts": [],
+      "module": "repair_loop.RepairLoop",
+      "analysis": "올바른 탐지",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/9",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-09-attempt-limit",
+      "expected_termination": "MAX_ATTEMPTS",
+      "actual_termination": "MAX_ATTEMPTS",
+      "status": "STOPPED",
+      "attempt_count": 0,
+      "delivery_approved": false,
+      "attempts": [],
+      "module": "repair_loop.RepairLoop",
+      "analysis": "올바른 탐지",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/10",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-10-invalidate-revalidate",
+      "expected_termination": "VALIDATION_INCOMPLETE",
+      "actual_termination": "VALIDATION_INCOMPLETE",
+      "status": "REVIEW",
+      "attempt_count": 1,
+      "delivery_approved": false,
+      "attempts": [
+        {
+          "target_module": "expression",
+          "invalidated": [
+            "expression",
+            "reconstruction",
+            "final_report",
+            "final_semantic_report",
+            "final_audit",
+            "approval_request",
+            "approval_report"
+          ],
+          "regenerated": [
+            "reconstruction"
+          ],
+          "judgment": "no_verified_progress",
+          "termination_reason": "VALIDATION_INCOMPLETE"
+        }
+      ],
+      "module": "repair_loop.RepairLoop",
+      "analysis": "올바른 탐지",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/11",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-11-partial-output",
+      "expected_gate": "FAIL",
+      "actual_gate": "FAIL",
+      "analysis": "올바른 구조적 안전 차단",
+      "mutation": {
+        "output_snapshots/0/coverage": "partial"
+      },
+      "evidence": [
+        {
+          "check_id": "SNAPSHOT_INTEGRITY",
+          "rule_id": "OUTPUT_SNAPSHOT_INVALID",
+          "message": "Output identity, version or digest mismatch",
+          "severity": "ERROR"
+        },
+        {
+          "check_id": "ORGANIZATION_FIDELITY",
+          "rule_id": "SECTION_PATH_UNRESOLVED",
+          "message": "Symbolic section has no unique existing heading",
+          "severity": "WARNING"
+        },
+        {
+          "check_id": "ORGANIZATION_FIDELITY",
+          "rule_id": "SECTION_PATH_UNRESOLVED",
+          "message": "Symbolic section has no unique existing heading",
+          "severity": "WARNING"
+        },
+        {
+          "check_id": "ORGANIZATION_FIDELITY",
+          "rule_id": "SECTION_PATH_UNRESOLVED",
+          "message": "Symbolic section has no unique existing heading",
+          "severity": "WARNING"
+        },
+        {
+          "check_id": "ORGANIZATION_FIDELITY",
+          "rule_id": "SECTION_PATH_UNRESOLVED",
+          "message": "Section label does not resolve to one existing heading",
+          "severity": "WARNING"
+        },
+        {
+          "check_id": "ORGANIZATION_FIDELITY",
+          "rule_id": "SECTION_PATH_UNRESOLVED",
+          "message": "Section label does not resolve to one existing heading",
+          "severity": "WARNING"
+        },
+        {
+          "check_id": "ORGANIZATION_FIDELITY",
+          "rule_id": "SECTION_PATH_UNRESOLVED",
+          "message": "Section label does not resolve to one existing heading",
+          "severity": "WARNING"
+        },
+        {
+          "check_id": "EXPRESSION_FIDELITY",
+          "rule_id": "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+          "message": "Whole-document semantic review has not run",
+          "severity": "WARNING"
+        },
+        {
+          "check_id": "APPROVAL_BOUNDARY",
+          "rule_id": "FINAL_APPROVAL_NOT_IMPLEMENTED",
+          "message": "No trusted semantic/human approval path exists",
+          "severity": "WARNING"
+        }
+      ],
+      "module": "final_validator + final_semantic_validator + integration",
+      "delivery_approved": false,
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/12",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-12-partial-source",
+      "expected_gate": "STOPPED",
+      "actual_gate": "STOPPED",
+      "delivery_approved": false,
+      "analysis": "올바른 구조적 안전 차단",
+      "mutation": {
+        "document_snapshot/coverage": "partial"
+      },
+      "evidence": {
+        "state": "STOPPED",
+        "last_gate_state": "FAIL",
+        "responsible_module": "information_extraction_analysis",
+        "invalidated_artifacts": [
+          "analysis",
+          "organization",
+          "expression",
+          "reconstruction",
+          "final_report",
+          "final_semantic_report",
+          "final_audit",
+          "approval_request",
+          "approval_report"
+        ],
+        "retry_count": 0,
+        "reason": "No verified automatic repair; re-run descendants after correcting the responsible input",
+        "stage_transition_allowed": false
+      },
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/13",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-13-no-progress",
+      "expected_termination": "NO_VERIFIED_PROGRESS",
+      "actual_termination": "NO_VERIFIED_PROGRESS",
+      "status": "FAIL",
+      "analysis": "올바른 진전 없음 종료",
+      "delivery_approved": false,
+      "mutation": {
+        "trace/0/unit_refs": [
+          "unknown"
+        ],
+        "adapter": "change justification only"
+      },
+      "evidence": [
+        {
+          "attempt": 1,
+          "target_module": "reconstruction",
+          "input_sha256": "b0efe0c4f5b253eeb91e7a56e81786803ee3585b6defe965038579ac63f29515",
+          "before_candidate_sha256": "14df5016f27b1c13beb5b11ba027630ebd60697da8ad03809bb797e3586e5add",
+          "evidence": [
+            {
+              "check_id": "ORGANIZATION_FIDELITY",
+              "rule_id": "SECTION_PATH_UNRESOLVED",
+              "message": "Symbolic section has no unique existing heading",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "ORGANIZATION_FIDELITY",
+              "rule_id": "SECTION_PATH_UNRESOLVED",
+              "message": "Symbolic section has no unique existing heading",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "ORGANIZATION_FIDELITY",
+              "rule_id": "SECTION_PATH_UNRESOLVED",
+              "message": "Symbolic section has no unique existing heading",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "BIDIRECTIONAL_TRACE",
+              "rule_id": "INFORMATION_UNIT_OMITTED",
+              "message": "Every original unit must have exactly one trace",
+              "severity": "ERROR"
+            },
+            {
+              "check_id": "ORGANIZATION_FIDELITY",
+              "rule_id": "SECTION_PATH_UNRESOLVED",
+              "message": "Section label does not resolve to one existing heading",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "ORGANIZATION_FIDELITY",
+              "rule_id": "SECTION_PATH_UNRESOLVED",
+              "message": "Section label does not resolve to one existing heading",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "ORGANIZATION_FIDELITY",
+              "rule_id": "SECTION_PATH_UNRESOLVED",
+              "message": "Section label does not resolve to one existing heading",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "EXPRESSION_FIDELITY",
+              "rule_id": "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+              "message": "Whole-document semantic review has not run",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "APPROVAL_BOUNDARY",
+              "rule_id": "FINAL_APPROVAL_NOT_IMPLEMENTED",
+              "message": "No trusted semantic/human approval path exists",
+              "severity": "WARNING"
+            },
+            {
+              "check_id": "PROVENANCE",
+              "rule_id": "INFORMATION_UNIT_OMITTED",
+              "severity": "ERROR",
+              "evidence": []
+            }
+          ],
+          "before_validation": {
+            "version": "final-output-audit-v1",
+            "structural_report": {
+              "version": "final-document-validation-v1",
+              "gate_state": "FAIL",
+              "checks": {
+                "SNAPSHOT_INTEGRITY": "passed",
+                "FULL_COVERAGE": "passed",
+                "PROTECTED_INFORMATION": "passed",
+                "ORGANIZATION_FIDELITY": "unresolved",
+                "EXPRESSION_FIDELITY": "unresolved",
+                "BIDIRECTIONAL_TRACE": "violated",
+                "CROSS_DOCUMENT_INTEGRITY": "passed",
+                "APPROVAL_BOUNDARY": "unresolved"
+              },
+              "check_versions": {
+                "SNAPSHOT_INTEGRITY": "1",
+                "FULL_COVERAGE": "1",
+                "PROTECTED_INFORMATION": "1",
+                "ORGANIZATION_FIDELITY": "1",
+                "EXPRESSION_FIDELITY": "1",
+                "BIDIRECTIONAL_TRACE": "1",
+                "CROSS_DOCUMENT_INTEGRITY": "1",
+                "APPROVAL_BOUNDARY": "1"
+              },
+              "semantic_fidelity": "not_run",
+              "delivery_approved": false,
+              "stage_transition_allowed": false,
+              "revision_sha256": "80b18bb47c51946c802875edf57eae05307f504e7a0a05decfd4038361a9f47f",
+              "analysis_sha256": "b2611b336ab2630bad45b320a548a4557ccf9584d65c60f79bf68b9952c743bb",
+              "organization_sha256": "8e9243ab65c1916c26c8b725f30266925afc219c22e9577df188f3b3e0a1ab1c",
+              "findings": [
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "BIDIRECTIONAL_TRACE",
+                  "rule_id": "INFORMATION_UNIT_OMITTED",
+                  "message": "Every original unit must have exactly one trace",
+                  "severity": "ERROR"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "EXPRESSION_FIDELITY",
+                  "rule_id": "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+                  "message": "Whole-document semantic review has not run",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "APPROVAL_BOUNDARY",
+                  "rule_id": "FINAL_APPROVAL_NOT_IMPLEMENTED",
+                  "message": "No trusted semantic/human approval path exists",
+                  "severity": "WARNING"
+                }
+              ],
+              "report_sha256": "e5a3c167e62fd7b370b083b0077dcab78051bd00c7ae2f57ee7a57c4aa62b506"
+            },
+            "semantic_report": {
+              "version": "final-output-semantic-validation-v1",
+              "checks": {
+                "CLAIM_FACTS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "QUANTITY_SCOPE": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "POLARITY_CONDITIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "ADDITIONS_OMISSIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "CONTRADICTIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "MOVE_CONSOLIDATION": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "PROVENANCE": {
+                  "status": "violated",
+                  "evidence": [],
+                  "rule_ids": [
+                    "INFORMATION_UNIT_OMITTED"
+                  ]
+                }
+              },
+              "findings": [
+                {
+                  "check_id": "PROVENANCE",
+                  "rule_id": "INFORMATION_UNIT_OMITTED",
+                  "severity": "ERROR",
+                  "evidence": []
+                }
+              ],
+              "snapshot_refs": [
+                {
+                  "side": "source",
+                  "document_id": "document",
+                  "snapshot_id": "document:source:84b9805b8a53",
+                  "version": "1",
+                  "sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4"
+                },
+                {
+                  "side": "output",
+                  "document_id": "document",
+                  "snapshot_id": "document:candidate:84b9805b8a53",
+                  "version": "1.candidate.84b9805b8a53",
+                  "sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4"
+                }
+              ],
+              "deterministic_audit": {
+                "literal_pairs": [
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 0,
+                      "end": 4,
+                      "quote": "# 안내"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 0,
+                      "end": 4,
+                      "quote": "# 안내"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 4,
+                      "end": 5,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 4,
+                      "end": 5,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 5,
+                      "end": 6,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 5,
+                      "end": 6,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 6,
+                      "end": 18,
+                      "quote": "제한 시간은 30초다."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 6,
+                      "end": 18,
+                      "quote": "제한 시간은 30초다."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 18,
+                      "end": 19,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 18,
+                      "end": 19,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 19,
+                      "end": 20,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 19,
+                      "end": 20,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 20,
+                      "end": 37,
+                      "quote": "자동 업데이트를 지원하지 않음."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 20,
+                      "end": 37,
+                      "quote": "자동 업데이트를 지원하지 않음."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 37,
+                      "end": 38,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 37,
+                      "end": 38,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 38,
+                      "end": 39,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 38,
+                      "end": 39,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 39,
+                      "end": 57,
+                      "quote": "캐시가 있을 때만 실행 가능하다."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 39,
+                      "end": 57,
+                      "quote": "캐시가 있을 때만 실행 가능하다."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 57,
+                      "end": 58,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 57,
+                      "end": 58,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  }
+                ]
+              },
+              "coverage": {
+                "complete": false,
+                "required_checks": [
+                  "CLAIM_FACTS",
+                  "QUANTITY_SCOPE",
+                  "POLARITY_CONDITIONS",
+                  "ADDITIONS_OMISSIONS",
+                  "CONTRADICTIONS",
+                  "MOVE_CONSOLIDATION",
+                  "PROVENANCE"
+                ],
+                "reviewed_checks": []
+              },
+              "execution": {
+                "state": "blocked_structural_failure",
+                "run_id": "53178ba5-2227-4739-91b7-ba2ece1cf113",
+                "request_sha256": "f7d14a83141d842aaf36d3771052264717b26b4c794275dd8f21afb45eb316cb",
+                "response_sha256": null,
+                "max_review_chars": 48000,
+                "timeout_seconds": 10
+              },
+              "delivery_approved": false,
+              "stage_transition_allowed": false,
+              "binding_sha256": "d77520b9bb24ffc400552cc70de6f348da3a72450f4de0a05d0ee15d7f82584a",
+              "structural_report_sha256": "e5a3c167e62fd7b370b083b0077dcab78051bd00c7ae2f57ee7a57c4aa62b506",
+              "overall_judgment": "contradicted",
+              "gate_state": "FAIL",
+              "execution_evidence_matches_current_inputs": true,
+              "report_sha256": "b54d906c0cd115c45337a4f9e867fa5f010626e35441691a518e834a80307630"
+            },
+            "gate_state": "FAIL",
+            "delivery_approved": false,
+            "stage_transition_allowed": false,
+            "report_sha256": "f3b34ab16967ebd0baca50fabd3547bcc6882a9f1659d7ab0b07a0d49274a0f9"
+          },
+          "after_validation": {
+            "version": "final-output-audit-v1",
+            "structural_report": {
+              "version": "final-document-validation-v1",
+              "gate_state": "FAIL",
+              "checks": {
+                "SNAPSHOT_INTEGRITY": "passed",
+                "FULL_COVERAGE": "passed",
+                "PROTECTED_INFORMATION": "passed",
+                "ORGANIZATION_FIDELITY": "unresolved",
+                "EXPRESSION_FIDELITY": "unresolved",
+                "BIDIRECTIONAL_TRACE": "violated",
+                "CROSS_DOCUMENT_INTEGRITY": "passed",
+                "APPROVAL_BOUNDARY": "unresolved"
+              },
+              "check_versions": {
+                "SNAPSHOT_INTEGRITY": "1",
+                "FULL_COVERAGE": "1",
+                "PROTECTED_INFORMATION": "1",
+                "ORGANIZATION_FIDELITY": "1",
+                "EXPRESSION_FIDELITY": "1",
+                "BIDIRECTIONAL_TRACE": "1",
+                "CROSS_DOCUMENT_INTEGRITY": "1",
+                "APPROVAL_BOUNDARY": "1"
+              },
+              "semantic_fidelity": "not_run",
+              "delivery_approved": false,
+              "stage_transition_allowed": false,
+              "revision_sha256": "521243a16c8dc70b81de022683efc27722161d25dbfdbd83f548b8d16fa39ecf",
+              "analysis_sha256": "b2611b336ab2630bad45b320a548a4557ccf9584d65c60f79bf68b9952c743bb",
+              "organization_sha256": "8e9243ab65c1916c26c8b725f30266925afc219c22e9577df188f3b3e0a1ab1c",
+              "findings": [
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "BIDIRECTIONAL_TRACE",
+                  "rule_id": "INFORMATION_UNIT_OMITTED",
+                  "message": "Every original unit must have exactly one trace",
+                  "severity": "ERROR"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "EXPRESSION_FIDELITY",
+                  "rule_id": "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+                  "message": "Whole-document semantic review has not run",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "APPROVAL_BOUNDARY",
+                  "rule_id": "FINAL_APPROVAL_NOT_IMPLEMENTED",
+                  "message": "No trusted semantic/human approval path exists",
+                  "severity": "WARNING"
+                }
+              ],
+              "report_sha256": "9b69e0f4be7fe6130fe820c61a47880a7e12997bc3da8439dcf11ff65fa45674"
+            },
+            "semantic_report": {
+              "version": "final-output-semantic-validation-v1",
+              "checks": {
+                "CLAIM_FACTS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "QUANTITY_SCOPE": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "POLARITY_CONDITIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "ADDITIONS_OMISSIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "CONTRADICTIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "MOVE_CONSOLIDATION": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "SEMANTIC_REVIEW_BLOCKED_STRUCTURAL_FAILURE"
+                },
+                "PROVENANCE": {
+                  "status": "violated",
+                  "evidence": [],
+                  "rule_ids": [
+                    "INFORMATION_UNIT_OMITTED"
+                  ]
+                }
+              },
+              "findings": [
+                {
+                  "check_id": "PROVENANCE",
+                  "rule_id": "INFORMATION_UNIT_OMITTED",
+                  "severity": "ERROR",
+                  "evidence": []
+                }
+              ],
+              "snapshot_refs": [
+                {
+                  "side": "source",
+                  "document_id": "document",
+                  "snapshot_id": "document:source:84b9805b8a53",
+                  "version": "1",
+                  "sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4"
+                },
+                {
+                  "side": "output",
+                  "document_id": "document",
+                  "snapshot_id": "document:candidate:84b9805b8a53",
+                  "version": "1.candidate.84b9805b8a53",
+                  "sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4"
+                }
+              ],
+              "deterministic_audit": {
+                "literal_pairs": [
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 0,
+                      "end": 4,
+                      "quote": "# 안내"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 0,
+                      "end": 4,
+                      "quote": "# 안내"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 4,
+                      "end": 5,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 4,
+                      "end": 5,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 5,
+                      "end": 6,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 5,
+                      "end": 6,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 6,
+                      "end": 18,
+                      "quote": "제한 시간은 30초다."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 6,
+                      "end": 18,
+                      "quote": "제한 시간은 30초다."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 18,
+                      "end": 19,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 18,
+                      "end": 19,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 19,
+                      "end": 20,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 19,
+                      "end": 20,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 20,
+                      "end": 37,
+                      "quote": "자동 업데이트를 지원하지 않음."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 20,
+                      "end": 37,
+                      "quote": "자동 업데이트를 지원하지 않음."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 37,
+                      "end": 38,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 37,
+                      "end": 38,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 38,
+                      "end": 39,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 38,
+                      "end": 39,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 39,
+                      "end": 57,
+                      "quote": "캐시가 있을 때만 실행 가능하다."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 39,
+                      "end": 57,
+                      "quote": "캐시가 있을 때만 실행 가능하다."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 57,
+                      "end": 58,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 57,
+                      "end": 58,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  }
+                ]
+              },
+              "coverage": {
+                "complete": false,
+                "required_checks": [
+                  "CLAIM_FACTS",
+                  "QUANTITY_SCOPE",
+                  "POLARITY_CONDITIONS",
+                  "ADDITIONS_OMISSIONS",
+                  "CONTRADICTIONS",
+                  "MOVE_CONSOLIDATION",
+                  "PROVENANCE"
+                ],
+                "reviewed_checks": []
+              },
+              "execution": {
+                "state": "blocked_structural_failure",
+                "run_id": "f78b1a4f-ae9b-4691-ac1c-f703c9fd9027",
+                "request_sha256": "3281bcfc84c1f3d55654354f25344df2aa0a72ddfa84eb946a34354a8e17e6c1",
+                "response_sha256": null,
+                "max_review_chars": 48000,
+                "timeout_seconds": 10
+              },
+              "delivery_approved": false,
+              "stage_transition_allowed": false,
+              "binding_sha256": "4852b691d89e0911a69566383091f8a20978ce8eae32d3759b9d059341878afe",
+              "structural_report_sha256": "9b69e0f4be7fe6130fe820c61a47880a7e12997bc3da8439dcf11ff65fa45674",
+              "overall_judgment": "contradicted",
+              "gate_state": "FAIL",
+              "execution_evidence_matches_current_inputs": true,
+              "report_sha256": "286fe40dab51b21c93b0b63ef320eedddf784bad1da6a9d8f2fb729ef45924ab"
+            },
+            "gate_state": "FAIL",
+            "delivery_approved": false,
+            "stage_transition_allowed": false,
+            "report_sha256": "0057e7f99de9de7e957e273c5bc909535479062366834a50abad389d4d9d20a7"
+          },
+          "after_candidate_sha256": "7eb2712f56447ab94a252cf2a431e6b56397b2e287de6a5d0a93c00d0586c894",
+          "invalidated": [
+            "reconstruction",
+            "final_report",
+            "final_semantic_report",
+            "final_audit",
+            "approval_request",
+            "approval_report"
+          ],
+          "regenerated": [],
+          "judgment": "no_verified_progress",
+          "termination_reason": "NO_VERIFIED_PROGRESS",
+          "started_elapsed_seconds": 0.004034087993204594,
+          "snapshot_sha256": "eb9d7a0eb05a61b65cc1b9d5aea9eb7044e0f6a52253d0e5975c403fb014b8b2",
+          "elapsed_seconds": 0.004972863011062145,
+          "resolved": [],
+          "unconfirmed": [],
+          "introduced": [],
+          "unresolved_increased": []
+        }
+      ],
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/14",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-14-all-descendants-revalidated",
+      "expected_termination": "VALIDATION_INCOMPLETE",
+      "actual_termination": "VALIDATION_INCOMPLETE",
+      "status": "REVIEW",
+      "analysis": "상위 오류 수정 후 전체 하위 재생성 및 의미 REVIEW 보존",
+      "delivery_approved": false,
+      "mutation": {
+        "analysis/units/0/statement": "",
+        "adapter": "restore original literal inventory"
+      },
+      "evidence": [
+        {
+          "attempt": 1,
+          "target_module": "analysis",
+          "input_sha256": "b0efe0c4f5b253eeb91e7a56e81786803ee3585b6defe965038579ac63f29515",
+          "before_candidate_sha256": "45f06c6a04c7b80b1cbbfb06c9d2b187a500e5fc83c7df9cceeaf21de24ae61f",
+          "evidence": [
+            {
+              "rule_id": "MISSING_UNIT_STATEMENT",
+              "severity": "ERROR",
+              "message": "Unit source-B001 missing statement",
+              "responsible_component": "information_extraction_analysis",
+              "origin_ref": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8",
+              "repair_recommendation": "Return to information_extraction_analysis to repair MISSING_UNIT_STATEMENT",
+              "requires_human_review": false,
+              "blocking": true,
+              "evidence": []
+            },
+            {
+              "rule_id": "SEMANTIC_REVIEW_REQUIRED",
+              "severity": "UNRESOLVED",
+              "message": "Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required",
+              "responsible_component": "validation_gate",
+              "origin_ref": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8",
+              "repair_recommendation": "Hold at REVIEW for human/semantic verification; do not auto-advance to Organization",
+              "requires_human_review": true,
+              "blocking": true,
+              "evidence": []
+            }
+          ],
+          "before_validation": {
+            "gate_state": "FAIL",
+            "upstream_report": {
+              "record_kind": "experimental_validation_gate_report_not_adopted_schema",
+              "version": "full-document-control-prototype-v1",
+              "plan": {
+                "version": "full-doc-validation-plan-v1",
+                "boundary": "analysis_to_organization",
+                "contract_id": "readonly-core-diagnostic",
+                "contract_sha256": "a65abb5adb5ca4b8e9abf7938a9cf498cd42d995ec6ed82d0f1546d0cba57f0e",
+                "scope_id": "source",
+                "required_checks": [
+                  {
+                    "check_id": "SNAPSHOT_AND_CONTRACT",
+                    "check_version": "1",
+                    "kind": "deterministic",
+                    "boundary": "analysis_to_organization",
+                    "scope_id": "source"
+                  },
+                  {
+                    "check_id": "BLOCK_COVERAGE",
+                    "check_version": "1",
+                    "kind": "deterministic",
+                    "boundary": "analysis_to_organization",
+                    "scope_id": "source"
+                  },
+                  {
+                    "check_id": "UNIT_AND_SPAN_INTEGRITY",
+                    "check_version": "1",
+                    "kind": "deterministic",
+                    "boundary": "analysis_to_organization",
+                    "scope_id": "source"
+                  },
+                  {
+                    "check_id": "PROTECTED_TRACEABILITY",
+                    "check_version": "1",
+                    "kind": "deterministic",
+                    "boundary": "analysis_to_organization",
+                    "scope_id": "source"
+                  },
+                  {
+                    "check_id": "SEMANTIC_FIDELITY",
+                    "check_version": "1",
+                    "kind": "semantic",
+                    "boundary": "analysis_to_organization",
+                    "scope_id": "source"
+                  }
+                ],
+                "plan_sha256": "bcdc15b780bddecc6ea218e474d00cf7e1c16c27a88c2c56cb801fae31cf1d38"
+              },
+              "checked_artifacts": {
+                "input_sha256": "9c7e9668a36e0a998d4c4bfedefa81729f370c52dea2cc3326d9ad0ea8d96c74",
+                "contract_id": "readonly-core-diagnostic",
+                "contract_version": "1",
+                "contract_sha256": "a65abb5adb5ca4b8e9abf7938a9cf498cd42d995ec6ed82d0f1546d0cba57f0e",
+                "snapshot_id": "document:source:84b9805b8a53",
+                "snapshot_version": "1",
+                "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                "analysis_sha256": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8"
+              },
+              "check_results": [
+                {
+                  "check_id": "SNAPSHOT_AND_CONTRACT",
+                  "check_version": "1",
+                  "kind": "deterministic",
+                  "status": "passed",
+                  "reason": "SNAPSHOT_AND_CONTRACT deterministic verification passed",
+                  "evidence": [
+                    {
+                      "snapshot_id": "document:source:84b9805b8a53",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "contract_id": "readonly-core-diagnostic",
+                      "contract_sha256": "a65abb5adb5ca4b8e9abf7938a9cf498cd42d995ec6ed82d0f1546d0cba57f0e"
+                    }
+                  ],
+                  "checked_snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                  "checked_analysis_sha256": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8"
+                },
+                {
+                  "check_id": "BLOCK_COVERAGE",
+                  "check_version": "1",
+                  "kind": "deterministic",
+                  "status": "passed",
+                  "reason": "All document blocks covered without gaps, overlaps, omissions, or duplicates",
+                  "evidence": [
+                    {
+                      "block_id": "B001",
+                      "kind": "heading",
+                      "start": 0,
+                      "end": 5,
+                      "status": "extracted"
+                    },
+                    {
+                      "block_id": "B002",
+                      "kind": "blank",
+                      "start": 5,
+                      "end": 6,
+                      "status": "excluded"
+                    },
+                    {
+                      "block_id": "B003",
+                      "kind": "paragraph",
+                      "start": 6,
+                      "end": 19,
+                      "status": "extracted"
+                    },
+                    {
+                      "block_id": "B004",
+                      "kind": "blank",
+                      "start": 19,
+                      "end": 20,
+                      "status": "excluded"
+                    },
+                    {
+                      "block_id": "B005",
+                      "kind": "paragraph",
+                      "start": 20,
+                      "end": 38,
+                      "status": "extracted"
+                    },
+                    {
+                      "block_id": "B006",
+                      "kind": "blank",
+                      "start": 38,
+                      "end": 39,
+                      "status": "excluded"
+                    },
+                    {
+                      "block_id": "B007",
+                      "kind": "paragraph",
+                      "start": 39,
+                      "end": 58,
+                      "status": "extracted"
+                    }
+                  ],
+                  "checked_snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                  "checked_analysis_sha256": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8"
+                },
+                {
+                  "check_id": "UNIT_AND_SPAN_INTEGRITY",
+                  "check_version": "1",
+                  "kind": "deterministic",
+                  "status": "violated",
+                  "reason": "MISSING_UNIT_STATEMENT: Unit source-B001 missing statement",
+                  "evidence": [],
+                  "checked_snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                  "checked_analysis_sha256": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8"
+                },
+                {
+                  "check_id": "PROTECTED_TRACEABILITY",
+                  "check_version": "1",
+                  "kind": "deterministic",
+                  "status": "not_run",
+                  "reason": "Skipped due to earlier failure in UNIT_AND_SPAN_INTEGRITY",
+                  "evidence": [],
+                  "checked_snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                  "checked_analysis_sha256": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8"
+                },
+                {
+                  "check_id": "SEMANTIC_FIDELITY",
+                  "check_version": "1",
+                  "kind": "semantic",
+                  "status": "unresolved",
+                  "reason": "Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required",
+                  "evidence": [
+                    {
+                      "unresolved_questions": [
+                        "Literal inventory is not semantic extraction or approval"
+                      ],
+                      "alignment_status": "needs_review",
+                      "cross_window_relation_review": {
+                        "status": "not_applicable_single_window",
+                        "executed": false,
+                        "window_count": 1,
+                        "total_units": 4,
+                        "reviewed_unit_ids": [
+                          "source-B001",
+                          "source-B003",
+                          "source-B005",
+                          "source-B007"
+                        ],
+                        "omitted_unit_ids": [],
+                        "units_truncated_for_budget": false,
+                        "reconciled_relation_count": 0,
+                        "verification_status": "not_applicable",
+                        "reason": "Single extraction window covers document; cross-window relation reconciliation not required"
+                      }
+                    }
+                  ],
+                  "checked_snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                  "checked_analysis_sha256": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8"
+                }
+              ],
+              "findings": [
+                {
+                  "rule_id": "MISSING_UNIT_STATEMENT",
+                  "severity": "ERROR",
+                  "message": "Unit source-B001 missing statement",
+                  "responsible_component": "information_extraction_analysis",
+                  "origin_ref": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8",
+                  "repair_recommendation": "Return to information_extraction_analysis to repair MISSING_UNIT_STATEMENT",
+                  "requires_human_review": false,
+                  "blocking": true,
+                  "evidence": []
+                },
+                {
+                  "rule_id": "SEMANTIC_REVIEW_REQUIRED",
+                  "severity": "UNRESOLVED",
+                  "message": "Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required",
+                  "responsible_component": "validation_gate",
+                  "origin_ref": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8",
+                  "repair_recommendation": "Hold at REVIEW for human/semantic verification; do not auto-advance to Organization",
+                  "requires_human_review": true,
+                  "blocking": true,
+                  "evidence": []
+                }
+              ],
+              "gate_state": "FAIL",
+              "execution_state": "completed",
+              "last_gate_state": null,
+              "diagnostics": [],
+              "delivery_approved": false,
+              "next_stage_allowed": false,
+              "report_sha256": "e14d0a1557847f502c40ff3fbf21f701017ffc90ab83c34a69ea6a602961864d"
+            },
+            "structural_report": {
+              "gate_state": "FAIL",
+              "findings": [
+                {
+                  "rule_id": "MISSING_UNIT_STATEMENT",
+                  "severity": "ERROR",
+                  "message": "Unit source-B001 missing statement",
+                  "responsible_component": "information_extraction_analysis",
+                  "origin_ref": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8",
+                  "repair_recommendation": "Return to information_extraction_analysis to repair MISSING_UNIT_STATEMENT",
+                  "requires_human_review": false,
+                  "blocking": true,
+                  "evidence": []
+                },
+                {
+                  "rule_id": "SEMANTIC_REVIEW_REQUIRED",
+                  "severity": "UNRESOLVED",
+                  "message": "Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required",
+                  "responsible_component": "validation_gate",
+                  "origin_ref": "f56f216b761e6dd15aea7b8b88ebde22b19b9b563b4cda5a1c17b405ef5680a8",
+                  "repair_recommendation": "Hold at REVIEW for human/semantic verification; do not auto-advance to Organization",
+                  "requires_human_review": true,
+                  "blocking": true,
+                  "evidence": []
+                }
+              ],
+              "checks": {
+                "SNAPSHOT_INTEGRITY": "unresolved",
+                "FULL_COVERAGE": "unresolved",
+                "PROTECTED_INFORMATION": "unresolved",
+                "ORGANIZATION_FIDELITY": "unresolved",
+                "EXPRESSION_FIDELITY": "unresolved",
+                "BIDIRECTIONAL_TRACE": "unresolved",
+                "CROSS_DOCUMENT_INTEGRITY": "unresolved",
+                "APPROVAL_BOUNDARY": "unresolved"
+              }
+            },
+            "semantic_report": {
+              "findings": [],
+              "checks": {
+                "CLAIM_FACTS": {
+                  "status": "unresolved"
+                },
+                "QUANTITY_SCOPE": {
+                  "status": "unresolved"
+                },
+                "POLARITY_CONDITIONS": {
+                  "status": "unresolved"
+                },
+                "ADDITIONS_OMISSIONS": {
+                  "status": "unresolved"
+                },
+                "CONTRADICTIONS": {
+                  "status": "unresolved"
+                },
+                "MOVE_CONSOLIDATION": {
+                  "status": "unresolved"
+                },
+                "PROVENANCE": {
+                  "status": "unresolved"
+                }
+              }
+            }
+          },
+          "after_validation": {
+            "version": "final-output-audit-v1",
+            "structural_report": {
+              "version": "final-document-validation-v1",
+              "gate_state": "REVIEW",
+              "checks": {
+                "SNAPSHOT_INTEGRITY": "passed",
+                "FULL_COVERAGE": "passed",
+                "PROTECTED_INFORMATION": "passed",
+                "ORGANIZATION_FIDELITY": "unresolved",
+                "EXPRESSION_FIDELITY": "unresolved",
+                "BIDIRECTIONAL_TRACE": "passed",
+                "CROSS_DOCUMENT_INTEGRITY": "passed",
+                "APPROVAL_BOUNDARY": "unresolved"
+              },
+              "check_versions": {
+                "SNAPSHOT_INTEGRITY": "1",
+                "FULL_COVERAGE": "1",
+                "PROTECTED_INFORMATION": "1",
+                "ORGANIZATION_FIDELITY": "1",
+                "EXPRESSION_FIDELITY": "1",
+                "BIDIRECTIONAL_TRACE": "1",
+                "CROSS_DOCUMENT_INTEGRITY": "1",
+                "APPROVAL_BOUNDARY": "1"
+              },
+              "semantic_fidelity": "not_run",
+              "delivery_approved": false,
+              "stage_transition_allowed": false,
+              "revision_sha256": "a5449bd1e66597915500f5deaff3c2f8518136ef4ffdb3bcb2205985a2a2ef74",
+              "analysis_sha256": "b2611b336ab2630bad45b320a548a4557ccf9584d65c60f79bf68b9952c743bb",
+              "organization_sha256": "8e9243ab65c1916c26c8b725f30266925afc219c22e9577df188f3b3e0a1ab1c",
+              "findings": [
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Symbolic section has no unique existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "ORGANIZATION_FIDELITY",
+                  "rule_id": "SECTION_PATH_UNRESOLVED",
+                  "message": "Section label does not resolve to one existing heading",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "EXPRESSION_FIDELITY",
+                  "rule_id": "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+                  "message": "Whole-document semantic review has not run",
+                  "severity": "WARNING"
+                },
+                {
+                  "check_id": "APPROVAL_BOUNDARY",
+                  "rule_id": "FINAL_APPROVAL_NOT_IMPLEMENTED",
+                  "message": "No trusted semantic/human approval path exists",
+                  "severity": "WARNING"
+                }
+              ],
+              "report_sha256": "ce2d8fd102e8a7c7fbb94d4529767c7bf281f0d6ead7e4b949a2fdf8d7812583"
+            },
+            "semantic_report": {
+              "version": "final-output-semantic-validation-v1",
+              "checks": {
+                "CLAIM_FACTS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+                },
+                "QUANTITY_SCOPE": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+                },
+                "POLARITY_CONDITIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+                },
+                "ADDITIONS_OMISSIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+                },
+                "CONTRADICTIONS": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+                },
+                "MOVE_CONSOLIDATION": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+                },
+                "PROVENANCE": {
+                  "status": "unresolved",
+                  "evidence": [],
+                  "rule_ids": [],
+                  "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+                }
+              },
+              "findings": [],
+              "snapshot_refs": [
+                {
+                  "side": "source",
+                  "document_id": "document",
+                  "snapshot_id": "document:source:84b9805b8a53",
+                  "version": "1",
+                  "sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4"
+                },
+                {
+                  "side": "output",
+                  "document_id": "document",
+                  "snapshot_id": "document:candidate:84b9805b8a53",
+                  "version": "1.candidate.84b9805b8a53",
+                  "sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4"
+                }
+              ],
+              "deterministic_audit": {
+                "literal_pairs": [
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 0,
+                      "end": 4,
+                      "quote": "# 안내"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 0,
+                      "end": 4,
+                      "quote": "# 안내"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 4,
+                      "end": 5,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 4,
+                      "end": 5,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 5,
+                      "end": 6,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 5,
+                      "end": 6,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 6,
+                      "end": 18,
+                      "quote": "제한 시간은 30초다."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 6,
+                      "end": 18,
+                      "quote": "제한 시간은 30초다."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 18,
+                      "end": 19,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 18,
+                      "end": 19,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 19,
+                      "end": 20,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 19,
+                      "end": 20,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 20,
+                      "end": 37,
+                      "quote": "자동 업데이트를 지원하지 않음."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 20,
+                      "end": 37,
+                      "quote": "자동 업데이트를 지원하지 않음."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 37,
+                      "end": 38,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 37,
+                      "end": 38,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 38,
+                      "end": 39,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 38,
+                      "end": 39,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 39,
+                      "end": 57,
+                      "quote": "캐시가 있을 때만 실행 가능하다."
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 39,
+                      "end": 57,
+                      "quote": "캐시가 있을 때만 실행 가능하다."
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  },
+                  {
+                    "source": {
+                      "side": "source",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 57,
+                      "end": 58,
+                      "quote": "\n"
+                    },
+                    "output": {
+                      "side": "output",
+                      "document_id": "document",
+                      "snapshot_sha256": "84b9805b8a536c00e04326c04fb0784e5900bacfaf9b9b4592afcfe6210e8de4",
+                      "start": 57,
+                      "end": 58,
+                      "quote": "\n"
+                    },
+                    "literal_text_equal": true,
+                    "quantity_tokens_equal": true,
+                    "version_tokens_equal": true
+                  }
+                ]
+              },
+              "coverage": {
+                "complete": false,
+                "required_checks": [
+                  "CLAIM_FACTS",
+                  "QUANTITY_SCOPE",
+                  "POLARITY_CONDITIONS",
+                  "ADDITIONS_OMISSIONS",
+                  "CONTRADICTIONS",
+                  "MOVE_CONSOLIDATION",
+                  "PROVENANCE"
+                ],
+                "reviewed_checks": []
+              },
+              "execution": {
+                "state": "not_run",
+                "run_id": "18937fe0-a8d9-45e4-9048-aded7b663ada",
+                "request_sha256": "6b6de9b6d4a109a4212b8411dbf320ea2de963d4eb07ee32062259967d58d4dc",
+                "response_sha256": null,
+                "max_review_chars": 48000,
+                "timeout_seconds": 10
+              },
+              "delivery_approved": false,
+              "stage_transition_allowed": false,
+              "binding_sha256": "54e83219ee7d69c0bc23ded5c30c5a0614070220ba94017f4406a7f78354214d",
+              "structural_report_sha256": "ce2d8fd102e8a7c7fbb94d4529767c7bf281f0d6ead7e4b949a2fdf8d7812583",
+              "overall_judgment": "unresolved",
+              "gate_state": "REVIEW",
+              "execution_evidence_matches_current_inputs": true,
+              "report_sha256": "62032a8733d08a22a2854d69868f4e5daec0dcf1201780397efc9c4c8d6adcfb"
+            },
+            "gate_state": "REVIEW",
+            "delivery_approved": false,
+            "stage_transition_allowed": false,
+            "report_sha256": "1964df75a7859be8daf0d49b6bf8523b63ef77332161d8323980cb5597d42d9e"
+          },
+          "after_candidate_sha256": "f08c98c763e7a42a323ad44df3e48c4754e601f15a970fad51481ac9df687780",
+          "invalidated": [
+            "analysis",
+            "organization",
+            "expression",
+            "reconstruction",
+            "final_report",
+            "final_semantic_report",
+            "final_audit",
+            "approval_request",
+            "approval_report"
+          ],
+          "regenerated": [
+            "organization",
+            "expression",
+            "reconstruction"
+          ],
+          "judgment": "violations_resolved",
+          "termination_reason": "VALIDATION_INCOMPLETE",
+          "started_elapsed_seconds": 0.0011485973373055458,
+          "snapshot_sha256": "eb9d7a0eb05a61b65cc1b9d5aea9eb7044e0f6a52253d0e5975c403fb014b8b2",
+          "elapsed_seconds": 0.006782130803912878,
+          "resolved": [
+            "5ffcc860434458321f7b048541115a8b513ac0e5f9e8ff473b253e90a0624ecb:1"
+          ],
+          "unconfirmed": [],
+          "introduced": [],
+          "unresolved_increased": []
+        }
+      ],
+      "module": "final_validator + final_semantic_validator + integration",
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/15",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-15-condition-split",
+      "expected_gate": "REJECTED_BEFORE_EXPRESSION",
+      "actual_gate": "REJECTED_BEFORE_EXPRESSION",
+      "analysis": "조건 동반 이동은 의미 REVIEW; 조건 분리는 구조적 차단",
+      "module": "organization + expression + reconstruction + final validators",
+      "mutation": {
+        "move_condition_with_claim": false
+      },
+      "evidence": {
+        "organization_validation": {
+          "version": "org-validation-report-v1",
+          "producer": "information-organization-prototype-v1",
+          "gate_state": "FAIL",
+          "is_valid": false,
+          "delivery_approved": false,
+          "next_stage_allowed": false,
+          "upstream_gate_state": "REVIEW",
+          "upstream_approved": false,
+          "plan_sha256": "de6477aba9bd5ad23c134008d805bc5d3f9481c71a68bb478d6e7ada08c43707",
+          "analysis_sha256": "de174881c0eecc8b91857b86899c28785e0603438ebecf6038129023edd5232b",
+          "check_results": [
+            {
+              "check_id": "ORGANIZATION_INPUT_INTEGRITY",
+              "status": "passed",
+              "reason": "Input artifacts and plan digest independently verified"
+            },
+            {
+              "check_id": "ALL_UNITS_TRACKED",
+              "status": "passed",
+              "reason": "All 3 InformationUnits tracked without duplicates"
+            },
+            {
+              "check_id": "MANDATORY_INFORMATION_PRESERVED",
+              "status": "passed",
+              "reason": "All contract-required information and linked conditions preserved"
+            },
+            {
+              "check_id": "ALLOWED_OUTPUT_SCOPES",
+              "status": "passed",
+              "reason": "All placements strictly confined to 2 declared scopes"
+            },
+            {
+              "check_id": "DESTINATION_REVIEW_INTEGRITY",
+              "status": "passed",
+              "reason": "All MOVE candidates adhere to independently verified destination bounds"
+            },
+            {
+              "check_id": "MOVE_DEPENDENCY_INTEGRITY",
+              "status": "violated",
+              "reason": "MOVE_SEVERS_REQUIRED_CONDITION: Claim source-B003 in details loses prerequisite source-B005"
+            },
+            {
+              "check_id": "CONSOLIDATION_FIDELITY",
+              "status": "passed",
+              "reason": "Consolidation candidates preserve all conditions, quantities, versions, and semantic equivalence"
+            },
+            {
+              "check_id": "ANTI_FORGERY_AND_APPROVAL_BOUNDS",
+              "status": "passed",
+              "reason": "Plan respects trust boundary and does not forge approval claims"
+            }
+          ],
+          "diagnostics": [
+            "MOVE_SEVERS_REQUIRED_CONDITION: Claim source-B003 in details loses prerequisite source-B005"
+          ],
+          "findings": [
+            {
+              "rule_id": "PLAN_PREVIEW_ONLY",
+              "severity": "INFO",
+              "message": "OrganizationPlan generated in isolated preview mode (upstream gate_state: UNVALIDATED). Pipeline stage progression is not authorized.",
+              "responsible_component": "information_organization",
+              "origin_ref": null,
+              "unit_ids": [],
+              "scope_id": null,
+              "action": "REVIEW",
+              "requires_human_review": true,
+              "blocking": false,
+              "evidence": []
+            }
+          ],
+          "report_sha256": "ab2c7e2239c8d7a84cdeabafa39b71b062280aee46f57e35620c8ac8d6f5dd63"
+        }
+      },
+      "delivery_approved": false,
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/16",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    },
+    {
+      "case_id": "N-16-condition-atomic-move",
+      "expected_gate": "REVIEW",
+      "actual_gate": "REVIEW",
+      "analysis": "조건 동반 이동은 의미 REVIEW; 조건 분리는 구조적 차단",
+      "module": "organization + expression + reconstruction + final validators",
+      "mutation": {
+        "move_condition_with_claim": true
+      },
+      "evidence": {
+        "outputs": [
+          {
+            "document_id": "document",
+            "snapshot_id": "document:candidate:b91566aa253b",
+            "version": "1.candidate.b91566aa253b",
+            "coverage": "complete",
+            "media_type": "text/markdown",
+            "content": "# 원본\n\n\n",
+            "sha256": "b91566aa253b595904d5245008bf8493a32c782fe008ce3ae133456823698895"
+          },
+          {
+            "document_id": "details",
+            "snapshot_id": "details:candidate:12ff5f4b9546",
+            "version": "1.candidate.12ff5f4b9546",
+            "coverage": "complete",
+            "media_type": "text/markdown",
+            "content": "# 목적지\n\n기존 문서 내용이다.\n\n로컬 실행이 가능하다.\n\n캐시가 있을 때만 동작한다.\n",
+            "sha256": "12ff5f4b95466f9c61dd9e0eba6cf34be351971ef62a509154c36c9b1d1cc0f8"
+          }
+        ],
+        "audit": {
+          "version": "final-output-audit-v1",
+          "structural_report": {
+            "version": "final-document-validation-v1",
+            "gate_state": "REVIEW",
+            "checks": {
+              "SNAPSHOT_INTEGRITY": "passed",
+              "FULL_COVERAGE": "passed",
+              "PROTECTED_INFORMATION": "passed",
+              "ORGANIZATION_FIDELITY": "passed",
+              "EXPRESSION_FIDELITY": "unresolved",
+              "BIDIRECTIONAL_TRACE": "passed",
+              "CROSS_DOCUMENT_INTEGRITY": "passed",
+              "APPROVAL_BOUNDARY": "unresolved"
+            },
+            "check_versions": {
+              "SNAPSHOT_INTEGRITY": "1",
+              "FULL_COVERAGE": "1",
+              "PROTECTED_INFORMATION": "1",
+              "ORGANIZATION_FIDELITY": "1",
+              "EXPRESSION_FIDELITY": "1",
+              "BIDIRECTIONAL_TRACE": "1",
+              "CROSS_DOCUMENT_INTEGRITY": "1",
+              "APPROVAL_BOUNDARY": "1"
+            },
+            "semantic_fidelity": "not_run",
+            "delivery_approved": false,
+            "stage_transition_allowed": false,
+            "revision_sha256": "6eb4fc94f0c229179d694c5900d9728223481775790dea949ef6c05af6a5c475",
+            "analysis_sha256": "de174881c0eecc8b91857b86899c28785e0603438ebecf6038129023edd5232b",
+            "organization_sha256": "c67f6947ef89946a383a4eec700c03fcbc4c69419ad95da9c21402f03c6ca881",
+            "findings": [
+              {
+                "check_id": "EXPRESSION_FIDELITY",
+                "rule_id": "FINAL_SEMANTIC_REVIEW_NOT_IMPLEMENTED",
+                "message": "Whole-document semantic review has not run",
+                "severity": "WARNING"
+              },
+              {
+                "check_id": "APPROVAL_BOUNDARY",
+                "rule_id": "FINAL_APPROVAL_NOT_IMPLEMENTED",
+                "message": "No trusted semantic/human approval path exists",
+                "severity": "WARNING"
+              }
+            ],
+            "report_sha256": "f7acc7ed50c2ab61cc74ee47af148761c4e3c5f0dd131ada62e3ff3aa8b9c25f"
+          },
+          "semantic_report": {
+            "version": "final-output-semantic-validation-v1",
+            "checks": {
+              "CLAIM_FACTS": {
+                "status": "unresolved",
+                "evidence": [],
+                "rule_ids": [],
+                "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+              },
+              "QUANTITY_SCOPE": {
+                "status": "unresolved",
+                "evidence": [],
+                "rule_ids": [],
+                "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+              },
+              "POLARITY_CONDITIONS": {
+                "status": "unresolved",
+                "evidence": [],
+                "rule_ids": [],
+                "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+              },
+              "ADDITIONS_OMISSIONS": {
+                "status": "unresolved",
+                "evidence": [],
+                "rule_ids": [],
+                "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+              },
+              "CONTRADICTIONS": {
+                "status": "unresolved",
+                "evidence": [],
+                "rule_ids": [],
+                "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+              },
+              "MOVE_CONSOLIDATION": {
+                "status": "unresolved",
+                "evidence": [],
+                "rule_ids": [],
+                "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+              },
+              "PROVENANCE": {
+                "status": "unresolved",
+                "evidence": [],
+                "rule_ids": [],
+                "unresolved_reason": "WHOLE_OUTPUT_SEMANTIC_REVIEW_NOT_ESTABLISHED"
+              }
+            },
+            "findings": [],
+            "snapshot_refs": [
+              {
+                "side": "source",
+                "document_id": "document",
+                "snapshot_id": "document:source:851b0a57d84b",
+                "version": "1",
+                "sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09"
+              },
+              {
+                "side": "source",
+                "document_id": "details",
+                "snapshot_id": "details-v1",
+                "version": "1",
+                "sha256": "cf9e3bc9f1d95097c85c2f5c5fa0b76084198da79dfe98a95ba417d8525fe809"
+              },
+              {
+                "side": "output",
+                "document_id": "document",
+                "snapshot_id": "document:candidate:b91566aa253b",
+                "version": "1.candidate.b91566aa253b",
+                "sha256": "b91566aa253b595904d5245008bf8493a32c782fe008ce3ae133456823698895"
+              },
+              {
+                "side": "output",
+                "document_id": "details",
+                "snapshot_id": "details:candidate:12ff5f4b9546",
+                "version": "1.candidate.12ff5f4b9546",
+                "sha256": "12ff5f4b95466f9c61dd9e0eba6cf34be351971ef62a509154c36c9b1d1cc0f8"
+              }
+            ],
+            "deterministic_audit": {
+              "literal_pairs": [
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 0,
+                    "end": 4,
+                    "quote": "# 원본"
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "document",
+                    "snapshot_sha256": "b91566aa253b595904d5245008bf8493a32c782fe008ce3ae133456823698895",
+                    "start": 0,
+                    "end": 4,
+                    "quote": "# 원본"
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 4,
+                    "end": 5,
+                    "quote": "\n"
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "document",
+                    "snapshot_sha256": "b91566aa253b595904d5245008bf8493a32c782fe008ce3ae133456823698895",
+                    "start": 4,
+                    "end": 5,
+                    "quote": "\n"
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 5,
+                    "end": 6,
+                    "quote": "\n"
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "document",
+                    "snapshot_sha256": "b91566aa253b595904d5245008bf8493a32c782fe008ce3ae133456823698895",
+                    "start": 5,
+                    "end": 6,
+                    "quote": "\n"
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 19,
+                    "end": 20,
+                    "quote": "\n"
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "document",
+                    "snapshot_sha256": "b91566aa253b595904d5245008bf8493a32c782fe008ce3ae133456823698895",
+                    "start": 6,
+                    "end": 7,
+                    "quote": "\n"
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "details",
+                    "snapshot_sha256": "cf9e3bc9f1d95097c85c2f5c5fa0b76084198da79dfe98a95ba417d8525fe809",
+                    "start": 0,
+                    "end": 19,
+                    "quote": "# 목적지\n\n기존 문서 내용이다.\n"
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "details",
+                    "snapshot_sha256": "12ff5f4b95466f9c61dd9e0eba6cf34be351971ef62a509154c36c9b1d1cc0f8",
+                    "start": 0,
+                    "end": 19,
+                    "quote": "# 목적지\n\n기존 문서 내용이다.\n"
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 6,
+                    "end": 18,
+                    "quote": "로컬 실행이 가능하다."
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "details",
+                    "snapshot_sha256": "12ff5f4b95466f9c61dd9e0eba6cf34be351971ef62a509154c36c9b1d1cc0f8",
+                    "start": 20,
+                    "end": 32,
+                    "quote": "로컬 실행이 가능하다."
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 18,
+                    "end": 19,
+                    "quote": "\n"
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "details",
+                    "snapshot_sha256": "12ff5f4b95466f9c61dd9e0eba6cf34be351971ef62a509154c36c9b1d1cc0f8",
+                    "start": 32,
+                    "end": 33,
+                    "quote": "\n"
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 20,
+                    "end": 35,
+                    "quote": "캐시가 있을 때만 동작한다."
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "details",
+                    "snapshot_sha256": "12ff5f4b95466f9c61dd9e0eba6cf34be351971ef62a509154c36c9b1d1cc0f8",
+                    "start": 34,
+                    "end": 49,
+                    "quote": "캐시가 있을 때만 동작한다."
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                },
+                {
+                  "source": {
+                    "side": "source",
+                    "document_id": "document",
+                    "snapshot_sha256": "851b0a57d84b057fd2e69d69b941a824c326e5e23906bcc57859bf13a12f9c09",
+                    "start": 35,
+                    "end": 36,
+                    "quote": "\n"
+                  },
+                  "output": {
+                    "side": "output",
+                    "document_id": "details",
+                    "snapshot_sha256": "12ff5f4b95466f9c61dd9e0eba6cf34be351971ef62a509154c36c9b1d1cc0f8",
+                    "start": 49,
+                    "end": 50,
+                    "quote": "\n"
+                  },
+                  "literal_text_equal": true,
+                  "quantity_tokens_equal": true,
+                  "version_tokens_equal": true
+                }
+              ]
+            },
+            "coverage": {
+              "complete": false,
+              "required_checks": [
+                "CLAIM_FACTS",
+                "QUANTITY_SCOPE",
+                "POLARITY_CONDITIONS",
+                "ADDITIONS_OMISSIONS",
+                "CONTRADICTIONS",
+                "MOVE_CONSOLIDATION",
+                "PROVENANCE"
+              ],
+              "reviewed_checks": []
+            },
+            "execution": {
+              "state": "not_run",
+              "run_id": "2dccddb3-d3e8-402a-aa92-9e44553feb77",
+              "request_sha256": "84c536dc53e8342066b32a3415a05d5ee3e8bbdf118b69de6ccc40fac45f5a50",
+              "response_sha256": null,
+              "max_review_chars": 48000,
+              "timeout_seconds": 30
+            },
+            "delivery_approved": false,
+            "stage_transition_allowed": false,
+            "binding_sha256": "e1b190a236a19ec3d7095849a2069eeaa2b374d4b086e2171dee98aa46d0f867",
+            "structural_report_sha256": "f7acc7ed50c2ab61cc74ee47af148761c4e3c5f0dd131ada62e3ff3aa8b9c25f",
+            "overall_judgment": "unresolved",
+            "gate_state": "REVIEW",
+            "execution_evidence_matches_current_inputs": true,
+            "report_sha256": "b3824451aba7d83c823a3c2e8b3483b8b283406a7dcd526e409855bad32f9dd3"
+          },
+          "gate_state": "REVIEW",
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "report_sha256": "2c523fd127a746abacc1093c95722433798d126a401b9c8fe61e91c934c247c3"
+        }
+      },
+      "delivery_approved": false,
+      "input_location": "evaluate.py:native_case/native_probes (controlled synthetic inputs)",
+      "output_evidence_pointer": "/cases/17",
+      "priority": "P2",
+      "fix_needed": "No confirmed defect in this bounded native probe",
+      "reproduce": "python3 evaluation/core_pipeline_2026_11_11/evaluate.py native /tmp/native.json"
+    }
+  ]
+}
