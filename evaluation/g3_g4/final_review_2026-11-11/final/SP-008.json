@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-008",
+  "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+  "ai_proposal_sha256": "577bb0dd699f900a2d5ad649802288fb65b230f3bb45b62c400129b4106759b3",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-008-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-008",
+          "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "VIOLATION",
+          "rationale": "사용자 원문 의견: 검증되지 않은 사실을 추가해서 부적절해",
+          "findings": [
+            {
+              "error_type": "UNSUPPORTED_ADDITION",
+              "severity": "major",
+              "reason": "사용자 의견에 대한 위치 연결·오류 분류는 Codex가 작성: 검증되지 않은 사실을 추가해서 부적절해"
+            }
+          ],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "report",
+              "start": 0,
+              "end": 60,
+              "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "report",
+              "start": 61,
+              "end": 84,
+              "quote": "모든 환경에서 응답 성능이 2배 향상됐다."
+            }
+          ],
+          "missing_information": [],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-008-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-008-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "단일 실행의 120ms 측정과 일반화 미검증이라는 범위를 확인했다. 추가된 모든 환경에서 2배 향상됐다는 주장에는 비교 기준이나 일반화 근거가 없고 삽입 지시도 없으므로 사용자 의견에 반례를 찾지 못했다."
+      },
+      "previous_event_sha256": "f44b99999127d2d48139a1ead90052fa605725324534657fb6223b70668e4f51"
+    },
+    {
+      "event_id": "SP-008-user-final-explicit-20261111",
+      "kind": "user_final",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "payload": {
+        "counterreview_event_id": "SP-008-ai-counterreview-20261111",
+        "judgment": "VIOLATION",
+        "rationale": "사용자 최신 명시적 최종 승인 전사: 단일 실행의 120ms 측정에서 검증되지 않은 '모든 환경 2배 개선' 주장 추가.",
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "report",
+            "start": 0,
+            "end": 60,
+            "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+          },
+          {
+            "side": "candidate",
+            "document_id": "report",
+            "start": 61,
+            "end": 84,
+            "quote": "모든 환경에서 응답 성능이 2배 향상됐다."
+          }
+        ],
+        "responses": [],
+        "unresolved_issues": [],
+        "approve_for_development_gold": true,
+        "confidence_limitations": [
+          "단일 사용자 검수와 AI 반례 보조; 독립 복수 사람 검수·재정이 아님",
+          "제공된 계약·문서·범위에서의 의미 판정이며 외부 실행 사실 검증이나 Core 승인 아님"
+        ],
+        "human_confirmed": true
+      },
+      "previous_event_sha256": "a562a728873a1633ca002dfa0a29037927439a856e1e0b1bde1da7144afbb5bf"
+    }
+  ]
+}

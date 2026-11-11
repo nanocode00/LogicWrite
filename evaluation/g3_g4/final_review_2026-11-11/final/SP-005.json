@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-005",
+  "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+  "ai_proposal_sha256": "e2ada0d4f01186eee1fa152689bc3bc9c81be5e672a404c723a6559dedb023a6",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-005-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-005",
+          "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "VIOLATION",
+          "rationale": "사용자 원문 의견: 의미가 완전히 달라졌어. 나중에 추가할 수도 있다는건 지금은 없다는 말이야.",
+          "findings": [
+            {
+              "error_type": "MODALITY_SCOPE_CHANGE",
+              "severity": "major",
+              "reason": "사용자 의견에 대한 위치 연결·오류 분류는 Codex가 작성: 의미가 완전히 달라졌어. 나중에 추가할 수도 있다는건 지금은 없다는 말이야."
+            },
+            {
+              "error_type": "UNSUPPORTED_ADDITION",
+              "severity": "major",
+              "reason": "사용자 의견에 대한 위치 연결·오류 분류는 Codex가 작성: 의미가 완전히 달라졌어. 나중에 추가할 수도 있다는건 지금은 없다는 말이야."
+            }
+          ],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "start": 3296,
+              "end": 3379,
+              "quote": "A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+            },
+            {
+              "side": "candidate",
+              "document_id": "readme",
+              "start": 3296,
+              "end": 3371,
+              "quote": "A signed/notarized DMG\nis available now for a more consumer-style download."
+            }
+          ],
+          "missing_information": [],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-005-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-005-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "추후 추가 가능성이 현재 제공 사실로 바뀐다. 미래 가능성만으로 모든 현실의 부재를 일반적으로 단정할 수는 없지만, 이번 계약은 현재 제공 사실이 아님을 명시하므로 사용자 의견을 뒤집을 근거는 없다. 실제 배포 상태는 판단하지 않았다."
+      },
+      "previous_event_sha256": "1c934ea1779b923130f23baa001702c4ae00e8ae7e8c0b12970022eab0423481"
+    },
+    {
+      "event_id": "SP-005-user-final-explicit-20261111",
+      "kind": "user_final",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "payload": {
+        "counterreview_event_id": "SP-005-ai-counterreview-20261111",
+        "judgment": "VIOLATION",
+        "rationale": "사용자 최신 명시적 최종 승인 전사: DMG의 미래 추가 가능성을 현재 제공 사실로 변경.",
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "readme",
+            "start": 3296,
+            "end": 3379,
+            "quote": "A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+          },
+          {
+            "side": "candidate",
+            "document_id": "readme",
+            "start": 3296,
+            "end": 3371,
+            "quote": "A signed/notarized DMG\nis available now for a more consumer-style download."
+          }
+        ],
+        "responses": [],
+        "unresolved_issues": [],
+        "approve_for_development_gold": true,
+        "confidence_limitations": [
+          "단일 사용자 검수와 AI 반례 보조; 독립 복수 사람 검수·재정이 아님",
+          "제공된 계약·문서·범위에서의 의미 판정이며 외부 실행 사실 검증이나 Core 승인 아님"
+        ],
+        "human_confirmed": true
+      },
+      "previous_event_sha256": "be87ee87b05a5d380c6f6c938616c4fcb6f2385913e2f84e47c599ac5a286677"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-012",
+  "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+  "ai_proposal_sha256": "af4af0521b1e1ebcf819a65c968f5eb2d6ab53d998b43215785935ea4cb58dc5",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-012-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-012",
+          "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "UNRESOLVED",
+          "rationale": "사용자 원문 의견: 전체 결과를 다시 전송받고 판단해야해",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "update",
+              "start": 0,
+              "end": 41,
+              "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "update",
+              "start": 0,
+              "end": 27,
+              "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다.\n"
+            }
+          ],
+          "missing_information": [
+            "잘리지 않은 최종 결과 전체와 그 해시를 확보한다."
+          ],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-012-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-012-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "후보는 partial 상태이며 제공된 부분에는 자동 업데이트 미지원만 보인다. 수동 재설치 필요가 최종 결과에서 삭제됐는지 잘린 부분에 있는지 확정할 수 없어 전체 결과를 다시 확보한 뒤 판단하자는 의견에 반례를 찾지 못했다."
+      },
+      "previous_event_sha256": "b6d0b2b9db4038d8bc4ecf5f23b559a5dfb502d13fb6d54c7df71c635f43b19d"
+    },
+    {
+      "event_id": "SP-012-user-final-explicit-20261111",
+      "kind": "user_final",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "payload": {
+        "counterreview_event_id": "SP-012-ai-counterreview-20261111",
+        "judgment": "UNRESOLVED",
+        "rationale": "사용자 최신 명시적 최종 승인 전사: 수정 결과가 partial이므로 실제 정보 삭제와 전송 절단을 구별할 수 없음.",
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "update",
+            "start": 0,
+            "end": 41,
+            "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+          },
+          {
+            "side": "candidate",
+            "document_id": "update",
+            "start": 0,
+            "end": 27,
+            "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다.\n"
+          }
+        ],
+        "responses": [],
+        "unresolved_issues": [
+          "수정 결과가 partial이므로 실제 정보 삭제와 전송 절단을 구별할 수 없음."
+        ],
+        "approve_for_development_gold": true,
+        "confidence_limitations": [
+          "단일 사용자 검수와 AI 반례 보조; 독립 복수 사람 검수·재정이 아님",
+          "제공된 계약·문서·범위에서의 의미 판정이며 외부 실행 사실 검증이나 Core 승인 아님"
+        ],
+        "human_confirmed": true
+      },
+      "previous_event_sha256": "f29e4c95121d951628f911cf9238a5ca7f4fcd8b8223a08ce2ccf41c9b430c6e"
+    }
+  ]
+}
