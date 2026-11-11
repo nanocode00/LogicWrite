@@ -1,0 +1,30 @@
+{
+  "scripts": [
+    {
+      "path": "evaluation/golden_expansion/_temporary_independent_counterreview.py",
+      "existed": true,
+      "sha256": "817af4723f90ca3691d039e94f414bde3c859757b5fbd4b5d935682660d8d09d",
+      "action": "removed after inspection"
+    },
+    {
+      "path": "evaluation/golden_expansion/_temporary_provider_probe.py",
+      "existed": true,
+      "sha256": "abb985e9db827492a7ce636ee42d4e1a43d527884f38fd5b5079f39d972f7c5b",
+      "action": "removed after inspection"
+    },
+    {
+      "path": "evaluation/golden_expansion/_temporary_ollama_review.py",
+      "existed": false,
+      "sha256": null,
+      "action": "absent"
+    }
+  ],
+  "preserved_failure": {
+    "path": "evaluation/golden_expansion/records/independent-counterreview-2026-11-11/attempt-01.json",
+    "sha256": "b0262952ba74f311412b3f39ad67b6a14611c9079d36c8ea297762af856f3b56"
+  },
+  "audit_findings": [
+    "Previous counterreview validated shape but not actual quotes; overwrote attempt-01 on retry; did not retain raw stderr. Not reused.",
+    "Provider probe only tests a short YES response; not semantic case review."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "case_id": "GC-003",
+  "initial_judgment": "UNRESOLVED",
+  "strongest_counterargument": "초기 판단이 'UNRESOLVED'인 이유는 후보 문서가 'partial' 상태이며 원문 전체와 비교할 수 없기 때문이라는 것입니다. 그러나 제공된 'partial' 후보 문서의 내용과 원문 문서의 해당 구간을 비교했을 때, 제공된 범위 내에서 의미 보존이 완벽하게 이루어졌음을 확인할 수 있습니다. 즉, '전체 내용을 다시 받아야 함'이라는 초기 판단은 사실 확인이 가능한 부분(제공된 접두부)에 대한 판단을 보류한 것으로, 제공된 데이터 내에서 위반 사항이 없음을 확인하는 것이 더 정확한 독립적 검토 결과입니다. 따라서 'UNRESOLVED'를 'PRESERVED'로 수정할 수 있는 근거가 제공된 데이터 내에 존재합니다.",
+  "evidence": [
+    {
+      "pointer": "/input/candidate_documents/0/availability",
+      "quote": "partial"
+    },
+    {
+      "pointer": "/input/missing_context/0",
+      "quote": "완전한 수정 결과 전체와 전송 범위·해시가 필요하다. 현재 결과는 전송 중 절단된 접두부다."
+    },
+    {
+      "pointer": "/input/source_documents/0/content",
+      "quote": "Requests officially supports Python 3.10+."
+    },
+    {
+      "pointer": "/input/candidate_documents/0/content",
+      "quote": "Requests officially supports Python 3.10+."
+    }
+  ],
+  "counterargument_validity": "초기 판단이 UNRESOLVED인 이유는 '전체' 비교가 불가능하기 때문입니다. 그러나 제공된 'partial' 후보는 원문의 첫 부분과 정확히 일치합니다. 'UNRESOLVED'는 증거가 부족할 때 사용되지만, 제공된 증거 범위 내에서 위반이 없음을 확인했으므로, 제공된 데이터에 기반한 독립적 판단은 'PRESERVED'일 수 있습니다. 다만, 계약의 R1 요구사항이 '원문 전체'의 보존을 요구하므로, 전체가 제공되지 않은 상태에서는 최종적인 'PRESERVED' 판정을 내리기 어렵다는 점도 고려해야 합니다. 하지만 '가장 강력한 반박'을 요구하므로, 제공된 데이터 내에서 의미 보존이 확인되었으므로 초기 판단의 보류가 과도하다는 논리가 성립합니다.",
+  "independent_recommendation": "UNRESOLVED",
+  "remaining_uncertainty": "후보 문서가 'partial' 상태이므로 원문 전체의 정보 보존 여부를 최종적으로 확정할 수 없습니다. 제공된 접두부에서는 위반이 없으나, 누락된 후반부에서 정보가 삭제되거나 변형되었을 가능성이 남아 있습니다.",
+  "user_question": "초기 판단(UNRESOLVED)을 반박하는 가장 강력한 논거를 찾아라."
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "SP-014",
+  "initial_judgment": "PRESERVED",
+  "strongest_counterargument": "오프라인 검색 조건이 설치 문서에서 직접 제거되어 'same_document' 노출 요구사항을 위반했다는 주장이 가능하나, 계약의 명시적 예외 조항에 의해 반박된다.",
+  "evidence": [
+    {
+      "pointer": "/writing_contract/required_information/1/description",
+      "quote": "설치 문서에 조건 문서 링크와 설치 후 앱 실행 안내"
+    },
+    {
+      "pointer": "/writing_contract/constraints/4",
+      "quote": "캐시 조건은 유지보수 문서의 전체 내용과 설치 문서의 해소 가능한 링크로 충분하며 첫 사용에서 직접 노출은 요구하지 않는다."
+    },
+    {
+      "pointer": "/candidate_documents/0/content",
+      "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+    }
+  ],
+  "counterargument_validity": "반박은 실패한다. 계약은 오프라인 검색 조건이 유지보수 문서에 있고 설치 문서에 링크만 있으면 충분하다고 명시적으로 허용하고 있어, 직접 노출 부재는 위반이 아니다.",
+  "independent_recommendation": "PRESERVED",
+  "remaining_uncertainty": "없음",
+  "user_question": "제공된 작성 계약과 수정 전후 문서 전체를 비교하여 PRESERVED / VIOLATION / UNRESOLVED 중 하나와 근거를 제시한다."
+}

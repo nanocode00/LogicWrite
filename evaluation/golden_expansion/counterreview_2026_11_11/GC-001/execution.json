@@ -1,0 +1,20 @@
+{
+  "case_id": "GC-001",
+  "input_sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+  "request_sha256": "235f87cb99c6b57e9c4d162468b126d9926712b810cdbae100b82f59ec9e88bf",
+  "request_encoding": "json.dumps(ensure_ascii=False).encode()",
+  "started_at": "2026-11-11T07:20:08.787383+00:00",
+  "requested_model": "qwen3.8-27b-q3-24k:latest",
+  "status": "failed",
+  "context_policy": "full input, no truncation; num_ctx=24576",
+  "isolation": "stateless local HTTP completion; no tools or filesystem interface",
+  "raw_response_sha256": "e7974af3095ae1872614fd2e3cb5d7089e649674b28a8a4ac794e0aa4acba167",
+  "actual_model": "qwen3.8-27b-q3-24k:latest",
+  "done": true,
+  "done_reason": "stop",
+  "prompt_eval_count": 2839,
+  "eval_count": 497,
+  "error_type": "KeyError",
+  "error": "'input'",
+  "seconds": 11.672
+}

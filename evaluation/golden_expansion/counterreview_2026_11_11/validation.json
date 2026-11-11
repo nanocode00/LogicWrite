@@ -1,0 +1,181 @@
+{
+  "cases": [
+    {
+      "case_id": "GC-001",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-001",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-002",
+      "initial_judgment": "VIOLATION",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-002",
+      "recommendation": "VIOLATION",
+      "matches_initial": true,
+      "quote_count": 3,
+      "quality_note": "AI calls Python 3.10+ -> 3.8+ a scope reduction; numeric minimum decreases, so this description is erroneous. Recommendation retained as raw advisory only."
+    },
+    {
+      "case_id": "GC-003",
+      "initial_judgment": "UNRESOLVED",
+      "status": "failed",
+      "error": "semantic_inconsistency: recommendation is UNRESOLVED but validity rationale argues PRESERVED; operator audit, no model correction",
+      "attempt_path": "retry-01/GC-003",
+      "recommendation": "UNRESOLVED",
+      "matches_initial": null,
+      "quote_count": 4
+    },
+    {
+      "case_id": "GC-004",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-004",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-005",
+      "initial_judgment": "VIOLATION",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-005",
+      "recommendation": "VIOLATION",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-006",
+      "initial_judgment": "UNRESOLVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-006",
+      "recommendation": "UNRESOLVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-007",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-007",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-008",
+      "initial_judgment": "VIOLATION",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-008",
+      "recommendation": "VIOLATION",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-009",
+      "initial_judgment": "UNRESOLVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-009",
+      "recommendation": "UNRESOLVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-010",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-010",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-011",
+      "initial_judgment": "VIOLATION",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "GC-011",
+      "recommendation": "VIOLATION",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "GC-012",
+      "initial_judgment": "UNRESOLVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "retry-01/GC-012",
+      "recommendation": "UNRESOLVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "SP-013",
+      "initial_judgment": "VIOLATION",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "retry-01/SP-013",
+      "recommendation": "VIOLATION",
+      "matches_initial": true,
+      "quote_count": 4
+    },
+    {
+      "case_id": "SP-014",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "retry-01/SP-014",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "SP-015",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "SP-015",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "SP-016",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "SP-016",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    },
+    {
+      "case_id": "SP-017",
+      "initial_judgment": "PRESERVED",
+      "status": "validated",
+      "error": null,
+      "attempt_path": "SP-017",
+      "recommendation": "PRESERVED",
+      "matches_initial": true,
+      "quote_count": 3
+    }
+  ],
+  "counts": {
+    "validated": 16,
+    "failed": 1
+  },
+  "disagreements": [],
+  "method": "Exact request reconstruction; raw input/request/response hashes; response completion/context budget; all quotes resolved against original input. /input prefix accepted as wrapper reference. Original execution logs preserved."
+}

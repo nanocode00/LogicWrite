@@ -1,0 +1,51 @@
+# GC-004
+
+## 사용자 최초 판단
+PRESERVED — 정보는 동일, 표현 방식만 다름
+입력 SHA-256: `0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44`
+
+## 독립 AI 반례
+원문의 'The default behavior is to raise a `TimeoutException` after 5 seconds of network inactivity.'는 HTTPX의 기본 동작이 '5초의 네트워크 비활성 후 예외를 발생시킨다'는 능동적 행위 주체와 시점을 명시하고 있다. 후보 문장의 'By default, 5 seconds of network inactivity raises a `TimeoutException`.'는 주체를 '5 seconds of network inactivity'로 변경하여, 시간 경과 자체가 예외를 발생시킨다는 인과적/주체적 오류를 유발할 수 있으며, 이는 단순한 문장 구조 변경이 아닌 의미론적 귀속(attribution)의 미세한 변화를 포함한다고 볼 수 있다.
+
+## AI의 반론 타당성 평가
+반박 시도는 문법적 주체 변경이 의미 보존을 위반할 수 있다는 점을 근거로 한다. 그러나 '5 seconds of network inactivity raises a TimeoutException'이라는 표현은 기술 문서에서 '조건(시간 경과)이 충족되면 결과가 발생한다'는 의미로 통용되는 관용적 표현이며, 원문의 'default behavior is to raise... after...'와 동일한 기능적 의미(5초 비활성 시 예외 발생)를 전달한다. 계약에서 요구하는 '주장·수치·조건'의 핵심 정보는 모두 동일하게 보존되어 있으며, 문법적 주체의 변화가 정보의 진실성이나 적용 범위를 변경하지는 않는다. 따라서 이 반박은 의미 보존 위반을 입증하지 못한다.
+
+## 정확한 인용 근거
+
+- `/input/source_documents/0/content`
+
+```text
+The default behavior is to raise a `TimeoutException` after 5 seconds of
+network inactivity.
+```
+
+- `/input/candidate_documents/0/content`
+
+```text
+By default, 5 seconds of network inactivity raises a `TimeoutException`.
+```
+
+- `/input/writing_contract/required_information/0/description`
+
+```text
+원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다.
+```
+
+## AI 권장 판단
+PRESERVED
+
+## 남은 불확실성
+문법적 주체 변경이 특정 독자에게 혼동을 줄 수 있는 미세한 뉘앙스 차이는 존재하지만, 정보 보존의 관점에서는 의미적 차이가 없다.
+
+## 사용자 확인 사항
+원문과 수정 후보의 의미 보존 여부를 판단하라.
+
+## 사용자 응답 (미작성)
+
+반론에 대한 선택: [ ] 동의 [ ] 반박 [ ] 보류
+
+근거: ______
+
+사용자 최종 판단: ______
+
+개발용 골드 포함 승인: 미결정
