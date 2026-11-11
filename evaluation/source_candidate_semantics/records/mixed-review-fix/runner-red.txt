@@ -1,0 +1,22 @@
+....FE........
+======================================================================
+ERROR: test_mixed_violation_is_visible_but_excluded_from_accuracy (test_run.RunnerTests.test_mixed_violation_is_visible_but_excluded_from_accuracy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 54, in test_mixed_violation_is_visible_but_excluded_from_accuracy
+    self.assertEqual(report['reviewed_case_count'], 1)
+                     ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'reviewed_case_count'
+
+======================================================================
+FAIL: test_excluded_mixed_report_is_still_checked_for_forged_binding (test_run.RunnerTests.test_excluded_mixed_report_is_still_checked_for_forged_binding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 73, in test_excluded_mixed_report_is_still_checked_for_forged_binding
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.064s
+
+FAILED (failures=1, errors=1)

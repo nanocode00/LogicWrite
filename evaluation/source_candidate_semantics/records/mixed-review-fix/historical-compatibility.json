@@ -1,0 +1,24 @@
+{
+  "offline-predictions.json": {
+    "source_sha256": "e6a26a192cd5b026a5659ec0f8762541833b8d7c9ea143bb60c3bf2ac42f46dd",
+    "evaluated_count": 0,
+    "accuracy": null,
+    "confirmed_violation_count": 0,
+    "evidence_trust": {
+      "kind": "advisory",
+      "model_execution_authenticated": false,
+      "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+    }
+  },
+  "live-pilot-predictions.json": {
+    "source_sha256": "7dfd3637ba84525b73d309af102226e58fd5c2e88aba5cbc62a3400c330db703",
+    "evaluated_count": 0,
+    "accuracy": null,
+    "confirmed_violation_count": 0,
+    "evidence_trust": {
+      "kind": "advisory",
+      "model_execution_authenticated": false,
+      "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+    }
+  }
+}

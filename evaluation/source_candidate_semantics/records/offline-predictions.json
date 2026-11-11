@@ -1,0 +1,1201 @@
+{
+  "version": "source-candidate-evaluation-run-v1",
+  "reference_labels_loaded": false,
+  "dataset_role": "development_only",
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-001.json",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_BUDGET_EXCEEDED"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "budget_exceeded",
+            "request_sha256": "516da19b75ab3375b342f982866f3418311d812ac61c747aa4baede924c7a51a",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "snapshot_id": "source_documents:readme:46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0",
+              "version": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+              "sha256": "46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0"
+            },
+            {
+              "side": "output",
+              "document_id": "readme",
+              "snapshot_id": "candidate_documents:readme:321dd1146227204544e273ea0e6791a710b4cec673ffc2579878d5aed3904045",
+              "version": "controlled-candidate-v1",
+              "sha256": "321dd1146227204544e273ea0e6791a710b4cec673ffc2579878d5aed3904045"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "4cd83d0c6a4ead1a9459b66b183a8a4df5c432b19f67753ce6a93e73559fc531"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "이번 릴리스에 한정한 PKG 선택 이유·non-blocking Doctor·향후 DMG 가능성",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "3fdc5008d432ffde411b541318b711d6b9d855914b6289ccb58fb56e512bea41",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-002",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-002.json",
+      "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_NOT_RUN"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "not_run",
+            "request_sha256": "3daa8e1edb8bae023946494c1a3b0e22cc33e4ba4f18b0a83e74167694174529",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "guide",
+              "snapshot_id": "source_documents:guide:f765692fe575b67cac658480f1abc77ae7bb1158fe4e7b55942ec32e59f1d7a6",
+              "version": "synthetic-source-v1",
+              "sha256": "f765692fe575b67cac658480f1abc77ae7bb1158fe4e7b55942ec32e59f1d7a6"
+            },
+            {
+              "side": "output",
+              "document_id": "guide",
+              "snapshot_id": "candidate_documents:guide:63241a37eab1f5feaf7752688d866b8cef9a51604d4db28982db74c6f409e6de",
+              "version": "controlled-candidate-v1",
+              "sha256": "63241a37eab1f5feaf7752688d866b8cef9a51604d4db28982db74c6f409e6de"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "67aff97abc0b7349ef5fcb391e3db8c1e61989c8832cbb15ba54cb5eb27558af"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "자동 업데이트 미지원·수동 재설치·시작 절차",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "7ac5157349f6e128d5ebfc896b67a6a10dfa362a3e384fb50913491a2ad9033f",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-003",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-003.json",
+      "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_NOT_RUN"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "not_run",
+            "request_sha256": "17363e49996abe248a3713df13cc21e70433238b00fb9bba3e621f47a8c293d5",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "install",
+              "snapshot_id": "source_documents:install:86272e1589fa4ecb3a66bab7076c93f242c0fd3e14b596b7eed206101c860ac4",
+              "version": "synthetic-source-v1",
+              "sha256": "86272e1589fa4ecb3a66bab7076c93f242c0fd3e14b596b7eed206101c860ac4"
+            },
+            {
+              "side": "source",
+              "document_id": "maintenance",
+              "snapshot_id": "source_documents:maintenance:b37eb24e4e19692ab7087110b7d40e4f40a143468ec2202026fb98125785f056",
+              "version": "synthetic-source-v1",
+              "sha256": "b37eb24e4e19692ab7087110b7d40e4f40a143468ec2202026fb98125785f056"
+            },
+            {
+              "side": "output",
+              "document_id": "install",
+              "snapshot_id": "candidate_documents:install:34328c742ec6a4fadaeba8272a0fc6768f47b544e1d14b243eee9ff6c08c53b6",
+              "version": "controlled-candidate-v1",
+              "sha256": "34328c742ec6a4fadaeba8272a0fc6768f47b544e1d14b243eee9ff6c08c53b6"
+            },
+            {
+              "side": "output",
+              "document_id": "maintenance",
+              "snapshot_id": "candidate_documents:maintenance:0a8b4de3ffad209e3a6843f37016438114a034f1fdc955d8232dabc31b60ed48",
+              "version": "controlled-candidate-v1",
+              "sha256": "0a8b4de3ffad209e3a6843f37016438114a034f1fdc955d8232dabc31b60ed48"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "41deb0ae1e29a5c2fa19cb9d09650abf84844ad1b85640256f1bd2b7cb7e4427"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "오프라인 검색은 캐시가 있을 때만 가능",
+              "exposure": "linked_document"
+            },
+            {
+              "id": "R2",
+              "description": "설치 문서에 조건 문서 링크와 설치 후 앱 실행 안내",
+              "exposure": "same_document"
+            },
+            {
+              "id": "R3",
+              "description": "캐시 수동 삭제",
+              "exposure": "linked_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다.",
+            "document_id maintenance의 논리 경로는 maintenance.md다. 조건의 설치 문서 내 전문 노출은 필요하지 않다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "593a19e46d77dbfa04b645545f9c4fefce8c62f898f6b5c6fe40615b57608ec1",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-004",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-004.json",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_NOT_RUN"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "not_run",
+            "request_sha256": "75774e6366a6ec95e2234b3afd111fa7272842a13c319bdd647e533f221b6976",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "config",
+              "snapshot_id": "source_documents:config:945764e78270b6526866882d32fa16f1caa97c2acd9bf8f3ebadff51174e8f36",
+              "version": "synthetic-source-v1",
+              "sha256": "945764e78270b6526866882d32fa16f1caa97c2acd9bf8f3ebadff51174e8f36"
+            },
+            {
+              "side": "output",
+              "document_id": "config",
+              "snapshot_id": "candidate_documents:config:4796e65b63439ad2c56f88b4527a8beed6399c2e0e86e201a06e9ca0fef14ca0",
+              "version": "controlled-candidate-v1",
+              "sha256": "4796e65b63439ad2c56f88b4527a8beed6399c2e0e86e201a06e9ca0fef14ca0"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "a0366c1e0155dc7fd5a3d429e3cec3d11cdcae7af42a1a3cafb4f47d0c7a0435"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "API 요청 제한 시간 30초와 재시도 설정 독립성",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "67d85e2044bf2096ed6efe40eab2c42993388e946a5ac3aacf0e1a93f85fff1f",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-005",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-005.json",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_BUDGET_EXCEEDED"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "budget_exceeded",
+            "request_sha256": "40fe1adf2ab44f81dec83c8fdb00f9cbb6108ab8273ee50e5402c4f92aa9e658",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "snapshot_id": "source_documents:readme:46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0",
+              "version": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+              "sha256": "46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0"
+            },
+            {
+              "side": "output",
+              "document_id": "readme",
+              "snapshot_id": "candidate_documents:readme:a7729c5eec39b26380e1d5629ce56972b1e7d55dc466789e602af6f8e7eb1b50",
+              "version": "controlled-candidate-v1",
+              "sha256": "a7729c5eec39b26380e1d5629ce56972b1e7d55dc466789e602af6f8e7eb1b50"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "98f880e6c4d5597d8744911b22545e8d15701de0d522204cece7f73868297528"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "signed/notarized DMG는 추후 추가 가능성이며 현재 제공 사실이 아니다",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "11acab2ca0e1605ae010230e9e566aa8abc538c608b9203d28f7c1bd08af6bb3",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-006",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-006.json",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_NOT_RUN"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "not_run",
+            "request_sha256": "a570a58806c35d22e6e6ba751438906954dc5e558183d4b43db4102db9c32aec",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "settings",
+              "snapshot_id": "source_documents:settings:a452475c1ed2111dad938e272582dc1a5657139eda385105d621042d96c20d17",
+              "version": "synthetic-source-v1",
+              "sha256": "a452475c1ed2111dad938e272582dc1a5657139eda385105d621042d96c20d17"
+            },
+            {
+              "side": "output",
+              "document_id": "settings",
+              "snapshot_id": "candidate_documents:settings:9ca1c8f8888199c204fe3cf9c6b1d6a9b4f36781a4b407d45915156379ae5680",
+              "version": "controlled-candidate-v1",
+              "sha256": "9ca1c8f8888199c204fe3cf9c6b1d6a9b4f36781a4b407d45915156379ae5680"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "c7d29fd232c25769f40fbde3e64824a494db20459fc48732d9059834cb518987"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "실험 빌드 자동 업데이트 미지원과 API 요청 제한 시간 30초",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "f0d779ff86c5e3c8171e306894a97f526e948d6d2654fcc38dc656ef007d2bf8",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-007",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-007.json",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_NOT_RUN"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "not_run",
+            "request_sha256": "82c71cab7130630e23bf6b0181c496a1aec50ec1eb5e84ec508ca6730eaf6d99",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "offline",
+              "snapshot_id": "source_documents:offline:5a94b2dd1079c5246c36d128d9251fb659c01330228fc375a495daf7bed0432b",
+              "version": "synthetic-source-v1",
+              "sha256": "5a94b2dd1079c5246c36d128d9251fb659c01330228fc375a495daf7bed0432b"
+            },
+            {
+              "side": "output",
+              "document_id": "offline",
+              "snapshot_id": "candidate_documents:offline:7eb2d382d6afee2057b6b5d35667a4508020b41f87fc93fb26851a18bc6ef858",
+              "version": "controlled-candidate-v1",
+              "sha256": "7eb2d382d6afee2057b6b5d35667a4508020b41f87fc93fb26851a18bc6ef858"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "9b11f884eacec7fc8eb4213c765c8c0752e9941ca96169b9d13dc3d77bc7f1df"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "검색은 캐시가 있을 때만 가능하며 최근 7일 범위",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "897376ba90d19b68e693974cec2029fb9fd3bf3b87467ebcd0b1ced82a7634b2",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-008",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-008.json",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "SEMANTIC_REVIEW_NOT_RUN"
+        ],
+        "semantic_report": {
+          "version": "source-candidate-semantic-evaluation-v1",
+          "checks": {
+            "CLAIM_FACTS": {
+              "status": "unresolved"
+            },
+            "QUANTITY_SCOPE": {
+              "status": "unresolved"
+            },
+            "POLARITY_CONDITIONS": {
+              "status": "unresolved"
+            },
+            "ADDITIONS_OMISSIONS": {
+              "status": "unresolved"
+            },
+            "CONTRADICTIONS": {
+              "status": "unresolved"
+            },
+            "MOVE_CONSOLIDATION": {
+              "status": "unresolved"
+            },
+            "PROVENANCE": {
+              "status": "unresolved"
+            }
+          },
+          "coverage": {
+            "complete": false,
+            "required_checks": [
+              "CLAIM_FACTS",
+              "QUANTITY_SCOPE",
+              "POLARITY_CONDITIONS",
+              "ADDITIONS_OMISSIONS",
+              "CONTRADICTIONS",
+              "MOVE_CONSOLIDATION",
+              "PROVENANCE"
+            ],
+            "reviewed_checks": []
+          },
+          "execution": {
+            "state": "not_run",
+            "request_sha256": "2a95ef6aacb2daeae11de4af2e4b40d67047f4a752a2aa296b7e376f542128fd",
+            "response_sha256": null,
+            "max_review_chars": 48000,
+            "timeout_seconds": 30
+          },
+          "snapshot_refs": [
+            {
+              "side": "source",
+              "document_id": "report",
+              "snapshot_id": "source_documents:report:7a2f8c980c50a19c83d0c4dd69ad78b41722de7f8789371c39ce60f7486189a7",
+              "version": "synthetic-source-v1",
+              "sha256": "7a2f8c980c50a19c83d0c4dd69ad78b41722de7f8789371c39ce60f7486189a7"
+            },
+            {
+              "side": "output",
+              "document_id": "report",
+              "snapshot_id": "candidate_documents:report:4415f2ebe0cd3af66f757d1c3540d5de27402c3e7fbbf803dc6cab988b5c657b",
+              "version": "controlled-candidate-v1",
+              "sha256": "4415f2ebe0cd3af66f757d1c3540d5de27402c3e7fbbf803dc6cab988b5c657b"
+            }
+          ],
+          "lineage": {
+            "available": false,
+            "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+          },
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "overall_judgment": "unresolved",
+          "gate_state": "REVIEW",
+          "report_sha256": "453f513daf589fb519d058a28d2eab5b55a3a2f6d18c3a0e0b0498aa17358733"
+        },
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "실험 A 단일 실행·120ms·일반화 미검증",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다.",
+            "사용자는 원문을 다듬도록 요청했으며, 모든 환경에서 성능이 2배 향상됐다는 추가 사실이나 해당 문구의 삽입 지시는 제공하지 않았다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "d19edf3ffcfe986e280ccf32db8942377295555f1a8d4368e2b5f1f36f3551fc",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-009",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-009.json",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "MISSING_CONTEXT",
+          "INCOMPLETE_SOURCE_DOCUMENTS",
+          "INCOMPLETE_CANDIDATE_DOCUMENTS"
+        ],
+        "semantic_report": null,
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "PKG 선택 이유 전체·non-blocking·DMG 미래 가능성을 packaging 문서에 보존하고 README에서 링크 제공",
+              "exposure": "linked_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다.",
+            "document_id packaging의 논리 경로는 PACKAGING.md다. 패키징 선택 이유는 이 문서로 이동할 수 있다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "45aaf17129d2cb7c8f5ccd75267a44f3704273430cf6bd77895eae326156efd4",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-010",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-010.json",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "MISSING_CONTEXT",
+          "UNKNOWN_BASELINE_OR_DESTINATION_SET"
+        ],
+        "semantic_report": null,
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "권한자가 지정한 기준 버전의 요청 제한 시간",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "e6a05a9411c79cfcd285df78cde7c88b4e0754ef8718571a949a49837f142d5f",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-011",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-011.json",
+      "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "MISSING_CONTEXT",
+          "PENDING_CONTRACT"
+        ],
+        "semantic_report": null,
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "캐시 선행조건 보존; 설치 페이지 현지 노출 여부는 사용자 승인 미확정",
+              "exposure": "pending_contract"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다.",
+            "details의 논리 경로는 details.md다. 계약 초안에 현지 노출 의무가 미확정으로 표시되어 있다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "9d7d41af162dd46cb71e58c4b3bc2952ae201cdf83d580a74b23e14417c1719b",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    {
+      "case_id": "SP-012",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-012.json",
+      "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+      "result": {
+        "version": "sp-source-candidate-adapter-v1",
+        "status": "unsupported",
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "evaluated": false,
+        "reasons": [
+          "MISSING_CONTEXT",
+          "INCOMPLETE_CANDIDATE_DOCUMENTS"
+        ],
+        "semantic_report": null,
+        "contract_mapping": {
+          "source": "writing_contract",
+          "destination": "semantic_request.writing_contract",
+          "mode": "verbatim_evaluation_contract",
+          "fields": [
+            "contract_id",
+            "version",
+            "audience",
+            "purpose",
+            "language",
+            "output_document_ids",
+            "required_information",
+            "constraints"
+          ],
+          "required_information": [
+            {
+              "id": "R1",
+              "description": "자동 업데이트 미지원과 수동 재설치 필요",
+              "exposure": "same_document"
+            }
+          ],
+          "constraints": [
+            "원문에 있는 나머지 정보도 보존한다.",
+            "의미가 같은 표현과 구조 변경을 허용한다.",
+            "새로운 사실 주장은 제공된 근거에 연결한다."
+          ],
+          "availability_mapping": "explicit SP availability complete -> evaluation coverage complete",
+          "inferred_scopes": false,
+          "inferred_relations": false,
+          "inferred_expected_literals": false
+        },
+        "input_sha256": "6dfea2c915956af066c62eb409deedbac87d27a20f532d9ee6c2a35ac77d7e59",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    }
+  ],
+  "record_sha256": "fb52601327ca8d5b4eaf9c7be7f7c83e2cf90e2ebea359ef61d65d092a49100a"
+}

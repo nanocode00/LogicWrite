@@ -1,0 +1,114 @@
+{
+  "version": "source-candidate-post-comparison-v1",
+  "dataset_role": "development_only",
+  "reference_manifest_path": "evaluation/g3_g4/development_gold_v2_2026-11-11/development-gold.json",
+  "reference_manifest_sha256": "2adddb82f0e9016c210887014bb65d074a99cd9ffa4515931c3002377adc3f5a",
+  "prediction_record_sha256": "1f6210087cd79943068bbda0e0f83cfc84a9b812a7b427d5b4ec90b89c66187b",
+  "metric_scope": "complete definitive model-advisory evaluations only; excludes unsupported/abstentions",
+  "gate_state_is_not_an_sp_label": true,
+  "candidate_count": 4,
+  "evaluated_count": 0,
+  "excluded": [
+    {
+      "case_id": "SP-005",
+      "reasons": [
+        "SEMANTIC_REVIEW_ERROR"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-006",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN",
+        "PROVIDER_NOT_ATTEMPTED_CALL_BUDGET_OR_PREVIOUS_FAILURE"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-007",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN",
+        "PROVIDER_NOT_ATTEMPTED_CALL_BUDGET_OR_PREVIOUS_FAILURE"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-008",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN",
+        "PROVIDER_NOT_ATTEMPTED_CALL_BUDGET_OR_PREVIOUS_FAILURE"
+      ],
+      "semantic_judgment": "unresolved"
+    }
+  ],
+  "accuracy": null,
+  "cases": [
+    {
+      "case_id": "SP-005",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/0/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-005.json",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+      "reference_pointer": "/cases/4",
+      "reasons": [
+        "SEMANTIC_REVIEW_ERROR"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-005.json --case SP-005",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-006",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/1/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-006.json",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+      "reference_pointer": "/cases/5",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN",
+        "PROVIDER_NOT_ATTEMPTED_CALL_BUDGET_OR_PREVIOUS_FAILURE"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-006.json --case SP-006",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-007",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/2/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-007.json",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+      "reference_pointer": "/cases/6",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN",
+        "PROVIDER_NOT_ATTEMPTED_CALL_BUDGET_OR_PREVIOUS_FAILURE"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-007.json --case SP-007",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-008",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/3/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-008.json",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "reference_pointer": "/cases/7",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN",
+        "PROVIDER_NOT_ATTEMPTED_CALL_BUDGET_OR_PREVIOUS_FAILURE"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-008.json --case SP-008",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    }
+  ]
+}

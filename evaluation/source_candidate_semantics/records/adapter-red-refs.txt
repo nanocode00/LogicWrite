@@ -1,0 +1,13 @@
+...........F..
+======================================================================
+FAIL: test_public_provenance_requires_pinned_matching_repository_path_version (test_source_candidate_adapter.AdapterTests.test_public_provenance_requires_pinned_matching_repository_path_version)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 144, in test_public_provenance_requires_pinned_matching_repository_path_version
+    self.assertFalse(adapter.evaluate(self.raw,reviewer=review)['evaluated'])
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.031s
+
+FAILED (failures=1)

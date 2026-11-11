@@ -1,0 +1,27 @@
+{
+  "base_pr23_head": "110c715748b44279ea54d06f3b13b79d29c6bdde",
+  "new_api_commit": "e9637d4",
+  "existing_main_evaluation_files_preserved": 186,
+  "files": {
+    "evaluation/source_candidate_semantics/.gitignore": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b",
+    "evaluation/source_candidate_semantics/PLAN.md": "a93ea82b98564884267518aaa0881047612e93d3425af037ef0396d374a8a5e0",
+    "evaluation/source_candidate_semantics/README.md": "1aec18a4e66733e6d52e2797ba14df4ffd605a697d23a69fbab9da39c158fa69",
+    "evaluation/source_candidate_semantics/records/adapter-green.txt": "c36d46939575f4f343c9996189bc6b911b7899f758367f83bdbeeed9b68b9bf2",
+    "evaluation/source_candidate_semantics/records/adapter-initial-red.txt": "6af56c7b7880c320e2dda12d4de65c613ec742a2d2cecb735429910014446e58",
+    "evaluation/source_candidate_semantics/records/adapter-red-lowlevel.txt": "411311bc9679504dace3d0ec2d3d0df7572d6faf090eb9814f70da1d915f969e",
+    "evaluation/source_candidate_semantics/records/adapter-red-refs.txt": "4ddc2103939772c8179c96d4a8f92e29b12afbed178b356285692aa2f5ed3213",
+    "evaluation/source_candidate_semantics/records/all-tests.json": "cba37a4968e0ab4d21e31b45f2ad5f85038b979a89b6851214ab3e8184849e3c",
+    "evaluation/source_candidate_semantics/records/integration-22-23-tests.json": "7e038761e7eebb7013d3f2cb556bb85daeef6fa96a7cda066c10a8cafc1bc672",
+    "evaluation/source_candidate_semantics/records/integration-summary.json": "8eab80c8a97476ef5458e75d22dff8c3719e78113fafc29030aba2d8f5af6734",
+    "evaluation/source_candidate_semantics/records/live-pilot-comparison.json": "9edefb8276e3b0aa1882ab4108e9ddeef1f2ed1228a685c7e398819edf0795db",
+    "evaluation/source_candidate_semantics/records/live-pilot-predictions.json": "7dfd3637ba84525b73d309af102226e58fd5c2e88aba5cbc62a3400c330db703",
+    "evaluation/source_candidate_semantics/records/offline-comparison.json": "ef3b8af7af6ff41dd38876e3d6c1168cce7f3fdcaf551a6184832bee12ee3ad3",
+    "evaluation/source_candidate_semantics/records/offline-predictions.json": "e6a26a192cd5b026a5659ec0f8762541833b8d7c9ea143bb60c3bf2ac42f46dd",
+    "evaluation/source_candidate_semantics/records/runner-initial-red.txt": "36c7a854bdf44ce42fb2f135bab83fc9b16011da7d2cf5899457e56143322b3f",
+    "evaluation/source_candidate_semantics/run.py": "68342754c0298f906a219e662233b9b12447f52b0280585e79ac32f0bcee0309",
+    "evaluation/source_candidate_semantics/test_run.py": "934789b200e91767fe37a52e03b4e4278ff59ab05b0d69cbb6326f196b32e587",
+    "experiments/full_document_control/final_semantic_validator.py": "1dcc08686c16db1b2c6c3b7a32764c021a8b8948c0f49e4dfcb6acf9faf2b093",
+    "experiments/full_document_control/source_candidate_adapter.py": "2d72429ffe7c53c9225d9ced2a6c83b424835be88046c117583e0ea3d14d3a3e",
+    "experiments/full_document_control/test_source_candidate_adapter.py": "6dc386b51ab7a6602a63080121cc4aeaf034c1cf767a8baac2a8d3a554676c4d"
+  }
+}

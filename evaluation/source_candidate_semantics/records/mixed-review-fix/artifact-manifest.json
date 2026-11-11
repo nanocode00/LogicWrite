@@ -1,0 +1,21 @@
+{
+  "baseline_pr24_commit": "51dff5d5d6cd318debd117c95b836b3035cf981e",
+  "real_model_calls": 0,
+  "legacy_core_prefix_byte_equal": true,
+  "files": {
+    "evaluation/source_candidate_semantics/README.md": "d39918a4f97c11384d3869221337725fcfc31e11018712bd897652063aed0377",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/VALIDATION.md": "60d51e5065c3b0e9a42c6eb1687ab39f6e26df8f0acd7509487a5fdc7f9ea371",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/all-tests.json": "8027e5c0ec95419e597d5524cf47aa8ef305215a4c5e959bea1a555cdc3c80f4",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/core-green.txt": "77df50472844a9184bbd2b9d3287d6307c335ee309b4c90f3fc7e69debb9d937",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/core-red.txt": "11171fc386a1c967e109618a807f28e04ee28de9555b2640d39a756564ffa59c",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/historical-compatibility.json": "1cb0b3c0b932ec10be9d1abc609966246f4e0c47dbafa132c43f18d88663d81c",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/preservation.json": "4e623b790d894fc91dd524b7df137e8980a96804cda8f6926ed0ef8677ad04f2",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/runner-green.txt": "4b00fec689db6498bcfc20ad760242aa3fb79a20a1f3ce7fec30ab1828982959",
+    "evaluation/source_candidate_semantics/records/mixed-review-fix/runner-red.txt": "4d3c60a8a555b4d44869458cd7ed2ba48d2d13c4576492cce4da9269d9f7c601",
+    "evaluation/source_candidate_semantics/run.py": "1fe988e195efb0d68b8cb418bbaa99845588058217c92d31b17771874b913932",
+    "evaluation/source_candidate_semantics/test_run.py": "6491aba690a1492157520af1dafd7277897b23d5c540ac45f1c0a4142ad3fd53",
+    "experiments/full_document_control/final_semantic_validator.py": "f38478be8597da538325070b98a8bd1cc399501a922f06b7432074a2bc1da344",
+    "experiments/full_document_control/source_candidate_adapter.py": "8bc26447ec9f8143c9cfb54206430332b1ab84b3e90393be407df189b70b7235",
+    "experiments/full_document_control/test_source_candidate_adapter.py": "73e47a358919c69b1d4eac5a3d218ba66efb154f0edd3f94408b47737a2e2f0a"
+  }
+}
