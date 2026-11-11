@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-005",
+  "input_path": "inputs/GC-005.json",
+  "input_sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "QUANTITY_CHANGE"
+  ],
+  "findings": [
+    {
+      "error_type": "QUANTITY_CHANGE",
+      "severity": "major",
+      "reason": "기본 네트워크 비활성 제한을 5초에서 50초로 바꾸었다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 61,
+          "end": 153,
+          "quote": "The default behavior is to raise a `TimeoutException` after 5 seconds of\nnetwork inactivity."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 61,
+          "end": 154,
+          "quote": "The default behavior is to raise a `TimeoutException` after 50 seconds of\nnetwork inactivity."
+        }
+      ]
+    }
+  ],
+  "rationale": "기본 네트워크 비활성 제한을 5초에서 50초로 바꾸었다.",
+  "acceptable_alternatives": [
+    "같은 주장·수치·조건·범위를 보존한 다른 표현·배치도 허용한다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

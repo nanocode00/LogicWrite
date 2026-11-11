@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-009",
+  "input_path": "inputs/GC-009.json",
+  "input_sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "UNRESOLVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "MISSING_DESTINATION"
+  ],
+  "findings": [
+    {
+      "error_type": "MISSING_DESTINATION",
+      "severity": "undetermined",
+      "reason": "계약상 후보 이동은 가능하나 목적지 원문·결과 없이 확인 옵션·콜백 조건의 전체 보존은 검증 대기다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 963,
+          "end": 2031,
+          "quote": "## Confirmation Option\n\nFor dangerous operations, it's very useful to be able to ask a user for confirmation. This can be done by adding a\nboolean `--yes` flag and asking for confirmation if the user did not provide it and to fail in a callback:\n\n```{eval-rst}\n.. click:example::\n\n    def abort_if_false(ctx, param, value):\n        if not value:\n            ctx.abort()\n\n    @click.command()\n    @click.option('--yes', is_flag=True, callback=abort_if_false,\n                  expose_value=False,\n                  prompt='Are you sure you want to drop the db?')\n    def dropdb():\n        click.echo('Dropped all tables!')\n\nAnd what it looks like on the command line:\n\n.. click:run::\n\n    invoke(dropdb, input=['n'])\n    invoke(dropdb, args=['--yes'])\n\nBecause this combination of parameters is quite common, this can also be\nreplaced with the :func:`confirmation_option` decorator:\n\n.. click:example::\n\n    @click.command()\n    @click.confirmation_option(prompt='Are you sure you want to drop the db?')\n    def dropdb():\n        click.echo('Dropped all tables!')\n```\n\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 987,
+          "end": 1026,
+          "quote": "See [confirmation details](details.md)."
+        }
+      ]
+    }
+  ],
+  "rationale": "계약상 후보 이동은 가능하나 목적지 원문·결과 없이 확인 옵션·콜백 조건의 전체 보존은 검증 대기다.",
+  "acceptable_alternatives": [
+    "부족한 전체 결과 또는 목적지 자료를 확보하기 전에는 정상이나 손실을 단정하지 않는다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

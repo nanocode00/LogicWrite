@@ -1,0 +1,113 @@
+{
+  "round_id": "2026-11-11-counterreview-responses",
+  "recorded_at": "2026-11-11T01:08:11.414717+00:00",
+  "source": "current conversation user responses; quotes transcribed verbatim, question context summarized by Codex",
+  "status": "responses_recorded_final_decision_deferred",
+  "final_decision_instruction": "일단 푸시부터 해볼래? 따로 검수하고 최종판정 할게.",
+  "original_counterreview_sha256": "c720dc654adb1c467386b94a211ee94aca0c5987214753629d7911cf82f433f1",
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "user_quote": "응",
+      "question_context": "정보 차이 없이 문체·표현만 달라졌다는 기존 의견 유지 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-002",
+      "user_quote": "응. 순서 제한을 계약으로 따로 두는게 나을까?",
+      "question_context": "적절한 재배열 의견 유지 및 순서 제한의 필요성에 대한 질문. 이어 과업에 영향을 줄 때만 명시하고 소급 추가하지 않는다는 설명에 그래라고 응답",
+      "additional_user_quotes": [
+        "그래"
+      ],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-003",
+      "user_quote": "계약이 주어져있지만, 이것은 링크 안내가 적절하다는 전제 하이며, 이 경우는 주변 문맥에 따라 적절한 조치가 유지/링크안내/이동 으로 갈릴수 있다.",
+      "question_context": "링크 허용 계약 충족과 계약 자체 타당성을 구분하자는 AI 반론에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-004",
+      "user_quote": "응",
+      "question_context": "정보 차이가 없는 적절한 축약 의견 유지 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-005",
+      "user_quote": "응응",
+      "question_context": "미래 가능성을 현재 제공으로 바꾼 의미 차이 의견 유지 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-006",
+      "user_quote": "응",
+      "question_context": "지원 여부와 시간 단위의 두 오류 의견 유지 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-007",
+      "user_quote": "응",
+      "question_context": "검색 조건이 사라진 부적절한 축약 의견 유지 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-008",
+      "user_quote": "응",
+      "question_context": "추가 근거·삽입 지시 없는 주장 추가가 부적절하다는 의견 유지 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-009",
+      "user_quote": "편집 방향은 적절하지만 목적지 내용이 제공되지 않았다면 요청해서 확인해야 할것으로 보여",
+      "question_context": "전체 문단 이동 방향과 목적지 미제공 결과의 판단을 구분하는 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-010",
+      "user_quote": "v2는 암묵적으로 v1의 다음 버전으로 볼수 있으니 v2를 우선으로 보는것이 타당하지만, 불확실성이 있을수 있어 사람이 한번 확인해야 한다는 의견이야",
+      "question_context": "v2 우선 참고와 승인된 기준 원문 확정은 다르다는 AI 의견에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-011",
+      "user_quote": "동일하게 계약과 별개로 주변 문맥에 따라 적절한 조치가 달라지므로 문맥 부족을 먼저 해소해야해",
+      "question_context": "SP-003과 계약 명시 상태가 다르다는 AI 보충 의견에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    },
+    {
+      "case_id": "SP-012",
+      "user_quote": "응 전송중 잘린거면 다시 전송받아야해",
+      "question_context": "전체 결과 재전송 후 판단이라는 의견 유지 질문에 대한 응답",
+      "additional_user_quotes": [],
+      "user_final_confirmed": false,
+      "development_gold_eligible": false
+    }
+  ],
+  "notes": [
+    "이 응답들은 user_final 이벤트가 아니다. 별도 검수 후 사용자가 최종 판정한다.",
+    "SP-009의 목적지 확인 의견은 새 응답으로 보존하되 과거 AI 검토를 이후 최초 판단에 소급 연결하지 않는다.",
+    "SP-002의 순서 제한을 기존 계약에 소급 추가하지 않는다. 기존 입력·답안·워크플로 스냅샷을 수정하지 않는다."
+  ]
+}

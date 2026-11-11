@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-001",
+  "input_path": "inputs/GC-001.json",
+  "input_sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "PARAPHRASE"
+  ],
+  "findings": [
+    {
+      "error_type": "PARAPHRASE",
+      "severity": "none",
+      "reason": "주체·공식 지원·최소 Python 버전이 동일하고 나머지 전체 문서를 보존했다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 1574,
+          "end": 1616,
+          "quote": "Requests officially supports Python 3.10+."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 1574,
+          "end": 1623,
+          "quote": "Python 3.10+ is officially supported by Requests."
+        }
+      ]
+    }
+  ],
+  "rationale": "주체·공식 지원·최소 Python 버전이 동일하고 나머지 전체 문서를 보존했다.",
+  "acceptable_alternatives": [
+    "같은 주장·수치·조건·범위를 보존한 다른 표현·배치도 허용한다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

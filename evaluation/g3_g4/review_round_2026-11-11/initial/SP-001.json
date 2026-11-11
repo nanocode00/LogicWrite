@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-001",
+  "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+  "ai_proposal_sha256": "3b49835432602afeeb2d9ee8bc599df144bf222ad420da4b424d489d5ace24f5",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-001-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-001",
+          "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "PRESERVED",
+          "rationale": "사용자 원문 의견: 정보의 차이 없어. 문체 차이라고 보면 될거 같아.",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "start": 3011,
+              "end": 3055,
+              "quote": "For this release, **PKG is the better fit**."
+            },
+            {
+              "side": "candidate",
+              "document_id": "readme",
+              "start": 3011,
+              "end": 3054,
+              "quote": "**PKG is the better fit for this release**."
+            }
+          ],
+          "missing_information": [],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    }
+  ]
+}

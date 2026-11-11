@@ -1,0 +1,570 @@
+{
+  "record_type": "explicit_user_final_decisions_and_development_inclusion_approval",
+  "scope": "single_user_development_only_not_independent_human_gold",
+  "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+      "ai_proposal_sha256": "3b49835432602afeeb2d9ee8bc599df144bf222ad420da4b424d489d5ace24f5",
+      "blinded_to_prior_judgments": false,
+      "rationale": "표현만 변경됨.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 3011,
+          "end": 3055,
+          "quote": "For this release, **PKG is the better fit**."
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3011,
+          "end": 3054,
+          "quote": "**PKG is the better fit for this release**."
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-002",
+      "judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+      "ai_proposal_sha256": "1fdade5d0cd7cb7417cb3003f4c65624cd9d89476dcb07e8ef31595abe5c1018",
+      "blinded_to_prior_judgments": false,
+      "rationale": "섹션 순서만 변경됨. 순서 제약을 소급 적용하지 않음.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "guide",
+          "start": 0,
+          "end": 74,
+          "quote": "# 실행 안내\n\n## 한계\n실험 빌드는 자동 업데이트를 지원하지 않는다. 수동 재설치가 필요하다.\n\n## 시작\n설치 후 앱을 연다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "guide",
+          "start": 0,
+          "end": 74,
+          "quote": "# 실행 안내\n\n## 시작\n설치 후 앱을 연다.\n\n## 한계\n실험 빌드는 자동 업데이트를 지원하지 않는다. 수동 재설치가 필요하다.\n"
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-003",
+      "judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+      "ai_proposal_sha256": "a17d58d75d7a5ae5e51947d3c400dc7704cafb24d0ec71138ad0623b09352b7a",
+      "blinded_to_prior_judgments": false,
+      "rationale": "작성 계약이 문서 링크를 허용하므로 PRESERVED. AI 반론인 계약 충족과 계약 자체의 적절성 구분을 검토한 후 사용자가 확정함. 독자 목적과 배치 적절성은 별도 후속 검토로 보존.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "install",
+          "start": 19,
+          "end": 49,
+          "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "maintenance",
+          "start": 24,
+          "end": 54,
+          "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "install",
+          "start": 19,
+          "end": 60,
+          "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": [
+        "독자 목적·배치 적절성을 별도 파생 문맥에서 검토"
+      ]
+    },
+    {
+      "case_id": "SP-004",
+      "judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+      "ai_proposal_sha256": "93d7df2becfc01e73f8e436ddd1013556fd2cc9f33fdd3cc9499ee9055e7cbf5",
+      "blinded_to_prior_judgments": false,
+      "rationale": "중복 문장을 제거했지만 고유 정보는 유지됨.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "config",
+          "start": 0,
+          "end": 63,
+          "quote": "# 요청 설정\n\nAPI 요청 제한 시간은 30초다.\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "config",
+          "start": 0,
+          "end": 42,
+          "quote": "# 요청 설정\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-005",
+      "judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+      "ai_proposal_sha256": "e2ada0d4f01186eee1fa152689bc3bc9c81be5e672a404c723a6559dedb023a6",
+      "blinded_to_prior_judgments": false,
+      "rationale": "DMG의 미래 추가 가능성을 현재 제공 사실로 변경.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 3296,
+          "end": 3379,
+          "quote": "A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3296,
+          "end": 3371,
+          "quote": "A signed/notarized DMG\nis available now for a more consumer-style download."
+        }
+      ],
+      "error_findings": [
+        {
+          "error_type": "MODALITY_SCOPE_CHANGE",
+          "severity": "major",
+          "reason": "나중에 추가할 수 있다는 가능성을 지금 제공한다는 주장으로 바꾸었다. 실제 DMG 존재 여부와 무관하게 제공 근거의 범위를 넘는다.",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "start": 3296,
+              "end": 3379,
+              "quote": "A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+            },
+            {
+              "side": "candidate",
+              "document_id": "readme",
+              "start": 3296,
+              "end": 3371,
+              "quote": "A signed/notarized DMG\nis available now for a more consumer-style download."
+            }
+          ]
+        },
+        {
+          "error_type": "UNSUPPORTED_ADDITION",
+          "severity": "major",
+          "reason": "나중에 추가할 수 있다는 가능성을 지금 제공한다는 주장으로 바꾸었다. 실제 DMG 존재 여부와 무관하게 제공 근거의 범위를 넘는다.",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "start": 3296,
+              "end": 3379,
+              "quote": "A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+            },
+            {
+              "side": "candidate",
+              "document_id": "readme",
+              "start": 3296,
+              "end": 3371,
+              "quote": "A signed/notarized DMG\nis available now for a more consumer-style download."
+            }
+          ]
+        }
+      ],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-006",
+      "judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+      "ai_proposal_sha256": "a113ee6bfeadb15a8efc79a945972cc16384285d82ffc9fb8c1e7928f9bb6a55",
+      "blinded_to_prior_judgments": false,
+      "rationale": "자동 업데이트 지원 여부 반전과 30초→30분 변경. 독립된 오류 두 건을 모두 기록.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "settings",
+          "start": 6,
+          "end": 31,
+          "quote": "실험 빌드는 자동 업데이트를 지원하지 않는다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "settings",
+          "start": 6,
+          "end": 27,
+          "quote": "실험 빌드는 자동 업데이트를 지원한다."
+        },
+        {
+          "side": "source",
+          "document_id": "settings",
+          "start": 32,
+          "end": 51,
+          "quote": "API 요청 제한 시간은 30초다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "settings",
+          "start": 28,
+          "end": 48,
+          "quote": "API 요청 제한 시간은 30분이다."
+        }
+      ],
+      "error_findings": [
+        {
+          "error_type": "NEGATION_REVERSAL",
+          "severity": "major",
+          "reason": "실험 빌드 자동 업데이트 미지원이 지원으로 반전됐다.",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "settings",
+              "start": 6,
+              "end": 31,
+              "quote": "실험 빌드는 자동 업데이트를 지원하지 않는다."
+            },
+            {
+              "side": "candidate",
+              "document_id": "settings",
+              "start": 6,
+              "end": 27,
+              "quote": "실험 빌드는 자동 업데이트를 지원한다."
+            }
+          ]
+        },
+        {
+          "error_type": "QUANTITY_UNIT_CHANGE",
+          "severity": "major",
+          "reason": "API 요청 제한 시간이 30초에서 30분으로 바뀌었다.",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "settings",
+              "start": 32,
+              "end": 51,
+              "quote": "API 요청 제한 시간은 30초다."
+            },
+            {
+              "side": "candidate",
+              "document_id": "settings",
+              "start": 28,
+              "end": 48,
+              "quote": "API 요청 제한 시간은 30분이다."
+            }
+          ]
+        }
+      ],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-007",
+      "judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+      "ai_proposal_sha256": "1cc0408ec604c9de06624ed4286792464a03a38d9599b7a4d3d041d7086f7d35",
+      "blinded_to_prior_judgments": false,
+      "rationale": "오프라인 검색에 필요한 캐시 선행조건 삭제.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "offline",
+          "start": 11,
+          "end": 32,
+          "quote": "캐시가 있는 경우에만 검색할 수 있다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "offline",
+          "start": 11,
+          "end": 20,
+          "quote": "검색할 수 있다."
+        }
+      ],
+      "error_findings": [
+        {
+          "error_type": "REQUIRED_CONDITION_LOSS",
+          "severity": "major",
+          "reason": "7일 한정은 남았지만 캐시 선행조건이 빠져 무조건 검색 가능한 것으로 읽힌다.",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "offline",
+              "start": 11,
+              "end": 32,
+              "quote": "캐시가 있는 경우에만 검색할 수 있다."
+            },
+            {
+              "side": "candidate",
+              "document_id": "offline",
+              "start": 11,
+              "end": 20,
+              "quote": "검색할 수 있다."
+            }
+          ]
+        }
+      ],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-008",
+      "judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "ai_proposal_sha256": "577bb0dd699f900a2d5ad649802288fb65b230f3bb45b62c400129b4106759b3",
+      "blinded_to_prior_judgments": false,
+      "rationale": "단일 실행의 120ms 측정에서 검증되지 않은 '모든 환경 2배 개선' 주장 추가.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "report",
+          "start": 0,
+          "end": 60,
+          "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "report",
+          "start": 61,
+          "end": 84,
+          "quote": "모든 환경에서 응답 성능이 2배 향상됐다."
+        }
+      ],
+      "error_findings": [
+        {
+          "error_type": "UNSUPPORTED_ADDITION",
+          "severity": "major",
+          "reason": "사용자의 추가 사실 제공이나 삽입 지시 없이 에이전트가 모든 환경 2배 개선이라는 주장을 임의로 추가했다. 실험 A 단일 실행의 120ms 관측만으로는 일반화 범위와 개선 배율을 뒷받침할 수 없다.",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "report",
+              "start": 0,
+              "end": 60,
+              "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "report",
+              "start": 61,
+              "end": 84,
+              "quote": "모든 환경에서 응답 성능이 2배 향상됐다."
+            }
+          ]
+        }
+      ],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-009",
+      "judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+      "ai_proposal_sha256": "96dffb466d2fbea7cc5066c0597c9c3e541caf1798e9ca21bdbf2d914584a8c7",
+      "blinded_to_prior_judgments": false,
+      "rationale": "PKG 선택 이유 전체를 패키징 의사결정 문서로 옮기는 방향은 적절하지만, PACKAGING.md의 전후 본문이 미제공이므로 정보 보존 검증 불가.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "readme",
+          "start": 2982,
+          "end": 3381,
+          "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "readme",
+          "start": 3007,
+          "end": 3046,
+          "quote": "See [packaging decision](PACKAGING.md)."
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-010",
+      "judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+      "ai_proposal_sha256": "7b6389fdb70835c42eaf34a9a1e07e84567ad4a21cf0c9ed0c6fb9bf2666a885",
+      "blinded_to_prior_judgments": false,
+      "rationale": "v2를 우선 참고할 수 있지만 승인된 기준 버전이 미확정.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "policy-v1",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 30초다."
+        },
+        {
+          "side": "source",
+          "document_id": "policy-v2",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 60초다."
+        },
+        {
+          "side": "candidate",
+          "document_id": "policy",
+          "start": 10,
+          "end": 25,
+          "quote": "요청 제한 시간은 60초다."
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-011",
+      "judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+      "ai_proposal_sha256": "d140c21ef3945bafc9f3bdbca2fed2cbe3eccf060f57876a5de0a51391b1c52f",
+      "blinded_to_prior_judgments": false,
+      "rationale": "설치 페이지의 조건 직접 노출 의무가 계약상 미확정.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "install",
+          "start": 0,
+          "end": 37,
+          "quote": "# 설치\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "install",
+          "start": 0,
+          "end": 45,
+          "quote": "# 설치\n\n오프라인 검색 조건은 [상세 안내](details.md)를 참조한다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "details",
+          "start": 0,
+          "end": 40,
+          "quote": "# 상세 안내\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": []
+    },
+    {
+      "case_id": "SP-012",
+      "judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "actor_type": "human",
+      "reviewer_id": "repository-user",
+      "approval_date": "2026-11-11",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "source": "current explicit user request: confirmed decisions table and case-specific rationale",
+      "transcription_by": "Codex; no new human judgment inferred",
+      "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+      "ai_proposal_sha256": "af4af0521b1e1ebcf819a65c968f5eb2d6ab53d998b43215785935ea4cb58dc5",
+      "blinded_to_prior_judgments": false,
+      "rationale": "수정 결과가 partial이므로 실제 정보 삭제와 전송 절단을 구별할 수 없음.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "update",
+          "start": 0,
+          "end": 41,
+          "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "update",
+          "start": 0,
+          "end": 27,
+          "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다.\n"
+        }
+      ],
+      "error_findings": [],
+      "non_blocking_followups": []
+    }
+  ]
+}

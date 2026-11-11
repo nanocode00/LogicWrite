@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-010",
+  "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+  "ai_proposal_sha256": "7b6389fdb70835c42eaf34a9a1e07e84567ad4a21cf0c9ed0c6fb9bf2666a885",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-010-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-010",
+          "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "UNRESOLVED",
+          "rationale": "사용자 원문 의견: v2를 기준으로 하되 사람에게 확인받아야해",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "policy-v1",
+              "start": 10,
+              "end": 25,
+              "quote": "요청 제한 시간은 30초다."
+            },
+            {
+              "side": "source",
+              "document_id": "policy-v2",
+              "start": 10,
+              "end": 25,
+              "quote": "요청 제한 시간은 60초다."
+            },
+            {
+              "side": "candidate",
+              "document_id": "policy",
+              "start": 10,
+              "end": 25,
+              "quote": "요청 제한 시간은 60초다."
+            }
+          ],
+          "missing_information": [
+            "두 스냅샷 중 기준 원문으로 승인한 버전을 확인한다. 최신 번호만으로 승인 버전을 추정하지 않는다."
+          ],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-010-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-010-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "v1의 30초, v2 및 후보의 60초를 비교했다. 승인된 기준 버전은 미확정이다. 사용자 의견에는 사람에게 확인받아야 한다는 조건이 포함되므로 v2의 잠정 사용을 승인된 기준 확정으로 확대 해석하지 않는 한 반례를 제기할 필요가 없다."
+      },
+      "previous_event_sha256": "d729eca12e8f3061e3d50cc3c04c5ac5a38188c4ea26d4310d7333009fecb525"
+    }
+  ]
+}

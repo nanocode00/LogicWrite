@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-011",
+  "input_path": "inputs/GC-011.json",
+  "input_sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "NEGATION_CONDITION_CHANGE"
+  ],
+  "findings": [
+    {
+      "error_type": "NEGATION_CONDITION_CHANGE",
+      "severity": "major",
+      "reason": "reload의 기본 비활성과 활성화 flag 조건을 반대로 바꾸었다. quit 구간이 남아 있어도 해당 위반은 해소되지 않는다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 555,
+          "end": 637,
+          "quote": "It's disabled by default and can be enabled via the `--web.enable-lifecycle` flag."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 555,
+          "end": 637,
+          "quote": "It's enabled by default and can be disabled via the `--web.enable-lifecycle` flag."
+        }
+      ]
+    }
+  ],
+  "rationale": "reload의 기본 비활성과 활성화 flag 조건을 반대로 바꾸었다. quit 구간이 남아 있어도 해당 위반은 해소되지 않는다.",
+  "acceptable_alternatives": [
+    "같은 주장·수치·조건·범위를 보존한 다른 표현·배치도 허용한다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

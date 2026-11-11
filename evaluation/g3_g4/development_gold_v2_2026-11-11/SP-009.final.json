@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-009",
+  "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+  "ai_proposal_sha256": "96dffb466d2fbea7cc5066c0597c9c3e541caf1798e9ca21bdbf2d914584a8c7",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-009-current-explicit-initial",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-009",
+          "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "UNRESOLVED",
+          "rationale": "PKG 선택 이유 전체를 패키징 의사결정 문서로 옮기는 방향은 적절하지만, PACKAGING.md의 전후 본문이 미제공이므로 정보 보존 검증 불가.",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "start": 2982,
+              "end": 3381,
+              "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "readme",
+              "start": 3007,
+              "end": 3046,
+              "quote": "See [packaging decision](PACKAGING.md)."
+            }
+          ],
+          "missing_information": [
+            "PKG 선택 이유 전체를 패키징 의사결정 문서로 옮기는 방향은 적절하지만, PACKAGING.md의 전후 본문이 미제공이므로 정보 보존 검증 불가."
+          ],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-009-fresh-ai-counterreview-after-explicit-initial",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/sp009_fresh_counterreview",
+      "recorded_at": "2026-11-11T02:13:03.471470+00:00",
+      "payload": {
+        "model": "Codex separate subagent; exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-009-current-explicit-initial",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "새로 전체 README 전후 차이를 비교하고 작성 계약 및 현재 초기 판단을 검토했다. 변경은 PKG 선택 이유 단락을 PACKAGING.md 링크로 대체한 부분뿐이며, 계약은 해당 이유 전체의 연결 문서 이동을 허용한다. 따라서 README에서 사라졌다는 사실만으로 VIOLATION을 확정할 반례는 없다. 반대로 링크만으로 Applications 설치, Node/cloudflared 번들, non-blocking post-install Doctor, 초보자 설치 경로 및 signed/notarized DMG의 미래 가능성이 목적지에 보존되었다고 확인할 수도 없다. source와 candidate 모두 packaging 본문이 미제공이므로 기존 목적지 정보와 이동된 정보의 보존 여부를 검증하려면 PACKAGING.md 전후 전체 스냅샷과 링크 목적지 역할이 필요하다. 이 누락 조건은 초기 판단과 입력의 missing_context에 이미 반영되어 있다. 나머지 README는 동일하고, 현재 UNRESOLVED 판단을 변경할 추가 모순이나 누락 조건은 발견하지 못했다."
+      },
+      "previous_event_sha256": "5bae2c8b0c59af0642b9dbb55999ea6699879c19d10cc3bce9ae0be52e687ec8"
+    },
+    {
+      "event_id": "SP-009-user-final-after-fresh-counterreview",
+      "kind": "user_final",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T02:18:22.632106+00:00",
+      "payload": {
+        "counterreview_event_id": "SP-009-fresh-ai-counterreview-after-explicit-initial",
+        "judgment": "UNRESOLVED",
+        "rationale": "사용자가 새 AI 검토 결과 확인 후 UNRESOLVED 최종 판정과 개발용 골드 포함 승인을 재확인함. PKG 선택 이유 전체를 패키징 의사결정 문서로 옮기는 방향은 적절하지만, PACKAGING.md의 전후 본문이 미제공이므로 정보 보존 검증 불가.",
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "readme",
+            "start": 2982,
+            "end": 3381,
+            "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+          },
+          {
+            "side": "candidate",
+            "document_id": "readme",
+            "start": 3007,
+            "end": 3046,
+            "quote": "See [packaging decision](PACKAGING.md)."
+          }
+        ],
+        "responses": [],
+        "unresolved_issues": [
+          "PKG 선택 이유 전체를 패키징 의사결정 문서로 옮기는 방향은 적절하지만, PACKAGING.md의 전후 본문이 미제공이므로 정보 보존 검증 불가."
+        ],
+        "approve_for_development_gold": true,
+        "confidence_limitations": [
+          "단일 사용자 검수와 별도 AI 반례 보조이며 독립 복수 사람 재정이 아님",
+          "PACKAGING.md 전후 본문 미제공으로 보존 여부를 확정할 수 없다는 보류 정답; 실제 이동 실행 검증이나 Core 승인 아님"
+        ],
+        "human_confirmed": true
+      },
+      "previous_event_sha256": "e9b43a9a6c3a5cf1f20841d950ea446e904efdbefc58a0650062555df473a9c8"
+    }
+  ]
+}

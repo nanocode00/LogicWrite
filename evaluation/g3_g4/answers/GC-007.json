@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-007",
+  "input_path": "inputs/GC-007.json",
+  "input_sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "PARAPHRASE"
+  ],
+  "findings": [
+    {
+      "error_type": "PARAPHRASE",
+      "severity": "none",
+      "reason": "버전 출력과 프로그램 종료의 동작을 모두 유지했다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 2050,
+          "end": 2165,
+          "quote": "{func}`version_option` adds a `--version` option which immediately prints the version number and exits the program."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 2050,
+          "end": 2167,
+          "quote": "The `--version` option added by {func}`version_option` immediately prints the version number, then exits the program."
+        }
+      ]
+    }
+  ],
+  "rationale": "버전 출력과 프로그램 종료의 동작을 모두 유지했다.",
+  "acceptable_alternatives": [
+    "같은 주장·수치·조건·범위를 보존한 다른 표현·배치도 허용한다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

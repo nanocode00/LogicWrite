@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "GC-010",
+  "input_path": "inputs/GC-010.json",
+  "input_sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "PRESERVED",
+  "external_truth": "not_assessed",
+  "focus": [
+    "REORDER"
+  ],
+  "findings": [
+    {
+      "error_type": "REORDER",
+      "severity": "none",
+      "reason": "두 섹션의 문구와 endpoint 의미를 유지하며 순서만 바꾸었다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "main",
+          "start": 328,
+          "end": 422,
+          "quote": "This endpoint returns 200 when Prometheus is ready to serve traffic (i.e. respond to queries)."
+        },
+        {
+          "side": "candidate",
+          "document_id": "main",
+          "start": 189,
+          "end": 283,
+          "quote": "This endpoint returns 200 when Prometheus is ready to serve traffic (i.e. respond to queries)."
+        }
+      ]
+    }
+  ],
+  "rationale": "두 섹션의 문구와 endpoint 의미를 유지하며 순서만 바꾸었다.",
+  "acceptable_alternatives": [
+    "같은 주장·수치·조건·범위를 보존한 다른 표현·배치도 허용한다."
+  ],
+  "review_questions": [
+    "과제 계약·주변 문맥·양쪽 문서 전체가 이 잠정 판정을 지지하는지 사람이 확인한다."
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

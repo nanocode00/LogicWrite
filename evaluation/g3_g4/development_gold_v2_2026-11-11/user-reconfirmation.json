@@ -1,0 +1,15 @@
+{
+  "case_id": "SP-009",
+  "reviewer_id": "repository-user",
+  "actor_type": "human",
+  "recorded_at": "2026-11-11T02:18:22.632106+00:00",
+  "source": "current conversation user reply to the displayed fresh AI counterreview and explicit confirmation question",
+  "question": "이 새 검토 결과까지 확인하신 뒤, SP-009를 UNRESOLVED로 최종 확정하고 개발용 골드 포함을 승인하시나요?",
+  "user_quote": "응",
+  "judgment": "UNRESOLVED",
+  "development_inclusion_approved": true,
+  "blinded_to_prior_judgments": false,
+  "counterreview_path": "evaluation/g3_g4/sp009_followup_2026-11-11/SP-009.counterreview.json",
+  "counterreview_sha256": "1b1314585d06fd15e8d61054ddc07654166803a244627c9d95741c8bf0f40807",
+  "transcription_by": "Codex; records actual explicit user reply, not a generated human judgment"
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "SP-004",
+  "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+  "ai_proposal_sha256": "93d7df2becfc01e73f8e436ddd1013556fd2cc9f33fdd3cc9499ee9055e7cbf5",
+  "method": "single_user_ai_counterreview",
+  "dataset_role": "development_only",
+  "confidence_limits": [
+    "single_human_reviewer",
+    "ai_assistance_is_not_independent_human_review",
+    "not_independent_holdout"
+  ],
+  "events": [
+    {
+      "event_id": "SP-004-user-initial-20261111",
+      "kind": "user_initial",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T00:33:23.064665+00:00",
+      "payload": {
+        "form": {
+          "form_status": "submitted",
+          "case_id": "SP-004",
+          "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+          "reviewer_id": "repository-user",
+          "reviewed_at": "2026-11-11",
+          "blinded_to_prior_judgments": false,
+          "judgment": "PRESERVED",
+          "rationale": "사용자 원문 의견: 정보의 차이 없어. 적절한 축약이야.",
+          "findings": [],
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "config",
+              "start": 0,
+              "end": 63,
+              "quote": "# 요청 설정\n\nAPI 요청 제한 시간은 30초다.\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+            },
+            {
+              "side": "candidate",
+              "document_id": "config",
+              "start": 0,
+              "end": 42,
+              "quote": "# 요청 설정\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+            }
+          ],
+          "missing_information": [],
+          "acceptable_alternatives": []
+        },
+        "human_confirmed": true,
+        "ai_proposal_exposure": "seen"
+      },
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "SP-004-ai-counterreview-20261111",
+      "kind": "ai_counterreview",
+      "actor_type": "ai",
+      "actor_id": "/root/pilot_counterreview",
+      "recorded_at": "2026-11-11T00:35:59.867088+00:00",
+      "payload": {
+        "model": "Codex separate subagent; inherited model, exact model identifier not exposed",
+        "separate_review": true,
+        "initial_event_id": "SP-004-user-initial-20261111",
+        "review_scope": [
+          "counterexamples",
+          "missing_conditions",
+          "contradictions"
+        ],
+        "challenges": [],
+        "no_challenge_reason": "삭제된 30초 문장은 남아 있는 재시도 설정과 무관한 30초 문장에 포함된다. 수치와 재시도 독립성 모두 유지되어 적절한 축약이라는 의견에 반례를 찾지 못했다."
+      },
+      "previous_event_sha256": "1e6111c724358e2502227d722cfe75b0159665ca0d5b6a75ab142796e301d353"
+    },
+    {
+      "event_id": "SP-004-user-final-explicit-20261111",
+      "kind": "user_final",
+      "actor_type": "human",
+      "actor_id": "repository-user",
+      "recorded_at": "2026-11-11T01:45:49.465943+00:00",
+      "payload": {
+        "counterreview_event_id": "SP-004-ai-counterreview-20261111",
+        "judgment": "PRESERVED",
+        "rationale": "사용자 최신 명시적 최종 승인 전사: 중복 문장을 제거했지만 고유 정보는 유지됨.",
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "config",
+            "start": 0,
+            "end": 63,
+            "quote": "# 요청 설정\n\nAPI 요청 제한 시간은 30초다.\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+          },
+          {
+            "side": "candidate",
+            "document_id": "config",
+            "start": 0,
+            "end": 42,
+            "quote": "# 요청 설정\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+          }
+        ],
+        "responses": [],
+        "unresolved_issues": [],
+        "approve_for_development_gold": true,
+        "confidence_limitations": [
+          "단일 사용자 검수와 AI 반례 보조; 독립 복수 사람 검수·재정이 아님",
+          "제공된 계약·문서·범위에서의 의미 판정이며 외부 실행 사실 검증이나 Core 승인 아님"
+        ],
+        "human_confirmed": true
+      },
+      "previous_event_sha256": "5e119974848d4b618452c67b5d6e4deb96e0af4b34772bca09769bb71f64d52c"
+    }
+  ]
+}

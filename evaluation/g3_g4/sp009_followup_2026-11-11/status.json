@@ -1,0 +1,28 @@
+{
+  "case_id": "SP-009",
+  "source_initial_path": "evaluation/g3_g4/final_review_2026-11-11/pending/SP-009.initial.json",
+  "source_initial_sha256": "3255bf6d3d5c9bf5259b75d8d0283dfe984f46d1d4b6d50ec24a4aa1af07e233",
+  "raw_ai_path": "ai-counterreview.raw.json",
+  "raw_ai_sha256": "fedf4126948d2e8fd9d88bcea1f102d95a4942bf5b57f0202399c80a02b59f0f",
+  "snapshot_path": "evaluation/g3_g4/sp009_followup_2026-11-11/SP-009.counterreview.json",
+  "snapshot_sha256": "1b1314585d06fd15e8d61054ddc07654166803a244627c9d95741c8bf0f40807",
+  "agent": "/root/sp009_fresh_counterreview",
+  "context": "fresh agent fork_turns=none; performed new review of frozen input and current explicit initial judgment",
+  "assessment": {
+    "review_level": "ai_counterreview_completed",
+    "development_gold_eligible": false,
+    "independent_multi_human_complete": false,
+    "final_judgment": null,
+    "method": "single_user_ai_counterreview",
+    "confidence_limits": [
+      "single_human_reviewer",
+      "ai_assistance_is_not_independent_human_review",
+      "not_independent_holdout"
+    ]
+  },
+  "user_post_counterreview_confirmation": "not_recorded",
+  "active_manifest_path": "evaluation/g3_g4/final_review_2026-11-11/development-gold.json",
+  "active_manifest_sha256": "24d84c42c0f826df6402cd22de07353b120d0cd52b299ca79292e285fb3bce4e",
+  "active_count_unchanged": 11,
+  "remaining_step": "사용자가 이 새 AI 결과를 검토한 후 UNRESOLVED 최종 판정·개발용 포함 승인을 재확인해야 함. AI가 대신 생성하지 않음."
+}
