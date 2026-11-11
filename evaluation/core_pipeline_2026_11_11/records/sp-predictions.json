@@ -1,0 +1,755 @@
+{
+  "schema_version": "1",
+  "mode": "deterministic_readonly_diagnostics",
+  "real_model": "not_run",
+  "reference_labels_loaded": false,
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "runtime_input_sha256": "3fdc5008d432ffde411b541318b711d6b9d855914b6289ccb58fb56e512bea41",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+      ],
+      "witnesses": [
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "snapshot_sha256": "46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0",
+              "start": 3011,
+              "end": 3089,
+              "quote": "For this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\n"
+            },
+            {
+              "side": "output",
+              "document_id": "readme",
+              "snapshot_sha256": "321dd1146227204544e273ea0e6791a710b4cec673ffc2579878d5aed3904045",
+              "start": 3011,
+              "end": 3088,
+              "quote": "**PKG is the better fit for this release**. A DMG is nicer for drag-and-drop\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "readme",
+          "runtime_bundle_sha256": "be6cfc81274ccd96c057b49895070fde178e85a544308e6bf1d07cdba267fa8c",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 506,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-001.json",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784"
+    },
+    {
+      "case_id": "SP-002",
+      "runtime_input_sha256": "7ac5157349f6e128d5ebfc896b67a6a10dfa362a3e384fb50913491a2ad9033f",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+      ],
+      "witnesses": [
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "guide",
+              "snapshot_sha256": "f765692fe575b67cac658480f1abc77ae7bb1158fe4e7b55942ec32e59f1d7a6",
+              "start": 9,
+              "end": 15,
+              "quote": "## 한계\n"
+            },
+            {
+              "side": "output",
+              "document_id": "guide",
+              "snapshot_sha256": "63241a37eab1f5feaf7752688d866b8cef9a51604d4db28982db74c6f409e6de",
+              "start": 9,
+              "end": 15,
+              "quote": "## 시작\n"
+            }
+          ]
+        },
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "guide",
+              "snapshot_sha256": "f765692fe575b67cac658480f1abc77ae7bb1158fe4e7b55942ec32e59f1d7a6",
+              "start": 15,
+              "end": 55,
+              "quote": "실험 빌드는 자동 업데이트를 지원하지 않는다. 수동 재설치가 필요하다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "guide",
+              "snapshot_sha256": "63241a37eab1f5feaf7752688d866b8cef9a51604d4db28982db74c6f409e6de",
+              "start": 15,
+              "end": 27,
+              "quote": "설치 후 앱을 연다.\n"
+            }
+          ]
+        },
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "guide",
+              "snapshot_sha256": "f765692fe575b67cac658480f1abc77ae7bb1158fe4e7b55942ec32e59f1d7a6",
+              "start": 56,
+              "end": 62,
+              "quote": "## 시작\n"
+            },
+            {
+              "side": "output",
+              "document_id": "guide",
+              "snapshot_sha256": "63241a37eab1f5feaf7752688d866b8cef9a51604d4db28982db74c6f409e6de",
+              "start": 28,
+              "end": 34,
+              "quote": "## 한계\n"
+            }
+          ]
+        },
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "guide",
+              "snapshot_sha256": "f765692fe575b67cac658480f1abc77ae7bb1158fe4e7b55942ec32e59f1d7a6",
+              "start": 62,
+              "end": 74,
+              "quote": "설치 후 앱을 연다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "guide",
+              "snapshot_sha256": "63241a37eab1f5feaf7752688d866b8cef9a51604d4db28982db74c6f409e6de",
+              "start": 34,
+              "end": 74,
+              "quote": "실험 빌드는 자동 업데이트를 지원하지 않는다. 수동 재설치가 필요하다.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "guide",
+          "runtime_bundle_sha256": "79586f5d62479da8de9445e7f89ccb799c6208c62f78288b1d7cd3211a45736b",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 7,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-002.json",
+      "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a"
+    },
+    {
+      "case_id": "SP-003",
+      "runtime_input_sha256": "593a19e46d77dbfa04b645545f9c4fefce8c62f898f6b5c6fe40615b57608ec1",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+      ],
+      "witnesses": [
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "install",
+              "snapshot_sha256": "86272e1589fa4ecb3a66bab7076c93f242c0fd3e14b596b7eed206101c860ac4",
+              "start": 19,
+              "end": 50,
+              "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "install",
+              "snapshot_sha256": "34328c742ec6a4fadaeba8272a0fc6768f47b544e1d14b243eee9ff6c08c53b6",
+              "start": 19,
+              "end": 61,
+              "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다.\n"
+            }
+          ]
+        },
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "maintenance",
+              "snapshot_sha256": "b37eb24e4e19692ab7087110b7d40e4f40a143468ec2202026fb98125785f056",
+              "start": 0,
+              "end": 23,
+              "quote": "# 유지보수\n\n캐시는 수동으로 삭제한다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "maintenance",
+              "snapshot_sha256": "0a8b4de3ffad209e3a6843f37016438114a034f1fdc955d8232dabc31b60ed48",
+              "start": 0,
+              "end": 55,
+              "quote": "# 유지보수\n\n캐시는 수동으로 삭제한다.\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE",
+        "CROSS_DOCUMENT_DEPENDENCIES_NOT_INFERRED"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "install",
+          "runtime_bundle_sha256": "8f162e29b9cb796089d44157e6da4518d32de35dc1c396af4b199fe21df6bb71",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        },
+        {
+          "document_id": "maintenance",
+          "runtime_bundle_sha256": "5b202c7ddb00102043d671731a99b1b9bdc23901b391f2ad0ce38fa497fe3ab1",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 6,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-003.json",
+      "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34"
+    },
+    {
+      "case_id": "SP-004",
+      "runtime_input_sha256": "67d85e2044bf2096ed6efe40eab2c42993388e946a5ac3aacf0e1a93f85fff1f",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+        "LITERAL_DIFFERENCE_NEEDS_CONTEXT"
+      ],
+      "witnesses": [
+        {
+          "check_id": "QUANTITY_SCOPE",
+          "status": "unresolved",
+          "rule_id": "LITERAL_DIFFERENCE_NEEDS_CONTEXT",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "config",
+              "snapshot_sha256": "945764e78270b6526866882d32fa16f1caa97c2acd9bf8f3ebadff51174e8f36",
+              "start": 0,
+              "end": 63,
+              "quote": "# 요청 설정\n\nAPI 요청 제한 시간은 30초다.\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "config",
+              "snapshot_sha256": "4796e65b63439ad2c56f88b4527a8beed6399c2e0e86e201a06e9ca0fef14ca0",
+              "start": 0,
+              "end": 42,
+              "quote": "# 요청 설정\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+            }
+          ]
+        },
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "config",
+              "snapshot_sha256": "945764e78270b6526866882d32fa16f1caa97c2acd9bf8f3ebadff51174e8f36",
+              "start": 0,
+              "end": 63,
+              "quote": "# 요청 설정\n\nAPI 요청 제한 시간은 30초다.\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "config",
+              "snapshot_sha256": "4796e65b63439ad2c56f88b4527a8beed6399c2e0e86e201a06e9ca0fef14ca0",
+              "start": 0,
+              "end": 42,
+              "quote": "# 요청 설정\n\n재시도 설정과 무관하게 API 요청 제한 시간은 30초다.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "config",
+          "runtime_bundle_sha256": "4ca1d7ea12b54be36fa429eea0cd45bd215bc894913e65cfef0cf127397799d5",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 1,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-004.json",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6"
+    },
+    {
+      "case_id": "SP-005",
+      "runtime_input_sha256": "11acab2ca0e1605ae010230e9e566aa8abc538c608b9203d28f7c1bd08af6bb3",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+      ],
+      "witnesses": [
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "readme",
+              "snapshot_sha256": "46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0",
+              "start": 3319,
+              "end": 3380,
+              "quote": "can still be added later for a more consumer-style download.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "readme",
+              "snapshot_sha256": "a7729c5eec39b26380e1d5629ce56972b1e7d55dc466789e602af6f8e7eb1b50",
+              "start": 3319,
+              "end": 3372,
+              "quote": "is available now for a more consumer-style download.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "readme",
+          "runtime_bundle_sha256": "be6cfc81274ccd96c057b49895070fde178e85a544308e6bf1d07cdba267fa8c",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 506,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-005.json",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec"
+    },
+    {
+      "case_id": "SP-006",
+      "runtime_input_sha256": "f0d779ff86c5e3c8171e306894a97f526e948d6d2654fcc38dc656ef007d2bf8",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+        "LITERAL_DIFFERENCE_NEEDS_CONTEXT"
+      ],
+      "witnesses": [
+        {
+          "check_id": "QUANTITY_SCOPE",
+          "status": "unresolved",
+          "rule_id": "LITERAL_DIFFERENCE_NEEDS_CONTEXT",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "settings",
+              "snapshot_sha256": "a452475c1ed2111dad938e272582dc1a5657139eda385105d621042d96c20d17",
+              "start": 6,
+              "end": 52,
+              "quote": "실험 빌드는 자동 업데이트를 지원하지 않는다. API 요청 제한 시간은 30초다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "settings",
+              "snapshot_sha256": "9ca1c8f8888199c204fe3cf9c6b1d6a9b4f36781a4b407d45915156379ae5680",
+              "start": 6,
+              "end": 49,
+              "quote": "실험 빌드는 자동 업데이트를 지원한다. API 요청 제한 시간은 30분이다.\n"
+            }
+          ]
+        },
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "settings",
+              "snapshot_sha256": "a452475c1ed2111dad938e272582dc1a5657139eda385105d621042d96c20d17",
+              "start": 6,
+              "end": 52,
+              "quote": "실험 빌드는 자동 업데이트를 지원하지 않는다. API 요청 제한 시간은 30초다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "settings",
+              "snapshot_sha256": "9ca1c8f8888199c204fe3cf9c6b1d6a9b4f36781a4b407d45915156379ae5680",
+              "start": 6,
+              "end": 49,
+              "quote": "실험 빌드는 자동 업데이트를 지원한다. API 요청 제한 시간은 30분이다.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "settings",
+          "runtime_bundle_sha256": "3d67da8554b952e765fd1c364b89e74f235eb0733d92cff4b02857d4358c11e1",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 3,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-006.json",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455"
+    },
+    {
+      "case_id": "SP-007",
+      "runtime_input_sha256": "897376ba90d19b68e693974cec2029fb9fd3bf3b87467ebcd0b1ced82a7634b2",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+      ],
+      "witnesses": [
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "offline",
+              "snapshot_sha256": "5a94b2dd1079c5246c36d128d9251fb659c01330228fc375a495daf7bed0432b",
+              "start": 11,
+              "end": 56,
+              "quote": "캐시가 있는 경우에만 검색할 수 있다. 검색 결과는 최근 7일 범위로 한정한다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "offline",
+              "snapshot_sha256": "7eb2d382d6afee2057b6b5d35667a4508020b41f87fc93fb26851a18bc6ef858",
+              "start": 11,
+              "end": 44,
+              "quote": "검색할 수 있다. 검색 결과는 최근 7일 범위로 한정한다.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "offline",
+          "runtime_bundle_sha256": "a7302ffda7b2b5c456a078a30cfcec7284b23f7de65375115d24cd2920394269",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 3,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-007.json",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405"
+    },
+    {
+      "case_id": "SP-008",
+      "runtime_input_sha256": "d19edf3ffcfe986e280ccf32db8942377295555f1a8d4368e2b5f1f36f3551fc",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+      ],
+      "witnesses": [
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "report",
+              "snapshot_sha256": "7a2f8c980c50a19c83d0c4dd69ad78b41722de7f8789371c39ce60f7486189a7",
+              "start": 0,
+              "end": 60,
+              "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "report",
+              "snapshot_sha256": "4415f2ebe0cd3af66f757d1c3540d5de27402c3e7fbbf803dc6cab988b5c657b",
+              "start": 0,
+              "end": 85,
+              "quote": "# 성능 보고\n\n실험 A의 단일 실행에서 평균 응답 시간이 120ms였다. 일반화 검증은 수행하지 않았다.\n\n모든 환경에서 응답 성능이 2배 향상됐다.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "report",
+          "runtime_bundle_sha256": "5ee24450bdb1ae90074c585d2c8bae51d487c63b29a7bb42819d7d6d8593a4b6",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 1,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-008.json",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a"
+    },
+    {
+      "case_id": "SP-009",
+      "runtime_input_sha256": "45aaf17129d2cb7c8f5ccd75267a44f3704273430cf6bd77895eae326156efd4",
+      "comparison_scope": "unsupported",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [],
+      "witnesses": [],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE",
+        "COMPLETE_SOURCE_AND_OUTPUT_SNAPSHOTS_REQUIRED"
+      ],
+      "source_only_pipeline": [],
+      "input_path": "evaluation/semantic_pilot/inputs/SP-009.json",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e"
+    },
+    {
+      "case_id": "SP-010",
+      "runtime_input_sha256": "e6a05a9411c79cfcd285df78cde7c88b4e0754ef8718571a949a49837f142d5f",
+      "comparison_scope": "unsupported",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [],
+      "witnesses": [],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE",
+        "DOCUMENT_ID_SET_DIFFERS_NO_BASELINE_RESOLVER"
+      ],
+      "source_only_pipeline": [],
+      "input_path": "evaluation/semantic_pilot/inputs/SP-010.json",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf"
+    },
+    {
+      "case_id": "SP-011",
+      "runtime_input_sha256": "9d7d41af162dd46cb71e58c4b3bc2952ae201cdf83d580a74b23e14417c1719b",
+      "comparison_scope": "native_literal_diagnostic_only",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [
+        "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW"
+      ],
+      "witnesses": [
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "install",
+              "snapshot_sha256": "9a3e05028d9a7552bc4d41475bd15457afc393c8d2ab1aa599c0559b890548c2",
+              "start": 6,
+              "end": 37,
+              "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+            },
+            {
+              "side": "output",
+              "document_id": "install",
+              "snapshot_sha256": "9783a06d6683aceed273cc323815c6bea069854db53a3aa482d80b01da6ad574",
+              "start": 6,
+              "end": 45,
+              "quote": "오프라인 검색 조건은 [상세 안내](details.md)를 참조한다.\n"
+            }
+          ]
+        },
+        {
+          "check_id": "CLAIM_FACTS",
+          "status": "unresolved",
+          "rule_id": "CHANGED_TEXT_NEEDS_SEMANTIC_REVIEW",
+          "evidence": [
+            {
+              "side": "source",
+              "document_id": "details",
+              "snapshot_sha256": "46c104a39d21e438193148ec4746acea8bf6b90b6394ed1518deb0c4e4ab01c9",
+              "start": 0,
+              "end": 8,
+              "quote": "# 상세 안내\n"
+            },
+            {
+              "side": "output",
+              "document_id": "details",
+              "snapshot_sha256": "c4975d8c7906edad42d26421873fff1258b8129523e95d28b7104303f83c152f",
+              "start": 0,
+              "end": 40,
+              "quote": "# 상세 안내\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE",
+        "CROSS_DOCUMENT_DEPENDENCIES_NOT_INFERRED"
+      ],
+      "source_only_pipeline": [
+        {
+          "document_id": "install",
+          "runtime_bundle_sha256": "10e87b4da514066d5efdca7e685ec3fc5ed4519bae69572a2f60f1218c75f2d4",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        },
+        {
+          "document_id": "details",
+          "runtime_bundle_sha256": "c2df66d495337cc8243efa556f16f1f9572ae9ae18fbc2b4c1dfa847391b3b26",
+          "status": "REVIEW",
+          "delivery_approved": false,
+          "analysis_gate": "REVIEW",
+          "final_gate": "REVIEW",
+          "candidate_equals_source": true
+        }
+      ],
+      "literal_pair_count": 4,
+      "input_path": "evaluation/semantic_pilot/inputs/SP-011.json",
+      "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4"
+    },
+    {
+      "case_id": "SP-012",
+      "runtime_input_sha256": "6dfea2c915956af066c62eb409deedbac87d27a20f532d9ee6c2a35ac77d7e59",
+      "comparison_scope": "unsupported",
+      "sp_prediction": null,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "real_model": "not_run",
+      "witness_rule_ids": [],
+      "witnesses": [],
+      "limitations": [
+        "SP_CONTRACT_NOT_NATIVE_CORE_CONTRACT",
+        "POSITIONAL_DIAGNOSTIC_LEDGER_NOT_PIPELINE_PROVENANCE",
+        "NO_SEMANTIC_EQUIVALENCE_OR_EXTERNAL_TRUTH_OR_APPROVAL_INFERENCE",
+        "COMPLETE_SOURCE_AND_OUTPUT_SNAPSHOTS_REQUIRED"
+      ],
+      "source_only_pipeline": [],
+      "input_path": "evaluation/semantic_pilot/inputs/SP-012.json",
+      "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e"
+    }
+  ]
+}

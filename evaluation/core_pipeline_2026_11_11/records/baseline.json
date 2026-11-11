@@ -1,0 +1,21 @@
+{
+  "baseline_commit": "29dd271c5e367044af765cc0ff9e81db52de7160",
+  "python": "3.12.3",
+  "test_command": "python3 -m unittest discover -s experiments/full_document_control -p test_*.py (original 340, excludes new regression file)",
+  "test_exit_code": 0,
+  "module_sha256": {
+    "pipeline.py": "2398138272e01b6e0c03efdec7b62b8b25ef6ac77fe9593bed0f359ee098c314",
+    "semantic_validator.py": "19df9bfb0f76627afbe412786226df02a2465a05e9da4dcb0a1ea877927ab601",
+    "organization.py": "58faec94a5e7ed848b04e589f96de880aa46589e45c479db0dabc11a1eeb7010",
+    "expression.py": "9817ea764492825d2f4ff480ba1223e6937b517af7ba36bc762fac30589ea567",
+    "reconstruction.py": "25e563f68b6b5273be000af378f7fe0d1e394d4488f23f82c3f0c72b8ac2010f",
+    "final_validator.py": "20e5373eda3eac39fa8fe8fb7f5dae6ca3e05e5d8f761397c5bdc15b63a6bddd",
+    "final_semantic_validator.py": "4fd63cecc3327aac6d00a764a77dc5c96593433d075066850547148ae3129f2d",
+    "final_approval.py": "28b61db74cf79de4cbfcdb8e0edbc6a349dd7aaa08380d14e6b88499be3acef8",
+    "integration.py": "1f6bc4013eeeed42095a5166798c12f09210c6e8411e01bb4e5646aec39f0e08",
+    "repair_loop.py": "ae93d617bb2fbf680efecd8ec1b15490f4db5a34b0b2c9d8acb16e2f68dbfdc6"
+  },
+  "real_model": "not_run",
+  "baseline_pipeline_record": "records/baseline-pipeline.json",
+  "native_before_record": "records/native-before.json"
+}

@@ -1,0 +1,1654 @@
+{
+  "execution_mode": "isolated_candidate",
+  "status": "STOPPED",
+  "source_ref": {
+    "snapshot_id": "snap-fd-001-v1",
+    "document_id": "doc-local-runtime-install",
+    "version": "1",
+    "coverage": "complete",
+    "media_type": "text/markdown",
+    "content": "# 로컬 런타임 설치 안내\n\n로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다.\n\n## 지원 환경 및 패키지\n\n| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |\n\n```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```\n\n---\n\n## 운영 제약 및 주의사항\n\n- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다.\n",
+    "sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+    "source_record": {
+      "type": "repository_markdown_fixture",
+      "path": "experiments/full_document_control/sample_doc.md",
+      "offset_convention": "zero_based_unicode_codepoint_half_open_no_normalization"
+    }
+  },
+  "analysis": {
+    "record_kind": "experimental_full_document_analysis_not_adopted_schema",
+    "version": "full-document-control-prototype-v1",
+    "case_id": "FD-001",
+    "input_sha256": "7396a5c2737cf55acab0a04e6e5fcaf2f0949a8d2359a27f85b432f780f793c9",
+    "contract_id": "contract-fd-001-v1",
+    "contract_version": "1",
+    "contract_sha256": "3952fbc544e3c1239b3724438b0da41c178e8a342af72025a2a2a405b0fc6026",
+    "snapshot_id": "snap-fd-001-v1",
+    "snapshot_version": "1",
+    "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+    "window_count": 1,
+    "processed_window_ids": [
+      "W001"
+    ],
+    "expected_window_ids": [
+      "W001"
+    ],
+    "oversized_block_ids": [],
+    "reconciled_cross_window_relations": [],
+    "cross_window_relation_review": {
+      "status": "not_applicable_single_window",
+      "executed": false,
+      "window_count": 1,
+      "total_units": 7,
+      "reviewed_unit_ids": [
+        "source-B001",
+        "source-B003",
+        "source-B005",
+        "source-B007",
+        "source-B009",
+        "source-B013",
+        "source-B015"
+      ],
+      "omitted_unit_ids": [],
+      "units_truncated_for_budget": false,
+      "reconciled_relation_count": 0,
+      "verification_status": "not_applicable",
+      "reason": "Single extraction window covers document; cross-window relation reconciliation not required"
+    },
+    "budget_policy": {
+      "unit": "unicode_codepoints",
+      "default_max_prompt_chars": 12000,
+      "token_vs_char_policy": "Prompt budget enforces an upper bound on total rendered Unicode codepoints (instructions + writing_contract + outline + context_blocks + target_blocks <= max_prompt_chars). Exact LLM provider token counts depend on model-specific tokenizers and are not computed offline; set max_prompt_chars conservatively to account for multi-token Korean/UTF-8 sequences.",
+      "oversized_block_policy": "hold_as_unresolved_never_send_unbounded",
+      "max_prompt_chars": 12000
+    },
+    "response_sha256s": [
+      "4651ad44908408348e45630a9d65a3d33bd82e7b4c73a026272c94a5d012048e"
+    ],
+    "blocks": [
+      {
+        "block_id": "B001",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "heading",
+        "start": 0,
+        "end": 15,
+        "line_start": 1,
+        "line_end": 1,
+        "text": "# 로컬 런타임 설치 안내\n",
+        "sha256": "4fa7277a4e93c0461a37624fd3fa184300da8ab3d99f0a7ac02569dc77e1eb25",
+        "extractable": true,
+        "exclusion_reason": null,
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B002",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "blank",
+        "start": 15,
+        "end": 16,
+        "line_start": 2,
+        "line_end": 2,
+        "text": "\n",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "extractable": false,
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B003",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "paragraph",
+        "start": 16,
+        "end": 101,
+        "line_start": 3,
+        "line_end": 3,
+        "text": "로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다.\n",
+        "sha256": "db1a18dde6eee38f7051facb02299915f6c7e19e4c2a609f0129ebabed83353b",
+        "extractable": true,
+        "exclusion_reason": null,
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B004",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "blank",
+        "start": 101,
+        "end": 102,
+        "line_start": 4,
+        "line_end": 4,
+        "text": "\n",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "extractable": false,
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B005",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "heading",
+        "start": 102,
+        "end": 117,
+        "line_start": 5,
+        "line_end": 5,
+        "text": "## 지원 환경 및 패키지\n",
+        "sha256": "bfb1a64dc103af977236ededd3924cb23c8d34637372fb9aac9d414f743e6f04",
+        "extractable": true,
+        "exclusion_reason": null,
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B006",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "blank",
+        "start": 117,
+        "end": 118,
+        "line_start": 6,
+        "line_end": 6,
+        "text": "\n",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "extractable": false,
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B007",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "table",
+        "start": 118,
+        "end": 257,
+        "line_start": 7,
+        "line_end": 10,
+        "text": "| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |\n",
+        "sha256": "17e1617ea7afadf4b1f30dd103556863e7ed8d1c7c49aeba5dbc9c9f8ec0b19b",
+        "extractable": true,
+        "exclusion_reason": null,
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B008",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "blank",
+        "start": 257,
+        "end": 258,
+        "line_start": 11,
+        "line_end": 11,
+        "text": "\n",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "extractable": false,
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B009",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "code_block",
+        "start": 258,
+        "end": 329,
+        "line_start": 12,
+        "line_end": 15,
+        "text": "```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```\n",
+        "sha256": "a78641899b4e246c9334fc0242b4ddc939bf32b6b5d26422c667a3f552866fc2",
+        "extractable": true,
+        "exclusion_reason": null,
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B010",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "blank",
+        "start": 329,
+        "end": 330,
+        "line_start": 16,
+        "line_end": 16,
+        "text": "\n",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "extractable": false,
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B011",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "thematic_break",
+        "start": 330,
+        "end": 334,
+        "line_start": 17,
+        "line_end": 17,
+        "text": "---\n",
+        "sha256": "f52d711103d50a437830c6fbcd04fb4bab49a0f82f6d26d1c791c6e8488dd090",
+        "extractable": false,
+        "exclusion_reason": "structural_separator_thematic_break",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B012",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "blank",
+        "start": 334,
+        "end": 335,
+        "line_start": 18,
+        "line_end": 18,
+        "text": "\n",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "extractable": false,
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B013",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "heading",
+        "start": 335,
+        "end": 351,
+        "line_start": 19,
+        "line_end": 19,
+        "text": "## 운영 제약 및 주의사항\n",
+        "sha256": "5be8b0d821ac0175c55d65a6bdb751fc7e7b71a77b7cada5f1a2da4bdeefd429",
+        "extractable": true,
+        "exclusion_reason": null,
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B014",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "blank",
+        "start": 351,
+        "end": 352,
+        "line_start": 20,
+        "line_end": 20,
+        "text": "\n",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "extractable": false,
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null
+      },
+      {
+        "block_id": "B015",
+        "snapshot_id": "snap-fd-001-v1",
+        "kind": "list",
+        "start": 352,
+        "end": 476,
+        "line_start": 21,
+        "line_end": 22,
+        "text": "- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다.\n",
+        "sha256": "51703ad5089d62d21ac37c44e540aead2620447fae4d73ff29b3fe1bdb544817",
+        "extractable": true,
+        "exclusion_reason": null,
+        "unsupported_reason": null
+      }
+    ],
+    "units": [
+      {
+        "id": "source-B001",
+        "window_id": "W001",
+        "origin": "source",
+        "origin_block_ids": [
+          "B001"
+        ],
+        "cross_block_unit": false,
+        "statement": "# 로컬 런타임 설치 안내",
+        "quotes": [
+          {
+            "block_id": "B001",
+            "quote": "# 로컬 런타임 설치 안내",
+            "occurrence": 0
+          }
+        ],
+        "source_spans": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "block_id": "B001",
+            "block_kind": "heading",
+            "block_sha256": "4fa7277a4e93c0461a37624fd3fa184300da8ab3d99f0a7ac02569dc77e1eb25",
+            "block_relative_start": 0,
+            "block_relative_end": 14,
+            "start": 0,
+            "end": 14,
+            "quote": "# 로컬 런타임 설치 안내"
+          }
+        ],
+        "elements": [
+          {
+            "id": "literal-B001",
+            "kind": "claim",
+            "value": "# 로컬 런타임 설치 안내",
+            "quotes": [
+              {
+                "block_id": "B001",
+                "quote": "# 로컬 런타임 설치 안내",
+                "occurrence": 0
+              }
+            ],
+            "source_spans": [
+              {
+                "snapshot_id": "snap-fd-001-v1",
+                "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+                "block_id": "B001",
+                "block_kind": "heading",
+                "block_sha256": "4fa7277a4e93c0461a37624fd3fa184300da8ab3d99f0a7ac02569dc77e1eb25",
+                "block_relative_start": 0,
+                "block_relative_end": 14,
+                "start": 0,
+                "end": 14,
+                "quote": "# 로컬 런타임 설치 안내"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "assessment": {
+          "scope_id": "install_guide",
+          "relevance": "uncertain",
+          "importance": "uncertain",
+          "preservation": "retain_current",
+          "exposure": "Source text retained in full",
+          "reason": "Literal source-block inventory only",
+          "uncertainty": "Semantic purpose, relationships and completeness need independent review"
+        },
+        "evidence_kind": "source_assertion_not_runtime_verification",
+        "review_required": true
+      },
+      {
+        "id": "source-B003",
+        "window_id": "W001",
+        "origin": "source",
+        "origin_block_ids": [
+          "B003"
+        ],
+        "cross_block_unit": false,
+        "statement": "로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다.",
+        "quotes": [
+          {
+            "block_id": "B003",
+            "quote": "로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다.",
+            "occurrence": 0
+          }
+        ],
+        "source_spans": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "block_id": "B003",
+            "block_kind": "paragraph",
+            "block_sha256": "db1a18dde6eee38f7051facb02299915f6c7e19e4c2a609f0129ebabed83353b",
+            "block_relative_start": 0,
+            "block_relative_end": 84,
+            "start": 16,
+            "end": 100,
+            "quote": "로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다."
+          }
+        ],
+        "elements": [
+          {
+            "id": "literal-B003",
+            "kind": "claim",
+            "value": "로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다.",
+            "quotes": [
+              {
+                "block_id": "B003",
+                "quote": "로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다.",
+                "occurrence": 0
+              }
+            ],
+            "source_spans": [
+              {
+                "snapshot_id": "snap-fd-001-v1",
+                "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+                "block_id": "B003",
+                "block_kind": "paragraph",
+                "block_sha256": "db1a18dde6eee38f7051facb02299915f6c7e19e4c2a609f0129ebabed83353b",
+                "block_relative_start": 0,
+                "block_relative_end": 84,
+                "start": 16,
+                "end": 100,
+                "quote": "로컬 에이전트 런타임 v0.4.0은 외부 클라우드 업로드 없이 작업 폴더 안에서 파일 검색과 테스트 실행을 수행한다. 기본 요청 제한 시간은 30초다."
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "assessment": {
+          "scope_id": "install_guide",
+          "relevance": "uncertain",
+          "importance": "uncertain",
+          "preservation": "retain_current",
+          "exposure": "Source text retained in full",
+          "reason": "Literal source-block inventory only",
+          "uncertainty": "Semantic purpose, relationships and completeness need independent review"
+        },
+        "evidence_kind": "source_assertion_not_runtime_verification",
+        "review_required": true
+      },
+      {
+        "id": "source-B005",
+        "window_id": "W001",
+        "origin": "source",
+        "origin_block_ids": [
+          "B005"
+        ],
+        "cross_block_unit": false,
+        "statement": "## 지원 환경 및 패키지",
+        "quotes": [
+          {
+            "block_id": "B005",
+            "quote": "## 지원 환경 및 패키지",
+            "occurrence": 0
+          }
+        ],
+        "source_spans": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "block_id": "B005",
+            "block_kind": "heading",
+            "block_sha256": "bfb1a64dc103af977236ededd3924cb23c8d34637372fb9aac9d414f743e6f04",
+            "block_relative_start": 0,
+            "block_relative_end": 14,
+            "start": 102,
+            "end": 116,
+            "quote": "## 지원 환경 및 패키지"
+          }
+        ],
+        "elements": [
+          {
+            "id": "literal-B005",
+            "kind": "claim",
+            "value": "## 지원 환경 및 패키지",
+            "quotes": [
+              {
+                "block_id": "B005",
+                "quote": "## 지원 환경 및 패키지",
+                "occurrence": 0
+              }
+            ],
+            "source_spans": [
+              {
+                "snapshot_id": "snap-fd-001-v1",
+                "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+                "block_id": "B005",
+                "block_kind": "heading",
+                "block_sha256": "bfb1a64dc103af977236ededd3924cb23c8d34637372fb9aac9d414f743e6f04",
+                "block_relative_start": 0,
+                "block_relative_end": 14,
+                "start": 102,
+                "end": 116,
+                "quote": "## 지원 환경 및 패키지"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "assessment": {
+          "scope_id": "install_guide",
+          "relevance": "uncertain",
+          "importance": "uncertain",
+          "preservation": "retain_current",
+          "exposure": "Source text retained in full",
+          "reason": "Literal source-block inventory only",
+          "uncertainty": "Semantic purpose, relationships and completeness need independent review"
+        },
+        "evidence_kind": "source_assertion_not_runtime_verification",
+        "review_required": true
+      },
+      {
+        "id": "source-B007",
+        "window_id": "W001",
+        "origin": "source",
+        "origin_block_ids": [
+          "B007"
+        ],
+        "cross_block_unit": false,
+        "statement": "| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |",
+        "quotes": [
+          {
+            "block_id": "B007",
+            "quote": "| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |",
+            "occurrence": 0
+          }
+        ],
+        "source_spans": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "block_id": "B007",
+            "block_kind": "table",
+            "block_sha256": "17e1617ea7afadf4b1f30dd103556863e7ed8d1c7c49aeba5dbc9c9f8ec0b19b",
+            "block_relative_start": 0,
+            "block_relative_end": 138,
+            "start": 118,
+            "end": 256,
+            "quote": "| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |"
+          }
+        ],
+        "elements": [
+          {
+            "id": "literal-B007",
+            "kind": "claim",
+            "value": "| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |",
+            "quotes": [
+              {
+                "block_id": "B007",
+                "quote": "| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |",
+                "occurrence": 0
+              }
+            ],
+            "source_spans": [
+              {
+                "snapshot_id": "snap-fd-001-v1",
+                "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+                "block_id": "B007",
+                "block_kind": "table",
+                "block_sha256": "17e1617ea7afadf4b1f30dd103556863e7ed8d1c7c49aeba5dbc9c9f8ec0b19b",
+                "block_relative_start": 0,
+                "block_relative_end": 138,
+                "start": 118,
+                "end": 256,
+                "quote": "| 플랫폼 | 최소 버전 | 설치 패키지 |\n| --- | --- | --- |\n| Ubuntu | 22.04 LTS | `runtime-linux-x64.tar.gz` |\n| macOS | 14.0 | `runtime-macos-14.pkg` |"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "assessment": {
+          "scope_id": "install_guide",
+          "relevance": "uncertain",
+          "importance": "uncertain",
+          "preservation": "retain_current",
+          "exposure": "Source text retained in full",
+          "reason": "Literal source-block inventory only",
+          "uncertainty": "Semantic purpose, relationships and completeness need independent review"
+        },
+        "evidence_kind": "source_assertion_not_runtime_verification",
+        "review_required": true
+      },
+      {
+        "id": "source-B009",
+        "window_id": "W001",
+        "origin": "source",
+        "origin_block_ids": [
+          "B009"
+        ],
+        "cross_block_unit": false,
+        "statement": "```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```",
+        "quotes": [
+          {
+            "block_id": "B009",
+            "quote": "```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```",
+            "occurrence": 0
+          }
+        ],
+        "source_spans": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "block_id": "B009",
+            "block_kind": "code_block",
+            "block_sha256": "a78641899b4e246c9334fc0242b4ddc939bf32b6b5d26422c667a3f552866fc2",
+            "block_relative_start": 0,
+            "block_relative_end": 70,
+            "start": 258,
+            "end": 328,
+            "quote": "```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```"
+          }
+        ],
+        "elements": [
+          {
+            "id": "literal-B009",
+            "kind": "claim",
+            "value": "```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```",
+            "quotes": [
+              {
+                "block_id": "B009",
+                "quote": "```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```",
+                "occurrence": 0
+              }
+            ],
+            "source_spans": [
+              {
+                "snapshot_id": "snap-fd-001-v1",
+                "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+                "block_id": "B009",
+                "block_kind": "code_block",
+                "block_sha256": "a78641899b4e246c9334fc0242b4ddc939bf32b6b5d26422c667a3f552866fc2",
+                "block_relative_start": 0,
+                "block_relative_end": 70,
+                "start": 258,
+                "end": 328,
+                "quote": "```bash\ntar -xzf runtime-linux-x64.tar.gz\n./install.sh --port 8765\n```"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "assessment": {
+          "scope_id": "install_guide",
+          "relevance": "uncertain",
+          "importance": "uncertain",
+          "preservation": "retain_current",
+          "exposure": "Source text retained in full",
+          "reason": "Literal source-block inventory only",
+          "uncertainty": "Semantic purpose, relationships and completeness need independent review"
+        },
+        "evidence_kind": "source_assertion_not_runtime_verification",
+        "review_required": true
+      },
+      {
+        "id": "source-B013",
+        "window_id": "W001",
+        "origin": "source",
+        "origin_block_ids": [
+          "B013"
+        ],
+        "cross_block_unit": false,
+        "statement": "## 운영 제약 및 주의사항",
+        "quotes": [
+          {
+            "block_id": "B013",
+            "quote": "## 운영 제약 및 주의사항",
+            "occurrence": 0
+          }
+        ],
+        "source_spans": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "block_id": "B013",
+            "block_kind": "heading",
+            "block_sha256": "5be8b0d821ac0175c55d65a6bdb751fc7e7b71a77b7cada5f1a2da4bdeefd429",
+            "block_relative_start": 0,
+            "block_relative_end": 15,
+            "start": 335,
+            "end": 350,
+            "quote": "## 운영 제약 및 주의사항"
+          }
+        ],
+        "elements": [
+          {
+            "id": "literal-B013",
+            "kind": "claim",
+            "value": "## 운영 제약 및 주의사항",
+            "quotes": [
+              {
+                "block_id": "B013",
+                "quote": "## 운영 제약 및 주의사항",
+                "occurrence": 0
+              }
+            ],
+            "source_spans": [
+              {
+                "snapshot_id": "snap-fd-001-v1",
+                "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+                "block_id": "B013",
+                "block_kind": "heading",
+                "block_sha256": "5be8b0d821ac0175c55d65a6bdb751fc7e7b71a77b7cada5f1a2da4bdeefd429",
+                "block_relative_start": 0,
+                "block_relative_end": 15,
+                "start": 335,
+                "end": 350,
+                "quote": "## 운영 제약 및 주의사항"
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "assessment": {
+          "scope_id": "install_guide",
+          "relevance": "uncertain",
+          "importance": "uncertain",
+          "preservation": "retain_current",
+          "exposure": "Source text retained in full",
+          "reason": "Literal source-block inventory only",
+          "uncertainty": "Semantic purpose, relationships and completeness need independent review"
+        },
+        "evidence_kind": "source_assertion_not_runtime_verification",
+        "review_required": true
+      },
+      {
+        "id": "source-B015",
+        "window_id": "W001",
+        "origin": "source",
+        "origin_block_ids": [
+          "B015"
+        ],
+        "cross_block_unit": false,
+        "statement": "- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다.",
+        "quotes": [
+          {
+            "block_id": "B015",
+            "quote": "- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다.",
+            "occurrence": 0
+          }
+        ],
+        "source_spans": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "block_id": "B015",
+            "block_kind": "list",
+            "block_sha256": "51703ad5089d62d21ac37c44e540aead2620447fae4d73ff29b3fe1bdb544817",
+            "block_relative_start": 0,
+            "block_relative_end": 123,
+            "start": 352,
+            "end": 475,
+            "quote": "- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다."
+          }
+        ],
+        "elements": [
+          {
+            "id": "literal-B015",
+            "kind": "claim",
+            "value": "- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다.",
+            "quotes": [
+              {
+                "block_id": "B015",
+                "quote": "- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다.",
+                "occurrence": 0
+              }
+            ],
+            "source_spans": [
+              {
+                "snapshot_id": "snap-fd-001-v1",
+                "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+                "block_id": "B015",
+                "block_kind": "list",
+                "block_sha256": "51703ad5089d62d21ac37c44e540aead2620447fae4d73ff29b3fe1bdb544817",
+                "block_relative_start": 0,
+                "block_relative_end": 123,
+                "start": 352,
+                "end": 475,
+                "quote": "- 오프라인 모드는 사전 다운로드된 모델 캐시(`~/.cache/local-runtime`)가 존재할 때만 동작한다.\n- macOS 패키지는 초기 실험 빌드이므로 자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다."
+              }
+            ]
+          }
+        ],
+        "relations": [],
+        "assessment": {
+          "scope_id": "install_guide",
+          "relevance": "uncertain",
+          "importance": "uncertain",
+          "preservation": "retain_current",
+          "exposure": "Source text retained in full",
+          "reason": "Literal source-block inventory only",
+          "uncertainty": "Semantic purpose, relationships and completeness need independent review"
+        },
+        "evidence_kind": "source_assertion_not_runtime_verification",
+        "review_required": true
+      }
+    ],
+    "requirement_bindings": [
+      {
+        "requirement_id": "req-version",
+        "scope_id": "install_guide",
+        "expected_literal": "v0.4.0",
+        "kind": "identifier",
+        "requires_condition_link": false,
+        "unit_ids": [],
+        "element_refs": [],
+        "condition_linked": true,
+        "condition_link_status": "satisfied",
+        "verified_condition_links": [],
+        "link_verification": "not_required",
+        "omitted": false,
+        "satisfied": false,
+        "unmet_reason": "Required literal 'v0.4.0' (identifier) not traced in extracted elements"
+      },
+      {
+        "requirement_id": "req-timeout",
+        "scope_id": "install_guide",
+        "expected_literal": "30초",
+        "kind": "quantity",
+        "requires_condition_link": false,
+        "unit_ids": [],
+        "element_refs": [],
+        "condition_linked": true,
+        "condition_link_status": "satisfied",
+        "verified_condition_links": [],
+        "link_verification": "not_required",
+        "omitted": false,
+        "satisfied": false,
+        "unmet_reason": "Required literal '30초' (quantity) not traced in extracted elements"
+      },
+      {
+        "requirement_id": "req-linux-package",
+        "scope_id": "install_guide",
+        "expected_literal": "runtime-linux-x64.tar.gz",
+        "kind": "identifier",
+        "requires_condition_link": false,
+        "unit_ids": [],
+        "element_refs": [],
+        "condition_linked": true,
+        "condition_link_status": "satisfied",
+        "verified_condition_links": [],
+        "link_verification": "not_required",
+        "omitted": false,
+        "satisfied": false,
+        "unmet_reason": "Required literal 'runtime-linux-x64.tar.gz' (identifier) not traced in extracted elements"
+      },
+      {
+        "requirement_id": "req-install-port",
+        "scope_id": "install_guide",
+        "expected_literal": "./install.sh --port 8765",
+        "kind": "claim",
+        "requires_condition_link": false,
+        "unit_ids": [
+          "source-B009"
+        ],
+        "element_refs": [
+          {
+            "unit_id": "source-B009",
+            "element_id": "literal-B009"
+          }
+        ],
+        "condition_linked": true,
+        "condition_link_status": "satisfied",
+        "verified_condition_links": [],
+        "link_verification": "not_required",
+        "omitted": false,
+        "satisfied": true,
+        "unmet_reason": null
+      },
+      {
+        "requirement_id": "req-offline-cache-condition",
+        "scope_id": "install_guide",
+        "expected_literal": "~/.cache/local-runtime",
+        "kind": "condition",
+        "requires_condition_link": true,
+        "unit_ids": [],
+        "element_refs": [],
+        "condition_linked": false,
+        "condition_link_status": "violated",
+        "verified_condition_links": [],
+        "link_verification": "failed",
+        "omitted": false,
+        "satisfied": false,
+        "unmet_reason": "Required literal '~/.cache/local-runtime' (condition) not traced in extracted elements"
+      },
+      {
+        "requirement_id": "req-macos-manual-update",
+        "scope_id": "install_guide",
+        "expected_literal": "자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다",
+        "kind": "condition",
+        "requires_condition_link": true,
+        "unit_ids": [],
+        "element_refs": [],
+        "condition_linked": false,
+        "condition_link_status": "violated",
+        "verified_condition_links": [],
+        "link_verification": "failed",
+        "omitted": false,
+        "satisfied": false,
+        "unmet_reason": "Required literal '자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다' (condition) not traced in extracted elements"
+      }
+    ],
+    "coverage_ledger": [
+      {
+        "block_id": "B001",
+        "kind": "heading",
+        "start": 0,
+        "end": 15,
+        "extractable": true,
+        "status": "extracted",
+        "reported_unit_ids": [
+          "source-B001"
+        ],
+        "unit_ids": [
+          "source-B001"
+        ],
+        "exclusion_reason": null,
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "uncovered_text": "\n",
+        "uncovered_nonwhitespace": false,
+        "coverage_note": "lexical_only_not_semantic_completeness"
+      },
+      {
+        "block_id": "B002",
+        "kind": "blank",
+        "start": 15,
+        "end": 16,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B003",
+        "kind": "paragraph",
+        "start": 16,
+        "end": 101,
+        "extractable": true,
+        "status": "extracted",
+        "reported_unit_ids": [
+          "source-B003"
+        ],
+        "unit_ids": [
+          "source-B003"
+        ],
+        "exclusion_reason": null,
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "uncovered_text": "\n",
+        "uncovered_nonwhitespace": false,
+        "coverage_note": "lexical_only_not_semantic_completeness"
+      },
+      {
+        "block_id": "B004",
+        "kind": "blank",
+        "start": 101,
+        "end": 102,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B005",
+        "kind": "heading",
+        "start": 102,
+        "end": 117,
+        "extractable": true,
+        "status": "extracted",
+        "reported_unit_ids": [
+          "source-B005"
+        ],
+        "unit_ids": [
+          "source-B005"
+        ],
+        "exclusion_reason": null,
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "uncovered_text": "\n",
+        "uncovered_nonwhitespace": false,
+        "coverage_note": "lexical_only_not_semantic_completeness"
+      },
+      {
+        "block_id": "B006",
+        "kind": "blank",
+        "start": 117,
+        "end": 118,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B007",
+        "kind": "table",
+        "start": 118,
+        "end": 257,
+        "extractable": true,
+        "status": "extracted",
+        "reported_unit_ids": [
+          "source-B007"
+        ],
+        "unit_ids": [
+          "source-B007"
+        ],
+        "exclusion_reason": null,
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "uncovered_text": "\n",
+        "uncovered_nonwhitespace": false,
+        "coverage_note": "lexical_only_not_semantic_completeness"
+      },
+      {
+        "block_id": "B008",
+        "kind": "blank",
+        "start": 257,
+        "end": 258,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B009",
+        "kind": "code_block",
+        "start": 258,
+        "end": 329,
+        "extractable": true,
+        "status": "extracted",
+        "reported_unit_ids": [
+          "source-B009"
+        ],
+        "unit_ids": [
+          "source-B009"
+        ],
+        "exclusion_reason": null,
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "uncovered_text": "\n",
+        "uncovered_nonwhitespace": false,
+        "coverage_note": "lexical_only_not_semantic_completeness"
+      },
+      {
+        "block_id": "B010",
+        "kind": "blank",
+        "start": 329,
+        "end": 330,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B011",
+        "kind": "thematic_break",
+        "start": 330,
+        "end": 334,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "structural_separator_thematic_break",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B012",
+        "kind": "blank",
+        "start": 334,
+        "end": 335,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B013",
+        "kind": "heading",
+        "start": 335,
+        "end": 351,
+        "extractable": true,
+        "status": "extracted",
+        "reported_unit_ids": [
+          "source-B013"
+        ],
+        "unit_ids": [
+          "source-B013"
+        ],
+        "exclusion_reason": null,
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "uncovered_text": "\n",
+        "uncovered_nonwhitespace": false,
+        "coverage_note": "lexical_only_not_semantic_completeness"
+      },
+      {
+        "block_id": "B014",
+        "kind": "blank",
+        "start": 351,
+        "end": 352,
+        "extractable": false,
+        "status": "excluded",
+        "exclusion_reason": "whitespace_only_separator",
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "unit_ids": [],
+        "coverage_note": "non_extractable_structural_separator"
+      },
+      {
+        "block_id": "B015",
+        "kind": "list",
+        "start": 352,
+        "end": 476,
+        "extractable": true,
+        "status": "extracted",
+        "reported_unit_ids": [
+          "source-B015"
+        ],
+        "unit_ids": [
+          "source-B015"
+        ],
+        "exclusion_reason": null,
+        "unsupported_reason": null,
+        "unresolved_reason": null,
+        "uncovered_text": "\n",
+        "uncovered_nonwhitespace": false,
+        "coverage_note": "lexical_only_not_semantic_completeness"
+      }
+    ],
+    "alignment": {
+      "status": "needs_review",
+      "reason": "[W001] Purpose alignment has not been semantically evaluated"
+    },
+    "unresolved_questions": [
+      "Literal inventory is not semantic extraction or approval"
+    ],
+    "semantic_fidelity": "not_run",
+    "delivery_approved": false,
+    "analysis_sha256": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7"
+  },
+  "analysis_report": {
+    "record_kind": "experimental_validation_gate_report_not_adopted_schema",
+    "version": "full-document-control-prototype-v1",
+    "plan": {
+      "version": "full-doc-validation-plan-v1",
+      "boundary": "analysis_to_organization",
+      "contract_id": "contract-fd-001-v1",
+      "contract_sha256": "3952fbc544e3c1239b3724438b0da41c178e8a342af72025a2a2a405b0fc6026",
+      "scope_id": "install_guide",
+      "required_checks": [
+        {
+          "check_id": "SNAPSHOT_AND_CONTRACT",
+          "check_version": "1",
+          "kind": "deterministic",
+          "boundary": "analysis_to_organization",
+          "scope_id": "install_guide"
+        },
+        {
+          "check_id": "BLOCK_COVERAGE",
+          "check_version": "1",
+          "kind": "deterministic",
+          "boundary": "analysis_to_organization",
+          "scope_id": "install_guide"
+        },
+        {
+          "check_id": "UNIT_AND_SPAN_INTEGRITY",
+          "check_version": "1",
+          "kind": "deterministic",
+          "boundary": "analysis_to_organization",
+          "scope_id": "install_guide"
+        },
+        {
+          "check_id": "PROTECTED_TRACEABILITY",
+          "check_version": "1",
+          "kind": "deterministic",
+          "boundary": "analysis_to_organization",
+          "scope_id": "install_guide"
+        },
+        {
+          "check_id": "SEMANTIC_FIDELITY",
+          "check_version": "1",
+          "kind": "semantic",
+          "boundary": "analysis_to_organization",
+          "scope_id": "install_guide"
+        }
+      ],
+      "plan_sha256": "0bb0868ac0d17b8da26bf5d26fb31db8fdce92549973cc2fd2b524bdfd093bac"
+    },
+    "checked_artifacts": {
+      "input_sha256": "7396a5c2737cf55acab0a04e6e5fcaf2f0949a8d2359a27f85b432f780f793c9",
+      "contract_id": "contract-fd-001-v1",
+      "contract_version": "1",
+      "contract_sha256": "3952fbc544e3c1239b3724438b0da41c178e8a342af72025a2a2a405b0fc6026",
+      "snapshot_id": "snap-fd-001-v1",
+      "snapshot_version": "1",
+      "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+      "analysis_sha256": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7"
+    },
+    "check_results": [
+      {
+        "check_id": "SNAPSHOT_AND_CONTRACT",
+        "check_version": "1",
+        "kind": "deterministic",
+        "status": "passed",
+        "reason": "SNAPSHOT_AND_CONTRACT deterministic verification passed",
+        "evidence": [
+          {
+            "snapshot_id": "snap-fd-001-v1",
+            "snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+            "contract_id": "contract-fd-001-v1",
+            "contract_sha256": "3952fbc544e3c1239b3724438b0da41c178e8a342af72025a2a2a405b0fc6026"
+          }
+        ],
+        "checked_snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+        "checked_analysis_sha256": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7"
+      },
+      {
+        "check_id": "BLOCK_COVERAGE",
+        "check_version": "1",
+        "kind": "deterministic",
+        "status": "passed",
+        "reason": "All document blocks covered without gaps, overlaps, omissions, or duplicates",
+        "evidence": [
+          {
+            "block_id": "B001",
+            "kind": "heading",
+            "start": 0,
+            "end": 15,
+            "status": "extracted"
+          },
+          {
+            "block_id": "B002",
+            "kind": "blank",
+            "start": 15,
+            "end": 16,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B003",
+            "kind": "paragraph",
+            "start": 16,
+            "end": 101,
+            "status": "extracted"
+          },
+          {
+            "block_id": "B004",
+            "kind": "blank",
+            "start": 101,
+            "end": 102,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B005",
+            "kind": "heading",
+            "start": 102,
+            "end": 117,
+            "status": "extracted"
+          },
+          {
+            "block_id": "B006",
+            "kind": "blank",
+            "start": 117,
+            "end": 118,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B007",
+            "kind": "table",
+            "start": 118,
+            "end": 257,
+            "status": "extracted"
+          },
+          {
+            "block_id": "B008",
+            "kind": "blank",
+            "start": 257,
+            "end": 258,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B009",
+            "kind": "code_block",
+            "start": 258,
+            "end": 329,
+            "status": "extracted"
+          },
+          {
+            "block_id": "B010",
+            "kind": "blank",
+            "start": 329,
+            "end": 330,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B011",
+            "kind": "thematic_break",
+            "start": 330,
+            "end": 334,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B012",
+            "kind": "blank",
+            "start": 334,
+            "end": 335,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B013",
+            "kind": "heading",
+            "start": 335,
+            "end": 351,
+            "status": "extracted"
+          },
+          {
+            "block_id": "B014",
+            "kind": "blank",
+            "start": 351,
+            "end": 352,
+            "status": "excluded"
+          },
+          {
+            "block_id": "B015",
+            "kind": "list",
+            "start": 352,
+            "end": 476,
+            "status": "extracted"
+          }
+        ],
+        "checked_snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+        "checked_analysis_sha256": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7"
+      },
+      {
+        "check_id": "UNIT_AND_SPAN_INTEGRITY",
+        "check_version": "1",
+        "kind": "deterministic",
+        "status": "passed",
+        "reason": "UNIT_AND_SPAN_INTEGRITY deterministic verification passed",
+        "evidence": [
+          {
+            "unit_id": "source-B001",
+            "origin_block_ids": [
+              "B001"
+            ]
+          },
+          {
+            "unit_id": "source-B003",
+            "origin_block_ids": [
+              "B003"
+            ]
+          },
+          {
+            "unit_id": "source-B005",
+            "origin_block_ids": [
+              "B005"
+            ]
+          },
+          {
+            "unit_id": "source-B007",
+            "origin_block_ids": [
+              "B007"
+            ]
+          },
+          {
+            "unit_id": "source-B009",
+            "origin_block_ids": [
+              "B009"
+            ]
+          },
+          {
+            "unit_id": "source-B013",
+            "origin_block_ids": [
+              "B013"
+            ]
+          },
+          {
+            "unit_id": "source-B015",
+            "origin_block_ids": [
+              "B015"
+            ]
+          }
+        ],
+        "checked_snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+        "checked_analysis_sha256": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7"
+      },
+      {
+        "check_id": "PROTECTED_TRACEABILITY",
+        "check_version": "1",
+        "kind": "deterministic",
+        "status": "violated",
+        "reason": "PROTECTED_TRACEABILITY_VIOLATION: Protected information traceability failed: req-version: missing literal 'v0.4.0' (identifier); req-timeout: missing literal '30초' (quantity); req-linux-package: missing literal 'runtime-linux-x64.tar.gz' (identifier); req-offline-cache-condition: missing literal '~/.cache/local-runtime' (condition); req-macos-manual-update: missing literal '자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다' (condition)",
+        "evidence": [
+          {
+            "requirement_id": "req-version",
+            "expected_literal": "v0.4.0",
+            "kind": "identifier",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-timeout",
+            "expected_literal": "30초",
+            "kind": "quantity",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-linux-package",
+            "expected_literal": "runtime-linux-x64.tar.gz",
+            "kind": "identifier",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-install-port",
+            "expected_literal": "./install.sh --port 8765",
+            "kind": "claim",
+            "matched_units": [
+              "source-B009"
+            ],
+            "matched_elements": [
+              {
+                "unit_id": "source-B009",
+                "element_id": "literal-B009"
+              }
+            ],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-offline-cache-condition",
+            "expected_literal": "~/.cache/local-runtime",
+            "kind": "condition",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": false,
+            "condition_link_status": "violated",
+            "verified_condition_links": [],
+            "link_verification": "failed",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-macos-manual-update",
+            "expected_literal": "자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다",
+            "kind": "condition",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": false,
+            "condition_link_status": "violated",
+            "verified_condition_links": [],
+            "link_verification": "failed",
+            "omitted": false
+          }
+        ],
+        "checked_snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+        "checked_analysis_sha256": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7"
+      },
+      {
+        "check_id": "SEMANTIC_FIDELITY",
+        "check_version": "1",
+        "kind": "semantic",
+        "status": "unresolved",
+        "reason": "Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required",
+        "evidence": [
+          {
+            "unresolved_questions": [
+              "Literal inventory is not semantic extraction or approval"
+            ],
+            "alignment_status": "needs_review",
+            "cross_window_relation_review": {
+              "status": "not_applicable_single_window",
+              "executed": false,
+              "window_count": 1,
+              "total_units": 7,
+              "reviewed_unit_ids": [
+                "source-B001",
+                "source-B003",
+                "source-B005",
+                "source-B007",
+                "source-B009",
+                "source-B013",
+                "source-B015"
+              ],
+              "omitted_unit_ids": [],
+              "units_truncated_for_budget": false,
+              "reconciled_relation_count": 0,
+              "verification_status": "not_applicable",
+              "reason": "Single extraction window covers document; cross-window relation reconciliation not required"
+            }
+          }
+        ],
+        "checked_snapshot_sha256": "9bd99e83dfb7f100e4ca90cf1ac03eaeb3ca8572e8c8774c5883164b4240d7fd",
+        "checked_analysis_sha256": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7"
+      }
+    ],
+    "findings": [
+      {
+        "rule_id": "PROTECTED_TRACEABILITY_VIOLATION",
+        "severity": "ERROR",
+        "message": "Protected information traceability failed: req-version: missing literal 'v0.4.0' (identifier); req-timeout: missing literal '30초' (quantity); req-linux-package: missing literal 'runtime-linux-x64.tar.gz' (identifier); req-offline-cache-condition: missing literal '~/.cache/local-runtime' (condition); req-macos-manual-update: missing literal '자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다' (condition)",
+        "responsible_component": "information_extraction_analysis",
+        "origin_ref": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7",
+        "repair_recommendation": "Return to information_extraction_analysis to repair PROTECTED_TRACEABILITY_VIOLATION",
+        "requires_human_review": false,
+        "blocking": true,
+        "evidence": [
+          {
+            "requirement_id": "req-version",
+            "expected_literal": "v0.4.0",
+            "kind": "identifier",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-timeout",
+            "expected_literal": "30초",
+            "kind": "quantity",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-linux-package",
+            "expected_literal": "runtime-linux-x64.tar.gz",
+            "kind": "identifier",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-install-port",
+            "expected_literal": "./install.sh --port 8765",
+            "kind": "claim",
+            "matched_units": [
+              "source-B009"
+            ],
+            "matched_elements": [
+              {
+                "unit_id": "source-B009",
+                "element_id": "literal-B009"
+              }
+            ],
+            "condition_linked": true,
+            "condition_link_status": "satisfied",
+            "verified_condition_links": [],
+            "link_verification": "not_required",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-offline-cache-condition",
+            "expected_literal": "~/.cache/local-runtime",
+            "kind": "condition",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": false,
+            "condition_link_status": "violated",
+            "verified_condition_links": [],
+            "link_verification": "failed",
+            "omitted": false
+          },
+          {
+            "requirement_id": "req-macos-manual-update",
+            "expected_literal": "자동 업데이트를 지원하지 않으며 수동으로 재설치해야 한다",
+            "kind": "condition",
+            "matched_units": [],
+            "matched_elements": [],
+            "condition_linked": false,
+            "condition_link_status": "violated",
+            "verified_condition_links": [],
+            "link_verification": "failed",
+            "omitted": false
+          }
+        ]
+      },
+      {
+        "rule_id": "SEMANTIC_REVIEW_REQUIRED",
+        "severity": "UNRESOLVED",
+        "message": "Model reported alignment needs_review, unresolved semantic questions, or incomplete cross-window relation review; human review required",
+        "responsible_component": "validation_gate",
+        "origin_ref": "ca58c2e93973bfc7124f6412bacca41734dc83b6e9774a0a01160a0bd257d0f7",
+        "repair_recommendation": "Hold at REVIEW for human/semantic verification; do not auto-advance to Organization",
+        "requires_human_review": true,
+        "blocking": true,
+        "evidence": []
+      }
+    ],
+    "gate_state": "FAIL",
+    "execution_state": "completed",
+    "last_gate_state": null,
+    "diagnostics": [],
+    "delivery_approved": false,
+    "next_stage_allowed": false,
+    "report_sha256": "e74e3ab80f433f133cb27481bb1b1a049e2ad1ba4ad7db45c19f42580263c6a9"
+  },
+  "organization_plan": null,
+  "expression_preview": null,
+  "revision_result": null,
+  "final_report": null,
+  "final_semantic_report": null,
+  "final_audit": null,
+  "approval_report": null,
+  "controller": {
+    "state": "STOPPED",
+    "last_gate_state": "FAIL",
+    "responsible_module": "information_extraction_analysis",
+    "invalidated_artifacts": [
+      "analysis",
+      "organization",
+      "expression",
+      "reconstruction",
+      "final_report",
+      "final_semantic_report",
+      "final_audit",
+      "approval_request",
+      "approval_report"
+    ],
+    "retry_count": 0,
+    "reason": "No verified automatic repair; re-run descendants after correcting the responsible input",
+    "stage_transition_allowed": false
+  },
+  "stage_transition_allowed": false,
+  "delivery_approved": false
+}
