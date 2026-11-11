@@ -19,7 +19,7 @@ python3 evaluation/golden_expansion/codex_counterreview_2026_11_11/validate.py
 python3 evaluation/golden_expansion/codex_counterreview_2026_11_11/regression.py
 ```
 
-validate.py는 모델을 호출하지 않고 보존 파일 해시, 입력 전용 요청, 초기 판단 연결, 원시 결과, 인용 및 빈 사람 응답 필드를 재검증한다. 실제 독립 검토 재실행에는 Codex collaboration 도구로 새 `fork_turns=none` 검토자를 생성하고 해당 `*.request.json`만 전달해야 한다. 이전 결과·이력을 상속하지 말고 새 attempt 경로에 저장한다. 이미 성공한 검토자는 재호출하지 않는다.
+validate.py는 모델을 호출하지 않으며 파일 쓰기 없이 보존 파일 해시, 입력 전용 요청, 초기 판단 연결, 원시 결과와 인용을 재검증한다. manifest 무결성 검사를 먼저 수행하고 이후 증거를 검사한다. 성공·실패 모두 기존 결과물을 재생성하거나 복구하지 않는다. 실제 독립 검토 재실행에는 Codex collaboration 도구로 새 `fork_turns=none` 검토자를 생성하고 해당 `*.request.json`만 전달해야 한다. 이전 결과·이력을 상속하지 말고 새 attempt 경로에 저장한다. 이미 성공한 검토자는 재호출하지 않는다.
 
 사용자는 각 반론에 동의·반박·보류를 선택할 수 있다. 사용자 최종 판단과 개발용 골드 포함 승인은 기록하지 않는다. 기존 G3/G4 골드 및 평가 자료를 변경하지 않는다.
 
@@ -30,3 +30,15 @@ Codex 서브에이전트 3개를 실제 실행하여 17건 검토 완료, 실패
 기계 검증은 17개 입력 연결·원시 JSON·사례 순서·라벨·일치 여부·72개 정확한 인용을 확인한다. 반론 및 판단 근거의 의미상 일관성도 실행자가 읽어 점검했다. 사용자 판단을 대신하지 않는다. 전체 회귀 결과는 regression-results.json에 기록한다.
 
 최종 회귀: **15개 디렉터리 / 606 tests 통과**. 이번 재검토에서 외부 AGY 및 로컬 Qwen 호출은 0회다. 실제 Codex 검토 실행은 3개 세션, 검토 범위는 각각 6/6/5건이다. 최초 큰 출력의 절단은 trace에 남아 있으며 후속 전체 청크 열람으로 보완했다. SP-015는 원문 README 32,510자 및 후보 32,177자, packaging 전후 27/427자를 전체 검토했다.
+
+## 사용자 응답 보존 및 렌더링 분리
+
+`validate.py`는 읽기 전용이다. 사례 Markdown, REVIEW-PACKAGE.md, human-response-forms.json에 사용자가 반론 응답이나 최종 판단을 쓰면 기존 manifest와 차이가 나므로 검증은 `artifact changed`로 실패한다. 이 실패는 스냅샷 변경의 보고이며 사용자 응답의 타당성 판정이 아니다. 사용자 내용을 지우거나 빈 양식으로 되돌리지 않고, 누락된 파일도 자동 재생성하지 않는다. manifest를 자동 갱신하여 변경을 승인하지 않는다. 기존 validation.json도 읽어서 계산 결과와 비교할 뿐 수정하지 않는다.
+
+렌더링은 별도 명령으로만 실행하며 **존재하지 않는 새 디렉터리**가 필요하다. 원본 패키지 내부 경로나 기존 출력 디렉터리는 거부한다. 원본 무결성과 증거 검사가 모두 끝나기 전에는 출력 디렉터리를 만들지 않는다. 파일은 배타적 생성 모드로 쓰며 덮어쓰기 옵션은 없다.
+
+```sh
+python3 evaluation/golden_expansion/codex_counterreview_2026_11_11/render.py --output /tmp/logicwrite-new-review-copy
+```
+
+사용자 작성 내용이 있는 원본을 렌더링하려 하면 manifest 차이에서 중단한다. 원본 응답을 보존한 채 별도 검토 이력으로 다뤄야 하며, 렌더링은 사용자 응답이나 최종 판단을 복사·승인하는 기능이 아니다. 회귀 테스트는 사용자 Markdown/JSON 수정 후 실패 경로와 정상 검증 경로에서 모든 파일 bytes와 mtime이 그대로임을 확인한다. 새 출력의 문서는 기존 17건 검토 자료와 bytes가 같은지도 검사한다.

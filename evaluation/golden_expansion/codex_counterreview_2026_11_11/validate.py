@@ -1,4 +1,4 @@
-"""Offline verification and human review package rendering. Never invokes models."""
+"""Read-only evidence and artifact verification. Never renders or invokes models."""
 import collections,hashlib,json,pathlib,re
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 OUT=pathlib.Path(__file__).resolve().parent
@@ -6,7 +6,6 @@ LABELS={'PRESERVED','VIOLATION','UNRESOLVED'}
 BATCHES=['gc01_06','gc07_12','sp13_17']
 def sha(b):return hashlib.sha256(b).hexdigest()
 def load(p):return json.loads(p.read_text())
-def save(p,d):p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
 def require(ok,message):
  if not ok:raise ValueError(message)
 def check_identity(result,initial):
@@ -24,7 +23,11 @@ def check_quote(inp,e):
   require(isinstance(e['quote'],str) and bool(e['quote'].strip()) and e['quote'] in v,'quote not exact substring')
  except (KeyError,IndexError,TypeError) as err:raise ValueError('invalid quote pointer') from err
 
-def main():
+def verify():
+ # Check the committed snapshot first, including all user-editable artifacts.
+ # Changes are reported, never repaired or silently re-baselined.
+ for name,digest in load(OUT/'artifact-manifest.json').items():
+  require(sha((OUT/name).read_bytes())==digest,'artifact changed: '+name)
  for name,digest in load(OUT/'preserved-files.json').items():require(sha((ROOT/name).read_bytes())==digest,'preserved file changed: '+name)
  initial=load(OUT/'initial-judgments.json')['cases']
  require((OUT/'initial-judgments.json').read_bytes()==(ROOT/'evaluation/golden_expansion/counterreview_2026_11_11/initial-judgments.json').read_bytes(),'initial history changed')
@@ -61,25 +64,14 @@ def main():
     except (ValueError,KeyError,TypeError) as err:failures.append(dict(case_id=cid,error=str(err),batch=batch))
   except (ValueError,KeyError,TypeError,FileNotFoundError) as err:
    failures.extend(dict(case_id=c['initial']['case_id'],error=str(err),batch=batch) for c in request['cases'])
- forms=[];table=['# Codex 독립 반례 검토 — 사용자 최종 판단 대기','','최초 판단과 Codex AI 반례를 구분한다. AI 권장 판단은 사용자 최종 판단이나 개발용 골드 포함 승인이 아니다. Qwen 결과는 이번 집계에서 제외했다.','','| ID | 사용자 최초 판단 | Codex 권장 | 일치 | 반론·정확한 근거·사용자 응답 |','|---|---|---|---|---|']
- for initial_row in initial:
-  cid=initial_row['case_id'];form=dict(case_id=cid,input_sha256=initial_row['input_sha256'],counterargument_response=None,response_options=['동의','반박','보류'],response_reason=None,user_final_judgment=None,approve_for_development_gold=None);forms.append(form)
-  if cid not in collected:table.append(f'| {cid} | {initial_row["initial_judgment"]} | 검토 실패 | — | 원인: validation.json |');continue
-  item=collected[cid];r=item['result'];body=['# '+cid,'','## 사용자 최초 판단',r['initial_judgment']+' — '+initial_row['initial_reason'],'','입력 SHA-256: `'+r['input_sha256']+'`','','## 독립 Codex AI의 가장 강한 반론',r['strongest_counterargument'],'','## AI의 반론 타당성 평가',r['counterargument_validity'],'','## 정확한 인용 근거']
-  for e in r['evidence']:body+=['',f'- `{e["pointer"]}`','','```text',e['quote'],'```']
-  body+=['','## 독립 AI 권장 판단',r['independent_recommendation'],'','## 판단 근거',r['rationale'],'','## 남은 불확실성',r['remaining_uncertainty'],'','## 사용자 확인 사항',r['user_question'],'','## 사용자 응답 (미작성)','','반론에 대한 선택: [ ] 동의 [ ] 반박 [ ] 보류','','근거: ______','','사용자 최종 판단: ______','','개발용 골드 포함 승인: 미결정']
-  (OUT/'cases').mkdir(exist_ok=True);(OUT/'cases'/(cid+'.md')).write_text('\n'.join(body)+'\n')
-  table.append(f'| {cid} | {r["initial_judgment"]} | {r["independent_recommendation"]} | {"일치" if r["matches_initial"] else "불일치"} | [사례 검토](cases/{cid}.md) |')
  disagreements=[cid for cid,c in collected.items() if not c['result']['matches_initial']]
- table+=['',f'검증 완료 {len(collected)}건 / 검토 실패 {len(failures)}건.','','최초 판단과 불일치: '+(', '.join(disagreements) or '없음'),'','의미 판정 UNRESOLVED와 실행·검증 실패는 구분한다. 실패 재시도 시 원인을 해결하고 새 attempt에 입력 전용 요청만 전달한다. 성공 사례는 재호출하지 않는다.']
- (OUT/'REVIEW-PACKAGE.md').write_text('\n'.join(table)+'\n');
- if (OUT/'human-response-forms.json').exists():require(load(OUT/'human-response-forms.json')==forms,'human forms changed; refuse overwrite')
- else:save(OUT/'human-response-forms.json',forms)
  result=dict(completed=len(collected),failed=len(failures),disagreements=disagreements,recommendation_distribution=dict(collections.Counter(c['result']['independent_recommendation'] for c in collected.values())),cases=[dict(case_id=cid,batch=c['batch'],quote_count=len(c['result']['evidence']),recommendation=c['result']['independent_recommendation'],matches_initial=c['result']['matches_initial']) for cid,c in collected.items()],failures=failures)
- save(OUT/'validation.json',result)
- manifest=OUT/'artifact-manifest.json'
- if manifest.exists():
-  for name,digest in load(manifest).items():require(sha((OUT/name).read_bytes())==digest,'artifact changed: '+name)
- print(json.dumps(result,ensure_ascii=False))
  require(len(collected)+len(failures)==17,'total coverage')
+ require(load(OUT/'validation.json')==result,'stored validation summary mismatch')
+ return result,initial,collected,failures
+
+def main():
+ result,_,_,_=verify()
+ print(json.dumps(result,ensure_ascii=False))
+ return result
 if __name__=='__main__':main()
