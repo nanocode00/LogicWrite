@@ -1,0 +1,69 @@
+FFFFFFFF
+======================================================================
+FAIL: test_answer_fields_are_rejected (test_source_candidate_adapter.AdapterTests.test_answer_fields_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+======================================================================
+FAIL: test_deterministic_literal_violation_without_model_is_fail_but_unevaluated (test_source_candidate_adapter.AdapterTests.test_deterministic_literal_violation_without_model_is_fail_but_unevaluated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+======================================================================
+FAIL: test_equality_without_reviewer_is_unresolved_and_has_no_receipt (test_source_candidate_adapter.AdapterTests.test_equality_without_reviewer_is_unresolved_and_has_no_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+======================================================================
+FAIL: test_full_cited_review_supports_only_advisory_evaluation (test_source_candidate_adapter.AdapterTests.test_full_cited_review_supports_only_advisory_evaluation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+======================================================================
+FAIL: test_incomplete_or_unbound_metadata_never_reaches_reviewer (test_source_candidate_adapter.AdapterTests.test_incomplete_or_unbound_metadata_never_reaches_reviewer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+======================================================================
+FAIL: test_invalid_or_approval_response_budget_timeout_never_evaluated (test_source_candidate_adapter.AdapterTests.test_invalid_or_approval_response_budget_timeout_never_evaluated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+======================================================================
+FAIL: test_missing_context_pending_contract_and_unknown_baseline_are_unsupported (test_source_candidate_adapter.AdapterTests.test_missing_context_pending_contract_and_unknown_baseline_are_unsupported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+======================================================================
+FAIL: test_multidocument_move_is_complete_pair_not_forged_lineage (test_source_candidate_adapter.AdapterTests.test_multidocument_move_is_complete_pair_not_forged_lineage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/experiments/full_document_control/test_source_candidate_adapter.py", line 45, in setUp
+    self.assertIsNotNone(adapter, 'source/candidate evaluation adapter is missing')
+AssertionError: unexpectedly None : source/candidate evaluation adapter is missing
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+FAILED (failures=8)

@@ -1,0 +1,20 @@
+{
+  "checked_on": "2026-11-11",
+  "base_main": "29dd271c5e367044af765cc0ff9e81db52de7160",
+  "pr22_head": "ef7a66973b35356d8dbc343b91fc62011991e4b4",
+  "pr23_head": "110c715748b44279ea54d06f3b13b79d29c6bdde",
+  "local_integration_head": "d5891711ab84ae0021850f79f1bebfc541cd4af8",
+  "overlapping_changed_paths": [],
+  "merge_conflicts": [],
+  "functional_dependency": "none between PR22 and PR23; both reuse existing main modules",
+  "tests_passed": 562,
+  "remote_ci_status": "no registered or executed checks (statusCheckRollup empty)",
+  "ready_for_review": [
+    22,
+    23
+  ],
+  "remote_merges_performed": [],
+  "existing_evaluation_files_preserved": 186,
+  "g3_active_gold": 12,
+  "provisional_human_judgment_pending": 17
+}

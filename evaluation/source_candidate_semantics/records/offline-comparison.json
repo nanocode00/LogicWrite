@@ -1,0 +1,302 @@
+{
+  "version": "source-candidate-post-comparison-v1",
+  "dataset_role": "development_only",
+  "reference_manifest_path": "evaluation/g3_g4/development_gold_v2_2026-11-11/development-gold.json",
+  "reference_manifest_sha256": "2adddb82f0e9016c210887014bb65d074a99cd9ffa4515931c3002377adc3f5a",
+  "prediction_record_sha256": "fb52601327ca8d5b4eaf9c7be7f7c83e2cf90e2ebea359ef61d65d092a49100a",
+  "metric_scope": "complete definitive model-advisory evaluations only; excludes unsupported/abstentions",
+  "gate_state_is_not_an_sp_label": true,
+  "candidate_count": 12,
+  "evaluated_count": 0,
+  "excluded": [
+    {
+      "case_id": "SP-001",
+      "reasons": [
+        "SEMANTIC_REVIEW_BUDGET_EXCEEDED"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-002",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-003",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-004",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-005",
+      "reasons": [
+        "SEMANTIC_REVIEW_BUDGET_EXCEEDED"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-006",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-007",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-008",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-009",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "INCOMPLETE_SOURCE_DOCUMENTS",
+        "INCOMPLETE_CANDIDATE_DOCUMENTS"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-010",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "UNKNOWN_BASELINE_OR_DESTINATION_SET"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-011",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "PENDING_CONTRACT"
+      ],
+      "semantic_judgment": "unresolved"
+    },
+    {
+      "case_id": "SP-012",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "INCOMPLETE_CANDIDATE_DOCUMENTS"
+      ],
+      "semantic_judgment": "unresolved"
+    }
+  ],
+  "accuracy": null,
+  "cases": [
+    {
+      "case_id": "SP-001",
+      "expected": "PRESERVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/0/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-001.json",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+      "reference_pointer": "/cases/0",
+      "reasons": [
+        "SEMANTIC_REVIEW_BUDGET_EXCEEDED"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-001.json --case SP-001",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-002",
+      "expected": "PRESERVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/1/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-002.json",
+      "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+      "reference_pointer": "/cases/1",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-002.json --case SP-002",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-003",
+      "expected": "PRESERVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/2/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-003.json",
+      "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+      "reference_pointer": "/cases/2",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-003.json --case SP-003",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-004",
+      "expected": "PRESERVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/3/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-004.json",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+      "reference_pointer": "/cases/3",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-004.json --case SP-004",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-005",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/4/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-005.json",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+      "reference_pointer": "/cases/4",
+      "reasons": [
+        "SEMANTIC_REVIEW_BUDGET_EXCEEDED"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-005.json --case SP-005",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-006",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/5/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-006.json",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+      "reference_pointer": "/cases/5",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-006.json --case SP-006",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-007",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/6/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-007.json",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+      "reference_pointer": "/cases/6",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-007.json --case SP-007",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-008",
+      "expected": "VIOLATION",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/7/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-008.json",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "reference_pointer": "/cases/7",
+      "reasons": [
+        "SEMANTIC_REVIEW_NOT_RUN"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-008.json --case SP-008",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-009",
+      "expected": "UNRESOLVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/8/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-009.json",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+      "reference_pointer": "/cases/8",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "INCOMPLETE_SOURCE_DOCUMENTS",
+        "INCOMPLETE_CANDIDATE_DOCUMENTS"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-009.json --case SP-009",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-010",
+      "expected": "UNRESOLVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/9/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-010.json",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+      "reference_pointer": "/cases/9",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "UNKNOWN_BASELINE_OR_DESTINATION_SET"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-010.json --case SP-010",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-011",
+      "expected": "UNRESOLVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/10/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-011.json",
+      "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+      "reference_pointer": "/cases/10",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "PENDING_CONTRACT"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-011.json --case SP-011",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    },
+    {
+      "case_id": "SP-012",
+      "expected": "UNRESOLVED",
+      "actual": null,
+      "included_in_metric": false,
+      "prediction_pointer": "/cases/11/result",
+      "input_path": "evaluation/semantic_pilot/inputs/SP-012.json",
+      "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+      "reference_pointer": "/cases/11",
+      "reasons": [
+        "MISSING_CONTEXT",
+        "INCOMPLETE_CANDIDATE_DOCUMENTS"
+      ],
+      "reproduce": "python3 evaluation/source_candidate_semantics/run.py predict /tmp/SP-012.json --case SP-012",
+      "priority": "P2",
+      "followup": "Supply missing context or execute a cited full-context model review"
+    }
+  ]
+}

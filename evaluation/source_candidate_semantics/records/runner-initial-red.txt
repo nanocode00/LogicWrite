@@ -1,0 +1,53 @@
+EEEEEE
+======================================================================
+ERROR: test_case_result_is_not_core_approval (test_run.RunnerTests.test_case_result_is_not_core_approval)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 53, in test_case_result_is_not_core_approval
+    import run
+ModuleNotFoundError: No module named 'run'
+
+======================================================================
+ERROR: test_duplicate_case_ids_rejected (test_run.RunnerTests.test_duplicate_case_ids_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 48, in test_duplicate_case_ids_rejected
+    import run
+ModuleNotFoundError: No module named 'run'
+
+======================================================================
+ERROR: test_no_accuracy_from_unevaluated_cases (test_run.RunnerTests.test_no_accuracy_from_unevaluated_cases)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 28, in test_no_accuracy_from_unevaluated_cases
+    import run
+ModuleNotFoundError: No module named 'run'
+
+======================================================================
+ERROR: test_predictions_never_load_references (test_run.RunnerTests.test_predictions_never_load_references)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 16, in test_predictions_never_load_references
+    import run
+ModuleNotFoundError: No module named 'run'
+
+======================================================================
+ERROR: test_provisional_cases_not_in_g3_runner (test_run.RunnerTests.test_provisional_cases_not_in_g3_runner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 35, in test_provisional_cases_not_in_g3_runner
+    import run
+ModuleNotFoundError: No module named 'run'
+
+======================================================================
+ERROR: test_tampered_input_binding_rejected (test_run.RunnerTests.test_tampered_input_binding_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-semantic-adapter/evaluation/source_candidate_semantics/test_run.py", line 41, in test_tampered_input_binding_rejected
+    import run
+ModuleNotFoundError: No module named 'run'
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (errors=6)
