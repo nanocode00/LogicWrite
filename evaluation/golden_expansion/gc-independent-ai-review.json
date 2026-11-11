@@ -1,0 +1,242 @@
+{
+  "review_identity": {
+    "agent": "/root/counterreview",
+    "runtime_identity": "Codex AI subagent",
+    "model": "GPT-6 family; exact serving model not exposed to this subagent",
+    "review_type": "independent AI advisory counterexample review",
+    "human_reviewer": false,
+    "gold_or_approval": false
+  },
+  "read_scope": {
+    "repository": "/home/honorbear/LogicWrite-golden-next",
+    "expected_base": "29dd271",
+    "read_content": [
+      "evaluation/g3_g4/inputs/GC-001.json through GC-012.json (source/candidate content, metadata, embedded contracts, missing_context, supplied_observations)",
+      "evaluation/g3_g4/sources/requests-document.txt",
+      "evaluation/g3_g4/sources/httpx-document.txt",
+      "evaluation/g3_g4/sources/click-document.txt",
+      "evaluation/g3_g4/sources/prometheus-document.txt"
+    ],
+    "excluded_content": [
+      "evaluation/g3_g4/answers/*",
+      "evaluation/g3_g4/cases/*",
+      "AI author rationales"
+    ],
+    "discovery_only": "rg listed filenames in cases and answers without reading content; attempted root AGENTS.md absent"
+  },
+  "evidence_boundary": "Only supplied pinned documents and contracts; no runtime execution or external factual truth inferred. All judgments tentative AI advice.",
+  "results": [
+    {
+      "case_id": "GC-001",
+      "input_sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Active/passive rephrasing preserves official support, Python minimum 3.10, open upper range, and attribution to Requests.",
+      "strongest_counterargument": "Passive form could weaken agent attribution, but explicit \"by Requests\" retains it.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Installing Requests and Supported Versions",
+          "source_quote": "Requests officially supports Python 3.10+.",
+          "candidate_pointer": "candidate_documents[main].content: Installing Requests and Supported Versions",
+          "candidate_quote": "Python 3.10+ is officially supported by Requests."
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-002",
+      "input_sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+      "tentative_judgment": "VIOLATION",
+      "explanation": "3.10+ becomes 3.8+, adding official support for 3.8 and 3.9 without authorization.",
+      "strongest_counterargument": "A historical release may support 3.8, but contract preserves this pinned document, not external version truth.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Installing Requests and Supported Versions",
+          "source_quote": "Python 3.10+",
+          "candidate_pointer": "candidate_documents[main].content: Installing Requests and Supported Versions",
+          "candidate_quote": "Python 3.8+"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-003",
+      "input_sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+      "tentative_judgment": "UNRESOLVED",
+      "explanation": "Observed prefix is unchanged; missing tail is explicitly a transmission truncation, so whole-result preservation and deletion cannot be established.",
+      "strongest_counterargument": "If the prefix were the complete result, feature and cloning sections would be deleted; partial availability prevents that inference.",
+      "missing_context": [
+        "완전한 수정 결과 전체와 전송 범위·해시가 필요하다. 현재 결과는 전송 중 절단된 접두부다."
+      ],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: main availability=partial; missing_context[0]",
+          "source_quote": "## Supported Features & Best–Practices",
+          "candidate_pointer": "candidate_documents[main].content: main availability=partial; missing_context[0]",
+          "candidate_quote": "candidate stops before supported-features section"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-004",
+      "input_sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Default qualifier, five-second network-inactivity condition, and TimeoutException remain; remaining text/code unchanged.",
+      "strongest_counterargument": "Raises could sound immediate at threshold rather than after, but both describe the same default timeout condition without introducing total request duration.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: opening paragraph",
+          "source_quote": "after 5 seconds of network inactivity",
+          "candidate_pointer": "candidate_documents[main].content: opening paragraph",
+          "candidate_quote": "By default, 5 seconds of network inactivity raises a `TimeoutException`."
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-005",
+      "input_sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+      "tentative_judgment": "VIOLATION",
+      "explanation": "Default network-inactivity timeout grows tenfold, from 5 to 50 seconds; unchanged 5s client comment also conflicts.",
+      "strongest_counterargument": "Later examples permit custom timeouts but do not authorize modifying the default statement.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: opening paragraph; default-client code comment",
+          "source_quote": "after 5 seconds",
+          "candidate_pointer": "candidate_documents[main].content: opening paragraph; default-client code comment",
+          "candidate_quote": "after 50 seconds"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-006",
+      "input_sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+      "tentative_judgment": "UNRESOLVED",
+      "explanation": "Unchanged observed prefix does not establish preservation of fine-grained timeout definitions or example in the missing transmitted tail.",
+      "strongest_counterargument": "As a complete document this would delete connect/read/write/pool details, but input explicitly says partial transmission.",
+      "missing_context": [
+        "완전한 수정 결과 전체와 전송 범위·해시가 필요하다. 현재 결과는 전송 중 절단된 접두부다."
+      ],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: main availability=partial; missing_context[0]",
+          "source_quote": "## Fine tuning the configuration",
+          "candidate_pointer": "candidate_documents[main].content: main availability=partial; missing_context[0]",
+          "candidate_quote": "candidate stops before fine-tuning section"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-007",
+      "input_sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Decorator attribution, option name, immediate version print, and subsequent program exit are retained.",
+      "strongest_counterargument": "\"Then\" could add strict ordering, but ordinary \"prints ... and exits\" already describes print followed by termination here.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Version Option",
+          "source_quote": "immediately prints the version number and exits the program",
+          "candidate_pointer": "candidate_documents[main].content: Version Option",
+          "candidate_quote": "immediately prints the version number, then exits the program"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-008",
+      "input_sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+      "tentative_judgment": "VIOLATION",
+      "explanation": "Candidate reverses termination behavior from exiting to continuing after printing the version.",
+      "strongest_counterargument": "A callback customization might continue, but none is supplied and the pinned generic claim must remain.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Version Option",
+          "source_quote": "exits the program",
+          "candidate_pointer": "candidate_documents[main].content: Version Option",
+          "candidate_quote": "continues running the program"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-009",
+      "input_sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+      "tentative_judgment": "UNRESOLVED",
+      "explanation": "Contract permits linked relocation, but absent details snapshots and link-resolution evidence prevent checking preservation of confirmation conditions and examples.",
+      "strongest_counterargument": "Main no longer contains dangerous-operation confirmation details, which would violate same-document exposure; this contract explicitly allows linked-document exposure.",
+      "missing_context": [
+        "details.md의 수정 전후 전체 스냅샷과 목적지 역할·링크 해소가 필요하다."
+      ],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Confirmation Option; details availability=not_provided; missing_context[0]",
+          "source_quote": "full confirmation section with --yes, abort callback and decorator example",
+          "candidate_pointer": "candidate_documents[main].content: Confirmation Option; details availability=not_provided; missing_context[0]",
+          "candidate_quote": "See [confirmation details](details.md)."
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-010",
+      "input_sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Readiness and health sections move intact; endpoint-to-behavior associations and subsequent reload/quit text remain.",
+      "strongest_counterargument": "Order might change perceived operational priority, but no normative ordering or dependency exists in source or contract.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Readiness check and Health check",
+          "source_quote": "health section precedes readiness",
+          "candidate_pointer": "candidate_documents[main].content: Readiness check and Health check",
+          "candidate_quote": "readiness section precedes health"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-011",
+      "input_sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+      "tentative_judgment": "VIOLATION",
+      "explanation": "Reload endpoint default disabled state is reversed to enabled; lifecycle flag enable action is reversed to disable.",
+      "strongest_counterargument": "Deployed settings may vary, but neither deployment verification nor factual updating is authorized by this contract.",
+      "missing_context": [],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Reload",
+          "source_quote": "disabled by default and can be enabled via",
+          "candidate_pointer": "candidate_documents[main].content: Reload",
+          "candidate_quote": "enabled by default and can be disabled via"
+        }
+      ],
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "GC-012",
+      "input_sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+      "tentative_judgment": "UNRESOLVED",
+      "explanation": "Linked relocation is permitted, but unseen details prevent checking reload/quit methods, paths, disabled-default condition, flag, and alternative signals.",
+      "strongest_counterargument": "A brief lifecycle heading and link might preserve navigation, but do not prove the destination contains the source facts or resolves correctly.",
+      "missing_context": [
+        "details.md의 수정 전후 전체 스냅샷과 목적지 역할·링크 해소가 필요하다."
+      ],
+      "evidence": [
+        {
+          "source_pointer": "source_documents[main].content: Lifecycle operations; details availability=not_provided; missing_context[0]",
+          "source_quote": "Reload and Quit sections including SIGHUP and SIGTERM",
+          "candidate_pointer": "candidate_documents[main].content: Lifecycle operations; details availability=not_provided; missing_context[0]",
+          "candidate_quote": "See [reload and quit](details.md)."
+        }
+      ],
+      "content_hashes_verified": true
+    }
+  ]
+}

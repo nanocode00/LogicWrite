@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1.0",
+  "case_id": "SP-013",
+  "input_path": "inputs/SP-013.json",
+  "input_sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+  "status": "provisional",
+  "label_origin": "ai_proposal",
+  "gold_eligible": false,
+  "expected_judgment": "VIOLATION",
+  "external_truth": "not_assessed",
+  "focus": [
+    "EXPOSURE_REQUIREMENT"
+  ],
+  "findings": [
+    {
+      "error_type": "EXPOSURE_REQUIREMENT",
+      "severity": "major",
+      "reason": "캐시 조건 전문은 목적지에 있으나 첫 사용 설치 문서 직접 노출 의무를 충족하지 않는다.",
+      "evidence": [
+        {
+          "side": "source",
+          "document_id": "install",
+          "start": 0,
+          "end": 50,
+          "quote": "# 설치\n\n설치 후 앱을 연다.\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+        },
+        {
+          "side": "source",
+          "document_id": "maintenance",
+          "start": 0,
+          "end": 23,
+          "quote": "# 유지보수\n\n캐시는 수동으로 삭제한다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "install",
+          "start": 0,
+          "end": 61,
+          "quote": "# 설치\n\n설치 후 앱을 연다.\n\n오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다.\n"
+        },
+        {
+          "side": "candidate",
+          "document_id": "maintenance",
+          "start": 0,
+          "end": 55,
+          "quote": "# 유지보수\n\n캐시는 수동으로 삭제한다.\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다.\n"
+        }
+      ]
+    }
+  ],
+  "rationale": "캐시 조건 전문은 목적지에 있으나 첫 사용 설치 문서 직접 노출 의무를 충족하지 않는다.",
+  "acceptable_alternatives": [
+    "동일한 합성 계약과 문서 전체에 근거하여 사람이 재검토한다."
+  ],
+  "review_questions": [
+    "제공된 계약과 문서 전체만으로 판단할 수 있는가?"
+  ],
+  "reviews": [],
+  "disagreements": [],
+  "adjudication": null
+}

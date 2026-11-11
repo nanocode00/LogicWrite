@@ -1,0 +1,14 @@
+{
+  "form_status": "blank",
+  "case_id": "SP-014",
+  "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+  "reviewer_id": null,
+  "reviewed_at": null,
+  "blinded_to_prior_judgments": null,
+  "judgment": null,
+  "rationale": null,
+  "findings": [],
+  "evidence": [],
+  "missing_information": [],
+  "acceptable_alternatives": []
+}

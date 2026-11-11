@@ -1,0 +1,99 @@
+{
+  "review_identity": {
+    "agent": "/root/counterreview",
+    "runtime": "Codex AI subagent, GPT-6 family; exact serving model not exposed",
+    "type": "independent AI advisory review",
+    "human_approval": false,
+    "gold": false
+  },
+  "read_scope": {
+    "included": [
+      "evaluation/golden_expansion/inputs/SP-013.json through SP-017.json only"
+    ],
+    "excluded": [
+      "answers",
+      "registry expected labels",
+      "author rationale",
+      "parent inputs"
+    ],
+    "parent_delta_limit": "Did not read parent inputs under INPUTS ONLY instruction; checked internal paired-delta consistency only. SP013/014 source and candidate content hashes identical while exposure/context differ. Other derivative completeness/authority scenarios assessed as explicitly supplied assumptions."
+  },
+  "results": [
+    {
+      "case_id": "SP-013",
+      "input_sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+      "tentative_judgment": "VIOLATION",
+      "explanation": "Cache prerequisite survives verbatim in maintenance, but install no longer directly exposes it despite R1 same_document and explicit first-use prerequisite constraint.",
+      "strongest_counterargument": "A resolved link preserves bundle-level facts; however this contract specifically requires the prerequisite before first use in installation text.",
+      "evidence_pointers": [
+        "writing_contract.required_information[R1].exposure=same_document",
+        "writing_contract.constraints[-1]",
+        "candidate_documents[install].content: 오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+      ],
+      "missing_context": [],
+      "provenance_boundary": "All context synthetic; no claim of actual first-use behavior.",
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "SP-014",
+      "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Same relocation is allowed because optional offline feature condition may be linked; destination is complete, condition verbatim, and logical maintenance.md mapping explicit. Existing install instruction and manual cache deletion remain.",
+      "strongest_counterargument": "Installation readers may overlook a linked prerequisite, but the supplied contract expressly says direct first-use exposure is unnecessary for this optional feature.",
+      "evidence_pointers": [
+        "writing_contract.required_information[R1].exposure=linked_document",
+        "writing_contract.constraints[-1]",
+        "candidate_documents[maintenance].content: 캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+      ],
+      "missing_context": [],
+      "provenance_boundary": "Optionality is a controlled scenario assumption, not observed behavior.",
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "SP-015",
+      "input_sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Complete before/after packaging document preserves the whole moved paragraph, including non-blocking Doctor and future signed/notarized DMG possibility. README supplies PACKAGING.md link; all other README text is byte-identical by computed diff.",
+      "strongest_counterargument": "Moving rationale out of README could hide it or damage context; explicit linked exposure and packaging logical path resolve this contract concern. No claim of deployed link availability follows.",
+      "evidence_pointers": [
+        "source_documents[readme].content: Why PKG Instead Of DMG? paragraph",
+        "candidate_documents[packaging].content: identical full paragraph",
+        "candidate_documents[readme].content: See [packaging decision](PACKAGING.md).",
+        "writing_contract.constraints[-1]"
+      ],
+      "missing_context": [],
+      "provenance_boundary": "Mixed provenance now represented by public_source_based plus public_git README and controlled_synthetic destination. Destination is assumed, not an upstream PACKAGING.md observation.",
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "SP-016",
+      "input_sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Supplied synthetic owner authorization uniquely selects policy-v2 by ID/version/SHA256 and excludes v1; candidate equals v2 byte for byte.",
+      "strongest_counterargument": "Two source versions disagree, and general preserve-all constraint could be read to retain both, but the specific baseline-selection clause explicitly excludes historical v1. This is scenario authorization only.",
+      "evidence_pointers": [
+        "writing_contract.constraints[-1]: policy-v2(version v2, SHA-256 41b246fbf0f3eea08a2fbcf9c60e9f456cc69c84c742312f5a1962f44c096dd8)",
+        "candidate_documents[policy].sha256 equals source_documents[policy-v2].sha256"
+      ],
+      "missing_context": [],
+      "provenance_boundary": "Approval is explicitly fictional; must never create or imply real human/Core approval.",
+      "content_hashes_verified": true
+    },
+    {
+      "case_id": "SP-017",
+      "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+      "tentative_judgment": "PRESERVED",
+      "explanation": "Candidate complete document equals source byte for byte: unsupported automatic update and required manual reinstall remain.",
+      "strongest_counterargument": "If candidate were only a transmitted prefix, completion would remain unknown; this derived input explicitly supplies an assumed complete result and labels replacement synthetic.",
+      "evidence_pointers": [
+        "source_documents[update].availability=complete",
+        "candidate_documents[update].availability=complete",
+        "source_documents[update].sha256 equals candidate_documents[update].sha256",
+        "supplied_observations[0]"
+      ],
+      "missing_context": [],
+      "provenance_boundary": "Completeness is a controlled replacement assumption, not recovery or observation of a real missing tail.",
+      "content_hashes_verified": true
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "schema_version": "1.0.0",
+  "base_commit": "29dd271c5e367044af765cc0ff9e81db52de7160",
+  "dataset_role": "development_only",
+  "cases": [
+    {
+      "case_id": "SP-013",
+      "input_path": "inputs/SP-013.json",
+      "input_sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+      "input_version": "controlled-derivative-v1",
+      "answer_path": "answers/SP-013.json",
+      "answer_sha256": "2751c08c4e9af6205185e63264da75a47f3bd3bf2a78765bf2d31c0616e1846c",
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-003.json",
+          "sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34"
+        },
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-011.json",
+          "sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4"
+        }
+      ],
+      "changed_conditions": "이 합성 시나리오에서 첫 실행의 유일한 핵심 기능은 오프라인 검색이다. 첫 사용 전에 캐시 준비가 필수이며 설치 문서에 캐시 조건을 직접 노출해야 한다.",
+      "construction": "controlled_synthetic_not_observed",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "SP-014",
+      "input_path": "inputs/SP-014.json",
+      "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+      "input_version": "controlled-derivative-v1",
+      "answer_path": "answers/SP-014.json",
+      "answer_sha256": "89f1455aaf921fc1f10a5f79dc0b302a834bf5ff5b2a9d1f31173d6d1367ea49",
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-003.json",
+          "sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34"
+        },
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-011.json",
+          "sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4"
+        }
+      ],
+      "changed_conditions": "이 합성 시나리오에서 오프라인 검색은 선택 기능이다. 설치 후 기본 기능은 캐시 없이 동작한다. 캐시 조건은 유지보수 문서의 전체 내용과 설치 문서의 해소 가능한 링크로 충분하며 첫 사용에서 직접 노출은 요구하지 않는다.",
+      "construction": "controlled_synthetic_not_observed",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "SP-015",
+      "input_path": "inputs/SP-015.json",
+      "input_sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+      "input_version": "controlled-derivative-v1",
+      "answer_path": "answers/SP-015.json",
+      "answer_sha256": "2dd8df5d3208f3bb9727d71753095f1a25c036ce698619c544ea30240c5a4f47",
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-009.json",
+          "sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e"
+        }
+      ],
+      "changed_conditions": "미제공 목적지 전후 전체를 통제 합성 제공; 실제 upstream PACKAGING.md 관측이 아니다.",
+      "construction": "controlled_synthetic_not_observed",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "SP-016",
+      "input_path": "inputs/SP-016.json",
+      "input_sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+      "input_version": "controlled-derivative-v1",
+      "answer_path": "answers/SP-016.json",
+      "answer_sha256": "d23d68a7ac065d0141687617fa6b7d4b6c7601325f0bdd120137e3e1a93af715",
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-010.json",
+          "sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf"
+        }
+      ],
+      "changed_conditions": "합성 권한자 policy-owner는 합성 작성 시점 2026-11-11T09:00:00+09:00에 policy-v2(version v2, SHA-256 41b246fbf0f3eea08a2fbcf9c60e9f456cc69c84c742312f5a1962f44c096dd8)만 기준 원문으로 승인했다고 가정한다. policy-v1은 비교용 과거 스냅샷이며 보존 대상이 아니다. 실제 사람 승인이나 Core 정책 승인으로 사용하지 않는다.",
+      "construction": "controlled_synthetic_not_observed",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "SP-017",
+      "input_path": "inputs/SP-017.json",
+      "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+      "input_version": "controlled-derivative-v1",
+      "answer_path": "answers/SP-017.json",
+      "answer_sha256": "707b39f048e9b1a65d121b77e2fcdb5f40dc3b651b580afd5bd5bb4b337c77b9",
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-012.json",
+          "sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e"
+        }
+      ],
+      "changed_conditions": "잘린 접두부를 원문과 동일한 전체 결과로 합성 교체. 실제 누락 부분을 관측한 것이 아니다.",
+      "construction": "controlled_synthetic_not_observed",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-001",
+      "input_path": "../g3_g4/inputs/GC-001.json",
+      "input_sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-001.json",
+      "answer_sha256": "5b9d2c43005760dcffb6d2d8bfa9d25370ba0e3bb5413d4a17939c3f2a3ac1bd",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-002",
+      "input_path": "../g3_g4/inputs/GC-002.json",
+      "input_sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-002.json",
+      "answer_sha256": "f4247a4c4114a667fe76e57c3d12bc2a67f3faf37500e49eccf00af72cb8e034",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-003",
+      "input_path": "../g3_g4/inputs/GC-003.json",
+      "input_sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-003.json",
+      "answer_sha256": "00f180c1f90e42bfe722587a5359a1dfa81b448bb9d33cdce0b407c04826248a",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-004",
+      "input_path": "../g3_g4/inputs/GC-004.json",
+      "input_sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-004.json",
+      "answer_sha256": "ef5eed66a0381e64e9eda85e1704df337a4170a4fffd875327c1fde4dc9e0dd7",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-005",
+      "input_path": "../g3_g4/inputs/GC-005.json",
+      "input_sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-005.json",
+      "answer_sha256": "0c37fd2bd52f142cfcfbb812a65539c64cdc0f546493ce16e3881b24cd5e11d3",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-006",
+      "input_path": "../g3_g4/inputs/GC-006.json",
+      "input_sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-006.json",
+      "answer_sha256": "52f3e5ba5cea92a10ef5f510ae5e6bef3af013478d630a5e416d0f77499d1677",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-007",
+      "input_path": "../g3_g4/inputs/GC-007.json",
+      "input_sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-007.json",
+      "answer_sha256": "48dd31c9e3a818b62b116ed73de2cc78ad0e561bcceee2b61febde8437c322ac",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-008",
+      "input_path": "../g3_g4/inputs/GC-008.json",
+      "input_sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-008.json",
+      "answer_sha256": "83b603d527b591a08f0c8a9791e7cd2af27b3c9510cd66924548c86f7186949f",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-009",
+      "input_path": "../g3_g4/inputs/GC-009.json",
+      "input_sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-009.json",
+      "answer_sha256": "2e59ac0794cd1dd9b9045b7a35c9fb6e57a4c651d02704b592b13f9a5b659491",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-010",
+      "input_path": "../g3_g4/inputs/GC-010.json",
+      "input_sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-010.json",
+      "answer_sha256": "28248f7bebe9c613aa6ab54b5cfd4d4fd9a81e2cd1448921278975e4c8229799",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-011",
+      "input_path": "../g3_g4/inputs/GC-011.json",
+      "input_sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-011.json",
+      "answer_sha256": "bab3202a3f490e71b53bb8fde12815545086460b6ac9e8505b2399d51636a8f0",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    },
+    {
+      "case_id": "GC-012",
+      "input_path": "../g3_g4/inputs/GC-012.json",
+      "input_sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+      "input_version": "existing-g4-v1",
+      "answer_path": "../g3_g4/answers/GC-012.json",
+      "answer_sha256": "9c55f754be6b297dfc4043d71913958ad8fe95808f9622e3fb0eeb001c706af0",
+      "status": "provisional",
+      "development_gold_eligible": false,
+      "user_final_judgment": null
+    }
+  ]
+}

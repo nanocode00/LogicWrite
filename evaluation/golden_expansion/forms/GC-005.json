@@ -1,0 +1,14 @@
+{
+  "form_status": "blank",
+  "case_id": "GC-005",
+  "input_sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+  "reviewer_id": null,
+  "reviewed_at": null,
+  "blinded_to_prior_judgments": null,
+  "judgment": null,
+  "rationale": null,
+  "findings": [],
+  "evidence": [],
+  "missing_information": [],
+  "acceptable_alternatives": []
+}
