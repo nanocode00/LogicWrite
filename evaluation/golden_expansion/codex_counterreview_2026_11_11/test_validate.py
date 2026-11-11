@@ -1,0 +1,15 @@
+import unittest
+import validate
+class CounterreviewValidationTests(unittest.TestCase):
+ def test_exact_pointer_quote(self):
+  validate.check_quote({'a/b':['보존 문자열']},{'pointer':'/a~1b/0','quote':'보존'})
+ def test_wrong_quote_rejected(self):
+  with self.assertRaises(ValueError):validate.check_quote({'text':'실제'},{'pointer':'/text','quote':'발명'})
+ def test_object_not_string(self):
+  with self.assertRaises(ValueError):validate.check_quote({'text':{'a':'x'}},{'pointer':'/text','quote':'x'})
+ def test_negative_index_rejected(self):
+  with self.assertRaises(ValueError):validate.check_quote({'text':['x']},{'pointer':'/text/-1','quote':'x'})
+ def test_wrong_id_rejected(self):
+  with self.assertRaises(ValueError):validate.check_identity({'case_id':'other','input_sha256':'abc','initial_judgment':'PRESERVED'},{'case_id':'X','input_sha256':'abc','initial_judgment':'PRESERVED'})
+ def test_missing_initial_binding_rejected(self):
+  with self.assertRaises(ValueError):validate.check_identity({'case_id':'X','input_sha256':'abc'},{'case_id':'X','input_sha256':'abc','initial_judgment':'PRESERVED'})
