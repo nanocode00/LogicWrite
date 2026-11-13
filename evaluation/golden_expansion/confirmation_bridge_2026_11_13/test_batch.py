@@ -26,7 +26,11 @@ class BatchTests(unittest.TestCase):
 
     def test_human_attribution_remains_unconfirmed(self):
         rows=b.build()["cases"]
-        self.assertTrue(all(r["formal_response_human_confirmed"] is None
+        self.assertTrue(all(r["formal_challenge_id"] is None
+                            and r["formal_response_decision"] is None
+                            and r["response_mapping_status"] == "case_level_agreement_with_ai_assessment_only"
+                            and r["historical_final"]["response_to_ai_assessment"] == "동의"
+                            and r["formal_response_human_confirmed"] is None
                             and r["final_evidence_human_confirmed"] is None
                             and r["confidence_limitations_human_confirmed"] is None
                             and all(o["human_confirmed_as_final_evidence"] is None

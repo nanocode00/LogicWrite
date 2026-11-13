@@ -35,7 +35,9 @@ def validate(root=ROOT, here=HERE):
                 "user labels modified")
         require(row["gold_inclusion_approved"] is True and row["formal_gold_eligible"] is False,
                 "approval and eligibility boundary")
-        require(row["suggested_formal_response"] == "reject"
+        require(row["formal_challenge_id"] is None
+                and row["formal_response_decision"] is None
+                and row["response_mapping_status"] == "case_level_agreement_with_ai_assessment_only"
                 and row["formal_response_human_confirmed"] is None
                 and row["final_evidence_human_confirmed"] is None
                 and row["confidence_limitations_human_confirmed"] is None,

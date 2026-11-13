@@ -55,9 +55,9 @@
         "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
         "pointer": "/cases/0"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-001",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -125,9 +125,9 @@
         "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
         "pointer": "/cases/1"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-002",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -195,9 +195,9 @@
         "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
         "pointer": "/cases/2"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-003",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -265,9 +265,9 @@
         "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
         "pointer": "/cases/3"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-004",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -335,9 +335,9 @@
         "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
         "pointer": "/cases/4"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-005",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -405,9 +405,9 @@
         "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
         "pointer": "/cases/5"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-006",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -475,9 +475,9 @@
         "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
         "pointer": "/cases/0"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-007",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -545,9 +545,9 @@
         "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
         "pointer": "/cases/1"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-008",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -615,9 +615,9 @@
         "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
         "pointer": "/cases/2"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-009",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -685,9 +685,9 @@
         "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
         "pointer": "/cases/3"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-010",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -755,9 +755,9 @@
         "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
         "pointer": "/cases/4"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-011",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -825,9 +825,9 @@
         "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
         "pointer": "/cases/5"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-GC-012",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -895,9 +895,9 @@
         "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
         "pointer": "/cases/0"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-SP-013",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -965,9 +965,9 @@
         "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
         "pointer": "/cases/1"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-SP-014",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -1035,9 +1035,9 @@
         "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
         "pointer": "/cases/2"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-SP-015",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -1105,9 +1105,9 @@
         "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
         "pointer": "/cases/3"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-SP-016",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {
@@ -1175,9 +1175,9 @@
         "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
         "pointer": "/cases/4"
       },
-      "suggested_formal_challenge_id": "legacy-strongest-SP-017",
-      "suggested_formal_response": "reject",
-      "response_suggestion_basis": "AI validity rejected strongest counterargument; historical user agreed with the assessment, but did not provide a formal challenge-ID-specific response.",
+      "formal_challenge_id": null,
+      "formal_response_decision": null,
+      "response_mapping_status": "case_level_agreement_with_ai_assessment_only",
       "formal_response_human_confirmed": null,
       "candidate_final_evidence": [
         {

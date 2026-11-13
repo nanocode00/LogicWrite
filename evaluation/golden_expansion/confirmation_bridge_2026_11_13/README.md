@@ -16,7 +16,7 @@
 
 ## 정식 형태로 제안할 수 있지만 확정하지 않은 내용
 
-Codex의 strongest counterargument를 각 사례의 임시 `legacy-strongest-<case_id>` challenge로 대응시켰다. 17건 모두 Codex 평가가 해당 반론의 판단 뒤집기 시도를 받아들이지 않으므로 `reject`를 **제안**한다. 사용자의 '동의'는 그 Codex 평가에 관한 것으로, 새 `challenge_id`에 대한 정식 `reject` 응답을 직접 제출했다는 뜻은 아니다.
+Codex의 strongest counterargument와 그 타당성 평가는 원본 출처 그대로 연결한다. 사용자의 사례별 '동의'는 **Codex의 평가에 동의**했다는 뜻으로만 보존한다. 이를 정식 `challenge_id`별 `accept/reject/defer`로 전환하는 것은 근거가 부족하므로 **응답값과 challenge ID를 모두 null로 유지**한다.
 
 AI가 인용한 원문/후보 34개는 SHA/offset으로 대조된 **참고 근거**이나, 현재 `human_confirmed_as_final_evidence`는 모두 null이다. UNRESOLVED 4건의 `initial_unresolved_reason`은 실제 사용자 최초 이유이며, 별도의 final `unresolved_issues` 사용자 입력으로 합성하지 않는다.
 

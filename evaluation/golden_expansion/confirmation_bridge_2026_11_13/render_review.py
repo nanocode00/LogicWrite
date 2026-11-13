@@ -14,7 +14,7 @@ lines=[
  "- 기존 포함 승인: 17/17",
  "- 기존 신규 적격성/활성화: 0/17, 기존 골드 SP-001~012 12건 유지",
  "- Codex 인용 근거 후보: 34개, 아직 사용자가 정식 최종 증거로 확인한 것은 0개",
- "- 제안하는 반론 정리: 17건 모두 AI가 기존 판단을 뒤집는 반론에 동의하지 않았고, 사용자는 이 AI의 평가에 사례별로 동의했다. 각 challenge에 대한 정식 reject 응답이 제출되었다는 의미가 아니다.",
+ "- 반론 응답 원문: 17건 모두 사용자는 Codex의 반론 타당성 평가에 동의했다. 정식 challenge별 accept/reject/defer는 매핑하지 않는다.",
  "- 실제로 확인이 필요한 범위: 최종 증거 인용의 채택, 제안한 challenge별 응답, 평가 한계 인지 및 UNRESOLVED 4건의 최종 미해결 사유 확인. 승인되지 않은 값은 모두 null로 유지",
  "",
  "## 사례별 기존 판단과 제안 근거",
@@ -33,7 +33,7 @@ for row in data["cases"]:
       f"- Codex가 검토한 반론: {row['historical_codex_argument']}",
       f"- Codex의 반론 타당성 평가: {row['codex_assessment']}",
       f"- 실제 사용자 응답: Codex 평가에 동의 / 최종 판단 {row['historical_final']['judgment']}",
-      "- 서식 연결안: 반론을 수용하지 않음(reject 제안). 정식 challenge 응답은 미확인",
+      "- 정식 challenge ID·응답: 미확정 (사용자의 기존 동의를 임의로 accept/reject/defer로 치환하지 않음)",
     ])
     if row["initial_unresolved_reason"]:
         lines.append(f"- 확인할 최종 미해결 이유 후보(기존 최초 이유): {row['initial_unresolved_reason']}")
