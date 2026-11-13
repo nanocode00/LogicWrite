@@ -55,7 +55,7 @@ PR #15 당시 실행 기록(현행화 전 기획서): 원본 4,614바이트 불�
 | 겹치는 범위 | 동일 범위·동일 결과는 한 번만 반영하고 모든 단위를 추적. 상충 결과·부분 중첩 수정은 전체 후보로 만들지 않음. 수정 없는 중첩 범위는 정확한 위치로 추적 |
 | 문서 내부 배치 | 완전한 독립 문단과 해석 가능한 기존 단위의 before/after 기준점, 또는 유일한 기존 제목 경로와 relative_order를 지원. 새 제목은 만들지 않음. 상충·순환 배치는 보류 |
 | 보호 구조 | 제목·코드·표·인용 블록을 분해해 재작성/이동하지 않음. 원본 문맥상 수정 제외 정책은 Expression 검증기를 재사용 |
-| 문서 간 MOVE | 원본의 완전한 독립 문단만 검증된 전체 목적지에 추가. 필수 조건도 실제 목적지에 보존돼야 함. 원본·목적지 전체를 하나의 ChangeSet으로 구성 |
+| 문서 간 MOVE | 원본의 완전한 독립 문단만 검증된 전체 목적지 끝에 append. section_path는 빈 배열이며 목적지 섹션·앵커 요청은 `MOVE_PLACEMENT_UNSUPPORTED`로 Preview/REVIEW 보류. 필수 조건도 실제 목적지에 보존돼야 함. 원본·목적지 전체를 하나의 ChangeSet으로 구성 |
 | MOVE 경계 | 기존 목적지 내용은 자체 문서에 고정. 필요한 최소 개행만 추가. 미확정 코드 펜스·HTML 등 unsupported 구문이 있는 목적지로는 추가하지 않음 |
 | 중복 통합 | 기존 검증기의 compatible 그룹에 속한 정확히 같은 독립 문단만 지정된 primary에 대응. secondary 원문 범위도 alias로 보존·추적. 다른 KEEP 발생 위치를 해당 그룹으로 지울 수 없음 |
 | 제거/잠정 목적지/부분 블록 이동 | 독립적인 실제 제거 승인 실행기가 없거나 안전한 문서 구성을 확정할 수 없어 Preview/REVIEW로 보류 |
@@ -70,6 +70,7 @@ PR #15 당시 실행 기록(현행화 전 기획서): 원본 4,614바이트 불�
 - `candidate`: 모든 입력 원본/목적지의 전체 output_snapshots를 생성했으며 preview_fragments는 비어 있음. **최종 승인과 다름**.
 - `preview`: 전체 재구성이 보류돼 output_snapshots는 비어 있음. 부분 문서 묶음을 전달 후보처럼 표시하지 않음.
 - `block_ledger`/`change_set`: 모든 원본 구간과 출력 구간, 처리 방식 및 통합 alias의 근거를 기록. 출처가 없는 것은 독립 검증 가능한 MOVE 경계의 최소 개행뿐임.
+- `execution_observations`: 편집 판단 D(assessment/placement/표현 요청)와 실제 결과 Q(trace spans/원장 처리/문자 변경 여부)를 분리한 부가 진단. 보류된 전체 후보는 not_materialized이며 검증·승인 근거로 사용하지 않음. 상세는 [Core 구현 현황](CORE_STATUS.md#d와-q-산출물-계약) 참조.
 - `trace`: 모든 단위·요소 ID와 원본 span 및 실제 출력의 정확한 span·문자열·다이제스트를 연결. 같은 문장의 다른 출현 위치로 바꾸는 것도 차단.
 - 추가 참조: `analysis_ref`, `expression_preview_sha256`, `source_refs`, `revision_sha256`. 해시 자체는 실행자·의미 평가자의 인증이 아님.
 

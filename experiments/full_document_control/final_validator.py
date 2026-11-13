@@ -252,6 +252,9 @@ def _check_physical_order(bundle, analysis, org, docs, ledger, finding):
         if plc['disposition'] != 'placed':
             continue
         if plc['action'] == 'MOVE' and uid in unit_blocks:
+            target = plc['targets'][0]
+            if target.get('section_path') or target.get('anchor_unit_id') or target.get('anchor_relative_position') in {'before', 'after'}:
+                finding('ORGANIZATION_FIDELITY', 'MOVE_PLACEMENT_UNSUPPORTED', 'Append-only output cannot satisfy destination section/anchor placement')
             bid = unit_blocks[uid]
             moves[bid] = scopes[plc['targets'][0]['scope_id']]
         if plc['action'] == 'CONSOLIDATE' and uid in unit_blocks and plc.get('consolidated_into') in unit_blocks:
