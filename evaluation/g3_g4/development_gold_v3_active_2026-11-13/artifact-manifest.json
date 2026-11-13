@@ -1,0 +1,16 @@
+{
+  "activation/PLAN.md": "a27583cab538310054779e29f1628b4b767ad29e164045b30ffd902bd1ec4d5c",
+  "activation/README.md": "117f2db0c879e973c86ee56b79f295cff3c72e9ec5e0a150af7cff016a911ad2",
+  "activation/VALIDATION.md": "858d727d4a20e4790eb150e2c5264d713dc14600c1e112e3240895a022bbace6",
+  "activation/activation-history.json": "557885ced3be7d0ff39ad8897a0379f1e7334691992e917e23f03ac9a1aab0d3",
+  "activation/development-gold.json": "ef40a2e673d1e6ea3cc78bb2ca14da583a1f089ba9d1e47c0fdf4a8fb4b39fff",
+  "activation/policy-approval.json": "bc128e8dbc44884d6d51acfbbe1cc70455d786ead3c0f49d8ac3a9b20501cd27",
+  "activation/preserved-files.json": "4516de328a1f72a004a1492c7f93c6a4d003c654ccc71f7464682073f11f8a3d",
+  "activation/validate.py": "22bf18be2226683fea6c7a35decdff44cbd3a14468672c3642ea4b92dbb84306",
+  "consumers/README.md": "4d0d0dd61e9068c4b35d2f2f81e075fa7024c8dc781eb6ef888bf518982dda0e",
+  "consumers/core_diagnostics.py": "ff3f20cb4cdebf09bdb234db001aff50a983be506b9f0bb4b0f5df39ab32b1cd",
+  "consumers/runtime.py": "1fd73e03a6747e3e06c1929b23e4351e049ffe5819a2f59c375486eeb4169fbb",
+  "consumers/source_candidate.py": "25edfc78c30acc41d887fa2a9935a9a734b336dfd079366331554d806973035f",
+  "consumers/test_active.py": "dd09cc398c6668eb48e884dde0de5ede65a9bd587f1b23a5dde34ab32b7cdec0",
+  "index": "99bc3355786194a51b8b234e3c3b4b8a1d31ac600d76dc9992aa57a5b6d00895"
+}
