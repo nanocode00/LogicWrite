@@ -55,3 +55,11 @@ python3 evaluation/integrated_reconstruction/check_preservation.py --legacy-chec
 ```
 
 현재 Core·개발 문서는 과거 바이트와 동일할 의무가 없다. 기존 직접 역사 validator와 `run_checks.py`는 최초 snapshot 재현 전용이며 공식 전체 명령을 대신하지 않는다. 검증 실패를 제외/skip하거나 기존 증거를 다시 해시해 해결하지 않았다. 이 PR은 Draft를 유지하며 사람 판단·골드 포함 승인을 작성하지 않는다. IR-001의 현실성·역할 유도·대안/Q 조건 필요성은 DESIGN/REVIEW에 남겼다.
+
+### 최종 전체 실행 결과
+
+실제 최신 main `a7a93603026c97e306dced2f36c783c7a2c8ce2d`: **731 PASS**. 이를 반영한 #36 검증 커밋 `64188cf`: **760 PASS = 역사244 + Core446 + 소비자22 + 경계19 + 신규 평가29**. 공식 실행이 `test_integrity.py`23개와 `test_preservation.py`6개를 각각 현재 단계에서 수집·실행한 것을 보고서로 확인했다. 양쪽 failures/errors/skipped/expected_failures/unexpected_successes 전부0, 증거·코드 실행 전후 지문 동일. 원격 Actions workflow0개이며 위 결과는 로컬 검증이다.
+
+[새 통합 검증 요약](records/integration-validation-2026-11-13.json)에 suite별 실행 수, 검증 revision/코드 지문, 전체 로컬 JSON 경로·SHA, 보존 수량, 원본 입력3건 SHA와 신규 스키마 계보를 남겼다. 원래 records는 수정하지 않았다. 이후 추가한 파일은 이 요약/설명뿐이며 테스트한 코드·입력·답안·사람 응답은 같다. 최종 `git diff --check` 및 별도 보존 검사도 통과했다.
+
+사람은 기존 입력3건의 설계 검수를 시작할 수 있다. 현실적 난도·목적 복구·Q 필수성은 미확정이며 이 검증으로 정답을 확정하지 않는다. PR #34의57건은 그대로 Draft/보존, #36도 Draft다. 실제 모델 성능·골드 승인은 미실시다.
