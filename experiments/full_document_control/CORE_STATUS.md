@@ -78,3 +78,9 @@ git diff --name-only 879d15b -- evaluation/
 ```
 
 로컬 결과: Core 371 + minimal_gate 31 + extraction_analysis 27 + extraction_ab 17 = **446 tests 통과**. `repair_example.py`는 1회 복구 후 REVIEW / VALIDATION_INCOMPLETE, 두 승인 플래그 false를 유지했다. 별도 읽기 전용 코드 리뷰는 지적 사항 없음, 관련 67 tests 통과를 확인했다. `git diff --check` 통과, evaluation 변경 목록은 비어 있다. 로컬 회귀는 외부 모델의 의미 품질, 홀드아웃 점수, 원격 CI, 실제 승인/배포 검증과 구별한다.
+
+### PR #37 실제 병합 후 재검증
+
+PR #37이 실제 main `6be0e615c5c56e7cb084596918b50e3438da0d03`으로 병합된 뒤 이를 이 PR 브랜치에 병합해 충돌 없이 재검증했다. 공식 명령 `python3 tools/evidence_validation/run.py --output /tmp/logicwrite-pr33-final.json` 결과는 **731 tests PASS**(역사 평가 244 + 현재 Core 446 + 현재 소비자 22 + 경계 19), failures/errors/skip/expected failures/unexpected successes 모두 0이다. 과거 보존 검증 실패 7묶음도 고정 snapshot에서 전부 실행했다. 기존 임시 결합 728건보다 3건 늘어난 것은 #37 검수에서 추가한 skip/expected failure/`tests/` 수집 회귀다.
+
+`repair_example.py`는 승인·단계 전환 false 및 REVIEW를 유지한다. Golden Set/fixture/사람 판단·승인 정책은 기준 main과 바이트 동일하며 `git diff --check` 통과다. 원격 Actions workflow는 0개여서 위 결과는 로컬 검증이다. 기존 직접 역사 검증기는 과거 snapshot용이며 공식 전체 명령은 저장소 README와 `tools/evidence_validation/README.md`에 안내한다.
