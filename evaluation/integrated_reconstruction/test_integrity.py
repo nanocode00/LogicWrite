@@ -129,5 +129,43 @@ class IntegrityTests(unittest.TestCase):
         self.assertNotIn('source_family', x)
         self.assertNotIn('answer', json.dumps(x))
 
+class InputV2Tests(unittest.TestCase):
+    def value(self):
+        x = json.loads((ROOT / 'inputs/IR-003.json').read_text())
+        x.update(schema_version='integrated-input-v2', context=None, explicit_constraints=[])
+        x['availability']['document_set'] = 'partial'
+        x['documents'][0].update(role=None, authority=None, completeness='excerpt',
+                                 source_scope='provided excerpt only; original offsets unknown')
+        return x
+
+    def test_unconstrained_partial_input_with_unknown_roles_is_valid(self):
+        v.check_input(ROOT, self.value())
+
+    def test_excerpt_requires_declared_gap_and_scope(self):
+        for field in ('gaps', 'source_scope'):
+            x = self.value()
+            if field == 'gaps':
+                x['availability']['gaps'] = []
+            else:
+                del x['documents'][0]['source_scope']
+            with self.assertRaises(ValueError):
+                v.check_input(ROOT, x)
+
+    def test_partial_set_requires_gap(self):
+        x = self.value()
+        x['documents'][0]['completeness'] = 'complete'
+        del x['documents'][0]['source_scope']
+        x['availability']['gaps'] = []
+        with self.assertRaises(ValueError):
+            v.check_input(ROOT, x)
+
+    def test_unknown_input_version_and_answer_leak_rejected(self):
+        for change in ({'schema_version': 'integrated-input-v99'}, {'expected_actions': ['REMOVE']}):
+            x = self.value()
+            x.update(change)
+            with self.assertRaises(ValueError):
+                v.check_input(ROOT, x)
+
+
 if __name__ == '__main__':
     unittest.main()

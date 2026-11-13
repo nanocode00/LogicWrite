@@ -19,3 +19,16 @@ D `decision_observation`은 외부 제출한 요약 판단·원문 근거다. `c
 Q는 `execution_status=partial/failed/not_run`에서 완성본 품질 점수를 만들지 않는다. `validation_results.status`의 not_run과 pass를 구별하고, 실패는 정당한 보류가 아니다. 의미 보존·문서 목적·추론의 적절성은 별도 사람 검수 대상이다. 스키마는 이런 보고를 위한 구조이며 자동 의미 채점기나 Core runner가 아니다.
 
 검수 기록에서 공급받지 않은 이름·시각·서명·사유를 만들지 않는다. 최초/최종 판단은 포함 승인과 다르다. 포함 승인은 현재 패키지에서는 null만 허용한다. 이후 별도 사람 결정·출처·해시를 가진 승인 절차를 만들 때 스키마를 버전 관리한다. AI가 사람 판단을 기록하더라도 실제 인용과 기록자/판정자 구분을 남겨야 한다.
+
+## 입력 v2 — 불완전한 계약/자료 표현
+
+기존 `input.schema.json` 및 IR-001~003 v1 바이트/해시/사람 응답은 유지한다. 새 `input-v2.schema.json`을 `schema_version=integrated-input-v2`로 선택할 수 있다. 아직 실제 v2 평가 사례·답안·사람 판단은 없다.
+
+| v2 항목 | 해석 |
+|---|---|
+| `explicit_constraints: []` | 명시 제약 미제공. 권한·사실·미확정 범위는 여전히 준수 |
+| `context`, `documents[].role/authority: null` | 미확정 맥락/역할/근거 위상. 문서 내용에 근거한 추론과 사용자 확인 구분 |
+| `availability.document_set: complete/partial/unknown` | 제공 문서군의 완전성. partial/unknown은 비어 있지 않은 gaps 필수 |
+| `documents[].completeness: complete/excerpt` | 개별 제공 본문이 완본인지 발췌인지. excerpt는 source_scope와 gaps 필수. SHA·인용은 제공 본문 좌표만 뜻하며 누락 원문의 복원·변경을 주장하지 않음 |
+
+v2는 입력 표현 및 무결성 검증까지 지원한다. 기존 submission/reference는 완전한 제공 문서군 후보 규약이며 **발췌본을 원문 전체 출력으로 취급하는 Core 어댑터·Q 채점은 미구현**이다. 부분 자료의 사람 평정은 제공 범위 보존·정당한 보류까지만 설계 검토하고, 새 사례/출력 규약 버전 승인 후 실행 평가한다.

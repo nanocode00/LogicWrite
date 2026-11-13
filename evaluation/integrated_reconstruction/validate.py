@@ -54,7 +54,13 @@ def check_evidence(items, docs):
 
 
 def check_input(root, inp):
-    schema_check(root, 'input', inp)
+    version = inp.get('schema_version')
+    require(version in ('integrated-input-v1', 'integrated-input-v2'), 'unknown input version')
+    schema_check(root, 'input-v2' if version == 'integrated-input-v2' else 'input', inp)
+    if version == 'integrated-input-v2':
+        incomplete = (inp['availability']['document_set'] != 'complete'
+                      or any(d['completeness'] == 'excerpt' for d in inp['documents']))
+        require(not incomplete or bool(inp['availability']['gaps']), 'incomplete input requires declared gaps')
     unique(inp['documents'], 'document_id')
     unique(inp['documents'], 'path')
     for d in inp['documents']:

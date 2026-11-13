@@ -16,7 +16,9 @@
 
 처음 테스트는 검증기 미작성으로 import 실패했다([로그](records/initial-missing-validator.log)). 이것을 동작 회귀 실패 재현과 혼동하지 않는다. 서식 검사의 숫자 분리/단어 결합 결함은 실제 2개 테스트 실패→수정 후 성공으로 재현했다.
 
-보존 재현:
+위 표와 `records/`는 최초 기준 main에서 실행한 역사적 기록이며 덮어쓰지 않는다. 아래 직접 validator/`run_checks.py` 명령도 그 기준 트리의 재현용이다. 현재 공식 전체 실행은 다음 통합 정리 절을 따른다.
+
+최초 기준 트리 보존 재현:
 
 ```sh
 python3 evaluation/integrated_reconstruction/check_preservation.py
@@ -33,3 +35,23 @@ python3 evaluation/core_pipeline_2026_11_11/run_checks.py --output /tmp/logicwri
 정답이 편집 순서/표현 하나를 강제하지 않도록 대안을 두었으나, Q 조건의 필수성·서식/의미 경계·D 사전 제출의 관측 효과는 사람 검수가 필요하다. 3건은 모두 한 합성 작성 군집이고 실자료/독립 출처/실제 AI 초안의 분포를 검증하지 않았다. 관련 자료를 전부 제공하므로 검색 능력 실험이 아니다.
 
 모델 B0/B1/B2 실행·문서 품질 점수·개선 효과·검토 시간·원격 CI 통과·사람 검수·골드 포함 승인·동결·홀드아웃·Core 통합은 **미실시**다. 해시와 스키마는 구조/버전 비교 수단이며 정답의 의미적 타당성이나 사람 신원의 인증이 아니다. 작업은 Draft PR로 검토하며 사람 검수 전 병합하지 않는다.
+
+## 순차 통합 후 검증 경계 보완
+
+PR #37 main `6be0e61` → PR #33 main `af6a793` → PR #35 main `a7a93603026c97e306dced2f36c783c7a2c8ce2d`를 실제 병합 순서대로 반영했다. `records/protected_baseline.json`과 최초 실행 기록은 원본으로 유지한다.
+
+- 이전 `check_preservation.py`는 정상적인 현재 README/Core 변경을 main asset changed로 거부했다. 실패 재현 후 #37의 EvidenceStore를 재사용해 **역사 전체616 Git 객체/snapshot**과 **현재 기존 평가/fixture545파일**을 분리했다. 원래 baseline 자체는 최초 PR #36 Git blob과 대조하므로 재봉인도 거부한다.
+- PR #34의 고정420파일·과거 #35 문서1파일을 Git 객체로 계속 확인한다. 현재 #35 문서의 정상 추가는 과거 기록 객체를 대체하지 않는다. `--legacy-checkout`으로 IDE의 실제 #34 checkout420파일도 대조했다.
+- 이미 사용된 v1 입력/답안/참고 출력/사람 응답 및 메타데이터21파일은 최초 PR #36 commit `1b0776b`의 객체와 현재 저장본을 비교한다. symlink 대체, 입력·사람 응답 변경, baseline 재봉인, 기존 승인·manifest 변경을 거부한다. 향후 실제 사람 응답은 사본/별도 버전 기록으로 보존하고 원본을 덮어쓰지 않는다.
+- v1 스키마와 3개 입력의 바이트·SHA·계보는 바꾸지 않았다. 별도 v2 입력 규약과 4개 회귀를 추가했다. `explicit_constraints=[]`, null 맥락/역할/근거 위상, partial/unknown 문서군, excerpt+source_scope+gaps를 검사한다. 기존 전체 출력 규약의 발췌 입력 실행/자동 Q 채점은 지원하지 않는다.
+- 신규 보존 회귀6개 + 기존/입력v2 무결성23개 = **29 tests PASS**, 독립 읽기 전용 리뷰 차단 문제 없음. 기계 검증은 D/Q 기준의 의미 타당성이나 사람 승인 근거가 아니다.
+
+현재 공식 전체 명령과 패키지 검사:
+
+```sh
+python3 tools/evidence_validation/run.py --output /tmp/logicwrite-pr36-final.json
+python3 evaluation/integrated_reconstruction/validate.py
+python3 evaluation/integrated_reconstruction/check_preservation.py --legacy-checkout /home/honorbear/LogicWrite
+```
+
+현재 Core·개발 문서는 과거 바이트와 동일할 의무가 없다. 기존 직접 역사 validator와 `run_checks.py`는 최초 snapshot 재현 전용이며 공식 전체 명령을 대신하지 않는다. 검증 실패를 제외/skip하거나 기존 증거를 다시 해시해 해결하지 않았다. 이 PR은 Draft를 유지하며 사람 판단·골드 포함 승인을 작성하지 않는다. IR-001의 현실성·역할 유도·대안/Q 조건 필요성은 DESIGN/REVIEW에 남겼다.
