@@ -1,0 +1,76 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T6-05",
+  "task": {
+    "title": "권한 범위별 반복과 귀속 구별",
+    "purpose": "권한 정책과 공지 전체를 통합 검토한다. 공지에서 정책의 현지 경고는 유지해야 한다.",
+    "audience": "기술 리뷰어/의사결정자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "권한 정책과 공지 전체를 통합 검토한다. 공지에서 정책의 현지 경고는 유지해야 한다.",
+    "output_document_ids": [
+      "policy",
+      "notice"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "policy",
+      "role": "editable fictional document",
+      "content": "# 권한 정책\n운영자: 책임자 승인 후 쓰기 가능. 감사자: 읽기 전용.\n팀 전체 최적화로 지연이 감소했다. 담당자 유나는 측정만 수행했다.\n",
+      "sha256": "c2832bb0a4573bbaedff4a0a3efe2fa1a2ce387e9b312e0755262c0265c91fa5",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [
+    {
+      "document_id": "notice",
+      "role": "editable fictional document",
+      "content": "# 운영 공지\n운영자도 책임자 승인 전 쓰기 금지. 감사자는 읽기 전용.\n",
+      "sha256": "d8f563eef91fd2fede5ae564801b74138c6d0d3eb50870bb7e0b89f7c92c9300",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "policy",
+      "notice"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

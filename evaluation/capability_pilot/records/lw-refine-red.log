@@ -1,0 +1,43 @@
+...E......E....
+======================================================================
+ERROR: test_dataset (test_integrity.IntegrityTests.test_dataset)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 53, in test_dataset
+    result = self.validate()
+             ^^^^^^^^^^^^^^^
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 30, in validate
+    return self.module.validate_package(self.root, require_reviews=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/validate.py", line 171, in validate_package
+    inp, answer, review = validate_pair(root, c, sources)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/validate.py", line 102, in validate_pair
+    require(set(scope) == set(inp['contract']['output_document_ids']), 'contract/scope mismatch')
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/validate.py", line 19, in require
+    raise ValueError(message)
+ValueError: contract/scope mismatch
+
+======================================================================
+ERROR: test_read_only_record_may_be_returned_but_never_edited (test_integrity.IntegrityTests.test_read_only_record_may_be_returned_but_never_edited)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 37, in test_read_only_record_may_be_returned_but_never_edited
+    self.assertEqual(self.validate()['cases'], 56)
+                     ^^^^^^^^^^^^^^^
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 30, in validate
+    return self.module.validate_package(self.root, require_reviews=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/validate.py", line 171, in validate_package
+    inp, answer, review = validate_pair(root, c, sources)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/validate.py", line 102, in validate_pair
+    require(set(scope) == set(inp['contract']['output_document_ids']), 'contract/scope mismatch')
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/validate.py", line 19, in require
+    raise ValueError(message)
+ValueError: contract/scope mismatch
+
+----------------------------------------------------------------------
+Ran 15 tests in 3.779s
+
+FAILED (errors=2)

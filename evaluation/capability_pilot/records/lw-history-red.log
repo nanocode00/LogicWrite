@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_previous_review_input_bytes_remain_bound (test_integrity.IntegrityTests.test_previous_review_input_bytes_remain_bound)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 101, in test_previous_review_input_bytes_remain_bound
+    with self.assertRaises(ValueError): self.validate()
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 1.326s
+
+FAILED (failures=1)

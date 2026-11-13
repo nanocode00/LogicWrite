@@ -1,0 +1,67 @@
+{
+  "T1": [
+    "facts_conditions",
+    "cross_paragraph",
+    "true_conflict",
+    "scope_time_attribution",
+    "unclear_authority"
+  ],
+  "T2": [
+    "selection",
+    "audience_purpose",
+    "local_exposure",
+    "long_required",
+    "purpose_conflict"
+  ],
+  "T3": [
+    "empty_information",
+    "partial_removal",
+    "equivalent_retained",
+    "unique_value_protected",
+    "unclear_retention"
+  ],
+  "T4": [
+    "known_destination",
+    "multiple_destinations",
+    "local_summary_link",
+    "destination_integrity",
+    "missing_destination_scope"
+  ],
+  "T5": [
+    "prerequisite_order",
+    "grouping",
+    "multiple_orders",
+    "keep_placement",
+    "missing_anchor"
+  ],
+  "T6": [
+    "exact_duplicate",
+    "partial_unique",
+    "different_scope_time_attribution",
+    "necessary_repetition",
+    "unknown_equivalence"
+  ],
+  "T7": [
+    "required_missing",
+    "partial_missing_location",
+    "already_satisfied",
+    "authority_conflict",
+    "unsupported_requirement"
+  ],
+  "T8": [
+    "style_terms",
+    "referent_clarity",
+    "compression",
+    "protected_code_quote_id",
+    "optional_noop",
+    "missing_context"
+  ],
+  "T9": [
+    "whole_task",
+    "preserved_but_unfit",
+    "roles_consistency",
+    "multiple_whole_outputs",
+    "global_regression",
+    "partial_or_unclear_task"
+  ]
+}

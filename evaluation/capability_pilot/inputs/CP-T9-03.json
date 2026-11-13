@@ -1,0 +1,92 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T9-03",
+  "task": {
+    "title": "esbuild: 역할 분리와 전역 퇴행 방지",
+    "purpose": "도입 검토 README와 제공된 시작 안내를 함께 편집한다. API/기능 설명을 다듬어도 시작 링크와 제한된 근거 범위를 잃지 않아야 한다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "도입 검토 README와 제공된 시작 안내를 함께 편집한다. API/기능 설명을 다듬어도 시작 링크와 제한된 근거 범위를 잃지 않아야 한다.",
+    "output_document_ids": [
+      "draft",
+      "quickstart"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "<p align=\"center\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"./images/wordmark-dark.svg\">\n    <source media=\"(prefers-color-scheme: light)\" srcset=\"./images/wordmark-light.svg\">\n    <img alt=\"esbuild: An extremely fast JavaScript bundler\" src=\"./images/wordmark-light.svg\">\n  </picture>\n  <br>\n  <a href=\"https://esbuild.github.io/\">Website</a> |\n  <a href=\"https://esbuild.github.io/getting-started/\">Getting started</a> |\n  <a href=\"https://esbuild.github.io/api/\">Documentation</a> |\n  <a href=\"https://esbuild.github.io/plugins/\">Plugins</a> |\n  <a href=\"https://esbuild.github.io/faq/\">FAQ</a>\n</p>\n\n## Why?\n\nOur current build tools for the web are 10-100x slower than they could be:\n\n<p align=\"center\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"./images/benchmark-dark.svg\">\n    <source media=\"(prefers-color-scheme: light)\" srcset=\"./images/benchmark-light.svg\">\n    <img alt=\"Bar chart with benchmark results\" src=\"./images/benchmark-light.svg\">\n  </picture>\n</p>\n\nThe main goal of the esbuild bundler project is to bring about a new era of build tool performance, and create an easy-to-use modern bundler along the way.\n\nMajor features:\n\n- Extreme speed without needing a cache\n- [JavaScript](https://esbuild.github.io/content-types/#javascript), [CSS](https://esbuild.github.io/content-types/#css), [TypeScript](https://esbuild.github.io/content-types/#typescript), and [JSX](https://esbuild.github.io/content-types/#jsx) built-in\n- A straightforward [API](https://esbuild.github.io/api/) for CLI, JS, and Go\n- Bundles ESM and CommonJS modules\n- Bundles CSS including [CSS modules](https://github.com/css-modules/css-modules)\n- Tree shaking, [minification](https://esbuild.github.io/api/#minify), and [source maps](https://esbuild.github.io/api/#sourcemap)\n- [Local server](https://esbuild.github.io/api/#serve), [watch mode](https://esbuild.github.io/api/#watch), and [plugins](https://esbuild.github.io/plugins/)\n\nCheck out the [getting started](https://esbuild.github.io/getting-started/) instructions if you want to give esbuild a try.\n",
+      "sha256": "d9233b2fb0eb5c20dd5371d0ec627bfeacede26cb5781cb19e645798ea21c585",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "evanw/esbuild",
+        "transformations": []
+      },
+      "document_path": "README.md"
+    }
+  ],
+  "destination_documents": [
+    {
+      "document_id": "quickstart",
+      "role": "editable complete controlled destination",
+      "content": "# First-use guide (controlled draft)\n- Extreme speed without needing a cache\n- [JavaScript](https://esbuild.github.io/content-types/#javascript), [CSS](https://esbuild.github.io/content-types/#css), [TypeScript](https://esbuild.github.io/content-types/#typescript), and [JSX](https://esbuild.github.io/content-types/#jsx) built-in\n- A straightforward [API](https://esbuild.github.io/api/) for CLI, JS, and Go\n- Bundles ESM and CommonJS modules\n- Bundles CSS including [CSS modules](https://github.com/css-modules/css-modules)\n- Tree shaking, [minification](https://esbuild.github.io/api/#minify), and [source maps](https://esbuild.github.io/api/#sourcemap)\n- [Local server](https://esbuild.github.io/api/#serve), [watch mode](https://esbuild.github.io/api/#watch), and [plugins](https://esbuild.github.io/plugins/)\n\n## Next step\nTo be connected to the pinned README learning path.\n",
+      "sha256": "15dcb59a645b3bb387a07f26018a8946043950dde2f47b7b10de28d6a6caefb0",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "controlled-destinations",
+        "transformations": []
+      },
+      "document_path": "quickstart.md"
+    }
+  ],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "<p align=\"center\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"./images/wordmark-dark.svg\">\n    <source media=\"(prefers-color-scheme: light)\" srcset=\"./images/wordmark-light.svg\">\n    <img alt=\"esbuild: An extremely fast JavaScript bundler\" src=\"./images/wordmark-light.svg\">\n  </picture>\n  <br>\n  <a href=\"https://esbuild.github.io/\">Website</a> |\n  <a href=\"https://esbuild.github.io/getting-started/\">Getting started</a> |\n  <a href=\"https://esbuild.github.io/api/\">Documentation</a> |\n  <a href=\"https://esbuild.github.io/plugins/\">Plugins</a> |\n  <a href=\"https://esbuild.github.io/faq/\">FAQ</a>\n</p>\n\n## Why?\n\nOur current build tools for the web are 10-100x slower than they could be:\n\n<p align=\"center\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"./images/benchmark-dark.svg\">\n    <source media=\"(prefers-color-scheme: light)\" srcset=\"./images/benchmark-light.svg\">\n    <img alt=\"Bar chart with benchmark results\" src=\"./images/benchmark-light.svg\">\n  </picture>\n</p>\n\nThe main goal of the esbuild bundler project is to bring about a new era of build tool performance, and create an easy-to-use modern bundler along the way.\n\nMajor features:\n\n- Extreme speed without needing a cache\n- [JavaScript](https://esbuild.github.io/content-types/#javascript), [CSS](https://esbuild.github.io/content-types/#css), [TypeScript](https://esbuild.github.io/content-types/#typescript), and [JSX](https://esbuild.github.io/content-types/#jsx) built-in\n- A straightforward [API](https://esbuild.github.io/api/) for CLI, JS, and Go\n- Bundles ESM and CommonJS modules\n- Bundles CSS including [CSS modules](https://github.com/css-modules/css-modules)\n- Tree shaking, [minification](https://esbuild.github.io/api/#minify), and [source maps](https://esbuild.github.io/api/#sourcemap)\n- [Local server](https://esbuild.github.io/api/#serve), [watch mode](https://esbuild.github.io/api/#watch), and [plugins](https://esbuild.github.io/plugins/)\n\nCheck out the [getting started](https://esbuild.github.io/getting-started/) instructions if you want to give esbuild a try.\n",
+      "sha256": "d9233b2fb0eb5c20dd5371d0ec627bfeacede26cb5781cb19e645798ea21c585",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "evanw/esbuild",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft",
+      "quickstart"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

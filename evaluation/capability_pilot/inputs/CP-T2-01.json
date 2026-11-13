@@ -1,0 +1,105 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T2-01",
+  "task": {
+    "title": "Pydantic: 신규 V2 사용자에게 필요한 선택",
+    "purpose": "V2 신규 사용자를 위한 짧은 도입 안내와 기존 사용자용 이관 메모를 만든다. 원문은 참고용으로 유지하고 두 출력의 독자를 구별한다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "V2 신규 사용자를 위한 짧은 도입 안내와 기존 사용자용 이관 메모를 만든다. 원문은 참고용으로 유지하고 두 출력의 독자를 구별한다.",
+    "output_document_ids": [
+      "draft",
+      "quickstart",
+      "reference"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "# Pydantic Validation\n\n[![CI](https://img.shields.io/github/actions/workflow/status/pydantic/pydantic/ci.yml?branch=main&logo=github&label=CI)](https://github.com/pydantic/pydantic/actions?query=event%3Apush+branch%3Amain+workflow%3ACI)\n[![Coverage](https://coverage-badge.samuelcolvin.workers.dev/pydantic/pydantic.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/pydantic/pydantic)\n[![pypi](https://img.shields.io/pypi/v/pydantic.svg)](https://pypi.python.org/pypi/pydantic)\n[![CondaForge](https://img.shields.io/conda/v/conda-forge/pydantic.svg)](https://anaconda.org/conda-forge/pydantic)\n[![downloads](https://static.pepy.tech/badge/pydantic/month)](https://pepy.tech/project/pydantic)\n[![versions](https://img.shields.io/pypi/pyversions/pydantic.svg)](https://github.com/pydantic/pydantic)\n[![license](https://img.shields.io/github/license/pydantic/pydantic.svg)](https://github.com/pydantic/pydantic/blob/main/LICENSE)\n[![Pydantic v2](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json)](https://pydantic.dev/docs/validation/latest/get-started/contributing/#badges)\n[![llms.txt](https://img.shields.io/badge/llms.txt-green)](https://pydantic.dev/docs/validation/latest/llms.txt)\n\nData validation using Python type hints.\n\nFast and extensible, Pydantic plays nicely with your linters/IDE/brain.\nDefine how data should be in pure, canonical Python 1+; validate it with Pydantic.\n\n## Pydantic Logfire :fire:\n\nLogfire is an observability and evaluation platform for AI applications and agents. Debug and trace agent execution, evaluate AI outputs, and manage model interactions through an integrated AI gateway.\nExplore [Logfire’s AI observability and evaluation platform](https://pydantic.dev/logfire).\n\n## Pydantic V1.10 vs. V2\n\nPydantic V2 is a ground-up rewrite that offers many new features, performance improvements, and some breaking changes compared to Pydantic V1.\n\nIf you're using Pydantic V1 you may want to look at the\n[pydantic V1.10 Documentation](https://pydantic.dev/docs/validation/1.10/overview/) or,\n[`1.10.X-fixes` git branch](https://github.com/pydantic/pydantic/tree/1.10.X-fixes). Pydantic V2 also ships with the latest version of Pydantic V1 built in so that you can incrementally upgrade your code base and projects: `from pydantic import v1 as pydantic_v1`.\n\n## Help\n\nSee [documentation](https://pydantic.dev/docs/validation/latest/get-started/) for more details.\n\n## Installation\n\nInstall using `pip install -U pydantic` or `conda install pydantic -c conda-forge`.\nFor more installation options to make Pydantic even faster,\nsee the [Install](https://pydantic.dev/docs/validation/latest/get-started/install/) section in the documentation.\n\n## A Simple Example\n\n```python\nfrom datetime import datetime\nfrom typing import Optional\nfrom pydantic import BaseModel\n\nclass User(BaseModel):\n    id: int\n    name: str = 'John Doe'\n    signup_ts: Optional[datetime] = None\n    friends: list[int] = []\n\nexternal_data = {'id': '123', 'signup_ts': '2017-06-01 12:22', 'friends': [1, '2', b'3']}\nuser = User(**external_data)\nprint(user)\n#> User id=123 name='John Doe' signup_ts=datetime.datetime(2017, 6, 1, 12, 22) friends=[1, 2, 3]\nprint(user.id)\n#> 123\n```\n\n## Contributing\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Pydantic, see\n[Contributing to Pydantic](https://pydantic.dev/docs/validation/latest/get-started/contributing/).\n\n## Reporting a Security Vulnerability\n\nSee our [security policy](https://github.com/pydantic/pydantic/security/policy).\n",
+      "sha256": "ce51f0aeaec3e44c54fd3311c305aae33b1569f95a9f9a5b1cc0aa8b3a51daf6",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "pydantic/pydantic",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [
+    {
+      "document_id": "quickstart",
+      "role": "editable complete controlled destination",
+      "content": "# New user guide\nNo curated content yet.\n",
+      "sha256": "42604b4a77752dacd8260fdaf01e380752fd9d01fc09a46ff8c311f519652b0b",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "controlled-destinations",
+        "transformations": []
+      }
+    },
+    {
+      "document_id": "reference",
+      "role": "editable complete controlled destination",
+      "content": "# Maintainer / migration notes\nExisting note: this is not a deployment approval record.\n",
+      "sha256": "5ca12f343d2d02bc9a2af86d4e624cce94b251be80fdb99b6eab24292a05484b",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "controlled-destinations",
+        "transformations": []
+      }
+    }
+  ],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "# Pydantic Validation\n\n[![CI](https://img.shields.io/github/actions/workflow/status/pydantic/pydantic/ci.yml?branch=main&logo=github&label=CI)](https://github.com/pydantic/pydantic/actions?query=event%3Apush+branch%3Amain+workflow%3ACI)\n[![Coverage](https://coverage-badge.samuelcolvin.workers.dev/pydantic/pydantic.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/pydantic/pydantic)\n[![pypi](https://img.shields.io/pypi/v/pydantic.svg)](https://pypi.python.org/pypi/pydantic)\n[![CondaForge](https://img.shields.io/conda/v/conda-forge/pydantic.svg)](https://anaconda.org/conda-forge/pydantic)\n[![downloads](https://static.pepy.tech/badge/pydantic/month)](https://pepy.tech/project/pydantic)\n[![versions](https://img.shields.io/pypi/pyversions/pydantic.svg)](https://github.com/pydantic/pydantic)\n[![license](https://img.shields.io/github/license/pydantic/pydantic.svg)](https://github.com/pydantic/pydantic/blob/main/LICENSE)\n[![Pydantic v2](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json)](https://pydantic.dev/docs/validation/latest/get-started/contributing/#badges)\n[![llms.txt](https://img.shields.io/badge/llms.txt-green)](https://pydantic.dev/docs/validation/latest/llms.txt)\n\nData validation using Python type hints.\n\nFast and extensible, Pydantic plays nicely with your linters/IDE/brain.\nDefine how data should be in pure, canonical Python 1+; validate it with Pydantic.\n\n## Pydantic Logfire :fire:\n\nLogfire is an observability and evaluation platform for AI applications and agents. Debug and trace agent execution, evaluate AI outputs, and manage model interactions through an integrated AI gateway.\nExplore [Logfire’s AI observability and evaluation platform](https://pydantic.dev/logfire).\n\n## Pydantic V1.10 vs. V2\n\nPydantic V2 is a ground-up rewrite that offers many new features, performance improvements, and some breaking changes compared to Pydantic V1.\n\nIf you're using Pydantic V1 you may want to look at the\n[pydantic V1.10 Documentation](https://pydantic.dev/docs/validation/1.10/overview/) or,\n[`1.10.X-fixes` git branch](https://github.com/pydantic/pydantic/tree/1.10.X-fixes). Pydantic V2 also ships with the latest version of Pydantic V1 built in so that you can incrementally upgrade your code base and projects: `from pydantic import v1 as pydantic_v1`.\n\n## Help\n\nSee [documentation](https://pydantic.dev/docs/validation/latest/get-started/) for more details.\n\n## Installation\n\nInstall using `pip install -U pydantic` or `conda install pydantic -c conda-forge`.\nFor more installation options to make Pydantic even faster,\nsee the [Install](https://pydantic.dev/docs/validation/latest/get-started/install/) section in the documentation.\n\n## A Simple Example\n\n```python\nfrom datetime import datetime\nfrom typing import Optional\nfrom pydantic import BaseModel\n\nclass User(BaseModel):\n    id: int\n    name: str = 'John Doe'\n    signup_ts: Optional[datetime] = None\n    friends: list[int] = []\n\nexternal_data = {'id': '123', 'signup_ts': '2017-06-01 12:22', 'friends': [1, '2', b'3']}\nuser = User(**external_data)\nprint(user)\n#> User id=123 name='John Doe' signup_ts=datetime.datetime(2017, 6, 1, 12, 22) friends=[1, 2, 3]\nprint(user.id)\n#> 123\n```\n\n## Contributing\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Pydantic, see\n[Contributing to Pydantic](https://pydantic.dev/docs/validation/latest/get-started/contributing/).\n\n## Reporting a Security Vulnerability\n\nSee our [security policy](https://github.com/pydantic/pydantic/security/policy).\n",
+      "sha256": "ce51f0aeaec3e44c54fd3311c305aae33b1569f95a9f9a5b1cc0aa8b3a51daf6",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "pydantic/pydantic",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft",
+      "quickstart",
+      "reference"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

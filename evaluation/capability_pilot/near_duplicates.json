@@ -1,0 +1,14 @@
+{
+  "method": "lowercase Unicode word 5-token shingles, Jaccard >= 0.12; short/shared templates and semantic derivations may evade this heuristic. Family graph is authoritative, not this score.",
+  "comparisons": "All new source documents against RW20 excerpts, LW12 inputs and four GC source documents. New public original SHA duplicates checked separately; synthetic author batch clustered.",
+  "matches": [
+    {
+      "case_id": "CP-T1-03",
+      "legacy_id": "requests",
+      "document_id": "draft",
+      "jaccard_5_token": 0.97229,
+      "disposition": "development_only; inspect correlation, never a holdout"
+    }
+  ],
+  "exact_public_original_duplicates": 0
+}

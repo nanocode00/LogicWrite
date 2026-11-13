@@ -1,0 +1,219 @@
+{
+  "reviewer": "독립 Codex AI",
+  "method": "input-only; answers/curation/reviews not read",
+  "cases": [
+    {
+      "case_id": "CP-T4-01",
+      "input_sha256": "a92e27b9d5cc269b137f8c8cc12ea3ce3128a3036c869bb8ccbeb1201efbabfe",
+      "assessment": "README.md와 ops.md 두 문서만 대상이다. benchmark 표와 연결된 조건·해석·한계를 ops.md Benchmarks로 재소속하는 판단이 타당하다. 목적지 전체와 실제 경로가 제공되어 이동과 내부 연결을 구체적으로 검토할 수 있다.",
+      "required_preservations": [
+        "corpus·CPU·locale/Unicode·옵션·line count·표 수치·성능 절벽·높은 match count 및 single benchmark 경고",
+        "README의 설치/빌드/기능/한계/관련 도구/라이선스 등 비대상 정보",
+        "ops의 legacy ls 예외 및 무관한 Shell integration/Background 절",
+        "읽기 전용 upstream 원문"
+      ],
+      "valid_alternatives": [
+        "Quick examples comparing tools 절을 문맥 전체와 함께 ops.md#benchmarks에 옮기고 README에 해당 링크를 남긴다.",
+        "성능 요약 절의 benchmark 연결과 일반 알고리즘 설명을 구분하여 적절한 범위를 선택한다. 하나의 경계만 정답으로 강제할 수 없다."
+      ],
+      "counterexample": "최고 속도 행만 옮기고 비교의 workload/Unicode/line count 차이 및 느린 경우를 버리면 결과를 일반적 성능 보증으로 바꾼다. ops를 benchmark 전용으로 덮어써 ls 예외를 삭제하는 것도 부당하다.",
+      "unresolved_conditions": [
+        "외부 blog 및 corpus URL의 내용은 입력에 없으므로 추가 벤치마크나 현재 성능을 단정할 수 없다. 이는 제공된 표의 이동을 막는 조건은 아니다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Please remember that a single benchmark is never enough!"
+        },
+        {
+          "document_id": "draft",
+          "quote": "Beware of performance cliffs though:"
+        },
+        {
+          "document_id": "draft",
+          "quote": "all matches must be words. Timings were collected on a system with an Intel\ni9-12900K 5.2 GHz."
+        },
+        {
+          "document_id": "ops",
+          "quote": "## Benchmarks\nNo imported benchmark yet."
+        },
+        {
+          "document_id": "ops",
+          "quote": "Existing exception: legacy ls workflows must remain unchanged."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-02",
+      "input_sha256": "acece704ac659da5a0ab3d5342f7cec30e16e2257e4b3d55a1cc89257aecc010",
+      "assessment": "ops.md와 quickstart.md 모두 Shell integration 절과 편집 가능한 전체 문맥이 있어 복수 목적지가 유효하다. 단순 이동 자체가 유일한 의무는 아니며 원본 설치 후 진입 경로와 기존 참조를 보존해야 한다.",
+      "required_preservations": [
+        "Homebrew/Linux 설치 뒤 연결, 목차 및 Key bindings의 #setting-up-shell-integration 진입 경로",
+        "bash/zsh/fish/Nushell 명령과 버전 제한·Nushell autoload·source 제약",
+        "변수 설정은 sourcing 시점이어야 한다는 조건",
+        "ops legacy ls 예외 및 quickstart 설치 선행조건을 포함한 비대상 목적지 정보"
+      ],
+      "valid_alternatives": [
+        "설정 절 전체를 ops.md#shell-integration으로 옮기고 README의 Setting up shell integration 헤더를 짧은 연결 안내로 남긴다.",
+        "같은 절을 quickstart.md#shell-integration에 배치하고 원본 연결을 유지한다.",
+        "이동이 선택적이라는 문구에 따라 원래 절 유지 판단도 가능하나 첫 사용 경로가 적절한 이유를 밝혀야 한다."
+      ],
+      "counterexample": "절 제목까지 지운 뒤 instructions below/목차/Key bindings의 로컬 앵커를 방치하면 연결이 끊긴다. Nushell source 방식을 다른 shell과 통합하거나 변수를 source 후 설정하게 요약하면 실행 조건이 바뀐다.",
+      "unresolved_conditions": [
+        "외부 package 문서나 /shell 실제 파일 본문은 제공되지 않았다. /shell은 저장소 루트 참조이고 shell/completion-examples.nu는 README 기준 상대 경로이므로 포함 범위에 따라 경로 의미를 확인한다. 현재 세 document_path는 같은 디렉터리라 단순 파일 이동만으로 상대 경로를 임의 변경할 이유는 없다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "see [the instructions below](#setting-up-shell-integration)."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Setting the variables after sourcing the script will have no effect."
+        },
+        {
+          "document_id": "draft",
+          "quote": "By [setting up shell integration](#setting-up-shell-integration), you can use"
+        },
+        {
+          "document_id": "ops",
+          "quote": "## Shell integration\nNo imported shell procedure yet."
+        },
+        {
+          "document_id": "quickstart",
+          "quote": "Select the tool for your task. Preserve the upstream installation prerequisites."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-03",
+      "input_sha256": "5c7d12e00695bb8dbfbe6779f4e61d97986389155ff9cddebcae2410ed0a9452",
+      "assessment": "고급 안내는 advanced.md로 명시되어 목적지 선택의 공백이 없다. fzf 및 import 선택 세부를 advanced Optional integrations에 옮기되 README에 필수 binary/shell 설정과 선택 기능을 구별하는 안내를 남기는 것이 타당하다.",
+      "required_preservations": [
+        "필수 binary 설치 및 shell 설정과 모든 플랫폼/shell별 조건",
+        "fzf 선택성·completions/interactive selection 목적·최소 v0.51.0",
+        "import 선택성·plugin별 표·기존 파일 자동 탐지 조건",
+        "advanced의 legacy ls 예외",
+        "이동한 [fzf], [fzf-installation] 등 참조형 링크는 목적지 안에서도 실제 정의에 해소되어야 함"
+      ],
+      "valid_alternatives": [
+        "선택 3/4단계의 상세를 advanced.md#optional-integrations에 옮기고 README에는 선택 표기와 실제 링크를 둔다.",
+        "advanced 안에서 fzf와 import 각각 하위 절을 만들고 README에서 두 개별 앵커로 연결한다. 설치 4단계라는 기존 소개는 요약의 네 단계 의미를 유지하거나 문맥상 조정한다."
+      ],
+      "counterexample": "선택 절의 코드만 이동하고 [fzf-installation] 정의를 README에만 남기면 advanced의 참조가 해소되지 않는다. optional 표기를 삭제하거나 fzf를 기본 z 명령의 필수 전제로 단정하거나, advanced를 새 파일처럼 덮어써 기존 예외를 지워도 부당하다.",
+      "unresolved_conditions": [
+        "외부 fzf 설치 문서의 실제 본문은 입력이 아니므로 URL이 설치 절을 가리킨다는 범위 이상의 지침을 추가할 수 없다. 이동 실행을 보류해야 할 목적지/권한 공백은 없다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "3. **Install fzf** <sup>(optional)</sup>"
+        },
+        {
+          "document_id": "draft",
+          "quote": "The minimum supported fzf version is v0.51.0."
+        },
+        {
+          "document_id": "draft",
+          "quote": "4. **Import your data** <sup>(optional)</sup>"
+        },
+        {
+          "document_id": "draft",
+          "quote": "[fzf-installation]: https://github.com/junegunn/fzf#installation"
+        },
+        {
+          "document_id": "advanced",
+          "quote": "## Optional integrations\nNo optional integration instructions imported yet."
+        },
+        {
+          "document_id": "advanced",
+          "quote": "Existing exception: legacy ls workflows must remain unchanged."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-04",
+      "input_sha256": "b9ef07ef50ed0b44af7e24685997a84181829ee3196bf6abf42afa6c8b408ee1",
+      "assessment": "이동 필요성 검토이므로 무수정 판단이 정당하다. 기본 모드 정보는 첫 사용에 직접 필요하고 ops의 기존 다른 도구 예외를 삭제할 권한이 없다. 이동한다면 sd용 설명만 별도로 추가하며 전체 반환 목록은 draft/ops/quickstart다.",
+      "required_preservations": [
+        "기본 regex와 -F 문자열 모드, 기본 line-by-line과 -A across의 서로 다른 축",
+        "in-place 수정과 -p preview, --/$$ 예외 등 비대상 사용 정보",
+        "모드별 메모리/성능 tradeoff와 원본 접근성",
+        "ops의 legacy ls 예외와 quickstart 전체의 무관한 기존 정보"
+      ],
+      "valid_alternatives": [
+        "세 문서 무수정 반환과 모드 설명이 원본에 필요한 이유를 기록한다.",
+        "Processing modes 상세만 ops.md의 sd 전용 절로 옮기고 README에 기본값/필요조건 요약 및 실제 앵커 연결을 남긴다."
+      ],
+      "counterexample": "ops를 sd 안내만으로 교체하여 ls 예외를 지우거나 -F와 -A를 같은 모드 선택으로 합치면 부당하다. across를 기본이라 쓰거나 README에서 line-by-line 기본 조건을 없애면 독자 과업에 필요한 정보를 잃는다.",
+      "unresolved_conditions": [
+        "find/replace 모드라는 말은 String-literal mode와 Processing modes 모두에 걸칠 수 있다. 답변은 선택한 범위를 근거로 밝혀야 하며 특정 절만 정답으로 고정할 근거는 없다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "By default, expressions are treated as regex."
+        },
+        {
+          "document_id": "draft",
+          "quote": "By default, sd processes input **line by line**."
+        },
+        {
+          "document_id": "draft",
+          "quote": "use the `-A` / `--across` flag:"
+        },
+        {
+          "document_id": "ops",
+          "quote": "Existing exception: legacy ls workflows must remain unchanged."
+        },
+        {
+          "document_id": "quickstart",
+          "quote": "## Appendix\nNo imported details yet."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T5-02",
+      "input_sha256": "5a68978259499110b56810360315f40b54d2bfcbe394e87c4f93090398a59209",
+      "assessment": "보호 단위가 명령/config 줄로 명시되었고 필요한 section 헤더를 유지하는 블록 분할/반복이 허용되어 선택 설정 그룹화와 코드 보호는 양립한다. 기본 pager 연결과 선택 navigate/dark를 분리하되 각 config/CLI 대안의 의미를 유지해야 한다.",
+      "required_preservations": [
+        "모든 기존 명령/config 줄의 공백·주석을 포함한 바이트",
+        "config 조각마다 필요한 [core]/[interactive]/[delta]/[merge] 헤더와 원래 해석",
+        "dark/light/omit auto-detection 선택과 navigate n/N 설명",
+        "merge conflict 설정·그 밖의 기능·이미지·매뉴얼 링크 및 수정 범위 밖 #side-by-side-view-1 앵커"
+      ],
+      "valid_alternatives": [
+        "기본 연결과 선택 navigate/dark 절을 나누고 각 절에 대응 gitconfig 조각과 CLI 대안을 배치한다. [delta]는 필요한 조각마다 원문 헤더로 반복 가능하다.",
+        "선택 탐색→색상 또는 색상→탐색 모두 가능하다. 두 선택 설정을 하나의 [delta] 블록으로 함께 두어도 된다.",
+        "블록을 통째로 유지하면서 필수/선택 설명과 읽기 경로를 재배치하는 방법도 의미상 가능하나 실제 재배치 목적을 충족하는지 보여야 한다."
+      ],
+      "counterexample": "navigate/dark를 선택 설정으로 분리하면서 줄을 고치거나 [delta] 헤더 없이 떼어 놓으면 보호 및 해석 보존 위반이다. gitconfig 설정과 CLI 명령을 함께 반드시 모두 실행하도록 연결하면 기존 Or run 대체 관계를 바꾼다. 무관 앵커를 고치는 것도 명시 범위 밖이다.",
+      "unresolved_conditions": [
+        "제공 원문은 각 설정의 기술적 최소 필요성을 정식 정의하지 않는다. core.pager 연결을 중심으로 안내할 수 있으나 interactive.diffFilter/merge.conflictStyle를 모든 pager 사용에 절대 필수 또는 쓸모없다고 단정할 근거는 없다. 외부 매뉴얼의 추가 조건은 입력이 아니다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "[delta]\n    navigate = true  # use n and N to move between diff sections\n    dark = true      # or light = true, or omit for auto-detection"
+        },
+        {
+          "document_id": "draft",
+          "quote": "git config --global interactive.diffFilter 'delta --color-only'"
+        },
+        {
+          "document_id": "draft",
+          "quote": "Or run:"
+        },
+        {
+          "document_id": "draft",
+          "quote": "[[config](#side-by-side-view-1)]"
+        }
+      ]
+    }
+  ]
+}

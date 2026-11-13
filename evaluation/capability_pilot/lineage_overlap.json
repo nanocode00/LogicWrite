@@ -1,0 +1,296 @@
+[
+  {
+    "family_id": "pallets",
+    "repository": "pallets/flask",
+    "same_family_as_prior_development": true,
+    "prior_matches": [
+      "pallets/click"
+    ],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "encode",
+    "repository": "encode/httpx",
+    "same_family_as_prior_development": true,
+    "prior_matches": [
+      "encode/httpx"
+    ],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "psf",
+    "repository": "psf/requests",
+    "same_family_as_prior_development": true,
+    "prior_matches": [
+      "psf/requests"
+    ],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "fastapi",
+    "repository": "fastapi/fastapi",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "pydantic",
+    "repository": "pydantic/pydantic",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "astral-sh",
+    "repository": "astral-sh/ruff",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "textualize",
+    "repository": "Textualize/rich",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "pytest-dev",
+    "repository": "pytest-dev/pytest",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "pypa",
+    "repository": "pypa/pip",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "python-poetry",
+    "repository": "python-poetry/poetry",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "jqlang",
+    "repository": "jqlang/jq",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "sharkdp",
+    "repository": "sharkdp/bat",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "burntsushi",
+    "repository": "BurntSushi/ripgrep",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "junegunn",
+    "repository": "junegunn/fzf",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "ajeetdsouza",
+    "repository": "ajeetdsouza/zoxide",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "chmln",
+    "repository": "chmln/sd",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "starship",
+    "repository": "starship/starship",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "dandavison",
+    "repository": "dandavison/delta",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "nushell",
+    "repository": "nushell/nushell",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "clap-rs",
+    "repository": "clap-rs/clap",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "serde-rs",
+    "repository": "serde-rs/serde",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "tokio-rs",
+    "repository": "tokio-rs/tokio",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "antirez",
+    "repository": "antirez/linenoise",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "openjs-express-lodash",
+    "repository": "expressjs/express",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "koajs",
+    "repository": "koajs/koa",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "axios",
+    "repository": "axios/axios",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "sindresorhus",
+    "repository": "sindresorhus/got",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "chalk",
+    "repository": "chalk/chalk",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "openjs-express-lodash",
+    "repository": "lodash/lodash",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "micromatch",
+    "repository": "micromatch/picomatch",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "immerjs",
+    "repository": "immerjs/immer",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "reduxjs",
+    "repository": "reduxjs/redux",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "pmndrs",
+    "repository": "pmndrs/zustand",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "tanstack",
+    "repository": "TanStack/query",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "evanw",
+    "repository": "evanw/esbuild",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  },
+  {
+    "family_id": "rollup",
+    "repository": "rollup/rollup",
+    "same_family_as_prior_development": false,
+    "prior_matches": [],
+    "holdout_eligible": false,
+    "reason": "현재 파일럿 자체가 공개·주석·AI 검토에 노출된 development다. 기존 가족과 겹치면 다른 파일이어도 홀드아웃으로 분리할 수 없다."
+  }
+]

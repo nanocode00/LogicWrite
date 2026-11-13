@@ -1,0 +1,62 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T9-08",
+  "task": {
+    "title": "전체 문서의 독자·공개 목적 미확정",
+    "purpose": "완전한 초안을 제공한다. 공개 발표와 내부 감사라는 상충하는 요청 중 우선 독자와 공개 권한이 미정이다. 전체 문서의 목적 적합성을 확정할 수 있는지 검토하고, 확정할 수 없는 판단과 보존 가능한 사실을 구별한다.",
+    "audience": "공개 독자 또는 내부 감사자; 우선순위 미정",
+    "deliverables": [
+      "편집 전 판단·근거·확인 질문",
+      "원문을 보존한 검토 메모; 최종 공개판 발행은 범위 밖"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "완전한 초안을 제공한다. 공개 발표와 내부 감사라는 상충하는 요청 중 우선 독자와 공개 권한이 미정이다. 전체 문서의 목적 적합성을 확정할 수 있는지 검토하고, 확정할 수 없는 판단과 보존 가능한 사실을 구별한다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable fictional full draft",
+      "content": "# 실험 결과 초안\n10건 중 9건 성공, 1건 실패. 최종 승인 미발급.\n내부 감사: 실패 원인·승인 경로까지 보존해야 한다.\n공개 안내: 공개 권한이 있는 정보만 알린다.\n요청 A는 공개 발표, 요청 B는 내부 감사 보고다. 우선 독자와 공개 권한은 미정이다.\n",
+      "sha256": "d1aa35f2ec731eb369dd39c1a1bf1a99ba2f62c62dbd80e103feda44bcb88416",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [
+      "우선 독자·공개 권한·상충 과업의 우선순위 미확정"
+    ],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

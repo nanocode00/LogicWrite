@@ -1,0 +1,626 @@
+{
+  "reviewer": "독립 Codex AI",
+  "method": "input-only; answers/curation/reviews not read",
+  "cases": [
+    {
+      "case_id": "CP-T4-01",
+      "input_sha256": "118119901d7ea8cc6cf638cc397719cab877cb3b2f3850286d2ee8e90b44eaf7",
+      "assessment": "benchmark 비교 단락의 ops/Benchmarks 재소속은 목적과 제공된 전체 문맥상 타당하다. 초보자용 설치·기능 안내까지 광범위하게 삭제할 근거는 없다.",
+      "required_preservations": [
+        "원본의 설치·빌드·기능·한계·라이선스·기존 링크 정보",
+        "비교 표의 명령·수치·corpus·CPU·Unicode/locale·옵션 차이와 single benchmark 경고",
+        "ops의 legacy ls 예외와 무관한 절; quickstart의 설치 선행조건"
+      ],
+      "valid_alternatives": [
+        "Quick examples comparing tools 전체를 조건·표·주의와 함께 ops Benchmarks에 옮기고 원본에 실제 목적지 연결을 남긴다.",
+        "성능 설명 절까지 포함할지는 benchmark 근거와 기능 설명을 구분해 판단한다. quickstart는 무수정 반환 가능."
+      ],
+      "counterexample": "빠른 수치 행만 ops로 이동하고 느린 패턴·높은 match count·line count 차이를 버리면 비교의 범위가 바뀐다. ops를 새 문서처럼 덮어써 legacy ls 예외를 잃는 것도 부당하다.",
+      "unresolved_conditions": [
+        "문서 ID ops의 실제 파일 경로가 제공되지 않아 새 상대 링크의 파일명은 확정 불가. 외부 blog 본문은 제공되지 않았다."
+      ],
+      "input_defects": [
+        "purpose는 '두 문서 전체'지만 output_document_ids는 draft, ops, quickstart 세 개다. 반환 집합 해석을 명시해야 한다."
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Please remember that a single benchmark is never enough!"
+        },
+        {
+          "document_id": "draft",
+          "quote": "Beware of performance cliffs though:"
+        },
+        {
+          "document_id": "ops",
+          "quote": "Existing exception: legacy ls workflows must remain unchanged."
+        },
+        {
+          "document_id": "quickstart",
+          "quote": "Select the tool for your task. Preserve the upstream installation prerequisites."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-02",
+      "input_sha256": "b2791b23616bb29c6de1d1099a1b2d1096f436355d39f43e3e59e50b1a0b7279",
+      "assessment": "ops와 quickstart 모두 Shell integration 절과 전체 편집 문맥이 있으므로 두 목적지가 유효하다. 원본 설치 후 진입 경로가 필수이며 유일한 목적지를 정답으로 고정할 수 없다.",
+      "required_preservations": [
+        "설치 방식별 shell integration 연결과 목차·Key bindings의 #setting-up-shell-integration 참조",
+        "bash/zsh/fish/Nushell별 명령 및 버전·autoload·source 제약",
+        "변수는 source 시점에 설정해야 한다는 조건, 기존 목적지 모든 무관 정보"
+      ],
+      "valid_alternatives": [
+        "설정 절 전체를 ops 또는 quickstart 중 하나로 옮기고 원본의 기존 헤더를 연결 안내로 유지한다.",
+        "세부 shell 설정을 옮기되 원본에 설치 후 설정이 별도라는 짧은 안내와 실제 대상 연결을 남긴다."
+      ],
+      "counterexample": "절을 옮긴 뒤 Homebrew/Linux의 instructions below나 Key bindings의 로컬 앵커를 그대로 깨뜨리거나, Nushell을 bash처럼 source 파이프로 바꾸면 부당하다.",
+      "unresolved_conditions": [
+        "문서 ID와 실제 파일 경로의 매핑이 없어 새 문서 링크 경로 확인이 필요하다. /shell은 원본 저장소 루트 상대 참조여서 이동 위치에 따른 해석을 확인해야 한다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "see [the instructions below](#setting-up-shell-integration)."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Setting the variables after sourcing the script will have no effect."
+        },
+        {
+          "document_id": "draft",
+          "quote": "By [setting up shell integration](#setting-up-shell-integration), you can use"
+        },
+        {
+          "document_id": "ops",
+          "quote": "## Shell integration\nNo imported shell procedure yet."
+        },
+        {
+          "document_id": "quickstart",
+          "quote": "## Shell integration\nNo imported shell procedure yet."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-03",
+      "input_sha256": "985051d1e6a576008c76181e2c0d54458a38a2b612ec54bed7dee1f4eb3a5557",
+      "assessment": "선택 fzf/데이터 가져오기 세부사항 이동은 가능하지만 필수 binary→shell 설정의 구분과 선택 기능 발견 경로를 원본에 유지해야 한다. 고급 안내라는 이름만으로 없는 목적지를 만들 수 없다.",
+      "required_preservations": [
+        "binary와 shell 설정의 플랫폼·shell별 조건 및 기존 설정",
+        "fzf 선택성·최소 v0.51.0·completions/interactive selection 목적",
+        "import 선택성·자동 탐지·지원 plugin 전체",
+        "목적지 기존 legacy ls 예외, 이동한 참조형 링크 정의"
+      ],
+      "valid_alternatives": [
+        "ops의 Background 등 제공된 절 아래 고급 선택 안내를 도구별로 명명하여 이동한다.",
+        "quickstart Appendix를 고급 선택 안내로 명확히 구분해 사용하는 해석도 가능하나 목적지 지정은 확인 필요."
+      ],
+      "counterexample": "설치가 4단계라는 문장만 남겨 선택 절을 완전히 없애면 필수/선택 구별과 진입 경로가 사라진다. fzf를 zoxide의 모든 사용에 필수라 쓰거나 [fzf-installation] 정의를 이동 문서에 누락하는 것도 오류다.",
+      "unresolved_conditions": [
+        "고급 안내가 ops인지 quickstart인지 명시되지 않았다. 문서 파일 경로가 없어 연결 경로는 확정 불가. 외부 fzf 설치 링크의 내용은 확인된 입력이 아니다."
+      ],
+      "input_defects": [
+        "task의 고급 안내와 실제 목적지 role/제목 Operations notes, First use 사이에 명시적 대응이 없다."
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "3. **Install fzf** <sup>(optional)</sup>"
+        },
+        {
+          "document_id": "draft",
+          "quote": "The minimum supported fzf version is v0.51.0."
+        },
+        {
+          "document_id": "draft",
+          "quote": "4. **Import your data** <sup>(optional)</sup>"
+        },
+        {
+          "document_id": "draft",
+          "quote": "[fzf-installation]: https://github.com/junegunn/fzf#installation"
+        },
+        {
+          "document_id": "ops",
+          "quote": "## Background\nNo imported feature description yet."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-04",
+      "input_sha256": "d018fa04704f9ef155145a439ada9e3e34e8febb4ea223ef716371633ca4c9db",
+      "assessment": "이동 필요성을 검토하는 과제이므로 기본 사용에 필요한 모드 설명을 원본에 유지하는 무수정 판단이 타당하다. 이동한다면 sd 정보만 구분하여 추가하고 ls 예외는 남긴다.",
+      "required_preservations": [
+        "원본 기본 regex/-F 선택과 line-by-line 기본/-A across 조건",
+        "in-place 변경과 -p preview, -- 및 $$ 예외",
+        "모드별 메모리/성능 tradeoff와 기존 다른 도구 예외"
+      ],
+      "valid_alternatives": [
+        "문서를 그대로 반환하고 모드 설명이 기본 사용에 필요하다는 판단을 별도로 제출한다.",
+        "고급 processing mode 상세를 ops에 옮기되 원본에서 -A 필요조건을 찾을 수 있게 유지한다."
+      ],
+      "counterexample": "ops를 sd 전용으로 덮어써 legacy ls 예외를 삭제하거나 across를 기본 모드로 합치면 부당하다. find/replace 설명을 전부 제거해 기본 사용이 외부 메모 없이는 이해되지 않게 하는 것도 근거가 없다.",
+      "unresolved_conditions": [
+        "find/replace 모드가 String-literal mode인지 Processing modes인지 범위가 넓어 편집 대상을 명시할 필요가 있다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "By default, sd processes input **line by line**."
+        },
+        {
+          "document_id": "draft",
+          "quote": "use the `-A` / `--across` flag:"
+        },
+        {
+          "document_id": "draft",
+          "quote": "By default, expressions are treated as regex."
+        },
+        {
+          "document_id": "ops",
+          "quote": "Existing exception: legacy ls workflows must remain unchanged."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-05",
+      "input_sha256": "d2b8b368a2340ac3718999e71dc97645b670f27668c55314c216a4b79706a97b",
+      "assessment": "staging 캐시 실행과 보관 원장은 별개다. 배경만 archive 부록에 재배치하거나 현 배치를 유지할 수 있으나 읽기 전용 보관 원장에 삭제 절차를 부여할 수 없다.",
+      "required_preservations": [
+        "staging 전용·검증된 백업·책임자 승인 조건은 명령보다 먼저 노출",
+        "purge staging-cache의 대상과 명령 의미",
+        "원장 읽기 전용·삭제 금지 및 캐시와 원장 구별"
+      ],
+      "valid_alternatives": [
+        "현 문서 전체를 유지하고 절 제목·간격만 정리한다.",
+        "캐시 재생성/원장 별개라는 배경만 archive 부록으로 이동하되 실행 안내에서도 대상 혼동이 없게 한다."
+      ],
+      "counterexample": "purge staging-cache를 archive의 일반 실행 명령으로 옮기거나 경고를 부록으로 분리하면 읽기 전용 원장에도 수행 가능한 절차로 오해하게 한다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "runbook",
+          "quote": "경고: staging 전용. 검증된 백업과 책임자 승인 뒤 수행."
+        },
+        {
+          "document_id": "runbook",
+          "quote": "`purge staging-cache`"
+        },
+        {
+          "document_id": "runbook",
+          "quote": "배경: 임시 캐시는 재생성 가능하다. 보관 원장은 별도다."
+        },
+        {
+          "document_id": "archive",
+          "quote": "보관 원장은 읽기 전용이다. 원장 삭제 금지."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T4-06",
+      "input_sha256": "67397d034f033686558d5dc2a5130982c12410bd975669836cd85156a1dfe55e",
+      "assessment": "목적지 전체와 권한이 없으므로 이동 실행 판단을 보류하고 readme를 그대로 반환해야 한다.",
+      "required_preservations": [
+        "로그 보관 7일과 목적지/권한 미제공 사실",
+        "allowed document_ids에 없는 ops.md를 창작하거나 수정하지 않음"
+      ],
+      "valid_alternatives": [
+        "분석과 미해결 조건을 제출하고 readme 전체 무수정 반환"
+      ],
+      "counterexample": "readme의 7일 규칙을 삭제하고 새 ops.md를 생성하여 이동 완료라 보고하면 목적지 보존과 편집 권한을 추측한 것이다.",
+      "unresolved_conditions": [
+        "ops.md 전체, 편집 권한, 기존 규칙과 충돌 여부, 실제 이동 범위"
+      ],
+      "input_defects": [
+        "필요 목적지 전체 및 편집 권한 미제공이라는 의도된 정보 공백"
+      ],
+      "evidence": [
+        {
+          "document_id": "readme",
+          "quote": "로그 보관은 7일이다."
+        },
+        {
+          "document_id": "readme",
+          "quote": "이동 요청 목적지: ops.md. 내용과 편집 권한은 제공되지 않았다."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T5-01",
+      "input_sha256": "56f660a9b2f71cfc9f5d20e88c5e1a3e3267191c31697a98df982664dbead974",
+      "assessment": "말미 Prerequisites를 Installation 안 Step 1 앞에 재배치하면 명시 목적을 충족한다. 설치→shell→추가 설정 순서는 보존한다.",
+      "required_preservations": [
+        "Nerd Font 설치뿐 아니라 terminal에서 enabled 조건 및 두 링크",
+        "모든 OS별 설치·shell별 설정·버전 제약·Step 3 정보",
+        "Installation 명시 앵커 🚀-installation 및 비대상 절"
+      ],
+      "valid_alternatives": [
+        "Prerequisites 블록을 Installation 제목 바로 아래로 이동한다.",
+        "설치 진입점에서 먼저 보이는 동일 문서 상단에 두되 Installation 링크 진입 시에도 선행조건이 보이도록 배치한다."
+      ],
+      "counterexample": "선행조건을 Step 2 뒤나 별도 외부 링크에만 두면 처음 설치 전에 발견할 수 없다. shell 설정을 먼저 수행하게 뒤집는 것도 요청 위반이다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "### Prerequisites"
+        },
+        {
+          "document_id": "draft",
+          "quote": "- A [Nerd Font](https://www.nerdfonts.com/) installed and enabled in your terminal (for example, try the [FiraCode Nerd Font](https://www.nerdfonts.com/font-downloads))."
+        },
+        {
+          "document_id": "draft",
+          "quote": "### Step 1. Install Starship"
+        },
+        {
+          "document_id": "draft",
+          "quote": "### Step 2. Set up your shell to use Starship"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T5-02",
+      "input_sha256": "6bea6db3fd72fbd6bf24e3a1149537062562f79b89006609dc662db2a3240dc5",
+      "assessment": "기본 pager 연결과 navigate/dark 선택 설정을 독자가 구별하게 할 수 있으나 기존 두 대체 설정 예시는 필수·선택을 한 보호 코드 블록에 혼합한다. 설명과 블록 단위 재배치로도 목적 달성이 가능하며 명령을 고칠 필요는 없다.",
+      "required_preservations": [
+        "gitconfig 및 shell 명령 문자열, 주석과 대체 설정의 의미",
+        "core.pager와 interactive.diffFilter, merge.conflictStyle를 근거 없이 삭제/필수 단정하지 않음",
+        "dark/light/omit auto-detection 선택, navigate n/N 의미; 모든 비대상 기능 및 이미지"
+      ],
+      "valid_alternatives": [
+        "보호 블록을 그대로 두고 블록 앞에 항목별 필수/선택 구분 설명을 추가한다.",
+        "기본·선택 설명 절을 그룹화하고 두 완전한 대체 블록은 원문 문자열을 유지해 배치한다.",
+        "코드 블록 분할까지 허용된다면 각 명령 바이트와 gitconfig section 문맥을 보존해 그룹화할 수 있으나 이 해석은 명시해야 한다."
+      ],
+      "counterexample": "navigate/dark를 제거하여 간단하게 만들거나 git config 명령을 새 문자열로 바꾸는 것은 보호 위반이다. [delta] 헤더 없이 값을 떼어 옮기면 설정 의미가 바뀐다.",
+      "unresolved_conditions": [
+        "명령 문자열 보호가 fence 전체 바이트/구조 보호인지 문자열만 보호인지에 따라 블록 분할 허용 여부가 달라진다."
+      ],
+      "input_defects": [
+        "기존 [[config](#side-by-side-view-1)]는 제공 문서의 Side-by-side view 헤더가 하나뿐이어서 대응 앵커가 확인되지 않는다. 이 과제에서 링크 수정까지 필수로 확장할 근거는 없다."
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "    navigate = true  # use n and N to move between diff sections"
+        },
+        {
+          "document_id": "draft",
+          "quote": "    dark = true      # or light = true, or omit for auto-detection"
+        },
+        {
+          "document_id": "draft",
+          "quote": "git config --global interactive.diffFilter 'delta --color-only'"
+        },
+        {
+          "document_id": "draft",
+          "quote": "[[config](#side-by-side-view-1)]"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T5-03",
+      "input_sha256": "df1f473dee4a18259fa960940760556ec651f6df58ba7d79715dcdb15756574e",
+      "assessment": "설치·설정·학습 링크를 사용자 경로로, 기여·개발 자료를 기여자 경로로 묶을 수 있다. 현 Status가 설치 전에 있다는 가치와 변경 가능성 문구를 잃지 않아야 한다.",
+      "required_preservations": [
+        "minimum-viable-product, 일부 명령 불안정, design 변경 가능성",
+        "설치·설정의 실제 명령 및 경로, 기존 목차 앵커",
+        "Philosophy/Goals/지원·라이선스 등 비대상 정보와 개발 링크"
+      ],
+      "valid_alternatives": [
+        "Status→사용자 안내(학습/설치/설정)→설계 배경→기여 순으로 묶고 목차를 맞춘다.",
+        "Status를 독립 상단 절로 유지하면서 사용자/기여자 안내 연결을 추가한다."
+      ],
+      "counterexample": "Status를 개발자 전용 말미로 밀거나 daily driver라는 긍정 문장만 남기면 설치 전 변경 위험 발견 조건을 훼손한다. devdocs 링크가 있다고 설치 정책 전체를 기여자에게만 숨기는 것도 부적절하다.",
+      "unresolved_conditions": [
+        "외부 book/CONTRIBUTING/devdocs 내용은 제공되지 않아 개발 절차나 지원 플랫폼 세부를 새로 작성할 근거가 없다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Many people use it as their daily driver, but it may be unstable for some commands. Nu's design is subject to change as it matures."
+        },
+        {
+          "document_id": "draft",
+          "quote": "## Installation"
+        },
+        {
+          "document_id": "draft",
+          "quote": "## Configuration"
+        },
+        {
+          "document_id": "draft",
+          "quote": "See [Contributing](CONTRIBUTING.md) for details."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T5-04",
+      "input_sha256": "53b1f12acc3920a8ab6e458d32b8b8d9ac3c12bac7cacf0c787700babc3619c3",
+      "assessment": "짧은 Get Started→About 뒤 docs.rs/examples 연결은 API 학습 경로를 이미 제공한다. 구조 무수정 판단이 충분히 타당하며 재배치가 필수 정답일 수 없다.",
+      "required_preservations": [
+        "cargo add clap 명령",
+        "docs.rs API 문서와 examples/의 서로 다른 실제 대상",
+        "소개·이중 라이선스·후원 정보"
+      ],
+      "valid_alternatives": [
+        "문서 전체 무수정 반환과 현 구조가 짧고 탐색 가능하다는 분석",
+        "Get Started 주변에서 기존 API/예제 링크를 함께 보이게 최소 재배치"
+      ],
+      "counterexample": "About을 불필요한 배경으로 삭제하면 그 안의 유일한 docs.rs/examples 학습 경로도 사라진다. examples/를 API reference라 단정하는 것도 링크 대상 오해다.",
+      "unresolved_conditions": [
+        "링크가 있음을 확인할 수 있으나 외부 API 본문과 examples 실제 파일 내용은 입력에 없다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "## Get Started\n\n```console\n$ cargo add clap\n```"
+        },
+        {
+          "document_id": "draft",
+          "quote": "- [docs.rs](https://docs.rs/clap/latest/clap/)\n- [examples](examples/)"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T5-05",
+      "input_sha256": "788fc15e0f29e9aa523e1d92c9b0ea09b68fce237b7cee015d66e6d653a3d115",
+      "assessment": "선행조건 절을 실행 앞에 옮기는 동일 문서 재배치가 타당하다. 완료 검증은 실행 뒤에 둔다.",
+      "required_preservations": [
+        "staging 확인과 백업 복구 검증 두 조건",
+        "`drop temp-stage` 문자열",
+        "임시 데이터만 제거됐는지 완료 검증"
+      ],
+      "valid_alternatives": [
+        "선행조건→실행→완료 확인 순서로 절 전체 이동",
+        "동일한 순서에서 절 제목 표현을 최소 정리하되 명령은 그대로 유지"
+      ],
+      "counterexample": "백업이 있다는 말로 복구 검증을 축약하거나 명령을 drop stage로 고치면 조건/대상이 바뀐다. 경고만 말미에 남기면 실행 순서 정리 목적 미달이다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "guide",
+          "quote": "`drop temp-stage`"
+        },
+        {
+          "document_id": "guide",
+          "quote": "staging 대상인지 확인한다. 백업 복구를 검증한다."
+        },
+        {
+          "document_id": "guide",
+          "quote": "임시 데이터만 제거됐는지 검증한다."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T5-06",
+      "input_sha256": "a65ff2127f4ec902c5c591b2c18fafb8e7d899957939c5496c3421c058596f1b",
+      "assessment": "전체 원문과 마지막 경고 앵커가 없어 위치 확정이 불가능하다. 제공 excerpt 무수정 반환과 판단 보류가 적절하다.",
+      "required_preservations": [
+        "승인 후 수행한다는 시간/권한 조건",
+        "제공되지 않은 앞뒤 절과 경고 내용을 창작하지 않음"
+      ],
+      "valid_alternatives": [
+        "excerpt 전체 무수정 반환하고 원문·경고 앵커를 미해결 조건으로 기록"
+      ],
+      "counterexample": "마지막 경고라는 제목을 새로 만들어 그 앞에 배치했다고 보고하면 실제 문서 위치를 검증하지 않은 것이다.",
+      "unresolved_conditions": [
+        "전체 문서, 이동할 단락 범위, 마지막 경고의 고유 앵커와 앞뒤 문맥"
+      ],
+      "input_defects": [
+        "단락 하나만 제공된 의도된 정보 공백"
+      ],
+      "evidence": [
+        {
+          "document_id": "excerpt",
+          "quote": "이 단계는 승인 후 수행한다."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T6-01",
+      "input_sha256": "7231b03abab2f5599977a89840d699e815b4ba224ead78c57d5dd80090c1e987",
+      "assessment": "추가 소개 사본은 원문 소개와 문장이 정확히 같아 한 번으로 통합할 수 있다. 소개 중복과 예시의 역할 설명은 다른 정보다.",
+      "required_preservations": [
+        "Serialize/Deserialize core APIs와 derive feature의 조건",
+        "각 data format은 별도 crate이며 예시는 JSON이라는 범위",
+        "코드·링크·지원 및 라이선스 등 비대상 정보"
+      ],
+      "valid_alternatives": [
+        "말미 controlled 반복 절만 제거하고 상단 소개 유지",
+        "소개 한 곳을 남기는 동등한 통합 위치도 가능하나 기존 학습 흐름 보존 필요"
+      ],
+      "counterexample": "Serde가 JSON 변환을 전부 직접 제공한다고 요약하면서 serde_json 구분을 없애거나 derive를 모든 사용에 필수로 단정하면 중복 통합을 넘어 의미를 왜곡한다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "## Repeated introduction (controlled)"
+        },
+        {
+          "document_id": "draft",
+          "quote": "**Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**"
+        },
+        {
+          "document_id": "draft",
+          "quote": "# Each data format lives in its own crate; the sample code below uses JSON"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T6-02",
+      "input_sha256": "d32d1ae643480bc69b3e89fc7f0cf668bfa7a116ede63c904b67654f1627d2f9",
+      "assessment": "팀 요약의 비동기 Rust 소개는 원문과 중복되나 별도 load test 승인 조건은 고유한 팀 규칙이다. 중복분만 통합하고 귀속을 분리해야 한다.",
+      "required_preservations": [
+        "Team deployment approval requires a separate load test.의 팀 배포 승인 조건",
+        "원문 scheduler/reactor/TCP/UDP 기능과 버전·예제·MSRV/LTS 등 비대상 정보",
+        "통제 팀 메모를 upstream 보증으로 바꾸지 않음"
+      ],
+      "valid_alternatives": [
+        "팀 절에 승인 조건만 남기고 일반 소개 반복을 제거",
+        "본문 기능 소개와 별도 Team deployment approval 절을 가까이 두어 귀속 구분"
+      ],
+      "counterexample": "팀 요약 전체를 중복이라 삭제하면 승인 조건이 사라진다. Reliable 기능 아래에 load test를 붙여 Tokio 프로젝트의 보증/기능처럼 쓰는 것도 부당하다.",
+      "unresolved_conditions": [
+        "팀 load test의 기준·실행/통과 여부는 입력이 없어 작성할 수 없다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Tokio supports asynchronous Rust applications. Team deployment approval requires a separate load test."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Tokio is an event-driven, non-blocking I/O platform for writing\nasynchronous applications with the Rust programming language."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T6-03",
+      "input_sha256": "a2874e1e66e7f0e0385340378e2cdbf61e2d32edbe800b47288806f7a344e52e",
+      "assessment": "tty 편집 길이 제한, non-tty 반환 길이 무제한, async caller buffer 제한은 서로 다른 조건으로 중복 제거할 수 없다. folded 표시와 실제 반환 문자열도 구별해야 한다.",
+      "required_preservations": [
+        "tty LINENOISE_MAX_LINE와 파일/파이프 non-tty 조건",
+        "tty paste도 동일 한도·folded 표시는 실제 문자열을 바꾸지 않음",
+        "async linenoiseEditStart는 caller buffer 크기로 제한",
+        "기타 API·예제·테스트 등 비대상 정보"
+      ],
+      "valid_alternatives": [
+        "현 조건부 설명을 무수정 유지",
+        "blocking tty/non-tty/async 세 범위를 명시한 표나 연결 문장으로 정리하되 모든 조건 유지"
+      ],
+      "counterexample": "파이프에는 길이 제한이 없다는 말을 전체 API에 일반화하면 caller buffer async 및 tty 한도를 위반한다. multiline 화면 편집과 무제한 입력을 동등시해도 오류다.",
+      "unresolved_conditions": [
+        "LINENOISE_MAX_LINE 실제 수치나 입력 경계 동작은 코드 미제공으로 확정할 수 없다."
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "the maximum editable line length is `LINENOISE_MAX_LINE`."
+        },
+        {
+          "document_id": "draft",
+          "quote": "standard input is not a tty, which happens every time you redirect a file\nto a program, or use it in an Unix pipeline, there are no limits to the\nlength of the line that can be returned."
+        },
+        {
+          "document_id": "draft",
+          "quote": "The asynchronous API uses the buffer provided by the caller, so pasted input\nis limited by the size passed to `linenoiseEditStart()`."
+        },
+        {
+          "document_id": "draft",
+          "quote": "the string returned by `linenoise()` is still the real text pasted by the\nuser."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T6-04",
+      "input_sha256": "7115abe2e85e0db3dd96637a4980685626ba9d14c9f73ebbef204feaffbbafa4",
+      "assessment": "Installation의 npm install express와 Quick Start의 generator 설치/의존성 npm install은 대상과 과업이 다르다. 반복처럼 보인다는 이유로 삭제하면 독립 진입점 사용성이 깨진다. Quick Start에는 환경 조건의 현지 노출 보완을 검토할 수 있다.",
+      "required_preservations": [
+        "Installation의 Node.js 18+와 새 프로젝트 package.json/npm init 조건",
+        "Quick Start의 generator@4→app 생성/cd→의존성 설치→시작→localhost 흐름",
+        "Examples/Running Tests의 npm install은 각 저장소/과업 범위를 유지",
+        "기존 코드 및 프로젝트 인력/보안/라이선스 등 비대상 정보"
+      ],
+      "valid_alternatives": [
+        "각 독립 경로의 실행 명령을 유지하고 Quick Start 앞에 제공된 Node 환경 전제를 재노출한다.",
+        "Installation과 Quick Start를 유지하고 공통 환경 조건을 각 진입점에서 즉시 확인 가능하게 연결한다. 단순 링크만으로 독립 수행 가능한지 별도 판단 필요."
+      ],
+      "counterexample": "같은 npm install이라는 이유로 Quick Start의 의존성 설치를 지우거나 generator@4를 npm install express와 합치면 생성된 앱의 준비가 달라진다. 최신 버전을 추측해 @4를 수정할 권한은 없다.",
+      "unresolved_conditions": [
+        "Quick Start의 generator@4와 일반 Express 안내의 현재 major 관계/Node 요구를 외부 사실로 교정할 수 없다. 입력의 버전 혼재 가능성을 남겨야 한다."
+      ],
+      "input_defects": [
+        "task는 공통 설치/환경 안내를 전제하지만 실제 Quick Start에는 Node.js 18+ 문구가 없다. 무수정이 두 진입점의 독립성까지 충족한다고 단정하기 어렵다."
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Node.js 18 or higher is required."
+        },
+        {
+          "document_id": "draft",
+          "quote": "npm install express"
+        },
+        {
+          "document_id": "draft",
+          "quote": "npm install -g express-generator@4"
+        },
+        {
+          "document_id": "draft",
+          "quote": "express /tmp/foo && cd /tmp/foo"
+        },
+        {
+          "document_id": "draft",
+          "quote": "  Install dependencies:\n\n```bash\nnpm install\n```"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T6-05",
+      "input_sha256": "9cd837eb1b91fbe91300f4ff5f72f5d9327978660d797e2e7fb0ee0c206c9f10",
+      "assessment": "운영자의 승인 전 금지/승인 후 허용과 감사자의 읽기 전용은 역할·시점이 다르다. 정책과 공지의 현지 경고를 유지하며 귀속 정보를 보존해야 한다.",
+      "required_preservations": [
+        "운영자는 책임자 승인 후에만 쓰기 가능; 승인 전 금지",
+        "감사자의 읽기 전용과 공지 현지 경고",
+        "지연 감소는 팀 전체 최적화 귀속, 유나는 측정만 수행"
+      ],
+      "valid_alternatives": [
+        "두 문서 무수정 유지하며 필요한 반복임을 분석",
+        "역할·승인 시점별로 정책을 정리하되 공지 안에도 승인 전 금지/감사자 읽기 전용을 남긴다."
+      ],
+      "counterexample": "공지 경고를 정책 링크로 대체하거나 운영자는 쓰기 가능으로 축약하면 현지 경고/승인 전 조건이 사라진다. 유나가 최적화로 지연을 감소시켰다고 통합하면 기여 귀속을 바꾼다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "policy",
+          "quote": "운영자: 책임자 승인 후 쓰기 가능. 감사자: 읽기 전용."
+        },
+        {
+          "document_id": "notice",
+          "quote": "운영자도 책임자 승인 전 쓰기 금지. 감사자는 읽기 전용."
+        },
+        {
+          "document_id": "policy",
+          "quote": "팀 전체 최적화로 지연이 감소했다. 담당자 유나는 측정만 수행했다."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T6-06",
+      "input_sha256": "c2ce55d6ee8ea14ea4d1fabb44333cdf519598d685e2001751d15d2edf3675ca",
+      "assessment": "같은 상태 문구만으로 두 점검 기록의 동일 대상을 입증할 수 없다. 대상·시점·귀속 동등성 미확정이므로 통합 보류가 타당하다.",
+      "required_preservations": [
+        "A/B 별도 기록과 각각 점검 완료·예외 없음 상태",
+        "장비 ID·일시·책임자 미기재 사실"
+      ],
+      "valid_alternatives": [
+        "records 전체 무수정 반환 및 필요한 동등성 증거를 미해결 조건으로 기록"
+      ],
+      "counterexample": "A와 B를 중복으로 지워 점검 완료 한 줄만 남기면 서로 다른 장비/시점의 두 건일 가능성을 손실한다. 같은 책임자가 같은 날 점검했다고 채우는 것도 창작이다.",
+      "unresolved_conditions": [
+        "각 기록의 장비/점검 대상 ID, 일시, 책임자, 동일 이벤트의 사본인지 여부"
+      ],
+      "input_defects": [
+        "동등성 판정에 필요한 대상·시점·귀속 필드 미기재"
+      ],
+      "evidence": [
+        {
+          "document_id": "records",
+          "quote": "A: 점검 완료, 예외 없음.\nB: 점검 완료, 예외 없음.\n장비 ID·일시·책임자 미기재."
+        }
+      ]
+    }
+  ]
+}

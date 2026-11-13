@@ -1,0 +1,109 @@
+FFFFFFFFFFFFF
+======================================================================
+FAIL: test_alternative_cannot_require_forbidden_effect (test_integrity.IntegrityTests.test_alternative_cannot_require_forbidden_effect)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_answer_leak_rejected_even_when_rebound (test_integrity.IntegrityTests.test_answer_leak_rejected_even_when_rebound)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_bad_document_hash (test_integrity.IntegrityTests.test_bad_document_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_dataset (test_integrity.IntegrityTests.test_dataset)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_fake_approval_rejected (test_integrity.IntegrityTests.test_fake_approval_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_family_reuse_not_independent (test_integrity.IntegrityTests.test_family_reuse_not_independent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_invented_evidence_span (test_integrity.IntegrityTests.test_invented_evidence_span)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_missing_is_distinct_from_partial (test_integrity.IntegrityTests.test_missing_is_distinct_from_partial)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_path_traversal_rejected (test_integrity.IntegrityTests.test_path_traversal_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_snapshot_tampering_rejected (test_integrity.IntegrityTests.test_snapshot_tampering_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_stale_input_binding (test_integrity.IntegrityTests.test_stale_input_binding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_unknown_destination_scope (test_integrity.IntegrityTests.test_unknown_destination_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+======================================================================
+FAIL: test_validation_never_overwrites_human_responses_even_on_error (test_integrity.IntegrityTests.test_validation_never_overwrites_human_responses_even_on_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 15, in setUp
+    self.assertTrue(spec and spec.loader and (ROOT / 'validate.py').exists(), 'validator must exist')
+AssertionError: False is not true : validator must exist
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.001s
+
+FAILED (failures=13)

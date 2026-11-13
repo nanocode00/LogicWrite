@@ -1,0 +1,62 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T4-06",
+  "task": {
+    "title": "경로만 있는 목적지",
+    "purpose": "README의 운영 절차를 ops.md로 옮길 요청을 검토한다. 목적지 전체와 편집 권한이 없으면 실행 결과를 추측하지 않는다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "README의 운영 절차를 ops.md로 옮길 요청을 검토한다. 목적지 전체와 편집 권한이 없으면 실행 결과를 추측하지 않는다.",
+    "output_document_ids": [
+      "readme"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "readme",
+      "role": "editable fictional document",
+      "content": "# 시작\n로그 보관은 7일이다.\n이동 요청 목적지: ops.md. 내용과 편집 권한은 제공되지 않았다.\n",
+      "sha256": "a553a5c2e664b999d0100f735860dfeee2ee5dce0662ea6c49ff4f2a2b6ff75f",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [
+      "ops.md 전체 내용과 편집 권한 미제공"
+    ],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "readme"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}
