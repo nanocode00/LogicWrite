@@ -1,0 +1,687 @@
+{
+  "schema_version": "user-final-submission-v1",
+  "basis_commit": "740de2e3c51f8f7b2a8357269012929483a376a1",
+  "events": [
+    {
+      "event_id": "user-final-submission-GC-001",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-001",
+      "input_sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+      "collection_order": 1,
+      "collection_group": 1,
+      "previous_event_sha256": null,
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/0"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/0"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/0"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-002",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-002",
+      "input_sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+      "collection_order": 2,
+      "collection_group": 1,
+      "previous_event_sha256": "7652ea4edd1557de28ff841f1eaa1588a04fa552a39ee8f0c3864705fe8bfa55",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/1"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/1"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/1"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "VIOLATION",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-003",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-003",
+      "input_sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+      "collection_order": 3,
+      "collection_group": 1,
+      "previous_event_sha256": "5f2ce3db229a123bc4c436bbf8e0276b897ab6ce58da6b56cafd83a9787d37c1",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/2"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/2"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/2"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "UNRESOLVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-004",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-004",
+      "input_sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+      "collection_order": 4,
+      "collection_group": 1,
+      "previous_event_sha256": "2254f506ec1900d674a468d6e96367c540560f44c4a833a8c2dc6b4632eb2f5c",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/3"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/3"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/3"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-005",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-005",
+      "input_sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+      "collection_order": 5,
+      "collection_group": 2,
+      "previous_event_sha256": "82f55793a508890a11b48d9bbfb8fc498efc875109e23ed686b17ece3cb2c583",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/4"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/4"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/4"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "VIOLATION",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-006",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-006",
+      "input_sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+      "collection_order": 6,
+      "collection_group": 2,
+      "previous_event_sha256": "e83ca7ce429dd47459353536e0471dc3df232a1176ddddb450079b2a6cc4a90b",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/5"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/5"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/5"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "UNRESOLVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-007",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-007",
+      "input_sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+      "collection_order": 7,
+      "collection_group": 2,
+      "previous_event_sha256": "906290162083da96ae79ae6d679dd8a3e876fe67dceb5fc9336100f0fba36d0b",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/6"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/6"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/0"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-008",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-008",
+      "input_sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+      "collection_order": 8,
+      "collection_group": 2,
+      "previous_event_sha256": "1b9787a697386606c124a10047e7e7878ea5102375738d630974ead8d8c29619",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/7"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/7"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/1"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "VIOLATION",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-009",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-009",
+      "input_sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+      "collection_order": 9,
+      "collection_group": 3,
+      "previous_event_sha256": "75d7ab28097c6a01578a479072b624bd4293708e369c2eaaa194d844290bef63",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/8"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/8"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/2"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "UNRESOLVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-010",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-010",
+      "input_sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+      "collection_order": 10,
+      "collection_group": 3,
+      "previous_event_sha256": "078a3299b136ad0379861ff01c9750aaa803db7df66c0a69fdfa7fa9b51d2586",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/9"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/9"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/3"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-011",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-011",
+      "input_sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+      "collection_order": 11,
+      "collection_group": 3,
+      "previous_event_sha256": "5cee08f4b6f61a9850c2afce9e12b19eb764a623492cc50ceb1d9c9f38e29071",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/10"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/10"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/4"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "VIOLATION",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-GC-012",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "GC-012",
+      "input_sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+      "collection_order": 12,
+      "collection_group": 3,
+      "previous_event_sha256": "d6731367f221d585524fc67d89dbf2f8d52c06cfe537ce5638b0076ad3a9df3a",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/11"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/11"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/5"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "UNRESOLVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-SP-013",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "SP-013",
+      "input_sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+      "collection_order": 13,
+      "collection_group": 4,
+      "previous_event_sha256": "5912790fe9e8cc741cc7220c984e0021f1d0507cd55423f7570326f0667de99a",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/12"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/12"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/0"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "VIOLATION",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-SP-014",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "SP-014",
+      "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+      "collection_order": 14,
+      "collection_group": 4,
+      "previous_event_sha256": "bcf35d51c7a37d2f8f0ab8980d2e23719f17a8c5484ff840c22655886e85444f",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/13"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/13"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/1"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-SP-015",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "SP-015",
+      "input_sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+      "collection_order": 15,
+      "collection_group": 4,
+      "previous_event_sha256": "4d87f2d8e4443638b434da0f9d78882a3d94f06d6f5f4019ea2737ad965c1236",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/14"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/14"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/2"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-SP-016",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "SP-016",
+      "input_sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+      "collection_order": 16,
+      "collection_group": 4,
+      "previous_event_sha256": "c0963a7cf5e441397c1b34606eaf60c96ae7b4a402617465ac7b0836a8fb96d8",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/15"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/15"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/3"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    },
+    {
+      "event_id": "user-final-submission-SP-017",
+      "kind": "user_final_submission_recorded",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_reviewed_at": null,
+      "signature": null,
+      "case_id": "SP-017",
+      "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+      "collection_order": 17,
+      "collection_group": 5,
+      "previous_event_sha256": "8218b6c5d14d64288896f2c28b88eb71edd1993fadf7d06095f5916822188025",
+      "submission_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/submission.json",
+        "sha256": "296afa23b8dcca759fc17d8fc944cdb83a699a3c7498f6d264d90ffa01b20647",
+        "pointer": "/cases/16"
+      },
+      "initial_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/16"
+      },
+      "counterreview_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/4"
+      },
+      "execution_reference": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "payload": {
+        "counterargument_response": "동의",
+        "judgment": "PRESERVED",
+        "matches_initial": true,
+        "rationale": "추가 의견 없음",
+        "approve_for_development_gold": null
+      }
+    }
+  ],
+  "terminal_event_sha256": "295fc03d56c21f55dca1468ee82a12f4bc054fc7820a7c19e4cd8ac8f9e1d408"
+}

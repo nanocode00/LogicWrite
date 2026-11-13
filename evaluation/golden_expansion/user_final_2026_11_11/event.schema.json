@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "User final submission without gold approval v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "user_final_submission_recorded"
+    },
+    "actor_type": {
+      "const": "human"
+    },
+    "recorder_type": {
+      "const": "ai"
+    },
+    "user_reviewed_at": {
+      "const": null
+    },
+    "signature": {
+      "const": null
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^user-final-submission-(GC|SP)-[0-9]{3}$"
+    },
+    "case_id": {
+      "enum": [
+        "GC-001",
+        "GC-002",
+        "GC-003",
+        "GC-004",
+        "GC-005",
+        "GC-006",
+        "GC-007",
+        "GC-008",
+        "GC-009",
+        "GC-010",
+        "GC-011",
+        "GC-012",
+        "SP-013",
+        "SP-014",
+        "SP-015",
+        "SP-016",
+        "SP-017"
+      ]
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "collection_order": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 17
+    },
+    "collection_group": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "previous_event_sha256": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      ]
+    },
+    "submission_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pointer": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "pointer"
+      ]
+    },
+    "initial_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pointer": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "pointer"
+      ]
+    },
+    "counterreview_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pointer": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "pointer"
+      ]
+    },
+    "execution_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pointer": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "pointer"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "counterargument_response": {
+          "const": "동의"
+        },
+        "judgment": {
+          "enum": [
+            "PRESERVED",
+            "VIOLATION",
+            "UNRESOLVED"
+          ]
+        },
+        "matches_initial": {
+          "const": true
+        },
+        "rationale": {
+          "const": "추가 의견 없음"
+        },
+        "approve_for_development_gold": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "counterargument_response",
+        "judgment",
+        "matches_initial",
+        "rationale",
+        "approve_for_development_gold"
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "actor_type",
+    "recorder_type",
+    "user_reviewed_at",
+    "signature",
+    "event_id",
+    "case_id",
+    "input_sha256",
+    "collection_order",
+    "collection_group",
+    "previous_event_sha256",
+    "submission_reference",
+    "initial_reference",
+    "counterreview_reference",
+    "execution_reference",
+    "payload"
+  ]
+}
