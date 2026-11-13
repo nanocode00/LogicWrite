@@ -938,7 +938,9 @@ def generate_organization_plan(
                         'scope_id': target_scope_id,
                         'document_id': dest_review.get('document_id'),
                         'destination_role': None,
-                        'section_path': ['Transferred Information'],
+                        # The bounded executor appends; it cannot create or
+                        # select destination sections. Do not invent intent.
+                        'section_path': [],
                         'relative_order': 10,
                         'anchor_relative_position': 'within',
                         'anchor_unit_id': None,
