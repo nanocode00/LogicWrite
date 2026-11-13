@@ -1,5 +1,9 @@
 # LogicWrite
 
+전체 로컬 검증: `python3 tools/evidence_validation/run.py --output /tmp/logicwrite-validation.json`.
+[검증 실행 경계와 레거시 명령 차이](tools/evidence_validation/README.md)를 참조한다. 현재 Core 회귀와 고정된 과거 평가 검증을 분리하며, 개별 Core 테스트만으로 전체 검증을 대신하지 않는다.
+
+
 **에이전트를 위한 논리적 글쓰기 (Logical Writing for Agents)**
 
 LogicWrite는 AI가 생성한 글을 검토하고 개선하기 위한 **모델 비종속형 초기 프로젝트**다. 목표는 무조건 글을 짧게 만드는 것이 아니라, 독자에게 필요한 정보를 적절한 위치에서 제공하고 근거 없는 주장과 내부 모순을 줄이는 것이다.
