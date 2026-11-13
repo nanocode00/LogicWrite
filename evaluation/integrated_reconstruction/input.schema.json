@@ -1,0 +1,132 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "integrated-input-v1"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^IR-[0-9]{3}$"
+    },
+    "request": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1
+    },
+    "explicit_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "access": {
+            "enum": [
+              "edit",
+              "read_only",
+              "format_only"
+            ]
+          },
+          "authority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "completeness": {
+            "const": "complete"
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "document_id",
+          "path",
+          "role",
+          "access",
+          "authority",
+          "completeness",
+          "content",
+          "sha256"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "availability": {
+      "type": "object",
+      "properties": {
+        "external_material": {
+          "const": "not_available"
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "external_material",
+        "gaps"
+      ],
+      "additionalProperties": false
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "const": "reviewable_candidate_only"
+        },
+        "required": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "mode",
+        "required"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "case_id",
+    "request",
+    "context",
+    "explicit_constraints",
+    "documents",
+    "availability",
+    "delivery"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

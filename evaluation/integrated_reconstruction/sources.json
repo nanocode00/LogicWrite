@@ -1,0 +1,10 @@
+{
+  "construction": "all_synthetic",
+  "created": "2026-11-13",
+  "author_type": "ai",
+  "source_family": "synthetic-author-cluster-20261113",
+  "license": "repository MIT; ../../LICENSE",
+  "real_upstream_sources": 0,
+  "independent_author_clusters": 1,
+  "notes": "가상 프로젝트·명세·연락처·관찰 기록. 실제 명세·실험·고객 자료가 아니다. 원문 스냅샷은 inputs/*.json의 content와 SHA-256이며 모든 출력 예시는 별도 보존한다. 기존 57건에서 원문을 복사하거나 변형하지 않았다."
+}

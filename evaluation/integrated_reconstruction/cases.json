@@ -1,0 +1,60 @@
+[
+  {
+    "case_id": "IR-001",
+    "input_path": "inputs/IR-001.json",
+    "answer_path": "answers/IR-001.json",
+    "review_path": "reviews/IR-001.json",
+    "source_family": "synthetic-author-cluster-20261113",
+    "scenario_family": "paperdock",
+    "parent_case_ids": [],
+    "construction": "synthetic",
+    "language": "ko",
+    "split": "exposed_development",
+    "independent_real_source": false,
+    "diagnostic_tags": [
+      "selection",
+      "cross_document_discovery",
+      "placement",
+      "expression",
+      "preservation"
+    ]
+  },
+  {
+    "case_id": "IR-002",
+    "input_path": "inputs/IR-002.json",
+    "answer_path": "answers/IR-002.json",
+    "review_path": "reviews/IR-002.json",
+    "source_family": "synthetic-author-cluster-20261113",
+    "scenario_family": "queuebridge",
+    "parent_case_ids": [],
+    "construction": "synthetic",
+    "language": "ko",
+    "split": "exposed_development",
+    "independent_real_source": false,
+    "diagnostic_tags": [
+      "cross_document_consistency",
+      "temporal_scope",
+      "consolidation",
+      "expression"
+    ]
+  },
+  {
+    "case_id": "IR-003",
+    "input_path": "inputs/IR-003.json",
+    "answer_path": "answers/IR-003.json",
+    "review_path": "reviews/IR-003.json",
+    "source_family": "synthetic-author-cluster-20261113",
+    "scenario_family": "harborsync",
+    "parent_case_ids": [],
+    "construction": "synthetic",
+    "language": "ko",
+    "split": "exposed_development",
+    "independent_real_source": false,
+    "diagnostic_tags": [
+      "authority",
+      "bounded_abstention",
+      "no_change",
+      "preservation"
+    ]
+  }
+]
