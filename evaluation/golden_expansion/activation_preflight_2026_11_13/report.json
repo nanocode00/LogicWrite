@@ -1,0 +1,1895 @@
+{
+  "schema_version": "development-gold-activation-preflight-v1",
+  "basis_commit": "dc15379e63394a04f513721cfbea4fa590802bc0",
+  "status": "blocked",
+  "dataset_role": "development_only",
+  "independent_holdout": false,
+  "independent_multi_human_complete": false,
+  "active_dataset": {
+    "path": "evaluation/g3_g4/development_gold_v2_2026-11-11/development-gold.json",
+    "sha256": "2adddb82f0e9016c210887014bb65d074a99cd9ffa4515931c3002377adc3f5a",
+    "pointer": ""
+  },
+  "active_count": 12,
+  "active_case_ids": [
+    "SP-001",
+    "SP-002",
+    "SP-003",
+    "SP-004",
+    "SP-005",
+    "SP-006",
+    "SP-007",
+    "SP-008",
+    "SP-009",
+    "SP-010",
+    "SP-011",
+    "SP-012"
+  ],
+  "active_cases": [
+    {
+      "case_id": "SP-001",
+      "user_final_judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/0",
+      "input_sha256": "e7c04a8b9b1f9253d04a660a8e5a908d87b0e30aa1dd3516b2200bf22606c784",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-001.json",
+      "snapshot_sha256": "5d7eb8ec644afeab0c9d79fa02198075a5e88c62c8e812eb595c7c7176d24b30",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-001.json",
+      "source_counterreview_sha256": "9695d6e399868c40dd7a92860018f46766cd58fb71e71b7ef110b9b1c9134589",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-002",
+      "user_final_judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/1",
+      "input_sha256": "71b871d684528aaf24fa207ec069e0b403fa5a2e60fc04665b3152f80170f56a",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-002.json",
+      "snapshot_sha256": "5c0635124d7eee291ff99732dd84f0b3b38b63860f52867e511fe09d45958409",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-002.json",
+      "source_counterreview_sha256": "a85f806eb6f2bd349ec7411182e765ae89e267723984139de30b3ace29e6a821",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-003",
+      "user_final_judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/2",
+      "input_sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-003.json",
+      "snapshot_sha256": "aa2214ecea9eeca655d9728765847d385aea27c5619a99084025ac4a7b4a81b1",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-003.json",
+      "source_counterreview_sha256": "aa755375742fd1e40e424e5dc6f42a3ed7970691486e179a3f524c3e129af550",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-004",
+      "user_final_judgment": "PRESERVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/3",
+      "input_sha256": "ed9488e9d4a268219e845e264fc035fbe50165f8c0ca5718b3d870730fc988d6",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-004.json",
+      "snapshot_sha256": "21f97eec48a2db1b711865814180f3010e54fdcb04186c9969aa311a3c50e0dc",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-004.json",
+      "source_counterreview_sha256": "bd91a75aeeff054e914b26c0f1094eeb0e0257e359e579a72a766a6a15e8c33c",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-005",
+      "user_final_judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/4",
+      "input_sha256": "0dd9d93531eefe97c10dccef68c3d168ee894cc70171919da2e990cafab82eec",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-005.json",
+      "snapshot_sha256": "01d88ad8a9094aa69a2951dc8519ead301a499400f4ef5cf173258f3dbf5533c",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-005.json",
+      "source_counterreview_sha256": "5cbe3b312fd505d3a6b84b36fc014725d02b31743a8764d3cccf95f7bf93dcea",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-006",
+      "user_final_judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/5",
+      "input_sha256": "575f224a4c88071ea6b3edffe60a9952cb6c34d256325fc55ec4b10a05dab455",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-006.json",
+      "snapshot_sha256": "f400c312b58602144c5c51997923af509a867b96fa00d12b876892947e44fd38",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-006.json",
+      "source_counterreview_sha256": "4c5550e63b75c6be38497374a509c67f0e6473ec3ac38fb597837cd162a282a5",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-007",
+      "user_final_judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/6",
+      "input_sha256": "b66bc1eb2936b5aac1b093d38ba71897940b545df9f6d6e567095f290074e405",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-007.json",
+      "snapshot_sha256": "e460494ffae7e1c2afc04bd97cebde337e36fb6e558ac119fc2e8c23a1904ecc",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-007.json",
+      "source_counterreview_sha256": "304c8326ed958ff39dff58ef4fa88398e3ed9ee9d82bda362d9f5917a06ee415",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-008",
+      "user_final_judgment": "VIOLATION",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/7",
+      "input_sha256": "c0e410f9a76a3106eea2a0931cc43b59d506d0d8b7672fb6f6e847073288477a",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-008.json",
+      "snapshot_sha256": "36dca8bbe05d2edcee148d26460fbf396b8b5c0bb2fa3dddad0b48f48cc9def2",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-008.json",
+      "source_counterreview_sha256": "b2065ec4e56514a3d266d649e7f831f9e0251112605dd7ba24ee907a8ffd1f7a",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-009",
+      "user_final_judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/8",
+      "input_sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/development_gold_v2_2026-11-11/SP-009.final.json",
+      "snapshot_sha256": "888c4e386095c9d2ceb10ca1a555c4f7b3f5cc275f2deb7db1c49d77ba38d69f",
+      "source_counterreview_path": "evaluation/g3_g4/sp009_followup_2026-11-11/SP-009.counterreview.json",
+      "source_counterreview_sha256": "1b1314585d06fd15e8d61054ddc07654166803a244627c9d95741c8bf0f40807",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-010",
+      "user_final_judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/9",
+      "input_sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-010.json",
+      "snapshot_sha256": "fdc55fc9e990b366524b6c7cdb504c80202e994e076b2c8be2a4b441bd8a26bf",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-010.json",
+      "source_counterreview_sha256": "9a4cb307c5af3b2ee97a5776a406833e0876017af50c6f03e0eca484abbaaafc",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-011",
+      "user_final_judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/10",
+      "input_sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-011.json",
+      "snapshot_sha256": "c15fbaf773db67cb90e6a8b474a138f28b8c5af93fbd624a63d33e6fd5f56696",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-011.json",
+      "source_counterreview_sha256": "6dbb82200a91d5e220fa04cffd0dc3b761aa52618a6d0ad71da56ece8418dbeb",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    },
+    {
+      "case_id": "SP-012",
+      "user_final_judgment": "UNRESOLVED",
+      "user_development_gold_approved": true,
+      "approval_pointer": "/cases/11",
+      "input_sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e",
+      "review_method": "single_user_ai_counterreview",
+      "review_level": "user_final_confirmed",
+      "snapshot_path": "evaluation/g3_g4/final_review_2026-11-11/final/SP-012.json",
+      "snapshot_sha256": "31f39d4b113191facf983e4ce5261440878f55a6659ade284dbfa0bce335fe64",
+      "source_counterreview_path": "evaluation/g3_g4/review_round_2026-11-11/counterreview/SP-012.json",
+      "source_counterreview_sha256": "104cc0810c0b376bf9f4990d1a055ad0ce1facf12fe07198890c3c864d0e6a7c",
+      "development_gold_eligible": true,
+      "independent_multi_human_complete": false,
+      "blockers": []
+    }
+  ],
+  "active_distribution": {
+    "PRESERVED": 4,
+    "VIOLATION": 4,
+    "UNRESOLVED": 4
+  },
+  "unchanged_consumers": [
+    {
+      "path": "evaluation/core_pipeline_2026_11_11/evaluate.py",
+      "sha256": "bc350c3cab91fed81136d780adee67d8b60239cd8e4879b8ee5642ef9423c4a3",
+      "pointer": ""
+    },
+    {
+      "path": "evaluation/source_candidate_semantics/run.py",
+      "sha256": "1fe988e195efb0d68b8cb418bbaa99845588058217c92d31b17771874b913932",
+      "pointer": ""
+    }
+  ],
+  "new_inclusion_approved": 17,
+  "new_eligible": 0,
+  "new_activated": 0,
+  "eligible_case_ids": [],
+  "blocked_case_ids": [
+    "GC-001",
+    "GC-002",
+    "GC-003",
+    "GC-004",
+    "GC-005",
+    "GC-006",
+    "GC-007",
+    "GC-008",
+    "GC-009",
+    "GC-010",
+    "GC-011",
+    "GC-012",
+    "SP-013",
+    "SP-014",
+    "SP-015",
+    "SP-016",
+    "SP-017"
+  ],
+  "v3_dataset_path": null,
+  "v3_active_index_path": null,
+  "target_only": {
+    "not_active": true,
+    "count": 29,
+    "distribution": {
+      "PRESERVED": 12,
+      "VIOLATION": 9,
+      "UNRESOLVED": 8
+    }
+  },
+  "policy": [
+    {
+      "path": "evaluation/golden_expansion/review.py",
+      "sha256": "9c042ccb2480cc40d4f580130a8432b9e68da5ea01963652243a177f13ea3f90",
+      "pointer": ""
+    },
+    {
+      "path": "evaluation/golden_expansion/record.schema.json",
+      "sha256": "2e8240962ba1dfaeff80b835517c9db214f42cb3931cf114ae1bb0eb0e509645",
+      "pointer": ""
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "GC-001",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-001.json",
+        "sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/0"
+      },
+      "initial_reason": "정보는 같고 표현의 차이",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/0"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/0"
+      },
+      "final_event_sha256": "7652ea4edd1557de28ff841f1eaa1588a04fa552a39ee8f0c3864705fe8bfa55",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/0"
+      },
+      "inclusion_event_sha256": "38e13d068a0fe553fe080e096ad30649843a17c7ca7d1b05abc64ae869dd2f9d",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-001.workflow.json",
+        "sha256": "ed3e66d801bcd16451b8399c05fcc0affd9abe8e73d75598f498cd40544c1eba",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/5"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "psf/requests",
+          "path": "README.md",
+          "version": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+          "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+          "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+          "snapshot_path": "sources/requests-document.txt",
+          "snapshot_sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "psf/requests"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-002",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-002.json",
+        "sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/1"
+      },
+      "initial_reason": "근거 없는 지원 버전 변경",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/1"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/1"
+      },
+      "final_event_sha256": "5f2ce3db229a123bc4c436bbf8e0276b897ab6ce58da6b56cafd83a9787d37c1",
+      "user_final_judgment": "VIOLATION",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/1"
+      },
+      "inclusion_event_sha256": "ecd9acf4bc52d83bfef87a6a6d982c3a4417bfcfb92fdeafe558cc2dc6ea8e5e",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-002.workflow.json",
+        "sha256": "cafdf22c51efadf727b72438b63d5c6b6dbde543a6c7f26f68244463c45c6f54",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/6"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "psf/requests",
+          "path": "README.md",
+          "version": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+          "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+          "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+          "snapshot_path": "sources/requests-document.txt",
+          "snapshot_sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "psf/requests"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-003",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-003.json",
+        "sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/2"
+      },
+      "initial_reason": "전체 내용을 다시 받아야 함",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/2"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/2"
+      },
+      "final_event_sha256": "2254f506ec1900d674a468d6e96367c540560f44c4a833a8c2dc6b4632eb2f5c",
+      "user_final_judgment": "UNRESOLVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/2"
+      },
+      "inclusion_event_sha256": "c720d9c786d1235d4debdbc91b711d9fc92e364225203690f5473aadf3e6b608",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-003.workflow.json",
+        "sha256": "bbd325c9adbd1296f53b063e1cec64b1cd97838a1d2936ed7fa00788abb1ded2",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED",
+        "FINAL_UNRESOLVED_ISSUES_NOT_SUBMITTED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/7"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "psf/requests",
+          "path": "README.md",
+          "version": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+          "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+          "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+          "snapshot_path": "sources/requests-document.txt",
+          "snapshot_sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "psf/requests"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-004",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-004.json",
+        "sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/3"
+      },
+      "initial_reason": "정보는 동일, 표현 방식만 다름",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/3"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/3"
+      },
+      "final_event_sha256": "82f55793a508890a11b48d9bbfb8fc498efc875109e23ed686b17ece3cb2c583",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/3"
+      },
+      "inclusion_event_sha256": "5895c0b2f168e083563acf5e097c1c5ef758d94d28173bb4517c33a322762a8b",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-004.workflow.json",
+        "sha256": "ec8b96939ed9c810f66ca15ff87f83fcacee4edbaa80eb997436b068e4cba6f6",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/8"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "encode/httpx",
+          "path": "docs/advanced/timeouts.md",
+          "version": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+          "git_blob_sha": "aedcfb627f5139901638ebf8de30216c2640591e",
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+          "snapshot_path": "sources/httpx-document.txt",
+          "snapshot_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "encode/httpx"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-005",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-005.json",
+        "sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/4"
+      },
+      "initial_reason": "근거 없는 시간 변경",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/4"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/4"
+      },
+      "final_event_sha256": "e83ca7ce429dd47459353536e0471dc3df232a1176ddddb450079b2a6cc4a90b",
+      "user_final_judgment": "VIOLATION",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/4"
+      },
+      "inclusion_event_sha256": "9c855ee47531adf54d02720266699d78499e8d50a59fab62dc4c64712d16d261",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-005.workflow.json",
+        "sha256": "50cc5344a60914b437b36fa8b46dea9a25a4123448fb13cad234ef2ad9ffe9de",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/9"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "encode/httpx",
+          "path": "docs/advanced/timeouts.md",
+          "version": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+          "git_blob_sha": "aedcfb627f5139901638ebf8de30216c2640591e",
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+          "snapshot_path": "sources/httpx-document.txt",
+          "snapshot_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "encode/httpx"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-006",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-006.json",
+        "sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/5"
+      },
+      "initial_reason": "전체 내용을 재전송받아야 함",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": "/cases/5"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+        "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/5"
+      },
+      "final_event_sha256": "906290162083da96ae79ae6d679dd8a3e876fe67dceb5fc9336100f0fba36d0b",
+      "user_final_judgment": "UNRESOLVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/5"
+      },
+      "inclusion_event_sha256": "16fa3e21f66d070eeaf3664fee5906933867d9d27a421f691e0841f9e4abeb47",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-006.workflow.json",
+        "sha256": "7b462b2eb125006790d2ccaa329e418b156ef345b4b1de0d676efd92dea66412",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED",
+        "FINAL_UNRESOLVED_ISSUES_NOT_SUBMITTED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/10"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "encode/httpx",
+          "path": "docs/advanced/timeouts.md",
+          "version": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+          "git_blob_sha": "aedcfb627f5139901638ebf8de30216c2640591e",
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+          "snapshot_path": "sources/httpx-document.txt",
+          "snapshot_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "encode/httpx"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-007",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-007.json",
+        "sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/6"
+      },
+      "initial_reason": "정보는 동일, 표현 방식 차이",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/0"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/6"
+      },
+      "final_event_sha256": "1b9787a697386606c124a10047e7e7878ea5102375738d630974ead8d8c29619",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/6"
+      },
+      "inclusion_event_sha256": "999eb45c3204e7684948d9cd456337ba72ac785206a3f7da10d382ffe2a6a91e",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-007.workflow.json",
+        "sha256": "88c8e086afbd94748eed4080363d128d4a02f5cc382620635860a086c5f14ff3",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/11"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "pallets/click",
+          "path": "docs/option-decorators.md",
+          "version": "8abb77a8432e03ed14a95f972b44f905279415a7",
+          "git_blob_sha": "9a2e33e498f6b3ca8dae40f22f8457c1e6614b6c",
+          "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+          "snapshot_path": "sources/click-document.txt",
+          "snapshot_sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "pallets/click"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-008",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-008.json",
+        "sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/7"
+      },
+      "initial_reason": "버전 출력 후 동작 변경",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/1"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/7"
+      },
+      "final_event_sha256": "75d7ab28097c6a01578a479072b624bd4293708e369c2eaaa194d844290bef63",
+      "user_final_judgment": "VIOLATION",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/7"
+      },
+      "inclusion_event_sha256": "f7ac9b1f4c14a16674fa5c8cde5aa6090903312b8a5d974ce9e15341c64a4d2b",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-008.workflow.json",
+        "sha256": "0311f055cfcba7a95fbbe85f15bba9fe62ed40080f4443dc5a57f777e8ab18f0",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/12"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "pallets/click",
+          "path": "docs/option-decorators.md",
+          "version": "8abb77a8432e03ed14a95f972b44f905279415a7",
+          "git_blob_sha": "9a2e33e498f6b3ca8dae40f22f8457c1e6614b6c",
+          "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+          "snapshot_path": "sources/click-document.txt",
+          "snapshot_sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "pallets/click"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-009",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-009.json",
+        "sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/8"
+      },
+      "initial_reason": "이동된 문서의 본문이 필요함",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/2"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/8"
+      },
+      "final_event_sha256": "078a3299b136ad0379861ff01c9750aaa803db7df66c0a69fdfa7fa9b51d2586",
+      "user_final_judgment": "UNRESOLVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/8"
+      },
+      "inclusion_event_sha256": "ce53e10843ebc68c77bfe35f96c8f62d19fadab0484f460505f8531ec802162c",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-009.workflow.json",
+        "sha256": "609dc0411353238631ed30ad69bb42c0d269eafc3311846da8d928a1ca92a9b7",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED",
+        "FINAL_UNRESOLVED_ISSUES_NOT_SUBMITTED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/13"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "pallets/click",
+          "path": "docs/option-decorators.md",
+          "version": "8abb77a8432e03ed14a95f972b44f905279415a7",
+          "git_blob_sha": "9a2e33e498f6b3ca8dae40f22f8457c1e6614b6c",
+          "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+          "snapshot_path": "sources/click-document.txt",
+          "snapshot_sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+          "captured_on": "2026-11-10"
+        },
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "details.md",
+          "version": "controlled-candidate-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "pallets/click"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-010",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-010.json",
+        "sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/9"
+      },
+      "initial_reason": "내용은 보존되고 위치만 변경",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/3"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/9"
+      },
+      "final_event_sha256": "5cee08f4b6f61a9850c2afce9e12b19eb764a623492cc50ceb1d9c9f38e29071",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/9"
+      },
+      "inclusion_event_sha256": "2c4b2fb4743712acca8d3acaefe60f1f5bfa848151f9e8fa1cfbe04cae5c93f6",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-010.workflow.json",
+        "sha256": "9bd6c4c77236036e7fb6234d6b52158ed5e61cbe0b4402544e713b660f159744",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/14"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "prometheus/prometheus",
+          "path": "docs/management_api.md",
+          "version": "bd517f6636ce1b6263dada9dfecb3fe92c84d96f",
+          "git_blob_sha": "ecc46fad8808977d575fe6a646282b58540ac064",
+          "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+          "snapshot_path": "sources/prometheus-document.txt",
+          "snapshot_sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "prometheus/prometheus"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-011",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-011.json",
+        "sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/10"
+      },
+      "initial_reason": "기본 활성화 여부와 플래그 역할 두 가지 변경",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/4"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/10"
+      },
+      "final_event_sha256": "d6731367f221d585524fc67d89dbf2f8d52c06cfe537ce5638b0076ad3a9df3a",
+      "user_final_judgment": "VIOLATION",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/10"
+      },
+      "inclusion_event_sha256": "a88088e1dfe3f12d2288b9bcc8b5bb63aad10c5b2ef2084b6826662537854409",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-011.workflow.json",
+        "sha256": "b48e423238551efe5945a475b0b2941e3eabe1d9432f460bbe0319bc0f96c2a6",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/15"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "prometheus/prometheus",
+          "path": "docs/management_api.md",
+          "version": "bd517f6636ce1b6263dada9dfecb3fe92c84d96f",
+          "git_blob_sha": "ecc46fad8808977d575fe6a646282b58540ac064",
+          "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+          "snapshot_path": "sources/prometheus-document.txt",
+          "snapshot_sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "prometheus/prometheus"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "GC-012",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-012.json",
+        "sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/11"
+      },
+      "initial_reason": "이동된 문서의 내용이 필요함",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+        "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+        "pointer": "/cases/5"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+        "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/11"
+      },
+      "final_event_sha256": "5912790fe9e8cc741cc7220c984e0021f1d0507cd55423f7570326f0667de99a",
+      "user_final_judgment": "UNRESOLVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/11"
+      },
+      "inclusion_event_sha256": "c8fefdf31d1a98007b3e1d44a2c1ba6fc6b01a3f2f97afa1a1fbb17851f155ff",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/GC-012.workflow.json",
+        "sha256": "658b14a425f1ea50d9e68cbd2b79124e463cf57460ff0cd8a70666e666f998ab",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED",
+        "FINAL_UNRESOLVED_ISSUES_NOT_SUBMITTED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/16"
+      },
+      "parent_inputs": [],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "prometheus/prometheus",
+          "path": "docs/management_api.md",
+          "version": "bd517f6636ce1b6263dada9dfecb3fe92c84d96f",
+          "git_blob_sha": "ecc46fad8808977d575fe6a646282b58540ac064",
+          "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+          "snapshot_path": "sources/prometheus-document.txt",
+          "snapshot_sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+          "captured_on": "2026-11-10"
+        },
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "details.md",
+          "version": "controlled-candidate-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [
+        "prometheus/prometheus"
+      ],
+      "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+    },
+    {
+      "case_id": "SP-013",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-013.json",
+        "sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/12"
+      },
+      "initial_reason": "필수 조건 위반",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/0"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/12"
+      },
+      "final_event_sha256": "bcf35d51c7a37d2f8f0ab8980d2e23719f17a8c5484ff840c22655886e85444f",
+      "user_final_judgment": "VIOLATION",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/12"
+      },
+      "inclusion_event_sha256": "00e86903d4bd8e38f81b210e3e321a99c06d556dfe0abb05f4752a720dfe6bd5",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/SP-013.workflow.json",
+        "sha256": "190775045d89e3cc43e10ad118fac78babef4ac1d4e81f7c823ff2407e1ebd7a",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/0"
+      },
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-003.json",
+          "sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34"
+        },
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-011.json",
+          "sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4"
+        }
+      ],
+      "source_provenance": [
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "install.md",
+          "version": "synthetic-source-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        },
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "maintenance.md",
+          "version": "synthetic-source-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [],
+      "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+    },
+    {
+      "case_id": "SP-014",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-014.json",
+        "sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/13"
+      },
+      "initial_reason": "다른 문서로 이동했으며 계약 충족",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/1"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/13"
+      },
+      "final_event_sha256": "4d87f2d8e4443638b434da0f9d78882a3d94f06d6f5f4019ea2737ad965c1236",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/13"
+      },
+      "inclusion_event_sha256": "de1dd24710227efb462e183077b33c53dd611c5282444c321765eeb8407496ff",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/SP-014.workflow.json",
+        "sha256": "36c0abce83160bf8ee04cf486f847a93f9254544d380fdbf11e3190aaed06587",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/1"
+      },
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-003.json",
+          "sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34"
+        },
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-011.json",
+          "sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4"
+        }
+      ],
+      "source_provenance": [
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "install.md",
+          "version": "synthetic-source-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        },
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "maintenance.md",
+          "version": "synthetic-source-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [],
+      "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+    },
+    {
+      "case_id": "SP-015",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-015.json",
+        "sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/14"
+      },
+      "initial_reason": "다른 문서로 이동했으며 계약 충족",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/2"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/14"
+      },
+      "final_event_sha256": "c0963a7cf5e441397c1b34606eaf60c96ae7b4a402617465ac7b0836a8fb96d8",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/14"
+      },
+      "inclusion_event_sha256": "bb90f13658ca8688a376a5d5fd51bc1ab62bdb6ca269e76ed4154df642dda8d5",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/SP-015.workflow.json",
+        "sha256": "13b17bb5f035ec190aad8e8226c6ed3670306da957d51ead250637264f18aacf",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/2"
+      },
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-009.json",
+          "sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e"
+        }
+      ],
+      "source_provenance": [
+        {
+          "kind": "public_git",
+          "repository": "nanocode00/chatgpt2codex",
+          "path": "README.md",
+          "version": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+          "git_blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+          "url": "https://raw.githubusercontent.com/nanocode00/chatgpt2codex/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md",
+          "snapshot_path": "sources/chatgpt2codex-README.md",
+          "snapshot_sha256": "46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0",
+          "captured_on": "2026-11-10"
+        },
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "PACKAGING.md",
+          "version": "controlled-derivative-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-11"
+        }
+      ],
+      "source_families": [
+        "nanocode00/chatgpt2codex"
+      ],
+      "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+    },
+    {
+      "case_id": "SP-016",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-016.json",
+        "sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/15"
+      },
+      "initial_reason": "계약에서 지정한 v2 기준 내용 선택",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/3"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/15"
+      },
+      "final_event_sha256": "8218b6c5d14d64288896f2c28b88eb71edd1993fadf7d06095f5916822188025",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/15"
+      },
+      "inclusion_event_sha256": "fa06ac532ea215f09348cf0064d5e808ccce16b879447d937b061651f94181da",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/SP-016.workflow.json",
+        "sha256": "9a813f858a6a80511d1c5ad2003e377c2672b9d8f88b1553bb0c391c89cd5a43",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/3"
+      },
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-010.json",
+          "sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf"
+        }
+      ],
+      "source_provenance": [
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "policy-v1.md",
+          "version": "v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        },
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "policy-v2.md",
+          "version": "v2",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [],
+      "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+    },
+    {
+      "case_id": "SP-017",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-017.json",
+        "sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+        "pointer": ""
+      },
+      "initial": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": "/cases/16"
+      },
+      "initial_reason": "전체 본문 제공, 내용 완전히 동일",
+      "counterreview": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+        "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+        "pointer": "/cases/4"
+      },
+      "counterreview_execution": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+        "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+        "pointer": "/status"
+      },
+      "final": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/16"
+      },
+      "final_event_sha256": "295fc03d56c21f55dca1468ee82a12f4bc054fc7820a7c19e4cd8ac8f9e1d408",
+      "user_final_judgment": "PRESERVED",
+      "user_counterargument_response": "동의",
+      "user_additional_reason": "추가 의견 없음",
+      "inclusion": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/16"
+      },
+      "inclusion_event_sha256": "b4d7eaa8133ec492ca5afa4cc9d17c840bacaa6d85e71a584a8ea7b1b07fd13b",
+      "inclusion_declaration": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+        "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+        "pointer": "/statement"
+      },
+      "inclusion_approved": true,
+      "formal_workflow": {
+        "path": "evaluation/golden_expansion/prepared/SP-017.workflow.json",
+        "sha256": "859250a45b0359432a5b3b64846232d080c10ff6eaceaddc43fb01d3c346b568",
+        "pointer": ""
+      },
+      "formal_assessment": {
+        "review_level": "ai_provisional",
+        "development_gold_eligible": false,
+        "final_judgment": null,
+        "independent_multi_human_complete": false
+      },
+      "user_reviewed_at": null,
+      "formal_final_unresolved_issues": null,
+      "eligible_for_activation": false,
+      "blockers": [
+        "FORMAL_REVIEW_CHAIN_NOT_RECORDED",
+        "USER_INITIAL_FORM_INCOMPLETE",
+        "USER_FINAL_EVIDENCE_NOT_SUBMITTED",
+        "CHALLENGE_RESPONSES_NOT_BOUND",
+        "FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED"
+      ],
+      "registry": {
+        "path": "evaluation/golden_expansion/registry.json",
+        "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+        "pointer": "/cases/4"
+      },
+      "parent_inputs": [
+        {
+          "path": "evaluation/semantic_pilot/inputs/SP-012.json",
+          "sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e"
+        }
+      ],
+      "source_provenance": [
+        {
+          "kind": "controlled_synthetic",
+          "repository": null,
+          "path": "update.md",
+          "version": "synthetic-source-v1",
+          "git_blob_sha": null,
+          "url": null,
+          "snapshot_path": null,
+          "snapshot_sha256": null,
+          "captured_on": "2026-11-10"
+        }
+      ],
+      "source_families": [],
+      "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+    }
+  ]
+}
