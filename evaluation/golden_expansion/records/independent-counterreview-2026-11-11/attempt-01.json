@@ -1,0 +1,48 @@
+{
+  "batch": 1,
+  "ids": [
+    "GC-001",
+    "GC-002",
+    "GC-003",
+    "GC-004"
+  ],
+  "requested_model": "gemini-4-argon-medium",
+  "prompt_sha256": "3e52637cdf0158695ab977a6debfa908eea41b1b3e669f72753c00f4d5dee2a8",
+  "prompt_chars": 31979,
+  "input_sha256": {
+    "GC-001": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+    "GC-002": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+    "GC-003": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+    "GC-004": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44"
+  },
+  "initial_judgments": {
+    "GC-001": {
+      "judgment": "PRESERVED",
+      "reason": "정보는 같고 표현의 차이"
+    },
+    "GC-002": {
+      "judgment": "VIOLATION",
+      "reason": "근거 없는 지원 버전 변경"
+    },
+    "GC-003": {
+      "judgment": "UNRESOLVED",
+      "reason": "전체 내용을 다시 받아야함"
+    },
+    "GC-004": {
+      "judgment": "PRESERVED",
+      "reason": "정보는 동일, 표현 방식만 다름"
+    }
+  },
+  "answer_files_accessed": false,
+  "gold_files_accessed": false,
+  "input_only": true,
+  "model_execution_authenticated": false,
+  "advisory_only": true,
+  "final_judgment_recorded": false,
+  "gold_promoted": false,
+  "seconds": 6.957,
+  "returncode": 3,
+  "raw_response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "state": "provider_failure",
+  "error_class": "quota_exhausted"
+}

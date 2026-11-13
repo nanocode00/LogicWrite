@@ -1,0 +1,132 @@
+{
+  "completed": 17,
+  "failed": 0,
+  "disagreements": [],
+  "recommendation_distribution": {
+    "PRESERVED": 8,
+    "VIOLATION": 5,
+    "UNRESOLVED": 4
+  },
+  "cases": [
+    {
+      "case_id": "GC-001",
+      "batch": "gc01_06",
+      "quote_count": 3,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-002",
+      "batch": "gc01_06",
+      "quote_count": 3,
+      "recommendation": "VIOLATION",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-003",
+      "batch": "gc01_06",
+      "quote_count": 5,
+      "recommendation": "UNRESOLVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-004",
+      "batch": "gc01_06",
+      "quote_count": 3,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-005",
+      "batch": "gc01_06",
+      "quote_count": 3,
+      "recommendation": "VIOLATION",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-006",
+      "batch": "gc01_06",
+      "quote_count": 5,
+      "recommendation": "UNRESOLVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-007",
+      "batch": "gc07_12",
+      "quote_count": 3,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-008",
+      "batch": "gc07_12",
+      "quote_count": 3,
+      "recommendation": "VIOLATION",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-009",
+      "batch": "gc07_12",
+      "quote_count": 7,
+      "recommendation": "UNRESOLVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-010",
+      "batch": "gc07_12",
+      "quote_count": 5,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-011",
+      "batch": "gc07_12",
+      "quote_count": 3,
+      "recommendation": "VIOLATION",
+      "matches_initial": true
+    },
+    {
+      "case_id": "GC-012",
+      "batch": "gc07_12",
+      "quote_count": 7,
+      "recommendation": "UNRESOLVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "SP-013",
+      "batch": "sp13_17",
+      "quote_count": 5,
+      "recommendation": "VIOLATION",
+      "matches_initial": true
+    },
+    {
+      "case_id": "SP-014",
+      "batch": "sp13_17",
+      "quote_count": 5,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "SP-015",
+      "batch": "sp13_17",
+      "quote_count": 4,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "SP-016",
+      "batch": "sp13_17",
+      "quote_count": 4,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    },
+    {
+      "case_id": "SP-017",
+      "batch": "sp13_17",
+      "quote_count": 4,
+      "recommendation": "PRESERVED",
+      "matches_initial": true
+    }
+  ],
+  "failures": []
+}

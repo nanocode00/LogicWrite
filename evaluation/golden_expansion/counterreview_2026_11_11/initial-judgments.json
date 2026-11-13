@@ -1,0 +1,125 @@
+{
+  "source": "User message 2026-11-11, verbatim judgments and reasons",
+  "status": "initial_only_immutable",
+  "cases": [
+    {
+      "case_id": "GC-001",
+      "input_path": "evaluation/g3_g4/inputs/GC-001.json",
+      "input_sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "정보는 같고 표현의 차이"
+    },
+    {
+      "case_id": "GC-002",
+      "input_path": "evaluation/g3_g4/inputs/GC-002.json",
+      "input_sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+      "initial_judgment": "VIOLATION",
+      "initial_reason": "근거 없는 지원 버전 변경"
+    },
+    {
+      "case_id": "GC-003",
+      "input_path": "evaluation/g3_g4/inputs/GC-003.json",
+      "input_sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+      "initial_judgment": "UNRESOLVED",
+      "initial_reason": "전체 내용을 다시 받아야 함"
+    },
+    {
+      "case_id": "GC-004",
+      "input_path": "evaluation/g3_g4/inputs/GC-004.json",
+      "input_sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "정보는 동일, 표현 방식만 다름"
+    },
+    {
+      "case_id": "GC-005",
+      "input_path": "evaluation/g3_g4/inputs/GC-005.json",
+      "input_sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+      "initial_judgment": "VIOLATION",
+      "initial_reason": "근거 없는 시간 변경"
+    },
+    {
+      "case_id": "GC-006",
+      "input_path": "evaluation/g3_g4/inputs/GC-006.json",
+      "input_sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+      "initial_judgment": "UNRESOLVED",
+      "initial_reason": "전체 내용을 재전송받아야 함"
+    },
+    {
+      "case_id": "GC-007",
+      "input_path": "evaluation/g3_g4/inputs/GC-007.json",
+      "input_sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "정보는 동일, 표현 방식 차이"
+    },
+    {
+      "case_id": "GC-008",
+      "input_path": "evaluation/g3_g4/inputs/GC-008.json",
+      "input_sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+      "initial_judgment": "VIOLATION",
+      "initial_reason": "버전 출력 후 동작 변경"
+    },
+    {
+      "case_id": "GC-009",
+      "input_path": "evaluation/g3_g4/inputs/GC-009.json",
+      "input_sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+      "initial_judgment": "UNRESOLVED",
+      "initial_reason": "이동된 문서의 본문이 필요함"
+    },
+    {
+      "case_id": "GC-010",
+      "input_path": "evaluation/g3_g4/inputs/GC-010.json",
+      "input_sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "내용은 보존되고 위치만 변경"
+    },
+    {
+      "case_id": "GC-011",
+      "input_path": "evaluation/g3_g4/inputs/GC-011.json",
+      "input_sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+      "initial_judgment": "VIOLATION",
+      "initial_reason": "기본 활성화 여부와 플래그 역할 두 가지 변경"
+    },
+    {
+      "case_id": "GC-012",
+      "input_path": "evaluation/g3_g4/inputs/GC-012.json",
+      "input_sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+      "initial_judgment": "UNRESOLVED",
+      "initial_reason": "이동된 문서의 내용이 필요함"
+    },
+    {
+      "case_id": "SP-013",
+      "input_path": "evaluation/golden_expansion/inputs/SP-013.json",
+      "input_sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+      "initial_judgment": "VIOLATION",
+      "initial_reason": "필수 조건 위반"
+    },
+    {
+      "case_id": "SP-014",
+      "input_path": "evaluation/golden_expansion/inputs/SP-014.json",
+      "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "다른 문서로 이동했으며 계약 충족"
+    },
+    {
+      "case_id": "SP-015",
+      "input_path": "evaluation/golden_expansion/inputs/SP-015.json",
+      "input_sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "다른 문서로 이동했으며 계약 충족"
+    },
+    {
+      "case_id": "SP-016",
+      "input_path": "evaluation/golden_expansion/inputs/SP-016.json",
+      "input_sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "계약에서 지정한 v2 기준 내용 선택"
+    },
+    {
+      "case_id": "SP-017",
+      "input_path": "evaluation/golden_expansion/inputs/SP-017.json",
+      "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+      "initial_judgment": "PRESERVED",
+      "initial_reason": "전체 본문 제공, 내용 완전히 동일"
+    }
+  ]
+}

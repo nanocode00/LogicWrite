@@ -1,0 +1,23 @@
+{
+  "case_id": "SP-015",
+  "initial_judgment": "PRESERVED",
+  "strongest_counterargument": "계약 R1은 'PKG 선택 이유 전체'를 packaging 문서에 보존할 것을 요구합니다. 원문(README)에는 PKG 선택의 구체적 이유(메뉴바 런타임 설치, Node/cloudflared 번들링, non-blocking Doctor 실행, 초보자 경로 명확성)가 명시되어 있습니다. 그러나 후보 packaging 문서에는 이러한 구체적 이유들이 누락된 채 '패키지 선택 관련 안내.'라는 추상적 문구만 존재하며, 이는 '전체' 보존 요구를 충족하지 못합니다. 또한 README에서 해당 섹션을 단순히 링크로 대체하면서 핵심 기술적 근거가 소실되었으므로 의미 보존이 깨졌다고 볼 수 있습니다.",
+  "evidence": [
+    {
+      "pointer": "/writing_contract/required_information/0/description",
+      "quote": "PKG 선택 이유 전체·non-blocking·DMG 미래 가능성을 packaging 문서에 보존하고 README에서 링크 제공"
+    },
+    {
+      "pointer": "/source_documents/0/content",
+      "quote": "For this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+    },
+    {
+      "pointer": "/candidate_documents/1/content",
+      "quote": "# Packaging\n\n패키지 선택 관련 안내.\n\n### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download."
+    }
+  ],
+  "counterargument_validity": "반박 시도는 실패합니다. 제공된 증거를 재확인하면, 후보 packaging 문서(`/candidate_documents/1/content`)에는 원문 README에 있던 PKG 선택 이유(메뉴바 런타임, Node/cloudflared, non-blocking Doctor 등)가 빠짐없이 포함되어 있습니다. 초기 판단이 옳았으며, 계약 R1의 '전체 보존' 요구가 충족되었습니다. README에서 해당 내용을 링크로 대체한 것은 계약의 '의미가 같은 표현과 구조 변경을 허용한다'는 조항에 부합합니다.",
+  "independent_recommendation": "PRESERVED",
+  "remaining_uncertainty": "없음. 후보 문서에 원문의 핵심 정보가 정확히 보존되어 있음이 확인됨.",
+  "user_question": "제공된 작성 계약과 수정 전후 문서 전체를 비교하여 PRESERVED / VIOLATION / UNRESOLVED 중 하나와 근거를 제시한다."
+}

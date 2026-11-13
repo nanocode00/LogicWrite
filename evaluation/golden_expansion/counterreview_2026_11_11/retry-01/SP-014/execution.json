@@ -1,0 +1,18 @@
+{
+  "case_id": "SP-014",
+  "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+  "request_sha256": "a73ce8dcfa72f0b91c37440fc8438534978fb5ca091697899a21b92c62bb2b89",
+  "request_encoding": "json.dumps(ensure_ascii=False).encode()",
+  "started_at": "2026-11-11T07:25:59.218824+00:00",
+  "requested_model": "qwen3.8-27b-q3-24k:latest",
+  "status": "validated",
+  "context_policy": "full input, no truncation; num_ctx=24576",
+  "isolation": "stateless local HTTP completion; no tools or filesystem interface",
+  "raw_response_sha256": "8774fc80be214f00690aec60cf7aee443590c37d33a70c45721d49979f8d5c89",
+  "actual_model": "qwen3.8-27b-q3-24k:latest",
+  "done": true,
+  "done_reason": "stop",
+  "prompt_eval_count": 1801,
+  "eval_count": 351,
+  "seconds": 8.148
+}

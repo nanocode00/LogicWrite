@@ -1,0 +1,194 @@
+{
+  "total_actual_calls": 21,
+  "calls": [
+    {
+      "path": "GC-001/execution.json",
+      "case_id": "GC-001",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 11.672,
+      "error": "'input'"
+    },
+    {
+      "path": "GC-002/execution.json",
+      "case_id": "GC-002",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 12.144,
+      "error": "'input'"
+    },
+    {
+      "path": "GC-003/execution.json",
+      "case_id": "GC-003",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 46.328,
+      "error": "incomplete generation"
+    },
+    {
+      "path": "GC-004/execution.json",
+      "case_id": "GC-004",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 13.17,
+      "error": "'input'"
+    },
+    {
+      "path": "GC-005/execution.json",
+      "case_id": "GC-005",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 10.552,
+      "error": null
+    },
+    {
+      "path": "GC-006/execution.json",
+      "case_id": "GC-006",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 11.721,
+      "error": "'input'"
+    },
+    {
+      "path": "GC-007/execution.json",
+      "case_id": "GC-007",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 12.967,
+      "error": "'input'"
+    },
+    {
+      "path": "GC-008/execution.json",
+      "case_id": "GC-008",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 11.232,
+      "error": "'input'"
+    },
+    {
+      "path": "GC-009/execution.json",
+      "case_id": "GC-009",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 13.029,
+      "error": null
+    },
+    {
+      "path": "GC-010/execution.json",
+      "case_id": "GC-010",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 15.49,
+      "error": null
+    },
+    {
+      "path": "GC-011/execution.json",
+      "case_id": "GC-011",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 10.667,
+      "error": null
+    },
+    {
+      "path": "GC-012/execution.json",
+      "case_id": "GC-012",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 45.877,
+      "error": "incomplete generation"
+    },
+    {
+      "path": "SP-013/execution.json",
+      "case_id": "SP-013",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 11.711,
+      "error": "list index out of range"
+    },
+    {
+      "path": "SP-014/execution.json",
+      "case_id": "SP-014",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "failed",
+      "seconds": 13.046,
+      "error": "quote mismatch: {'pointer': '/writing_contract/required_information/0', 'quote': '{\"id\": \"R1\", \"description\": \"오프라인 검색은 캐시가 있을 때만 가능\", \"exposure\": \"linked_document\"}'}"
+    },
+    {
+      "path": "SP-015/execution.json",
+      "case_id": "SP-015",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 26.152,
+      "error": null
+    },
+    {
+      "path": "SP-016/execution.json",
+      "case_id": "SP-016",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 16.842,
+      "error": null
+    },
+    {
+      "path": "SP-017/execution.json",
+      "case_id": "SP-017",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 15.028,
+      "error": null
+    },
+    {
+      "path": "retry-01/GC-003/execution.json",
+      "case_id": "GC-003",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 14.273,
+      "error": null
+    },
+    {
+      "path": "retry-01/GC-012/execution.json",
+      "case_id": "GC-012",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 10.532,
+      "error": null
+    },
+    {
+      "path": "retry-01/SP-013/execution.json",
+      "case_id": "SP-013",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 10.145,
+      "error": null
+    },
+    {
+      "path": "retry-01/SP-014/execution.json",
+      "case_id": "SP-014",
+      "requested_model": "qwen3.8-27b-q3-24k:latest",
+      "actual_model": "qwen3.8-27b-q3-24k:latest",
+      "status": "validated",
+      "seconds": 8.148,
+      "error": null
+    }
+  ]
+}

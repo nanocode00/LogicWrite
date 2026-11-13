@@ -1,0 +1,184 @@
+{
+  "review_identity": {
+    "runtime_identity": "Codex separate subagent",
+    "model": "Inherited model",
+    "exact_serving_identifier": "독립 관측 불가; 노출되지 않음"
+  },
+  "read_audit": {
+    "files_read": [
+      "/tmp/logicwrite-codex-independent-20261111/sp13_17/request.json"
+    ],
+    "full_input_review_method": "요청 JSON 전체를 파싱하고 지시, 초기 판단, 모든 메타데이터·계약·availability·missing_context·supplied_observations를 검토했다. 최초 큰 출력이 잘려 SP-015를 별도로 재독했다. source README 32510자를 [0:8000], [8000:16000], [16000:24000], [24000:32510]의 손실 없는 연속 청크로 전부 읽고 candidate README 32177자를 [0:16000], [16000:32177]로 전부 읽었다. packaging 전후 27/427자도 전부 읽었다. 전체 문서의 SHA-256을 content와 대조하고 모든 전후 문서의 전체 unified diff를 출력·검토했다. SP-015는 이동 절 전체의 문자 동일성과 README의 해당 한 구간 교체 외 전체 동일성, 목적지 기존 본문+이동 절의 정확한 결합을 assert로 확인했다. SP-016은 v2와 전체 동일성을 확인했다. 근거 포인터와 인용은 각 input 객체에 대해 프로그램으로 부분 문자열 유효성을 검증했다.",
+    "limitations": [
+      "허용된 요청 파일만 읽었다. 저장소·이력·다른 AI 결과·외부 링크에 접근하지 않았다.",
+      "합성 조건에 대한 자문이며 사람 최종 결정 또는 실제 동작 검증이 아니다.",
+      "입력 SHA 값은 전달된 초기 레코드 식별자를 사용하며 실행 인증을 의미하지 않는다.",
+      "python 명령이 없어 처음 호출은 실패했으며 이후 python3 표준 라이브러리로 모든 분석을 완료했다."
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "SP-013",
+      "input_sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+      "initial_judgment": "VIOLATION",
+      "strongest_counterargument": "문서 묶음 전체에는 캐시 조건이 같은 문장으로 남고 설치 문서에 해소 가능한 링크가 있으므로 구조 변경 허용에 따라 보존으로 볼 수 있다는 반박이다.",
+      "evidence": [
+        {
+          "pointer": "/source_documents/0/content",
+          "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "pointer": "/candidate_documents/0/content",
+          "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+        },
+        {
+          "pointer": "/candidate_documents/1/content",
+          "quote": "캐시는 수동으로 삭제한다.\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "pointer": "/writing_contract/required_information/0/exposure",
+          "quote": "same_document"
+        },
+        {
+          "pointer": "/writing_contract/constraints/4",
+          "quote": "이 합성 시나리오에서 첫 실행의 유일한 핵심 기능은 오프라인 검색이다. 첫 사용 전에 캐시 준비가 필수이며 설치 문서에 캐시 조건을 직접 노출해야 한다."
+        }
+      ],
+      "counterargument_validity": "성립하지 않음. 전체 의미의 잔존은 맞지만 R1 same_document 및 설치 문서 직접 노출이라는 구체적인 제약을 충족하지 못한다.",
+      "independent_recommendation": "VIOLATION",
+      "matches_initial": true,
+      "rationale": "설치 후 앱 실행과 수동 삭제는 보존되었다. 다만 유일한 첫 실행 핵심 기능의 필수 캐시 조건을 설치 문서에서 제거하여 링크로만 대체했다. 이동 허용이라는 일반 규칙보다 직접 노출 조건이 구체적이다.",
+      "remaining_uncertainty": "제공된 입력 내 의미 판단에 필요한 누락 문맥은 없다. 외부 사실·실제 승인·연결 파일의 실제 upstream 상태는 검증하지 않았으며 판단 범위 밖이다.",
+      "user_question": "설치 문서에 캐시 필요 조건을 직접 다시 넣을 것인가?",
+      "review_status": "complete"
+    },
+    {
+      "case_id": "SP-014",
+      "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+      "initial_judgment": "PRESERVED",
+      "strongest_counterargument": "캐시 조건이 설치 문서에서 사라져 첫 사용자가 조건을 놓칠 수 있으므로 VIOLATION이라는 반박이다.",
+      "evidence": [
+        {
+          "pointer": "/source_documents/0/content",
+          "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "pointer": "/candidate_documents/0/content",
+          "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+        },
+        {
+          "pointer": "/candidate_documents/1/content",
+          "quote": "캐시는 수동으로 삭제한다.\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+        },
+        {
+          "pointer": "/writing_contract/required_information/0/exposure",
+          "quote": "linked_document"
+        },
+        {
+          "pointer": "/writing_contract/constraints/4",
+          "quote": "이 합성 시나리오에서 오프라인 검색은 선택 기능이다. 설치 후 기본 기능은 캐시 없이 동작한다. 캐시 조건은 유지보수 문서의 전체 내용과 설치 문서의 해소 가능한 링크로 충분하며 첫 사용에서 직접 노출은 요구하지 않는다."
+        }
+      ],
+      "counterargument_validity": "성립하지 않음. 이 계약은 오프라인 검색을 선택 기능으로 정하고 연결 문서 노출을 명시적으로 허용한다. 일반적인 첫 사용 위험으로 계약을 강화할 수 없다.",
+      "independent_recommendation": "PRESERVED",
+      "matches_initial": true,
+      "rationale": "두 문서의 전체 본문이 제공되고 maintenance.md의 논리 경로가 지정되어 있다. 캐시 조건은 정확히 이동했고 설치 후 앱 실행 안내, 조건 문서 링크, 수동 삭제가 모두 보존된다.",
+      "remaining_uncertainty": "제공된 입력 내 의미 판단에 필요한 누락 문맥은 없다. 외부 사실·실제 승인·연결 파일의 실제 upstream 상태는 검증하지 않았으며 판단 범위 밖이다.",
+      "user_question": "연결 문서 노출을 허용한 현재 계약을 유지할 것인가?",
+      "review_status": "complete"
+    },
+    {
+      "case_id": "SP-015",
+      "input_sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+      "initial_judgment": "PRESERVED",
+      "strongest_counterargument": "README에서 PKG 선택 근거가 빠지고 외부 목적지로 이동했으므로 non-blocking Doctor 또는 미래 DMG 가능성이 누락되었거나 목적지 보존을 추정한 것은 아닌지 반박한다.",
+      "evidence": [
+        {
+          "pointer": "/source_documents/0/content",
+          "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+        },
+        {
+          "pointer": "/candidate_documents/1/content",
+          "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+        },
+        {
+          "pointer": "/candidate_documents/0/content",
+          "quote": "### Packaging rationale\n\nSee [packaging decision](PACKAGING.md)."
+        },
+        {
+          "pointer": "/writing_contract/constraints/3",
+          "quote": "document_id packaging의 논리 경로는 PACKAGING.md다. 패키징 선택 이유는 이 문서로 이동할 수 있다."
+        }
+      ],
+      "counterargument_validity": "성립하지 않음. 목적지의 전후 전체 본문이 제공되며 원래 절 전체가 문자 그대로 추가되었다. README에 PACKAGING.md 링크가 있고 계약이 이 이동을 명시 허용한다.",
+      "independent_recommendation": "PRESERVED",
+      "matches_initial": true,
+      "rationale": "README 전체 차이는 패키징 절을 제목과 링크로 바꾼 한 구간뿐이다. 제거된 제목·본문 전체가 packaging에 그대로 존재하고 원래 packaging의 안내 문장도 남는다. Applications 설치, Node/cloudflared 묶음, non-blocking Doctor, 초보자 설치 경로, signed/notarized DMG의 미래 가능성을 모두 보존했다. 나머지 README는 동일하다. 기존 다른 링크의 실제 목적지 내용은 추정하지 않았다.",
+      "remaining_uncertainty": "제공된 입력 내 의미 판단에 필요한 누락 문맥은 없다. 외부 사실·실제 승인·연결 파일의 실제 upstream 상태는 검증하지 않았으며 판단 범위 밖이다.",
+      "user_question": "제공된 합성 PACKAGING.md 범위의 자문 결과로 사용할 것인가?",
+      "review_status": "complete"
+    },
+    {
+      "case_id": "SP-016",
+      "input_sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+      "initial_judgment": "PRESERVED",
+      "strongest_counterargument": "과거 원문 30초가 60초로 바뀌었으므로 수치 보존 위반 또는 상충 원문 때문에 UNRESOLVED라는 반박이다.",
+      "evidence": [
+        {
+          "pointer": "/source_documents/0/content",
+          "quote": "요청 제한 시간은 30초다."
+        },
+        {
+          "pointer": "/source_documents/1/content",
+          "quote": "요청 제한 시간은 60초다."
+        },
+        {
+          "pointer": "/candidate_documents/0/content",
+          "quote": "요청 제한 시간은 60초다."
+        },
+        {
+          "pointer": "/writing_contract/constraints/3",
+          "quote": "합성 권한자 policy-owner는 합성 작성 시점 2026-11-11T09:00:00+09:00에 policy-v2(version v2, SHA-256 41b246fbf0f3eea08a2fbcf9c60e9f456cc69c84c742312f5a1962f44c096dd8)만 기준 원문으로 승인했다고 가정한다. policy-v1은 비교용 과거 스냅샷이며 보존 대상이 아니다. 실제 사람 승인이나 Core 정책 승인으로 사용하지 않는다."
+        }
+      ],
+      "counterargument_validity": "성립하지 않음. 계약은 해시까지 특정한 v2만 기준으로 승인되었다고 가정하고 v1을 보존 대상에서 명시 제외한다.",
+      "independent_recommendation": "PRESERVED",
+      "matches_initial": true,
+      "rationale": "후보는 승인된 기준 v2 전체와 동일하고 60초를 직접 노출한다. 과거 스냅샷의 30초를 남기면 오히려 지정된 기준을 혼동시킨다. 합성 승인 가정을 실제 사람 또는 Core 정책 승인으로 확장하지 않았다.",
+      "remaining_uncertainty": "제공된 입력 내 의미 판단에 필요한 누락 문맥은 없다. 외부 사실·실제 승인·연결 파일의 실제 upstream 상태는 검증하지 않았으며 판단 범위 밖이다.",
+      "user_question": "v2만 기준으로 삼는 합성 계약 조건을 유지할 것인가?",
+      "review_status": "complete"
+    },
+    {
+      "case_id": "SP-017",
+      "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+      "initial_judgment": "PRESERVED",
+      "strongest_counterargument": "전체 본문 제공 표기가 합성 대체에 불과하므로 실제 누락된 원문 보존은 증명되지 않아 UNRESOLVED여야 한다는 반박이다.",
+      "evidence": [
+        {
+          "pointer": "/source_documents/0/content",
+          "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+        },
+        {
+          "pointer": "/candidate_documents/0/content",
+          "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+        },
+        {
+          "pointer": "/writing_contract/required_information/0/description",
+          "quote": "자동 업데이트 미지원과 수동 재설치 필요"
+        },
+        {
+          "pointer": "/supplied_observations/0",
+          "quote": "통제된 합성 조건: 잘린 접두부를 원문과 동일한 전체 결과로 합성 교체. 실제 누락 부분을 관측한 것이 아니다."
+        }
+      ],
+      "counterargument_validity": "현재 과제 범위에서는 성립하지 않음. 실제 원문 관측의 입증과 주어진 합성 전후 본문 사이의 의미 보존은 별개다. 두 complete 본문은 정확히 동일하다.",
+      "independent_recommendation": "PRESERVED",
+      "matches_initial": true,
+      "rationale": "자동 업데이트 미지원과 수동 재설치 필요가 후보에 같은 문장으로 직접 노출된다. 수정된 주장·수치·조건·귀속이 없다. 실제 누락 부분의 관측으로 간주하지 않는다는 supplied_observations와도 모순되지 않는다.",
+      "remaining_uncertainty": "제공된 입력 내 의미 판단에 필요한 누락 문맥은 없다. 외부 사실·실제 승인·연결 파일의 실제 upstream 상태는 검증하지 않았으며 판단 범위 밖이다.",
+      "user_question": "이 결과를 실제 누락 부분 관측이 아닌 합성 입력의 보존 판단으로 한정할 것인가?",
+      "review_status": "complete"
+    }
+  ]
+}
