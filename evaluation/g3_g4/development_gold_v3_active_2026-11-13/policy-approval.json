@@ -1,0 +1,654 @@
+{
+  "schema_version": "legacy-policy-application-approval-v1",
+  "source_kind": "current_user_message_transcription",
+  "statement": "GC-001~012, SP-013~017 총 17건에 한해 `legacy-review-migration-v1` 정책 적용을 승인한다. 기존 사용자 판단 및 개발용 골드 포함 승인도 그대로 유지한다.",
+  "activation_instruction_quote": "검증을 통과한 신규 17건에 적격성 부여",
+  "policy_id": "legacy-review-migration-v1",
+  "policy": {
+    "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+    "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+    "pointer": ""
+  },
+  "case_ids": [
+    "GC-001",
+    "GC-002",
+    "GC-003",
+    "GC-004",
+    "GC-005",
+    "GC-006",
+    "GC-007",
+    "GC-008",
+    "GC-009",
+    "GC-010",
+    "GC-011",
+    "GC-012",
+    "SP-013",
+    "SP-014",
+    "SP-015",
+    "SP-016",
+    "SP-017"
+  ],
+  "approved": true,
+  "actor_type": "human",
+  "recorder_type": "ai",
+  "user_approved_at": null,
+  "signature": null,
+  "authenticated_identity": null,
+  "externally_authenticated": false,
+  "historical_events_rewritten": false,
+  "case_approvals": [
+    {
+      "event_id": "legacy-policy-apply-GC-001",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-001",
+      "input_sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/0"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/0"
+      },
+      "final_event_sha256": "7652ea4edd1557de28ff841f1eaa1588a04fa552a39ee8f0c3864705fe8bfa55",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/0"
+      },
+      "inclusion_event_sha256": "38e13d068a0fe553fe080e096ad30649843a17c7ca7d1b05abc64ae869dd2f9d",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": null
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-002",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-002",
+      "input_sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/1"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/1"
+      },
+      "final_event_sha256": "5f2ce3db229a123bc4c436bbf8e0276b897ab6ce58da6b56cafd83a9787d37c1",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/1"
+      },
+      "inclusion_event_sha256": "ecd9acf4bc52d83bfef87a6a6d982c3a4417bfcfb92fdeafe558cc2dc6ea8e5e",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "54c977016195db3253843331d7951e48b3b5ced6900b3c79d763882cb7494e4f"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-003",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-003",
+      "input_sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/2"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/2"
+      },
+      "final_event_sha256": "2254f506ec1900d674a468d6e96367c540560f44c4a833a8c2dc6b4632eb2f5c",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/2"
+      },
+      "inclusion_event_sha256": "c720d9c786d1235d4debdbc91b711d9fc92e364225203690f5473aadf3e6b608",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "acf34410fc547afc836c79620274b14e5a4fcbbca409180243399c5109fef6c7"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-004",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-004",
+      "input_sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/3"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/3"
+      },
+      "final_event_sha256": "82f55793a508890a11b48d9bbfb8fc498efc875109e23ed686b17ece3cb2c583",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/3"
+      },
+      "inclusion_event_sha256": "5895c0b2f168e083563acf5e097c1c5ef758d94d28173bb4517c33a322762a8b",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "22dc04a6cbc576216b3ed77ae7131d1ffe8977bf81c10590a9f439ff5209a84c"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-005",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-005",
+      "input_sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/4"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/4"
+      },
+      "final_event_sha256": "e83ca7ce429dd47459353536e0471dc3df232a1176ddddb450079b2a6cc4a90b",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/4"
+      },
+      "inclusion_event_sha256": "9c855ee47531adf54d02720266699d78499e8d50a59fab62dc4c64712d16d261",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "de618414ebbd4532f4d746241d30f66c663e53815154905f32c4d70e92279afc"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-006",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-006",
+      "input_sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/5"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/5"
+      },
+      "final_event_sha256": "906290162083da96ae79ae6d679dd8a3e876fe67dceb5fc9336100f0fba36d0b",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/5"
+      },
+      "inclusion_event_sha256": "16fa3e21f66d070eeaf3664fee5906933867d9d27a421f691e0841f9e4abeb47",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "7df8ed0996eded8e58830af43d5aa5e5a7e36318193457fe13f6b395ca4975ea"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-007",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-007",
+      "input_sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/6"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/6"
+      },
+      "final_event_sha256": "1b9787a697386606c124a10047e7e7878ea5102375738d630974ead8d8c29619",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/6"
+      },
+      "inclusion_event_sha256": "999eb45c3204e7684948d9cd456337ba72ac785206a3f7da10d382ffe2a6a91e",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "89607c13676ba6dcab4b710b8feb79ad6690717fd2bbec11ff842fb659cfddc3"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-008",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-008",
+      "input_sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/7"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/7"
+      },
+      "final_event_sha256": "75d7ab28097c6a01578a479072b624bd4293708e369c2eaaa194d844290bef63",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/7"
+      },
+      "inclusion_event_sha256": "f7ac9b1f4c14a16674fa5c8cde5aa6090903312b8a5d974ce9e15341c64a4d2b",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "b933c8644da2849e13bdcf1c509a77e7823f701c5d7a94eba7eab1fbed25861d"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-009",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-009",
+      "input_sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/8"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/8"
+      },
+      "final_event_sha256": "078a3299b136ad0379861ff01c9750aaa803db7df66c0a69fdfa7fa9b51d2586",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/8"
+      },
+      "inclusion_event_sha256": "ce53e10843ebc68c77bfe35f96c8f62d19fadab0484f460505f8531ec802162c",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "d2b1e7ea1d61e05fe6f9fd3f12d2bd1f84b0a19ad8f7063617d7cd2e6084a1c6"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-010",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-010",
+      "input_sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/9"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/9"
+      },
+      "final_event_sha256": "5cee08f4b6f61a9850c2afce9e12b19eb764a623492cc50ceb1d9c9f38e29071",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/9"
+      },
+      "inclusion_event_sha256": "2c4b2fb4743712acca8d3acaefe60f1f5bfa848151f9e8fa1cfbe04cae5c93f6",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "dc97e20c86677ea06fd18d1818e5d0fde70629ce9e964919f09c015902f03d49"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-011",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-011",
+      "input_sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/10"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/10"
+      },
+      "final_event_sha256": "d6731367f221d585524fc67d89dbf2f8d52c06cfe537ce5638b0076ad3a9df3a",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/10"
+      },
+      "inclusion_event_sha256": "a88088e1dfe3f12d2288b9bcc8b5bb63aad10c5b2ef2084b6826662537854409",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "0b4a179bd2c9acedc28ae4a0b34682ded3a2da02a178eaa59b406bc83d55e492"
+    },
+    {
+      "event_id": "legacy-policy-apply-GC-012",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "GC-012",
+      "input_sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/11"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/11"
+      },
+      "final_event_sha256": "5912790fe9e8cc741cc7220c984e0021f1d0507cd55423f7570326f0667de99a",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/11"
+      },
+      "inclusion_event_sha256": "c8fefdf31d1a98007b3e1d44a2c1ba6fc6b01a3f2f97afa1a1fbb17851f155ff",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "4fb1171cbd17a6825057ef74e043f2353150fce465fa87616f3c2583d0ab2f93"
+    },
+    {
+      "event_id": "legacy-policy-apply-SP-013",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "SP-013",
+      "input_sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/12"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/12"
+      },
+      "final_event_sha256": "bcf35d51c7a37d2f8f0ab8980d2e23719f17a8c5484ff840c22655886e85444f",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/12"
+      },
+      "inclusion_event_sha256": "00e86903d4bd8e38f81b210e3e321a99c06d556dfe0abb05f4752a720dfe6bd5",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "6536a9b2c9c430041e08017fe611dc2b01f98b9a352fae80f5fa307b65679720"
+    },
+    {
+      "event_id": "legacy-policy-apply-SP-014",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "SP-014",
+      "input_sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/13"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/13"
+      },
+      "final_event_sha256": "4d87f2d8e4443638b434da0f9d78882a3d94f06d6f5f4019ea2737ad965c1236",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/13"
+      },
+      "inclusion_event_sha256": "de1dd24710227efb462e183077b33c53dd611c5282444c321765eeb8407496ff",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "ea59a6d3e8ad2cf2c8c27a7d2686d5ead2e2ee1d0ae9d80a9464d04186401909"
+    },
+    {
+      "event_id": "legacy-policy-apply-SP-015",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "SP-015",
+      "input_sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/14"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/14"
+      },
+      "final_event_sha256": "c0963a7cf5e441397c1b34606eaf60c96ae7b4a402617465ac7b0836a8fb96d8",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/14"
+      },
+      "inclusion_event_sha256": "bb90f13658ca8688a376a5d5fd51bc1ab62bdb6ca269e76ed4154df642dda8d5",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "91b14442622fb6963ecdca41ceddd0bc9e7159e557dfd9efce9cf0cc4e6cabfd"
+    },
+    {
+      "event_id": "legacy-policy-apply-SP-016",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "SP-016",
+      "input_sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/15"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/15"
+      },
+      "final_event_sha256": "8218b6c5d14d64288896f2c28b88eb71edd1993fadf7d06095f5916822188025",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/15"
+      },
+      "inclusion_event_sha256": "fa06ac532ea215f09348cf0064d5e808ccce16b879447d937b061651f94181da",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "f9129ba7c7fe66e7ea015c467844ae906490f97965ddfa2e97212c6e1e0ff8fc"
+    },
+    {
+      "event_id": "legacy-policy-apply-SP-017",
+      "kind": "user_legacy_policy_application_approved",
+      "case_id": "SP-017",
+      "input_sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+      "approved": true,
+      "policy_id": "legacy-review-migration-v1",
+      "policy": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+        "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+        "pointer": ""
+      },
+      "review_bundle": {
+        "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/legacy-records.json",
+        "sha256": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+        "pointer": "/cases/16"
+      },
+      "final_reference": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": "/events/16"
+      },
+      "final_event_sha256": "295fc03d56c21f55dca1468ee82a12f4bc054fc7820a7c19e4cd8ac8f9e1d408",
+      "inclusion_reference": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": "/events/16"
+      },
+      "inclusion_event_sha256": "b4d7eaa8133ec492ca5afa4cc9d17c840bacaa6d85e71a584a8ea7b1b07fd13b",
+      "source_pointer": "/statement",
+      "source_statement_sha256": "651eb234cb289e787b5028acf598a2177fc606d24cbbb033a5945744a70bee24",
+      "actor_type": "human",
+      "recorder_type": "ai",
+      "user_approved_at": null,
+      "previous_event_sha256": "29f413f434401b9a0bc0f5ce0d01c0ae34b74ea2638aaa1b3826145380266505"
+    }
+  ],
+  "terminal_event_sha256": "8c81fa062c82151d0897a8a8260c870e9ee3336e038a449661b7370f76ce055f"
+}

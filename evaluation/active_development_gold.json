@@ -1,0 +1,36 @@
+{
+  "schema_version": "active-development-gold-index-v1",
+  "dataset_role": "development_only",
+  "active_dataset": {
+    "path": "evaluation/g3_g4/development_gold_v3_active_2026-11-13/development-gold.json",
+    "sha256": "ef40a2e673d1e6ea3cc78bb2ca14da583a1f089ba9d1e47c0fdf4a8fb4b39fff",
+    "pointer": ""
+  },
+  "activation_history": {
+    "path": "evaluation/g3_g4/development_gold_v3_active_2026-11-13/activation-history.json",
+    "sha256": "557885ced3be7d0ff39ad8897a0379f1e7334691992e917e23f03ac9a1aab0d3",
+    "pointer": ""
+  },
+  "active_count": 29,
+  "active_distribution": {
+    "PRESERVED": 12,
+    "VIOLATION": 9,
+    "UNRESOLVED": 8
+  },
+  "consumers": {
+    "semantic_evaluation": {
+      "path": "evaluation/development_gold_active/source_candidate.py",
+      "sha256": "25edfc78c30acc41d887fa2a9935a9a734b336dfd079366331554d806973035f",
+      "pointer": ""
+    },
+    "core_diagnostics": {
+      "path": "evaluation/development_gold_active/core_diagnostics.py",
+      "sha256": "ff3f20cb4cdebf09bdb234db001aff50a983be506b9f0bb4b0f5df39ab32b1cd",
+      "pointer": ""
+    }
+  },
+  "historical_v2_consumers": {
+    "semantic_evaluation": "evaluation/source_candidate_semantics/run.py",
+    "core_diagnostics": "evaluation/core_pipeline_2026_11_11/evaluate.py"
+  }
+}
