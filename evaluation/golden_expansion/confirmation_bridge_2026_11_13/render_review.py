@@ -15,7 +15,7 @@ lines=[
  "- 기존 신규 적격성/활성화: 0/17, 기존 골드 SP-001~012 12건 유지",
  "- Codex 인용 근거 후보: 34개, 아직 사용자가 정식 최종 증거로 확인한 것은 0개",
  "- 반론 응답 원문: 17건 모두 사용자는 Codex의 반론 타당성 평가에 동의했다. 정식 challenge별 accept/reject/defer는 매핑하지 않는다.",
- "- 실제로 확인이 필요한 범위: 최종 증거 인용의 채택, 제안한 challenge별 응답, 평가 한계 인지 및 UNRESOLVED 4건의 최종 미해결 사유 확인. 승인되지 않은 값은 모두 null로 유지",
+ "- UNRESOLVED 4건의 기존 사유·판단 유지 재확인은 별도 user-reconfirmation.json에 전사했다. 정식 evidence·challenge 응답 확인으로 확장하지 않으며, 완료된 검토를 다시 요구하지 않는다.",
  "",
  "## 사례별 기존 판단과 제안 근거",
  "",
@@ -36,7 +36,7 @@ for row in data["cases"]:
       "- 정식 challenge ID·응답: 미확정 (사용자의 기존 동의를 임의로 accept/reject/defer로 치환하지 않음)",
     ])
     if row["initial_unresolved_reason"]:
-        lines.append(f"- 확인할 최종 미해결 이유 후보(기존 최초 이유): {row['initial_unresolved_reason']}")
+        lines.append(f"- 사용자가 유지를 재확인한 기존 미해결 이유: {row['initial_unresolved_reason']}")
     for e in row["candidate_final_evidence"]:
         quote = e["quote"].replace("\n"," ⏎ ").replace("|","/")
         lines.append(f"- AI 출처 인용 후보 [{e['side']} / {e['document_id']} / {e['start']}:{e['end']}]: “{quote}”")
@@ -45,7 +45,7 @@ lines.extend([
  "## 제출·활성화 경계",
  "",
  "이 책자는 사용자 확인을 준비한 초안이며 새로운 사용자 증거·정식 최종 이벤트·골드 활성화가 아니다.",
- "정식 사용자 증빙으로 반영할 때는 이 문서와 confirmation-batch.json을 명시적으로 확인한 새 사용자 발언을 원문 그대로 별도 기록하고, 사건의 실제 시간 순서와 기존 이력의 출처를 보존해야 한다.",
+ "기존 판단·포함 승인과 미해결 사유 유지 재확인을 재수집하지 않는다. 별도 레거시 이관 경로는 후속 PR에서 검수하며 AI 인용·응답 매핑·확인되지 않은 필드는 사용자 제출로 만들지 않는다.",
  "사용자 확인 이후에도 review.py의 정식 event-chain 충족 여부는 독립적으로 검증해야 하며, 자동으로 개발용 골드를 활성화하지 않는다.",
  ""
 ])

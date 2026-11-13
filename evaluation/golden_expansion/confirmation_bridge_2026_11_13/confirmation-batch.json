@@ -7,6 +7,11 @@
     "sha256": "892d5a278bec49d18eb38503e88365b3370baf834717f1f29cb5ebebfd2f1bdc",
     "pointer": ""
   },
+  "unresolved_reason_reaffirmation": {
+    "path": "evaluation/golden_expansion/confirmation_bridge_2026_11_13/user-reconfirmation.json",
+    "sha256": "734d6f4b8c278950368f7ee0c9d69da3d2c9966d342edc5a65a48f0946a4aeb0",
+    "pointer": ""
+  },
   "existing_inclusion_approved": 17,
   "proposed_evidence_quotes": 34,
   "new_user_evidence_confirmations": 0,
@@ -83,7 +88,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-002",
@@ -153,7 +159,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-003",
@@ -223,7 +230,16 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": "전체 내용을 다시 받아야 함",
       "final_unresolved_issues_human_confirmed": null,
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": {
+        "source": {
+          "path": "evaluation/golden_expansion/confirmation_bridge_2026_11_13/user-reconfirmation.json",
+          "sha256": "734d6f4b8c278950368f7ee0c9d69da3d2c9966d342edc5a65a48f0946a4aeb0",
+          "pointer": "/cases/0"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "전체 내용을 다시 받아야 함"
+      }
     },
     {
       "case_id": "GC-004",
@@ -293,7 +309,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-005",
@@ -363,7 +380,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-006",
@@ -433,7 +451,16 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": "전체 내용을 재전송받아야 함",
       "final_unresolved_issues_human_confirmed": null,
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": {
+        "source": {
+          "path": "evaluation/golden_expansion/confirmation_bridge_2026_11_13/user-reconfirmation.json",
+          "sha256": "734d6f4b8c278950368f7ee0c9d69da3d2c9966d342edc5a65a48f0946a4aeb0",
+          "pointer": "/cases/1"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "전체 내용을 재전송받아야 함"
+      }
     },
     {
       "case_id": "GC-007",
@@ -503,7 +530,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-008",
@@ -573,7 +601,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-009",
@@ -643,7 +672,16 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": "이동된 문서의 본문이 필요함",
       "final_unresolved_issues_human_confirmed": null,
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": {
+        "source": {
+          "path": "evaluation/golden_expansion/confirmation_bridge_2026_11_13/user-reconfirmation.json",
+          "sha256": "734d6f4b8c278950368f7ee0c9d69da3d2c9966d342edc5a65a48f0946a4aeb0",
+          "pointer": "/cases/2"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "이동된 문서의 본문이 필요함"
+      }
     },
     {
       "case_id": "GC-010",
@@ -713,7 +751,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-011",
@@ -783,7 +822,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "GC-012",
@@ -853,7 +893,16 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": "이동된 문서의 내용이 필요함",
       "final_unresolved_issues_human_confirmed": null,
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": {
+        "source": {
+          "path": "evaluation/golden_expansion/confirmation_bridge_2026_11_13/user-reconfirmation.json",
+          "sha256": "734d6f4b8c278950368f7ee0c9d69da3d2c9966d342edc5a65a48f0946a4aeb0",
+          "pointer": "/cases/3"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "이동된 문서의 내용이 필요함"
+      }
     },
     {
       "case_id": "SP-013",
@@ -923,7 +972,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "SP-014",
@@ -993,7 +1043,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "SP-015",
@@ -1063,7 +1114,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "SP-016",
@@ -1133,7 +1185,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     },
     {
       "case_id": "SP-017",
@@ -1203,7 +1256,8 @@
       "confidence_limitations_human_confirmed": null,
       "initial_unresolved_reason": null,
       "final_unresolved_issues_human_confirmed": "not_applicable",
-      "formal_gold_eligible": false
+      "formal_gold_eligible": false,
+      "retained_unresolved_reason_reaffirmation": null
     }
   ]
 }

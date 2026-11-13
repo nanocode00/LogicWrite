@@ -6,7 +6,7 @@
 - 기존 신규 적격성/활성화: 0/17, 기존 골드 SP-001~012 12건 유지
 - Codex 인용 근거 후보: 34개, 아직 사용자가 정식 최종 증거로 확인한 것은 0개
 - 반론 응답 원문: 17건 모두 사용자는 Codex의 반론 타당성 평가에 동의했다. 정식 challenge별 accept/reject/defer는 매핑하지 않는다.
-- 실제로 확인이 필요한 범위: 최종 증거 인용의 채택, 제안한 challenge별 응답, 평가 한계 인지 및 UNRESOLVED 4건의 최종 미해결 사유 확인. 승인되지 않은 값은 모두 null로 유지
+- UNRESOLVED 4건의 기존 사유·판단 유지 재확인은 별도 user-reconfirmation.json에 전사했다. 정식 evidence·challenge 응답 확인으로 확장하지 않으며, 완료된 검토를 다시 요구하지 않는다.
 
 ## 사례별 기존 판단과 제안 근거
 
@@ -59,7 +59,7 @@
 - Codex의 반론 타당성 평가: 두 반박 모두 불성립: 누락은 완성 후보에서의 삭제가 아니라 명시된 전송 절단이다. 접두부 동일성만으로 미제공 후반부 보존도 입증할 수 없다.
 - 실제 사용자 응답: Codex 평가에 동의 / 최종 판단 UNRESOLVED
 - 정식 challenge ID·응답: 미확정 (사용자의 기존 동의를 임의로 accept/reject/defer로 치환하지 않음)
-- 확인할 최종 미해결 이유 후보(기존 최초 이유): 전체 내용을 다시 받아야 함
+- 사용자가 유지를 재확인한 기존 미해결 이유: 전체 내용을 다시 받아야 함
 - AI 출처 인용 후보 [source / main / 1618:1656]: “## Supported Features & Best–Practices”
 - AI 출처 인용 후보 [candidate / main / 1574:1616]: “Requests officially supports Python 3.10+.”
 
@@ -90,7 +90,7 @@
 - Codex의 반론 타당성 평가: 두 반박 모두 불성립: 후보는 전송 중 절단된 partial 자료다. 알려진 삭제로 취급할 수 없고 미제공 부분의 보존도 추정할 수 없다.
 - 실제 사용자 응답: Codex 평가에 동의 / 최종 판단 UNRESOLVED
 - 정식 challenge ID·응답: 미확정 (사용자의 기존 동의를 임의로 accept/reject/defer로 치환하지 않음)
-- 확인할 최종 미해결 이유 후보(기존 최초 이유): 전체 내용을 재전송받아야 함
+- 사용자가 유지를 재확인한 기존 미해결 이유: 전체 내용을 재전송받아야 함
 - AI 출처 인용 후보 [source / main / 1169:1201]: “## Fine tuning the configuration”
 - AI 출처 인용 후보 [candidate / main / 1092:1163]: “client = httpx.Client(timeout=None)  # Disable all timeouts by default.”
 
@@ -121,7 +121,7 @@
 - Codex의 반론 타당성 평가: 어느 쪽도 확정에 충분하지 않음. linked_document 노출과 details.md 이동은 명시적으로 허용되므로 main의 삭제 자체가 위반은 아니다. 반대로 링크 존재는 목적지 내용 보존의 증거가 아니다.
 - 실제 사용자 응답: Codex 평가에 동의 / 최종 판단 UNRESOLVED
 - 정식 challenge ID·응답: 미확정 (사용자의 기존 동의를 임의로 accept/reject/defer로 치환하지 않음)
-- 확인할 최종 미해결 이유 후보(기존 최초 이유): 이동된 문서의 본문이 필요함
+- 사용자가 유지를 재확인한 기존 미해결 이유: 이동된 문서의 본문이 필요함
 - AI 출처 인용 후보 [candidate / main / 987:1026]: “See [confirmation details](details.md).”
 - AI 출처 인용 후보 [source / main / 1102:1208]: “boolean `--yes` flag and asking for confirmation if the user did not provide it and to fail in a callback:”
 
@@ -152,7 +152,7 @@
 - Codex의 반론 타당성 평가: 확정 반론은 성립하지 않음. 계약은 details.md로 상세를 옮겨 링크로 노출하는 구성을 허용한다. 따라서 main 누락만으로 위반이라 할 수 없고, 미제공 목적지의 보존을 추정해서도 안 된다.
 - 실제 사용자 응답: Codex 평가에 동의 / 최종 판단 UNRESOLVED
 - 정식 challenge ID·응답: 미확정 (사용자의 기존 동의를 임의로 accept/reject/defer로 치환하지 않음)
-- 확인할 최종 미해결 이유 후보(기존 최초 이유): 이동된 문서의 내용이 필요함
+- 사용자가 유지를 재확인한 기존 미해결 이유: 이동된 문서의 내용이 필요함
 - AI 출처 인용 후보 [candidate / main / 425:484]: “## Lifecycle operations ⏎  ⏎ See [reload and quit](details.md).”
 - AI 출처 인용 후보 [source / main / 475:637]: “This endpoint triggers a reload of the Prometheus configuration and rule files. It's disabled by default and can be enabled via the `--web.enable-lifecycle` flag.”
 
@@ -209,5 +209,5 @@
 ## 제출·활성화 경계
 
 이 책자는 사용자 확인을 준비한 초안이며 새로운 사용자 증거·정식 최종 이벤트·골드 활성화가 아니다.
-정식 사용자 증빙으로 반영할 때는 이 문서와 confirmation-batch.json을 명시적으로 확인한 새 사용자 발언을 원문 그대로 별도 기록하고, 사건의 실제 시간 순서와 기존 이력의 출처를 보존해야 한다.
+기존 판단·포함 승인과 미해결 사유 유지 재확인을 재수집하지 않는다. 별도 레거시 이관 경로는 후속 PR에서 검수하며 AI 인용·응답 매핑·확인되지 않은 필드는 사용자 제출로 만들지 않는다.
 사용자 확인 이후에도 review.py의 정식 event-chain 충족 여부는 독립적으로 검증해야 하며, 자동으로 개발용 골드를 활성화하지 않는다.

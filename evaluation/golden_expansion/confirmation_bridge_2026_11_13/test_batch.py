@@ -1,6 +1,7 @@
 """No automatic elevation of historical review into current user endorsement."""
 import copy
 import json
+import shutil
 from pathlib import Path
 import tempfile
 import unittest
@@ -61,6 +62,32 @@ class BatchTests(unittest.TestCase):
         before=path.read_bytes(),path.stat().st_mtime_ns
         v.validate()
         self.assertEqual(before,(path.read_bytes(),path.stat().st_mtime_ns))
+
+    def test_reaffirmation_is_separate_from_formal_evidence(self):
+        rows = b.build()["cases"]
+        reaffirmed = [r for r in rows if r["retained_unresolved_reason_reaffirmation"]]
+        self.assertEqual([r["case_id"] for r in reaffirmed], ["GC-003", "GC-006", "GC-009", "GC-012"])
+        for row in reaffirmed:
+            self.assertEqual(row["retained_unresolved_reason_reaffirmation"]["reason"], row["initial_unresolved_reason"])
+            self.assertIsNone(row["formal_response_decision"])
+            self.assertIsNone(row["final_evidence_human_confirmed"])
+
+    def test_supplied_root_evidence_tampering_is_detected(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            shutil.copytree(b.ROOT / "evaluation", root / "evaluation", ignore=shutil.ignore_patterns("__pycache__"))
+            baseline = b.load(b.ROOT / "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/preserved-files.json")
+            for name in baseline:
+                target = root / name
+                if not target.exists():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(b.ROOT / name, target)
+            here = root / "evaluation/golden_expansion/confirmation_bridge_2026_11_13"
+            self.assertEqual(v.validate(root=root, here=here)["case_count"], 17)
+            source = root / "evaluation/golden_expansion/user_final_2026_11_11/events.json"
+            source.write_bytes(source.read_bytes() + b" ")
+            with self.assertRaises(ValueError):
+                v.validate(root=root, here=here)
 
 if __name__=="__main__":
     unittest.main()

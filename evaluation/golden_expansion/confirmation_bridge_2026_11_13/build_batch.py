@@ -11,6 +11,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 SOURCE = ROOT / "evaluation/golden_expansion/formal_review_reuse_2026_11_13"
 EXPECTED_IDS = [f"GC-{n:03}" for n in range(1, 13)] + [f"SP-{n:03}" for n in range(13, 18)]
+REAFFIRMATION_SHA = "734d6f4b8c278950368f7ee0c9d69da3d2c9966d342edc5a65a48f0946a4aeb0"
 
 
 def load(path):
@@ -21,16 +22,21 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def link(path, ptr=""):
-    return {"path": str(path.relative_to(ROOT)), "sha256": sha(path), "pointer": ptr}
+def link(path, ptr="", root=ROOT):
+    return {"path": str(path.relative_to(root)), "sha256": sha(path), "pointer": ptr}
 
 
-def build():
-    spec = importlib.util.spec_from_file_location("historical_adaptor", SOURCE / "transcription_adapter.py")
+def build(root=ROOT):
+    source = root / "evaluation/golden_expansion/formal_review_reuse_2026_11_13"
+    here = root / "evaluation/golden_expansion/confirmation_bridge_2026_11_13"
+    spec = importlib.util.spec_from_file_location("historical_adaptor", source / "transcription_adapter.py")
     adapter = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(adapter)
-    historical = adapter.build()
-    suggestions = load(SOURCE / "suggestions.json")
+    historical = adapter.build(root)
+    suggestions = load(source / "suggestions.json")
+    reaffirmation = load(here / "user-reconfirmation.json")
+    if sha(here / "user-reconfirmation.json") != REAFFIRMATION_SHA:
+        raise ValueError("user reaffirmation changed")
     assert historical["number_of_cases"] == suggestions["case_count"] == 17
     assert [r["case_id"] for r in historical["cases"]] == EXPECTED_IDS
     assert [r["case_id"] for r in suggestions["cases"]] == EXPECTED_IDS
@@ -39,7 +45,8 @@ def build():
         "schema_version": "gold-review-confirmation-batch-proposal-v1",
         "status": "proposed_not_human_confirmed",
         "purpose": "Take the already submitted user judgments as immutable and request only provenance/evidence/resolution acknowledgments absent from formal schema.",
-        "source": link(SOURCE / "transcription.json"),
+        "source": link(source / "transcription.json", root=root),
+        "unresolved_reason_reaffirmation": link(here / "user-reconfirmation.json", root=root),
         "existing_inclusion_approved": 17,
         "proposed_evidence_quotes": 34,
         "new_user_evidence_confirmations": 0,
@@ -96,6 +103,10 @@ def build():
             "initial_unresolved_reason": history["initial_human"]["rationale"] if history["final_human"]["judgment"] == "UNRESOLVED" else None,
             "final_unresolved_issues_human_confirmed": None if history["final_human"]["judgment"] == "UNRESOLVED" else "not_applicable",
             "formal_gold_eligible": False,
+            "retained_unresolved_reason_reaffirmation": (
+                {"source": link(here / "user-reconfirmation.json", f"/cases/{next(n for n, r in enumerate(reaffirmation['cases']) if r['case_id'] == cid)}", root),
+                 "judgment": "UNRESOLVED", "reason": history["initial_human"]["rationale"]}
+                if history["final_human"]["judgment"] == "UNRESOLVED" else None),
         })
     return result
 

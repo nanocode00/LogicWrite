@@ -20,7 +20,7 @@ Codex의 strongest counterargument와 그 타당성 평가는 원본 출처 그�
 
 AI가 인용한 원문/후보 34개는 SHA/offset으로 대조된 **참고 근거**이나, 현재 `human_confirmed_as_final_evidence`는 모두 null이다. UNRESOLVED 4건의 `initial_unresolved_reason`은 실제 사용자 최초 이유이며, 별도의 final `unresolved_issues` 사용자 입력으로 합성하지 않는다.
 
-정식 기록으로 추가하려면 사용자가 `REVIEW.md`의 인용과 반론 대응을 확인하고, 필요한 범위의 evidence 채택, challenge별 응답, confidence limitations 및 UNRESOLVED 4건 최종 이슈를 새 기록으로 명시해야 한다. 이는 기존 라벨 재판정과 다르다.
+사용자는 후속 요청에서 UNRESOLVED 4건의 기존 사유와 판단 유지 재확인 사실을 명시했다. `user-reconfirmation.json`에 그 문장을 그대로 전사하고 기존 최초 이유의 SHA/JSON pointer에 연결했다. 이는 정식 final evidence나 challenge 응답을 제출했다는 뜻이 아니다. 과거 시각·인증 신원은 만들지 않았다. 완료된 검토를 다시 요구하지 않는다. 별도 레거시 이관 정책은 후속 PR에서 검토하며, 이 패키지가 기존 정식 이벤트 요건을 충족했다고 주장하지 않는다.
 
 ## 검사
 
@@ -30,3 +30,5 @@ python3 -B -m unittest discover -s evaluation/golden_expansion/confirmation_brid
 ```
 
 **경계:** 신규 정식 human event 0건, 신규 골드 적격 0건, 활성화 0건. 기존 활성 v2의 12건을 유지한다. 이 패키지를 곧바로 정식 `review.py`에 통과시키거나 기존 workflow 필수 정책을 느슨하게 만들어서는 안 된다. 사용자 확인을 받고도 실제 event-chain 요건은 별도로 검증해야 하며 v3 활성화는 그 이후의 작업이다.
+
+기존 `final_unresolved_issues_human_confirmed=null`은 정식 양식 미작성이라는 과거 상태로 유지하며, 현재 사유 유지 재확인은 별도 `retained_unresolved_reason_reaffirmation`에 연결한다. 원본 입력·Codex 실행·최종 판단·포함 승인의 기존 검증기를 먼저 실행하고 지정 root의 증거를 검증한다.

@@ -3,6 +3,7 @@
 This checks provenance and candidate accuracy, not human endorsement or gold eligibility.
 """
 import json
+import importlib.util
 from pathlib import Path
 import build_batch
 
@@ -17,13 +18,20 @@ def require(ok, reason):
 
 def validate(root=ROOT, here=HERE):
     stored = json.loads((here / "confirmation-batch.json").read_text(encoding="utf-8"))
-    if root == ROOT:
-        derived = build_batch.build()
-        require(stored == derived, "proposal diverged from source history")
-    else:
-        # For deliberate mutation tests, the checked package is always rebuilt
-        # only from the repository's trusted original sources.
-        require(stored == build_batch.build(), "proposal tampered")
+    # Validate the supplied repository, not a different trusted checkout.
+    for folder, entry, method in [
+        ("codex_counterreview_2026_11_11", "validate.py", "verify"),
+        ("user_final_2026_11_11", "validate_submission.py", "validate"),
+        ("gold_inclusion_approval_2026_11_13", "validate_approval.py", "validate"),
+    ]:
+        path = root / "evaluation/golden_expansion" / folder / entry
+        spec = importlib.util.spec_from_file_location("bridge_" + folder, path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        result = getattr(module, method)()
+        if method == "verify":
+            require(result[0]["completed"] == 17 and result[0]["failed"] == 0, "incomplete AI review")
+    require(stored == build_batch.build(root), "proposal diverged from source history")
     require(stored["status"] == "proposed_not_human_confirmed", "wrong status")
     require(stored["new_user_evidence_confirmations"] == 0 and stored["new_formal_user_events"] == 0
             and stored["development_gold_activated"] == 0, "false claim of activation/confirmation")
@@ -48,7 +56,7 @@ def validate(root=ROOT, here=HERE):
                     "must not invent final unresolved reason")
         options = row["candidate_final_evidence"]
         require(options and len(options) == 2, "missing quote proposals")
-        input_source = json.loads((ROOT / row["input_reference"]["path"]).read_text(encoding="utf-8"))
+        input_source = json.loads((root / row["input_reference"]["path"]).read_text(encoding="utf-8"))
         for option in options:
             docs = input_source[option["side"] + "_documents"]
             target = next((d for d in docs if d["document_id"] == option["document_id"]), None)
