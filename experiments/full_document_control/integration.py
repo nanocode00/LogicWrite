@@ -91,12 +91,13 @@ class RevisionController:
         errors = [f for f in findings if f.get('severity') == 'ERROR']
         findings = errors or findings
         rules = ' '.join(f.get('rule_id', '') for f in findings)
-        if any(k in rules for k in ('MOVE', 'DESTINATION', 'PLACEMENT', 'CONSOLIDATION', 'ORGANIZATION')):
+        # Mixed failures invalidate from the earliest responsible stage.
+        if any(k in rules for k in ('ANALYSIS', 'INPUT_DIGEST', 'CONTRACT_REF', 'SNAPSHOT_REF', 'EXTRACTION')):
+            module, invalidated = 'information_extraction_analysis', ['analysis', 'organization', 'expression', 'reconstruction', 'final_report']
+        elif any(k in rules for k in ('MOVE', 'DESTINATION', 'PLACEMENT', 'CONSOLIDATION', 'ORGANIZATION')):
             module, invalidated = 'information_organization', ['organization', 'expression', 'reconstruction', 'final_report']
         elif any(f.get('check_id') == 'EXPRESSION_FIDELITY' for f in findings) or any(k in rules for k in ('EXPRESSION', 'GENERATOR', 'GENERATION', 'PROTECTED_INFORMATION_LOSS', 'REGISTER', 'TERM_VIOLATION')):
             module, invalidated = 'expression_refinement', ['expression', 'reconstruction', 'final_report']
-        elif any(k in rules for k in ('ANALYSIS', 'INPUT_DIGEST', 'CONTRACT_REF', 'SNAPSHOT_REF', 'EXTRACTION')):
-            module, invalidated = 'information_extraction_analysis', ['analysis', 'organization', 'expression', 'reconstruction', 'final_report']
         else:
             module, invalidated = 'reconstruction', ['reconstruction', 'final_report']
         invalidated += ['final_semantic_report', 'final_audit', 'approval_request', 'approval_report']

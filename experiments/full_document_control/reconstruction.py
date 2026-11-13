@@ -91,6 +91,40 @@ def bounded_text(entry, before, after, constraints):
     return expected == after
 
 
+def execution_observations(analysis, org, preview, result):
+    """Advisory D/Q separation, never consumed as validation or approval evidence.
+
+    D is copied intent; Q comes exclusively from materialized trace/ledger data.
+    A held reconstruction has no observed output, even if previews exist.
+    """
+    placements = {p['unit_id']: p for p in org['placements']}
+    entries = {e['unit_id']: e for e in preview['expression_plan']['entries']}
+    traces = {t['unit_refs'][0]: t for t in result['trace']}
+    rows = []
+    for unit in analysis['units']:
+        uid = unit['id']
+        spans = traces.get(uid, {}).get('output_spans', [])
+        observed = result['delivery_state'] == 'candidate' and bool(spans)
+        if observed:
+            # Analysis spans belong to the single source snapshot. Destination
+            # origin rows have no matching source interval in the unit trace.
+            source_doc = result['source_refs'][0]['document_id']
+            treatments = sorted({row['treatment'] for row in result['block_ledger']
+                if row['source_document_id'] == source_doc and any(
+                    row['start'] < span['end'] and span['start'] < row['end']
+                    for span in unit['source_spans'])})
+        rows.append({'unit_id': uid,
+            'decision': {'assessment': copy.deepcopy(unit.get('assessment')),
+                         'placement': copy.deepcopy(placements[uid]),
+                         'expression_operation': entries[uid]['operation']},
+            'observation': {'state': 'observed' if observed else 'not_materialized',
+                'output_spans': copy.deepcopy(spans) if observed else [],
+                'treatments': treatments if observed else [],
+                'text_changed': [s['quote'] for s in unit['source_spans']] != [s['quote'] for s in spans]
+                                if observed else None}})
+    return {'version': 'execution-observations-v1', 'advisory_only': True, 'units': rows}
+
+
 def reconstruct_documents(bundle, analysis, org, preview, *, destination_snapshots=None):
     findings = []
     result = {'version': VERSION, 'meta': {'execution_mode': 'isolated_candidate', 'delivery_approved': False},
@@ -98,6 +132,7 @@ def reconstruct_documents(bundle, analysis, org, preview, *, destination_snapsho
               'expression_plan': copy.deepcopy(preview.get('expression_plan')),
               'delivery_state': 'preview', 'output_snapshots': [], 'preview_fragments': copy.deepcopy(preview.get('preview_fragments', [])),
               'change_set': [], 'trace': [], 'block_ledger': [], 'findings': findings,
+              'execution_observations': {'version': 'execution-observations-v1', 'advisory_only': True, 'units': []},
               'delivery_approved': False, 'stage_transition_allowed': False}
     try:
         docs = source_documents(bundle, destination_snapshots)
@@ -108,6 +143,7 @@ def reconstruct_documents(bundle, analysis, org, preview, *, destination_snapsho
             findings.extend(f for f in validation['findings'] if f['severity'] == 'ERROR')
             return expression.seal(result, 'revision_sha256')
         _construct(bundle, analysis, org, preview, docs, result)
+        result['execution_observations'] = execution_observations(analysis, org, preview, result)
     except OutputScopeError as exc:
         findings.append(issue(exc.rule_id, 'Document is not a concrete output scope in the Writing Contract', 'ERROR'))
     except IncompleteSnapshot:
@@ -196,6 +232,9 @@ def _construct(bundle, analysis, org, preview, docs, result):
         target = targets[0]
         doc = scopes[target['scope_id']]['document_id']
         if plc['action'] == 'MOVE':
+            if target.get('section_path') or target.get('anchor_unit_id') or target.get('anchor_relative_position') in {'before', 'after'}:
+                findings.append(issue('MOVE_PLACEMENT_UNSUPPORTED', 'MOVE supports append only; destination section/anchor placement requires review'))
+                return
             if uid not in unit_node or doc not in layouts:
                 findings.append(issue('PARTIAL_BLOCK_MOVE_HELD', 'MOVE needs a whole unprotected paragraph and full destination'))
                 return
