@@ -1,0 +1,60 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T9-07",
+  "task": {
+    "title": "한 문서의 완결된 상태 확인",
+    "purpose": "검토자는 이 한 문서에서 점검 결과와 승인 상태 두 질문의 답을 찾는다. 현재 답을 그대로 보존하면 되며 추가 문서는 요구하지 않는다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "검토자는 이 한 문서에서 점검 결과와 승인 상태 두 질문의 답을 찾는다. 현재 답을 그대로 보존하면 되며 추가 문서는 요구하지 않는다.",
+    "output_document_ids": [
+      "status"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "status",
+      "role": "editable fictional document",
+      "content": "# 상태\n점검 3건 모두 통과했다. 최종 승인은 아직 발급되지 않았다.\n",
+      "sha256": "75c5ccd8d4781e7f362dd9bd48df5b6de6fd4b80e93939487cf463ef33056512",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "status"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

@@ -1,0 +1,37 @@
+....FF..F.F.........
+======================================================================
+FAIL: test_duplicate_required_id_cannot_shrink_recall_denominator (test_integrity.IntegrityTests.test_duplicate_required_id_cannot_shrink_recall_denominator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 60, in test_duplicate_required_id_cannot_shrink_recall_denominator
+    with self.assertRaises(ValueError): self.validate()
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_empty_counterreview_evidence_rejected (test_integrity.IntegrityTests.test_empty_counterreview_evidence_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 84, in test_empty_counterreview_evidence_rejected
+    with self.assertRaises(ValueError): self.validate()
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_incomplete_or_nonindependent_raw_review_rejected (test_integrity.IntegrityTests.test_incomplete_or_nonindependent_raw_review_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 72, in test_incomplete_or_nonindependent_raw_review_rejected
+    with self.assertRaises(ValueError): self.validate()
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_malformed_human_response_rejected_without_rewriting (test_integrity.IntegrityTests.test_malformed_human_response_rejected_without_rewriting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite/evaluation/capability_pilot/test_integrity.py", line 90, in test_malformed_human_response_rejected_without_rewriting
+    with self.assertRaises(ValueError): self.validate()
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 20 tests in 10.503s
+
+FAILED (failures=4)

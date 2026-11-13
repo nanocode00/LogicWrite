@@ -1,0 +1,77 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T9-06",
+  "task": {
+    "title": "전체 출력 절단에 따른 Q 미평가",
+    "purpose": "원문과 제공된 결과 조각의 문서 적합성을 검토한다. 전체 출력이 없으면 전체 과업 완료를 단정하지 않는다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "원문과 제공된 결과 조각의 문서 적합성을 검토한다. 전체 출력이 없으면 전체 과업 완료를 단정하지 않는다.",
+    "output_document_ids": [
+      "source",
+      "output_fragment"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "source",
+      "role": "editable fictional document",
+      "content": "# 설치\n백업을 확인한다. 설치를 실행한다. 검증 실패 시 되돌린다.\n",
+      "sha256": "7ba437e5888281ccd967220fe8cf2d708ddceb52538d410fba457c92f70132b0",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    },
+    {
+      "document_id": "output_fragment",
+      "role": "editable fictional document",
+      "content": "# 설치\n백업을 확인한다.\n",
+      "sha256": "101373f7227c42827d4969b851bcf0c543815dd0f2d55155f351309b50226d1f",
+      "availability": "provided",
+      "completeness": "excerpt",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [
+      "후보 전체 출력이 제공되지 않음"
+    ],
+    "external_material": "not_available",
+    "candidate_output": "fragment_only"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "source",
+      "output_fragment"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

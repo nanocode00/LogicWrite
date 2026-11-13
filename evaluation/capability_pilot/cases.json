@@ -1,0 +1,3320 @@
+[
+  {
+    "case_id": "CP-T1-01",
+    "primary_type": "T1",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": true,
+    "subscenario_ids": [
+      "facts_conditions",
+      "cross_paragraph"
+    ],
+    "subscenario_evidence": {
+      "facts_conditions": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "cross_paragraph": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "pallets",
+    "source_key": "pallets/flask",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T1-01.json",
+    "answer_path": "answers/CP-T1-01.json",
+    "review_path": "reviews/CP-T1-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 3278,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T1-02",
+    "primary_type": "T1",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "facts_conditions",
+      "cross_paragraph"
+    ],
+    "subscenario_evidence": {
+      "facts_conditions": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "cross_paragraph": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "encode",
+    "source_key": "encode/httpx",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T1-02.json",
+    "answer_path": "answers/CP-T1-02.json",
+    "review_path": "reviews/CP-T1-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 9882,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T1-03",
+    "primary_type": "T1",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "true_conflict",
+      "facts_conditions"
+    ],
+    "subscenario_evidence": {
+      "true_conflict": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "facts_conditions": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "psf",
+    "source_key": "psf/requests",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T1-03.json",
+    "answer_path": "answers/CP-T1-03.json",
+    "review_path": "reviews/CP-T1-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 5874,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T1-04",
+    "primary_type": "T1",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "scope_time_attribution",
+      "cross_paragraph"
+    ],
+    "subscenario_evidence": {
+      "scope_time_attribution": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "cross_paragraph": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "fastapi",
+    "source_key": "fastapi/fastapi",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T1-04.json",
+    "answer_path": "answers/CP-T1-04.json",
+    "review_path": "reviews/CP-T1-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 45226,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T1-05",
+    "primary_type": "T1",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "scope_time_attribution",
+      "cross_paragraph",
+      "facts_conditions"
+    ],
+    "subscenario_evidence": {
+      "scope_time_attribution": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "cross_paragraph": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "facts_conditions": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T1-05.json",
+    "answer_path": "answers/CP-T1-05.json",
+    "review_path": "reviews/CP-T1-05.json",
+    "document_type": "meeting_record_and_table",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 158,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T1-06",
+    "primary_type": "T1",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "unclear_authority"
+    ],
+    "subscenario_evidence": {
+      "unclear_authority": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T1-06.json",
+    "answer_path": "answers/CP-T1-06.json",
+    "review_path": "reviews/CP-T1-06.json",
+    "document_type": "meeting_record_and_table",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 60,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T2-01",
+    "primary_type": "T2",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": true,
+    "subscenario_ids": [
+      "selection",
+      "audience_purpose"
+    ],
+    "subscenario_evidence": {
+      "selection": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "audience_purpose": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "pydantic",
+    "source_key": "pydantic/pydantic",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T2-01.json",
+    "answer_path": "answers/CP-T2-01.json",
+    "review_path": "reviews/CP-T2-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 7311,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T2-02",
+    "primary_type": "T2",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "selection",
+      "audience_purpose"
+    ],
+    "subscenario_evidence": {
+      "selection": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "audience_purpose": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "astral-sh",
+    "source_key": "astral-sh/ruff",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T2-02.json",
+    "answer_path": "answers/CP-T2-02.json",
+    "review_path": "reviews/CP-T2-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 39327,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T2-03",
+    "primary_type": "T2",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "local_exposure",
+      "long_required"
+    ],
+    "subscenario_evidence": {
+      "local_exposure": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "long_required": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "textualize",
+    "source_key": "Textualize/rich",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T2-03.json",
+    "answer_path": "answers/CP-T2-03.json",
+    "review_path": "reviews/CP-T2-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 33812,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T2-04",
+    "primary_type": "T2",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "selection",
+      "long_required"
+    ],
+    "subscenario_evidence": {
+      "selection": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "long_required": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "pytest-dev",
+    "source_key": "pytest-dev/pytest",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T2-04.json",
+    "answer_path": "answers/CP-T2-04.json",
+    "review_path": "reviews/CP-T2-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 10908,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T2-05",
+    "primary_type": "T2",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "local_exposure",
+      "audience_purpose",
+      "long_required",
+      "selection"
+    ],
+    "subscenario_evidence": {
+      "local_exposure": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "audience_purpose": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "long_required": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "selection": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T2-05.json",
+    "answer_path": "answers/CP-T2-05.json",
+    "review_path": "reviews/CP-T2-05.json",
+    "document_type": "runbook",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 155,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T2-06",
+    "primary_type": "T2",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "purpose_conflict"
+    ],
+    "subscenario_evidence": {
+      "purpose_conflict": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T2-06.json",
+    "answer_path": "answers/CP-T2-06.json",
+    "review_path": "reviews/CP-T2-06.json",
+    "document_type": "runbook",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 103,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T2-07",
+    "primary_type": "T2",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "selection",
+      "local_exposure"
+    ],
+    "subscenario_evidence": {
+      "selection": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "local_exposure": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T2-07.json",
+    "answer_path": "answers/CP-T2-07.json",
+    "review_path": "reviews/CP-T2-07.json",
+    "document_type": "runbook",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 19,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T3-01",
+    "primary_type": "T3",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": true,
+    "subscenario_ids": [
+      "empty_information"
+    ],
+    "subscenario_evidence": {
+      "empty_information": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "pypa",
+    "source_key": "pypa/pip",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T3-01.json",
+    "answer_path": "answers/CP-T3-01.json",
+    "review_path": "reviews/CP-T3-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 4844,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T3-02",
+    "primary_type": "T3",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "partial_removal",
+      "unique_value_protected"
+    ],
+    "subscenario_evidence": {
+      "partial_removal": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "unique_value_protected": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "python-poetry",
+    "source_key": "python-poetry/poetry",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T3-02.json",
+    "answer_path": "answers/CP-T3-02.json",
+    "review_path": "reviews/CP-T3-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 11056,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T3-03",
+    "primary_type": "T3",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "equivalent_retained",
+      "empty_information"
+    ],
+    "subscenario_evidence": {
+      "equivalent_retained": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "empty_information": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "jqlang",
+    "source_key": "jqlang/jq",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T3-03.json",
+    "answer_path": "answers/CP-T3-03.json",
+    "review_path": "reviews/CP-T3-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 5661,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T3-04",
+    "primary_type": "T3",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "unique_value_protected"
+    ],
+    "subscenario_evidence": {
+      "unique_value_protected": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "sharkdp",
+    "source_key": "sharkdp/bat",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T3-04.json",
+    "answer_path": "answers/CP-T3-04.json",
+    "review_path": "reviews/CP-T3-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 68396,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T3-05",
+    "primary_type": "T3",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "partial_removal",
+      "unique_value_protected",
+      "equivalent_retained"
+    ],
+    "subscenario_evidence": {
+      "partial_removal": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "unique_value_protected": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "equivalent_retained": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T3-05.json",
+    "answer_path": "answers/CP-T3-05.json",
+    "review_path": "reviews/CP-T3-05.json",
+    "document_type": "audit_report",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 90,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T3-06",
+    "primary_type": "T3",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "unclear_retention",
+      "unique_value_protected"
+    ],
+    "subscenario_evidence": {
+      "unclear_retention": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "unique_value_protected": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T3-06.json",
+    "answer_path": "answers/CP-T3-06.json",
+    "review_path": "reviews/CP-T3-06.json",
+    "document_type": "audit_report",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 74,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T4-01",
+    "primary_type": "T4",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": true,
+    "subscenario_ids": [
+      "known_destination",
+      "local_summary_link"
+    ],
+    "subscenario_evidence": {
+      "known_destination": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "local_summary_link": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "burntsushi",
+    "source_key": "BurntSushi/ripgrep",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T4-01.json",
+    "answer_path": "answers/CP-T4-01.json",
+    "review_path": "reviews/CP-T4-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 43610,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T4-02",
+    "primary_type": "T4",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": false,
+    "subscenario_ids": [
+      "multiple_destinations",
+      "known_destination",
+      "local_summary_link"
+    ],
+    "subscenario_evidence": {
+      "multiple_destinations": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "known_destination": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "local_summary_link": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "junegunn",
+    "source_key": "junegunn/fzf",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T4-02.json",
+    "answer_path": "answers/CP-T4-02.json",
+    "review_path": "reviews/CP-T4-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 85864,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T4-03",
+    "primary_type": "T4",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": false,
+    "subscenario_ids": [
+      "local_summary_link",
+      "known_destination"
+    ],
+    "subscenario_evidence": {
+      "local_summary_link": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "known_destination": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "ajeetdsouza",
+    "source_key": "ajeetdsouza/zoxide",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T4-03.json",
+    "answer_path": "answers/CP-T4-03.json",
+    "review_path": "reviews/CP-T4-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 47422,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T4-04",
+    "primary_type": "T4",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": false,
+    "subscenario_ids": [
+      "destination_integrity"
+    ],
+    "subscenario_evidence": {
+      "destination_integrity": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "chmln",
+    "source_key": "chmln/sd",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T4-04.json",
+    "answer_path": "answers/CP-T4-04.json",
+    "review_path": "reviews/CP-T4-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 14372,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T4-05",
+    "primary_type": "T4",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "destination_integrity",
+      "local_summary_link",
+      "known_destination"
+    ],
+    "subscenario_evidence": {
+      "destination_integrity": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "local_summary_link": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "known_destination": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T4-05.json",
+    "answer_path": "answers/CP-T4-05.json",
+    "review_path": "reviews/CP-T4-05.json",
+    "document_type": "operations_and_archive",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 156,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T4-06",
+    "primary_type": "T4",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "missing_destination_scope"
+    ],
+    "subscenario_evidence": {
+      "missing_destination_scope": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T4-06.json",
+    "answer_path": "answers/CP-T4-06.json",
+    "review_path": "reviews/CP-T4-06.json",
+    "document_type": "operations_and_archive",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 58,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T5-01",
+    "primary_type": "T5",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": true,
+    "subscenario_ids": [
+      "prerequisite_order"
+    ],
+    "subscenario_evidence": {
+      "prerequisite_order": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "starship",
+    "source_key": "starship/starship",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T5-01.json",
+    "answer_path": "answers/CP-T5-01.json",
+    "review_path": "reviews/CP-T5-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 31633,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T5-02",
+    "primary_type": "T5",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": false,
+    "subscenario_ids": [
+      "grouping",
+      "multiple_orders"
+    ],
+    "subscenario_evidence": {
+      "grouping": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_orders": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "dandavison",
+    "source_key": "dandavison/delta",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T5-02.json",
+    "answer_path": "answers/CP-T5-02.json",
+    "review_path": "reviews/CP-T5-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 15566,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T5-03",
+    "primary_type": "T5",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "grouping",
+      "multiple_orders"
+    ],
+    "subscenario_evidence": {
+      "grouping": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_orders": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "nushell",
+    "source_key": "nushell/nushell",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T5-03.json",
+    "answer_path": "answers/CP-T5-03.json",
+    "review_path": "reviews/CP-T5-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 22748,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T5-04",
+    "primary_type": "T5",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "keep_placement",
+      "multiple_orders"
+    ],
+    "subscenario_evidence": {
+      "keep_placement": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_orders": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "clap-rs",
+    "source_key": "clap-rs/clap",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T5-04.json",
+    "answer_path": "answers/CP-T5-04.json",
+    "review_path": "reviews/CP-T5-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 3638,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T5-05",
+    "primary_type": "T5",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "prerequisite_order",
+      "grouping",
+      "multiple_orders"
+    ],
+    "subscenario_evidence": {
+      "prerequisite_order": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "grouping": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_orders": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T5-05.json",
+    "answer_path": "answers/CP-T5-05.json",
+    "review_path": "reviews/CP-T5-05.json",
+    "document_type": "runbook",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 105,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T5-06",
+    "primary_type": "T5",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "missing_anchor"
+    ],
+    "subscenario_evidence": {
+      "missing_anchor": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T5-06.json",
+    "answer_path": "answers/CP-T5-06.json",
+    "review_path": "reviews/CP-T5-06.json",
+    "document_type": "runbook",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 17,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T6-01",
+    "primary_type": "T6",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": true,
+    "subscenario_ids": [
+      "exact_duplicate"
+    ],
+    "subscenario_evidence": {
+      "exact_duplicate": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "serde-rs",
+    "source_key": "serde-rs/serde",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T6-01.json",
+    "answer_path": "answers/CP-T6-01.json",
+    "review_path": "reviews/CP-T6-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 8868,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T6-02",
+    "primary_type": "T6",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "partial_unique"
+    ],
+    "subscenario_evidence": {
+      "partial_unique": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "tokio-rs",
+    "source_key": "tokio-rs/tokio",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T6-02.json",
+    "answer_path": "answers/CP-T6-02.json",
+    "review_path": "reviews/CP-T6-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 19493,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T6-03",
+    "primary_type": "T6",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "different_scope_time_attribution"
+    ],
+    "subscenario_evidence": {
+      "different_scope_time_attribution": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "antirez",
+    "source_key": "antirez/linenoise",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T6-03.json",
+    "answer_path": "answers/CP-T6-03.json",
+    "review_path": "reviews/CP-T6-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 34726,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T6-04",
+    "primary_type": "T6",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "necessary_repetition"
+    ],
+    "subscenario_evidence": {
+      "necessary_repetition": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "openjs-express-lodash",
+    "source_key": "expressjs/express",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T6-04.json",
+    "answer_path": "answers/CP-T6-04.json",
+    "review_path": "reviews/CP-T6-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 20744,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T6-05",
+    "primary_type": "T6",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "different_scope_time_attribution",
+      "necessary_repetition",
+      "partial_unique"
+    ],
+    "subscenario_evidence": {
+      "different_scope_time_attribution": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "necessary_repetition": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "partial_unique": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T6-05.json",
+    "answer_path": "answers/CP-T6-05.json",
+    "review_path": "reviews/CP-T6-05.json",
+    "document_type": "policy_and_notice",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 120,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T6-06",
+    "primary_type": "T6",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "unknown_equivalence"
+    ],
+    "subscenario_evidence": {
+      "unknown_equivalence": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T6-06.json",
+    "answer_path": "answers/CP-T6-06.json",
+    "review_path": "reviews/CP-T6-06.json",
+    "document_type": "policy_and_notice",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 60,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T7-01",
+    "primary_type": "T7",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": true,
+    "subscenario_ids": [
+      "required_missing",
+      "partial_missing_location"
+    ],
+    "subscenario_evidence": {
+      "required_missing": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "partial_missing_location": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "high",
+    "source_family": "koajs",
+    "source_key": "koajs/koa",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T7-01.json",
+    "answer_path": "answers/CP-T7-01.json",
+    "review_path": "reviews/CP-T7-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 33828,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T7-02",
+    "primary_type": "T7",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "partial_missing_location",
+      "required_missing"
+    ],
+    "subscenario_evidence": {
+      "partial_missing_location": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "required_missing": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "axios",
+    "source_key": "axios/axios",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T7-02.json",
+    "answer_path": "answers/CP-T7-02.json",
+    "review_path": "reviews/CP-T7-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 216187,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T7-03",
+    "primary_type": "T7",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "already_satisfied"
+    ],
+    "subscenario_evidence": {
+      "already_satisfied": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "sindresorhus",
+    "source_key": "sindresorhus/got",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T7-03.json",
+    "answer_path": "answers/CP-T7-03.json",
+    "review_path": "reviews/CP-T7-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 39504,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T7-04",
+    "primary_type": "T7",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "already_satisfied"
+    ],
+    "subscenario_evidence": {
+      "already_satisfied": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "chalk",
+    "source_key": "chalk/chalk",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T7-04.json",
+    "answer_path": "answers/CP-T7-04.json",
+    "review_path": "reviews/CP-T7-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 27770,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T7-05",
+    "primary_type": "T7",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "authority_conflict",
+      "required_missing"
+    ],
+    "subscenario_evidence": {
+      "authority_conflict": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "required_missing": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T7-05.json",
+    "answer_path": "answers/CP-T7-05.json",
+    "review_path": "reviews/CP-T7-05.json",
+    "document_type": "policy_and_guide",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 93,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T7-06",
+    "primary_type": "T7",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "unsupported_requirement"
+    ],
+    "subscenario_evidence": {
+      "unsupported_requirement": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T7-06.json",
+    "answer_path": "answers/CP-T7-06.json",
+    "review_path": "reviews/CP-T7-06.json",
+    "document_type": "policy_and_guide",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 68,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T8-01",
+    "primary_type": "T8",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": true,
+    "subscenario_ids": [
+      "style_terms",
+      "compression",
+      "protected_code_quote_id"
+    ],
+    "subscenario_evidence": {
+      "style_terms": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "compression": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "protected_code_quote_id": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "openjs-express-lodash",
+    "source_key": "lodash/lodash",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T8-01.json",
+    "answer_path": "answers/CP-T8-01.json",
+    "review_path": "reviews/CP-T8-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 7313,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T8-02",
+    "primary_type": "T8",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "referent_clarity",
+      "protected_code_quote_id"
+    ],
+    "subscenario_evidence": {
+      "referent_clarity": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "protected_code_quote_id": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "micromatch",
+    "source_key": "micromatch/picomatch",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T8-02.json",
+    "answer_path": "answers/CP-T8-02.json",
+    "review_path": "reviews/CP-T8-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 56571,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T8-03",
+    "primary_type": "T8",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "compression",
+      "referent_clarity"
+    ],
+    "subscenario_evidence": {
+      "compression": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "referent_clarity": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "immerjs",
+    "source_key": "immerjs/immer",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T8-03.json",
+    "answer_path": "answers/CP-T8-03.json",
+    "review_path": "reviews/CP-T8-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 3860,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T8-04",
+    "primary_type": "T8",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "optional_noop",
+      "protected_code_quote_id"
+    ],
+    "subscenario_evidence": {
+      "optional_noop": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "protected_code_quote_id": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "reduxjs",
+    "source_key": "reduxjs/redux",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T8-04.json",
+    "answer_path": "answers/CP-T8-04.json",
+    "review_path": "reviews/CP-T8-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 16880,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T8-05",
+    "primary_type": "T8",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "style_terms",
+      "compression",
+      "protected_code_quote_id",
+      "optional_noop"
+    ],
+    "subscenario_evidence": {
+      "style_terms": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "compression": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "protected_code_quote_id": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "optional_noop": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T8-05.json",
+    "answer_path": "answers/CP-T8-05.json",
+    "review_path": "reviews/CP-T8-05.json",
+    "document_type": "notice",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 101,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T8-06",
+    "primary_type": "T8",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "missing_context"
+    ],
+    "subscenario_evidence": {
+      "missing_context": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "ordinary",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T8-06.json",
+    "answer_path": "answers/CP-T8-06.json",
+    "review_path": "reviews/CP-T8-06.json",
+    "document_type": "notice",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 15,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T9-01",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": true,
+    "subscenario_ids": [
+      "whole_task",
+      "roles_consistency",
+      "multiple_whole_outputs"
+    ],
+    "subscenario_evidence": {
+      "whole_task": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "roles_consistency": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_whole_outputs": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "pmndrs",
+    "source_key": "pmndrs/zustand",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-01.json",
+    "answer_path": "answers/CP-T9-01.json",
+    "review_path": "reviews/CP-T9-01.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 35975,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T9-02",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": false,
+    "subscenario_ids": [
+      "preserved_but_unfit",
+      "whole_task",
+      "multiple_whole_outputs"
+    ],
+    "subscenario_evidence": {
+      "preserved_but_unfit": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "whole_task": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_whole_outputs": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "tanstack",
+    "source_key": "TanStack/query",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-02.json",
+    "answer_path": "answers/CP-T9-02.json",
+    "review_path": "reviews/CP-T9-02.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 11112,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T9-03",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": false,
+    "subscenario_ids": [
+      "roles_consistency",
+      "global_regression",
+      "whole_task"
+    ],
+    "subscenario_evidence": {
+      "roles_consistency": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "global_regression": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "whole_task": {
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "evanw",
+    "source_key": "evanw/esbuild",
+    "parent_ids": [],
+    "construction": "controlled_public",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-03.json",
+    "answer_path": "answers/CP-T9-03.json",
+    "review_path": "reviews/CP-T9-03.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 5089,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "controlled-destinations"
+  },
+  {
+    "case_id": "CP-T9-04",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "whole_task",
+      "multiple_whole_outputs",
+      "global_regression"
+    ],
+    "subscenario_evidence": {
+      "whole_task": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_whole_outputs": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "global_regression": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "rollup",
+    "source_key": "rollup/rollup",
+    "parent_ids": [],
+    "construction": "public_task",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-04.json",
+    "answer_path": "answers/CP-T9-04.json",
+    "review_path": "reviews/CP-T9-04.json",
+    "document_type": "README",
+    "language": "English input / Korean task",
+    "length_codepoints": 19992,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "common-task-form-only"
+  },
+  {
+    "case_id": "CP-T9-05",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 2,
+    "calibration": false,
+    "subscenario_ids": [
+      "whole_task",
+      "preserved_but_unfit",
+      "roles_consistency",
+      "multiple_whole_outputs",
+      "global_regression"
+    ],
+    "subscenario_evidence": {
+      "whole_task": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "preserved_but_unfit": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "roles_consistency": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_whole_outputs": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "global_regression": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-05.json",
+    "answer_path": "answers/CP-T9-05.json",
+    "review_path": "reviews/CP-T9-05.json",
+    "document_type": "runbook_and_report",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 132,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T9-06",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "partial_or_unclear_task"
+    ],
+    "subscenario_evidence": {
+      "partial_or_unclear_task": {
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "compound",
+    "risk": "ordinary",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-06.json",
+    "answer_path": "answers/CP-T9-06.json",
+    "review_path": "reviews/CP-T9-06.json",
+    "document_type": "runbook_and_report",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 54,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T9-07",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "whole_task",
+      "multiple_whole_outputs"
+    ],
+    "subscenario_evidence": {
+      "whole_task": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      },
+      "multiple_whole_outputs": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace and complete Q where supplied"
+      }
+    },
+    "complexity": "simple",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-07.json",
+    "answer_path": "answers/CP-T9-07.json",
+    "review_path": "reviews/CP-T9-07.json",
+    "document_type": "runbook_and_report",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 40,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "valid_decision_or_edit",
+      "justified_no_edit"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  },
+  {
+    "case_id": "CP-T9-08",
+    "primary_type": "T9",
+    "secondary_types": [],
+    "version": 1,
+    "calibration": false,
+    "subscenario_ids": [
+      "partial_or_unclear_task",
+      "roles_consistency"
+    ],
+    "subscenario_evidence": {
+      "partial_or_unclear_task": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace; Q purpose_fit unresolved until contract fixed"
+      },
+      "roles_consistency": {
+        "evidence_refs": [
+          "E1"
+        ],
+        "answer_pointer": "/D/required_decisions",
+        "observation": "declared_plan/native_trace; Q purpose_fit unresolved until contract fixed"
+      }
+    },
+    "complexity": "compound",
+    "risk": "high",
+    "source_family": "synthetic-author-batch-20261113",
+    "source_key": "synthetic-author-batch-20261113",
+    "parent_ids": [],
+    "construction": "synthetic",
+    "split": "development",
+    "exposure_history": [
+      {
+        "event": "authoring_and_public_PR",
+        "actor_type": "ai",
+        "status": "exposed_development"
+      }
+    ],
+    "status": "provisional",
+    "rights": "see sources.json; synthetic text covered by repository MIT",
+    "input_path": "inputs/CP-T9-08.json",
+    "answer_path": "answers/CP-T9-08.json",
+    "review_path": "reviews/CP-T9-08.json",
+    "document_type": "runbook_and_report",
+    "language": "Korean with code/identifiers",
+    "length_codepoints": 148,
+    "independent_sample_unit": "source_family; repeated synthetic author batch is one cluster",
+    "outcome_modes": [
+      "unjustified_edit_counterexample",
+      "multiple_valid_answers",
+      "genuine_unresolved"
+    ],
+    "shared_template_group": "synthetic-author-batch"
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T1-05",
+  "task": {
+    "title": "권한 표와 시점별 변경의 비충돌",
+    "purpose": "아래 회의 기록과 권한 표를 바탕으로 현재 배포 권한과 당시 의견을 분석해 검토 메모를 작성한다.",
+    "audience": "기술 리뷰어/의사결정자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "아래 회의 기록과 권한 표를 바탕으로 현재 배포 권한과 당시 의견을 분석해 검토 메모를 작성한다.",
+    "output_document_ids": [
+      "record"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "record",
+      "role": "editable fictional document",
+      "content": "# 권한 기록\n11월 1일 결정: 운영자만 배포할 수 있다.\n11월 8일 결정: 리뷰어도 운영자 승인 후 배포할 수 있다.\n민수 의견: 장차 모든 팀원에게 권한을 주자. 미채택.\n\n| 시점 | 리뷰어 배포 |\n| 11월 1일 | 불가 |\n| 11월 8일 | 운영자 승인 후 가능 |\n",
+      "sha256": "9ce6c8cc25fb06e597aa3ed1545e02e629d3c60ebe6f40b1ce22bbf1acae2ae5",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "record"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "schema_version": "capability-answer-v1",
+  "case_id": "CP-T9-05",
+  "input_sha256": "bde4e8e45ac45346eb245c861c4c73b0d6982aac4bd8da29549e93860a21c342",
+  "status": "provisional",
+  "author_type": "ai",
+  "gold_eligible": false,
+  "evidence": [
+    {
+      "id": "E1",
+      "document_id": "runbook",
+      "start": 0,
+      "end": 93,
+      "quote": "# 캐시 갱신\n`refresh stage-cache`\n대상은 staging만. 실행 전 복구 가능한 백업과 책임자 승인이 필요하다.\n검증 실패 시 중단하고 보고한다.\n"
+    },
+    {
+      "id": "E2",
+      "document_id": "report",
+      "start": 0,
+      "end": 39,
+      "quote": "# 검증 기록\n10건 중 9건 성공, 1건 실패. 최종 승인 미발급.\n"
+    }
+  ],
+  "D": {
+    "obligations": [
+      {
+        "id": "O1",
+        "criterion": "실행 전 staging·백업·승인 조건을 직접 노출한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "O2",
+        "criterion": "실행 후 검증 실패 시 중단을 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "O3",
+        "criterion": "검증 기록의 실패 1건과 미승인 상태를 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "criterion": "See case-specific required decisions and their source scopes; no unobserved chain of thought is scored.",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "required_decisions": [
+      {
+        "id": "R1",
+        "criterion": "실행 전 staging·백업·승인 조건을 직접 노출한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "R2",
+        "criterion": "실행 후 검증 실패 시 중단을 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "R3",
+        "criterion": "검증 기록의 실패 1건과 미승인 상태를 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "R4",
+        "criterion": "report는 바꾸지 않고 전체 출력에 포함한다. Q 과업은 조건·중단 의무·상태 탐색이며 실제 운영 성공이나 실행 방법 완성은 채점하지 않는다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "optional_decisions": [
+      {
+        "id": "P1",
+        "criterion": "동일 제약을 충족하는 자연스러운 표현·제목 변경은 선택 사항이다.",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "required_effects": {
+      "R1": true,
+      "R2": true,
+      "R3": true,
+      "R4": true
+    },
+    "forbidden_effects": {
+      "F1": true
+    },
+    "forbidden_outcomes": [
+      {
+        "id": "F1",
+        "criterion": "모든 문장을 보존했더라도 경고를 명령 뒤로 숨기거나 실패를 성공으로 요약한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "acceptable_alternatives": [
+      {
+        "id": "A1",
+        "description": "실행 안내에 전 과정, 검증 기록 링크",
+        "effects": {
+          "R1": true,
+          "R2": true,
+          "R3": true,
+          "F1": false,
+          "R4": true
+        },
+        "bundle_policy": "complete_bundle_no_cherry_picking",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "A2",
+        "description": "작업 카드+상세 안내 연결, 검증 기록 원문 유지",
+        "effects": {
+          "R1": true,
+          "R2": true,
+          "R3": true,
+          "F1": false,
+          "R4": true
+        },
+        "bundle_policy": "complete_bundle_no_cherry_picking",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "unresolved_questions": [],
+    "applicability": {
+      "state": "applicable",
+      "reason": "Input and cited evidence support the requested decisions."
+    },
+    "observation": {
+      "accepted_channels": [
+        "native_trace",
+        "declared_plan"
+      ],
+      "natural_run_without_trace": "unobserved",
+      "output_effect": "auxiliary_only",
+      "submission_before_edit": true
+    }
+  },
+  "Q": {
+    "applicability": "requires_complete_candidate_output",
+    "protected_facts": [
+      {
+        "id": "PF1",
+        "criterion": "실행 전 staging·백업·승인 조건을 직접 노출한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "PF2",
+        "criterion": "실행 후 검증 실패 시 중단을 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "PF3",
+        "criterion": "검증 기록의 실패 1건과 미승인 상태를 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "task_checks": [
+      {
+        "id": "Q1",
+        "criterion": "실행 전 staging·백업·승인 조건을 직접 노출한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "Q2",
+        "criterion": "실행 후 검증 실패 시 중단을 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "id": "Q3",
+        "criterion": "검증 기록의 실패 1건과 미승인 상태를 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "whole_document_constraints": [
+      "전체 영향 문서에서 계약의 역할·현지 노출·순서·보존 의무를 만족한다.",
+      "중대 정보 손실·허구 추가는 문체 점수와 별도 기록하며 상쇄하지 않는다."
+    ],
+    "rubric_anchors": {
+      "information_preservation": [
+        "보호 사실/조건의 손실 또는 허구 추가",
+        "일부 사실 누락으로 핵심 과업 실패",
+        "보호 사실은 유지하나 경미한 참조 결함",
+        "아래 protected_facts와 조건·귀속·수치 모두 유지"
+      ],
+      "purpose_fit": [
+        "독자 과업 수행 불가",
+        "부분 수행만 가능해 실질 보완 필요",
+        "주요 과업 수행 가능하나 경미한 불편",
+        "아래 task_checks를 해당 독자가 모두 수행"
+      ],
+      "completeness": [
+        "필수 영향 문서/절 누락",
+        "문서 일부만 있어 연결 복구 필요",
+        "전체 영향 문서가 있으나 사소한 연결 누락",
+        "허용 범위 전체 출력과 과업 연결이 완결"
+      ],
+      "placement": [
+        "선행조건/경고 뒤집힘으로 과업 실패",
+        "탐색·선행조건 접근에 실질 보완 필요",
+        "순서 의무 충족하나 경미한 탐색 불편",
+        "과업별 선행조건·보존 장소·현지 노출 충족"
+      ],
+      "expression": [
+        "의미 반전 또는 이해 불가",
+        "주체/용어 모호성으로 실질 보완 필요",
+        "자연스럽고 이해 가능, 경미한 장황함",
+        "보호 요소를 유지하면서 명료하고 일관됨"
+      ]
+    },
+    "trace_requirements": "Candidate fact/scope → input evidence spans; evaluate Q without viewing the submitted D plan.",
+    "unseen_valid_answer_policy": "Send for human reconsideration; never reject solely for absence from listed alternatives."
+  },
+  "metrics": {
+    "D": {
+      "required_decision_recall": {
+        "numerator": "satisfied R IDs with evidence",
+        "denominator": 4
+      },
+      "forbidden_outcome_count": {
+        "numerator": "observed F IDs",
+        "denominator": 1
+      },
+      "evidence_precision": {
+        "numerator": "supported observable submitted decisions",
+        "denominator": "all evaluable submitted decisions"
+      },
+      "abstention": {
+        "expected": false,
+        "execution_failure_is_abstention": false
+      }
+    },
+    "Q": {
+      "dimensions": [
+        "information_preservation",
+        "purpose_fit",
+        "completeness",
+        "placement",
+        "expression"
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "aggregate_DQ": false,
+      "zero_denominator": "N/A",
+      "missing_output": "not_evaluated/incomplete; report completion separately"
+    }
+  }
+}

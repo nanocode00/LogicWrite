@@ -1,0 +1,287 @@
+{
+  "schema_version": "capability-answer-v1",
+  "case_id": "CP-T9-01",
+  "input_sha256": "7fc9ef737d6d8e13bb20efe26b2e0bc91621d9b04673c3cfd8fe82d47a244f79",
+  "status": "provisional",
+  "author_type": "ai",
+  "gold_eligible": false,
+  "evidence": [
+    {
+      "id": "E1",
+      "document_id": "upstream",
+      "start": 2263,
+      "end": 2296,
+      "quote": "State has to be updated immutably"
+    },
+    {
+      "id": "E2",
+      "document_id": "upstream",
+      "start": 2688,
+      "end": 2712,
+      "quote": "no providers are needed."
+    },
+    {
+      "id": "E3",
+      "document_id": "quickstart",
+      "start": 0,
+      "end": 321,
+      "quote": "# First-use guide (controlled draft)\nYour store is a hook! You can put anything in it: primitives, objects, functions. State has to be updated immutably and the `set` function [merges state](./docs/learn/guides/immutable-state-and-merging.md) to help it.\n\n## Next step\nTo be connected to the pinned README learning path.\n"
+    }
+  ],
+  "D": {
+    "obligations": [
+      {
+        "id": "O1",
+        "criterion": "설치·create import·store 생성·component hook 사용 경로를 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      },
+      {
+        "id": "O2",
+        "criterion": "immutable update와 set merge 조건을 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "criterion": "See case-specific required decisions and their source scopes; no unobserved chain of thought is scored.",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "required_decisions": [
+      {
+        "id": "R1",
+        "criterion": "설치·create import·store 생성·component hook 사용 경로를 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      },
+      {
+        "id": "R2",
+        "criterion": "immutable update와 set merge 조건을 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      },
+      {
+        "id": "R3",
+        "criterion": "제공된 document_path 기준으로 이동 후 상대 링크·앵커를 보존하거나 실제 목적지로 갱신하며, 미제공 외부 본문을 추측하지 않는다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "optional_decisions": [
+      {
+        "id": "P1",
+        "criterion": "동일 제약을 충족하는 자연스러운 표현·제목 변경은 선택 사항이다.",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "required_effects": {
+      "R1": true,
+      "R2": true,
+      "R3": true
+    },
+    "forbidden_effects": {
+      "F1": true
+    },
+    "forbidden_outcomes": [
+      {
+        "id": "F1",
+        "criterion": "깔끔한 소개만 남겨 실제 사용 경로를 끊는다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "acceptable_alternatives": [
+      {
+        "id": "A1",
+        "description": "README 요약+완결된 시작 안내",
+        "effects": {
+          "R1": true,
+          "R2": true,
+          "F1": false,
+          "R3": true
+        },
+        "bundle_policy": "complete_bundle_no_cherry_picking",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      },
+      {
+        "id": "A2",
+        "description": "README에 완결 경로+시작 안내에 요약 링크",
+        "effects": {
+          "R1": true,
+          "R2": true,
+          "F1": false,
+          "R3": true
+        },
+        "bundle_policy": "complete_bundle_no_cherry_picking",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "unresolved_questions": [],
+    "applicability": {
+      "state": "applicable",
+      "reason": "Input and cited evidence support the requested decisions."
+    },
+    "observation": {
+      "accepted_channels": [
+        "native_trace",
+        "declared_plan"
+      ],
+      "natural_run_without_trace": "unobserved",
+      "output_effect": "auxiliary_only",
+      "submission_before_edit": true
+    }
+  },
+  "Q": {
+    "applicability": "requires_complete_candidate_output",
+    "protected_facts": [
+      {
+        "id": "PF1",
+        "criterion": "설치·create import·store 생성·component hook 사용 경로를 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      },
+      {
+        "id": "PF2",
+        "criterion": "immutable update와 set merge 조건을 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "task_checks": [
+      {
+        "id": "Q1",
+        "criterion": "설치·create import·store 생성·component hook 사용 경로를 연결한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      },
+      {
+        "id": "Q2",
+        "criterion": "immutable update와 set merge 조건을 보존한다",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E3"
+        ]
+      }
+    ],
+    "whole_document_constraints": [
+      "전체 영향 문서에서 계약의 역할·현지 노출·순서·보존 의무를 만족한다.",
+      "중대 정보 손실·허구 추가는 문체 점수와 별도 기록하며 상쇄하지 않는다."
+    ],
+    "rubric_anchors": {
+      "information_preservation": [
+        "보호 사실/조건의 손실 또는 허구 추가",
+        "일부 사실 누락으로 핵심 과업 실패",
+        "보호 사실은 유지하나 경미한 참조 결함",
+        "아래 protected_facts와 조건·귀속·수치 모두 유지"
+      ],
+      "purpose_fit": [
+        "독자 과업 수행 불가",
+        "부분 수행만 가능해 실질 보완 필요",
+        "주요 과업 수행 가능하나 경미한 불편",
+        "아래 task_checks를 해당 독자가 모두 수행"
+      ],
+      "completeness": [
+        "필수 영향 문서/절 누락",
+        "문서 일부만 있어 연결 복구 필요",
+        "전체 영향 문서가 있으나 사소한 연결 누락",
+        "허용 범위 전체 출력과 과업 연결이 완결"
+      ],
+      "placement": [
+        "선행조건/경고 뒤집힘으로 과업 실패",
+        "탐색·선행조건 접근에 실질 보완 필요",
+        "순서 의무 충족하나 경미한 탐색 불편",
+        "과업별 선행조건·보존 장소·현지 노출 충족"
+      ],
+      "expression": [
+        "의미 반전 또는 이해 불가",
+        "주체/용어 모호성으로 실질 보완 필요",
+        "자연스럽고 이해 가능, 경미한 장황함",
+        "보호 요소를 유지하면서 명료하고 일관됨"
+      ]
+    },
+    "trace_requirements": "Candidate fact/scope → input evidence spans; evaluate Q without viewing the submitted D plan.",
+    "unseen_valid_answer_policy": "Send for human reconsideration; never reject solely for absence from listed alternatives."
+  },
+  "metrics": {
+    "D": {
+      "required_decision_recall": {
+        "numerator": "satisfied R IDs with evidence",
+        "denominator": 3
+      },
+      "forbidden_outcome_count": {
+        "numerator": "observed F IDs",
+        "denominator": 1
+      },
+      "evidence_precision": {
+        "numerator": "supported observable submitted decisions",
+        "denominator": "all evaluable submitted decisions"
+      },
+      "abstention": {
+        "expected": false,
+        "execution_failure_is_abstention": false
+      }
+    },
+    "Q": {
+      "dimensions": [
+        "information_preservation",
+        "purpose_fit",
+        "completeness",
+        "placement",
+        "expression"
+      ],
+      "range": [
+        0,
+        3
+      ],
+      "aggregate_DQ": false,
+      "zero_denominator": "N/A",
+      "missing_output": "not_evaluated/incomplete; report completion separately"
+    }
+  }
+}

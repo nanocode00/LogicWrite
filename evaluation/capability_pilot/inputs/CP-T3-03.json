@@ -1,0 +1,79 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T3-03",
+  "task": {
+    "title": "jq: 동등 정보가 남는 중복 제거",
+    "purpose": "문서 말미에 반복된 프로젝트 설명을 제거할지 판단한다. 같은 설명이 첫 문단에 실제 남는지 확인한다.",
+    "audience": "기술 리뷰어/의사결정자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "문서 말미에 반복된 프로젝트 설명을 제거할지 판단한다. 같은 설명이 첫 문단에 실제 남는지 확인한다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "# jq\n\n`jq` is a lightweight and flexible command-line JSON processor akin to `sed`,`awk`,`grep`, and friends for JSON data. It's written in portable C and has zero runtime dependencies, allowing you to easily slice, filter, map, and transform structured data.\n\n## Documentation\n\n- **Official Documentation**: [jqlang.org](https://jqlang.org)\n- **Try jq Online**: [play.jqlang.org](https://play.jqlang.org)\n\n## Installation\n\n### Prebuilt Binaries\n\nDownload the latest releases from the [GitHub release page](https://github.com/jqlang/jq/releases).\nThe platform-specific assets are standalone executables, not archives. On macOS and Linux,\nrename the downloaded file to `jq` and make it executable with `chmod +x jq`.\n\n### Docker Image\n\nPull the [jq image](https://github.com/jqlang/jq/pkgs/container/jq) to start quickly with Docker.\n\n#### Run with Docker\n\n##### Example: Extracting the version from a `package.json` file\n\n```bash\ndocker run --rm -i ghcr.io/jqlang/jq:latest < package.json '.version'\n```\n\n##### Example: Extracting the version from a `package.json` file with a mounted volume\n\n```bash\ndocker run --rm -i -v \"$PWD:$PWD\" -w \"$PWD\" ghcr.io/jqlang/jq:latest '.version' package.json\n```\n\n### Building from source\n\n#### Dependencies\n\n- libtool\n- make\n- automake\n- autoconf\n\n#### Instructions\n\n```console\ngit submodule update --init    # if building from git to get oniguruma\nautoreconf -i                  # if building from git\n./configure --with-oniguruma=builtin\nmake clean                     # if upgrading from a version previously built from source\nmake -j8\nmake check\nsudo make install\nsudo ldconfig                  # on Linux, if jq cannot find libjq.so\n```\n\nBuild a statically linked version:\n\n```console\nmake clean\nmake LDFLAGS=-all-static\n```\n\nIf you're not using the latest git version but instead building a released tarball (available on the release page), skip the `autoreconf` step, and flex or bison won't be needed.\n\n##### Cross-Compilation\n\nFor details on cross-compilation, check out the [GitHub Actions file](.github/workflows/ci.yml) and the [cross-compilation wiki page](https://github.com/jqlang/jq/wiki/Cross-compilation).\n\n## Community & Support\n\n- Questions & Help: [Stack Overflow (jq tag)](https://stackoverflow.com/questions/tagged/jq)\n- Chat & Community: [Join us on Discord](https://discord.gg/yg6yjNmgAC)\n- Wiki & Advanced Topics: [Explore the Wiki](https://github.com/jqlang/jq/wiki)\n\n## License\n\n`jq` is released under the [MIT License](COPYING). `jq`'s documentation is\nlicensed under the [Creative Commons CC BY 3.0](COPYING).\n`jq` uses parts of the open source C library \"decNumber\", which is distributed\nunder [ICU License](COPYING)\n\n## Repeated introduction (controlled)\n`jq` is a lightweight and flexible command-line JSON processor akin to `sed`,`awk`,`grep`, and friends for JSON data. It's written in portable C and has zero runtime dependencies, allowing you to easily slice, filter, map, and transform structured data.\n",
+      "sha256": "707158d7b37df827d0f7015c8b79af71beb759e45f69868816f9a0997c6da4dd",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "controlled_public",
+        "source_key": "jqlang/jq",
+        "transformations": [
+          {
+            "operation": "append",
+            "text": "\n## Repeated introduction (controlled)\n`jq` is a lightweight and flexible command-line JSON processor akin to `sed`,`awk`,`grep`, and friends for JSON data. It's written in portable C and has zero runtime dependencies, allowing you to easily slice, filter, map, and transform structured data.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "# jq\n\n`jq` is a lightweight and flexible command-line JSON processor akin to `sed`,`awk`,`grep`, and friends for JSON data. It's written in portable C and has zero runtime dependencies, allowing you to easily slice, filter, map, and transform structured data.\n\n## Documentation\n\n- **Official Documentation**: [jqlang.org](https://jqlang.org)\n- **Try jq Online**: [play.jqlang.org](https://play.jqlang.org)\n\n## Installation\n\n### Prebuilt Binaries\n\nDownload the latest releases from the [GitHub release page](https://github.com/jqlang/jq/releases).\nThe platform-specific assets are standalone executables, not archives. On macOS and Linux,\nrename the downloaded file to `jq` and make it executable with `chmod +x jq`.\n\n### Docker Image\n\nPull the [jq image](https://github.com/jqlang/jq/pkgs/container/jq) to start quickly with Docker.\n\n#### Run with Docker\n\n##### Example: Extracting the version from a `package.json` file\n\n```bash\ndocker run --rm -i ghcr.io/jqlang/jq:latest < package.json '.version'\n```\n\n##### Example: Extracting the version from a `package.json` file with a mounted volume\n\n```bash\ndocker run --rm -i -v \"$PWD:$PWD\" -w \"$PWD\" ghcr.io/jqlang/jq:latest '.version' package.json\n```\n\n### Building from source\n\n#### Dependencies\n\n- libtool\n- make\n- automake\n- autoconf\n\n#### Instructions\n\n```console\ngit submodule update --init    # if building from git to get oniguruma\nautoreconf -i                  # if building from git\n./configure --with-oniguruma=builtin\nmake clean                     # if upgrading from a version previously built from source\nmake -j8\nmake check\nsudo make install\nsudo ldconfig                  # on Linux, if jq cannot find libjq.so\n```\n\nBuild a statically linked version:\n\n```console\nmake clean\nmake LDFLAGS=-all-static\n```\n\nIf you're not using the latest git version but instead building a released tarball (available on the release page), skip the `autoreconf` step, and flex or bison won't be needed.\n\n##### Cross-Compilation\n\nFor details on cross-compilation, check out the [GitHub Actions file](.github/workflows/ci.yml) and the [cross-compilation wiki page](https://github.com/jqlang/jq/wiki/Cross-compilation).\n\n## Community & Support\n\n- Questions & Help: [Stack Overflow (jq tag)](https://stackoverflow.com/questions/tagged/jq)\n- Chat & Community: [Join us on Discord](https://discord.gg/yg6yjNmgAC)\n- Wiki & Advanced Topics: [Explore the Wiki](https://github.com/jqlang/jq/wiki)\n\n## License\n\n`jq` is released under the [MIT License](COPYING). `jq`'s documentation is\nlicensed under the [Creative Commons CC BY 3.0](COPYING).\n`jq` uses parts of the open source C library \"decNumber\", which is distributed\nunder [ICU License](COPYING)\n",
+      "sha256": "2050b0eb357e6b0aa376ba2399acaae5e4938c9e78908a0e6853705e194be281",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "jqlang/jq",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

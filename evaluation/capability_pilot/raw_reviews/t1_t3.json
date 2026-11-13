@@ -1,0 +1,582 @@
+{
+  "reviewer": "독립 Codex AI",
+  "method": "input-only; answers/curation/reviews not read",
+  "cases": [
+    {
+      "case_id": "CP-T1-01",
+      "input_sha256": "9bc1789a09c46843a40e7dbeb8fa180c6201f07c4aad732b8814828f68f30162",
+      "assessment": "전체 README와 동일한 고정 근거로 역할·역사·선택 자유를 분석할 수 있다. 표와 짧은 소개를 draft에 더하거나 관련 소개 부분을 재구성하는 것이 타당하다. 무수정만으로는 요청한 표와 소개문 산출을 충족하지 않는다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "WSGI 프레임워크라는 역할, Werkzeug/Jinja를 감싼 출발과 현재 선택 자유를 구별",
+        "예제·실행 출력·기부·기여 안내와 링크 등 비대상 전체 정보"
+      ],
+      "valid_alternatives": [
+        "사실/관계 표를 기존 소개 뒤 추가",
+        "기존 소개를 동등한 정보의 짧은 소개와 표로 재작성"
+      ],
+      "counterexample": "doesn’t enforce any dependencies를 Flask가 아무 의존성도 사용하지 않는다는 뜻으로 바꾸거나 Werkzeug/Jinja를 개발자가 필수 선택해야 한다고 단정하면 관계를 왜곡한다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Flask is a lightweight [WSGI] web application framework."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Flask offers suggestions, but doesn't enforce any dependencies or\nproject layout."
+        },
+        {
+          "document_id": "draft",
+          "quote": "It is up to the developer to choose the tools and\nlibraries they want to use."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T1-02",
+      "input_sha256": "7c2b34214b0f9a5c38bbf208be2d6bb125a7117c4d067d6e5990a8a8e38b7121",
+      "assessment": "CLI는 통합 기능이지만 선택 의존성 설치가 필요하고 HTTP/2도 별도 선택 설치임을 전체 문맥에서 확인할 수 있다. 소개에 이 조건을 연결하되 sync/async와 프로토콜 선택을 혼동하지 않는다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "HTTP/1.1·HTTP/2 지원과 sync/async API 모두 보존",
+        "cli와 http2의 독립적인 선택 설치 조건",
+        "기타 기능·요구 Python 3.9+·예제·의존성·라이선스 유지"
+      ],
+      "valid_alternatives": [
+        "소개 문장에 CLI extras 조건을 덧붙임",
+        "기능/설치 조건 관계 표를 추가"
+      ],
+      "counterexample": "기본 pip install httpx만 하면 CLI와 HTTP/2를 모두 사용할 수 있다고 쓰는 편집은 부당하다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "$ pip install 'httpx[cli]'  # The command line client is an optional dependency."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Or, to include the optional HTTP/2 support, use:"
+        },
+        {
+          "document_id": "draft",
+          "quote": "HTTPX requires Python 3.9+."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T1-03",
+      "input_sha256": "b9e87602f933c79dc0f7b953d8702c9dc2f07feadc8eeb400f08e1539591b071",
+      "assessment": "같은 릴리스의 3.9 지원 추가 메모는 고정 원문의 3.10+와 충돌한다. 추가 메모를 삭제하거나 3.10+로 바로잡을 근거가 충분하다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "기존 3.10+ 지원 문장",
+        "HTTP 기능·예제·설치·Git 복제 예외 등 비대상 내용"
+      ],
+      "valid_alternatives": [
+        "Compatibility note 전체 삭제",
+        "메모를 Python 3.10+로 수정"
+      ],
+      "counterexample": "3.9를 살리려고 upstream의 지원 절을 3.9+로 낮추거나 서로 다른 버전의 설명이라고 근거 없이 해석하면 안 된다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Requests officially supports Python 3.9 for this same release."
+        },
+        {
+          "document_id": "upstream",
+          "quote": "Requests officially supports Python 3.10+."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T1-04",
+      "input_sha256": "518a33ba8f82036f4be7984b512b3604e485b3c792968c455c8cc0f1be34b2cd",
+      "assessment": "전체 README에서 개발 속도 200~300%와 오류 약40%는 내부 개발팀의 추정이라는 각주를 이미 제공한다. 처리 성능의 별도 TechEmpower 서술과 구분하여 분석할 수 있다. 정확한 원문은 무수정으로 반환하면서 분석 메모를 제출해도 타당하다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "수치의 about·estimation·internal development team 조건",
+        "개발 생산성과 런타임 성능의 별도 근거",
+        "스폰서·인용·예제·의존성 등 비대상 전체 내용"
+      ],
+      "valid_alternatives": [
+        "원문 유지와 별도 근거 분석",
+        "수치 바로 옆에 기존 각주의 범위를 명확히 연결"
+      ],
+      "counterexample": "독립 벤치마크가 개발 속도 300%와 오류40%를 입증했다고 합치거나 모든 팀에서 보장된 효과라고 바꾸는 것은 부당하다.",
+      "unresolved_conditions": [
+        "표본 수·실험 설계·재현 데이터는 제공되지 않으므로 보편적 효과 크기는 판단 불가"
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "* **Fast to code**: Increase the speed to develop features by about 200% to 300%. *"
+        },
+        {
+          "document_id": "draft",
+          "quote": "* **Fewer bugs**: Reduce about 40% of human (developer) induced errors. *"
+        },
+        {
+          "document_id": "draft",
+          "quote": "<small>* estimation based on tests conducted by an internal development team, building production applications.</small>"
+        },
+        {
+          "document_id": "draft",
+          "quote": "Independent TechEmpower benchmarks show **FastAPI** applications running under Uvicorn as"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T1-05",
+      "input_sha256": "87713b723c3eb55072ebdf751e5f55bacc4f980a9fa114c4cc74f6551170c478",
+      "assessment": "제공 기록상 최신 결정은 11월8일이며 리뷰어는 운영자 승인 후 배포 가능하다. 11월1일의 제한과 미채택 의견은 당시 기록으로 남겨야 한다. 현재라는 말은 제공 기록 기준으로만 확정 가능하다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "날짜별 두 결정과 표의 시간 범위",
+        "민수 의견의 미래 제안·미채택 상태",
+        "운영자 승인 조건"
+      ],
+      "valid_alternatives": [
+        "record에 날짜별 분석 메모 추가",
+        "기록은 그대로 두고 최신 제공 결정 기준이라고 명시"
+      ],
+      "counterexample": "모든 팀원이 배포 가능하다고 의견을 규정으로 승격하거나 과거 불가 기록을 최신 결정과 충돌한다고 삭제하면 안 된다.",
+      "unresolved_conditions": [
+        "11월8일 이후 결정의 부재는 현실의 현재 권한까지 보증하지 않는다"
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "record",
+          "quote": "11월 1일 결정: 운영자만 배포할 수 있다."
+        },
+        {
+          "document_id": "record",
+          "quote": "11월 8일 결정: 리뷰어도 운영자 승인 후 배포할 수 있다."
+        },
+        {
+          "document_id": "record",
+          "quote": "민수 의견: 장차 모든 팀원에게 권한을 주자. 미채택."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T1-06",
+      "input_sha256": "d2d2eacbadd6e2130fc05ae4341f30f87f2bde340019e24e6b9cc9e699ef1802",
+      "assessment": "10ms와30ms를 관측 기록으로 보존하면서 공개 수치 확정을 보류하고 버전·환경·승인자를 질문해야 한다. 승인된 대표 수치는 진짜 판단 불가이나 미확정 공개 요약 초안과 질문 작성은 실행 가능하다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "A/B 각각의 수치와 관측 표지",
+        "대상 버전·환경·승인자 미기재 사실"
+      ],
+      "valid_alternatives": [
+        "수치 비확정 상태의 요약 초안",
+        "원문 유지와 확인 질문 제출"
+      ],
+      "counterexample": "더 좋은 값인10ms를 승인 성능으로 선택하거나 두 수치 평균20ms를 대표 성능으로 새로 만드는 것은 부당하다.",
+      "unresolved_conditions": [
+        "A/B의 대상·측정 환경·비교 가능성",
+        "어느 수치가 승인됐는지와 승인 권한"
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "memo",
+          "quote": "관측 A: 10ms."
+        },
+        {
+          "document_id": "memo",
+          "quote": "관측 B: 30ms."
+        },
+        {
+          "document_id": "memo",
+          "quote": "대상 버전, 측정 환경, 승인자: 미기재."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T2-01",
+      "input_sha256": "7986900f8d3e26b74ec9d0b46e62ac234890c49a85fac6fa7d147a3ce728015c",
+      "assessment": "source와 두 destination 전체가 있어 역할별 큐레이션이 가능하다. 원문 draft는 참고용으로 유지하고 quickstart에 목적·설치·입문 예시, reference에 V1/V2 차이·점진 이관 안내를 배치할 수 있다. 상세 이관 절차는 제공되지 않아 링크 이상을 창작하면 안 된다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "draft 전체 원문",
+        "reference의 배포 승인 기록이 아니라는 기존 주의",
+        "V2 breaking changes와 내장V1 점진 이관 경로",
+        "참조 링크 및 예제 의미"
+      ],
+      "valid_alternatives": [
+        "설치와 기존 예시를 quickstart에 발췌하고 이관 링크를 reference에 배치",
+        "더 짧은 소개와 설치만 quickstart에 두고 예제 원문 위치를 안내"
+      ],
+      "counterexample": "reference 기존 주의를 placeholder처럼 삭제하거나 외부 이관 문서를 읽은 것처럼 구체적 API 변경 목록을 생성하면 부당하다.",
+      "unresolved_conditions": [
+        "전체 migration guide 내용은 입력에 없다. 링크 기반 안내는 가능하지만 완전 이관 매뉴얼은 불가능"
+      ],
+      "input_defects": [
+        "원문 소개의 Python 1+ 표현은 비정상적으로 보이나 권위 있는 정정값이 공급되지 않았다. 이를 임의로 고치는 것은 별도 범위다."
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Pydantic V2 is a ground-up rewrite that offers many new features, performance improvements, and some breaking changes compared to Pydantic V1."
+        },
+        {
+          "document_id": "draft",
+          "quote": "from pydantic import v1 as pydantic_v1"
+        },
+        {
+          "document_id": "reference",
+          "quote": "Existing note: this is not a deployment approval record."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Define how data should be in pure, canonical Python 1+; validate it with Pydantic."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T2-02",
+      "input_sha256": "2bf2b06a9cea6178c1d2434a79c7a088b00de3fe64747724de7f4a87570095b6",
+      "assessment": "초보 설치/실행과 유지보수 구성/규칙/지원의 내용이 source에 제공되고 destination 기존 조건도 확인 가능하다. 두 안내의 발췌·재구성은 가능하나 모든 지원 규칙과 구성 옵션의 세부 문서는 링크만 있다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "reference 기존 배포 승인 아님 주의",
+        "기존 source 비대상 정보·링크를 손실 없이 유지",
+        "preview 불안정성, 기본 규칙과 전체 규칙의 구별",
+        "pyproject.toml에서 tool.ruff 접두사 필요"
+      ],
+      "valid_alternatives": [
+        "draft 유지 후 두 목적 문서에 필요한 내용 복사",
+        "안내별 짧은 시작 경로와 source/공식 링크 제공"
+      ],
+      "counterexample": "기본 규칙을 F/E만으로 기억에 따라 교체하거나 Python3.15 compatibility를 실행 인터프리터 최소 버전이라고 쓰면 부당하다.",
+      "unresolved_conditions": [
+        "완전한 지원 규칙·구성 옵션 목록은 외부 링크 내용이라 제공되지 않음"
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "uvx ruff@0.17.5 check   # Lint all files in the current directory."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Ruff can be configured through a `pyproject.toml`, `ruff.toml`, or `.ruff.toml` file"
+        },
+        {
+          "document_id": "draft",
+          "quote": "By default, Ruff enables rules from the `F`, `E`, `B`, `UP`, and `RUF` categories,"
+        },
+        {
+          "document_id": "reference",
+          "quote": "Existing note: this is not a deployment approval record."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T2-03",
+      "input_sha256": "740d21063261618dbe9a0c8785915e489e8c081f3aa7c1ee72cc805ecd9efa72",
+      "assessment": "전체 source에서 호환성 절이 이미 설치 절 직전에 있다. Python3.8+와 Windows 터미널 색 제한을 설치 전 보게 하는 현재 순서는 충족하므로 무수정 유지도 유효하다. 더 눈에 띄는 요약을 추가할 수 있지만 필수 이동으로 단정하면 과잉이다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "Linux/macOS/Windows 호환",
+        "새 Windows Terminal true color/emoji와 classic16색 차이",
+        "Python3.8+ 및 Jupyter 설명",
+        "후속 기능·예제·링크 전체"
+      ],
+      "valid_alternatives": [
+        "Compatibility와 Installing 순서 그대로 유지",
+        "설치 앞에 동일 조건 체크 문장 추가"
+      ],
+      "counterexample": "호환성 절이 설치 뒤에 있다고 가정해 이동을 강요하거나 모든 Windows 터미널이 true color/emoji를 동일 지원한다고 축약하면 부당하다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "## Compatibility\n\nRich works with Linux, macOS and Windows. True color / emoji works with new Windows Terminal, classic terminal is limited to 16 colors. Rich requires Python 3.8 or later."
+        },
+        {
+          "document_id": "draft",
+          "quote": "## Installing\n\nInstall with `pip` or your favorite PyPI package manager."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T2-04",
+      "input_sha256": "298ea6ddd452870552b1128bcd3cc49731842ea9d8a6afbb8d7fc0ebc76b30c6",
+      "assessment": "실패 보고 교육이 목적이고 원문은 의도적으로 실패하는 inc(3)==5 예제와 실제4 설명을 묶어 제공한다. 무수정 분석이나 입문 설명을 붙이는 것이 타당하며 테스트 수정 과제가 아니다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "inc 함수·실패 assertion·AssertionError 출력의 연결",
+        "실패를 보여주는 목적",
+        "README 기타 기능·지원·보안·라이선스와 RST 구조"
+      ],
+      "valid_alternatives": [
+        "기존 예제와 출력 유지",
+        "inc(3)의 실제4와 기대5 차이를 설명하는 짧은 문장 추가"
+      ],
+      "counterexample": "실패를 제거하려고 기대값을4로 바꾸면서 출력은 실패로 남기거나 실패 블록을 초보자에게 어렵다고 삭제하면 목적을 훼손한다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "    def inc(x):\n        return x + 1"
+        },
+        {
+          "document_id": "draft",
+          "quote": "        assert inc(3) == 5"
+        },
+        {
+          "document_id": "draft",
+          "quote": "    E       assert 4 == 5"
+        },
+        {
+          "document_id": "draft",
+          "quote": "Thanks to ``pytest``'s detailed assertion introspection, you can simply use plain ``assert`` statements."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T2-05",
+      "input_sha256": "0ce79c4c27c76ac4bc55853e91e2d77c7380b7928a42003f6318b4b4931e9c2f",
+      "assessment": "입력 runbook 하나 안에 실행 카드와 감사 부록 두 절을 만들 수 있다. 첫 명령 전 staging 한정·production금지·백업 검증·책임자 승인을 보여야 한다. 현재도 이 조건이 명령 앞에 있으므로 재배치 자체가 필수는 아니나 두 산출 역할은 구성해야 한다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "staging 한정과 production 금지",
+        "백업 검증 및 운영 책임자 승인 선행 조건",
+        "승인 이력 보존 의무",
+        "rotate staging 명령과 자유인 알림 색상"
+      ],
+      "valid_alternatives": [
+        "runbook 안에 실행 카드/감사 부록 구획 추가",
+        "원래 조건 순서를 유지하며 제목만 역할별 정리"
+      ],
+      "counterexample": "승인 조건을 감사 부록으로만 밀어 명령 뒤에 놓거나 실제 승인 이력을 허구로 채우면 부당하다.",
+      "unresolved_conditions": [
+        "실제 승인 이력 데이터는 없으므로 보존 의무만 적고 이력 생성은 불가"
+      ],
+      "input_defects": [
+        "감사 부록에 필요한 실제 승인 이력은 공급되지 않았다. 부록 구조 작성은 가능하므로 과제 전체가 판단 불가는 아니다."
+      ],
+      "evidence": [
+        {
+          "document_id": "runbook",
+          "quote": "대상: staging만. production 실행 금지."
+        },
+        {
+          "document_id": "runbook",
+          "quote": "실행 전 백업 검증과 운영 책임자 승인이 필요하다. 승인 이력은 감사 부록에 보존한다."
+        },
+        {
+          "document_id": "runbook",
+          "quote": "검증 뒤 실행: `rotate staging`"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T2-06",
+      "input_sha256": "dbc57d294e844b6ce2dd43756bfcad5e4ac94eb97fc4f64c0b1b5ad5c63cbb6a",
+      "assessment": "요청A와B가 공개 범위를 서로 다르게 요구하고 우선 독자·공개 권한이 미정이므로 최종 공개판 확정은 진짜 판단 불가다. 원문 유지와 충돌·확인 질문 정리는 실행 가능하다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "사용자와 감사자의 상이한 요구",
+        "모두 공개와 내부 절차 비공개의 충돌",
+        "권한과 독자 미정 사실"
+      ],
+      "valid_alternatives": [
+        "무수정 반환과 권한 확인 질문",
+        "공개하지 않은 조건별 내부 검토안 두 개"
+      ],
+      "counterexample": "사용자 편의만을 근거로 내부 절차를 삭제한 최종 공개판을 만들거나 요청A를 권한 승인으로 간주하면 부당하다.",
+      "unresolved_conditions": [
+        "우선 독자",
+        "공개 승인권자와 승인된 범위",
+        "내부 절차의 실제 내용도 입력에 없음"
+      ],
+      "input_defects": [
+        "초안은 독자 요구의 개요뿐이고 공개할 상태·복구 예정·내부 절차 본문은 없다. 공개 범위가 정해져도 실질 배포판 완성에는 추가 내용이 필요하다."
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "요청 A: 모두 공개. 요청 B: 내부 절차 비공개."
+        },
+        {
+          "document_id": "draft",
+          "quote": "공개 권한·우선 독자: 미정."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T3-01",
+      "input_sha256": "87016038824ce60a187f6bce142d11ea0e9f3471738931e0e74aca67faf41fe9",
+      "assessment": "통제 추가 문장은 내용 없는 메타 문장으로 식별되며 제거가 명확히 허용된다. 기능·링크·다른 문장은 그대로 유지해야 한다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "패키지 설치 기능과 PyPI/other indexes 범위",
+        "설치·사용·릴리스·기여·행동강령 링크 전체"
+      ],
+      "valid_alternatives": [
+        "추가 placeholder 한 문장 삭제",
+        "정보 없는 부분을 없애는 축약"
+      ],
+      "counterexample": "간결화 명목으로 정기 릴리스 안내나 행동강령 링크까지 함께 삭제하는 것은 요청 범위를 넘는다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Editorial placeholder: this sentence is here to say that this document contains sentences."
+        },
+        {
+          "document_id": "upstream",
+          "quote": "Pip is the `package installer`_ for Python. You can use pip to install packages from the `Python Package Index`_ and other indexes."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T3-02",
+      "input_sha256": "8f4b0b817fee7033735e4e3e3cdd4bca74dd0ebebb224206cf35076560772b95",
+      "assessment": "추가 메모 첫 문장은 본문 의존성 관리 설명과 중복이지만 두 번째 오프라인 별도 검증 조건은 고유한 팀 계약이다. 부분 제거가 타당하며 upstream에 없다는 이유로 전체를 제거하면 안 된다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "For this team 한정과 offline installation separately validated 조건",
+        "원문 기능·설치·예제·자원·프로젝트 정보",
+        "통제 계약과 upstream 기능 사실 구분"
+      ],
+      "valid_alternatives": [
+        "중복 첫 문장만 삭제",
+        "팀 메모를 오프라인 검증 한 문장으로 축약"
+      ],
+      "counterexample": "upstream과 같게 만든다는 이유로 Team handoff note 전체 삭제, 또는 Poetry가 오프라인 설치를 보장한다고 변환하는 것은 부당하다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Poetry helps you declare, manage and install dependencies of Python projects,\nensuring you have the right stack everywhere."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Poetry manages dependencies. For this team, offline installation must be separately validated."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T3-03",
+      "input_sha256": "dba81433226cfc9833c70cd10be15ce662f8d6499d198e643ea82f8b7db6be2b",
+      "assessment": "실제 첫 문단과 말미 추가 소개가 동일하므로 말미 반복 제거가 정보 손실 없이 가능하다. upstream의 첫 문단이 남는지 전체 결과에서 확인해야 한다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "최초 소개의 경량·유연성·portable C·zero runtime dependencies·JSON 변환 정보",
+        "설치·빌드 의존성·Docker·지원·라이선스 전체"
+      ],
+      "valid_alternatives": [
+        "Repeated introduction 제목과 반복 문장 삭제",
+        "말미를 앞 소개 링크로 축약"
+      ],
+      "counterexample": "zero runtime dependencies와 build dependencies를 모순으로 오인해 빌드 도구 목록을 삭제하거나 두 소개를 동시에 없애면 부당하다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "`jq` is a lightweight and flexible command-line JSON processor akin to `sed`,`awk`,`grep`, and friends for JSON data. It's written in portable C and has zero runtime dependencies, allowing you to easily slice, filter, map, and transform structured data."
+        },
+        {
+          "document_id": "draft",
+          "quote": "## Repeated introduction (controlled)"
+        },
+        {
+          "document_id": "draft",
+          "quote": "#### Dependencies\n\n- libtool\n- make\n- automake\n- autoconf"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T3-04",
+      "input_sha256": "64183911a536fa27caf90b4c205d744cf84581bbada85f80779c6250fbcb5d0e",
+      "assessment": "주독자가 대화형이어도 파이프 사용이 계약 범위이고 전체 README에는 기본 비대화형 출력과 강제 장식 옵션의 예외도 있다. 삭제 필요가 없다는 무수정 판단이 타당하다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "파이프/파일 리다이렉션 때 plain 출력의 기본 동작",
+        "--decorations=always와 --force-colorization의 강제 출력 방법",
+        "xclip·cat 대체·파이프 예제와 나머지 전체 내용"
+      ],
+      "valid_alternatives": [
+        "전체 무수정 유지와 이유 제시",
+        "필요하면 관련 설명을 가리키는 짧은 안내 추가"
+      ],
+      "counterexample": "대화형 독자에게 불필요하다고 File concatenation과 파이프 설명을 삭제하거나 파이프에서는 무조건 장식 출력이 불가능하다고 일반화하면 부당하다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Whenever `bat` detects a non-interactive terminal (i.e. when you pipe into another process or into a file), `bat` will act as a drop-in replacement for `cat` and fall back to printing the plain file contents, regardless of the `--pager` option's value."
+        },
+        {
+          "document_id": "draft",
+          "quote": "Use `--decorations=always` to show decorations even when piping output to another command, or `--decorations=never` to disable them entirely."
+        },
+        {
+          "document_id": "draft",
+          "quote": "There is also the `--force-colorization` option, which is an alias for `--decorations=always --color=always`."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T3-05",
+      "input_sha256": "4f9ca6b3b56590aecfe90cffa11c2fd1b52b7461a423f16e687828106c7fc5e7",
+      "assessment": "검사 진행의 두 문장은 중복이므로 하나로 줄일 수 있다. 10건·8통과·2실패와 재검증 필요·미승인은 감사 고유 정보여서 보존해야 한다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "총10건/8건 통과/2건 실패",
+        "실패2건 재검증 필요",
+        "최종 승인 미발급"
+      ],
+      "valid_alternatives": [
+        "진행 중복 한 문장 제거",
+        "같은 수치와 상태를 유지하는 한 단락 축약"
+      ],
+      "counterexample": "8건 통과만 남기거나 최종 승인 미발급을 삭제해 성공 보고처럼 보이게 하는 것은 부당하다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "audit",
+          "quote": "검사는 진행되었다. 검사를 진행한 상태다."
+        },
+        {
+          "document_id": "audit",
+          "quote": "10건 중 8건 통과, 2건 실패. 실패 2건은 재검증이 필요하다."
+        },
+        {
+          "document_id": "audit",
+          "quote": "최종 승인은 아직 발급되지 않았다."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T3-06",
+      "input_sha256": "759b1787d6d6d7a14ba6971afb75acb1462aa724d93658f414568320f5df503b",
+      "assessment": "2024년 기록이라는 이유만으로 삭제할 수 없다. 유일 사본 가능성과 권한 미확인 때문에 삭제 승인 여부는 진짜 판단 불가다. 원문 보존과 확인 질문을 남기는 정리는 가능하다. 후보 출력은 not_run이므로 실행 결과의 성공·실패는 아직 평가할 수 없다. 이는 입력 근거의 판단 가능성과 별개다.",
+      "required_preservations": [
+        "2024년 장비 교체와 센서 보정 예외1건",
+        "다른 사본 미확인",
+        "보존 기간·삭제 권한 미기재"
+      ],
+      "valid_alternatives": [
+        "원문 무수정 보존 후 질문",
+        "고유 사실을 유지한 채 확인 필요 상태만 표시"
+      ],
+      "counterexample": "오래됐으므로 삭제하거나 다른 사본이 있을 것이라고 가정해 예외 기록을 제거하면 부당하다.",
+      "unresolved_conditions": [
+        "적용 보존 기간",
+        "삭제 승인권자와 실제 승인",
+        "대체 사본 존재·완전성"
+      ],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "archive",
+          "quote": "2024년 장비 교체 시 센서 보정 예외 1건이 있었다."
+        },
+        {
+          "document_id": "archive",
+          "quote": "다른 사본: 확인되지 않음. 보존 기간·삭제 권한: 미기재."
+        }
+      ]
+    }
+  ]
+}

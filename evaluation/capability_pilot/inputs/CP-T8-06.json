@@ -1,0 +1,62 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T8-06",
+  "task": {
+    "title": "지시 대상 문맥 부족",
+    "purpose": "단독 발췌의 표현을 검토한다. 무엇이 닫히는지 알 수 없으면 뜻을 정해 교정하지 않는다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "단독 발췌의 표현을 검토한다. 무엇이 닫히는지 알 수 없으면 뜻을 정해 교정하지 않는다.",
+    "output_document_ids": [
+      "excerpt"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "excerpt",
+      "role": "editable fictional document",
+      "content": "그것을 확인한 뒤 닫는다.\n",
+      "sha256": "242f23122406564dfce8757d183649c2945b6b1f708f1a28fa3b5481cfb9c9b1",
+      "availability": "provided",
+      "completeness": "excerpt",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [
+      "앞 문장과 지시 대상 미제공"
+    ],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "excerpt"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

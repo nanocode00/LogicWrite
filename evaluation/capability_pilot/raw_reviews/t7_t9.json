@@ -1,0 +1,565 @@
+{
+  "reviewer": "독립 Codex AI",
+  "method": "input-only; answers/curation/reviews not read",
+  "cases": [
+    {
+      "case_id": "CP-T7-01",
+      "input_sha256": "e4009823d2fc83e7e45256550bd05a48921227f5db90bbd844fa8bd65566e8e8",
+      "assessment": "보완 가능. draft Installation의 빈 자리에서 npm 설치 명령 전에 고정 upstream의 Node v18.0.0 이상 조건을 복원한다. async 예시의 v7.6+ 표제는 다른 범위이며 설치 최소 버전의 대체 근거가 아니다. 후보가 not_run인 것은 판단불가가 아니라 아직 실행하지 않은 상태다.",
+      "required_preservations": [
+        "설치 명령 및 코드, middleware 예시와 버전별 서명 설명, 나머지 README 전체",
+        "read-only upstream"
+      ],
+      "valid_alternatives": [
+        "upstream 문장 그대로 한 문장 삽입",
+        "v18.0.0 이상 및 ES2015/async 지원이라는 의미를 유지한 동등한 설명을 설치 전에 삽입"
+      ],
+      "counterexample": "node v7.6+를 전역 설치 최소 조건으로 채택하거나 현재 제품 버전을 외부에서 추정하는 편집은 부당하다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "upstream",
+          "quote": "Koa requires __node v18.0.0__ or higher for ES2015 and async function support."
+        },
+        {
+          "document_id": "draft",
+          "quote": "### ___async___ functions (node v7.6+)"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T7-02",
+      "input_sha256": "19d6061989977fe7b5f894e20afae116de68307324c6e1b99cd5b22e6dc32e28",
+      "assessment": "부분 누락은 복원 가능. Features의 불완전한 항목 -  with built-in cancellation APIs.에 Cancel requests를 복구한다. 별도 Cancellation 절도 존재하므로 전체 설명이 없다는 판단은 틀리다.",
+      "required_preservations": [
+        "그 외 기능 목록, 요청/오류/보안/취소 예시 전체",
+        "CancelToken의 deprecated 조건과 AbortController 지원 범위",
+        "read-only upstream"
+      ],
+      "valid_alternatives": [
+        "원래 항목을 - Cancel requests with built-in cancellation APIs.로 복원",
+        "같은 기능을 나타내는 완결된 목록 문장으로 최소 수정"
+      ],
+      "counterexample": "기능 목록 복원 대신 취소 API 예시를 새로 만들거나 deprecated CancelToken을 최신 권장 API로 바꾸는 것은 범위와 근거를 벗어난다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "-  with built-in cancellation APIs."
+        },
+        {
+          "document_id": "upstream",
+          "quote": "- Cancel requests with built-in cancellation APIs."
+        },
+        {
+          "document_id": "upstream",
+          "quote": "> This API is deprecated since v0.22.0 and should not be used in new projects."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T7-03",
+      "input_sha256": "c6eddd40b0e7c3d1ff7b68c2c3e7d1a0e5c17521e1d7fd4f672454c32a08317f",
+      "assessment": "무수정이 유효하다. 설치 절에 native ESM, CommonJS export 미제공, ESM 전환 및 v11 유지보수/백포트 미지원이 이미 명시돼 있다. 전역 actively maintained와 v11 지원 중단은 적용 버전이 달라 충돌하지 않는다.",
+      "required_preservations": [
+        "기존 두 경고와 버전 한정",
+        "설치/JSON 예시 및 전체 비대상 내용"
+      ],
+      "valid_alternatives": [
+        "근거를 제시하고 draft 전체를 그대로 제출",
+        "필요하다면 경고의 기존 위치와 내용을 유지하며 가독성만 소폭 개선"
+      ],
+      "counterexample": "v11은 더 이상 유지보수되지 않으므로 Got 전체가 미유지보수라고 고치거나 같은 경고를 중복 추가하면 잘못이다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "**Got v11 is no longer maintained and we will not accept any backport requests.**"
+        },
+        {
+          "document_id": "draft",
+          "quote": "no longer provides a CommonJS export."
+        },
+        {
+          "document_id": "draft",
+          "quote": "- [Actively maintained](https://github.com/sindresorhus/got/graphs/contributors)"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T7-04",
+      "input_sha256": "412c238ce609520fa7e287df3698618ccac7ca107d6de69c63b0f05bdc2164e7",
+      "assessment": "무수정이 유효하다. 설치 직후 IMPORTANT에 Chalk 5는 ESM이며 TypeScript 또는 build tool 사용자에게 Chalk 4를 잠정 권고하는 문장이 있다. 링크의 외부 설명 없이도 요청된 선택 안내를 판단할 수 있다.",
+      "required_preservations": [
+        "Chalk 5와 Chalk 4의 구분, probably 및 for now라는 한정",
+        "설치 명령과 Usage 코드 및 나머지 README"
+      ],
+      "valid_alternatives": [
+        "전체 원문 유지",
+        "기존 경고를 의미와 한정을 보존한 채 설치 전으로 옮기거나 읽기 쉽게 표현"
+      ],
+      "counterexample": "Chalk 4가 모든 사용자에게 필수라고 단정하거나 TypeScript를 Chalk 5가 전혀 지원하지 않는다고 바꾸면 근거보다 강한 편집이다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "**IMPORTANT:** Chalk 5 is ESM. If you want to use Chalk with TypeScript or a build tool, you will probably want to use Chalk 4 for now. [Read more.](https://github.com/chalk/chalk/releases/tag/v5.0.0)"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T7-05",
+      "input_sha256": "9bc83026bae979420299d0aae59b60b5785ee7e6bef98767cb0fa21cac30346a",
+      "assessment": "정확한 만료값은 진짜 판단불가다. 같은 버전·배포용 토큰에 24시간과 48시간이 충돌하고 우선 권위가 없다. 편집 작업 자체는 미해결 질문과 guide 전체 무수정 결과를 제출하여 완료할 수 있으나 값 확정은 할 수 없다.",
+      "required_preservations": [
+        "승인 정책을 따른다는 guide 원칙",
+        "policy_a와 policy_b 원문을 read-only로 유지"
+      ],
+      "valid_alternatives": [
+        "guide 무수정 및 승인권자에게 우선 정책 확인 요청",
+        "guide에 값 확정 보류와 두 승인 자료 충돌을 명시하되 어느 값도 정책으로 확정하지 않음"
+      ],
+      "counterexample": "더 보수적으로 보이는 24시간을 임의 채택하거나 둘의 평균 36시간을 쓰는 것은 승인 근거가 없다.",
+      "unresolved_conditions": [
+        "어느 승인 정책이 우선하는지 또는 최종 승인 만료값"
+      ],
+      "input_defects": [
+        "동일 범위 승인 자료의 우선순위 미확정으로 단일 값 확정 불가능"
+      ],
+      "evidence": [
+        {
+          "document_id": "policy_a",
+          "quote": "버전 2, 배포용 토큰 만료 24시간."
+        },
+        {
+          "document_id": "policy_b",
+          "quote": "버전 2, 배포용 토큰 만료 48시간."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T7-06",
+      "input_sha256": "8bea8a64c9b8b234eee6148de0b6e52f3db9a721265d48b4beea57924877c772",
+      "assessment": "알고리즘 이름은 진짜 판단불가다. 알고리즘을 넣으라는 요청은 제품이 특정 암호화를 구현했다는 사실 근거가 아니다. 제공 자료만으로 이름을 채울 수 없다.",
+      "required_preservations": [
+        "설정 파일 저장이라는 확인된 기능",
+        "구현 자료와 검증 결과가 제공되지 않았다는 제한"
+      ],
+      "valid_alternatives": [
+        "guide 전체 무수정과 구현/검증 근거 요청",
+        "알고리즘은 자료 부족으로 확인되지 않았다고 표시하고 사실 주장은 보류"
+      ],
+      "counterexample": "AES-256을 일반적으로 쓰니까 추가하거나 저장 기능을 곧 암호화 저장으로 바꾸면 허구 사실을 만든다.",
+      "unresolved_conditions": [
+        "실제 암호화 구현 및 검증 결과, 승인된 알고리즘 명칭"
+      ],
+      "input_defects": [
+        "알고리즘 사실을 뒷받침할 자료 없음"
+      ],
+      "evidence": [
+        {
+          "document_id": "guide",
+          "quote": "설정 파일을 저장한다."
+        },
+        {
+          "document_id": "guide",
+          "quote": "요청: 암호화 알고리즘 이름을 추가하라. 구현 자료와 검증 결과는 제공되지 않았다."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T8-01",
+      "input_sha256": "a6d5853eba8f700f9e3bc7da815d6862766392acf67717e6c0ba99482f9a8db1",
+      "assessment": "한국어 소개만 다듬을 수 있다. 배열/객체/문자열 작업을 쉽게 한다는 설명을 기술 안내 문체로 정리하며 새로운 효능을 추가하지 않는다.",
+      "required_preservations": [
+        "코드·버전 v4.18.1·인용·원문 영문 구간은 바이트 단위 보존",
+        "기존 링크와 전체 README"
+      ],
+      "valid_alternatives": [
+        "Lodash는 배열, 객체, 문자열 작업을 간편하게 하는 라이브러리입니다.",
+        "Lodash는 배열, 객체, 문자열을 다루는 작업을 쉽게 해 줍니다."
+      ],
+      "counterexample": "한국어 표현 개선을 이유로 영문 전체를 번역하거나 var를 const로 바꾸거나 버전을 정정하면 보호 조건 위반이다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Lodash는 배열이랑 객체 및 문자열의 작업을 쉽게 해주는 것입니다. 쓰기 편한 것이다."
+        },
+        {
+          "document_id": "draft",
+          "quote": "# lodash v4.18.1"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T8-02",
+      "input_sha256": "2d441d6d7895e1fcce95341eb36b8bba45808060d6697a3ffc60994f0be08e3b",
+      "assessment": "지시 대상은 제공된 Usage와 API로 해소 가능하다. picomatch 주 함수가 glob 패턴과 옵션 객체를 받아 matcher 함수를 반환하고, 반환된 matcher가 문자열을 검사한다. 문맥 부족을 이유로 판단불가로 둘 필요가 없다.",
+      "required_preservations": [
+        "모든 예시 코드 그대로 유지",
+        "함수 생성과 반환된 matcher의 검사 역할 구분",
+        "기타 README 내용과 링크"
+      ],
+      "valid_alternatives": [
+        "주 함수는 패턴과 옵션으로 matcher 함수를 만듭니다. 반환된 matcher 함수가 문자열을 검사합니다.",
+        "picomatch 함수는 패턴과 옵션을 받아 문자열 검사 함수를 반환합니다."
+      ],
+      "counterexample": "주 함수가 문자열을 받아 glob 패턴을 반환한다고 주어/목적어를 뒤집거나 예시의 문법 문제를 고치면 요청 범위를 벗어난다.",
+      "unresolved_conditions": [],
+      "input_defects": [
+        "주변 코드에는 불완전하거나 의심스러운 예시가 있으나 한국어 지시대상 해소를 막지 않으며 코드 수정 권한은 없음"
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "주 함수는 패턴과 옵션으로 그것을 만든다. 그것이 문자열을 검사한다."
+        },
+        {
+          "document_id": "upstream",
+          "quote": "The main export is a function that takes a glob pattern and an options object and returns a function for matching strings."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T8-03",
+      "input_sha256": "420cc3a5f40af6a194d7077d806269224ca0ef2364354d6363563f1d03f6053c",
+      "assessment": "추가 한국어 요약의 반복을 줄이되 현재 tree를 수정하는 방식과 다음 불변 state tree의 생성 관계를 보존한다. 한 문장으로 압축할 근거가 충분하다.",
+      "required_preservations": [
+        "immutable next state와 current tree 수정 방식의 관계",
+        "영문 표어와 문서의 나머지 내용"
+      ],
+      "valid_alternatives": [
+        "현재 tree를 수정하는 방식으로 다음 불변 state tree를 만듭니다.",
+        "현재 트리를 수정하는 방식으로 다음 불변 상태 트리를 만듭니다."
+      ],
+      "counterexample": "불변성을 없애 현재 state를 직접 변경한다고만 쓰거나 현재 tree는 절대 수정하지 않는다고 의미를 뒤집는 것은 압축이 아니다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "현재 tree를 수정하는 방식으로 다음 불변 state tree를 만든다. 다음 tree는 불변인 tree이며 이를 생성하는 방식이다."
+        },
+        {
+          "document_id": "upstream",
+          "quote": "_Create the next immutable state tree by simply modifying the current tree_"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T8-04",
+      "input_sha256": "cba7a021f38de9c631b2c0d0436b2db1cbdecd30242d93aea53311fe09ae4ec2",
+      "assessment": "무수정이 유효하다. 소개에서 React 또는 다른 view library와 사용할 수 있다고 이미 명확히 말한다. React 예제가 있다고 Redux 자체가 React 전용이라는 결론을 낼 수 없다.",
+      "required_preservations": [
+        "React 이외 view library 사용 가능성",
+        "식별자와 코드 예시",
+        "Toolkit 권고와 core 설치 경로 등 전체 비대상 내용"
+      ],
+      "valid_alternatives": [
+        "근거를 설명하고 draft 전체 무수정 제출",
+        "정확한 기존 소개를 유지하며 별도의 판단 문서에서 범위 설명"
+      ],
+      "counterexample": "React 전용이라고 소개를 고치거나 React 예시를 모두 지워 범용성을 표현하는 것은 불필요한 정보 손실이다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "You can use Redux together with [React](https://react.dev), or with any other view library."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T8-05",
+      "input_sha256": "6917e680d2fc68499ea3e98f6ad3a6feb16c34dd1212ed7fb9b2eed25f0c4591",
+      "assessment": "공지의 두 문장을 합니다체로 간결하게 바꿀 수 있다. 금지·조건·최대 2회·재검토 가능이라는 의미를 그대로 유지한다.",
+      "required_preservations": [
+        "승인 전 실행 금지",
+        "실패 시 최대 2회 재검토 가능",
+        "`retry_limit = 2` 및 “검토는 승인과 다르다.” 그대로"
+      ],
+      "valid_alternatives": [
+        "승인 전에는 실행하면 안 됩니다. 실패 시 최대 2회 재검토할 수 있습니다.",
+        "승인 전에는 실행하지 않습니다. 실패 시 최대 2회까지 재검토할 수 있습니다."
+      ],
+      "counterexample": "재검토를 재실행/재시도로 바꾸거나 최대 2회를 반드시 2회로 바꾸거나 인용을 합니다체로 바꾸면 의미/보호 위반이다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "notice",
+          "quote": "승인 전에는 실행을 하면 안 되는 것입니다. 실패 시 최대 2회 재검토할 수 있는 것입니다."
+        },
+        {
+          "document_id": "notice",
+          "quote": "코드: `retry_limit = 2`"
+        },
+        {
+          "document_id": "notice",
+          "quote": "인용: “검토는 승인과 다르다.”"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T8-06",
+      "input_sha256": "4ac1eddce0db43e29baab01a1b9e86d5fb4aa4be99db36659f27bbdb761e0be9",
+      "assessment": "지시 대상과 닫는 대상은 진짜 판단불가다. 단독 발췌에는 대상이 없으며 대상 확정 교정은 금지된다. 무수정 제출과 필요한 문맥 질문은 가능하다.",
+      "required_preservations": [
+        "확인한 뒤 닫는다는 순서",
+        "지시 대상의 미확정 상태"
+      ],
+      "valid_alternatives": [
+        "원문 그대로 유지하고 앞 문장 및 닫는 대상 요청",
+        "대상 치환 없이 문체만 제안하되 모호성 해결 완료라고 하지 않음"
+      ],
+      "counterexample": "그것을 파일이라고 정해 파일을 확인한 뒤 창을 닫는다로 고치면 입력에 없는 두 대상을 발명한다.",
+      "unresolved_conditions": [
+        "앞 문장, 확인하는 대상, 닫는 대상"
+      ],
+      "input_defects": [
+        "단독 발췌로 지시 대상을 식별할 근거 없음"
+      ],
+      "evidence": [
+        {
+          "document_id": "excerpt",
+          "quote": "그것을 확인한 뒤 닫는다."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T9-01",
+      "input_sha256": "282fc8d49e8015ef63a435dd7f348e8337bb3d6767c4e855ef09a4203ef8af4a",
+      "assessment": "두 문서 전체를 대상으로 초보 JavaScript 학습 경로를 구성할 수 있다. README에는 설치→create로 store→hook으로 component에서 상태/액션 선택의 실제 코드가 있다. quickstart의 store 설명만으로는 component 사용까지 수행하기 어려우므로 해당 예시와 순서/학습 경로를 연결해야 한다. draft가 이미 이 흐름을 충족한다면 그대로 반환하고 quickstart를 보완하는 것도 유효하다.",
+      "required_preservations": [
+        "quickstart의 immutable update와 set merge 설명",
+        "create/useBearStore/BearCounter/Controls 코드의 일관성",
+        "README의 TypeScript 안내와 RSC·상태 덮어쓰기 주의 등 비대상 내용",
+        "draft와 quickstart 각각 전체 출력"
+      ],
+      "valid_alternatives": [
+        "quickstart에 제공 README의 설치·store·component 예시를 순서대로 가져오고 README의 다음 학습 경로를 연결",
+        "README에 초보 경로 안내를 최소 추가하고 quickstart에서 기존 해당 절로 명확히 안내하되 store→component 수행에 필요한 내용을 충분히 제공"
+      ],
+      "counterexample": "사실을 손상하지 않은 기능 목록이나 store 생성만 내놓으면 D가 유지돼도 전체 초보 수행 목적 Q는 충족하지 않는다. quickstart를 누락하거나 기존 immutable update 의무를 삭제해도 안 된다.",
+      "unresolved_conditions": [],
+      "input_defects": [
+        "상대 링크가 새 목적지에서 어떻게 해석되는지 경로가 주어지지 않음. 파일 경로를 임의 확정하지 말고 기존 참조 또는 명확한 문서/절 참조 사용"
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "npm install zustand"
+        },
+        {
+          "document_id": "draft",
+          "quote": "## First create a store"
+        },
+        {
+          "document_id": "draft",
+          "quote": "## Then bind your components, and that's it!"
+        },
+        {
+          "document_id": "quickstart",
+          "quote": "State has to be updated immutably and the `set` function [merges state](./docs/learn/guides/immutable-state-and-merging.md) to help it."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T9-02",
+      "input_sha256": "aee547690de46db50c5baf84217e86e6af852de7c7ecfce577ec8a432da99b33",
+      "assessment": "설치 코드를 생성할 필요 없이 서버 상태 도구인지 판단하는 안내와 제공된 공식 docs 링크로의 다음 경로를 완성할 수 있다. README의 사실이 충분하므로 외부 API 내용을 모른다는 이유로 전체를 판단불가 처리하면 과도하다. draft 원문이 목적에 충분하면 유지하고 quickstart의 미완성 Next step을 구체화할 수 있다.",
+      "required_preservations": [
+        "fetching/caching/synchronizing/updating server state라는 범위",
+        "protocol-agnostic 및 기존 기능",
+        "공식 https://tanstack.com/query 링크와 기타 비대상 정보",
+        "draft/quickstart 전체"
+      ],
+      "valid_alternatives": [
+        "quickstart에 서버에서 가져오는 상태 관리 용도와 docs 이동 경로를 제공하고 README 유지",
+        "두 문서의 역할을 소개/다음 학습으로 구분하되 원문 근거 범위 내에서 재구성"
+      ],
+      "counterexample": "기능 목록만 반복하면 문장 사실 D는 맞아도 초보 선택/학습 이동이라는 Q는 미충족이다. 추정 npm 설치 명령이나 QueryClient API를 넣는 것은 supplied evidence 밖이다.",
+      "unresolved_conditions": [],
+      "input_defects": [
+        "공식 docs 링크의 본문은 제공되지 않음. 링크로 안내하는 과제 수행에는 장애가 아니지만 구체 설치 API의 근거로 쓸 수 없음"
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "An async state management library built to simplify fetching, caching, synchronizing, and updating server state."
+        },
+        {
+          "document_id": "draft",
+          "quote": "https://tanstack.com/query"
+        },
+        {
+          "document_id": "quickstart",
+          "quote": "To be connected to the pinned README learning path."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T9-03",
+      "input_sha256": "098cb33924019e06b013969b33cf291954be12749cb329aed709968bea9b9ca5",
+      "assessment": "README와 quickstart를 함께 검토하여 도입 판단과 시작 안내의 역할을 분리할 수 있다. 제공 자료에는 지원 기능과 CLI/JS/Go API 존재, getting started 링크가 있으나 실제 설치 절차 본문은 없다. 시작 안내를 링크까지 완성하는 것은 가능하며 설치 코드를 추측해서는 안 된다.",
+      "required_preservations": [
+        "시작 링크와 API/기능의 원래 범위",
+        "기존 목적지의 기능 정보는 적절한 참조/통합으로 유지",
+        "draft와 quickstart 각각 전체 출력"
+      ],
+      "valid_alternatives": [
+        "README는 도입 설명 유지, quickstart는 기능 요약과 공식 getting started/API 경로를 목적에 맞게 구성",
+        "중복 기능을 가독성 있게 정리하되 각 문서에서 필요한 근거·시작 이동 경로를 유지"
+      ],
+      "counterexample": "API 설명을 잘 다듬어도 유일한 getting started 경로를 삭제하면 전역 Q가 퇴행한다. 10-100x 문장을 모든 환경에서 입증된 속도 보장으로 바꾸면 D도 손상한다.",
+      "unresolved_conditions": [],
+      "input_defects": [
+        "외부 getting-started 본문 및 실행 검증 자료 없음. 링크 기반 안내의 완료와 실제 설치/성능 검증을 구별해야 함"
+      ],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "- A straightforward [API](https://esbuild.github.io/api/) for CLI, JS, and Go"
+        },
+        {
+          "document_id": "draft",
+          "quote": "Check out the [getting started](https://esbuild.github.io/getting-started/) instructions if you want to give esbuild a try."
+        },
+        {
+          "document_id": "quickstart",
+          "quote": "To be connected to the pinned README learning path."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T9-04",
+      "input_sha256": "50a8df804a0ba8dd1596f7c366b5607988a5c4cbd996e384e4918cb953cc7b52",
+      "assessment": "무수정이 유효하다. 전체 README에 global 설치, main.js→bundle.js 전제, CommonJS 명령이 모두 있으며 독자가 요청된 CLI 경로를 알 수 있다. runtime 성공 기록은 없지만 문서 적합성 판단불가가 아니다.",
+      "required_preservations": [
+        "npm install --global rollup",
+        "rollup main.js --format cjs --file bundle.js 및 입출력 전제",
+        "브라우저/UMD의 별도 예시와 기타 README 전체"
+      ],
+      "valid_alternatives": [
+        "draft 전체 무수정 반환 및 해당 근거 제시",
+        "원래 명령/기능을 유지한 채 CommonJS 경로를 짧게 강조"
+      ],
+      "counterexample": "설치 방법이 없다고 판단하거나 출력 확장자를 bundle.cjs로 임의 변경하거나 실행 검증 성공을 주장하는 것은 입력과 맞지 않는다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "draft",
+          "quote": "Install with `npm install --global rollup`."
+        },
+        {
+          "document_id": "draft",
+          "quote": "These commands assume the entry point to your application is named main.js, and that you'd like all imports compiled into a single file named bundle.js."
+        },
+        {
+          "document_id": "draft",
+          "quote": "rollup main.js --format cjs --file bundle.js"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T9-05",
+      "input_sha256": "edd38105e2ac9c4066986e8b3235131b83688e33b879a983b78f143ec4f7c6c9",
+      "assessment": "runbook만 편집할 수 있다. staging/복구 가능한 백업/책임자 승인 전제→기존 명령→검증 실패 중단·보고 순서로 재구성하고 현재 기록 9/10 성공·1 실패·최종 승인 미발급을 정확히 연결할 수 있다. 현 상태에서 완료/승인을 선언할 수 없다. 문서 구성의 일부는 가능하나 초보자가 실제 실행·검증을 독자 완료할 만큼 세부 절차는 제공되지 않았다.",
+      "required_preservations": [
+        "refresh stage-cache 명령과 staging 한정",
+        "백업·책임자 승인이라는 실행 전 조건",
+        "실패 시 중단하고 보고",
+        "read-only report의 9 성공/1 실패 및 최종 승인 미발급"
+      ],
+      "valid_alternatives": [
+        "runbook에 제공 기록을 출처와 함께 요약하고 승인 전 실행 보류 및 실패 보고를 안내",
+        "runbook에 승인/백업 확인 순서와 미제공 검증 절차 확인 질문을 표시하고 감사 기록은 원문 유지"
+      ],
+      "counterexample": "승인 미발급을 문서 편집으로 해소했다고 주장하거나 report를 10/10 성공으로 바꾸거나 production 명령·복구 명령을 발명하는 것은 부당하다. D 보존만으로 초보 실행 완료 Q를 자동 인정할 수 없다.",
+      "unresolved_conditions": [
+        "백업 생성/복구 확인 방법",
+        "검증 방법·성공 기준 및 실패 보고 대상",
+        "책임자 승인 획득과 최종 승인 발급을 확인하는 경로"
+      ],
+      "input_defects": [
+        "task는 실행 안내와 검증 기록 전체 구성을 요구하지만 출력/편집 권한은 runbook만이며 report는 read-only다. report를 새로 고치는 요구로 해석하면 충돌하므로 runbook 안의 참조/요약만 허용",
+        "availability.gaps=[]이나 실제 실행·검증 세부 방법은 없음"
+      ],
+      "evidence": [
+        {
+          "document_id": "runbook",
+          "quote": "대상은 staging만. 실행 전 복구 가능한 백업과 책임자 승인이 필요하다."
+        },
+        {
+          "document_id": "runbook",
+          "quote": "검증 실패 시 중단하고 보고한다."
+        },
+        {
+          "document_id": "report",
+          "quote": "10건 중 9건 성공, 1건 실패. 최종 승인 미발급."
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T9-06",
+      "input_sha256": "2b92f919d297b59a90358ec78fa9f57e31bbfd2fe791c0366327dba900e629f8",
+      "assessment": "원문과 관측 조각의 비교는 가능하다. 조각에는 백업 확인이 보존돼 있으나 excerpt이므로 설치/실패 복구가 전체 후보에서 삭제됐다고 단정할 수 없다. 전체 후보의 D와 Q는 미평가/판단보류이며 조각의 국소 사실 적합성과 구별해야 한다. 분석 과제 결과로 두 제공 문서를 온전히 반환할 수 있지만 후보 전체 출력을 만들어 채우면 안 된다.",
+      "required_preservations": [
+        "source의 백업→설치→검증 실패 복구 순서",
+        "output_fragment의 제공된 정확한 내용과 excerpt 지위",
+        "두 문서 전체 반환은 제공 범위 기준이며 fragment를 완전 출력으로 위장하지 않음"
+      ],
+      "valid_alternatives": [
+        "두 입력 그대로 제출하고 국소 비교 및 전체 출력 요청을 분석으로 제시",
+        "source 내용을 근거로 반드시 확인해야 할 누락 가능 항목을 제시하되 실제 후보의 누락 확정은 보류"
+      ],
+      "counterexample": "짧은 조각만으로 설치와 rollback이 삭제됐다고 단정해 전체 Q 실패를 주거나 백업 한 줄이 맞으니 전체 Q 성공으로 판단하는 것은 모두 잘못이다.",
+      "unresolved_conditions": [
+        "후보의 전체 출력과 나머지 문서"
+      ],
+      "input_defects": [
+        "전체 후보 출력이 없고 output_fragment.completeness=excerpt다. contract의 전체 결과 제출은 분석 산출물을 요구할 수 있으나 결손 후보를 복원했다는 증거가 되지 않는다"
+      ],
+      "evidence": [
+        {
+          "document_id": "source",
+          "quote": "백업을 확인한다. 설치를 실행한다. 검증 실패 시 되돌린다."
+        },
+        {
+          "document_id": "output_fragment",
+          "quote": "# 설치\n백업을 확인한다.\n"
+        }
+      ]
+    },
+    {
+      "case_id": "CP-T9-07",
+      "input_sha256": "a1358d0b62b249d0f8ce5463c3273c538dde7135b7e5228b300f22bb80a1e035",
+      "assessment": "무수정으로 목적을 충족한다. 한 status 문서에 점검 3건 전부 통과와 최종 승인 아직 미발급이라는 두 질문의 답이 모두 있다. 승인 미발급은 정확히 전달해야 할 상태이며 문서 과업의 판단불가나 미완료 사유가 아니다. 실제 승인 획득은 이 task의 요구가 아니다. candidate_output=not_run은 후보 실행 미완료일 뿐 입력 문서 Q를 평가할 수 없다는 뜻이 아니다.",
+      "required_preservations": [
+        "점검 3건 모두 통과라는 수치와 결과",
+        "최종 승인 아직 미발급이라는 부정 및 상태",
+        "status 전체"
+      ],
+      "valid_alternatives": [
+        "status 전체 무수정 반환과 두 질문에 대한 근거 판단 제출",
+        "같은 단일 문서에서 점검 결과와 승인 상태를 구분해 배치하되 두 의미를 그대로 유지"
+      ],
+      "counterexample": "점검 통과를 승인 완료로 고치거나 승인 미발급 문장을 지우면 D가 손상된다. 추가 승인 기록/다른 문서를 새로 요구하거나 승인 미발급 때문에 문서 과업 Q를 무조건 실패/판단불가로 두면 task 외 조건을 만든다.",
+      "unresolved_conditions": [],
+      "input_defects": [],
+      "evidence": [
+        {
+          "document_id": "status",
+          "quote": "점검 3건 모두 통과했다. 최종 승인은 아직 발급되지 않았다."
+        }
+      ]
+    }
+  ]
+}

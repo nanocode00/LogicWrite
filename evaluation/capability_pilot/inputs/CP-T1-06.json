@@ -1,0 +1,62 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T1-06",
+  "task": {
+    "title": "주체와 권위 미상인 수치 메모",
+    "purpose": "성능 메모를 검토해 공개 요약을 준비한다. 승인된 수치가 확인되지 않은 사실은 확인 질문으로 남긴다.",
+    "audience": "기술 리뷰어/의사결정자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "성능 메모를 검토해 공개 요약을 준비한다. 승인된 수치가 확인되지 않은 사실은 확인 질문으로 남긴다.",
+    "output_document_ids": [
+      "memo"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "memo",
+      "role": "editable fictional document",
+      "content": "# 검토용 성능 메모\n관측 A: 10ms.\n관측 B: 30ms.\n대상 버전, 측정 환경, 승인자: 미기재.\n",
+      "sha256": "21153756a3b1c087385dd2026d30ad78c8e173b81702ec055a35e2c2520473a2",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [
+      "대상 버전·측정 환경·권위 미확정"
+    ],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "memo"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "capability-review-v1",
+  "case_id": "CP-T8-03",
+  "input_sha256": "420cc3a5f40af6a194d7077d806269224ca0ef2364354d6363563f1d03f6053c",
+  "status": "provisional",
+  "initial_ai_proposal": "answers/CP-T8-03.json",
+  "independent_ai_counterreview": {
+    "path": "raw_reviews/t7_t9.json",
+    "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+    "case_pointer": "/cases/8",
+    "reviewed_input_sha256": "420cc3a5f40af6a194d7077d806269224ca0ef2364354d6363563f1d03f6053c",
+    "superseded_input": false
+  },
+  "human_initial_reviews": [],
+  "independent_human_counterexample": null,
+  "human_final_judgment": null,
+  "adjudication": null,
+  "gold_inclusion_approval": null,
+  "human_review_requirement": "Two independent input-first human reviews and explicit adjudication/inclusion approval remain pending."
+}

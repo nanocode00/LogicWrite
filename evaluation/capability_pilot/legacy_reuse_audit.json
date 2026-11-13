@@ -1,0 +1,388 @@
+[
+  {
+    "case_id": "RW-001",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/chatgpt2codex",
+      "path": "README.md",
+      "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+      "blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+      "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-002",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/chatgpt2codex",
+      "path": "docs/INSTALL.md",
+      "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+      "blob_sha": "6c9d228e844fae6421366eec895375f62a916aba",
+      "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/docs/INSTALL.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-003",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/chatgpt2codex",
+      "path": "README.md",
+      "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+      "blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+      "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-004",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/chatgpt2codex",
+      "path": "README.md",
+      "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+      "blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+      "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-005",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/chatgpt2codex",
+      "path": "docs/RELEASE_NOTES_v0.3.1.md",
+      "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+      "blob_sha": "d6b804f59e7e992c65a08511b6bc0077b7c9712b",
+      "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/docs/RELEASE_NOTES_v0.3.1.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-006",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/chatgpt2codex",
+      "path": "docs/TAURI_F4D3_WINDOWS_CLI_REGISTRATION.md",
+      "commit_sha": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+      "blob_sha": "109fafaa0ee8249dd443027aaf5cbc2586f14041",
+      "url": "https://github.com/nanocode00/chatgpt2codex/blob/dcc9ed7e18802800ae8b0536a232875b2a29eb05/docs/TAURI_F4D3_WINDOWS_CLI_REGISTRATION.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-007",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/resume",
+      "path": "experiences/README.md",
+      "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+      "blob_sha": "b71bbcb8782b5b45716dc5c8bab7506435590d9f",
+      "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/experiences/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-008",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/resume",
+      "path": "resume.md",
+      "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+      "blob_sha": "6c3fdd833e3b0b2259136c7a49c05392df1d38ea",
+      "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/resume.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-009",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/resume",
+      "path": "README.md",
+      "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+      "blob_sha": "6e3e3e02f7aaef0e1d433971f8fdcbe41013c1f6",
+      "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-010",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/resume",
+      "path": "guides/resume-experience-writing.md",
+      "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+      "blob_sha": "4d92cc824e0844630a7bb71e96683bd827e7f895",
+      "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/guides/resume-experience-writing.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-011",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/resume",
+      "path": "experiences/crypto-lob-prediction.md",
+      "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+      "blob_sha": "cddfc532673ffd28d469ea671bb549a486a32b97",
+      "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/experiences/crypto-lob-prediction.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-012",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/resume",
+      "path": "resume.md",
+      "commit_sha": "a01e81eb02949390b2b7a97e2326a1ea9a19f3b7",
+      "blob_sha": "6c3fdd833e3b0b2259136c7a49c05392df1d38ea",
+      "url": "https://github.com/nanocode00/resume/blob/a01e81eb02949390b2b7a97e2326a1ea9a19f3b7/resume.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-013",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/QuotaTray",
+      "path": "README.md",
+      "commit_sha": "e62eb5c37fbf7265a7937f3939bf99681e38cb03",
+      "blob_sha": "3a3209e9caf26dce59e87a9bb66bf04174e4395e",
+      "url": "https://github.com/nanocode00/QuotaTray/blob/e62eb5c37fbf7265a7937f3939bf99681e38cb03/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-014",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/QuotaTray",
+      "path": "README.md",
+      "commit_sha": "e62eb5c37fbf7265a7937f3939bf99681e38cb03",
+      "blob_sha": "3a3209e9caf26dce59e87a9bb66bf04174e4395e",
+      "url": "https://github.com/nanocode00/QuotaTray/blob/e62eb5c37fbf7265a7937f3939bf99681e38cb03/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-015",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/QuotaTray",
+      "path": "README.md",
+      "commit_sha": "e62eb5c37fbf7265a7937f3939bf99681e38cb03",
+      "blob_sha": "3a3209e9caf26dce59e87a9bb66bf04174e4395e",
+      "url": "https://github.com/nanocode00/QuotaTray/blob/e62eb5c37fbf7265a7937f3939bf99681e38cb03/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-016",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/project3-planning",
+      "path": "README.md",
+      "commit_sha": "0f5b6f8068db58d58045880bd6e94f64b7ec7537",
+      "blob_sha": "ebdb5156798abab32fc56298042708c123f1f244",
+      "url": "https://github.com/nanocode00/project3-planning/blob/0f5b6f8068db58d58045880bd6e94f64b7ec7537/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-017",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/project3-planning",
+      "path": "docs/GATES.md",
+      "commit_sha": "0f5b6f8068db58d58045880bd6e94f64b7ec7537",
+      "blob_sha": "beadd876250fa235938246fc5406234aa2ab1b02",
+      "url": "https://github.com/nanocode00/project3-planning/blob/0f5b6f8068db58d58045880bd6e94f64b7ec7537/docs/GATES.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-018",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_git_file",
+      "repository": "nanocode00/mallo-intro",
+      "path": "README.md",
+      "commit_sha": "916a3df7b6481d78c1a5fe95b53565f4fb7d91df",
+      "blob_sha": "463a2993d5b5dccc4fe48bf71d306266f4cf04cb",
+      "url": "https://github.com/nanocode00/mallo-intro/blob/916a3df7b6481d78c1a5fe95b53565f4fb7d91df/README.md"
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-019",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_pr_description_snapshot",
+      "repository": "nanocode00/resume",
+      "pr_number": 19,
+      "url": "https://github.com/nanocode00/resume/pull/19",
+      "head_sha_at_capture": "ca6d8c3ea213681fadcad60608331e2006d1004e",
+      "observed_on": "2026-11-02",
+      "provenance_note": "PR descriptions can be edited independently of head_sha; excerpt text is the captured snapshot, not an immutable Git object."
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "RW-020",
+    "family": "nanocode00-author-family",
+    "source": {
+      "type": "public_pr_description_snapshot",
+      "repository": "nanocode00/resume",
+      "pr_number": 20,
+      "url": "https://github.com/nanocode00/resume/pull/20",
+      "head_sha_at_capture": "f48dd540d99d97ba4ddb7746273176e45393688a",
+      "observed_on": "2026-11-02",
+      "provenance_note": "PR descriptions can be edited independently of head_sha; excerpt text is the captured snapshot, not an immutable Git object."
+    },
+    "current_status": "provisional_candidates_not_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "기존 라벨은 assistant proposal이다. 목적지·계약·최종 문맥·권리 재확인이 필요하며 같은 소유자 편중을 새 독립 표본으로 세지 않는다."
+  },
+  {
+    "case_id": "LW-001",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-002",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-003",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-004",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-005",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-006",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-007",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-008",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-009",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-010",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-011",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  },
+  {
+    "case_id": "LW-012",
+    "family": "legacy-synthetic-author-family",
+    "current_status": "synthetic_fixture_not_new_gold",
+    "decision": "not_reused_in_this_pilot",
+    "reason": "단일 정답 finding은 D/Q 전체 정답이 아니다. 기존 노출된 발췌를 새 독립 원문으로 세지 않고 새 통제 상황을 작성한다."
+  }
+]

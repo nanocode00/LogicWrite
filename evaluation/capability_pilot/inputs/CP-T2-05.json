@@ -1,0 +1,60 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T2-05",
+  "task": {
+    "title": "보안 경고의 보존과 현지 노출",
+    "purpose": "운영자 실행 카드와 감사 부록을 작성한다. 실행 카드는 첫 명령 전에 확인 조건을 보여야 한다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "운영자 실행 카드와 감사 부록을 작성한다. 실행 카드는 첫 명령 전에 확인 조건을 보여야 한다.",
+    "output_document_ids": [
+      "runbook"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "runbook",
+      "role": "editable fictional document",
+      "content": "# 운영 변경 절차\n대상: staging만. production 실행 금지.\n실행 전 백업 검증과 운영 책임자 승인이 필요하다. 승인 이력은 감사 부록에 보존한다.\n검증 뒤 실행: `rotate staging`\n옵션: 완료 알림 색상은 자유.\n작성자의 점심 메뉴는 김밥이었다.\n",
+      "sha256": "cf5cd8bd324872103a2f82f461b5bf96f59a0abac47acd0efa9f4bb42dcbc307",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "runbook"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

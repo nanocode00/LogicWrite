@@ -1,0 +1,62 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T2-06",
+  "task": {
+    "title": "상충하는 독자 과업의 선택 보류",
+    "purpose": "동일 초안의 공개 배포판을 준비한다. 공개 범위는 확정되지 않았으며 임의로 독자를 선택하지 않는다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "동일 초안의 공개 배포판을 준비한다. 공개 범위는 확정되지 않았으며 임의로 독자를 선택하지 않는다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable fictional document",
+      "content": "# 사고 대응 초안\n사용자: 상태와 복구 예정만 필요.\n감사자: 내부 대응 절차와 승인 경로 필요.\n요청 A: 모두 공개. 요청 B: 내부 절차 비공개.\n공개 권한·우선 독자: 미정.\n",
+      "sha256": "dc99d4aacacb4782584a44736448535426f0a118dec1b473004b7c1f0f6327e3",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [
+      "우선 독자·공개 권한 미확정"
+    ],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

@@ -1,0 +1,1517 @@
+[
+  {
+    "case_id": "CP-T1-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/0",
+        "reviewed_input_sha256": "9bc1789a09c46843a40e7dbeb8fa180c6201f07c4aad732b8814828f68f30162",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/0",
+      "reviewed_input_sha256": "9bc1789a09c46843a40e7dbeb8fa180c6201f07c4aad732b8814828f68f30162",
+      "superseded_input": false
+    },
+    "counterexample": "doesn’t enforce any dependencies를 Flask가 아무 의존성도 사용하지 않는다는 뜻으로 바꾸거나 Werkzeug/Jinja를 개발자가 필수 선택해야 한다고 단정하면 관계를 왜곡한다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T1-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/1",
+        "reviewed_input_sha256": "7c2b34214b0f9a5c38bbf208be2d6bb125a7117c4d067d6e5990a8a8e38b7121",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/1",
+      "reviewed_input_sha256": "7c2b34214b0f9a5c38bbf208be2d6bb125a7117c4d067d6e5990a8a8e38b7121",
+      "superseded_input": false
+    },
+    "counterexample": "기본 pip install httpx만 하면 CLI와 HTTP/2를 모두 사용할 수 있다고 쓰는 편집은 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T1-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/2",
+        "reviewed_input_sha256": "b9e87602f933c79dc0f7b953d8702c9dc2f07feadc8eeb400f08e1539591b071",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/2",
+      "reviewed_input_sha256": "b9e87602f933c79dc0f7b953d8702c9dc2f07feadc8eeb400f08e1539591b071",
+      "superseded_input": false
+    },
+    "counterexample": "3.9를 살리려고 upstream의 지원 절을 3.9+로 낮추거나 서로 다른 버전의 설명이라고 근거 없이 해석하면 안 된다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T1-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/3",
+        "reviewed_input_sha256": "518a33ba8f82036f4be7984b512b3604e485b3c792968c455c8cc0f1be34b2cd",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/3",
+      "reviewed_input_sha256": "518a33ba8f82036f4be7984b512b3604e485b3c792968c455c8cc0f1be34b2cd",
+      "superseded_input": false
+    },
+    "counterexample": "독립 벤치마크가 개발 속도 300%와 오류40%를 입증했다고 합치거나 모든 팀에서 보장된 효과라고 바꾸는 것은 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T1-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/4",
+        "reviewed_input_sha256": "87713b723c3eb55072ebdf751e5f55bacc4f980a9fa114c4cc74f6551170c478",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/4",
+      "reviewed_input_sha256": "87713b723c3eb55072ebdf751e5f55bacc4f980a9fa114c4cc74f6551170c478",
+      "superseded_input": false
+    },
+    "counterexample": "모든 팀원이 배포 가능하다고 의견을 규정으로 승격하거나 과거 불가 기록을 최신 결정과 충돌한다고 삭제하면 안 된다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T1-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/5",
+        "reviewed_input_sha256": "d2d2eacbadd6e2130fc05ae4341f30f87f2bde340019e24e6b9cc9e699ef1802",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/5",
+      "reviewed_input_sha256": "d2d2eacbadd6e2130fc05ae4341f30f87f2bde340019e24e6b9cc9e699ef1802",
+      "superseded_input": false
+    },
+    "counterexample": "더 좋은 값인10ms를 승인 성능으로 선택하거나 두 수치 평균20ms를 대표 성능으로 새로 만드는 것은 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T2-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/6",
+        "reviewed_input_sha256": "7986900f8d3e26b74ec9d0b46e62ac234890c49a85fac6fa7d147a3ce728015c",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/6",
+      "reviewed_input_sha256": "7986900f8d3e26b74ec9d0b46e62ac234890c49a85fac6fa7d147a3ce728015c",
+      "superseded_input": false
+    },
+    "counterexample": "reference 기존 주의를 placeholder처럼 삭제하거나 외부 이관 문서를 읽은 것처럼 구체적 API 변경 목록을 생성하면 부당하다.",
+    "remaining_input_notes": [
+      "원문 소개의 Python 1+ 표현은 비정상적으로 보이나 권위 있는 정정값이 공급되지 않았다. 이를 임의로 고치는 것은 별도 범위다."
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T2-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/7",
+        "reviewed_input_sha256": "2bf2b06a9cea6178c1d2434a79c7a088b00de3fe64747724de7f4a87570095b6",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/7",
+      "reviewed_input_sha256": "2bf2b06a9cea6178c1d2434a79c7a088b00de3fe64747724de7f4a87570095b6",
+      "superseded_input": false
+    },
+    "counterexample": "기본 규칙을 F/E만으로 기억에 따라 교체하거나 Python3.15 compatibility를 실행 인터프리터 최소 버전이라고 쓰면 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T2-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/8",
+        "reviewed_input_sha256": "740d21063261618dbe9a0c8785915e489e8c081f3aa7c1ee72cc805ecd9efa72",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/8",
+      "reviewed_input_sha256": "740d21063261618dbe9a0c8785915e489e8c081f3aa7c1ee72cc805ecd9efa72",
+      "superseded_input": false
+    },
+    "counterexample": "호환성 절이 설치 뒤에 있다고 가정해 이동을 강요하거나 모든 Windows 터미널이 true color/emoji를 동일 지원한다고 축약하면 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T2-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/9",
+        "reviewed_input_sha256": "298ea6ddd452870552b1128bcd3cc49731842ea9d8a6afbb8d7fc0ebc76b30c6",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/9",
+      "reviewed_input_sha256": "298ea6ddd452870552b1128bcd3cc49731842ea9d8a6afbb8d7fc0ebc76b30c6",
+      "superseded_input": false
+    },
+    "counterexample": "실패를 제거하려고 기대값을4로 바꾸면서 출력은 실패로 남기거나 실패 블록을 초보자에게 어렵다고 삭제하면 목적을 훼손한다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T2-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/10",
+        "reviewed_input_sha256": "0ce79c4c27c76ac4bc55853e91e2d77c7380b7928a42003f6318b4b4931e9c2f",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/10",
+      "reviewed_input_sha256": "0ce79c4c27c76ac4bc55853e91e2d77c7380b7928a42003f6318b4b4931e9c2f",
+      "superseded_input": false
+    },
+    "counterexample": "승인 조건을 감사 부록으로만 밀어 명령 뒤에 놓거나 실제 승인 이력을 허구로 채우면 부당하다.",
+    "remaining_input_notes": [
+      "감사 부록에 필요한 실제 승인 이력은 공급되지 않았다. 부록 구조 작성은 가능하므로 과제 전체가 판단 불가는 아니다."
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T2-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/11",
+        "reviewed_input_sha256": "dbc57d294e844b6ce2dd43756bfcad5e4ac94eb97fc4f64c0b1b5ad5c63cbb6a",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/11",
+      "reviewed_input_sha256": "dbc57d294e844b6ce2dd43756bfcad5e4ac94eb97fc4f64c0b1b5ad5c63cbb6a",
+      "superseded_input": false
+    },
+    "counterexample": "사용자 편의만을 근거로 내부 절차를 삭제한 최종 공개판을 만들거나 요청A를 권한 승인으로 간주하면 부당하다.",
+    "remaining_input_notes": [
+      "초안은 독자 요구의 개요뿐이고 공개할 상태·복구 예정·내부 절차 본문은 없다. 공개 범위가 정해져도 실질 배포판 완성에는 추가 내용이 필요하다."
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T2-07",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t2_extra.json",
+        "sha256": "80a868180b3359a5814bf196d48a07740a891eabee661d8ca1ec72b65bdf8528",
+        "case_pointer": "/cases/0",
+        "reviewed_input_sha256": "eac5b2c112bf62889be3f40dff4f1bf4b00e2c748b105d4571f13a14c7e259b2",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t2_extra.json",
+      "sha256": "80a868180b3359a5814bf196d48a07740a891eabee661d8ca1ec72b65bdf8528",
+      "case_pointer": "/cases/0",
+      "reviewed_input_sha256": "eac5b2c112bf62889be3f40dff4f1bf4b00e2c748b105d4571f13a14c7e259b2",
+      "superseded_input": false
+    },
+    "counterexample": "유일한 본문을 너무 짧거나 자명하다는 이유로 삭제하면 유일 필수 정보가 사라진다. 실행 뒤 승인한다로 순서를 뒤집거나 운영 책임자 승인·백업 검증·staging 명령 등을 입력 근거 없이 덧붙이는 것도 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T3-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/12",
+        "reviewed_input_sha256": "87016038824ce60a187f6bce142d11ea0e9f3471738931e0e74aca67faf41fe9",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/12",
+      "reviewed_input_sha256": "87016038824ce60a187f6bce142d11ea0e9f3471738931e0e74aca67faf41fe9",
+      "superseded_input": false
+    },
+    "counterexample": "간결화 명목으로 정기 릴리스 안내나 행동강령 링크까지 함께 삭제하는 것은 요청 범위를 넘는다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T3-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/13",
+        "reviewed_input_sha256": "8f4b0b817fee7033735e4e3e3cdd4bca74dd0ebebb224206cf35076560772b95",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/13",
+      "reviewed_input_sha256": "8f4b0b817fee7033735e4e3e3cdd4bca74dd0ebebb224206cf35076560772b95",
+      "superseded_input": false
+    },
+    "counterexample": "upstream과 같게 만든다는 이유로 Team handoff note 전체 삭제, 또는 Poetry가 오프라인 설치를 보장한다고 변환하는 것은 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T3-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/14",
+        "reviewed_input_sha256": "dba81433226cfc9833c70cd10be15ce662f8d6499d198e643ea82f8b7db6be2b",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/14",
+      "reviewed_input_sha256": "dba81433226cfc9833c70cd10be15ce662f8d6499d198e643ea82f8b7db6be2b",
+      "superseded_input": false
+    },
+    "counterexample": "zero runtime dependencies와 build dependencies를 모순으로 오인해 빌드 도구 목록을 삭제하거나 두 소개를 동시에 없애면 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T3-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/15",
+        "reviewed_input_sha256": "64183911a536fa27caf90b4c205d744cf84581bbada85f80779c6250fbcb5d0e",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/15",
+      "reviewed_input_sha256": "64183911a536fa27caf90b4c205d744cf84581bbada85f80779c6250fbcb5d0e",
+      "superseded_input": false
+    },
+    "counterexample": "대화형 독자에게 불필요하다고 File concatenation과 파이프 설명을 삭제하거나 파이프에서는 무조건 장식 출력이 불가능하다고 일반화하면 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T3-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/16",
+        "reviewed_input_sha256": "4f9ca6b3b56590aecfe90cffa11c2fd1b52b7461a423f16e687828106c7fc5e7",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/16",
+      "reviewed_input_sha256": "4f9ca6b3b56590aecfe90cffa11c2fd1b52b7461a423f16e687828106c7fc5e7",
+      "superseded_input": false
+    },
+    "counterexample": "8건 통과만 남기거나 최종 승인 미발급을 삭제해 성공 보고처럼 보이게 하는 것은 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T3-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t1_t3.json",
+        "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+        "case_pointer": "/cases/17",
+        "reviewed_input_sha256": "759b1787d6d6d7a14ba6971afb75acb1462aa724d93658f414568320f5df503b",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t1_t3.json",
+      "sha256": "aa2d907e29747cb1a7474c84732102694a2c89e4b8367054a8f3effd6c29fa74",
+      "case_pointer": "/cases/17",
+      "reviewed_input_sha256": "759b1787d6d6d7a14ba6971afb75acb1462aa724d93658f414568320f5df503b",
+      "superseded_input": false
+    },
+    "counterexample": "오래됐으므로 삭제하거나 다른 사본이 있을 것이라고 가정해 예외 기록을 제거하면 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T4-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/0",
+        "reviewed_input_sha256": "118119901d7ea8cc6cf638cc397719cab877cb3b2f3850286d2ee8e90b44eaf7",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t4_t6_v2.json",
+        "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+        "case_pointer": "/cases/0",
+        "reviewed_input_sha256": "a92e27b9d5cc269b137f8c8cc12ea3ce3128a3036c869bb8ccbeb1201efbabfe",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6_v2.json",
+      "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+      "case_pointer": "/cases/0",
+      "reviewed_input_sha256": "a92e27b9d5cc269b137f8c8cc12ea3ce3128a3036c869bb8ccbeb1201efbabfe",
+      "superseded_input": false
+    },
+    "counterexample": "최고 속도 행만 옮기고 비교의 workload/Unicode/line count 차이 및 느린 경우를 버리면 결과를 일반적 성능 보증으로 바꾼다. ops를 benchmark 전용으로 덮어써 ls 예외를 삭제하는 것도 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T4-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/1",
+        "reviewed_input_sha256": "b2791b23616bb29c6de1d1099a1b2d1096f436355d39f43e3e59e50b1a0b7279",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t4_t6_v2.json",
+        "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+        "case_pointer": "/cases/1",
+        "reviewed_input_sha256": "acece704ac659da5a0ab3d5342f7cec30e16e2257e4b3d55a1cc89257aecc010",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6_v2.json",
+      "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+      "case_pointer": "/cases/1",
+      "reviewed_input_sha256": "acece704ac659da5a0ab3d5342f7cec30e16e2257e4b3d55a1cc89257aecc010",
+      "superseded_input": false
+    },
+    "counterexample": "절 제목까지 지운 뒤 instructions below/목차/Key bindings의 로컬 앵커를 방치하면 연결이 끊긴다. Nushell source 방식을 다른 shell과 통합하거나 변수를 source 후 설정하게 요약하면 실행 조건이 바뀐다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T4-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/2",
+        "reviewed_input_sha256": "985051d1e6a576008c76181e2c0d54458a38a2b612ec54bed7dee1f4eb3a5557",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t4_t6_v2.json",
+        "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+        "case_pointer": "/cases/2",
+        "reviewed_input_sha256": "5c7d12e00695bb8dbfbe6779f4e61d97986389155ff9cddebcae2410ed0a9452",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6_v2.json",
+      "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+      "case_pointer": "/cases/2",
+      "reviewed_input_sha256": "5c7d12e00695bb8dbfbe6779f4e61d97986389155ff9cddebcae2410ed0a9452",
+      "superseded_input": false
+    },
+    "counterexample": "선택 절의 코드만 이동하고 [fzf-installation] 정의를 README에만 남기면 advanced의 참조가 해소되지 않는다. optional 표기를 삭제하거나 fzf를 기본 z 명령의 필수 전제로 단정하거나, advanced를 새 파일처럼 덮어써 기존 예외를 지워도 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T4-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/3",
+        "reviewed_input_sha256": "d018fa04704f9ef155145a439ada9e3e34e8febb4ea223ef716371633ca4c9db",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t4_t6_v2.json",
+        "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+        "case_pointer": "/cases/3",
+        "reviewed_input_sha256": "b9ef07ef50ed0b44af7e24685997a84181829ee3196bf6abf42afa6c8b408ee1",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6_v2.json",
+      "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+      "case_pointer": "/cases/3",
+      "reviewed_input_sha256": "b9ef07ef50ed0b44af7e24685997a84181829ee3196bf6abf42afa6c8b408ee1",
+      "superseded_input": false
+    },
+    "counterexample": "ops를 sd 안내만으로 교체하여 ls 예외를 지우거나 -F와 -A를 같은 모드 선택으로 합치면 부당하다. across를 기본이라 쓰거나 README에서 line-by-line 기본 조건을 없애면 독자 과업에 필요한 정보를 잃는다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T4-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/4",
+        "reviewed_input_sha256": "d2b8b368a2340ac3718999e71dc97645b670f27668c55314c216a4b79706a97b",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/4",
+      "reviewed_input_sha256": "d2b8b368a2340ac3718999e71dc97645b670f27668c55314c216a4b79706a97b",
+      "superseded_input": false
+    },
+    "counterexample": "purge staging-cache를 archive의 일반 실행 명령으로 옮기거나 경고를 부록으로 분리하면 읽기 전용 원장에도 수행 가능한 절차로 오해하게 한다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T4-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/5",
+        "reviewed_input_sha256": "67397d034f033686558d5dc2a5130982c12410bd975669836cd85156a1dfe55e",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/5",
+      "reviewed_input_sha256": "67397d034f033686558d5dc2a5130982c12410bd975669836cd85156a1dfe55e",
+      "superseded_input": false
+    },
+    "counterexample": "readme의 7일 규칙을 삭제하고 새 ops.md를 생성하여 이동 완료라 보고하면 목적지 보존과 편집 권한을 추측한 것이다.",
+    "remaining_input_notes": [
+      "필요 목적지 전체 및 편집 권한 미제공이라는 의도된 정보 공백"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T5-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/6",
+        "reviewed_input_sha256": "56f660a9b2f71cfc9f5d20e88c5e1a3e3267191c31697a98df982664dbead974",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/6",
+      "reviewed_input_sha256": "56f660a9b2f71cfc9f5d20e88c5e1a3e3267191c31697a98df982664dbead974",
+      "superseded_input": false
+    },
+    "counterexample": "선행조건을 Step 2 뒤나 별도 외부 링크에만 두면 처음 설치 전에 발견할 수 없다. shell 설정을 먼저 수행하게 뒤집는 것도 요청 위반이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T5-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/7",
+        "reviewed_input_sha256": "6bea6db3fd72fbd6bf24e3a1149537062562f79b89006609dc662db2a3240dc5",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t4_t6_v2.json",
+        "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+        "case_pointer": "/cases/4",
+        "reviewed_input_sha256": "5a68978259499110b56810360315f40b54d2bfcbe394e87c4f93090398a59209",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6_v2.json",
+      "sha256": "b514e21343f69c01bd0a815a1cfc9deafa527ba9fe920205f12242907d42cf35",
+      "case_pointer": "/cases/4",
+      "reviewed_input_sha256": "5a68978259499110b56810360315f40b54d2bfcbe394e87c4f93090398a59209",
+      "superseded_input": false
+    },
+    "counterexample": "navigate/dark를 선택 설정으로 분리하면서 줄을 고치거나 [delta] 헤더 없이 떼어 놓으면 보호 및 해석 보존 위반이다. gitconfig 설정과 CLI 명령을 함께 반드시 모두 실행하도록 연결하면 기존 Or run 대체 관계를 바꾼다. 무관 앵커를 고치는 것도 명시 범위 밖이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T5-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/8",
+        "reviewed_input_sha256": "df1f473dee4a18259fa960940760556ec651f6df58ba7d79715dcdb15756574e",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/8",
+      "reviewed_input_sha256": "df1f473dee4a18259fa960940760556ec651f6df58ba7d79715dcdb15756574e",
+      "superseded_input": false
+    },
+    "counterexample": "Status를 개발자 전용 말미로 밀거나 daily driver라는 긍정 문장만 남기면 설치 전 변경 위험 발견 조건을 훼손한다. devdocs 링크가 있다고 설치 정책 전체를 기여자에게만 숨기는 것도 부적절하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T5-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/9",
+        "reviewed_input_sha256": "53b1f12acc3920a8ab6e458d32b8b8d9ac3c12bac7cacf0c787700babc3619c3",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/9",
+      "reviewed_input_sha256": "53b1f12acc3920a8ab6e458d32b8b8d9ac3c12bac7cacf0c787700babc3619c3",
+      "superseded_input": false
+    },
+    "counterexample": "About을 불필요한 배경으로 삭제하면 그 안의 유일한 docs.rs/examples 학습 경로도 사라진다. examples/를 API reference라 단정하는 것도 링크 대상 오해다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T5-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/10",
+        "reviewed_input_sha256": "788fc15e0f29e9aa523e1d92c9b0ea09b68fce237b7cee015d66e6d653a3d115",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/10",
+      "reviewed_input_sha256": "788fc15e0f29e9aa523e1d92c9b0ea09b68fce237b7cee015d66e6d653a3d115",
+      "superseded_input": false
+    },
+    "counterexample": "백업이 있다는 말로 복구 검증을 축약하거나 명령을 drop stage로 고치면 조건/대상이 바뀐다. 경고만 말미에 남기면 실행 순서 정리 목적 미달이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T5-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/11",
+        "reviewed_input_sha256": "a65ff2127f4ec902c5c591b2c18fafb8e7d899957939c5496c3421c058596f1b",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/11",
+      "reviewed_input_sha256": "a65ff2127f4ec902c5c591b2c18fafb8e7d899957939c5496c3421c058596f1b",
+      "superseded_input": false
+    },
+    "counterexample": "마지막 경고라는 제목을 새로 만들어 그 앞에 배치했다고 보고하면 실제 문서 위치를 검증하지 않은 것이다.",
+    "remaining_input_notes": [
+      "단락 하나만 제공된 의도된 정보 공백"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T6-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/12",
+        "reviewed_input_sha256": "7231b03abab2f5599977a89840d699e815b4ba224ead78c57d5dd80090c1e987",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/12",
+      "reviewed_input_sha256": "7231b03abab2f5599977a89840d699e815b4ba224ead78c57d5dd80090c1e987",
+      "superseded_input": false
+    },
+    "counterexample": "Serde가 JSON 변환을 전부 직접 제공한다고 요약하면서 serde_json 구분을 없애거나 derive를 모든 사용에 필수로 단정하면 중복 통합을 넘어 의미를 왜곡한다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T6-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/13",
+        "reviewed_input_sha256": "d32d1ae643480bc69b3e89fc7f0cf668bfa7a116ede63c904b67654f1627d2f9",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/13",
+      "reviewed_input_sha256": "d32d1ae643480bc69b3e89fc7f0cf668bfa7a116ede63c904b67654f1627d2f9",
+      "superseded_input": false
+    },
+    "counterexample": "팀 요약 전체를 중복이라 삭제하면 승인 조건이 사라진다. Reliable 기능 아래에 load test를 붙여 Tokio 프로젝트의 보증/기능처럼 쓰는 것도 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T6-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/14",
+        "reviewed_input_sha256": "a2874e1e66e7f0e0385340378e2cdbf61e2d32edbe800b47288806f7a344e52e",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/14",
+      "reviewed_input_sha256": "a2874e1e66e7f0e0385340378e2cdbf61e2d32edbe800b47288806f7a344e52e",
+      "superseded_input": false
+    },
+    "counterexample": "파이프에는 길이 제한이 없다는 말을 전체 API에 일반화하면 caller buffer async 및 tty 한도를 위반한다. multiline 화면 편집과 무제한 입력을 동등시해도 오류다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T6-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/15",
+        "reviewed_input_sha256": "7115abe2e85e0db3dd96637a4980685626ba9d14c9f73ebbef204feaffbbafa4",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/15",
+      "reviewed_input_sha256": "7115abe2e85e0db3dd96637a4980685626ba9d14c9f73ebbef204feaffbbafa4",
+      "superseded_input": false
+    },
+    "counterexample": "같은 npm install이라는 이유로 Quick Start의 의존성 설치를 지우거나 generator@4를 npm install express와 합치면 생성된 앱의 준비가 달라진다. 최신 버전을 추측해 @4를 수정할 권한은 없다.",
+    "remaining_input_notes": [
+      "task는 공통 설치/환경 안내를 전제하지만 실제 Quick Start에는 Node.js 18+ 문구가 없다. 무수정이 두 진입점의 독립성까지 충족한다고 단정하기 어렵다."
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T6-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/16",
+        "reviewed_input_sha256": "9cd837eb1b91fbe91300f4ff5f72f5d9327978660d797e2e7fb0ee0c206c9f10",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/16",
+      "reviewed_input_sha256": "9cd837eb1b91fbe91300f4ff5f72f5d9327978660d797e2e7fb0ee0c206c9f10",
+      "superseded_input": false
+    },
+    "counterexample": "공지 경고를 정책 링크로 대체하거나 운영자는 쓰기 가능으로 축약하면 현지 경고/승인 전 조건이 사라진다. 유나가 최적화로 지연을 감소시켰다고 통합하면 기여 귀속을 바꾼다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T6-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t4_t6.json",
+        "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+        "case_pointer": "/cases/17",
+        "reviewed_input_sha256": "c2ce55d6ee8ea14ea4d1fabb44333cdf519598d685e2001751d15d2edf3675ca",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t4_t6.json",
+      "sha256": "550c58356373aa08bb3072f79fba5c4037686e70ce1a0d639cd26261c47ecabc",
+      "case_pointer": "/cases/17",
+      "reviewed_input_sha256": "c2ce55d6ee8ea14ea4d1fabb44333cdf519598d685e2001751d15d2edf3675ca",
+      "superseded_input": false
+    },
+    "counterexample": "A와 B를 중복으로 지워 점검 완료 한 줄만 남기면 서로 다른 장비/시점의 두 건일 가능성을 손실한다. 같은 책임자가 같은 날 점검했다고 채우는 것도 창작이다.",
+    "remaining_input_notes": [
+      "동등성 판정에 필요한 대상·시점·귀속 필드 미기재"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T7-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/0",
+        "reviewed_input_sha256": "e4009823d2fc83e7e45256550bd05a48921227f5db90bbd844fa8bd65566e8e8",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/0",
+      "reviewed_input_sha256": "e4009823d2fc83e7e45256550bd05a48921227f5db90bbd844fa8bd65566e8e8",
+      "superseded_input": false
+    },
+    "counterexample": "node v7.6+를 전역 설치 최소 조건으로 채택하거나 현재 제품 버전을 외부에서 추정하는 편집은 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T7-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/1",
+        "reviewed_input_sha256": "19d6061989977fe7b5f894e20afae116de68307324c6e1b99cd5b22e6dc32e28",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/1",
+      "reviewed_input_sha256": "19d6061989977fe7b5f894e20afae116de68307324c6e1b99cd5b22e6dc32e28",
+      "superseded_input": false
+    },
+    "counterexample": "기능 목록 복원 대신 취소 API 예시를 새로 만들거나 deprecated CancelToken을 최신 권장 API로 바꾸는 것은 범위와 근거를 벗어난다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T7-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/2",
+        "reviewed_input_sha256": "c6eddd40b0e7c3d1ff7b68c2c3e7d1a0e5c17521e1d7fd4f672454c32a08317f",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/2",
+      "reviewed_input_sha256": "c6eddd40b0e7c3d1ff7b68c2c3e7d1a0e5c17521e1d7fd4f672454c32a08317f",
+      "superseded_input": false
+    },
+    "counterexample": "v11은 더 이상 유지보수되지 않으므로 Got 전체가 미유지보수라고 고치거나 같은 경고를 중복 추가하면 잘못이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T7-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/3",
+        "reviewed_input_sha256": "412c238ce609520fa7e287df3698618ccac7ca107d6de69c63b0f05bdc2164e7",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/3",
+      "reviewed_input_sha256": "412c238ce609520fa7e287df3698618ccac7ca107d6de69c63b0f05bdc2164e7",
+      "superseded_input": false
+    },
+    "counterexample": "Chalk 4가 모든 사용자에게 필수라고 단정하거나 TypeScript를 Chalk 5가 전혀 지원하지 않는다고 바꾸면 근거보다 강한 편집이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T7-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/4",
+        "reviewed_input_sha256": "9bc83026bae979420299d0aae59b60b5785ee7e6bef98767cb0fa21cac30346a",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/4",
+      "reviewed_input_sha256": "9bc83026bae979420299d0aae59b60b5785ee7e6bef98767cb0fa21cac30346a",
+      "superseded_input": false
+    },
+    "counterexample": "더 보수적으로 보이는 24시간을 임의 채택하거나 둘의 평균 36시간을 쓰는 것은 승인 근거가 없다.",
+    "remaining_input_notes": [
+      "동일 범위 승인 자료의 우선순위 미확정으로 단일 값 확정 불가능"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T7-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/5",
+        "reviewed_input_sha256": "8bea8a64c9b8b234eee6148de0b6e52f3db9a721265d48b4beea57924877c772",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/5",
+      "reviewed_input_sha256": "8bea8a64c9b8b234eee6148de0b6e52f3db9a721265d48b4beea57924877c772",
+      "superseded_input": false
+    },
+    "counterexample": "AES-256을 일반적으로 쓰니까 추가하거나 저장 기능을 곧 암호화 저장으로 바꾸면 허구 사실을 만든다.",
+    "remaining_input_notes": [
+      "알고리즘 사실을 뒷받침할 자료 없음"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T8-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/6",
+        "reviewed_input_sha256": "a6d5853eba8f700f9e3bc7da815d6862766392acf67717e6c0ba99482f9a8db1",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/6",
+      "reviewed_input_sha256": "a6d5853eba8f700f9e3bc7da815d6862766392acf67717e6c0ba99482f9a8db1",
+      "superseded_input": false
+    },
+    "counterexample": "한국어 표현 개선을 이유로 영문 전체를 번역하거나 var를 const로 바꾸거나 버전을 정정하면 보호 조건 위반이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T8-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/7",
+        "reviewed_input_sha256": "2d441d6d7895e1fcce95341eb36b8bba45808060d6697a3ffc60994f0be08e3b",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/7",
+      "reviewed_input_sha256": "2d441d6d7895e1fcce95341eb36b8bba45808060d6697a3ffc60994f0be08e3b",
+      "superseded_input": false
+    },
+    "counterexample": "주 함수가 문자열을 받아 glob 패턴을 반환한다고 주어/목적어를 뒤집거나 예시의 문법 문제를 고치면 요청 범위를 벗어난다.",
+    "remaining_input_notes": [
+      "주변 코드에는 불완전하거나 의심스러운 예시가 있으나 한국어 지시대상 해소를 막지 않으며 코드 수정 권한은 없음"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T8-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/8",
+        "reviewed_input_sha256": "420cc3a5f40af6a194d7077d806269224ca0ef2364354d6363563f1d03f6053c",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/8",
+      "reviewed_input_sha256": "420cc3a5f40af6a194d7077d806269224ca0ef2364354d6363563f1d03f6053c",
+      "superseded_input": false
+    },
+    "counterexample": "불변성을 없애 현재 state를 직접 변경한다고만 쓰거나 현재 tree는 절대 수정하지 않는다고 의미를 뒤집는 것은 압축이 아니다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T8-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/9",
+        "reviewed_input_sha256": "cba7a021f38de9c631b2c0d0436b2db1cbdecd30242d93aea53311fe09ae4ec2",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/9",
+      "reviewed_input_sha256": "cba7a021f38de9c631b2c0d0436b2db1cbdecd30242d93aea53311fe09ae4ec2",
+      "superseded_input": false
+    },
+    "counterexample": "React 전용이라고 소개를 고치거나 React 예시를 모두 지워 범용성을 표현하는 것은 불필요한 정보 손실이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T8-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/10",
+        "reviewed_input_sha256": "6917e680d2fc68499ea3e98f6ad3a6feb16c34dd1212ed7fb9b2eed25f0c4591",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/10",
+      "reviewed_input_sha256": "6917e680d2fc68499ea3e98f6ad3a6feb16c34dd1212ed7fb9b2eed25f0c4591",
+      "superseded_input": false
+    },
+    "counterexample": "재검토를 재실행/재시도로 바꾸거나 최대 2회를 반드시 2회로 바꾸거나 인용을 합니다체로 바꾸면 의미/보호 위반이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T8-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/11",
+        "reviewed_input_sha256": "4ac1eddce0db43e29baab01a1b9e86d5fb4aa4be99db36659f27bbdb761e0be9",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/11",
+      "reviewed_input_sha256": "4ac1eddce0db43e29baab01a1b9e86d5fb4aa4be99db36659f27bbdb761e0be9",
+      "superseded_input": false
+    },
+    "counterexample": "그것을 파일이라고 정해 파일을 확인한 뒤 창을 닫는다로 고치면 입력에 없는 두 대상을 발명한다.",
+    "remaining_input_notes": [
+      "단독 발췌로 지시 대상을 식별할 근거 없음"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-01",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/12",
+        "reviewed_input_sha256": "282fc8d49e8015ef63a435dd7f348e8337bb3d6767c4e855ef09a4203ef8af4a",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t7_t9_v2.json",
+        "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+        "case_pointer": "/cases/0",
+        "reviewed_input_sha256": "7fc9ef737d6d8e13bb20efe26b2e0bc91621d9b04673c3cfd8fe82d47a244f79",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9_v2.json",
+      "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+      "case_pointer": "/cases/0",
+      "reviewed_input_sha256": "7fc9ef737d6d8e13bb20efe26b2e0bc91621d9b04673c3cfd8fe82d47a244f79",
+      "superseded_input": false
+    },
+    "counterexample": "store 설명만 반복하거나 동작 예시 없이 기능 나열만 제공하면 사실 보존 D가 맞아도 초보 수행 Q는 충족하지 않는다. quickstart를 빼거나 합친 결과 하나만 내면 두 전체 출력 요구 위반이다. 같은 디렉터리로 주어진 quickstart.md에서 ../README.md 또는 ../docs/...로 경로를 바꾸면 오히려 잘못이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-02",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/13",
+        "reviewed_input_sha256": "aee547690de46db50c5baf84217e86e6af852de7c7ecfce577ec8a432da99b33",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t7_t9_v2.json",
+        "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+        "case_pointer": "/cases/1",
+        "reviewed_input_sha256": "513a73fc300b957d32d8ddb3a57fd460f9280223d7209ed302150fd0ce93b4fd",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9_v2.json",
+      "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+      "case_pointer": "/cases/1",
+      "reviewed_input_sha256": "513a73fc300b957d32d8ddb3a57fd460f9280223d7209ed302150fd0ce93b4fd",
+      "superseded_input": false
+    },
+    "counterexample": "사실인 기능 목록만 반복하면 목적 Q는 미완성이다. 링크가 존재한다는 사실을 링크 본문이 supplied 되었다는 뜻으로 오인해 QueryClient 설치/설정 코드를 새로 넣으면 근거 범위를 벗어난다. 외부 설치 문서가 없다는 이유로 링크 안내 과업 전체를 판단불가 처리해도 안 된다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-03",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/14",
+        "reviewed_input_sha256": "098cb33924019e06b013969b33cf291954be12749cb329aed709968bea9b9ca5",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t7_t9_v2.json",
+        "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+        "case_pointer": "/cases/2",
+        "reviewed_input_sha256": "7ef3b3f8da3d387d9c5f6db8a91ddcb52b90473b887a21315eb16717df3e672a",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9_v2.json",
+      "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+      "case_pointer": "/cases/2",
+      "reviewed_input_sha256": "7ef3b3f8da3d387d9c5f6db8a91ddcb52b90473b887a21315eb16717df3e672a",
+      "superseded_input": false
+    },
+    "counterexample": "API 문장 하나를 개선하면서 전체 시작 링크를 삭제하면 국소 D 보존과 별개로 전역 Q가 퇴행한다. 10-100x 문구를 모든 환경에서 검증된 속도 보장으로 확대하거나 supplied되지 않은 설치 명령을 넣는 것은 부당하다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-04",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/15",
+        "reviewed_input_sha256": "50a8df804a0ba8dd1596f7c366b5607988a5c4cbd996e384e4918cb953cc7b52",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/15",
+      "reviewed_input_sha256": "50a8df804a0ba8dd1596f7c366b5607988a5c4cbd996e384e4918cb953cc7b52",
+      "superseded_input": false
+    },
+    "counterexample": "설치 방법이 없다고 판단하거나 출력 확장자를 bundle.cjs로 임의 변경하거나 실행 검증 성공을 주장하는 것은 입력과 맞지 않는다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-05",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/16",
+        "reviewed_input_sha256": "edd38105e2ac9c4066986e8b3235131b83688e33b879a983b78f143ec4f7c6c9",
+        "superseded_input": true
+      },
+      {
+        "path": "raw_reviews/t7_t9_v2.json",
+        "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+        "case_pointer": "/cases/3",
+        "reviewed_input_sha256": "bde4e8e45ac45346eb245c861c4c73b0d6982aac4bd8da29549e93860a21c342",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9_v2.json",
+      "sha256": "6998d2d9ce217e72588cbc4887b672df8f3326864f51c564afb223c205782ce7",
+      "case_pointer": "/cases/3",
+      "reviewed_input_sha256": "bde4e8e45ac45346eb245c861c4c73b0d6982aac4bd8da29549e93860a21c342",
+      "superseded_input": false
+    },
+    "counterexample": "9/10 성공을 작업 완료나 최종 승인으로 바꾸면 D가 손상된다. report를 편집하거나 최종 승인 미발급을 지우면 권한 위반이다. 백업 방법/검증 API/승인 발급 절차를 새로 요구하여 문서 Q를 보류하면 명시적으로 제외된 실제 실행 설계를 끌어들인다. 반대로 조건과 의무는 보존해도 report를 반환하지 않거나 상태를 찾을 경로를 없애면 전체 출력/탐색 Q가 미완성이다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "수정 입력에 대한 독립 재검토에서 차단 결함 없음. 사람 최종 판단은 별도 대기.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-06",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/17",
+        "reviewed_input_sha256": "2b92f919d297b59a90358ec78fa9f57e31bbfd2fe791c0366327dba900e629f8",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/17",
+      "reviewed_input_sha256": "2b92f919d297b59a90358ec78fa9f57e31bbfd2fe791c0366327dba900e629f8",
+      "superseded_input": false
+    },
+    "counterexample": "짧은 조각만으로 설치와 rollback이 삭제됐다고 단정해 전체 Q 실패를 주거나 백업 한 줄이 맞으니 전체 Q 성공으로 판단하는 것은 모두 잘못이다.",
+    "remaining_input_notes": [
+      "전체 후보 출력이 없고 output_fragment.completeness=excerpt다. contract의 전체 결과 제출은 분석 산출물을 요구할 수 있으나 결손 후보를 복원했다는 증거가 되지 않는다"
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-07",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t7_t9.json",
+        "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+        "case_pointer": "/cases/18",
+        "reviewed_input_sha256": "a1358d0b62b249d0f8ce5463c3273c538dde7135b7e5228b300f22bb80a1e035",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t7_t9.json",
+      "sha256": "d9facf74e5ff649fb2549ab45f90b5f8e02bed2f6215db294ecad1ef53248cbb",
+      "case_pointer": "/cases/18",
+      "reviewed_input_sha256": "a1358d0b62b249d0f8ce5463c3273c538dde7135b7e5228b300f22bb80a1e035",
+      "superseded_input": false
+    },
+    "counterexample": "점검 통과를 승인 완료로 고치거나 승인 미발급 문장을 지우면 D가 손상된다. 추가 승인 기록/다른 문서를 새로 요구하거나 승인 미발급 때문에 문서 과업 Q를 무조건 실패/판단불가로 두면 task 외 조건을 만든다.",
+    "remaining_input_notes": [],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  },
+  {
+    "case_id": "CP-T9-08",
+    "actor_type": "ai",
+    "status": "proposal_for_human_review",
+    "review_history": [
+      {
+        "path": "raw_reviews/t9_contract_gap.json",
+        "sha256": "5773454d4b51f07aa6431421bf96285f50c9b19cd2c18973c7ee0c81578290d9",
+        "case_pointer": "/cases/0",
+        "reviewed_input_sha256": "4bc730ea319ca1f2c7dd7ca3104ee730fedb81946d47d303cdf2595536c938cf",
+        "superseded_input": false
+      }
+    ],
+    "current_review": {
+      "path": "raw_reviews/t9_contract_gap.json",
+      "sha256": "5773454d4b51f07aa6431421bf96285f50c9b19cd2c18973c7ee0c81578290d9",
+      "case_pointer": "/cases/0",
+      "reviewed_input_sha256": "4bc730ea319ca1f2c7dd7ca3104ee730fedb81946d47d303cdf2595536c938cf",
+      "superseded_input": false
+    },
+    "counterexample": "완전한 원문을 받았다는 이유로 전체 목적 Q도 판단 가능하다고 결론내리거나, 임의로 공개 독자를 우선해 실패/승인 상태를 삭제하면 부당하다. 내부 감사 요청을 우선한다며 미제공 실패 원인/승인 경로를 발명해도 안 된다. 반대로 Q 미확정을 이유로 제공된 수치·승인 상태 자체도 판단불가라고 처리하면 D와 목적 기준을 혼동한다. 두 목적이 영원히 양립 불가능하다고 단정할 근거도 없으며 권한/우선순위 확인 후 분리된 판본 등이 가능할 수 있다.",
+    "remaining_input_notes": [
+      "원문 completeness=complete와 별개로 최종 목적판의 독자/권한/우선순위가 미확정이다. 다만 현재의 한계 검토 및 원문 보존 메모 제출을 막는 형식 결함은 아니다.",
+      "실패 원인·승인 경로의 실제 내용은 제공되지 않았다. 감사판을 완성하는 요구가 확정되면 추가 근거가 필요하지만 현 검토에서 이를 발명하거나 현재 과업의 별도 필수 산출물로 요구해서는 안 된다."
+    ],
+    "resolution_proposal": "초기 답안 초안과 독립 반례를 함께 사람에게 제시한다. 의도된 결손은 D 보류와 Q 미평가를 구별하며, 범위 밖 원문 이상값은 임의 수정하지 않는다.",
+    "human_adjudication": null
+  }
+]

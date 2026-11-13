@@ -1,0 +1,60 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T8-05",
+  "task": {
+    "title": "부정·수치·인용을 보호하는 한국어 교정",
+    "purpose": "아래 공지를 합니다체로 다듬고 긴 표현을 줄인다. 인용과 코드 식별자는 수정하지 않는다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "아래 공지를 합니다체로 다듬고 긴 표현을 줄인다. 인용과 코드 식별자는 수정하지 않는다.",
+    "output_document_ids": [
+      "notice"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "notice",
+      "role": "editable fictional document",
+      "content": "# 운영 공지\n승인 전에는 실행을 하면 안 되는 것입니다. 실패 시 최대 2회 재검토할 수 있는 것입니다.\n코드: `retry_limit = 2`\n인용: “검토는 승인과 다르다.”\n",
+      "sha256": "fa9ec6c0b736c5562db10bb7f8e2b8c0faecc3bf53519f1d71e29c91860d58de",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "notice"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

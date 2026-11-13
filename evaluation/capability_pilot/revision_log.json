@@ -1,0 +1,25 @@
+{
+  "reason": "Independent input-only counterexamples and calibration integrity review; no human judgment fabricated.",
+  "revised_inputs": [
+    "CP-T4-01",
+    "CP-T4-02",
+    "CP-T4-03",
+    "CP-T4-04",
+    "CP-T5-02",
+    "CP-T9-01",
+    "CP-T9-02",
+    "CP-T9-03",
+    "CP-T9-05"
+  ],
+  "input_versions": "reviewed_inputs/ retains immutable v1 reviewed bytes; current inputs are v2 only where changed.",
+  "answer_only_fixes": [
+    "T2-01 source anomaly boundary",
+    "T2-02 minimum-version vs compatibility",
+    "T2-03 no-op allowed",
+    "T2-05 no invented approval history",
+    "T2-06 substantive content also absent",
+    "T6-04 missing prerequisite at second entry point",
+    "T9-06 Q incomplete is not successful abstention"
+  ],
+  "independent_recheck": "All nine revised inputs rechecked input-only against current SHA; v1 raw reviews and original bytes retained."
+}

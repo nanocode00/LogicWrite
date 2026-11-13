@@ -1,0 +1,79 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T6-01",
+  "task": {
+    "title": "Serde: 완전 중복 통합",
+    "purpose": "말미에 통제 추가된 Serde 소개 사본을 본문과 통합한다. trait와 format crate의 서로 다른 역할은 유지한다.",
+    "audience": "기술 리뷰어/의사결정자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "말미에 통제 추가된 Serde 소개 사본을 본문과 통합한다. trait와 format crate의 서로 다른 역할은 유지한다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "# Serde &emsp; [![Build Status]][actions] [![Latest Version]][crates.io] [![serde msrv]][Rust 1.56] [![serde_derive msrv]][Rust 1.71]\n\n[Build Status]: https://img.shields.io/github/actions/workflow/status/serde-rs/serde/ci.yml?branch=master\n[actions]: https://github.com/serde-rs/serde/actions?query=branch%3Amaster\n[Latest Version]: https://img.shields.io/crates/v/serde.svg\n[crates.io]: https://crates.io/crates/serde\n[serde msrv]: https://img.shields.io/crates/msrv/serde.svg?label=serde%20msrv&color=lightgray\n[serde_derive msrv]: https://img.shields.io/crates/msrv/serde_derive.svg?label=serde_derive%20msrv&color=lightgray\n[Rust 1.56]: https://blog.rust-lang.org/2021/10/21/Rust-1.56.0/\n[Rust 1.71]: https://blog.rust-lang.org/2023/07/13/Rust-1.71.0/\n\n**Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**\n\n---\n\nYou may be looking for:\n\n- [An overview of Serde](https://serde.rs)\n- [Data formats supported by Serde](https://serde.rs/#data-formats)\n- [Setting up `#[derive(Serialize, Deserialize)]`](https://serde.rs/derive.html)\n- [Examples](https://serde.rs/examples.html)\n- [API documentation](https://docs.rs/serde)\n- [Release notes](https://github.com/serde-rs/serde/releases)\n\n## Serde in action\n\n<details>\n<summary>\nClick to show Cargo.toml.\n<a href=\"https://play.rust-lang.org/?edition=2021&gist=72755f28f99afc95e01d63174b28c1f5\" target=\"_blank\">Run this code in the playground.</a>\n</summary>\n\n```toml\n[dependencies]\n\n# The core APIs, including the Serialize and Deserialize traits. Always\n# required when using Serde. The \"derive\" feature is only required when\n# using #[derive(Serialize, Deserialize)] to make Serde work with structs\n# and enums defined in your crate.\nserde = { version = \"1.0\", features = [\"derive\"] }\n\n# Each data format lives in its own crate; the sample code below uses JSON\n# but you may be using a different one.\nserde_json = \"1.0\"\n```\n\n</details>\n<p></p>\n\n```rust\nuse serde::{Deserialize, Serialize};\n\n#[derive(Serialize, Deserialize, Debug)]\nstruct Point {\n    x: i32,\n    y: i32,\n}\n\nfn main() {\n    let point = Point { x: 1, y: 2 };\n\n    // Convert the Point to a JSON string.\n    let serialized = serde_json::to_string(&point).unwrap();\n\n    // Prints serialized = {\"x\":1,\"y\":2}\n    println!(\"serialized = {}\", serialized);\n\n    // Convert the JSON string back to a Point.\n    let deserialized: Point = serde_json::from_str(&serialized).unwrap();\n\n    // Prints deserialized = Point { x: 1, y: 2 }\n    println!(\"deserialized = {:?}\", deserialized);\n}\n```\n\n## Getting help\n\nSerde is one of the most widely used Rust libraries so any place that Rustaceans\ncongregate will be able to help you out. For chat, consider trying the\n[#rust-questions] or [#rust-beginners] channels of the unofficial community\nDiscord (invite: <https://discord.gg/rust-lang-community>), the [#rust-usage] or\n[#beginners] channels of the official Rust Project Discord (invite:\n<https://discord.gg/rust-lang>), or the [#general][zulip] stream in Zulip. For\nasynchronous, consider the [\\[rust\\] tag on StackOverflow][stackoverflow], the\n[/r/rust] subreddit which has a pinned weekly easy questions post, or the Rust\n[Discourse forum][discourse]. It's acceptable to file a support issue in this\nrepo but they tend not to get as many eyes as any of the above and may get\nclosed without a response after some time.\n\n[#rust-questions]: https://discord.com/channels/273534239310479360/274215136414400513\n[#rust-beginners]: https://discord.com/channels/273534239310479360/273541522815713281\n[#rust-usage]: https://discord.com/channels/442252698964721669/443150878111694848\n[#beginners]: https://discord.com/channels/442252698964721669/448238009733742612\n[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/122651-general\n[stackoverflow]: https://stackoverflow.com/questions/tagged/rust\n[/r/rust]: https://www.reddit.com/r/rust\n[discourse]: https://users.rust-lang.org\n\n<br>\n\n#### License\n\n<sup>\nLicensed under either of <a href=\"LICENSE-APACHE\">Apache License, Version\n2.0</a> or <a href=\"LICENSE-MIT\">MIT license</a> at your option.\n</sup>\n\n<br>\n\n<sub>\nUnless you explicitly state otherwise, any contribution intentionally submitted\nfor inclusion in Serde by you, as defined in the Apache-2.0 license, shall be\ndual licensed as above, without any additional terms or conditions.\n</sub>\n\n## Repeated introduction (controlled)\n**Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**\n",
+      "sha256": "cfccf13ed4bb0f9d09bebf84703b4ccda4bed23577713ae21ab65cb84877c1fd",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "controlled_public",
+        "source_key": "serde-rs/serde",
+        "transformations": [
+          {
+            "operation": "append",
+            "text": "\n## Repeated introduction (controlled)\n**Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**\n"
+          }
+        ]
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "# Serde &emsp; [![Build Status]][actions] [![Latest Version]][crates.io] [![serde msrv]][Rust 1.56] [![serde_derive msrv]][Rust 1.71]\n\n[Build Status]: https://img.shields.io/github/actions/workflow/status/serde-rs/serde/ci.yml?branch=master\n[actions]: https://github.com/serde-rs/serde/actions?query=branch%3Amaster\n[Latest Version]: https://img.shields.io/crates/v/serde.svg\n[crates.io]: https://crates.io/crates/serde\n[serde msrv]: https://img.shields.io/crates/msrv/serde.svg?label=serde%20msrv&color=lightgray\n[serde_derive msrv]: https://img.shields.io/crates/msrv/serde_derive.svg?label=serde_derive%20msrv&color=lightgray\n[Rust 1.56]: https://blog.rust-lang.org/2021/10/21/Rust-1.56.0/\n[Rust 1.71]: https://blog.rust-lang.org/2023/07/13/Rust-1.71.0/\n\n**Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**\n\n---\n\nYou may be looking for:\n\n- [An overview of Serde](https://serde.rs)\n- [Data formats supported by Serde](https://serde.rs/#data-formats)\n- [Setting up `#[derive(Serialize, Deserialize)]`](https://serde.rs/derive.html)\n- [Examples](https://serde.rs/examples.html)\n- [API documentation](https://docs.rs/serde)\n- [Release notes](https://github.com/serde-rs/serde/releases)\n\n## Serde in action\n\n<details>\n<summary>\nClick to show Cargo.toml.\n<a href=\"https://play.rust-lang.org/?edition=2021&gist=72755f28f99afc95e01d63174b28c1f5\" target=\"_blank\">Run this code in the playground.</a>\n</summary>\n\n```toml\n[dependencies]\n\n# The core APIs, including the Serialize and Deserialize traits. Always\n# required when using Serde. The \"derive\" feature is only required when\n# using #[derive(Serialize, Deserialize)] to make Serde work with structs\n# and enums defined in your crate.\nserde = { version = \"1.0\", features = [\"derive\"] }\n\n# Each data format lives in its own crate; the sample code below uses JSON\n# but you may be using a different one.\nserde_json = \"1.0\"\n```\n\n</details>\n<p></p>\n\n```rust\nuse serde::{Deserialize, Serialize};\n\n#[derive(Serialize, Deserialize, Debug)]\nstruct Point {\n    x: i32,\n    y: i32,\n}\n\nfn main() {\n    let point = Point { x: 1, y: 2 };\n\n    // Convert the Point to a JSON string.\n    let serialized = serde_json::to_string(&point).unwrap();\n\n    // Prints serialized = {\"x\":1,\"y\":2}\n    println!(\"serialized = {}\", serialized);\n\n    // Convert the JSON string back to a Point.\n    let deserialized: Point = serde_json::from_str(&serialized).unwrap();\n\n    // Prints deserialized = Point { x: 1, y: 2 }\n    println!(\"deserialized = {:?}\", deserialized);\n}\n```\n\n## Getting help\n\nSerde is one of the most widely used Rust libraries so any place that Rustaceans\ncongregate will be able to help you out. For chat, consider trying the\n[#rust-questions] or [#rust-beginners] channels of the unofficial community\nDiscord (invite: <https://discord.gg/rust-lang-community>), the [#rust-usage] or\n[#beginners] channels of the official Rust Project Discord (invite:\n<https://discord.gg/rust-lang>), or the [#general][zulip] stream in Zulip. For\nasynchronous, consider the [\\[rust\\] tag on StackOverflow][stackoverflow], the\n[/r/rust] subreddit which has a pinned weekly easy questions post, or the Rust\n[Discourse forum][discourse]. It's acceptable to file a support issue in this\nrepo but they tend not to get as many eyes as any of the above and may get\nclosed without a response after some time.\n\n[#rust-questions]: https://discord.com/channels/273534239310479360/274215136414400513\n[#rust-beginners]: https://discord.com/channels/273534239310479360/273541522815713281\n[#rust-usage]: https://discord.com/channels/442252698964721669/443150878111694848\n[#beginners]: https://discord.com/channels/442252698964721669/448238009733742612\n[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/122651-general\n[stackoverflow]: https://stackoverflow.com/questions/tagged/rust\n[/r/rust]: https://www.reddit.com/r/rust\n[discourse]: https://users.rust-lang.org\n\n<br>\n\n#### License\n\n<sup>\nLicensed under either of <a href=\"LICENSE-APACHE\">Apache License, Version\n2.0</a> or <a href=\"LICENSE-MIT\">MIT license</a> at your option.\n</sup>\n\n<br>\n\n<sub>\nUnless you explicitly state otherwise, any contribution intentionally submitted\nfor inclusion in Serde by you, as defined in the Apache-2.0 license, shall be\ndual licensed as above, without any additional terms or conditions.\n</sub>\n",
+      "sha256": "0a33359b87747c0ae2437374c1dd4fc4d151ae3122b3931e2757b45d0ed519b8",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "serde-rs/serde",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

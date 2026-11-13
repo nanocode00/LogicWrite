@@ -1,0 +1,1088 @@
+[
+  {
+    "family_id": "pallets",
+    "repository": "pallets/flask",
+    "commit": "49943b5a94413a530761350f04e896f76e8d620e",
+    "document": {
+      "path": "sources/pallets--flask/README.md",
+      "sha256": "1f2de14735b1ee9d3a342fa7c5d5e87b95727276c0a56c8a9d77221f37880602",
+      "git_blob_sha": "64f56cac4f9d60020a39b9c2f803b1846796cf6d",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/pallets/flask/49943b5a94413a530761350f04e896f76e8d620e/README.md"
+    },
+    "license": {
+      "path": "sources/pallets--flask/LICENSE.txt",
+      "sha256": "489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea",
+      "git_blob_sha": "9d227a0cc43c3268d15722b763bd94ad298645a1",
+      "upstream_path": "LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/pallets/flask/49943b5a94413a530761350f04e896f76e8d620e/LICENSE.txt"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "BSD-3-Clause",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/pallets--flask/LICENSE.txt",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "encode",
+    "repository": "encode/httpx",
+    "commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+    "document": {
+      "path": "sources/encode--httpx/README.md",
+      "sha256": "d58f476c1273c9c06c978467c6596620d3840ea8c99ba9d32300ab3286f0e0c3",
+      "git_blob_sha": "2ccecd578c3dfdd4fa1f7fc493309cfc944f7cb3",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/encode/httpx/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/README.md"
+    },
+    "license": {
+      "path": "sources/encode--httpx/LICENSE.md",
+      "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d",
+      "git_blob_sha": "ab79d16a3f4c6c894c028d1f7431811e8711b42b",
+      "upstream_path": "LICENSE.md",
+      "url": "https://raw.githubusercontent.com/encode/httpx/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/LICENSE.md"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "BSD-3-Clause",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/encode--httpx/LICENSE.md",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "psf",
+    "repository": "psf/requests",
+    "commit": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+    "document": {
+      "path": "sources/psf--requests/README.md",
+      "sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+      "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/psf/requests/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md"
+    },
+    "license": {
+      "path": "sources/psf--requests/LICENSE",
+      "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+      "git_blob_sha": "67db8588217f266eb561f75fae738656325deac9",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/psf/requests/3c7baaa05ab4aa49cc819ce3a819d260de19c157/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [
+      {
+        "path": "sources/psf--requests/NOTICE",
+        "sha256": "f5110972dedad2b4e9d314518daf3b7d72d6e02e499acd802181de6f74571dcc",
+        "git_blob_sha": "1ff62db688277b77c83c1766dac7f165364d3528",
+        "upstream_path": "NOTICE",
+        "url": "https://raw.githubusercontent.com/psf/requests/3c7baaa05ab4aa49cc819ce3a819d260de19c157/NOTICE"
+      }
+    ],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "Apache-2.0",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/psf--requests/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "fastapi",
+    "repository": "fastapi/fastapi",
+    "commit": "5add7a458d629b07311d48261f696b5ac2bb9a5f",
+    "document": {
+      "path": "sources/fastapi--fastapi/README.md",
+      "sha256": "08b41549d83af51e20bc8a358f0c77fe0d82e0bd61e567c550d375ae1ddd6033",
+      "git_blob_sha": "779410e6967e72dd7e049e90154a3c92b56e82ef",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/fastapi/fastapi/5add7a458d629b07311d48261f696b5ac2bb9a5f/README.md"
+    },
+    "license": {
+      "path": "sources/fastapi--fastapi/LICENSE",
+      "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+      "git_blob_sha": "3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/fastapi/fastapi/5add7a458d629b07311d48261f696b5ac2bb9a5f/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/fastapi--fastapi/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "pydantic",
+    "repository": "pydantic/pydantic",
+    "commit": "560f0f96a37d6913afdfddb2de22030ef08e68c3",
+    "document": {
+      "path": "sources/pydantic--pydantic/README.md",
+      "sha256": "ce51f0aeaec3e44c54fd3311c305aae33b1569f95a9f9a5b1cc0aa8b3a51daf6",
+      "git_blob_sha": "a34e7ed34249a7eb8615514ad87ebe49b9dcc9de",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/pydantic/pydantic/560f0f96a37d6913afdfddb2de22030ef08e68c3/README.md"
+    },
+    "license": {
+      "path": "sources/pydantic--pydantic/LICENSE",
+      "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3",
+      "git_blob_sha": "488c6260c10f2e88fa1fae58a63fccec8d600cd1",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/pydantic/pydantic/560f0f96a37d6913afdfddb2de22030ef08e68c3/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/pydantic--pydantic/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "astral-sh",
+    "repository": "astral-sh/ruff",
+    "commit": "124210f4fde57836a8d8270fdcfb10ae3dacab31",
+    "document": {
+      "path": "sources/astral-sh--ruff/README.md",
+      "sha256": "440cda1c08ca3d299590d66de62ce1ff31a5ee40fc16793b5766dd68547348eb",
+      "git_blob_sha": "8122286741a846930e917e0bcc320a2e99c64235",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/124210f4fde57836a8d8270fdcfb10ae3dacab31/README.md"
+    },
+    "license": {
+      "path": "sources/astral-sh--ruff/LICENSE",
+      "sha256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18",
+      "git_blob_sha": "655a0c76fc5539b2f8e63b673741a5fd0e0c5799",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/124210f4fde57836a8d8270fdcfb10ae3dacab31/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/astral-sh--ruff/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "textualize",
+    "repository": "Textualize/rich",
+    "commit": "3a109ccdffe5b2d0e30684a304fbd388e99ce57b",
+    "document": {
+      "path": "sources/Textualize--rich/README.md",
+      "sha256": "2f68e0e5b36f088e4059f08717454bfca47691b0188a278c7966eef6205c0d63",
+      "git_blob_sha": "a8475817e1d00628656acd0d7eab72df16f61371",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/Textualize/rich/3a109ccdffe5b2d0e30684a304fbd388e99ce57b/README.md"
+    },
+    "license": {
+      "path": "sources/Textualize--rich/LICENSE",
+      "sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15",
+      "git_blob_sha": "4415505566f261c802b671426be529a31f914137",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Textualize/rich/3a109ccdffe5b2d0e30684a304fbd388e99ce57b/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/Textualize--rich/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "pytest-dev",
+    "repository": "pytest-dev/pytest",
+    "commit": "fc9a7ef678f64d17f1c03b619f3842ea1d127e74",
+    "document": {
+      "path": "sources/pytest-dev--pytest/README.rst",
+      "sha256": "37c713f12b48774c77c40accfe3a6a28c25d7e763c9c5e34266261cf738713b5",
+      "git_blob_sha": "253db05370e6add96414d95afe2d40483b7dd392",
+      "upstream_path": "README.rst",
+      "url": "https://raw.githubusercontent.com/pytest-dev/pytest/fc9a7ef678f64d17f1c03b619f3842ea1d127e74/README.rst"
+    },
+    "license": {
+      "path": "sources/pytest-dev--pytest/LICENSE",
+      "sha256": "ca836a5f9ecca3b2f350230faa20a48fb8b145653b5568d784862df864706b9b",
+      "git_blob_sha": "c3f1657fce94589bd1ec7cead810639047f3d359",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/pytest-dev/pytest/fc9a7ef678f64d17f1c03b619f3842ea1d127e74/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [
+      {
+        "path": "sources/pytest-dev--pytest/AUTHORS",
+        "sha256": "03e25c9a6839b292fd396c3508a6065db42e8bb5b4bea25f2f2ddd5238d1688b",
+        "git_blob_sha": "136ffd6c5ee883ac815a7a931be547e28e048fe0",
+        "upstream_path": "AUTHORS",
+        "url": "https://raw.githubusercontent.com/pytest-dev/pytest/fc9a7ef678f64d17f1c03b619f3842ea1d127e74/AUTHORS"
+      }
+    ],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/pytest-dev--pytest/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "pypa",
+    "repository": "pypa/pip",
+    "commit": "4b71f36fb4dfbc87ce65ac4710eeccf81d379f55",
+    "document": {
+      "path": "sources/pypa--pip/README.rst",
+      "sha256": "8ca7758397fe257fec43284cab0a31a03949d6a053b2e65683fe11a2fae0f087",
+      "git_blob_sha": "a4f5f8173ce614bf6c6889752221685b199bc6a5",
+      "upstream_path": "README.rst",
+      "url": "https://raw.githubusercontent.com/pypa/pip/4b71f36fb4dfbc87ce65ac4710eeccf81d379f55/README.rst"
+    },
+    "license": {
+      "path": "sources/pypa--pip/LICENSE.txt",
+      "sha256": "634300a669d49aeae65b12c6c48c924c51a4cdf3d1ff086dc3456dc8bcaa2104",
+      "git_blob_sha": "8e7b65eaf628360e6f32f4140fcdd7ec7c2b7077",
+      "upstream_path": "LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/pypa/pip/4b71f36fb4dfbc87ce65ac4710eeccf81d379f55/LICENSE.txt"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/pypa--pip/LICENSE.txt",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "python-poetry",
+    "repository": "python-poetry/poetry",
+    "commit": "4acc75e19f128c8340c6f977a35e53b5f7f39071",
+    "document": {
+      "path": "sources/python-poetry--poetry/README.md",
+      "sha256": "e073b37572ac444b70fc5481d8bfacf6ac0b7aaa90e3bbc68099fd3233b59230",
+      "git_blob_sha": "62a8894c0f330db68c5a3d70a5f09cb16d13692c",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/python-poetry/poetry/4acc75e19f128c8340c6f977a35e53b5f7f39071/README.md"
+    },
+    "license": {
+      "path": "sources/python-poetry--poetry/LICENSE",
+      "sha256": "1786f071a510648a24695f295117f02bae0bbf0fb7c6730aafe9c93a3e4bf7ee",
+      "git_blob_sha": "81a8e1e4739866071bf412c851e60ef0660f76a1",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/python-poetry/poetry/4acc75e19f128c8340c6f977a35e53b5f7f39071/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/python-poetry--poetry/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "jqlang",
+    "repository": "jqlang/jq",
+    "commit": "5c001b18d7237cce1fdba63608732163f978dd23",
+    "document": {
+      "path": "sources/jqlang--jq/README.md",
+      "sha256": "2050b0eb357e6b0aa376ba2399acaae5e4938c9e78908a0e6853705e194be281",
+      "git_blob_sha": "bb320f68b26ed07e9f24e8c82c415ffe39251a76",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/jqlang/jq/5c001b18d7237cce1fdba63608732163f978dd23/README.md"
+    },
+    "license": {
+      "path": "sources/jqlang--jq/COPYING",
+      "sha256": "ad2b4a266b2268939c1446979759706077421cf906a203aa188c6f396e8cfd74",
+      "git_blob_sha": "c21d3f1645c72de28f3b46f9d8e01f20e0e496c8",
+      "upstream_path": "COPYING",
+      "url": "https://raw.githubusercontent.com/jqlang/jq/5c001b18d7237cce1fdba63608732163f978dd23/COPYING"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [
+      {
+        "path": "sources/jqlang--jq/AUTHORS",
+        "sha256": "0f1eab8760d70368581eb93b12fb8311faef2208b4fbfea68eea08625220f034",
+        "git_blob_sha": "93ab6bf9ba5c4313dff3804fa545a1d720866128",
+        "upstream_path": "AUTHORS",
+        "url": "https://raw.githubusercontent.com/jqlang/jq/5c001b18d7237cce1fdba63608732163f978dd23/AUTHORS"
+      }
+    ],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "BSD-2-Clause",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/jqlang--jq/COPYING",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "sharkdp",
+    "repository": "sharkdp/bat",
+    "commit": "8cf33bdde9a6e4c11d0f866415b1fc867df0cd40",
+    "document": {
+      "path": "sources/sharkdp--bat/README.md",
+      "sha256": "2d3de14315468b006e4305d0df5086a2788a3a982193395efa45e55255f4e184",
+      "git_blob_sha": "848873eef24ad6f212393b703abbddac5e265a3f",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/sharkdp/bat/8cf33bdde9a6e4c11d0f866415b1fc867df0cd40/README.md"
+    },
+    "license": {
+      "path": "sources/sharkdp--bat/LICENSE-MIT",
+      "sha256": "dccda9eb9533f5c65624a1106536c6cfde46008d58e60b3faf154e8b9fd5b46e",
+      "git_blob_sha": "2374e6c3f82b87e31f06b39e1c2c05beda16242a",
+      "upstream_path": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/sharkdp/bat/8cf33bdde9a6e4c11d0f866415b1fc867df0cd40/LICENSE-MIT"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [
+      {
+        "path": "sources/sharkdp--bat/NOTICE",
+        "sha256": "dd46bdeebfdf5e0e55dd0b4636eff2bfbb8f8efeaea018ed86814710a23c1bda",
+        "git_blob_sha": "97ff2fc8ec42ee3aba512377cd017936660cf107",
+        "upstream_path": "NOTICE",
+        "url": "https://raw.githubusercontent.com/sharkdp/bat/8cf33bdde9a6e4c11d0f866415b1fc867df0cd40/NOTICE"
+      }
+    ],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/sharkdp--bat/LICENSE-MIT",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "burntsushi",
+    "repository": "BurntSushi/ripgrep",
+    "commit": "178cc027e283fd965cb72d0a7395b219eada170c",
+    "document": {
+      "path": "sources/BurntSushi--ripgrep/README.md",
+      "sha256": "945622d974f65e4e141ef9726c948c2640eebd222c5b101afb6445728283921e",
+      "git_blob_sha": "54a7158a564faae22988da41efb1ef279e06fe5e",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/BurntSushi/ripgrep/178cc027e283fd965cb72d0a7395b219eada170c/README.md"
+    },
+    "license": {
+      "path": "sources/BurntSushi--ripgrep/LICENSE-MIT",
+      "sha256": "0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+      "git_blob_sha": "3b0a5dc09c1e16357459ddc9182a50f360f3cdba",
+      "upstream_path": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/BurntSushi/ripgrep/178cc027e283fd965cb72d0a7395b219eada170c/LICENSE-MIT"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/BurntSushi--ripgrep/LICENSE-MIT",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "junegunn",
+    "repository": "junegunn/fzf",
+    "commit": "4499615fe9c06c0651aa5650e5d0d0a5face99a8",
+    "document": {
+      "path": "sources/junegunn--fzf/README.md",
+      "sha256": "92f9ae224752ca3ff286fd53be56d258d4a7b49b6dadaa49d69209068de7b56e",
+      "git_blob_sha": "55005aa38acef7b1ca655eb5ac3765a88fdfafba",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/junegunn/fzf/4499615fe9c06c0651aa5650e5d0d0a5face99a8/README.md"
+    },
+    "license": {
+      "path": "sources/junegunn--fzf/LICENSE",
+      "sha256": "a296f423c0d30ce3581435e78e7e36c5fe73984a882d8720c72e713b4593588b",
+      "git_blob_sha": "f63057ce12075081be3c2b3e31bafff9d9359545",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/junegunn/fzf/4499615fe9c06c0651aa5650e5d0d0a5face99a8/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/junegunn--fzf/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "ajeetdsouza",
+    "repository": "ajeetdsouza/zoxide",
+    "commit": "1bb062057bef85aecb44e2e5c2a7983be4ebb710",
+    "document": {
+      "path": "sources/ajeetdsouza--zoxide/README.md",
+      "sha256": "396400a355f3c6f102fc41a0b84e2cab0689ee6a875c9181869ff6dbcc061c86",
+      "git_blob_sha": "d303a697b68feba742dd8da8978c82d96877105a",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/ajeetdsouza/zoxide/1bb062057bef85aecb44e2e5c2a7983be4ebb710/README.md"
+    },
+    "license": {
+      "path": "sources/ajeetdsouza--zoxide/LICENSE",
+      "sha256": "23aa3b08366e4ed6050f3d9950070201802aadbe5675fa1c19f24f4de91cf294",
+      "git_blob_sha": "fd94bad6afa1d520f9c1ea382d8008863dda55ba",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/ajeetdsouza/zoxide/1bb062057bef85aecb44e2e5c2a7983be4ebb710/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/ajeetdsouza--zoxide/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "chmln",
+    "repository": "chmln/sd",
+    "commit": "44febdf86343c653255ae4f20f5e1882dad6be17",
+    "document": {
+      "path": "sources/chmln--sd/README.md",
+      "sha256": "9908fcf52655578892c3f56c80406fa63d59dfb2fdacd86c9e9ed0815b649590",
+      "git_blob_sha": "220d7cd45ce1ce2df9338a192a551adee8538f8c",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/chmln/sd/44febdf86343c653255ae4f20f5e1882dad6be17/README.md"
+    },
+    "license": {
+      "path": "sources/chmln--sd/LICENSE",
+      "sha256": "531a4a325368974524d09db46e9f48c37c6c7f10357176cb2a727540c80f313e",
+      "git_blob_sha": "e76093cbad9e321cee3c63d504c625d3fafc288a",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/chmln/sd/44febdf86343c653255ae4f20f5e1882dad6be17/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/chmln--sd/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "starship",
+    "repository": "starship/starship",
+    "commit": "e3b64da0b660552377de8f7101a73a36b145791c",
+    "document": {
+      "path": "sources/starship--starship/README.md",
+      "sha256": "3a1c69539c6b04c737a9dfbba9b74f7973231c58d336fef2aac7284dd2da17c5",
+      "git_blob_sha": "5135dbc14d55e35f6bc0d2df689b58efe3c96d2c",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/starship/starship/e3b64da0b660552377de8f7101a73a36b145791c/README.md"
+    },
+    "license": {
+      "path": "sources/starship--starship/LICENSE",
+      "sha256": "2587580d0ec4ddc43d1534745a19ffeec0b63186497c2ed4bc36832da91b13e2",
+      "git_blob_sha": "fdc37f4678715460a326ed238044612b3ab21d9b",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/starship/starship/e3b64da0b660552377de8f7101a73a36b145791c/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "ISC",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/starship--starship/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "dandavison",
+    "repository": "dandavison/delta",
+    "commit": "07c8aa6ea3d28427129e22a497047dbf100ea585",
+    "document": {
+      "path": "sources/dandavison--delta/README.md",
+      "sha256": "192dcae133af9f942a909681c607de8aa808119e403d9968ae72ac6f37112396",
+      "git_blob_sha": "38324fcbc257807ac4ccc0c7a9e58dd4e3e7cc82",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/dandavison/delta/07c8aa6ea3d28427129e22a497047dbf100ea585/README.md"
+    },
+    "license": {
+      "path": "sources/dandavison--delta/LICENSE",
+      "sha256": "3c7f629a291a54889b6be5db2fc470462f27005c315d81edc1630f1d34046fd4",
+      "git_blob_sha": "e7f636f4bc9b9ba0040daa289af4a5f1eddb9449",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/dandavison/delta/07c8aa6ea3d28427129e22a497047dbf100ea585/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/dandavison--delta/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "nushell",
+    "repository": "nushell/nushell",
+    "commit": "7bff3d1d04d65529ee87f4b076448d7e9f538d09",
+    "document": {
+      "path": "sources/nushell--nushell/README.md",
+      "sha256": "8894a1ff03997ae1e58190fac16fbc6876c1aa8f0ea593fa0dc65e4da20a0939",
+      "git_blob_sha": "0c9442b6050220c652a5a8a6c3e0d0d4a65f44b6",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/nushell/nushell/7bff3d1d04d65529ee87f4b076448d7e9f538d09/README.md"
+    },
+    "license": {
+      "path": "sources/nushell--nushell/LICENSE",
+      "sha256": "ff5dcaaba6140ec57cafdd4f707cd0d329e727477cf7d5b9ba7a244ec2678b79",
+      "git_blob_sha": "1ecbafd78cadc79bad0e1d4105292830a19612d9",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/nushell/nushell/7bff3d1d04d65529ee87f4b076448d7e9f538d09/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/nushell--nushell/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "clap-rs",
+    "repository": "clap-rs/clap",
+    "commit": "ec93e71255c0b833a34f50662a3fdb22f53f6ded",
+    "document": {
+      "path": "sources/clap-rs--clap/README.md",
+      "sha256": "803041260cb12bb14ae91ebb115eadd3212373cde5a969d81f7c02b0817b7fdf",
+      "git_blob_sha": "71a4069428c972efe2ecf571113eacd871397fd6",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/clap-rs/clap/ec93e71255c0b833a34f50662a3fdb22f53f6ded/README.md"
+    },
+    "license": {
+      "path": "sources/clap-rs--clap/LICENSE-MIT",
+      "sha256": "6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+      "git_blob_sha": "a2d01088b6ce55e837a6d193943580f978fb2d2e",
+      "upstream_path": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/clap-rs/clap/ec93e71255c0b833a34f50662a3fdb22f53f6ded/LICENSE-MIT"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/clap-rs--clap/LICENSE-MIT",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "serde-rs",
+    "repository": "serde-rs/serde",
+    "commit": "aa7913ad0211fef960df68e7812a6211145a888c",
+    "document": {
+      "path": "sources/serde-rs--serde/README.md",
+      "sha256": "0a33359b87747c0ae2437374c1dd4fc4d151ae3122b3931e2757b45d0ed519b8",
+      "git_blob_sha": "681b874a6308ab4e2095caadfdaba8df98c1acfd",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/serde-rs/serde/aa7913ad0211fef960df68e7812a6211145a888c/README.md"
+    },
+    "license": {
+      "path": "sources/serde-rs--serde/LICENSE-MIT",
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+      "git_blob_sha": "31aa79387f27e730e33d871925e152e35e428031",
+      "upstream_path": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/serde-rs/serde/aa7913ad0211fef960df68e7812a6211145a888c/LICENSE-MIT"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/serde-rs--serde/LICENSE-MIT",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "tokio-rs",
+    "repository": "tokio-rs/tokio",
+    "commit": "ab0814fc8c62b3d8be40aad068e2fed6562cfeb0",
+    "document": {
+      "path": "sources/tokio-rs--tokio/README.md",
+      "sha256": "cfefe9d435f3660130db2417e51ab523376c262011d8b631678b6bb373731197",
+      "git_blob_sha": "e5b94ec61194fd92552dda7c3a4e0818c03f5ffd",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/tokio-rs/tokio/ab0814fc8c62b3d8be40aad068e2fed6562cfeb0/README.md"
+    },
+    "license": {
+      "path": "sources/tokio-rs--tokio/LICENSE",
+      "sha256": "253cd04c6714889df2d32f3f64d669179a1c95c76ac43c40882c52eb06bc3552",
+      "git_blob_sha": "f0dbcf4b45d6acca6f7f5d88dc86683c6f360d76",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/tokio-rs/tokio/ab0814fc8c62b3d8be40aad068e2fed6562cfeb0/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/tokio-rs--tokio/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "antirez",
+    "repository": "antirez/linenoise",
+    "commit": "a473823d74b93eab2ba83480df16ed37617493f2",
+    "document": {
+      "path": "sources/antirez--linenoise/README.markdown",
+      "sha256": "5a55b95310848c206560e2ffda0a1162ea2a10cf83d482360504d636e04c38b7",
+      "git_blob_sha": "0cea45a23e38e1af0e97b4d697448aafe8158143",
+      "upstream_path": "README.markdown",
+      "url": "https://raw.githubusercontent.com/antirez/linenoise/a473823d74b93eab2ba83480df16ed37617493f2/README.markdown"
+    },
+    "license": {
+      "path": "sources/antirez--linenoise/LICENSE",
+      "sha256": "efe1692aa5b869edaa0ac88f95eb0276c1125304ffc636a299db3ebbab47f62b",
+      "git_blob_sha": "18e814865a54f94fb81127fd0bf1b52e9350c530",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/antirez/linenoise/a473823d74b93eab2ba83480df16ed37617493f2/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "BSD-2-Clause",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/antirez--linenoise/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "openjs-express-lodash",
+    "repository": "expressjs/express",
+    "commit": "43fca52d28a422c8be48fd489cbd4f2d6152bab6",
+    "document": {
+      "path": "sources/expressjs--express/Readme.md",
+      "sha256": "3cf5f3e224dbb9b5e2bc0ac255871de453762ae7a277f868da5f4a69d6ff2509",
+      "git_blob_sha": "393c992807c7be0343ff69619700384d6cf57346",
+      "upstream_path": "Readme.md",
+      "url": "https://raw.githubusercontent.com/expressjs/express/43fca52d28a422c8be48fd489cbd4f2d6152bab6/Readme.md"
+    },
+    "license": {
+      "path": "sources/expressjs--express/LICENSE",
+      "sha256": "95a5762890e5c1c9808921cef095661fc482c5e1f0bba31446ac85595df6237c",
+      "git_blob_sha": "aa927e44e31d486f807634887662efa39256bf84",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/expressjs/express/43fca52d28a422c8be48fd489cbd4f2d6152bab6/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/expressjs--express/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code.",
+    "family_note": "Conservative common OpenJS umbrella grouping; no independence claim between these two."
+  },
+  {
+    "family_id": "koajs",
+    "repository": "koajs/koa",
+    "commit": "b7ead6f7a2bb56e2948b1c5e1cca77483e89c885",
+    "document": {
+      "path": "sources/koajs--koa/Readme.md",
+      "sha256": "fe1557fb00b87d4c1ccf3af31d4b58c52c05bfb3384658ab2a17615b372738c1",
+      "git_blob_sha": "689d4abebf329e90e6eae566b8d03ea8fbed1e28",
+      "upstream_path": "Readme.md",
+      "url": "https://raw.githubusercontent.com/koajs/koa/b7ead6f7a2bb56e2948b1c5e1cca77483e89c885/Readme.md"
+    },
+    "license": {
+      "path": "sources/koajs--koa/LICENSE",
+      "sha256": "16943a6ac79711e26289640dcca989be857059b938380b118bca5afc1ea4e7d7",
+      "git_blob_sha": "a70628748c14df221a11a29cde0eabe51ba55f7e",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/koajs/koa/b7ead6f7a2bb56e2948b1c5e1cca77483e89c885/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [
+      {
+        "path": "sources/koajs--koa/AUTHORS",
+        "sha256": "08bd56b7798f6a3dbab921d085f8bb41588a694f6544898c4f313b1d86e7d74b",
+        "git_blob_sha": "a44b8375a7490369bbf932ab4cb101044009d494",
+        "upstream_path": "AUTHORS",
+        "url": "https://raw.githubusercontent.com/koajs/koa/b7ead6f7a2bb56e2948b1c5e1cca77483e89c885/AUTHORS"
+      }
+    ],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/koajs--koa/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "axios",
+    "repository": "axios/axios",
+    "commit": "4ee8d46fc463770b8f5da718d5449a5b027b2c08",
+    "document": {
+      "path": "sources/axios--axios/README.md",
+      "sha256": "c8d5b4d10d136eec255bdebcd06f6e9b6bba3e84d04a5b27614450a6ec90b01e",
+      "git_blob_sha": "7999def374ac6520e294b455267495523ee0c1fc",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/axios/axios/4ee8d46fc463770b8f5da718d5449a5b027b2c08/README.md"
+    },
+    "license": {
+      "path": "sources/axios--axios/LICENSE",
+      "sha256": "82761059eaedacb3356803aea8a170d8298609f91b14fc32ee1bfb40d690183c",
+      "git_blob_sha": "05006a51eb888282323883df740cd90ad72d0700",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/axios/axios/4ee8d46fc463770b8f5da718d5449a5b027b2c08/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/axios--axios/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "sindresorhus",
+    "repository": "sindresorhus/got",
+    "commit": "6b5aafc1cd538998728be6f45c65b0f80bae01b2",
+    "document": {
+      "path": "sources/sindresorhus--got/readme.md",
+      "sha256": "7081389ece23c85b4dbc419573bdf3cc5ebfb87f7e599fe96e240666c915f16a",
+      "git_blob_sha": "a04f9b224dc6153e06deb589f01305d935ef4753",
+      "upstream_path": "readme.md",
+      "url": "https://raw.githubusercontent.com/sindresorhus/got/6b5aafc1cd538998728be6f45c65b0f80bae01b2/readme.md"
+    },
+    "license": {
+      "path": "sources/sindresorhus--got/license",
+      "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3",
+      "git_blob_sha": "fa7ceba3eb4a9657a9db7f3ffca4e4e97a9019de",
+      "upstream_path": "license",
+      "url": "https://raw.githubusercontent.com/sindresorhus/got/6b5aafc1cd538998728be6f45c65b0f80bae01b2/license"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/sindresorhus--got/license",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "chalk",
+    "repository": "chalk/chalk",
+    "commit": "72110019e147683f60e13fa0ff5c14a0c27cd9fe",
+    "document": {
+      "path": "sources/chalk--chalk/readme.md",
+      "sha256": "83afc9420595c1f7bb4ad5e13c2d77614676983f3df1e58acbb6985ed6a2ad7b",
+      "git_blob_sha": "c1b7195c4ab47459d85a72c0c311933a46950768",
+      "upstream_path": "readme.md",
+      "url": "https://raw.githubusercontent.com/chalk/chalk/72110019e147683f60e13fa0ff5c14a0c27cd9fe/readme.md"
+    },
+    "license": {
+      "path": "sources/chalk--chalk/license",
+      "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3",
+      "git_blob_sha": "fa7ceba3eb4a9657a9db7f3ffca4e4e97a9019de",
+      "upstream_path": "license",
+      "url": "https://raw.githubusercontent.com/chalk/chalk/72110019e147683f60e13fa0ff5c14a0c27cd9fe/license"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/chalk--chalk/license",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "openjs-express-lodash",
+    "repository": "lodash/lodash",
+    "commit": "2b5e6f7399a7b48005140b5d5c6bc6c0e62919a8",
+    "document": {
+      "path": "sources/lodash--lodash/README.md",
+      "sha256": "882ff84de79568af63234100cfc6497f091195c358cb27b91dc2c4b27692be03",
+      "git_blob_sha": "582fcae91ff06d855c6f4187394a5bbceb466665",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/lodash/lodash/2b5e6f7399a7b48005140b5d5c6bc6c0e62919a8/README.md"
+    },
+    "license": {
+      "path": "sources/lodash--lodash/LICENSE",
+      "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc",
+      "git_blob_sha": "77c42f1408a38a0609cac12c887616cb21bfb736",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/lodash/lodash/2b5e6f7399a7b48005140b5d5c6bc6c0e62919a8/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/lodash--lodash/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code.",
+    "family_note": "Conservative common OpenJS umbrella grouping; no independence claim between these two."
+  },
+  {
+    "family_id": "micromatch",
+    "repository": "micromatch/picomatch",
+    "commit": "9fab7bf61913ea334c4203ed321c426cfde44a42",
+    "document": {
+      "path": "sources/micromatch--picomatch/README.md",
+      "sha256": "8ed3dbd850dde9b3668f1aaeb4a3d474b6cac4736a06e2d206f453eacdf703e7",
+      "git_blob_sha": "158a8ba6607c845747ef0613f652eaa4e932b6c5",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/micromatch/picomatch/9fab7bf61913ea334c4203ed321c426cfde44a42/README.md"
+    },
+    "license": {
+      "path": "sources/micromatch--picomatch/LICENSE",
+      "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9",
+      "git_blob_sha": "3608dca25e30b572b6ad6935c8c7918bf70e3d2f",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/micromatch/picomatch/9fab7bf61913ea334c4203ed321c426cfde44a42/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/micromatch--picomatch/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "immerjs",
+    "repository": "immerjs/immer",
+    "commit": "784c86bb234e805566481c9425fcb2a3897e8bcc",
+    "document": {
+      "path": "sources/immerjs--immer/readme.md",
+      "sha256": "aa4c25aa3b251470ec5512d4271c202d229a0a9ffcf377762be331a5157edfba",
+      "git_blob_sha": "4e80fcf1d818ed3ab690246ea685c65c73eeaee2",
+      "upstream_path": "readme.md",
+      "url": "https://raw.githubusercontent.com/immerjs/immer/784c86bb234e805566481c9425fcb2a3897e8bcc/readme.md"
+    },
+    "license": {
+      "path": "sources/immerjs--immer/LICENSE",
+      "sha256": "99cf22f6960a6fe228ec84ea9aefb0d75b27999ece83a3a9801e1c2081fa270b",
+      "git_blob_sha": "c01411588adb07c56b6bb0cbf50aa112589df1eb",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/immerjs/immer/784c86bb234e805566481c9425fcb2a3897e8bcc/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/immerjs--immer/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "reduxjs",
+    "repository": "reduxjs/redux",
+    "commit": "0139377fc8eef33e28afc6e3e939df3f41f939a6",
+    "document": {
+      "path": "sources/reduxjs--redux/README.md",
+      "sha256": "a8378b85d48ddde1735008db98b6bdb1e614405e0e2c886f79cf18ea60db3a76",
+      "git_blob_sha": "d447e18b065ecd8c378f56d3ba1123ed4e1f6875",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/reduxjs/redux/0139377fc8eef33e28afc6e3e939df3f41f939a6/README.md"
+    },
+    "license": {
+      "path": "sources/reduxjs--redux/LICENSE.md",
+      "sha256": "f2da73c752c6b87624755edacf927cbd915fa76555d383e74494bad4a5155ab3",
+      "git_blob_sha": "55bc8dfbe90cb54a2d6611e97007e5ee026486da",
+      "upstream_path": "LICENSE.md",
+      "url": "https://raw.githubusercontent.com/reduxjs/redux/0139377fc8eef33e28afc6e3e939df3f41f939a6/LICENSE.md"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/reduxjs--redux/LICENSE.md",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "pmndrs",
+    "repository": "pmndrs/zustand",
+    "commit": "9fed2eb2f3af672da9f7bf694b996df3831fc207",
+    "document": {
+      "path": "sources/pmndrs--zustand/README.md",
+      "sha256": "3a53f23dae9f33f7b951cfc6eac1dbdb7def9c722d8f32a70d85190f47d11d5b",
+      "git_blob_sha": "64bfc2ef7242d37cce4dd73f6feaf6ce1efed61e",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/pmndrs/zustand/9fed2eb2f3af672da9f7bf694b996df3831fc207/README.md"
+    },
+    "license": {
+      "path": "sources/pmndrs--zustand/LICENSE",
+      "sha256": "c1e6e266563517467b1bf874817d23e426f3149252bd7d42758cd697514b8417",
+      "git_blob_sha": "a2c2649deec2aabf248294a60a6e2e63a58f4a2b",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/pmndrs/zustand/9fed2eb2f3af672da9f7bf694b996df3831fc207/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/pmndrs--zustand/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "tanstack",
+    "repository": "TanStack/query",
+    "commit": "19f555cf919a1438885d7d20c95b17b26d6d6859",
+    "document": {
+      "path": "sources/TanStack--query/README.md",
+      "sha256": "8b48efd96b0760eb8001b16ae4cbabd812ee050b22d13e3eca3a42daaf28a03b",
+      "git_blob_sha": "3e4b0598ad8a1352350bcea435f77a4393f303c9",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/TanStack/query/19f555cf919a1438885d7d20c95b17b26d6d6859/README.md"
+    },
+    "license": {
+      "path": "sources/TanStack--query/LICENSE",
+      "sha256": "a405ee70c632bb938acb7ac5f210e814409b3760ea9d2329d8ed8ffcfd11a0e7",
+      "git_blob_sha": "1869e21fc3c80b3010c3e60c5ab6dda077ce1f22",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/TanStack/query/19f555cf919a1438885d7d20c95b17b26d6d6859/LICENSE"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/TanStack--query/LICENSE",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "evanw",
+    "repository": "evanw/esbuild",
+    "commit": "f6058f8364fe7ab91ca57a83e02577ed74c9cae4",
+    "document": {
+      "path": "sources/evanw--esbuild/README.md",
+      "sha256": "d9233b2fb0eb5c20dd5371d0ec627bfeacede26cb5781cb19e645798ea21c585",
+      "git_blob_sha": "08272e6b3db3f5068e876e2c2b13b4e138d5694d",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/evanw/esbuild/f6058f8364fe7ab91ca57a83e02577ed74c9cae4/README.md"
+    },
+    "license": {
+      "path": "sources/evanw--esbuild/LICENSE.md",
+      "sha256": "b40ec5baec7bb34fa5b1c09521fa3cd52d5fad7adafed74932a2010d3612a681",
+      "git_blob_sha": "2027e8dcf3787f5aac9fcd835e2b80cb75a39211",
+      "upstream_path": "LICENSE.md",
+      "url": "https://raw.githubusercontent.com/evanw/esbuild/f6058f8364fe7ab91ca57a83e02577ed74c9cae4/LICENSE.md"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "MIT",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/evanw--esbuild/LICENSE.md",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  },
+  {
+    "family_id": "rollup",
+    "repository": "rollup/rollup",
+    "commit": "caa0971ef0ab5317d1660e24e38bcfe5a8431951",
+    "document": {
+      "path": "sources/rollup--rollup/README.md",
+      "sha256": "509a34b064a1698f3f1ac659b9630ed9663059ddb6c4d5d033449b0fb2540da9",
+      "git_blob_sha": "9d9047a9551b28f2d40151171421c6df7504c833",
+      "upstream_path": "README.md",
+      "url": "https://raw.githubusercontent.com/rollup/rollup/caa0971ef0ab5317d1660e24e38bcfe5a8431951/README.md"
+    },
+    "license": {
+      "path": "sources/rollup--rollup/LICENSE.md",
+      "sha256": "fa1bd040c5bdeefe65b3821cebf474f2733ce65df13089bd151dda1778e62fe8",
+      "git_blob_sha": "7b806824370697048284c1726fc4d1b567bfea68",
+      "upstream_path": "LICENSE.md",
+      "url": "https://raw.githubusercontent.com/rollup/rollup/caa0971ef0ab5317d1660e24e38bcfe5a8431951/LICENSE.md"
+    },
+    "rights_status": "license_text_checked",
+    "redistribution": "permitted_with_retained_license_and_notices",
+    "notices": [],
+    "parents": [],
+    "split": "development",
+    "exposure": "public_development",
+    "license_expression": "ISC",
+    "rights_scope": "Captured root README text only; images, linked pages, trademarks and external assets are not redistributed.",
+    "rights_evidence": "sources/rollup--rollup/LICENSE.md",
+    "rights_limitations": "No independent legal review; preserve all included notices. jq docs/ exception does not cover root README. Lodash bundled-code exceptions are not copied as code."
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T1-01",
+  "task": {
+    "title": "Flask: 프레임워크와 도구 선택 관계",
+    "purpose": "입문자가 Flask의 역할과 도구 선택 자유를 구별하도록 사실·관계 표와 짧은 소개문을 작성한다.",
+    "audience": "기술 리뷰어/의사결정자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "입문자가 Flask의 역할과 도구 선택 자유를 구별하도록 사실·관계 표와 짧은 소개문을 작성한다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/flask/refs/heads/stable/docs/_static/flask-name.svg\" alt=\"\" height=\"150\"></div>\n\n# Flask\n\nFlask is a lightweight [WSGI] web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around [Werkzeug]\nand [Jinja], and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n[WSGI]: https://wsgi.readthedocs.io/\n[Werkzeug]: https://werkzeug.palletsprojects.com/\n[Jinja]: https://jinja.palletsprojects.com/\n\n## A Simple Example\n\n```python\n# save this as app.py\nfrom flask import Flask\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef hello():\n    return \"Hello, World!\"\n```\n\n```\n$ flask run\n  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n```\n\n## Donate\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/\n",
+      "sha256": "1f2de14735b1ee9d3a342fa7c5d5e87b95727276c0a56c8a9d77221f37880602",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "pallets/flask",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/flask/refs/heads/stable/docs/_static/flask-name.svg\" alt=\"\" height=\"150\"></div>\n\n# Flask\n\nFlask is a lightweight [WSGI] web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around [Werkzeug]\nand [Jinja], and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n[WSGI]: https://wsgi.readthedocs.io/\n[Werkzeug]: https://werkzeug.palletsprojects.com/\n[Jinja]: https://jinja.palletsprojects.com/\n\n## A Simple Example\n\n```python\n# save this as app.py\nfrom flask import Flask\n\napp = Flask(__name__)\n\n@app.route(\"/\")\ndef hello():\n    return \"Hello, World!\"\n```\n\n```\n$ flask run\n  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n```\n\n## Donate\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/\n",
+      "sha256": "1f2de14735b1ee9d3a342fa7c5d5e87b95727276c0a56c8a9d77221f37880602",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "pallets/flask",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

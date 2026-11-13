@@ -1,0 +1,60 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T2-07",
+  "task": {
+    "title": "한 조건의 필수 선택",
+    "purpose": "첫 실행 안내에 이미 있는 승인 조건을 검토한다. 승인 조건은 독자가 실행 직전에 알아야 하는 유일 필수 정보다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "첫 실행 안내에 이미 있는 승인 조건을 검토한다. 승인 조건은 독자가 실행 직전에 알아야 하는 유일 필수 정보다.",
+    "output_document_ids": [
+      "card"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "card",
+      "role": "editable fictional document",
+      "content": "# 실행 카드\n승인 뒤 실행한다.\n",
+      "sha256": "a77dcdef216cb87c66e8bef2dafdaee49530b379848f9600390c4f09f600d05e",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "card"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

@@ -1,0 +1,115 @@
+type,subscenario,complexity,risk,source_family,split,case_id,calibration,evidence_refs,answer_pointer,review_status
+T1,facts_conditions,compound,ordinary,pallets,development,CP-T1-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T1,cross_paragraph,compound,ordinary,pallets,development,CP-T1-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T1,facts_conditions,compound,ordinary,encode,development,CP-T1-02,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T1,cross_paragraph,compound,ordinary,encode,development,CP-T1-02,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T1,true_conflict,compound,high,psf,development,CP-T1-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T1,facts_conditions,compound,high,psf,development,CP-T1-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T1,scope_time_attribution,compound,ordinary,fastapi,development,CP-T1-04,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T1,cross_paragraph,compound,ordinary,fastapi,development,CP-T1-04,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T1,scope_time_attribution,compound,high,synthetic-author-batch-20261113,development,CP-T1-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T1,cross_paragraph,compound,high,synthetic-author-batch-20261113,development,CP-T1-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T1,facts_conditions,compound,high,synthetic-author-batch-20261113,development,CP-T1-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T1,unclear_authority,simple,ordinary,synthetic-author-batch-20261113,development,CP-T1-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T2,selection,compound,ordinary,pydantic,development,CP-T2-01,True,E1 E2 E3 E4 E5,/D/required_decisions,AI reviewed; independent humans pending
+T2,audience_purpose,compound,ordinary,pydantic,development,CP-T2-01,True,E1 E2 E3 E4 E5,/D/required_decisions,AI reviewed; independent humans pending
+T2,selection,compound,ordinary,astral-sh,development,CP-T2-02,False,E1 E2 E3 E4 E5,/D/required_decisions,AI reviewed; independent humans pending
+T2,audience_purpose,compound,ordinary,astral-sh,development,CP-T2-02,False,E1 E2 E3 E4 E5,/D/required_decisions,AI reviewed; independent humans pending
+T2,local_exposure,compound,high,textualize,development,CP-T2-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T2,long_required,compound,high,textualize,development,CP-T2-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T2,selection,compound,ordinary,pytest-dev,development,CP-T2-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T2,long_required,compound,ordinary,pytest-dev,development,CP-T2-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T2,local_exposure,compound,high,synthetic-author-batch-20261113,development,CP-T2-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T2,audience_purpose,compound,high,synthetic-author-batch-20261113,development,CP-T2-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T2,long_required,compound,high,synthetic-author-batch-20261113,development,CP-T2-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T2,selection,compound,high,synthetic-author-batch-20261113,development,CP-T2-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T2,purpose_conflict,compound,high,synthetic-author-batch-20261113,development,CP-T2-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T2,selection,simple,high,synthetic-author-batch-20261113,development,CP-T2-07,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T2,local_exposure,simple,high,synthetic-author-batch-20261113,development,CP-T2-07,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T3,empty_information,simple,ordinary,pypa,development,CP-T3-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T3,partial_removal,compound,ordinary,python-poetry,development,CP-T3-02,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T3,unique_value_protected,compound,ordinary,python-poetry,development,CP-T3-02,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T3,equivalent_retained,simple,ordinary,jqlang,development,CP-T3-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T3,empty_information,simple,ordinary,jqlang,development,CP-T3-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T3,unique_value_protected,compound,ordinary,sharkdp,development,CP-T3-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T3,partial_removal,compound,high,synthetic-author-batch-20261113,development,CP-T3-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T3,unique_value_protected,compound,high,synthetic-author-batch-20261113,development,CP-T3-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T3,equivalent_retained,compound,high,synthetic-author-batch-20261113,development,CP-T3-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T3,unclear_retention,simple,high,synthetic-author-batch-20261113,development,CP-T3-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T3,unique_value_protected,simple,high,synthetic-author-batch-20261113,development,CP-T3-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T4,known_destination,compound,ordinary,burntsushi,development,CP-T4-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T4,local_summary_link,compound,ordinary,burntsushi,development,CP-T4-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T4,multiple_destinations,compound,ordinary,junegunn,development,CP-T4-02,False,E1 E2 E3 E4,/D/required_decisions,AI reviewed; independent humans pending
+T4,known_destination,compound,ordinary,junegunn,development,CP-T4-02,False,E1 E2 E3 E4,/D/required_decisions,AI reviewed; independent humans pending
+T4,local_summary_link,compound,ordinary,junegunn,development,CP-T4-02,False,E1 E2 E3 E4,/D/required_decisions,AI reviewed; independent humans pending
+T4,local_summary_link,compound,high,ajeetdsouza,development,CP-T4-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T4,known_destination,compound,high,ajeetdsouza,development,CP-T4-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T4,destination_integrity,compound,ordinary,chmln,development,CP-T4-04,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T4,destination_integrity,compound,high,synthetic-author-batch-20261113,development,CP-T4-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T4,local_summary_link,compound,high,synthetic-author-batch-20261113,development,CP-T4-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T4,known_destination,compound,high,synthetic-author-batch-20261113,development,CP-T4-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T4,missing_destination_scope,simple,ordinary,synthetic-author-batch-20261113,development,CP-T4-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T5,prerequisite_order,compound,high,starship,development,CP-T5-01,True,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T5,grouping,compound,ordinary,dandavison,development,CP-T5-02,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T5,multiple_orders,compound,ordinary,dandavison,development,CP-T5-02,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T5,grouping,compound,ordinary,nushell,development,CP-T5-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T5,multiple_orders,compound,ordinary,nushell,development,CP-T5-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T5,keep_placement,simple,ordinary,clap-rs,development,CP-T5-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T5,multiple_orders,simple,ordinary,clap-rs,development,CP-T5-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T5,prerequisite_order,compound,high,synthetic-author-batch-20261113,development,CP-T5-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T5,grouping,compound,high,synthetic-author-batch-20261113,development,CP-T5-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T5,multiple_orders,compound,high,synthetic-author-batch-20261113,development,CP-T5-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T5,missing_anchor,simple,ordinary,synthetic-author-batch-20261113,development,CP-T5-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T6,exact_duplicate,simple,ordinary,serde-rs,development,CP-T6-01,True,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T6,partial_unique,compound,ordinary,tokio-rs,development,CP-T6-02,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T6,different_scope_time_attribution,compound,high,antirez,development,CP-T6-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T6,necessary_repetition,compound,ordinary,openjs-express-lodash,development,CP-T6-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T6,different_scope_time_attribution,compound,high,synthetic-author-batch-20261113,development,CP-T6-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T6,necessary_repetition,compound,high,synthetic-author-batch-20261113,development,CP-T6-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T6,partial_unique,compound,high,synthetic-author-batch-20261113,development,CP-T6-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T6,unknown_equivalence,simple,ordinary,synthetic-author-batch-20261113,development,CP-T6-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T7,required_missing,simple,high,koajs,development,CP-T7-01,True,E1,/D/required_decisions,AI reviewed; independent humans pending
+T7,partial_missing_location,simple,high,koajs,development,CP-T7-01,True,E1,/D/required_decisions,AI reviewed; independent humans pending
+T7,partial_missing_location,simple,ordinary,axios,development,CP-T7-02,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T7,required_missing,simple,ordinary,axios,development,CP-T7-02,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T7,already_satisfied,compound,ordinary,sindresorhus,development,CP-T7-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T7,already_satisfied,compound,ordinary,chalk,development,CP-T7-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T7,authority_conflict,compound,high,synthetic-author-batch-20261113,development,CP-T7-05,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T7,required_missing,compound,high,synthetic-author-batch-20261113,development,CP-T7-05,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T7,unsupported_requirement,simple,high,synthetic-author-batch-20261113,development,CP-T7-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T8,style_terms,simple,ordinary,openjs-express-lodash,development,CP-T8-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,compression,simple,ordinary,openjs-express-lodash,development,CP-T8-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,protected_code_quote_id,simple,ordinary,openjs-express-lodash,development,CP-T8-01,True,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,referent_clarity,compound,ordinary,micromatch,development,CP-T8-02,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,protected_code_quote_id,compound,ordinary,micromatch,development,CP-T8-02,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,compression,simple,ordinary,immerjs,development,CP-T8-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,referent_clarity,simple,ordinary,immerjs,development,CP-T8-03,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,optional_noop,simple,ordinary,reduxjs,development,CP-T8-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,protected_code_quote_id,simple,ordinary,reduxjs,development,CP-T8-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T8,style_terms,compound,high,synthetic-author-batch-20261113,development,CP-T8-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T8,compression,compound,high,synthetic-author-batch-20261113,development,CP-T8-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T8,protected_code_quote_id,compound,high,synthetic-author-batch-20261113,development,CP-T8-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T8,optional_noop,compound,high,synthetic-author-batch-20261113,development,CP-T8-05,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T8,missing_context,simple,ordinary,synthetic-author-batch-20261113,development,CP-T8-06,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T9,whole_task,compound,ordinary,pmndrs,development,CP-T9-01,True,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,roles_consistency,compound,ordinary,pmndrs,development,CP-T9-01,True,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,multiple_whole_outputs,compound,ordinary,pmndrs,development,CP-T9-01,True,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,preserved_but_unfit,compound,ordinary,tanstack,development,CP-T9-02,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,whole_task,compound,ordinary,tanstack,development,CP-T9-02,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,multiple_whole_outputs,compound,ordinary,tanstack,development,CP-T9-02,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,roles_consistency,compound,ordinary,evanw,development,CP-T9-03,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,global_regression,compound,ordinary,evanw,development,CP-T9-03,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,whole_task,compound,ordinary,evanw,development,CP-T9-03,False,E1 E2 E3,/D/required_decisions,AI reviewed; independent humans pending
+T9,whole_task,compound,ordinary,rollup,development,CP-T9-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,multiple_whole_outputs,compound,ordinary,rollup,development,CP-T9-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,global_regression,compound,ordinary,rollup,development,CP-T9-04,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,whole_task,compound,high,synthetic-author-batch-20261113,development,CP-T9-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,preserved_but_unfit,compound,high,synthetic-author-batch-20261113,development,CP-T9-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,roles_consistency,compound,high,synthetic-author-batch-20261113,development,CP-T9-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,multiple_whole_outputs,compound,high,synthetic-author-batch-20261113,development,CP-T9-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,global_regression,compound,high,synthetic-author-batch-20261113,development,CP-T9-05,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,partial_or_unclear_task,compound,ordinary,synthetic-author-batch-20261113,development,CP-T9-06,False,E1 E2,/D/required_decisions,AI reviewed; independent humans pending
+T9,whole_task,simple,high,synthetic-author-batch-20261113,development,CP-T9-07,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T9,multiple_whole_outputs,simple,high,synthetic-author-batch-20261113,development,CP-T9-07,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T9,partial_or_unclear_task,compound,high,synthetic-author-batch-20261113,development,CP-T9-08,False,E1,/D/required_decisions,AI reviewed; independent humans pending
+T9,roles_consistency,compound,high,synthetic-author-batch-20261113,development,CP-T9-08,False,E1,/D/required_decisions,AI reviewed; independent humans pending

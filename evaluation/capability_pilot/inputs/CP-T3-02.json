@@ -1,0 +1,79 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T3-02",
+  "task": {
+    "title": "Poetry: 혼합 문단의 부분 제거",
+    "purpose": "추가 편집 메모의 중복 요약은 줄이되 승인된 팀 조건인 오프라인 환경 예외는 남긴다. 그 조건은 이 과제의 통제 계약이며 upstream 기능 주장이 아니다.",
+    "audience": "기술 리뷰어/의사결정자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "추가 편집 메모의 중복 요약은 줄이되 승인된 팀 조건인 오프라인 환경 예외는 남긴다. 그 조건은 이 과제의 통제 계약이며 upstream 기능 주장이 아니다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "# Poetry: Python packaging and dependency management made easy\n\n[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)\n[![Stable Version](https://img.shields.io/pypi/v/poetry?label=stable)][PyPI Releases]\n[![Pre-release Version](https://img.shields.io/github/v/release/python-poetry/poetry?label=pre-release&include_prereleases&sort=semver)][PyPI Releases]\n[![Python Versions](https://img.shields.io/pypi/pyversions/poetry)][PyPI]\n[![Download Stats](https://img.shields.io/pypi/dm/poetry)](https://pypistats.org/packages/poetry)\n[![Discord](https://img.shields.io/discord/487711540787675139?logo=discord)][Discord]\n\nPoetry helps you declare, manage and install dependencies of Python projects,\nensuring you have the right stack everywhere.\n\n![Poetry Install](https://raw.githubusercontent.com/python-poetry/poetry/main/assets/install.gif)\n\nPoetry replaces `setup.py`, `requirements.txt`, `setup.cfg`, `MANIFEST.in` and `Pipfile` with a simple `pyproject.toml`\nbased project format.\n\n```toml\n[build-system]\nrequires = [\"poetry-core>=2.0.0,<3.0.0\"]\nbuild-backend = \"poetry.core.masonry.api\"\n\n[project]\nname = \"my-package\"\nversion = \"0.1.0\"\ndescription = \"The description of the package\"\nreadme = \"README.md\"\n\nlicense = \"MIT\"\nlicense-files = [\"LICENSE\"]\n\n# No Python upper bound for package metadata\nrequires-python = \">=3.9\"\n\nauthors = [\n    { name = \"Sébastien Eustace\", email = \"sebastien@eustace.io\" },\n]\n\n# Keywords (translated to tags on the package index)\nkeywords = [\"packaging\", \"poetry\"]\n\ndependencies = [\n    # equivalent to ^3.8.1 with semver constraints\n    \"aiohttp (>=3.8.1,<4.0.0)\",\n    # dependency with extras\n    \"requests[security] (>=2.28,<3.0)\",\n    # version-specific dependency with prereleases allowed (see below)\n    \"tomli (>=2.0.1,<3.0.0) ; python_version < '3.11'\",\n    # git dependency with branch specified\n    \"cleo @ git+https://github.com/python-poetry/cleo.git@main\",\n]\n\n[project.urls]\nrepository = \"https://github.com/python-poetry/poetry\"\nhomepage = \"https://python-poetry.org\"\n\n# Scripts are easily expressed\n[project.scripts]\nmy_package_cli = \"my_package.console:run\"\n\n[project.optional-dependencies]\n# optional dependency to be installed via 'poetry install -E my-extra'\nmy-extra = [\"pendulum (>=3.1.0,<4.0.0)\"]\n\n[tool.poetry.dependencies]\n# Python upper bound for locking\npython = \">=3.9,<4.0\"\n# Version-specific dependencies with prereleases allowed\ntomli = { allow-prereleases = true }\n\n# Dependency groups are supported for organizing your dependencies\n[dependency-groups]\ndev = [\"pytest (>=7.1.2,<8.0.0)\", \"pytest-cov (>=3.0,<4.0)\"]\ndocs = [\"Sphinx (>=5.1.1,<6.0.0)\"]\n\n# ...and can be installed only when explicitly requested\n# via 'poetry install --with docs'\n[tool.poetry.group.docs]\noptional = true\n\n# Alternatively, you can use Poetry specific syntax\n# to specify dependency groups\n[tool.poetry.group.lint]\noptional = true\n\n[tool.poetry.group.lint.dependencies]\nruff = \">=0.10.0\"\n```\n\n## Installation\n\nPoetry supports multiple installation methods, including a simple script found at [install.python-poetry.org]. For full\ninstallation instructions, including advanced usage of the script, alternate install methods, and CI best practices, see\nthe full [installation documentation].\n\n## Documentation\n\n[Documentation] for the current version of Poetry (as well as the development branch and recently out of support\nversions) is available from the [official website].\n\n## Contribute\n\nPoetry is a large, complex project always in need of contributors. For those new to the project, a list of\n[suggested issues] to work on in Poetry and poetry-core is available. The full [contributing documentation] also\nprovides helpful guidance.\n\n## Resources\n\n* [Releases][PyPI Releases]\n* [Official Website]\n* [Documentation]\n* [Issue Tracker]\n* [Discord]\n\n  [PyPI]: https://pypi.org/project/poetry/\n  [PyPI Releases]: https://pypi.org/project/poetry/#history\n  [Official Website]: https://python-poetry.org\n  [Documentation]: https://python-poetry.org/docs/\n  [Issue Tracker]: https://github.com/python-poetry/poetry/issues\n  [Suggested Issues]: https://github.com/python-poetry/poetry/contribute\n  [Contributing Documentation]: https://python-poetry.org/docs/contributing\n  [Discord]: https://discord.com/invite/awxPgve\n  [install.python-poetry.org]: https://install.python-poetry.org\n  [Installation Documentation]: https://python-poetry.org/docs/#installation\n\n## Related Projects\n\n* [poetry-core](https://github.com/python-poetry/poetry-core): PEP 517 build-system for Poetry projects, and\ndependency-free core functionality of the Poetry frontend\n* [poetry-plugin-export](https://github.com/python-poetry/poetry-plugin-export): Export Poetry projects/lock files to\nforeign formats like requirements.txt\n* [poetry-plugin-bundle](https://github.com/python-poetry/poetry-plugin-bundle): Install Poetry projects/lock files to\nexternal formats like virtual environments\n* [install.python-poetry.org](https://github.com/python-poetry/install.python-poetry.org): The official Poetry\ninstallation script\n* [website](https://github.com/python-poetry/website): The official Poetry website and blog\n\n## Supporters\n\nThanks to [JetBrains](https://www.jetbrains.com) for supporting us with licenses for their tools.\n\n[<img src=\"https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg\" width=\"150\" alt=\"JetBrains logo.\" />](https://www.jetbrains.com)\n\n## Team handoff note (controlled)\nPoetry manages dependencies. For this team, offline installation must be separately validated.\n",
+      "sha256": "1d572488e377b35ec0b4ff416c2be79c6f5fcc7d52b49a9396b9393046b6613c",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "controlled_public",
+        "source_key": "python-poetry/poetry",
+        "transformations": [
+          {
+            "operation": "append",
+            "text": "\n## Team handoff note (controlled)\nPoetry manages dependencies. For this team, offline installation must be separately validated.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "# Poetry: Python packaging and dependency management made easy\n\n[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)\n[![Stable Version](https://img.shields.io/pypi/v/poetry?label=stable)][PyPI Releases]\n[![Pre-release Version](https://img.shields.io/github/v/release/python-poetry/poetry?label=pre-release&include_prereleases&sort=semver)][PyPI Releases]\n[![Python Versions](https://img.shields.io/pypi/pyversions/poetry)][PyPI]\n[![Download Stats](https://img.shields.io/pypi/dm/poetry)](https://pypistats.org/packages/poetry)\n[![Discord](https://img.shields.io/discord/487711540787675139?logo=discord)][Discord]\n\nPoetry helps you declare, manage and install dependencies of Python projects,\nensuring you have the right stack everywhere.\n\n![Poetry Install](https://raw.githubusercontent.com/python-poetry/poetry/main/assets/install.gif)\n\nPoetry replaces `setup.py`, `requirements.txt`, `setup.cfg`, `MANIFEST.in` and `Pipfile` with a simple `pyproject.toml`\nbased project format.\n\n```toml\n[build-system]\nrequires = [\"poetry-core>=2.0.0,<3.0.0\"]\nbuild-backend = \"poetry.core.masonry.api\"\n\n[project]\nname = \"my-package\"\nversion = \"0.1.0\"\ndescription = \"The description of the package\"\nreadme = \"README.md\"\n\nlicense = \"MIT\"\nlicense-files = [\"LICENSE\"]\n\n# No Python upper bound for package metadata\nrequires-python = \">=3.9\"\n\nauthors = [\n    { name = \"Sébastien Eustace\", email = \"sebastien@eustace.io\" },\n]\n\n# Keywords (translated to tags on the package index)\nkeywords = [\"packaging\", \"poetry\"]\n\ndependencies = [\n    # equivalent to ^3.8.1 with semver constraints\n    \"aiohttp (>=3.8.1,<4.0.0)\",\n    # dependency with extras\n    \"requests[security] (>=2.28,<3.0)\",\n    # version-specific dependency with prereleases allowed (see below)\n    \"tomli (>=2.0.1,<3.0.0) ; python_version < '3.11'\",\n    # git dependency with branch specified\n    \"cleo @ git+https://github.com/python-poetry/cleo.git@main\",\n]\n\n[project.urls]\nrepository = \"https://github.com/python-poetry/poetry\"\nhomepage = \"https://python-poetry.org\"\n\n# Scripts are easily expressed\n[project.scripts]\nmy_package_cli = \"my_package.console:run\"\n\n[project.optional-dependencies]\n# optional dependency to be installed via 'poetry install -E my-extra'\nmy-extra = [\"pendulum (>=3.1.0,<4.0.0)\"]\n\n[tool.poetry.dependencies]\n# Python upper bound for locking\npython = \">=3.9,<4.0\"\n# Version-specific dependencies with prereleases allowed\ntomli = { allow-prereleases = true }\n\n# Dependency groups are supported for organizing your dependencies\n[dependency-groups]\ndev = [\"pytest (>=7.1.2,<8.0.0)\", \"pytest-cov (>=3.0,<4.0)\"]\ndocs = [\"Sphinx (>=5.1.1,<6.0.0)\"]\n\n# ...and can be installed only when explicitly requested\n# via 'poetry install --with docs'\n[tool.poetry.group.docs]\noptional = true\n\n# Alternatively, you can use Poetry specific syntax\n# to specify dependency groups\n[tool.poetry.group.lint]\noptional = true\n\n[tool.poetry.group.lint.dependencies]\nruff = \">=0.10.0\"\n```\n\n## Installation\n\nPoetry supports multiple installation methods, including a simple script found at [install.python-poetry.org]. For full\ninstallation instructions, including advanced usage of the script, alternate install methods, and CI best practices, see\nthe full [installation documentation].\n\n## Documentation\n\n[Documentation] for the current version of Poetry (as well as the development branch and recently out of support\nversions) is available from the [official website].\n\n## Contribute\n\nPoetry is a large, complex project always in need of contributors. For those new to the project, a list of\n[suggested issues] to work on in Poetry and poetry-core is available. The full [contributing documentation] also\nprovides helpful guidance.\n\n## Resources\n\n* [Releases][PyPI Releases]\n* [Official Website]\n* [Documentation]\n* [Issue Tracker]\n* [Discord]\n\n  [PyPI]: https://pypi.org/project/poetry/\n  [PyPI Releases]: https://pypi.org/project/poetry/#history\n  [Official Website]: https://python-poetry.org\n  [Documentation]: https://python-poetry.org/docs/\n  [Issue Tracker]: https://github.com/python-poetry/poetry/issues\n  [Suggested Issues]: https://github.com/python-poetry/poetry/contribute\n  [Contributing Documentation]: https://python-poetry.org/docs/contributing\n  [Discord]: https://discord.com/invite/awxPgve\n  [install.python-poetry.org]: https://install.python-poetry.org\n  [Installation Documentation]: https://python-poetry.org/docs/#installation\n\n## Related Projects\n\n* [poetry-core](https://github.com/python-poetry/poetry-core): PEP 517 build-system for Poetry projects, and\ndependency-free core functionality of the Poetry frontend\n* [poetry-plugin-export](https://github.com/python-poetry/poetry-plugin-export): Export Poetry projects/lock files to\nforeign formats like requirements.txt\n* [poetry-plugin-bundle](https://github.com/python-poetry/poetry-plugin-bundle): Install Poetry projects/lock files to\nexternal formats like virtual environments\n* [install.python-poetry.org](https://github.com/python-poetry/install.python-poetry.org): The official Poetry\ninstallation script\n* [website](https://github.com/python-poetry/website): The official Poetry website and blog\n\n## Supporters\n\nThanks to [JetBrains](https://www.jetbrains.com) for supporting us with licenses for their tools.\n\n[<img src=\"https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg\" width=\"150\" alt=\"JetBrains logo.\" />](https://www.jetbrains.com)\n",
+      "sha256": "e073b37572ac444b70fc5481d8bfacf6ac0b7aaa90e3bbc68099fd3233b59230",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "python-poetry/poetry",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

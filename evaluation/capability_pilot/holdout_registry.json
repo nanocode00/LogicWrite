@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "families": [],
+  "status": "not_collected",
+  "policy": "All current public/AI-authored cases are exposed development material. New holdout families must be assigned by an independent custodian before annotation, checked against every existing family/parent graph and near-duplicate report, and kept outside this public package."
+}

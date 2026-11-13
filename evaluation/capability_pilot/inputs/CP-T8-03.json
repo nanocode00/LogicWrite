@@ -1,0 +1,79 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T8-03",
+  "task": {
+    "title": "Immer: 중복 표현 압축",
+    "purpose": "추가된 한국어 요약을 짧게 다듬는다. immutable next state와 current tree 수정 방식의 관계를 유지한다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "추가된 한국어 요약을 짧게 다듬는다. immutable next state와 current tree 수정 방식의 관계를 유지한다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "<img src=\"images/immer-logo.svg\" height=\"200px\" align=\"right\"/>\n\n# Immer\n\n[![npm](https://img.shields.io/npm/v/immer.svg)](https://www.npmjs.com/package/immer) [![Build Status](https://github.com/immerjs/immer/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/immerjs/immer/actions?query=branch%3Amain) [![Coverage Status](https://coveralls.io/repos/github/immerjs/immer/badge.svg?branch=main)](https://coveralls.io/github/immerjs/immer?branch=main) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![OpenCollective](https://opencollective.com/immer/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/immer/sponsors/badge.svg)](#sponsors) [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/immerjs/immer)\n\n_Create the next immutable state tree by simply modifying the current tree_\n\nWinner of the \"Breakthrough of the year\" [React open source award](https://osawards.com/react/) and \"Most impactful contribution\" [JavaScript open source award](https://osawards.com/javascript/) in 2019\n\n## Contribute using one-click online setup\n\nYou can use Gitpod (a free online VSCode like IDE) for contributing online. With a single click it will launch a workspace and automatically:\n\n- clone the immer repo.\n- install the dependencies.\n- run `yarn run start`.\n\nso that you can start coding straight away.\n\n[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)\n\n## Documentation\n\nThe documentation of this package is hosted at https://immerjs.github.io/immer/\n\n## Support\n\nDid Immer make a difference to your project? Join the open collective at https://opencollective.com/immer!\n\n## Release notes\n\nhttps://github.com/immerjs/immer/releases\n\n## 한국어 요약 (controlled)\n현재 tree를 수정하는 방식으로 다음 불변 state tree를 만든다. 다음 tree는 불변인 tree이며 이를 생성하는 방식이다.\n",
+      "sha256": "4ce4f566ca306473b300dd763dcdf520307735285fbf51cf759b34e5c35b49d0",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "controlled_public",
+        "source_key": "immerjs/immer",
+        "transformations": [
+          {
+            "operation": "append",
+            "text": "\n## 한국어 요약 (controlled)\n현재 tree를 수정하는 방식으로 다음 불변 state tree를 만든다. 다음 tree는 불변인 tree이며 이를 생성하는 방식이다.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "<img src=\"images/immer-logo.svg\" height=\"200px\" align=\"right\"/>\n\n# Immer\n\n[![npm](https://img.shields.io/npm/v/immer.svg)](https://www.npmjs.com/package/immer) [![Build Status](https://github.com/immerjs/immer/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/immerjs/immer/actions?query=branch%3Amain) [![Coverage Status](https://coveralls.io/repos/github/immerjs/immer/badge.svg?branch=main)](https://coveralls.io/github/immerjs/immer?branch=main) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![OpenCollective](https://opencollective.com/immer/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/immer/sponsors/badge.svg)](#sponsors) [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/immerjs/immer)\n\n_Create the next immutable state tree by simply modifying the current tree_\n\nWinner of the \"Breakthrough of the year\" [React open source award](https://osawards.com/react/) and \"Most impactful contribution\" [JavaScript open source award](https://osawards.com/javascript/) in 2019\n\n## Contribute using one-click online setup\n\nYou can use Gitpod (a free online VSCode like IDE) for contributing online. With a single click it will launch a workspace and automatically:\n\n- clone the immer repo.\n- install the dependencies.\n- run `yarn run start`.\n\nso that you can start coding straight away.\n\n[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)\n\n## Documentation\n\nThe documentation of this package is hosted at https://immerjs.github.io/immer/\n\n## Support\n\nDid Immer make a difference to your project? Join the open collective at https://opencollective.com/immer!\n\n## Release notes\n\nhttps://github.com/immerjs/immer/releases\n",
+      "sha256": "aa4c25aa3b251470ec5512d4271c202d229a0a9ffcf377762be331a5157edfba",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "immerjs/immer",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

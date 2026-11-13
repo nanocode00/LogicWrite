@@ -1,0 +1,76 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T4-05",
+  "task": {
+    "title": "파괴적 명령 경고와 목적지 충돌",
+    "purpose": "제공된 실행 안내와 보관 안내 전체를 정돈한다. 보관 안내의 읽기 전용 규칙은 수정할 수 없다. 모든 영향 문서를 반환한다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "제공된 실행 안내와 보관 안내 전체를 정돈한다. 보관 안내의 읽기 전용 규칙은 수정할 수 없다. 모든 영향 문서를 반환한다.",
+    "output_document_ids": [
+      "runbook",
+      "archive"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "runbook",
+      "role": "editable fictional document",
+      "content": "# 실행 안내\n경고: staging 전용. 검증된 백업과 책임자 승인 뒤 수행.\n`purge staging-cache`\n배경: 임시 캐시는 재생성 가능하다. 보관 원장은 별도다.\n",
+      "sha256": "65006f3aa81705904b301a9d9314a35e5d7a1348dcec627118451128000fc79c",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "destination_documents": [
+    {
+      "document_id": "archive",
+      "role": "editable fictional document",
+      "content": "# 보관 안내\n보관 원장은 읽기 전용이다. 원장 삭제 금지.\n## 배경 부록\n아직 추가 기록 없음.\n",
+      "sha256": "ec7ac733fb53bd31f052b415868e0e475a0f18a9e1bbc7c93ac79ab8bcf552f5",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "synthetic-author-batch-20261113",
+        "transformations": []
+      }
+    }
+  ],
+  "supporting_evidence": [],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "runbook",
+      "archive"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

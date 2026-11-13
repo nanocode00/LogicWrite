@@ -1,0 +1,108 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T4-04",
+  "task": {
+    "title": "sd: 목적지 기존 정보 손상 방지",
+    "purpose": "find/replace 모드 설명을 제공된 운영 메모로 옮길 필요가 있는지 검토한다. 목적지에는 다른 도구의 기존 예외가 있으며 삭제 권한은 없다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "find/replace 모드 설명을 제공된 운영 메모로 옮길 필요가 있는지 검토한다. 목적지에는 다른 도구의 기존 예외가 있으며 삭제 권한은 없다.",
+    "output_document_ids": [
+      "draft",
+      "ops",
+      "quickstart"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "# sd - `s`earch & `d`isplace\n\n`sd` is an intuitive find & replace CLI.\n\n## The Pitch\n\nWhy use it over any existing tools?\n\n*Painless regular expressions.* &nbsp; `sd` uses regex syntax that you already know from JavaScript and Python. Forget about dealing with quirks of `sed` or `awk` - get productive immediately.\n\n*String-literal mode.* &nbsp; Non-regex find & replace. No more backslashes or remembering which characters are special and need to be escaped.\n\n*Easy to read, easy to write.* &nbsp; Find & replace expressions are split up, which makes them easy to read and write. No more messing with unclosed and escaped slashes.\n\n*Smart, common-sense defaults.* &nbsp; Defaults follow common sense and are tailored for typical daily use.\n\n## Comparison to sed\n\nWhile sed does a whole lot more, sd focuses on doing just one thing and doing it well. Here are some cherry-picked examples where sd shines.\n\nSimpler syntax for replacing all occurrences:\n  - sd: `sd before after`\n  - sed: `sed s/before/after/g`\n\nReplace newlines with commas:\n  - sd: `sd -A '\\n' ','`\n  - sed: `sed ':a;N;$!ba;s/\\n/,/g'`\n\n  Note: this requires `-A` (across mode) since `\\n` is a cross-line pattern.\n\nExtracting stuff out of strings containing slashes:\n  - sd: `echo \"sample with /path/\" | sd '.*(/.*/)' '$1'`\n  - sed: `echo \"sample with /path/\" | sed -E 's/.*(\\\\/.*\\\\/)/\\1/g'`\n    \n    With sed, you can make it better with a different delimiter,\n    but it is still messy:\n    \n    `echo \"sample with /path/\" | sed -E 's|.*(/.*/)|\\1|g'`\n\nIn place modification of files:\n  - sd: `sd before after file.txt`\n  - sed: `sed -i -e 's/before/after/g' file.txt`\n    \n    With sed, you need to remember to use `-e` or else some\n    platforms will consider the next argument to be a backup suffix.\n\n## Benchmarks\n\n**Simple replacement on ~1.5 gigabytes of JSON**\n\n```sh\nhyperfine --warmup 3 --export-markdown out.md \\\n  'sed -E \"s/\\\"/'\"'\"'/g\" *.json > /dev/null' \\\n  'sed    \"s/\\\"/'\"'\"'/g\" *.json > /dev/null' \\\n  'sd     \"\\\"\" \"'\"'\"'\"   *.json > /dev/null'\n```\n\n| Command | Mean [s] | Min…Max [s] |\n|:---|---:|---:|\n| `sed -E \"s/\\\"/'/g\" *.json > /dev/null` | 2.338 ± 0.008 | 2.332…2.358 |\n| `sed    \"s/\\\"/'/g\" *.json > /dev/null` | 2.365 ± 0.009 | 2.351…2.378 |\n| `sd     \"\\\"\" \"'\"   *.json > /dev/null` | **0.997 ± 0.006** | 0.987…1.007 |\n\nResult: ~2.35 times faster\n\n**Regex replacement on a ~55M json file**:\n\n```sh\nhyperfine --warmup 3 --export-markdown out.md \\\n  'sed -E \"s:(\\w+):\\1\\1:g\"    dump.json > /dev/null' \\\n  'sed    \"s:\\(\\w\\+\\):\\1\\1:g\" dump.json > /dev/null' \\\n  'sd     \"(\\w+)\" \"$1$1\"      dump.json > /dev/null'\n```\n\n| Command | Mean [s] | Min…Max [s] |\n|:---|---:|---:|\n| `sed -E \"s:(\\w+):\\1\\1:g\"    dump.json > /dev/null` | 11.315 ± 0.215 | 11.102…11.725 |\n| `sed    \"s:\\(\\w\\+\\):\\1\\1:g\" dump.json > /dev/null` | 11.239 ± 0.208 | 11.057…11.762 |\n| `sd     \"(\\w+)\" \"$1$1\"      dump.json > /dev/null` | **0.942 ± 0.004** | 0.936…0.951 |\n\nResult: ~11.93 times faster\n\n**Line-by-line vs across mode** (1M lines, ~36MB file):\n\n| Command | Mean [ms] | Relative |\n|:---|---:|---:|\n| `sd -A 'foo' 'qux'` (across) | 125.6 ± 14.3 | 1.00 |\n| `sed s/foo/qux/g` | 316.4 ± 30.0 | 2.52 |\n| `sd 'foo' 'qux'` (line-by-line, default) | 357.0 ± 15.0 | 2.84 |\n\n| Command | Mean [ms] | Relative |\n|:---|---:|---:|\n| `sd -A '(\\w+) world' '$1 earth'` (across) | 254.0 ± 11.2 | 1.00 |\n| `sd '(\\w+) world' '$1 earth'` (line-by-line, default) | 566.7 ± 16.7 | 2.23 |\n| `sed -E 's/(\\w+) world/\\1 earth/g'` | 4432.7 ± 173.2 | 17.45 |\n\nLine-by-line mode is ~2-3x slower than across mode but still faster than sed for regex replacements. The tradeoff is dramatically lower memory usage:\n\n| Mode | Peak RSS |\n|:---|---:|\n| `sd -A` (across) | 74 MB |\n| `sd` (line-by-line, default) | 3 MB |\n\n## Installation\n\nInstall through\n[`cargo`](https://doc.rust-lang.org/cargo/getting-started/installation.html) with\n`cargo install sd`, or through various package managers\n\n[![Packaging status](https://repology.org/badge/vertical-allrepos/sd-find-replace.svg?exclude_unsupported=1)](https://repology.org/project/sd-find-replace/versions)\n\n## Quick Guide\n\n1. **String-literal mode**. By default, expressions are treated as regex. Use `-F` or `--fixed-strings` to disable regex.\n\n   ```sh\n   > echo 'lots((([]))) of special chars' | sd -F '((([])))' ''\n   lots of special chars\n   ```\n\n2. **Basic regex use** - let's trim some trailing whitespace\n\n   ```sh\n   > echo 'lorem ipsum 23   ' | sd '\\s+$' ''\n   lorem ipsum 23\n   ```\n\n3. **Capture groups**\n\n   Indexed capture groups:\n\n   ```sh\n   > echo 'cargo +nightly watch' | sd '(\\w+)\\s+\\+(\\w+)\\s+(\\w+)' 'cmd: $1, channel: $2, subcmd: $3'\n   cmd: cargo, channel: nightly, subcmd: watch\n   ```\n\n   Named capture groups:\n\n   ```sh\n   > echo \"123.45\" | sd '(?P<dollars>\\d+)\\.(?P<cents>\\d+)' '$dollars dollars and $cents cents'\n   123 dollars and 45 cents\n   ```\n\n   In the unlikely case you stumble upon ambiguities, resolve them by using `${var}` instead of `$var`. Here's an example:\n\n   ```sh\n   > echo '123.45' | sd '(?P<dollars>\\d+)\\.(?P<cents>\\d+)' '$dollars_dollars and $cents_cents'\n    and\n\n   > echo '123.45' | sd '(?P<dollars>\\d+)\\.(?P<cents>\\d+)' '${dollars}_dollars and ${cents}_cents'\n   123_dollars and 45_cents\n   ```\n\n4. **Find & replace in a file**\n\n   ```sh\n   > sd 'window.fetch' 'fetch' http.js\n   ```\n\n   That's it. The file is modified in-place.\n\n   To preview changes:\n\n   ```sh\n   > sd -p 'window.fetch' 'fetch' http.js\n   ```\n\n5. **Find & replace across project**\n\n   This example uses [fd](https://github.com/sharkdp/fd).\n\n   Good ol' unix philosophy to the rescue.\n\n   ```sh\n   fd --type file --exec sd 'from \"react\"' 'from \"preact\"'\n   ```\n\n   Same, but with backups (consider version control).\n\n   ```bash\n   fd --type file --exec cp {} {}.bk \\; --exec sd 'from \"react\"' 'from \"preact\"'\n   ```\n\n### Edge cases\nsd will interpret every argument starting with `-` as a (potentially unknown) flag.\nThe common convention of using `--` to signal the end of flags is respected:\n\n```bash\n$ echo \"./hello foo\" | sd \"foo\" \"-w\"\nerror: Found argument '-w' which wasn't expected, or isn't valid in this context\n\nUSAGE:\n    sd [OPTIONS] <find> <replace-with> [files]...\n\nFor more information try --help\n$ echo \"./hello foo\" | sd \"foo\" -- \"-w\"\n./hello -w\n$ echo \"./hello --foo\" | sd -- \"--foo\" \"-w\"\n./hello -w\n```\n\n### Processing modes\n\nBy default, sd processes input **line by line**. This means:\n- Low memory usage (only one line in memory at a time)\n- Streaming output for stdin (results appear before EOF)\n- `^` and `$` match the start/end of each line without phantom matches\n- `\\s+$` trims trailing whitespace without eating newlines\n\nIf you need patterns to match **across line boundaries** (e.g. replacing `\\n` or matching multi-line patterns), use the `-A` / `--across` flag:\n\n```sh\n> echo -e \"hello\\nworld\" | sd -A '\\n' ','\nhello,world\n```\n\n### Escaping special characters\nTo escape the `$` character, use `$$`:\n\n```bash\n❯ echo \"foo\" | sd 'foo' '$$bar'\n$bar\n```\n",
+      "sha256": "9908fcf52655578892c3f56c80406fa63d59dfb2fdacd86c9e9ed0815b649590",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "chmln/sd",
+        "transformations": []
+      },
+      "document_path": "README.md"
+    }
+  ],
+  "destination_documents": [
+    {
+      "document_id": "ops",
+      "role": "editable complete controlled destination",
+      "content": "# Operations notes\nExisting exception: legacy ls workflows must remain unchanged.\n## Benchmarks\nNo imported benchmark yet.\n## Shell integration\nNo imported shell procedure yet.\n## Background\nNo imported feature description yet.\n",
+      "sha256": "57a709aeeda58bee1f18610ab0a989c25613225425c8bce00f0842bd0e2631a4",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "controlled-destinations",
+        "transformations": []
+      },
+      "document_path": "ops.md"
+    },
+    {
+      "document_id": "quickstart",
+      "role": "editable complete controlled destination",
+      "content": "# First use\nSelect the tool for your task. Preserve the upstream installation prerequisites.\n## Shell integration\nNo imported shell procedure yet.\n## Appendix\nNo imported details yet.\n",
+      "sha256": "98c6c817b4926fa2e91262cc95f6145ae0d6f049d0eee9bc9237dad12b68e829",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "synthetic",
+        "source_key": "controlled-destinations",
+        "transformations": []
+      },
+      "document_path": "quickstart.md"
+    }
+  ],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "# sd - `s`earch & `d`isplace\n\n`sd` is an intuitive find & replace CLI.\n\n## The Pitch\n\nWhy use it over any existing tools?\n\n*Painless regular expressions.* &nbsp; `sd` uses regex syntax that you already know from JavaScript and Python. Forget about dealing with quirks of `sed` or `awk` - get productive immediately.\n\n*String-literal mode.* &nbsp; Non-regex find & replace. No more backslashes or remembering which characters are special and need to be escaped.\n\n*Easy to read, easy to write.* &nbsp; Find & replace expressions are split up, which makes them easy to read and write. No more messing with unclosed and escaped slashes.\n\n*Smart, common-sense defaults.* &nbsp; Defaults follow common sense and are tailored for typical daily use.\n\n## Comparison to sed\n\nWhile sed does a whole lot more, sd focuses on doing just one thing and doing it well. Here are some cherry-picked examples where sd shines.\n\nSimpler syntax for replacing all occurrences:\n  - sd: `sd before after`\n  - sed: `sed s/before/after/g`\n\nReplace newlines with commas:\n  - sd: `sd -A '\\n' ','`\n  - sed: `sed ':a;N;$!ba;s/\\n/,/g'`\n\n  Note: this requires `-A` (across mode) since `\\n` is a cross-line pattern.\n\nExtracting stuff out of strings containing slashes:\n  - sd: `echo \"sample with /path/\" | sd '.*(/.*/)' '$1'`\n  - sed: `echo \"sample with /path/\" | sed -E 's/.*(\\\\/.*\\\\/)/\\1/g'`\n    \n    With sed, you can make it better with a different delimiter,\n    but it is still messy:\n    \n    `echo \"sample with /path/\" | sed -E 's|.*(/.*/)|\\1|g'`\n\nIn place modification of files:\n  - sd: `sd before after file.txt`\n  - sed: `sed -i -e 's/before/after/g' file.txt`\n    \n    With sed, you need to remember to use `-e` or else some\n    platforms will consider the next argument to be a backup suffix.\n\n## Benchmarks\n\n**Simple replacement on ~1.5 gigabytes of JSON**\n\n```sh\nhyperfine --warmup 3 --export-markdown out.md \\\n  'sed -E \"s/\\\"/'\"'\"'/g\" *.json > /dev/null' \\\n  'sed    \"s/\\\"/'\"'\"'/g\" *.json > /dev/null' \\\n  'sd     \"\\\"\" \"'\"'\"'\"   *.json > /dev/null'\n```\n\n| Command | Mean [s] | Min…Max [s] |\n|:---|---:|---:|\n| `sed -E \"s/\\\"/'/g\" *.json > /dev/null` | 2.338 ± 0.008 | 2.332…2.358 |\n| `sed    \"s/\\\"/'/g\" *.json > /dev/null` | 2.365 ± 0.009 | 2.351…2.378 |\n| `sd     \"\\\"\" \"'\"   *.json > /dev/null` | **0.997 ± 0.006** | 0.987…1.007 |\n\nResult: ~2.35 times faster\n\n**Regex replacement on a ~55M json file**:\n\n```sh\nhyperfine --warmup 3 --export-markdown out.md \\\n  'sed -E \"s:(\\w+):\\1\\1:g\"    dump.json > /dev/null' \\\n  'sed    \"s:\\(\\w\\+\\):\\1\\1:g\" dump.json > /dev/null' \\\n  'sd     \"(\\w+)\" \"$1$1\"      dump.json > /dev/null'\n```\n\n| Command | Mean [s] | Min…Max [s] |\n|:---|---:|---:|\n| `sed -E \"s:(\\w+):\\1\\1:g\"    dump.json > /dev/null` | 11.315 ± 0.215 | 11.102…11.725 |\n| `sed    \"s:\\(\\w\\+\\):\\1\\1:g\" dump.json > /dev/null` | 11.239 ± 0.208 | 11.057…11.762 |\n| `sd     \"(\\w+)\" \"$1$1\"      dump.json > /dev/null` | **0.942 ± 0.004** | 0.936…0.951 |\n\nResult: ~11.93 times faster\n\n**Line-by-line vs across mode** (1M lines, ~36MB file):\n\n| Command | Mean [ms] | Relative |\n|:---|---:|---:|\n| `sd -A 'foo' 'qux'` (across) | 125.6 ± 14.3 | 1.00 |\n| `sed s/foo/qux/g` | 316.4 ± 30.0 | 2.52 |\n| `sd 'foo' 'qux'` (line-by-line, default) | 357.0 ± 15.0 | 2.84 |\n\n| Command | Mean [ms] | Relative |\n|:---|---:|---:|\n| `sd -A '(\\w+) world' '$1 earth'` (across) | 254.0 ± 11.2 | 1.00 |\n| `sd '(\\w+) world' '$1 earth'` (line-by-line, default) | 566.7 ± 16.7 | 2.23 |\n| `sed -E 's/(\\w+) world/\\1 earth/g'` | 4432.7 ± 173.2 | 17.45 |\n\nLine-by-line mode is ~2-3x slower than across mode but still faster than sed for regex replacements. The tradeoff is dramatically lower memory usage:\n\n| Mode | Peak RSS |\n|:---|---:|\n| `sd -A` (across) | 74 MB |\n| `sd` (line-by-line, default) | 3 MB |\n\n## Installation\n\nInstall through\n[`cargo`](https://doc.rust-lang.org/cargo/getting-started/installation.html) with\n`cargo install sd`, or through various package managers\n\n[![Packaging status](https://repology.org/badge/vertical-allrepos/sd-find-replace.svg?exclude_unsupported=1)](https://repology.org/project/sd-find-replace/versions)\n\n## Quick Guide\n\n1. **String-literal mode**. By default, expressions are treated as regex. Use `-F` or `--fixed-strings` to disable regex.\n\n   ```sh\n   > echo 'lots((([]))) of special chars' | sd -F '((([])))' ''\n   lots of special chars\n   ```\n\n2. **Basic regex use** - let's trim some trailing whitespace\n\n   ```sh\n   > echo 'lorem ipsum 23   ' | sd '\\s+$' ''\n   lorem ipsum 23\n   ```\n\n3. **Capture groups**\n\n   Indexed capture groups:\n\n   ```sh\n   > echo 'cargo +nightly watch' | sd '(\\w+)\\s+\\+(\\w+)\\s+(\\w+)' 'cmd: $1, channel: $2, subcmd: $3'\n   cmd: cargo, channel: nightly, subcmd: watch\n   ```\n\n   Named capture groups:\n\n   ```sh\n   > echo \"123.45\" | sd '(?P<dollars>\\d+)\\.(?P<cents>\\d+)' '$dollars dollars and $cents cents'\n   123 dollars and 45 cents\n   ```\n\n   In the unlikely case you stumble upon ambiguities, resolve them by using `${var}` instead of `$var`. Here's an example:\n\n   ```sh\n   > echo '123.45' | sd '(?P<dollars>\\d+)\\.(?P<cents>\\d+)' '$dollars_dollars and $cents_cents'\n    and\n\n   > echo '123.45' | sd '(?P<dollars>\\d+)\\.(?P<cents>\\d+)' '${dollars}_dollars and ${cents}_cents'\n   123_dollars and 45_cents\n   ```\n\n4. **Find & replace in a file**\n\n   ```sh\n   > sd 'window.fetch' 'fetch' http.js\n   ```\n\n   That's it. The file is modified in-place.\n\n   To preview changes:\n\n   ```sh\n   > sd -p 'window.fetch' 'fetch' http.js\n   ```\n\n5. **Find & replace across project**\n\n   This example uses [fd](https://github.com/sharkdp/fd).\n\n   Good ol' unix philosophy to the rescue.\n\n   ```sh\n   fd --type file --exec sd 'from \"react\"' 'from \"preact\"'\n   ```\n\n   Same, but with backups (consider version control).\n\n   ```bash\n   fd --type file --exec cp {} {}.bk \\; --exec sd 'from \"react\"' 'from \"preact\"'\n   ```\n\n### Edge cases\nsd will interpret every argument starting with `-` as a (potentially unknown) flag.\nThe common convention of using `--` to signal the end of flags is respected:\n\n```bash\n$ echo \"./hello foo\" | sd \"foo\" \"-w\"\nerror: Found argument '-w' which wasn't expected, or isn't valid in this context\n\nUSAGE:\n    sd [OPTIONS] <find> <replace-with> [files]...\n\nFor more information try --help\n$ echo \"./hello foo\" | sd \"foo\" -- \"-w\"\n./hello -w\n$ echo \"./hello --foo\" | sd -- \"--foo\" \"-w\"\n./hello -w\n```\n\n### Processing modes\n\nBy default, sd processes input **line by line**. This means:\n- Low memory usage (only one line in memory at a time)\n- Streaming output for stdin (results appear before EOF)\n- `^` and `$` match the start/end of each line without phantom matches\n- `\\s+$` trims trailing whitespace without eating newlines\n\nIf you need patterns to match **across line boundaries** (e.g. replacing `\\n` or matching multi-line patterns), use the `-A` / `--across` flag:\n\n```sh\n> echo -e \"hello\\nworld\" | sd -A '\\n' ','\nhello,world\n```\n\n### Escaping special characters\nTo escape the `$` character, use `$$`:\n\n```bash\n❯ echo \"foo\" | sd 'foo' '$$bar'\n$bar\n```\n",
+      "sha256": "9908fcf52655578892c3f56c80406fa63d59dfb2fdacd86c9e9ed0815b649590",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "chmln/sd",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft",
+      "ops",
+      "quickstart"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}

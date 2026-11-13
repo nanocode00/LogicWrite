@@ -1,0 +1,79 @@
+{
+  "schema_version": "capability-input-v1",
+  "case_id": "CP-T8-01",
+  "task": {
+    "title": "Lodash: 소개의 한국어 문체와 용어",
+    "purpose": "추가된 한국어 소개를 기술 안내 문체로 다듬는다. 코드·버전·인용·원문 영문 구간은 수정하지 않는다.",
+    "audience": "초보 사용자/유지보수자",
+    "deliverables": [
+      "외부로 제출한 판단·원문 근거·미해결 질문(편집 전에 고정)",
+      "허용 범위에 속한 모든 영향 문서의 전체 결과; 분석 과제도 결과 문서를 제출"
+    ]
+  },
+  "contract": {
+    "authority": "Only the pinned supplied evidence and explicit task conditions; controlled notes are fictional evaluation constraints, never upstream claims.",
+    "requirements": "추가된 한국어 소개를 기술 안내 문체로 다듬는다. 코드·버전·인용·원문 영문 구간은 수정하지 않는다.",
+    "output_document_ids": [
+      "draft"
+    ],
+    "protected_regions": "Code, quoted text and identifiers are byte-protected when the task says so; otherwise preserve all non-target information. No external URLs imply their contents are supplied.",
+    "reference_date": "fixed_snapshot_not_current_product_advice"
+  },
+  "source_documents": [
+    {
+      "document_id": "draft",
+      "role": "editable full README snapshot",
+      "content": "# lodash v4.18.1\n\n[Site](https://lodash.com/) |\n[Docs](https://lodash.com/docs) |\n[FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide) |\n[Contributing](https://github.com/lodash/lodash/blob/main/.github/CONTRIBUTING.md) |\n[Wiki](https://github.com/lodash/lodash/wiki \"Changelog, Roadmap, etc.\") |\n[Code of Conduct](https://github.com/openjs-foundation/cross-project-council/blob/main/CODE_OF_CONDUCT.md) |\n[Governance](https://github.com/lodash/lodash/blob/HEAD/GOVERNANCE.md) |\n[Twitter](https://twitter.com/bestiejs) |\n[Chat](https://gitter.im/lodash/lodash)\n\n> [!IMPORTANT]\n> As announced on the [OpenJS Foundation blog](https://openjsf.org/blog/sta-supports-lodash), Lodash has received support from the Sovereign Tech Agency and will transition to the Feature-Complete maturity stage so that it remains stable, secure, and sustainable long-term. As part of this effort, Lodash is rebooting its governance. A draft charter will be published shortly. The upcoming Technical Steering Committee (TSC) is already at work. For transparency, its members are listed in [GOVERNANCE.md](https://github.com/lodash/lodash/blob/HEAD/GOVERNANCE.md).\n\nThe [Lodash](https://lodash.com/) library exported as a [UMD](https://github.com/umdjs/umd) module.\n\nGenerated using [lodash-cli](https://www.npmjs.com/package/lodash-cli):\n```shell\n$ npm run build\n$ lodash -o ./dist/lodash.js\n$ lodash core -o ./dist/lodash.core.js\n```\n\n## Download\n\n * [Core build](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.core.js) ([~4 kB gzipped](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.core.min.js))\n * [Full build](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.js) ([~24 kB gzipped](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.min.js))\n * [CDN copies](https://www.jsdelivr.com/projects/lodash)\n\nLodash is released under the [MIT license](https://raw.githubusercontent.com/lodash/lodash/4.18.1/LICENSE) & supports modern environments.<br>\nReview the [build differences](https://github.com/lodash/lodash/wiki/build-differences) & pick one that’s right for you.\n\n## Installation\n\nIn a browser:\n```html\n<script src=\"lodash.js\"></script>\n```\n\nUsing npm:\n```shell\n$ npm i -g npm\n$ npm i --save lodash\n```\n\nIn Node.js:\n```js\n// Load the full build.\nvar _ = require('lodash');\n// Load the core build.\nvar _ = require('lodash/core');\n// Load the FP build for immutable auto-curried iteratee-first data-last methods.\nvar fp = require('lodash/fp');\n\n// Load method categories.\nvar array = require('lodash/array');\nvar object = require('lodash/fp/object');\n\n// Cherry-pick methods for smaller browserify/rollup/webpack bundles.\nvar at = require('lodash/at');\nvar curryN = require('lodash/fp/curryN');\n```\n\n## Why Lodash?\n\nLodash makes JavaScript easier by taking the hassle out of working with arrays,<br>\nnumbers, objects, strings, etc. Lodash’s modular methods are great for:\n\n * Iterating arrays, objects, & strings\n * Manipulating & testing values\n * Creating composite functions\n\n## Module Formats\n\nLodash is available in a [variety of builds](https://lodash.com/custom-builds) & module formats.\n\n * [lodash](https://www.npmjs.com/package/lodash) & [per method packages](https://www.npmjs.com/browse/keyword/lodash-modularized)\n * [lodash-es](https://www.npmjs.com/package/lodash-es), [babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash), & [lodash-webpack-plugin](https://www.npmjs.com/package/lodash-webpack-plugin)\n * [lodash/fp](https://github.com/lodash/lodash/tree/npm/fp)\n * [lodash-amd](https://www.npmjs.com/package/lodash-amd)\n\n\n\n## 한국어 소개 (controlled)\nLodash는 배열이랑 객체 및 문자열의 작업을 쉽게 해주는 것입니다. 쓰기 편한 것이다.\n",
+      "sha256": "d0595395a6130bcc10b278f4684ced4c157ab9bee9a7bb848666b3fba651ea91",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "controlled_public",
+        "source_key": "lodash/lodash",
+        "transformations": [
+          {
+            "operation": "append",
+            "text": "\n## 한국어 소개 (controlled)\nLodash는 배열이랑 객체 및 문자열의 작업을 쉽게 해주는 것입니다. 쓰기 편한 것이다.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "destination_documents": [],
+  "supporting_evidence": [
+    {
+      "document_id": "upstream",
+      "role": "read-only pinned upstream evidence",
+      "content": "# lodash v4.18.1\n\n[Site](https://lodash.com/) |\n[Docs](https://lodash.com/docs) |\n[FP Guide](https://github.com/lodash/lodash/wiki/FP-Guide) |\n[Contributing](https://github.com/lodash/lodash/blob/main/.github/CONTRIBUTING.md) |\n[Wiki](https://github.com/lodash/lodash/wiki \"Changelog, Roadmap, etc.\") |\n[Code of Conduct](https://github.com/openjs-foundation/cross-project-council/blob/main/CODE_OF_CONDUCT.md) |\n[Governance](https://github.com/lodash/lodash/blob/HEAD/GOVERNANCE.md) |\n[Twitter](https://twitter.com/bestiejs) |\n[Chat](https://gitter.im/lodash/lodash)\n\n> [!IMPORTANT]\n> As announced on the [OpenJS Foundation blog](https://openjsf.org/blog/sta-supports-lodash), Lodash has received support from the Sovereign Tech Agency and will transition to the Feature-Complete maturity stage so that it remains stable, secure, and sustainable long-term. As part of this effort, Lodash is rebooting its governance. A draft charter will be published shortly. The upcoming Technical Steering Committee (TSC) is already at work. For transparency, its members are listed in [GOVERNANCE.md](https://github.com/lodash/lodash/blob/HEAD/GOVERNANCE.md).\n\nThe [Lodash](https://lodash.com/) library exported as a [UMD](https://github.com/umdjs/umd) module.\n\nGenerated using [lodash-cli](https://www.npmjs.com/package/lodash-cli):\n```shell\n$ npm run build\n$ lodash -o ./dist/lodash.js\n$ lodash core -o ./dist/lodash.core.js\n```\n\n## Download\n\n * [Core build](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.core.js) ([~4 kB gzipped](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.core.min.js))\n * [Full build](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.js) ([~24 kB gzipped](https://raw.githubusercontent.com/lodash/lodash/4.18.1/dist/lodash.min.js))\n * [CDN copies](https://www.jsdelivr.com/projects/lodash)\n\nLodash is released under the [MIT license](https://raw.githubusercontent.com/lodash/lodash/4.18.1/LICENSE) & supports modern environments.<br>\nReview the [build differences](https://github.com/lodash/lodash/wiki/build-differences) & pick one that’s right for you.\n\n## Installation\n\nIn a browser:\n```html\n<script src=\"lodash.js\"></script>\n```\n\nUsing npm:\n```shell\n$ npm i -g npm\n$ npm i --save lodash\n```\n\nIn Node.js:\n```js\n// Load the full build.\nvar _ = require('lodash');\n// Load the core build.\nvar _ = require('lodash/core');\n// Load the FP build for immutable auto-curried iteratee-first data-last methods.\nvar fp = require('lodash/fp');\n\n// Load method categories.\nvar array = require('lodash/array');\nvar object = require('lodash/fp/object');\n\n// Cherry-pick methods for smaller browserify/rollup/webpack bundles.\nvar at = require('lodash/at');\nvar curryN = require('lodash/fp/curryN');\n```\n\n## Why Lodash?\n\nLodash makes JavaScript easier by taking the hassle out of working with arrays,<br>\nnumbers, objects, strings, etc. Lodash’s modular methods are great for:\n\n * Iterating arrays, objects, & strings\n * Manipulating & testing values\n * Creating composite functions\n\n## Module Formats\n\nLodash is available in a [variety of builds](https://lodash.com/custom-builds) & module formats.\n\n * [lodash](https://www.npmjs.com/package/lodash) & [per method packages](https://www.npmjs.com/browse/keyword/lodash-modularized)\n * [lodash-es](https://www.npmjs.com/package/lodash-es), [babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash), & [lodash-webpack-plugin](https://www.npmjs.com/package/lodash-webpack-plugin)\n * [lodash/fp](https://github.com/lodash/lodash/tree/npm/fp)\n * [lodash-amd](https://www.npmjs.com/package/lodash-amd)\n\n\n",
+      "sha256": "882ff84de79568af63234100cfc6497f091195c358cb27b91dc2c4b27692be03",
+      "availability": "provided",
+      "completeness": "complete",
+      "origin": {
+        "kind": "public_snapshot",
+        "source_key": "lodash/lodash",
+        "transformations": []
+      }
+    }
+  ],
+  "availability": {
+    "gaps": [],
+    "external_material": "not_available",
+    "candidate_output": "not_run"
+  },
+  "allowed_edit_scope": {
+    "document_ids": [
+      "draft"
+    ],
+    "operations": [
+      "analysis",
+      "selection",
+      "removal",
+      "placement",
+      "move",
+      "consolidation",
+      "evidence_based_addition",
+      "expression"
+    ],
+    "limits": "Task-specific requested edit only; preserve unrelated content, existing destination obligations, read-only evidence and records. Return affected documents in full."
+  }
+}
