@@ -1,0 +1,13 @@
+{
+  "schema_version": "integrated-review-v1",
+  "case_id": "IR-003",
+  "input_sha256": "75c88eb7c3b9cd217a8e0ca367889685ca086b7549b26a2024479fcc8a5a6c24",
+  "status": "pending_human_review",
+  "initial_judgment": null,
+  "initial_evidence": null,
+  "answer_exposure": null,
+  "counterreview": null,
+  "final_judgment": null,
+  "adjudication": null,
+  "gold_inclusion_approval": null
+}

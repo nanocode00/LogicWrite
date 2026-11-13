@@ -1,0 +1,111 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "integrated-review-v1"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^IR-[0-9]{3}$"
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "const": "pending_human_review"
+    },
+    "initial_judgment": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "initial_evidence": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "answer_exposure": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "counterreview": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "final_judgment": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "adjudication": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "gold_inclusion_approval": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "case_id",
+    "input_sha256",
+    "status",
+    "initial_judgment",
+    "initial_evidence",
+    "answer_exposure",
+    "counterreview",
+    "final_judgment",
+    "adjudication",
+    "gold_inclusion_approval"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

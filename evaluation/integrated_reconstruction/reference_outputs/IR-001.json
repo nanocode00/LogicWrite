@@ -1,0 +1,21 @@
+{
+  "case_id": "IR-001",
+  "input_sha256": "37b0fcb2aa74a75b5066c5b01fc2ea049a7ce67cdd0ca3fbc6888d776be990d3",
+  "kind": "ai_authored_non_unique_example_not_execution",
+  "bundle": "A",
+  "documents": [
+    {
+      "document_id": "readme",
+      "content": "# PaperDock\nPaperDock는 로컬 Markdown 폴더의 제목과 상대 경로를 JSON 색인으로 만드는 CLI입니다. 입력 본문은 바꾸지 않으며 외부로 전송하지 않습니다.\n\n## 시작\nPython 3.11 이상이 필요합니다. 출력 상위 폴더가 존재하는지 확인하세요. 기존 출력 파일은 덮어쓰지 않으며 같은 파일이 있으면 실패합니다.\n```sh\npython -m pip install paperdock==0.8.0\npaperdock index ./notes --out ./index.json\n```\n자세한 실행 조건은 [사용 안내](docs/usage.md)를 확인하세요.\n\n## 유지보수\n배포 전 확인 절차와 JSON 전환 이유는 [개발 기록](docs/devlog.md)에 있습니다.\n\n## Donate\n금전 후원은 받지 않습니다. 테스트 결과와 오류 제보를 환영합니다. [후원 안내](FUNDING.md)를 확인하세요.\n\n## Contributing\n변경 제안과 오류 제보는 [기여 안내](CONTRIBUTING.md)를 확인하세요.\n\n## License\nMIT. [LICENSE](LICENSE)를 참고하세요.\n",
+      "sha256": "13b1439bef304269f2abf2495e687cea16d1159e72a0bfbc07da14409eb3717f"
+    },
+    {
+      "document_id": "usage",
+      "content": "# 사용 안내\nPaperDock는 로컬 Markdown 폴더의 제목과 상대 경로를 JSON으로 색인합니다. 본문을 수정하거나 외부로 전송하지 않습니다.\n\n## 설치\nPython 3.11 이상이 필요합니다.\n```sh\npython -m pip install paperdock==0.8.0\n```\n\n## 색인\n출력 상위 폴더가 미리 존재해야 합니다. 같은 출력 파일이 이미 있으면 실패하며 기존 파일은 덮어쓰지 않습니다.\n```sh\npaperdock index ./notes --out ./index.json\n```\nJSON에는 제목과 입력 폴더 기준 상대 경로만 포함됩니다.\n\n## 기여\n오류 제보는 [기여 안내](../CONTRIBUTING.md)로 보냅니다.\n",
+      "sha256": "d33d4e80db405487aca7db67284e3a92c8ead9d46982da6c5890e1bb5f0e3020"
+    }
+  ],
+  "unresolved_questions": [],
+  "deferred_scope": [],
+  "executed_by_system": false
+}
