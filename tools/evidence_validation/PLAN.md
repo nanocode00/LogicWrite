@@ -21,7 +21,7 @@ Alternatives rejected: excluding Core paths from old manifests loses evidence; m
 - [x] Integrity API: synthetic current Core mutation is allowed, input/judgment/approval/manifest/validator/fixture tampering and missing Git history fail. Snapshot/source/requirements tampering fails. Pin substitution fails.
 - [x] Execution: verify separate suite roots and all original tests executed, current failing Core test causes nonzero result, real #33 combined tests pass. Historical execution failure cannot become success.
 - [x] Consumer adapter: current Core offline prediction -> historical comparator, no label reads before predictions; wrong input binding fails; current source identity reported.
-- [ ] Full runs: standalone latest-main branch and temporary combined #33 tree, diff check and unchanged old blobs, Draft PR only.
+- [x] Full runs: standalone latest-main branch and temporary combined #33 tree, diff check and unchanged old blobs, Draft PR only.
 
 ## Review focus
 
