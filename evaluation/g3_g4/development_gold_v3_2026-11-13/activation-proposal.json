@@ -1,0 +1,30 @@
+{
+  "status": "proposed_not_active",
+  "policy_approval": null,
+  "current_active_dataset": {
+    "path": "evaluation/g3_g4/development_gold_v2_2026-11-11/development-gold.json",
+    "sha256": "2adddb82f0e9016c210887014bb65d074a99cd9ffa4515931c3002377adc3f5a",
+    "pointer": ""
+  },
+  "candidate_dataset": {
+    "path": "evaluation/g3_g4/development_gold_v3_2026-11-13/development-gold.json",
+    "sha256": "2617830de63f0c6c7ad2124fd2c993e12e2f1b38628ea3c4c82d507f842632ed",
+    "pointer": ""
+  },
+  "consumers_unchanged": [
+    {
+      "path": "evaluation/core_pipeline_2026_11_11/evaluate.py",
+      "sha256": "bc350c3cab91fed81136d780adee67d8b60239cd8e4879b8ee5642ef9423c4a3",
+      "pointer": ""
+    },
+    {
+      "path": "evaluation/source_candidate_semantics/run.py",
+      "sha256": "1fe988e195efb0d68b8cb418bbaa99845588058217c92d31b17771874b913932",
+      "pointer": ""
+    }
+  ],
+  "activation_performed": false,
+  "blockers": [
+    "MIGRATION_POLICY_APPROVAL_REQUIRED"
+  ]
+}
