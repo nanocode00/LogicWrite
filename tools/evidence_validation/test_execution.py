@@ -100,3 +100,33 @@ class ExecutionTests(unittest.TestCase):
                 path = folder / filename
                 path.write_text('mutated\n')
                 self.assertNotEqual(before, runner.current_identity(root)['source_sha256'], filename)
+
+    def test_skipped_test_is_reported_and_cannot_pass_validation(self):
+        runner = self.runner()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'test_skip.py').write_text("import unittest\nclass Incomplete(unittest.TestCase):\n @unittest.skip('unavailable')\n def test_missing(self): pass\n")
+            result = runner.run_suite(root, '.', 'test_skip.py')
+            self.assertEqual(result['tests_run'], 1)
+            self.assertEqual(result['skipped'], 1)
+            self.assertNotEqual(result['returncode'], 0)
+
+    def test_expected_failure_is_not_full_pass(self):
+        runner = self.runner()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'test_xfail.py').write_text("import unittest\nclass Incomplete(unittest.TestCase):\n @unittest.expectedFailure\n def test_defect(self): self.fail('known defect')\n")
+            result = runner.run_suite(root, '.', 'test_xfail.py')
+            self.assertEqual(result['tests_run'], 1)
+            self.assertEqual(result['expected_failures'], 1)
+            self.assertNotEqual(result['returncode'], 0)
+
+    def test_repository_tests_directory_is_collected(self):
+        runner = self.runner()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            path = root / 'tests/regression/test_gate.py'
+            path.parent.mkdir(parents=True)
+            path.write_text('import unittest\n')
+            plan = runner.suite_plan(boundary.EvidenceStore(ROOT), root)
+            self.assertIn({'phase': 'current', 'directory': 'tests/regression', 'pattern': 'test_*.py'}, plan)

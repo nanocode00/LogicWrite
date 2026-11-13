@@ -55,3 +55,9 @@ Core 446개는 PR #33의 9개 회귀가 포함된 수치다. #33이 없는 독�
 PR #33과 #34는 원격 Draft/open·동일 head를 유지하며 main은 변경하지 않았다. 새 Draft PR도 사용자 검수 전 병합하지 않는다. 지원 통합 명령을 사용한다는 전제에서 #33의 기존 보존 검증 차단은 해소되었다. 실제 병합 시 최신 head/base 재확인과 같은 명령 재실행이 필요하다.
 
 실패/skip: 지원 통합 검증에서 0. 미실행: 외부 모델/서비스 호출, 원격 CI, 실제 승인 발급/배포, 원격 병합. 호스트는 Python 3.12.3, jsonschema 4.10.3. 당시 exact 환경 lock은 존재하지 않아 완전한 동일 환경 재현이나 의미 품질 향상을 주장하지 않는다. JSON 보고서는 로컬 `/tmp` 산출물이며 증거 원본이나 기존 점수에 반영하지 않았다.
+
+## 순차 통합 전 재검증
+
+2026-11-13, 원격 main `879d15b` 및 PR #37 head `a042823`를 다시 확인한 독립 워크트리에서 실행했다. skip/expected failure를 전체 PASS로 처리하던 문제와 `tests/` 수집 범위를 신규 회귀로 재현하고 수정했다. 저장소 README에 공식 전체 진입점을 추가했고 레거시 `run_checks.py`와 고정 snapshot 검증의 차이를 실행 안내에 명시했다.
+
+`python3 tools/evidence_validation/run.py --output /tmp/logicwrite-pr37-final.json`: **722 tests PASS = 역사 244 + 현재 Core 437 + 현재 소비자 22 + 경계 19**, failures/errors/skip/expected failures/unexpected successes 모두 0. 현재 증거 545파일·역사 snapshot 616파일 검증, 소비자별 29건 비교. 기존 증거/manifest/검증기/승인 정책 수정 없음. 최초 baseline 실행은 검토 중 파일 변경을 지문 검사에서 탐지해 FAIL했으며, 위 결과는 수정이 끝난 트리의 새 전체 실행이다. 원격 Actions workflow 0개로 로컬 결과이며 CI 통과 주장은 하지 않는다.

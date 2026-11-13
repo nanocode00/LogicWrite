@@ -10,7 +10,7 @@
 python3 tools/evidence_validation/run.py --output /tmp/logicwrite-validation.json
 ```
 
-진행은 stderr, 개별 명령·실패·실행 수·출처·환경은 JSON에 남긴다. 오류·빈 테스트 묶음·시간 초과·증거/코드 변경은 실패 종료다. 출력 경로는 저장소 밖이어야 한다. 레거시 역사 검증기를 현재 개발 트리에서 직접 실행하는 명령은 이 통합 명령을 대신하지 않는다.
+진행은 stderr, 개별 명령·실패·실행 수·출처·환경은 JSON에 남긴다. 오류·skip·expected failure·unexpected success·빈 테스트 묶음·시간 초과·증거/코드 변경은 실패 종료다. 출력 경로는 저장소 밖이어야 한다. 레거시 역사 검증기를 현재 개발 트리에서 직접 실행하는 명령은 이 통합 명령을 대신하지 않는다.
 
 ## 원인과 의존관계
 
@@ -68,3 +68,9 @@ python3 tools/evidence_validation/run.py --output /tmp/logicwrite-validation.jso
 - shared clone은 원본 Git 객체에 의존하며 shallow/archive-only 환경은 지원하지 않는다. 보고서의 현재 파일 지문과 독립 체크아웃을 함께 사용한다. 실제 승인/배포 정책에는 손대지 않는다.
 
 실제 독립 브랜치 및 PR #33 결합 결과는 [VALIDATION.md](VALIDATION.md)에 기록한다. 모든 변경은 별도 Draft PR이며 자동 병합하지 않는다.
+
+## 레거시 전체 실행과의 차이
+
+`evaluation/core_pipeline_2026_11_11/run_checks.py`는 발견한 모든 테스트를 **같은 현재 작업 트리**에서 실행하는 당시 도구다. 현재 Core/문서가 변경된 트리에서는 과거 `preserved-files.json`의 전체 snapshot 고정 때문에 역사적 검증 7개 묶음이 실패할 수 있다. 이것은 그 도구에서 예상되는 snapshot 차이이며, 새 전체 검증의 실패를 무시하라는 뜻이 아니다. 과거 검증기와 `run_checks.py`는 수정하지 않는다.
+
+공식 전체 명령은 위 `tools/evidence_validation/run.py`다. 과거 원본 244개 검증은 고정 Git snapshot에서, 현재 Core/소비자/신규 평가/`tests/` 회귀는 현재 트리에서 실행한다. 개별 Core unittest 명령은 부분 회귀용이다. skip/expected failure는 수를 따로 기록하고 전체 PASS로 처리하지 않는다. 보고서의 실패·오류·skip 집계와 suite별 실제 실행 수를 확인한다.

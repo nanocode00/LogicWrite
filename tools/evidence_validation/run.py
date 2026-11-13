@@ -22,7 +22,7 @@ def suite_plan(store, root):
     # engines; this supplements, rather than replaces, their historical tests.
     plan.extend({'phase': 'current', 'directory': name, 'pattern': 'test_*.py'} for name in
                 ('evaluation/core_pipeline_2026_11_11', 'evaluation/source_candidate_semantics'))
-    for base in ('experiments', 'tools'):
+    for base in ('experiments', 'tools', 'tests'):
         directories = sorted({str(p.parent.relative_to(root)) for p in (root / base).rglob('test_*.py')})
         plan.extend({'phase': 'current', 'directory': name, 'pattern': 'test_*.py'} for name in directories)
     # Newly versioned evaluation packages do not get silently tested on old Core.
@@ -57,16 +57,21 @@ def run_suite(root, directory, pattern):
         failures = re.search(r'^FAILED \(([^)]*)\)', output, re.MULTILINE)
         details = failures.group(1) if failures else ''
         tests = int(count.group(1)) if count else 0
+        skipped = sum(map(int, re.findall(r'skipped=(\d+)', output)))
+        expected = sum(map(int, re.findall(r'expected failures=(\d+)', output)))
+        unexpected = sum(map(int, re.findall(r'unexpected successes=(\d+)', output)))
+        complete = tests > 0 and not (skipped or expected or unexpected)
         return {'command': command, 'directory': directory, 'pattern': pattern,
-                'tests_run': tests, 'returncode': process.returncode if tests else (process.returncode or 2),
+                'tests_run': tests, 'returncode': process.returncode if complete else (process.returncode or 2),
                 'failures': sum(map(int, re.findall(r'failures=(\d+)', details))),
                 'errors': sum(map(int, re.findall(r'errors=(\d+)', details))),
-                'skipped': sum(map(int, re.findall(r'skipped=(\d+)', output))),
-                'output': output if process.returncode or not tests else output[-250:]}
+                'skipped': skipped, 'expected_failures': expected, 'unexpected_successes': unexpected,
+                'output': output if process.returncode or not complete else output[-250:]}
     except subprocess.TimeoutExpired:
         return {'command': command, 'directory': directory, 'pattern': pattern,
                 'tests_run': 0, 'returncode': 124, 'failures': 0, 'errors': 1,
-                'skipped': 0, 'output': 'Test process exceeded 120 seconds'}
+                'skipped': 0, 'expected_failures': 0, 'unexpected_successes': 0,
+                'output': 'Test process exceeded 120 seconds'}
 
 
 def validate(repository=ROOT):
@@ -95,7 +100,8 @@ def validate(repository=ROOT):
         store.verify_evidence()
         if before != current_identity(root):
             raise ValueError('current code changed during verification')
-        report['tests_run'] = sum(row['tests_run'] for row in report['suites'])
+        for field in ('tests_run', 'failures', 'errors', 'skipped', 'expected_failures', 'unexpected_successes'):
+            report[field] = sum(row[field] for row in report['suites'])
         report['status'] = 'PASS' if report['suites'] and all(row['returncode'] == 0 for row in report['suites']) else 'FAIL'
     except (ValueError, OSError, subprocess.SubprocessError) as exc:
         report['error'] = str(exc)
