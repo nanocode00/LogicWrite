@@ -1,0 +1,2260 @@
+{
+  "schema_version": "legacy-review-evidence-bundle-v1",
+  "basis_commit": "606f7b428b4cf9ea32a7ddcf50c3e3745a67a78a",
+  "status": "evidence_validated_policy_pending",
+  "record_type": "migration_bundle_not_formal_user_events",
+  "policy": {
+    "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/policy.json",
+    "sha256": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+    "pointer": ""
+  },
+  "continuation_request": {
+    "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/continuation-request.json",
+    "sha256": "d6ff6f6e365355d478c6ebae1b49d504da9a2a1486e072a32f8c27d7aac75a32",
+    "pointer": ""
+  },
+  "ordered_source_stages": [
+    {
+      "stage": "initial",
+      "source_commit": "93d5252f9348004f9ce38b886b73e458eff3c3c1",
+      "source": {
+        "path": "evaluation/golden_expansion/counterreview_2026_11_11/initial-judgments.json",
+        "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+        "pointer": ""
+      },
+      "order_basis": "git_ancestry_and_source_reference_links"
+    },
+    {
+      "stage": "ai_counterreview",
+      "source_commit": "8ace3d46a7aad4f58bafc30e45c70d0cce673742",
+      "source": {
+        "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+        "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+        "pointer": ""
+      },
+      "order_basis": "git_ancestry_and_source_reference_links"
+    },
+    {
+      "stage": "user_final",
+      "source_commit": "1ec8031608c20731895dc1a96524b30949bb0ed4",
+      "source": {
+        "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+        "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+        "pointer": ""
+      },
+      "order_basis": "git_ancestry_and_source_reference_links"
+    },
+    {
+      "stage": "inclusion",
+      "source_commit": "dc8083d04d40dcd06face398336f0b8f923f1eb2",
+      "source": {
+        "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+        "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+        "pointer": ""
+      },
+      "order_basis": "git_ancestry_and_source_reference_links"
+    }
+  ],
+  "case_count": 17,
+  "cases": [
+    {
+      "case_id": "GC-001",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-001.json",
+        "sha256": "b8965bdf566a855212a91a55db1cdc1dcd05dd42665abb8d60c6db42db780d82",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/0"
+        },
+        "judgment": "PRESERVED",
+        "reason": "정보는 같고 표현의 차이"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+          "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+          "pointer": "/cases/0"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+          "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "Requests officially supports Python 3.10+."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "Python 3.10+ is officially supported by Requests."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/0"
+        },
+        "event_sha256": "7652ea4edd1557de28ff841f1eaa1588a04fa552a39ee8f0c3864705fe8bfa55",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/0"
+        },
+        "event_sha256": "38e13d068a0fe553fe080e096ad30649843a17c7ca7d1b05abc64ae869dd2f9d",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/5"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "psf/requests",
+            "path": "README.md",
+            "version": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+            "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+            "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+            "snapshot_path": "sources/requests-document.txt",
+            "snapshot_sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "psf/requests"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-002",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-002.json",
+        "sha256": "751d613d03c25f4b422001096244705ff370632f259156bb9071e77d1e8d854a",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/1"
+        },
+        "judgment": "VIOLATION",
+        "reason": "근거 없는 지원 버전 변경"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+          "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+          "pointer": "/cases/1"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+          "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "Requests officially supports Python 3.10+."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "Requests officially supports Python 3.8+."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/1"
+        },
+        "event_sha256": "5f2ce3db229a123bc4c436bbf8e0276b897ab6ce58da6b56cafd83a9787d37c1",
+        "judgment": "VIOLATION",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/1"
+        },
+        "event_sha256": "ecd9acf4bc52d83bfef87a6a6d982c3a4417bfcfb92fdeafe558cc2dc6ea8e5e",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/6"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "psf/requests",
+            "path": "README.md",
+            "version": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+            "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+            "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+            "snapshot_path": "sources/requests-document.txt",
+            "snapshot_sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "psf/requests"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-003",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-003.json",
+        "sha256": "e964addcdc5bfd5174d43ff80cb3b8ce875db84c0ca7e941f3dc8f59af0870e5",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/2"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "전체 내용을 다시 받아야 함"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+          "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+          "pointer": "/cases/2"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+          "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "## Supported Features & Best–Practices"
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "Requests officially supports Python 3.10+."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          },
+          {
+            "pointer": "/candidate_documents/0/availability",
+            "quote": "partial"
+          },
+          {
+            "pointer": "/missing_context/0",
+            "quote": "완전한 수정 결과 전체와 전송 범위·해시가 필요하다. 현재 결과는 전송 중 절단된 접두부다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/2"
+        },
+        "event_sha256": "2254f506ec1900d674a468d6e96367c540560f44c4a833a8c2dc6b4632eb2f5c",
+        "judgment": "UNRESOLVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/2"
+        },
+        "event_sha256": "c720d9c786d1235d4debdbc91b711d9fc92e364225203690f5473aadf3e6b608",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": {
+        "reason": "전체 내용을 다시 받아야 함",
+        "attribution": "user_reason_retained_by_current_request",
+        "original_reason": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/2/initial_reason"
+        },
+        "reaffirmation": {
+          "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/continuation-request.json",
+          "sha256": "d6ff6f6e365355d478c6ebae1b49d504da9a2a1486e072a32f8c27d7aac75a32",
+          "pointer": "/unresolved_statement"
+        }
+      },
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/7"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "psf/requests",
+            "path": "README.md",
+            "version": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+            "git_blob_sha": "4e5c44555c02f127cd0cca2efa8b22716c78ee23",
+            "url": "https://github.com/psf/requests/blob/3c7baaa05ab4aa49cc819ce3a819d260de19c157/README.md",
+            "snapshot_path": "sources/requests-document.txt",
+            "snapshot_sha256": "2a9268c9be5f4dc9abe9105740be7c5234babc3dd2b25eb11ca376c538a0c67b",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "psf/requests"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-004",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-004.json",
+        "sha256": "0cca8992461ee3ebcafc3987d0f5831c95514bcadf0e59a2e91f6d87e1f1da44",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/3"
+        },
+        "judgment": "PRESERVED",
+        "reason": "정보는 동일, 표현 방식만 다름"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+          "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+          "pointer": "/cases/3"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+          "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "The default behavior is to raise a `TimeoutException` after 5 seconds of\nnetwork inactivity."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "By default, 5 seconds of network inactivity raises a `TimeoutException`."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/3"
+        },
+        "event_sha256": "82f55793a508890a11b48d9bbfb8fc498efc875109e23ed686b17ece3cb2c583",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/3"
+        },
+        "event_sha256": "5895c0b2f168e083563acf5e097c1c5ef758d94d28173bb4517c33a322762a8b",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/8"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "encode/httpx",
+            "path": "docs/advanced/timeouts.md",
+            "version": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+            "git_blob_sha": "aedcfb627f5139901638ebf8de30216c2640591e",
+            "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+            "snapshot_path": "sources/httpx-document.txt",
+            "snapshot_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "encode/httpx"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-005",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-005.json",
+        "sha256": "29fcdb276e517f5c276eec0ff13652613cdfd3108ed11c664f5780edece84e05",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/4"
+        },
+        "judgment": "VIOLATION",
+        "reason": "근거 없는 시간 변경"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+          "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+          "pointer": "/cases/4"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+          "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "after 5 seconds of"
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "after 50 seconds of"
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/4"
+        },
+        "event_sha256": "e83ca7ce429dd47459353536e0471dc3df232a1176ddddb450079b2a6cc4a90b",
+        "judgment": "VIOLATION",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/4"
+        },
+        "event_sha256": "9c855ee47531adf54d02720266699d78499e8d50a59fab62dc4c64712d16d261",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/9"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "encode/httpx",
+            "path": "docs/advanced/timeouts.md",
+            "version": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+            "git_blob_sha": "aedcfb627f5139901638ebf8de30216c2640591e",
+            "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+            "snapshot_path": "sources/httpx-document.txt",
+            "snapshot_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "encode/httpx"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-006",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-006.json",
+        "sha256": "77c237b84b850ce802f03d47edb6679c940921f81aa85d7bc4eb834d5e986e75",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/5"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "전체 내용을 재전송받아야 함"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.raw.json",
+          "sha256": "10c1d2dcf36fd8dd319b05b065a9d3a8d0d61d49c2b4facc0c70fa1fccd558d0",
+          "pointer": "/cases/5"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc01_06.execution.json",
+          "sha256": "97732804156c18f2e502290f6b2f712ac5eaa244ebf55d33432a8844632b8f19",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "## Fine tuning the configuration"
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "client = httpx.Client(timeout=None)  # Disable all timeouts by default."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          },
+          {
+            "pointer": "/candidate_documents/0/availability",
+            "quote": "partial"
+          },
+          {
+            "pointer": "/missing_context/0",
+            "quote": "완전한 수정 결과 전체와 전송 범위·해시가 필요하다. 현재 결과는 전송 중 절단된 접두부다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/5"
+        },
+        "event_sha256": "906290162083da96ae79ae6d679dd8a3e876fe67dceb5fc9336100f0fba36d0b",
+        "judgment": "UNRESOLVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/5"
+        },
+        "event_sha256": "16fa3e21f66d070eeaf3664fee5906933867d9d27a421f691e0841f9e4abeb47",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": {
+        "reason": "전체 내용을 재전송받아야 함",
+        "attribution": "user_reason_retained_by_current_request",
+        "original_reason": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/5/initial_reason"
+        },
+        "reaffirmation": {
+          "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/continuation-request.json",
+          "sha256": "d6ff6f6e365355d478c6ebae1b49d504da9a2a1486e072a32f8c27d7aac75a32",
+          "pointer": "/unresolved_statement"
+        }
+      },
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/10"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "encode/httpx",
+            "path": "docs/advanced/timeouts.md",
+            "version": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+            "git_blob_sha": "aedcfb627f5139901638ebf8de30216c2640591e",
+            "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/docs/advanced/timeouts.md",
+            "snapshot_path": "sources/httpx-document.txt",
+            "snapshot_sha256": "48959a587ecc6430f9051ab1b1c76fcebc3f3e95ec01199281aab813a2dcfaa1",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "encode/httpx"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-007",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-007.json",
+        "sha256": "0e8ebad79b9b3982789e6b1af8c7985bb3b0ac33c8cc4e30213000377338e1fe",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/6"
+        },
+        "judgment": "PRESERVED",
+        "reason": "정보는 동일, 표현 방식 차이"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+          "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+          "pointer": "/cases/0"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+          "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "{func}`version_option` adds a `--version` option which immediately prints the version number and exits the program."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "The `--version` option added by {func}`version_option` immediately prints the version number, then exits the program."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/6"
+        },
+        "event_sha256": "1b9787a697386606c124a10047e7e7878ea5102375738d630974ead8d8c29619",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/6"
+        },
+        "event_sha256": "999eb45c3204e7684948d9cd456337ba72ac785206a3f7da10d382ffe2a6a91e",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/11"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "pallets/click",
+            "path": "docs/option-decorators.md",
+            "version": "8abb77a8432e03ed14a95f972b44f905279415a7",
+            "git_blob_sha": "9a2e33e498f6b3ca8dae40f22f8457c1e6614b6c",
+            "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+            "snapshot_path": "sources/click-document.txt",
+            "snapshot_sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "pallets/click"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-008",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-008.json",
+        "sha256": "c7ed331f1ed0e17e18a011ecafbf04722e7778e7db4a68f36b0072ed19433dfc",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/7"
+        },
+        "judgment": "VIOLATION",
+        "reason": "버전 출력 후 동작 변경"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+          "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+          "pointer": "/cases/1"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+          "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "{func}`version_option` adds a `--version` option which immediately prints the version number and exits the program."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "{func}`version_option` adds a `--version` option which immediately prints the version number and continues running the program."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/7"
+        },
+        "event_sha256": "75d7ab28097c6a01578a479072b624bd4293708e369c2eaaa194d844290bef63",
+        "judgment": "VIOLATION",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/7"
+        },
+        "event_sha256": "f7ac9b1f4c14a16674fa5c8cde5aa6090903312b8a5d974ce9e15341c64a4d2b",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/12"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "pallets/click",
+            "path": "docs/option-decorators.md",
+            "version": "8abb77a8432e03ed14a95f972b44f905279415a7",
+            "git_blob_sha": "9a2e33e498f6b3ca8dae40f22f8457c1e6614b6c",
+            "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+            "snapshot_path": "sources/click-document.txt",
+            "snapshot_sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "pallets/click"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-009",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-009.json",
+        "sha256": "80aaff4509692f922f28ebccd929c010c6570ab4795d3666750c6f19efc041ed",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/8"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "이동된 문서의 본문이 필요함"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+          "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+          "pointer": "/cases/2"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+          "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "See [confirmation details](details.md)."
+          },
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "boolean `--yes` flag and asking for confirmation if the user did not provide it and to fail in a callback:"
+          },
+          {
+            "pointer": "/source_documents/1/availability",
+            "quote": "not_provided"
+          },
+          {
+            "pointer": "/candidate_documents/1/availability",
+            "quote": "not_provided"
+          },
+          {
+            "pointer": "/writing_contract/constraints/2",
+            "quote": "통제된 의미 보존 시험 조건으로 상세 내용을 details.md에 보존하고 본문에서 링크로 노출하는 구성을 허용한다. 후보 생성과 사후 전체 검증을 구분한다. 이 계약은 실제 문서 편집 권고가 아니다."
+          },
+          {
+            "pointer": "/missing_context/0",
+            "quote": "details.md의 수정 전후 전체 스냅샷과 목적지 역할·링크 해소가 필요하다."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/8"
+        },
+        "event_sha256": "078a3299b136ad0379861ff01c9750aaa803db7df66c0a69fdfa7fa9b51d2586",
+        "judgment": "UNRESOLVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/8"
+        },
+        "event_sha256": "ce53e10843ebc68c77bfe35f96c8f62d19fadab0484f460505f8531ec802162c",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": {
+        "reason": "이동된 문서의 본문이 필요함",
+        "attribution": "user_reason_retained_by_current_request",
+        "original_reason": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/8/initial_reason"
+        },
+        "reaffirmation": {
+          "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/continuation-request.json",
+          "sha256": "d6ff6f6e365355d478c6ebae1b49d504da9a2a1486e072a32f8c27d7aac75a32",
+          "pointer": "/unresolved_statement"
+        }
+      },
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/13"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "pallets/click",
+            "path": "docs/option-decorators.md",
+            "version": "8abb77a8432e03ed14a95f972b44f905279415a7",
+            "git_blob_sha": "9a2e33e498f6b3ca8dae40f22f8457c1e6614b6c",
+            "url": "https://github.com/pallets/click/blob/8abb77a8432e03ed14a95f972b44f905279415a7/docs/option-decorators.md",
+            "snapshot_path": "sources/click-document.txt",
+            "snapshot_sha256": "5c719c04b4a17bee3c4dc59bcb06e26def026f2f38d69309dc070512332beae6",
+            "captured_on": "2026-11-10"
+          },
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "details.md",
+            "version": "controlled-candidate-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "pallets/click"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-010",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-010.json",
+        "sha256": "6676d1408b9b457b3f4b4af3fbbda4fa3d99bd022bac1d17b67fa28f8fc56aab",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/9"
+        },
+        "judgment": "PRESERVED",
+        "reason": "내용은 보존되고 위치만 변경"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+          "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+          "pointer": "/cases/3"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+          "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "## Readiness check\n\n```\nGET /-/ready\nHEAD /-/ready\n```\n\nThis endpoint returns 200 when Prometheus is ready to serve traffic (i.e. respond to queries)."
+          },
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "## Health check\n\n```\nGET /-/healthy\nHEAD /-/healthy\n```\n\nThis endpoint always returns 200 and should be used to check Prometheus health."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "## Readiness check\n\n```\nGET /-/ready\nHEAD /-/ready\n```\n\nThis endpoint returns 200 when Prometheus is ready to serve traffic (i.e. respond to queries)."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "## Health check\n\n```\nGET /-/healthy\nHEAD /-/healthy\n```\n\nThis endpoint always returns 200 and should be used to check Prometheus health."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/9"
+        },
+        "event_sha256": "5cee08f4b6f61a9850c2afce9e12b19eb764a623492cc50ceb1d9c9f38e29071",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/9"
+        },
+        "event_sha256": "2c4b2fb4743712acca8d3acaefe60f1f5bfa848151f9e8fa1cfbe04cae5c93f6",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/14"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "prometheus/prometheus",
+            "path": "docs/management_api.md",
+            "version": "bd517f6636ce1b6263dada9dfecb3fe92c84d96f",
+            "git_blob_sha": "ecc46fad8808977d575fe6a646282b58540ac064",
+            "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+            "snapshot_path": "sources/prometheus-document.txt",
+            "snapshot_sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "prometheus/prometheus"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-011",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-011.json",
+        "sha256": "bf8a5b1cda5b6eaa181b558287fdaa2b44938064c425ea4dad4998279bf94900",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/10"
+        },
+        "judgment": "VIOLATION",
+        "reason": "기본 활성화 여부와 플래그 역할 두 가지 변경"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+          "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+          "pointer": "/cases/4"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+          "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "It's disabled by default and can be enabled via the `--web.enable-lifecycle` flag."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "It's enabled by default and can be disabled via the `--web.enable-lifecycle` flag."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/10"
+        },
+        "event_sha256": "d6731367f221d585524fc67d89dbf2f8d52c06cfe537ce5638b0076ad3a9df3a",
+        "judgment": "VIOLATION",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/10"
+        },
+        "event_sha256": "a88088e1dfe3f12d2288b9bcc8b5bb63aad10c5b2ef2084b6826662537854409",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/15"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "prometheus/prometheus",
+            "path": "docs/management_api.md",
+            "version": "bd517f6636ce1b6263dada9dfecb3fe92c84d96f",
+            "git_blob_sha": "ecc46fad8808977d575fe6a646282b58540ac064",
+            "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+            "snapshot_path": "sources/prometheus-document.txt",
+            "snapshot_sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "prometheus/prometheus"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "GC-012",
+      "input": {
+        "path": "evaluation/g3_g4/inputs/GC-012.json",
+        "sha256": "977a31d73f7391bc9823810679dd46d461de6afa4e5cf43450fc9b4f27ded24d",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/11"
+        },
+        "judgment": "UNRESOLVED",
+        "reason": "이동된 문서의 내용이 필요함"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.raw.json",
+          "sha256": "7b3dc3277c0a671c207f9335d31dddf01c19251377917c557350b93780dedf2c",
+          "pointer": "/cases/5"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/gc07_12.execution.json",
+          "sha256": "2d96c86f3a0a4a4ac7f56ac2c411589305735a1c044e22fe36ea418e0f14e284",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "## Lifecycle operations\n\nSee [reload and quit](details.md)."
+          },
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "This endpoint triggers a reload of the Prometheus configuration and rule files. It's disabled by default and can be enabled via the `--web.enable-lifecycle` flag."
+          },
+          {
+            "pointer": "/source_documents/1/availability",
+            "quote": "not_provided"
+          },
+          {
+            "pointer": "/candidate_documents/1/availability",
+            "quote": "not_provided"
+          },
+          {
+            "pointer": "/writing_contract/constraints/2",
+            "quote": "통제된 의미 보존 시험 조건으로 상세 내용을 details.md에 보존하고 본문에서 링크로 노출하는 구성을 허용한다. 후보 생성과 사후 전체 검증을 구분한다. 이 계약은 실제 문서 편집 권고가 아니다."
+          },
+          {
+            "pointer": "/missing_context/0",
+            "quote": "details.md의 수정 전후 전체 스냅샷과 목적지 역할·링크 해소가 필요하다."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "원문 전체의 주장·수치·조건·부정·코드와 적용 범위를 보존한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/11"
+        },
+        "event_sha256": "5912790fe9e8cc741cc7220c984e0021f1d0507cd55423f7570326f0667de99a",
+        "judgment": "UNRESOLVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/11"
+        },
+        "event_sha256": "c8fefdf31d1a98007b3e1d44a2c1ba6fc6b01a3f2f97afa1a1fbb17851f155ff",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": {
+        "reason": "이동된 문서의 내용이 필요함",
+        "attribution": "user_reason_retained_by_current_request",
+        "original_reason": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/11/initial_reason"
+        },
+        "reaffirmation": {
+          "path": "evaluation/golden_expansion/legacy_migration_2026_11_13/continuation-request.json",
+          "sha256": "d6ff6f6e365355d478c6ebae1b49d504da9a2a1486e072a32f8c27d7aac75a32",
+          "pointer": "/unresolved_statement"
+        }
+      },
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/16"
+        },
+        "parent_inputs": [],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "prometheus/prometheus",
+            "path": "docs/management_api.md",
+            "version": "bd517f6636ce1b6263dada9dfecb3fe92c84d96f",
+            "git_blob_sha": "ecc46fad8808977d575fe6a646282b58540ac064",
+            "url": "https://github.com/prometheus/prometheus/blob/bd517f6636ce1b6263dada9dfecb3fe92c84d96f/docs/management_api.md",
+            "snapshot_path": "sources/prometheus-document.txt",
+            "snapshot_sha256": "a35c19a065c3b98bc2f4129a4159f8962c08744a274f396b1061d6c357e6069a",
+            "captured_on": "2026-11-10"
+          },
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "details.md",
+            "version": "controlled-candidate-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [
+          "prometheus/prometheus"
+        ],
+        "construction": "공개 원문 전체에 AI가 통제한 수정을 적용한 개발용 후보. 실제 upstream 수정이나 사람 정답이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "SP-013",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-013.json",
+        "sha256": "ce3cd011bb651e101abaabe5b6d1941618ad3461de5baac6a5240b0d7ca6320c",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/12"
+        },
+        "judgment": "VIOLATION",
+        "reason": "필수 조건 위반"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+          "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+          "pointer": "/cases/0"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+          "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+          },
+          {
+            "pointer": "/candidate_documents/1/content",
+            "quote": "캐시는 수동으로 삭제한다.\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/exposure",
+            "quote": "same_document"
+          },
+          {
+            "pointer": "/writing_contract/constraints/4",
+            "quote": "이 합성 시나리오에서 첫 실행의 유일한 핵심 기능은 오프라인 검색이다. 첫 사용 전에 캐시 준비가 필수이며 설치 문서에 캐시 조건을 직접 노출해야 한다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/12"
+        },
+        "event_sha256": "bcf35d51c7a37d2f8f0ab8980d2e23719f17a8c5484ff840c22655886e85444f",
+        "judgment": "VIOLATION",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/12"
+        },
+        "event_sha256": "00e86903d4bd8e38f81b210e3e321a99c06d556dfe0abb05f4752a720dfe6bd5",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/0"
+        },
+        "parent_inputs": [
+          {
+            "path": "evaluation/semantic_pilot/inputs/SP-003.json",
+            "sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34"
+          },
+          {
+            "path": "evaluation/semantic_pilot/inputs/SP-011.json",
+            "sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4"
+          }
+        ],
+        "source_provenance": [
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "install.md",
+            "version": "synthetic-source-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          },
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "maintenance.md",
+            "version": "synthetic-source-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [],
+        "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "SP-014",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-014.json",
+        "sha256": "94a36bf11ec9cf60dc39097264ec96abc0c98874684ca18051fe201c464d5693",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/13"
+        },
+        "judgment": "PRESERVED",
+        "reason": "다른 문서로 이동했으며 계약 충족"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+          "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+          "pointer": "/cases/1"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+          "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "오프라인 검색 조건은 [유지보수](maintenance.md)를 참조한다."
+          },
+          {
+            "pointer": "/candidate_documents/1/content",
+            "quote": "캐시는 수동으로 삭제한다.\n\n캐시가 있는 경우에만 오프라인 검색을 사용할 수 있다."
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/exposure",
+            "quote": "linked_document"
+          },
+          {
+            "pointer": "/writing_contract/constraints/4",
+            "quote": "이 합성 시나리오에서 오프라인 검색은 선택 기능이다. 설치 후 기본 기능은 캐시 없이 동작한다. 캐시 조건은 유지보수 문서의 전체 내용과 설치 문서의 해소 가능한 링크로 충분하며 첫 사용에서 직접 노출은 요구하지 않는다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/13"
+        },
+        "event_sha256": "4d87f2d8e4443638b434da0f9d78882a3d94f06d6f5f4019ea2737ad965c1236",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/13"
+        },
+        "event_sha256": "de1dd24710227efb462e183077b33c53dd611c5282444c321765eeb8407496ff",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/1"
+        },
+        "parent_inputs": [
+          {
+            "path": "evaluation/semantic_pilot/inputs/SP-003.json",
+            "sha256": "a686c6bd7c615edd69d06ed2ee28532adec29421a3807ec9e9fe03c97627ed34"
+          },
+          {
+            "path": "evaluation/semantic_pilot/inputs/SP-011.json",
+            "sha256": "531320c62a446c510421df645bc3f55566ac9403200d36970b093816f23a6df4"
+          }
+        ],
+        "source_provenance": [
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "install.md",
+            "version": "synthetic-source-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          },
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "maintenance.md",
+            "version": "synthetic-source-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [],
+        "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "SP-015",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-015.json",
+        "sha256": "632a7c3afae5e5cb64781d3958b36d4e366ea54a2fe04642030b3eadd9bbe5d4",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/14"
+        },
+        "judgment": "PRESERVED",
+        "reason": "다른 문서로 이동했으며 계약 충족"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+          "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+          "pointer": "/cases/2"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+          "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+          },
+          {
+            "pointer": "/candidate_documents/1/content",
+            "quote": "### Why PKG Instead Of DMG?\n\nFor this release, **PKG is the better fit**. A DMG is nicer for drag-and-drop\napps, but this app needs to install a menu bar runtime under Applications,\nbundle Node/cloudflared helpers, and run a non-blocking post-install Doctor.\nPKG gives beginners a clearer \"install and open\" path. A signed/notarized DMG\ncan still be added later for a more consumer-style download.\n\n"
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "### Packaging rationale\n\nSee [packaging decision](PACKAGING.md)."
+          },
+          {
+            "pointer": "/writing_contract/constraints/3",
+            "quote": "document_id packaging의 논리 경로는 PACKAGING.md다. 패키징 선택 이유는 이 문서로 이동할 수 있다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/14"
+        },
+        "event_sha256": "c0963a7cf5e441397c1b34606eaf60c96ae7b4a402617465ac7b0836a8fb96d8",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/14"
+        },
+        "event_sha256": "bb90f13658ca8688a376a5d5fd51bc1ab62bdb6ca269e76ed4154df642dda8d5",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/2"
+        },
+        "parent_inputs": [
+          {
+            "path": "evaluation/semantic_pilot/inputs/SP-009.json",
+            "sha256": "70070b025604e32d0c8d0e069baebb0bf787bfa5736336415f1039790caf8d3e"
+          }
+        ],
+        "source_provenance": [
+          {
+            "kind": "public_git",
+            "repository": "nanocode00/chatgpt2codex",
+            "path": "README.md",
+            "version": "dcc9ed7e18802800ae8b0536a232875b2a29eb05",
+            "git_blob_sha": "5c9aeff92d6bbc092d98f84cbe3a0fe29838b6f0",
+            "url": "https://raw.githubusercontent.com/nanocode00/chatgpt2codex/dcc9ed7e18802800ae8b0536a232875b2a29eb05/README.md",
+            "snapshot_path": "sources/chatgpt2codex-README.md",
+            "snapshot_sha256": "46ef18b5453f94a51e5cb840b8088eda0a5306b181ecaa007f54d3bb678e7fa0",
+            "captured_on": "2026-11-10"
+          },
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "PACKAGING.md",
+            "version": "controlled-derivative-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-11"
+          }
+        ],
+        "source_families": [
+          "nanocode00/chatgpt2codex"
+        ],
+        "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "SP-016",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-016.json",
+        "sha256": "da5825690bd7f223ddc2a340476dbf7648f3b32d322e82e621a74ded21de2ba1",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/15"
+        },
+        "judgment": "PRESERVED",
+        "reason": "계약에서 지정한 v2 기준 내용 선택"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+          "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+          "pointer": "/cases/3"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+          "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "요청 제한 시간은 30초다."
+          },
+          {
+            "pointer": "/source_documents/1/content",
+            "quote": "요청 제한 시간은 60초다."
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "요청 제한 시간은 60초다."
+          },
+          {
+            "pointer": "/writing_contract/constraints/3",
+            "quote": "합성 권한자 policy-owner는 합성 작성 시점 2026-11-11T09:00:00+09:00에 policy-v2(version v2, SHA-256 41b246fbf0f3eea08a2fbcf9c60e9f456cc69c84c742312f5a1962f44c096dd8)만 기준 원문으로 승인했다고 가정한다. policy-v1은 비교용 과거 스냅샷이며 보존 대상이 아니다. 실제 사람 승인이나 Core 정책 승인으로 사용하지 않는다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/15"
+        },
+        "event_sha256": "8218b6c5d14d64288896f2c28b88eb71edd1993fadf7d06095f5916822188025",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/15"
+        },
+        "event_sha256": "fa06ac532ea215f09348cf0064d5e808ccce16b879447d937b061651f94181da",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/3"
+        },
+        "parent_inputs": [
+          {
+            "path": "evaluation/semantic_pilot/inputs/SP-010.json",
+            "sha256": "2eba2f7af65059d59e4dfe2181f80d478e29b6313ce810beddfc7719b621cfdf"
+          }
+        ],
+        "source_provenance": [
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "policy-v1.md",
+            "version": "v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          },
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "policy-v2.md",
+            "version": "v2",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [],
+        "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    },
+    {
+      "case_id": "SP-017",
+      "input": {
+        "path": "evaluation/golden_expansion/inputs/SP-017.json",
+        "sha256": "c654e533741304a3c51c49bdd6aff60d1c965960f2fcc8ead57b0fa740393b14",
+        "pointer": ""
+      },
+      "initial_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/initial-judgments.json",
+          "sha256": "bce0351d7905ceb69a592c1b9f40e5a616eda61953404022fd0e0dc3b886f1aa",
+          "pointer": "/cases/16"
+        },
+        "judgment": "PRESERVED",
+        "reason": "전체 본문 제공, 내용 완전히 동일"
+      },
+      "ai_review": {
+        "source": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.raw.json",
+          "sha256": "4e1876e5cdbdc995f9e472c7f6fc703dbf6698e15b7ac53db7e00f3a6c299254",
+          "pointer": "/cases/4"
+        },
+        "execution": {
+          "path": "evaluation/golden_expansion/codex_counterreview_2026_11_11/sp13_17.execution.json",
+          "sha256": "b95eeb61d406c7c727b08ebe98e6b9bc218a4a70e7cd04c1163dbc8b4347e3c0",
+          "pointer": "/status"
+        },
+        "supporting_evidence": [
+          {
+            "pointer": "/source_documents/0/content",
+            "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+          },
+          {
+            "pointer": "/candidate_documents/0/content",
+            "quote": "# 업데이트\n\n자동 업데이트는 지원하지 않는다. 수동 재설치가 필요하다.\n"
+          },
+          {
+            "pointer": "/writing_contract/required_information/0/description",
+            "quote": "자동 업데이트 미지원과 수동 재설치 필요"
+          },
+          {
+            "pointer": "/supplied_observations/0",
+            "quote": "통제된 합성 조건: 잘린 접두부를 원문과 동일한 전체 결과로 합성 교체. 실제 누락 부분을 관측한 것이 아니다."
+          }
+        ],
+        "attributed_to": "independent_Codex_review",
+        "evidence_attributed_to_human": false,
+        "execution_completed": true
+      },
+      "final_human": {
+        "source": {
+          "path": "evaluation/golden_expansion/user_final_2026_11_11/events.json",
+          "sha256": "e01a8480afa68d7dad8559e00068e5dd309bcf127f3f40a88745d7390a6401f2",
+          "pointer": "/events/16"
+        },
+        "event_sha256": "295fc03d56c21f55dca1468ee82a12f4bc054fc7820a7c19e4cd8ac8f9e1d408",
+        "judgment": "PRESERVED",
+        "response": "동의",
+        "response_target": "AI counterargument validity assessment",
+        "additional_reason": "추가 의견 없음"
+      },
+      "inclusion": {
+        "source": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/events.json",
+          "sha256": "9150b63c6a3a045f4334bae036ff801c7c2face1d31ba88606534a67cd555209",
+          "pointer": "/events/16"
+        },
+        "event_sha256": "b4d7eaa8133ec492ca5afa4cc9d17c840bacaa6d85e71a584a8ea7b1b07fd13b",
+        "declaration": {
+          "path": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13/approval-declaration.json",
+          "sha256": "7973b2f4d54365c34a387eee4a2183e11325b2fec883681fbfbf4c63c4d03555",
+          "pointer": "/statement"
+        },
+        "approved": true
+      },
+      "reason_retention": null,
+      "unrecorded_formal_fields": {
+        "challenge_id": null,
+        "challenge_decision": null,
+        "user_final_evidence": null,
+        "user_reviewed_at": null,
+        "authenticated_identity": null,
+        "signature": null,
+        "confidence_limitations_user_confirmed": null,
+        "blinded_to_prior_judgments": null
+      },
+      "lineage": {
+        "registry": {
+          "path": "evaluation/golden_expansion/registry.json",
+          "sha256": "dc1f2591571e20a81b32065fa292e15da833ebec481ae1447f3a797cb8b6568e",
+          "pointer": "/cases/4"
+        },
+        "parent_inputs": [
+          {
+            "path": "evaluation/semantic_pilot/inputs/SP-012.json",
+            "sha256": "ae66a0460e2337257a81a90a31b47f2c3115b24a46a8a2b9e188d4f35733df2e"
+          }
+        ],
+        "source_provenance": [
+          {
+            "kind": "controlled_synthetic",
+            "repository": null,
+            "path": "update.md",
+            "version": "synthetic-source-v1",
+            "git_blob_sha": null,
+            "url": null,
+            "snapshot_path": null,
+            "snapshot_sha256": null,
+            "captured_on": "2026-11-10"
+          }
+        ],
+        "source_families": [],
+        "construction": "통제된 합성 파생 입력. 아래 문맥·관측·승인은 이 사례 안에서만 가정한 조건이며 실제 관측이나 사람 승인 사실이 아니다."
+      },
+      "legacy_evidence_validated": true,
+      "qualifies_under_proposed_policy": true,
+      "activation_eligible": false,
+      "blockers": [
+        "MIGRATION_POLICY_APPROVAL_REQUIRED"
+      ],
+      "development_only": true,
+      "independent_multi_human_complete": false
+    }
+  ]
+}

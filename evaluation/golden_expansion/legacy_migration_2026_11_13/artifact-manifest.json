@@ -1,0 +1,14 @@
+{
+  "migration/PLAN.md": "7b7de63f679e7536fed2e03fa34303211efe6e1204c6102ee55becbff50912c8",
+  "migration/README.md": "823289ce7207fc63100e19d1315b35d1993ce0862b821456cd8e7e47ce1ea93e",
+  "migration/continuation-request.json": "d6ff6f6e365355d478c6ebae1b49d504da9a2a1486e072a32f8c27d7aac75a32",
+  "migration/legacy-records.json": "d5450e6e014488cc8ede891570955992a6a6a4089cabce9034f5ff3fe6efa0ae",
+  "migration/policy.json": "b51460e14de51e66867fc3ac9c619bf02990847776edce1404b5795f1652fc1f",
+  "migration/preserved-files.json": "c7cf41077053319a1e2b48c9de74bc7222e3b59c7c3738d7265f24676729b426",
+  "migration/test_migration.py": "49fe44dfb372aa1f688a3ea09ecd4f2f2f2408a44ae83a201365c9e10d8e77d2",
+  "migration/validate_migration.py": "fab7e4b01b25cb2e8a493449cee88268d75294477f934fdae07872da3a3eb724",
+  "v3/README.md": "82309154fe7a5ed593ef12801bbf8ae744396710501105147d10df2be7e273e1",
+  "v3/activation-proposal.json": "e47ce61fb156607547573d0f0a31c8c7b923f8bf8383fcd0c00ae3a4b9536ba3",
+  "v3/development-gold.json": "2617830de63f0c6c7ad2124fd2c993e12e2f1b38628ea3c4c82d507f842632ed",
+  "v3/validate.py": "1ad7216ecc40568320f3ca0908f6fb1e16642d4bc4b8082c433a347111d6d3d1"
+}

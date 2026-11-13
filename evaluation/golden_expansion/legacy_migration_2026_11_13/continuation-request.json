@@ -1,0 +1,17 @@
+{
+  "source_kind": "current_user_message_transcription",
+  "completed_review_instruction": "이미 완료한 사용자 검토를 다시 요구하지 마라.",
+  "unresolved_statement": "UNRESOLVED 4건(GC-003/006/009/012)은 사용자가 기존 사유와 판단을 모두 유지하기로 재확인함",
+  "unresolved_case_ids": [
+    "GC-003",
+    "GC-006",
+    "GC-009",
+    "GC-012"
+  ],
+  "scope": "Retained reasons/judgments and historical review reuse only; not confirmation of AI quotes or formal challenge responses.",
+  "user_reviewed_at": null,
+  "signature": null,
+  "authenticated_identity": null,
+  "externally_authenticated": false,
+  "policy_approval_claimed": false
+}
