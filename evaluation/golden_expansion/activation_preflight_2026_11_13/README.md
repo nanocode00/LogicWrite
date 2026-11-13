@@ -24,14 +24,14 @@
 | 코드 | 기존 정책의 요구 및 현재 부족한 자료 |
 |---|---|
 | FORMAL_REVIEW_CHAIN_NOT_RECORDED | prepared/*.workflow.json의 events는 빈 배열이며 review.assess는 ai_provisional / development_gold_eligible=false. 별도 #26/#27을 user_final로 간주할 수 없음 |
-| USER_INITIAL_FORM_INCOMPLETE | 제출 initial form의 reviewer_id·reviewed_at·노출/블라인드 정보·사용자 증거 구간이 없음. 최초 이유는 있지만 VIOLATION findings와 UNRESOLVED missing_information의 정식 양식도 미작성 |
+| USER_INITIAL_FORM_INCOMPLETE | 정식 initial form과 동일 human actor_id 연결이 미작성. reviewer_id는 이벤트 actor_id와 일치해야 한다. reviewed_at·blinded_to_prior_judgments는 필수 **키**이나 값은 null을 허용하고, initial evidence는 빈 배열도 허용한다. VIOLATION findings와 UNRESOLVED missing_information은 비어 있으면 안 된다 |
 | USER_FINAL_EVIDENCE_NOT_SUBMITTED | user_final 스키마는 최소 1개 evidence(side/document_id/start/end/quote)를 요구. #26은 최종 라벨과 '추가 의견 없음' 및 참조만 기록하며 사용자 작성 증거 배열이 아님 |
 | CHALLENGE_RESPONSES_NOT_BOUND | 정식 counterreview event ID 및 challenge_id별 accept/reject/defer와 rationale 연결 없음. 실제 사례별 '동의'는 존재하지만 이를 임의로 세부 반론 수락·해결로 변환하지 않음 |
 | FINAL_CONFIDENCE_LIMITATIONS_NOT_CONFIRMED | 정식 user_final의 confidence_limitations 및 동일 human actor_id/human_confirmed를 가진 순서·시각 연결 이벤트 미제출. 알려진 단일 사용자 한계를 사용자 확인 이벤트로 합성하지 않음 |
 
-GC-003/006/009/012에는 FINAL_UNRESOLVED_ISSUES_NOT_SUBMITTED도 적용된다. 초기 이유와 AI의 부족 문맥 설명은 존재하지만 **최종 user_final.payload.unresolved_issues로 사용자가 확인한 별도 필드는 없다**. 이를 비어 있지 않은 새 사용자 최종 사유로 자동 전사하지 않았다.
+GC-003/006/009/012에는 FINAL_UNRESOLVED_ISSUES_NOT_SUBMITTED도 적용된다. 초기 이유와 AI의 부족 문맥 설명은 존재하지만 **최종 user_final.payload.unresolved_issues로 사용자가 확인한 별도 필드는 없다**. 이를 비어 있지 않은 새 사용자 최종 사유로 자동 전사하지 않았다. 최종 evidence는 최소 1개가 필요하지만 초기 evidence와 달리 이는 선택 사항이 아니다.
 
-정식 event.recorded_at은 기록 시각이며 user reviewed_at과 구별된다. 현재 저장 시각을 과거 사용자 검토 시각으로 사용하거나 과거 순서의 이벤트를 소급 생성하지 않는다. 기존 정책은 동일 actor_id를 요구하지만 **외부 인증 신원이나 전자서명을 요구하지는 않는다**. 그런 인증·서명이 없다는 사실 자체를 추가 차단 정책으로 만들지 않았으며, 허위로 생성하지도 않았다.
+정식 event.recorded_at은 기록 시각이며 user reviewed_at과 구별된다. reviewed_at의 null 허용을 지키되 현재 저장 시각을 과거 사용자 검토 시각으로 사용하거나 과거 순서의 이벤트를 소급 생성하지 않는다. 기존 정책은 동일 actor_id를 요구하지만 **외부 인증 신원이나 전자서명을 요구하지는 않는다**. 그런 인증·서명이 없다는 사실 자체를 추가 차단 정책으로 만들지 않았으며, 허위로 생성하지도 않았다.
 
 ## 안전한 별도 경로가 가능한지
 
@@ -56,4 +56,4 @@ python3 -B evaluation/core_pipeline_2026_11_11/run_checks.py --output /tmp/logic
 
 실행 결과: 신규 회귀 7개 및 전체 18개 디렉터리 642개 테스트 통과. 테스트 전후 Python 입력 SHA 동일. 기준 main의 기존 추적 파일 562개를 Git blob bytes 및 SHA로 전수 비교해 변경 0건을 확인했다. 기본 사전 점검은 무결성 성공/status=blocked이며 활성화 전제 검사 옵션은 의도대로 exit 2다. 로컬 실행 결과이며 원격 CI 통과를 뜻하지 않는다.
 
-다음에는 사용자가 실제 증거 구간·노출 여부·리뷰 식별자/검토 시각을 제공하고, 기존 반례에 대한 challenge별 응답·최종 증거·한계와 UNRESOLVED 미해결 사항을 확인한 새 추가 전용 기록을 제출해야 한다. 과거 자료를 정정하지 않고 기존 정책의 순서 요건에 맞는 현재 최초 판단→별도 AI 검토→최종 확인 절차를 설계·검수해야 한다. 자료가 충족되면 별도 작업에서 v3 29건/12·9·8 및 활성 참조를 구현·검증한다. 현재 PR은 ChatGPT 독립 검수 대기이며 자동 병합하지 않는다.
+기존 17건의 **판단·반례·최종 판단·포함 승인은 이미 실제 제출된 기록**이므로 의미 판단을 다시 받지 않는다. `../formal_review_reuse_2026_11_13/`의 `transcription.json`은 출처 SHA/JSON pointer와 연결된 불변 이력의 서식 변환본이고, `format-mapping.json`은 필드 매핑 초안, `suggestions.json`은 **사용자가 아직 채택하지 않은** 근거 인용 34개다. 재사용 가능 증빙과 아직 부족한 정식 필드는 `../formal_review_reuse_2026_11_13/EVIDENCE_COVERAGE.md`에 구분했다. 과거 시각·AI 인용·사례 단위 '동의'를 새 사용자 증거/반론별 응답으로 꾸며 쓰지 않는다. 현재 `review.py`의 필수 요건이 충족된 것으로 주장하지 않으며, 후속 확인이 필요한 경우 이미 확정한 라벨이 아닌 실제 미기록 필드만 대상으로 한다. 자료가 충족되면 별도 작업에서 v3 29건/12·9·8 및 활성 참조를 구현·검증한다. 현재 PR은 ChatGPT 독립 검수 대기이며 자동 병합하지 않는다.
