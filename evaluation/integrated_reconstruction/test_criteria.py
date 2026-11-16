@@ -117,7 +117,8 @@ class CriteriaTests(unittest.TestCase):
         record = json.loads((self.root / 'criteria/v2/IR-001.json').read_text())
         q3 = record['Q']['invariants'][2]['criterion']
         self.assertIn('평가 제출물의 검토 기록·HITL 요청', q3)
-        self.assertIn('README 본문에 내부 검토 의견이나 미확정 정책을 반드시 삽입할 필요는 없다', q3)
+        self.assertIn('README 본문에는 내부 검토 의견이나 미확정 정책을 남기는 것을 허용하지 않는다', q3)
+        self.assertIn('평가 제출물의 검토 기록·HITL 요청에만', q3)
         self.assertIn('독립적으로 가능한 개선은 계속한다', q3)
         self.assertEqual(q3, record['Q']['reader_tasks'][2])
 
@@ -136,3 +137,8 @@ class CriteriaTests(unittest.TestCase):
                 self.v.validate(self.root)
             (self.root / 'criteria/v2/IR-001.json').write_bytes(original)
             (self.root / 'criteria/v2/manifest.json').write_bytes(manifest)
+
+    def test_readme_prohibition_parent_hash_verified(self):
+        self.mutate('criteria/v2/manifest.json', lambda d: d['correction']['follow_up'].update(parent_criteria_sha256='0' * 64))
+        with self.assertRaises(ValueError):
+            self.v.validate(self.root)

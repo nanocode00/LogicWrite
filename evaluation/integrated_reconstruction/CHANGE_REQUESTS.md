@@ -78,7 +78,13 @@ v1 참고 출력은 역사 자료로만 보존하며 v2 적합 예시로 재승�
 
 | 대상 | 정정 내용 | 상태 |
 |---|---|---|
-| IR-001 Q3 / reader_tasks | 후원 정책 충돌·양쪽 근거는 평가 제출물의 검토 기록·HITL 요청에 기록하면 된다. README 본문에 내부 검토 의견·미확정 정책을 반드시 삽입하지 않아도 된다. 미확인 정책을 임의 확정·적용하지 않으며 승인되지 않은 변경만 보류하고 독립적 개선은 계속한다. | 반영, 수정 후 사람 재검수 결과 null |
+| IR-001 Q3 / reader_tasks | 후원 정책 충돌·양쪽 근거는 평가 제출물의 검토 기록·HITL 요청에 기록하면 된다. 현행 clarification-02 기준은 README 본문에 내부 검토 의견·미확정 정책을 남기는 것을 허용하지 않는다. 미확인 정책을 임의 확정·적용하지 않으며 승인되지 않은 변경만 보류하고 독립적 개선은 계속한다. | 반영, 수정 후 사람 재검수 결과 null |
 | IR-003 검수 출처 | 사용자 최초 판단 원문, ChatGPT 제안 기준, 초안 열람 후 대조·반례 검토, 사용자가 동의한 기존 최종 판정을 구분했다. | 기록 정정, 기준·최종 판정 유지 |
 
 정정 이전 [수정요청 원문](reviews/history/before-clarification-01/CHANGE_REQUESTS.md), [기준](criteria/v2/history/before-clarification-01/IR-001.json), [계보 명세](criteria/v2/history/before-clarification-01/manifest.json), [IR-003 검수 스냅샷](reviews/history/recorded-2026-11-16/IR-003.json)은 보존했다. 정정본과 해시는 [현재 계보](criteria/v2/manifest.json)의 correction으로 연결한다. D2/F1과 기존 판단은 유지하며 Q3의 기록 위치만 명확히 했다. IR-002 Q1, IR-001 D5/Q2/F2, IR-003 평가 기준 및 v1 자료는 변경하지 않는다. 새 승인이나 독립 사람 검토 사실은 기록하지 않는다.
+
+## clarification-02 — README 검토 의견 기록 금지
+
+사용자 정정에 따라 IR-001 Q3와 reader_tasks를 변경했다. 후원 정책 충돌과 양쪽 근거는 평가 제출물의 검토 기록·HITL 요청에만 남기며, README 본문에는 내부 검토 의견이나 미확정 정책을 남기는 것을 허용하지 않는다. 단순한 삽입 의무 면제가 아니라 명시적인 금지다. 미확인 정책의 임의 확정·적용 금지와 독립적으로 가능한 개선의 계속은 유지한다.
+
+수정 전 기준·manifest는 criteria/v2/history/before-clarification-02/에 보존하고 현재 manifest의 correction.follow_up에서 부모 커밋·해시로 연결했다. 다른 기준과 검수 판단은 변경하지 않았다. 골드 포함 승인과 수정 후 사람 재검수 결과는 null이다.

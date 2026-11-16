@@ -36,6 +36,10 @@ python3 tools/evidence_validation/run.py --output /tmp/logicwrite-criteria-v2-va
 
 ## clarification-01
 
-Q3와 reader_tasks는 후원 충돌·양쪽 근거를 평가 제출물의 검토 기록·HITL 요청에 남기도록 명확히 했다. README 본문에 내부 검토 의견이나 미확정 정책을 반드시 삽입할 필요는 없다. 승인되지 않은 변경만 보류하며 독립적 개선은 계속한다. D2/F1을 포함한 다른 기준은 변경하지 않았다. IR-003 검수 기록은 최초 판단·ChatGPT 제안·초안 대조·기존 최종 판정의 출처를 정정했다.
+Q3와 reader_tasks는 후원 충돌·양쪽 근거를 평가 제출물의 검토 기록·HITL 요청에 남기도록 명확히 했다. 현행 clarification-02 기준은 README 본문에 내부 검토 의견이나 미확정 정책을 남기는 것을 허용하지 않는다. 승인되지 않은 변경만 보류하며 독립적 개선은 계속한다. D2/F1을 포함한 다른 기준은 변경하지 않았다. IR-003 검수 기록은 최초 판단·ChatGPT 제안·초안 대조·기존 최종 판정의 출처를 정정했다.
 
 이전 기준·manifest·검수 기록은 그대로 보존하고 manifest의 correction에서 부모 Git revision과 해시로 연결한다. 평가 기준 버전은 v2를 유지하며 첫 v2 스냅샷에 대한 clarification-01 정정이다. 기존 validation.json은 정정 이전 검증 결과이고, 정정 후 결과는 [clarification-01-validation.json](clarification-01-validation.json)에 별도 기록한다. 사람 재검수 결과와 골드 포함 승인은 null을 유지한다.
+
+## clarification-02
+
+IR-001 Q3와 reader_tasks는 README 본문에 내부 검토 의견이나 미확정 정책을 남기는 것을 명시적으로 금지한다. 충돌·근거는 평가 제출물의 검토 기록·HITL 요청에만 남긴다. 부모 clarification-01 기준과 manifest를 history/before-clarification-02/에 보존하고 correction.follow_up으로 계보를 연결했다. 다른 기준·사람 판단·승인 상태는 그대로다.

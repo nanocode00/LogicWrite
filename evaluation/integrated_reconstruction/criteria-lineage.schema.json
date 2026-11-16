@@ -216,6 +216,48 @@
         },
         "gold_inclusion_approval": {
           "type": "null"
+        },
+        "follow_up": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "clarification-02"
+            },
+            "parent_revision": {
+              "const": "ae1e8cc758090ee87f7ddd62fe0fa9f65a919fa6"
+            },
+            "parent_manifest_path": {
+              "const": "criteria/v2/history/before-clarification-02/manifest.json"
+            },
+            "parent_manifest_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "parent_criteria_path": {
+              "const": "criteria/v2/history/before-clarification-02/IR-001.json"
+            },
+            "parent_criteria_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "post_revision_human_review": {
+              "type": "null"
+            },
+            "gold_inclusion_approval": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "id",
+            "parent_revision",
+            "parent_manifest_path",
+            "parent_manifest_sha256",
+            "parent_criteria_path",
+            "parent_criteria_sha256",
+            "post_revision_human_review",
+            "gold_inclusion_approval"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -230,7 +272,8 @@
         "prior_change_requests_path",
         "prior_change_requests_sha256",
         "post_revision_human_review",
-        "gold_inclusion_approval"
+        "gold_inclusion_approval",
+        "follow_up"
       ],
       "additionalProperties": false
     }

@@ -77,6 +77,19 @@ def verify_correction(root, manifest):
     expected['Q']['invariants'][2]['criterion'] = current['Q']['invariants'][2]['criterion']
     expected['Q']['reader_tasks'][2] = current['Q']['reader_tasks'][2]
     v.require(expected == current, 'unauthorized correction criterion change')
+    follow_up = correction['follow_up']
+    for prefix in ('parent_manifest', 'parent_criteria'):
+        verify_hash(root, follow_up[prefix + '_path'], follow_up[prefix + '_sha256'])
+    intermediate = v.read(root, follow_up['parent_manifest_path'])
+    v.require(intermediate['cases'][0]['criteria_sha256'] == follow_up['parent_criteria_sha256'], 'follow-up parent binding')
+    expected_intermediate = copy.deepcopy(manifest)
+    del expected_intermediate['correction']['follow_up']
+    expected_intermediate['cases'][0]['criteria_sha256'] = follow_up['parent_criteria_sha256']
+    v.require(expected_intermediate == intermediate, 'unauthorized follow-up manifest change')
+    expected_follow_up = v.read(root, follow_up['parent_criteria_path'])
+    expected_follow_up['Q']['invariants'][2]['criterion'] = current['Q']['invariants'][2]['criterion']
+    expected_follow_up['Q']['reader_tasks'][2] = current['Q']['reader_tasks'][2]
+    v.require(expected_follow_up == current, 'unauthorized follow-up criterion change')
     prior_review = v.read(root, correction['prior_review_path'])
     current_review = v.read(root, 'reviews/IR-003.json')
     expected_review = copy.deepcopy(prior_review)

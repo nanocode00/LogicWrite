@@ -8,7 +8,7 @@
       "case_id": "IR-001",
       "criteria_version": "evaluation-criteria-v2",
       "criteria_path": "criteria/v2/IR-001.json",
-      "criteria_sha256": "f02af4dd969bb2306cdfe49dc7f24d1fafc3dca72ef672f78ed7040d27421d21",
+      "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
       "parent_version": "evaluation-criteria-v1",
       "parent_path": "answers/IR-001.json",
       "parent_sha256": "3ab3e18d9bdb075750af91903e877135e72eb65bb06ea92636a9d40f37ada358",
@@ -142,6 +142,16 @@
     "prior_change_requests_path": "reviews/history/before-clarification-01/CHANGE_REQUESTS.md",
     "prior_change_requests_sha256": "4ec8701106261dae2bc046a6e8e3b25b2738ee6eaea3f14cb532d19d1a436dfb",
     "post_revision_human_review": null,
-    "gold_inclusion_approval": null
+    "gold_inclusion_approval": null,
+    "follow_up": {
+      "id": "clarification-02",
+      "parent_revision": "ae1e8cc758090ee87f7ddd62fe0fa9f65a919fa6",
+      "parent_manifest_path": "criteria/v2/history/before-clarification-02/manifest.json",
+      "parent_manifest_sha256": "1c09ccfc0e347f361fdc46a4fb293c7ff2c8c153f4b94b500bf45fdd78dee4a4",
+      "parent_criteria_path": "criteria/v2/history/before-clarification-02/IR-001.json",
+      "parent_criteria_sha256": "f02af4dd969bb2306cdfe49dc7f24d1fafc3dca72ef672f78ed7040d27421d21",
+      "post_revision_human_review": null,
+      "gold_inclusion_approval": null
+    }
   }
 }

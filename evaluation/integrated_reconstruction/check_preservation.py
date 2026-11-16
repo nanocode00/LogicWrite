@@ -76,6 +76,10 @@ def verify(repo, legacy_checkout=None):
             ('CHANGE_REQUESTS.md', 'reviews/history/before-clarification-01/CHANGE_REQUESTS.md')):
         raw = store.git('show', correction_parent + ':' + PACKAGE + source)
         verify_bytes(repo, PACKAGE + archive, boundary.digest(raw), 'correction parent archive')
+    for name in ('IR-001.json', 'manifest.json'):
+        raw = store.git('show', 'ae1e8cc758090ee87f7ddd62fe0fa9f65a919fa6:' + PACKAGE + 'criteria/v2/' + name)
+        verify_bytes(repo, PACKAGE + 'criteria/v2/history/before-clarification-02/' + name,
+                     boundary.digest(raw), 'follow-up parent archive')
     spec = importlib.util.spec_from_file_location('preservation_criteria', ROOT / 'validate_criteria.py')
     criteria = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(criteria)
