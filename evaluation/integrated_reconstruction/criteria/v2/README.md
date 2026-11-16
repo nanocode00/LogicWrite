@@ -43,3 +43,7 @@ Q3와 reader_tasks는 후원 충돌·양쪽 근거를 평가 제출물의 검토
 ## clarification-02
 
 IR-001 Q3와 reader_tasks는 README 본문에 내부 검토 의견이나 미확정 정책을 남기는 것을 명시적으로 금지한다. 충돌·근거는 평가 제출물의 검토 기록·HITL 요청에만 남긴다. 부모 clarification-01 기준과 manifest를 history/before-clarification-02/에 보존하고 correction.follow_up으로 계보를 연결했다. 다른 기준·사람 판단·승인 상태는 그대로다.
+
+## 별도 참고 출력 후보
+
+[v2 비유일 후보 및 반례 검토](../../reference_outputs/v2_candidates/REVIEW.md)를 추가했다. 이 기준과 기존 v1 참고 출력의 해시·경로는 변경하지 않았다. 후보 계보는 별도 manifest에서 연결하며 후보의 의미적 적합성은 사람 재검수 대기다. AI 기대 판정과 기계 검증을 사람 판단으로 기록하지 않는다.

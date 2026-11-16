@@ -13,6 +13,7 @@
 | [FORMAT.md](FORMAT.md), `*.schema.json` | 모델 입력·AI 정답·사람 응답·실행 결과 규약. 기존 Core 입력과 다른 평가 전용 형식 |
 | [legacy_triage.json](legacy_triage.json) | 57건 지시문·해시와 보존/조건부 재사용 제안. 기존 판정 대체 아님 |
 | [EXPANSION.md](EXPANSION.md) | 기존 자산 처리와 다음 수집·검수 관문 |
+| [v2 참고 출력 후보](reference_outputs/v2_candidates/REVIEW.md) | clarification-02 기준의 비유일 전체 후보 2건·AI 반례 검토·별도 해시 계보; 사람 승인 아님 |
 | [VALIDATION.md](VALIDATION.md), [records/](records/) | 실제 점검과 한계, 보호 기준선, 실행 로그 |
 | [sources.json](sources.json) | 가상 자료의 작성·라이선스·출처 군집 기록 |
 
@@ -23,6 +24,7 @@ python3 tools/evidence_validation/run.py --output /tmp/logicwrite-validation.jso
 python3 evaluation/integrated_reconstruction/check_preservation.py
 python3 evaluation/integrated_reconstruction/validate.py
 python3 evaluation/integrated_reconstruction/validate_criteria.py
+python3 evaluation/integrated_reconstruction/validate_reference_candidates.py
 python3 evaluation/integrated_reconstruction/validate.py --input IR-001 > /tmp/IR-001-model-input.json
 python3 -m unittest discover -s evaluation/integrated_reconstruction -p 'test_*.py'
 ```
