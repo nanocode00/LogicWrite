@@ -173,6 +173,66 @@
     },
     "gold_eligible": {
       "const": false
+    },
+    "correction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "clarification-01"
+        },
+        "parent_revision": {
+          "const": "bd30dbdd65b1b895ebea3e8ee53fbe06a4b541e7"
+        },
+        "parent_manifest_path": {
+          "const": "criteria/v2/history/before-clarification-01/manifest.json"
+        },
+        "parent_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "parent_criteria_path": {
+          "const": "criteria/v2/history/before-clarification-01/IR-001.json"
+        },
+        "parent_criteria_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "prior_review_path": {
+          "const": "reviews/history/recorded-2026-11-16/IR-003.json"
+        },
+        "prior_review_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "prior_change_requests_path": {
+          "const": "reviews/history/before-clarification-01/CHANGE_REQUESTS.md"
+        },
+        "prior_change_requests_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "post_revision_human_review": {
+          "type": "null"
+        },
+        "gold_inclusion_approval": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "id",
+        "parent_revision",
+        "parent_manifest_path",
+        "parent_manifest_sha256",
+        "parent_criteria_path",
+        "parent_criteria_sha256",
+        "prior_review_path",
+        "prior_review_sha256",
+        "prior_change_requests_path",
+        "prior_change_requests_sha256",
+        "post_revision_human_review",
+        "gold_inclusion_approval"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -182,7 +242,8 @@
     "input_contract_changed",
     "cases",
     "reviews",
-    "gold_eligible"
+    "gold_eligible",
+    "correction"
   ],
   "additionalProperties": false,
   "$schema": "https://json-schema.org/draft/2020-12/schema"

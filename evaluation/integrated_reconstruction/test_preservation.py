@@ -98,3 +98,17 @@ class PreservationTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     preservation.verify(self.repo)
                 path.write_bytes(raw)
+
+    def test_clarification_parent_archives_cannot_be_resealed(self):
+        package = self.repo / 'evaluation/integrated_reconstruction'
+        for name in ('criteria/v2/history/before-clarification-01/IR-001.json',
+                     'criteria/v2/history/before-clarification-01/manifest.json',
+                     'reviews/history/recorded-2026-11-16/IR-003.json',
+                     'reviews/history/before-clarification-01/CHANGE_REQUESTS.md'):
+            with self.subTest(path=name):
+                path = package / name
+                original = path.read_bytes()
+                path.write_bytes(original + b' ')
+                with self.assertRaisesRegex(ValueError, 'correction parent archive'):
+                    preservation.verify(self.repo)
+                path.write_bytes(original)

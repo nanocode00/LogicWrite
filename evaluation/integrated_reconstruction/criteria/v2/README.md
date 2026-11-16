@@ -33,3 +33,9 @@ python3 tools/evidence_validation/run.py --output /tmp/logicwrite-criteria-v2-va
 검증기는 읽기 전용이다. 원본 양식은 Git 최초 커밋, 이전 검수는 `6d6f321` Git 객체와 대조하며 현재 검수는 별도 스냅샷·해시와 대조한다. v1 참고 출력은 경로·해시를 보존한 역사 자료이고 **v2 적합성을 재검증한 예시가 아니다**. 특히 IR-001의 기존 정책 단정·일기성 정보 처리·유지보수 배치는 사람 재검수와 후속 예시 개정 여부 판단이 필요하다.
 
 기계 검증 결과는 [검증 기록](validation.json)에 별도 기록한다. 수정 후 사람 재검수 결과는 null, 세 사례 골드 포함 승인은 null이다. 모델 성능 평가·실제 문서 발행·골드셋 동결은 이 버전에 포함하지 않는다.
+
+## clarification-01
+
+Q3와 reader_tasks는 후원 충돌·양쪽 근거를 평가 제출물의 검토 기록·HITL 요청에 남기도록 명확히 했다. README 본문에 내부 검토 의견이나 미확정 정책을 반드시 삽입할 필요는 없다. 승인되지 않은 변경만 보류하며 독립적 개선은 계속한다. D2/F1을 포함한 다른 기준은 변경하지 않았다. IR-003 검수 기록은 최초 판단·ChatGPT 제안·초안 대조·기존 최종 판정의 출처를 정정했다.
+
+이전 기준·manifest·검수 기록은 그대로 보존하고 manifest의 correction에서 부모 Git revision과 해시로 연결한다. 평가 기준 버전은 v2를 유지하며 첫 v2 스냅샷에 대한 clarification-01 정정이다. 기존 validation.json은 정정 이전 검증 결과이고, 정정 후 결과는 [clarification-01-validation.json](clarification-01-validation.json)에 별도 기록한다. 사람 재검수 결과와 골드 포함 승인은 null을 유지한다.

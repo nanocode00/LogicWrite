@@ -106,8 +106,33 @@ class CriteriaTests(unittest.TestCase):
 
     def test_ir003_stages_and_gated_gold_are_separate(self):
         review = json.loads((self.root / 'reviews/IR-003.json').read_text())
-        self.assertIn('AI 초안 열람 이전', review['initial_judgment'])
+        self.assertEqual(review['initial_judgment'], '당장 추가하거나 뺄 내용이 보이지 않으며, 수정 권한과 회의 대상을 확인하면 될 것으로 보인다.')
+        self.assertIn('AI 초안 열람 이전', review['answer_exposure'])
         self.assertIn('이후 ChatGPT', review['answer_exposure'])
         self.assertIn('독립 사람 반례 검토로 집계하지 않는다', review['counterreview'])
         self.assertIn('사람 검수 통과', review['final_judgment'])
         self.assertIsNone(review['gold_inclusion_approval'])
+
+    def test_q3_review_location_and_reader_task(self):
+        record = json.loads((self.root / 'criteria/v2/IR-001.json').read_text())
+        q3 = record['Q']['invariants'][2]['criterion']
+        self.assertIn('평가 제출물의 검토 기록·HITL 요청', q3)
+        self.assertIn('README 본문에 내부 검토 의견이나 미확정 정책을 반드시 삽입할 필요는 없다', q3)
+        self.assertIn('독립적으로 가능한 개선은 계속한다', q3)
+        self.assertEqual(q3, record['Q']['reader_tasks'][2])
+
+    def test_correction_parent_hash_cannot_be_resealed(self):
+        self.mutate('criteria/v2/manifest.json', lambda d: d['correction'].update(parent_manifest_sha256='0' * 64))
+        with self.assertRaises(ValueError):
+            self.v.validate(self.root)
+
+    def test_ir001_d2_and_f1_cannot_change_during_clarification(self):
+        for section, index in [('D', 1), ('Q', 0)]:
+            original = (self.root / 'criteria/v2/IR-001.json').read_bytes()
+            manifest = (self.root / 'criteria/v2/manifest.json').read_bytes()
+            group = 'decision_criteria' if section == 'D' else 'forbidden_outcomes'
+            self.mutate('criteria/v2/IR-001.json', lambda d: d[section][group][index].update(criterion='임의 정책 적용'), True)
+            with self.assertRaises(ValueError):
+                self.v.validate(self.root)
+            (self.root / 'criteria/v2/IR-001.json').write_bytes(original)
+            (self.root / 'criteria/v2/manifest.json').write_bytes(manifest)

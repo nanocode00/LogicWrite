@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Read-only criteria lineage checks, never a semantic verdict or human approval."""
 import argparse
+import copy
 import importlib.util
 import json
 from pathlib import Path
@@ -57,6 +58,35 @@ def request_location(record, location):
     return value
 
 
+def verify_correction(root, manifest):
+    correction = manifest['correction']
+    for prefix in ('parent_manifest', 'parent_criteria', 'prior_review', 'prior_change_requests'):
+        verify_hash(root, correction[prefix + '_path'], correction[prefix + '_sha256'])
+    prior_manifest = v.read(root, correction['parent_manifest_path'])
+    v.require(prior_manifest['cases'][0]['criteria_sha256'] == correction['parent_criteria_sha256'], 'correction parent criteria binding')
+    v.require(prior_manifest['reviews'][2]['sha256'] == correction['prior_review_sha256'], 'correction prior review binding')
+    expected_manifest = copy.deepcopy(prior_manifest)
+    expected_manifest['correction'] = correction
+    expected_manifest['cases'][0]['criteria_sha256'] = manifest['cases'][0]['criteria_sha256']
+    expected_manifest['reviews'][2]['snapshot_path'] = manifest['reviews'][2]['snapshot_path']
+    expected_manifest['reviews'][2]['sha256'] = manifest['reviews'][2]['sha256']
+    v.require(expected_manifest == manifest, 'unauthorized correction manifest change')
+    old = v.read(root, correction['parent_criteria_path'])
+    current = v.read(root, 'criteria/v2/IR-001.json')
+    expected = copy.deepcopy(old)
+    expected['Q']['invariants'][2]['criterion'] = current['Q']['invariants'][2]['criterion']
+    expected['Q']['reader_tasks'][2] = current['Q']['reader_tasks'][2]
+    v.require(expected == current, 'unauthorized correction criterion change')
+    prior_review = v.read(root, correction['prior_review_path'])
+    current_review = v.read(root, 'reviews/IR-003.json')
+    expected_review = copy.deepcopy(prior_review)
+    for key in ('initial_judgment', 'answer_exposure', 'counterreview', 'adjudication'):
+        expected_review[key] = current_review[key]
+    v.require(expected_review == current_review, 'unauthorized correction review change')
+    v.require(current_review['initial_judgment'] == '당장 추가하거나 뺄 내용이 보이지 않으며, 수정 권한과 회의 대상을 확인하면 될 것으로 보인다.', 'initial human judgment provenance')
+    v.schema_check(root, 'review', prior_review)
+
+
 def validate(root=ROOT):
     root = Path(root).resolve()
     # This validates all three unchanged v1 inputs/answers/references and live reviews.
@@ -110,11 +140,13 @@ def validate(root=ROOT):
         for bundle in child['Q']['acceptable_bundles']:
             v.require(set(bundle['must_satisfy']) == required, 'alternative skips invariant')
         v.require(child['Q']['reference_output_path'] == e['reference_output_path'], 'historical reference drift')
+    verify_correction(root, m)
     v.require(v.unique(m['reviews'], 'case_id') == {'IR-001', 'IR-002', 'IR-003'}, 'review set')
     for e in m['reviews']:
         cid = e['case_id']
         v.require(e['current_path'] == f'reviews/{cid}.json', 'current review path')
-        v.require(e['snapshot_path'] == f'reviews/history/recorded-2026-11-16/{cid}.json', 'snapshot review path')
+        snapshot = 'clarification-01' if cid == 'IR-003' else 'recorded-2026-11-16'
+        v.require(e['snapshot_path'] == f'reviews/history/{snapshot}/{cid}.json', 'snapshot review path')
         v.require(e['prior_path'] == f'reviews/history/before-criteria-v2/{cid}.json', 'prior review path')
         v.require(e['prior_revision'] == '6d6f32140b951cac025701ef42995ddba43565e0', 'prior revision drift')
         for key in ('current_path', 'snapshot_path'):

@@ -8,7 +8,7 @@
       "case_id": "IR-001",
       "criteria_version": "evaluation-criteria-v2",
       "criteria_path": "criteria/v2/IR-001.json",
-      "criteria_sha256": "55e9242673b36a1027ec4668018b6a0e5989a86e774caef6cd76c4ea5890b90f",
+      "criteria_sha256": "f02af4dd969bb2306cdfe49dc7f24d1fafc3dca72ef672f78ed7040d27421d21",
       "parent_version": "evaluation-criteria-v1",
       "parent_path": "answers/IR-001.json",
       "parent_sha256": "3ab3e18d9bdb075750af91903e877135e72eb65bb06ea92636a9d40f37ada358",
@@ -122,12 +122,26 @@
     {
       "case_id": "IR-003",
       "current_path": "reviews/IR-003.json",
-      "snapshot_path": "reviews/history/recorded-2026-11-16/IR-003.json",
-      "sha256": "2292ac3a005eb06440151529f40ef18ba87abd7e7021b49004e78984ed51a3d7",
+      "snapshot_path": "reviews/history/clarification-01/IR-003.json",
+      "sha256": "83c8c7fe16642ed9cb42193cbbef473d7aa460482055ec10580fb9f164bc5915",
       "prior_revision": "6d6f32140b951cac025701ef42995ddba43565e0",
       "prior_path": "reviews/history/before-criteria-v2/IR-003.json",
       "prior_sha256": "083e6ca66c749af68c48a75dc97babde8c652fbe79857a673bbe111f5e02c0be"
     }
   ],
-  "gold_eligible": false
+  "gold_eligible": false,
+  "correction": {
+    "id": "clarification-01",
+    "parent_revision": "bd30dbdd65b1b895ebea3e8ee53fbe06a4b541e7",
+    "parent_manifest_path": "criteria/v2/history/before-clarification-01/manifest.json",
+    "parent_manifest_sha256": "54d59c1c9cfe3e301757d107442c05990728b666bef175a14676088fd4249215",
+    "parent_criteria_path": "criteria/v2/history/before-clarification-01/IR-001.json",
+    "parent_criteria_sha256": "55e9242673b36a1027ec4668018b6a0e5989a86e774caef6cd76c4ea5890b90f",
+    "prior_review_path": "reviews/history/recorded-2026-11-16/IR-003.json",
+    "prior_review_sha256": "2292ac3a005eb06440151529f40ef18ba87abd7e7021b49004e78984ed51a3d7",
+    "prior_change_requests_path": "reviews/history/before-clarification-01/CHANGE_REQUESTS.md",
+    "prior_change_requests_sha256": "4ec8701106261dae2bc046a6e8e3b25b2738ee6eaea3f14cb532d19d1a436dfb",
+    "post_revision_human_review": null,
+    "gold_inclusion_approval": null
+  }
 }

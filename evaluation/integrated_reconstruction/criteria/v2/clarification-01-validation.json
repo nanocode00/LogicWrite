@@ -1,0 +1,51 @@
+{
+  "record_type": "clarification-01-local-validation",
+  "parent_revision": "bd30dbdd65b1b895ebea3e8ee53fbe06a4b541e7",
+  "scope": [
+    "IR-001 Q3 and matching reader task: review/HITL evidence location",
+    "IR-003 review provenance correction, unchanged final judgment"
+  ],
+  "command": "python3 tools/evidence_validation/run.py --output /tmp/logicwrite-clarification-01-validation.json",
+  "status": "PASS",
+  "tests_run": 777,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "expected_failures": 0,
+  "unexpected_successes": 0,
+  "related_regression_tests": 46,
+  "tested_working_tree_source_sha256": "a630e47cbcbd2ab484d1ca776c86afb9f4dbde62e11d7cb61e49c16e6278ca35",
+  "full_report_path": "/tmp/logicwrite-clarification-01-validation.json",
+  "full_report_sha256": "2db9cb8afcd658628720241d745405a69807171af205fa909c7e15cd512018d4",
+  "current_integrated_suites": [
+    {
+      "pattern": "test_criteria.py",
+      "tests_run": 15,
+      "returncode": 0
+    },
+    {
+      "pattern": "test_integrity.py",
+      "tests_run": 23,
+      "returncode": 0
+    },
+    {
+      "pattern": "test_preservation.py",
+      "tests_run": 8,
+      "returncode": 0
+    }
+  ],
+  "checks": {
+    "json_schemas_lineage_hashes_citations": "PASS",
+    "correction_parent_archives_authenticated_against_git": "PASS",
+    "IR001_changes_limited_to_Q3_and_matching_reader_task": true,
+    "IR001_D2_F1_D5_Q2_F2_unchanged": true,
+    "IR002_entire_v2_criteria_unchanged": true,
+    "IR003_criteria_and_final_judgment_unchanged": true,
+    "v1_inputs_answers_reference_outputs_byte_identical": true,
+    "previous_snapshots_and_validation_record_unchanged": true,
+    "new_independent_human_counterreview_claimed": false
+  },
+  "post_revision_human_review": null,
+  "gold_inclusion_approval": null,
+  "boundary": "Local schema/integrity/regression checks only; not gold approval or model evaluation. This report was added after testing; tested source/criteria/review bytes were unchanged."
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "integrated-review-v1",
+  "case_id": "IR-003",
+  "input_sha256": "75c88eb7c3b9cd217a8e0ca367889685ca086b7549b26a2024479fcc8a5a6c24",
+  "status": "pending_human_review",
+  "initial_judgment": "당장 추가하거나 뺄 내용이 보이지 않으며, 수정 권한과 회의 대상을 확인하면 될 것으로 보인다.",
+  "initial_evidence": null,
+  "answer_exposure": "사용자 최초 판단은 AI 초안 열람 이전에 이루어졌다. ChatGPT가 제안한 검토 기준에는 공유 범위 확인과 이미 알려진 실험 수치를 다시 묻지 않는다는 내용이 포함되어 있으며, 이는 AI 평가 기준에도 포함된 사항이다. 이 내용을 사용자의 최초 독립 판단에 귀속하지 않는다. 이후 ChatGPT와 AI 정답 초안 대조 및 반례 검토를 진행했다. 독립 사람 반례 검토가 아니다. 확인되지 않은 검수 시각·서명은 기록하지 않는다.",
+  "counterreview": "AI 정답 초안 열람 후 사용자와 ChatGPT가 진행한 대조·반례 검토: D1~D3, Q1~Q4, F1~F2 유지. 대안 A/B 모두 허용. 무수정 전체 원문 반환은 정상적인 완결 결과다. 서식 변경은 필요할 때만 수행한다. 내용 변경과 외부 공개본 작성은 필요한 권한 확보 전까지 보류하고 독립적으로 가능한 작업은 계속한다. 공유 범위 확인 및 이미 알려진 실험 수치를 재질문하지 않는 기준은 ChatGPT 제안·AI 평가 기준과의 대조 맥락이며 사용자 최초 판단 원문이 아니다. 독립 사람 반례 검토로 집계하지 않는다.",
+  "final_judgment": "사용자 판정: 사람 검수 통과, 평가 기준 수정 불필요, 골드셋 포함 승인 보류.",
+  "adjudication": "최초 판단의 출처 귀속을 정정했다. 정정 전 기록은 reviews/history/recorded-2026-11-16/IR-003.json에 보존하고 정정본은 reviews/history/clarification-01/IR-003.json으로 연결한다. 사용자가 동의한 기존 최종 판정과 평가 기준은 유지한다. 수정 후 새 사람 재검수·중재 실시·골드 포함 승인을 기록하는 것이 아니다. 기존 스키마의 status=pending_human_review는 유지한다.",
+  "gold_inclusion_approval": null
+}
