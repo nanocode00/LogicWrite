@@ -21,6 +21,9 @@ class PreservationTests(unittest.TestCase):
         self.repo = Path(self.tmp.name) / 'repo'
         subprocess.run(['git', 'clone', '--shared', '--quiet', str(REPO), str(self.repo)],
                        check=True, capture_output=True)
+        # Exercise this working-tree package, including not-yet-committed versions.
+        shutil.copytree(PACKAGE, self.repo / 'evaluation/integrated_reconstruction',
+                        dirs_exist_ok=True, ignore=shutil.ignore_patterns('__pycache__'))
 
     def test_current_core_and_development_docs_can_evolve(self):
         for name in ('experiments/full_document_control/reconstruction.py', 'README.md', 'docs/roadmap.md'):
@@ -48,7 +51,7 @@ class PreservationTests(unittest.TestCase):
             path = self.repo / 'evaluation/integrated_reconstruction' / name
             raw = path.read_bytes()
             path.write_bytes(raw + b' ')
-            with self.assertRaisesRegex(ValueError, 'pilot evidence'):
+            with self.assertRaisesRegex(ValueError, 'pilot evidence|stale hash'):
                 preservation.verify(self.repo)
             path.write_bytes(raw)
 
@@ -84,3 +87,14 @@ class PreservationTests(unittest.TestCase):
         path.symlink_to(outside)
         with self.assertRaisesRegex(ValueError, 'symlink'):
             preservation.verify(self.repo)
+
+    def test_original_and_prior_review_archives_are_authenticated(self):
+        for name in ('pilot-v1/IR-003.json', 'before-criteria-v2/IR-001.json',
+                     'before-criteria-v2/CHANGE_REQUESTS.md'):
+            with self.subTest(path=name):
+                path = self.repo / 'evaluation/integrated_reconstruction/reviews/history' / name
+                raw = path.read_bytes()
+                path.write_bytes(raw + b' ')
+                with self.assertRaises(ValueError):
+                    preservation.verify(self.repo)
+                path.write_bytes(raw)

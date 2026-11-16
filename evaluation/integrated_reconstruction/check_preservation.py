@@ -48,20 +48,37 @@ def verify(repo, legacy_checkout=None):
             if legacy_checkout is not None and name.startswith('evaluation/capability_pilot/'):
                 verify_bytes(legacy_checkout, name, expected, 'legacy checkout asset')
                 legacy_count += 1
-    # These already exposed input/answer/reference/response artifacts remain v1.
-    # Future actual human submissions must use separately versioned records.
+    # Inputs/answers/references stay byte-identical. Authorized review updates
+    # retain the original pilot forms plus prior and current record snapshots.
     pilot_files = store.git('ls-tree', '-r', '--name-only', PILOT_REVISION, '--', PACKAGE).decode().splitlines()
     protected = [name for name in pilot_files if name.startswith(tuple(PACKAGE + part for part in
         ('inputs/', 'answers/', 'reference_outputs/', 'reviews/')))
         or name in {PACKAGE + 'cases.json', PACKAGE + 'sources.json', PACKAGE + 'legacy_triage.json'}]
     for name in protected:
         raw = store.git('show', PILOT_REVISION + ':' + name)
-        verify_bytes(repo, name, boundary.digest(raw), 'pilot evidence')
+        target = name
+        if name.startswith(PACKAGE + 'reviews/'):
+            target = PACKAGE + 'reviews/history/pilot-v1/' + Path(name).name
+        verify_bytes(repo, target, boundary.digest(raw), 'pilot evidence')
+    prior = '6d6f32140b951cac025701ef42995ddba43565e0'
+    for cid in ('IR-001', 'IR-002', 'IR-003'):
+        raw = store.git('show', prior + ':' + PACKAGE + 'reviews/' + cid + '.json')
+        verify_bytes(repo, PACKAGE + 'reviews/history/before-criteria-v2/' + cid + '.json',
+                     boundary.digest(raw), 'prior human review')
+    raw = store.git('show', prior + ':' + PACKAGE + 'CHANGE_REQUESTS.md')
+    verify_bytes(repo, PACKAGE + 'reviews/history/before-criteria-v2/CHANGE_REQUESTS.md',
+                 boundary.digest(raw), 'prior change requests')
+    spec = importlib.util.spec_from_file_location('preservation_criteria', ROOT / 'validate_criteria.py')
+    criteria = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(criteria)
+    criteria.validate(repo / PACKAGE)
     return dict(historical_revision=boundary.HISTORICAL_REVISION,
                 historical_snapshot_files_verified=historical['verified_files'],
                 current_evidence_files_unchanged=current['verified_files'],
                 protected_pr_objects_verified=sum(len(x) for x in baseline['protected_pr_files'].values()),
                 pilot_evidence_files_unchanged=len(protected),
+                original_review_forms='authenticated_archives',
+                prior_review_records_verified=3, current_review_records_verified=3,
                 legacy_checkout_checked=legacy_checkout is not None,
                 legacy_checkout_files_verified=legacy_count,
                 current_core_comparison='historical equality not required', gold_promoted=False)

@@ -22,15 +22,16 @@
 python3 tools/evidence_validation/run.py --output /tmp/logicwrite-validation.json
 python3 evaluation/integrated_reconstruction/check_preservation.py
 python3 evaluation/integrated_reconstruction/validate.py
+python3 evaluation/integrated_reconstruction/validate_criteria.py
 python3 evaluation/integrated_reconstruction/validate.py --input IR-001 > /tmp/IR-001-model-input.json
 python3 -m unittest discover -s evaluation/integrated_reconstruction -p 'test_*.py'
 ```
 
 `--input`은 입력 스키마·원문 해시만 확인하고 그 입력만 stdout으로 내보낸다. 패키지 검증은 읽기 전용이다.
-검수 응답은 `reviews/IR-xxx.json`의 사본에 사람이 작성한다. 검증기는 렌더링·응답 덮어쓰기를 하지 않는다.
-현재 사람 최초/최종 판단·중재·골드 포함 승인은 모두 null이다. 포함 승인은 별도 후속 절차이며 이 초안에서 기록·허용하지 않는다.
+검수 응답은 `reviews/IR-xxx.json`에 기록하며 이전 양식·응답은 `reviews/history/`에 버전별 보존한다. 검증기는 렌더링·응답 덮어쓰기를 하지 않는다.
+현재 사용자 제공 검수 판단과 수정요청 반영 상태는 [REVIEW.md](REVIEW.md), [평가 기준 v2](criteria/v2/README.md)에 기록했다. 수정 후 사람 재검수·중재·골드 포함 승인은 미완료다. 포함 승인은 별도 후속 절차이며 이 초안에서 기록·허용하지 않는다.
 본문 보존과 실제 독자 과업 달성은 사람이 평가해야 한다. 구조 검사 통과는 성능·품질 입증이 아니다.
 
-공식 전체 명령은 역사적 평가와 현재 Core/신규 평가를 분리한다. 레거시 `run_checks.py` 및 기존 역사 validator의 현재 트리 직접 호출 차이는 [공식 실행 안내](../../tools/evidence_validation/README.md)에 있다. 부분 검증으로 전체 검증을 대신하지 않는다. 보존 검사는 과거 전체616파일을 고정 snapshot에서, 기존 평가/fixture545파일과 이미 노출된 파일럿21파일을 현재 저장본에서 확인한다. 정상적인 현재 Core/개발 문서는 과거 바이트와 같을 의무가 없다.
+공식 전체 명령은 역사적 평가와 현재 Core/신규 평가를 분리한다. 레거시 `run_checks.py` 및 기존 역사 validator의 현재 트리 직접 호출 차이는 [공식 실행 안내](../../tools/evidence_validation/README.md)에 있다. 부분 검증으로 전체 검증을 대신하지 않는다. 보존 검사는 과거 전체616파일을 고정 snapshot에서, 기존 평가/fixture545파일과 이미 노출된 파일럿21파일을 원본 저장본/인증된 양식 이력에서 확인한다. 현재 검수 기록은 별도 스냅샷·해시와 대조한다. 정상적인 현재 Core/개발 문서는 과거 바이트와 같을 의무가 없다.
 
-v1 3건은 그대로 보존한다. [v2 입력 규약](FORMAT.md#입력-v2--불완전한-계약자료-표현)은 무제약·미확정 역할·부분 자료를 표현하나 새 실제 사례/골드가 아니다. 사람 응답은 기존 양식의 사본을 새 버전 기록으로 남기며 원본에 덮어쓰지 않는다. 현실성·유도·D/Q 강제성의 남은 판단은 [DESIGN.md](DESIGN.md)와 [REVIEW.md](REVIEW.md)를 따른다.
+v1 3건은 그대로 보존한다. [v2 입력 규약](FORMAT.md#입력-v2--불완전한-계약자료-표현)은 무제약·미확정 역할·부분 자료를 표현하나 새 실제 사례/골드가 아니다. 사람 응답은 최초 양식과 이전 판단을 이력으로 보존하고 현재 기록을 갱신한다. 현실성·유도·D/Q 강제성의 남은 판단은 [DESIGN.md](DESIGN.md)와 [REVIEW.md](REVIEW.md)를 따른다.

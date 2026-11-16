@@ -1,0 +1,189 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "integrated-criteria-lineage-v1"
+    },
+    "version": {
+      "const": "evaluation-criteria-v2"
+    },
+    "serialization_schema": {
+      "const": "answer.schema.json"
+    },
+    "input_contract_changed": {
+      "const": false
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "criteria_version": {
+            "const": "evaluation-criteria-v2"
+          },
+          "criteria_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "criteria_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "parent_version": {
+            "const": "evaluation-criteria-v1"
+          },
+          "parent_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parent_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "input_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "input_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "reference_output_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference_output_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "reference_status": {
+            "const": "historical_v1_not_revalidated_for_v2"
+          },
+          "change_requests": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "status": {
+                  "const": "implemented"
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "id",
+                "status",
+                "locations"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          },
+          "post_revision_human_review": {
+            "type": "null"
+          },
+          "gold_inclusion_approval": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "case_id",
+          "criteria_version",
+          "criteria_path",
+          "criteria_sha256",
+          "parent_version",
+          "parent_path",
+          "parent_sha256",
+          "input_path",
+          "input_sha256",
+          "reference_output_path",
+          "reference_output_sha256",
+          "reference_status",
+          "change_requests",
+          "post_revision_human_review",
+          "gold_inclusion_approval"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "current_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "snapshot_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "prior_revision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prior_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prior_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "case_id",
+          "current_path",
+          "snapshot_path",
+          "sha256",
+          "prior_revision",
+          "prior_path",
+          "prior_sha256"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "gold_eligible": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "version",
+    "serialization_schema",
+    "input_contract_changed",
+    "cases",
+    "reviews",
+    "gold_eligible"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
