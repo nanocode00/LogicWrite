@@ -1,0 +1,1004 @@
+{
+  "fetched_at_utc": "2026-11-17T07:43:08.952833+00:00",
+  "no_credentials_used": true,
+  "paid_requests": 0,
+  "models": [
+    {
+      "id": "deepseek/deepseek-v3.2",
+      "name": "DeepSeek: DeepSeek V3.2",
+      "context_length": 163840,
+      "pricing": {
+        "prompt": "0.00000026",
+        "completion": "0.00000038",
+        "input_cache_read": "0.00000013"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "include_reasoning",
+        "logit_bias",
+        "logprobs",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "reasoning",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_logprobs",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 163840,
+        "max_completion_tokens": 147456,
+        "is_moderated": false
+      },
+      "reasoning": {
+        "mandatory": false,
+        "default_enabled": false
+      },
+      "architecture": {
+        "modality": "text->text",
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "DeepSeek",
+        "instruct_type": null
+      }
+    },
+    {
+      "id": "google/gemini-2.5-flash-lite",
+      "name": "Google: Gemini 2.5 Flash Lite",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": "0.0000001",
+        "completion": "0.0000004",
+        "image": "0.0000001",
+        "audio": "0.0000003",
+        "input_audio_cache": "0.00000003",
+        "web_search": "0.014",
+        "internal_reasoning": "0.0000004",
+        "input_cache_read": "0.00000001",
+        "input_cache_write": "0.0000000833333333333333"
+      },
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 1048576,
+        "max_completion_tokens": 65535,
+        "is_moderated": false
+      },
+      "reasoning": {
+        "mandatory": false
+      },
+      "architecture": {
+        "modality": "text+image+file+audio+video->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "file",
+          "audio",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Gemini",
+        "instruct_type": null
+      }
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b-2507",
+      "name": "Qwen: Qwen3 235B A22B Instruct 2507",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": "0.00000014",
+        "completion": "0.0000008",
+        "input_cache_read": "0.00000005"
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "logit_bias",
+        "logprobs",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_logprobs",
+        "top_p"
+      ],
+      "top_provider": {
+        "context_length": 131072,
+        "max_completion_tokens": 117964,
+        "is_moderated": false
+      },
+      "architecture": {
+        "modality": "text->text",
+        "input_modalities": [
+          "text"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Qwen3",
+        "instruct_type": null
+      }
+    }
+  ],
+  "endpoints": [
+    {
+      "url": "https://openrouter.ai/api/v1/models/deepseek/deepseek-v3.2/endpoints",
+      "fetched_at_utc": "2026-11-17T07:43:08.279224+00:00",
+      "data": {
+        "id": "deepseek/deepseek-v3.2",
+        "name": "DeepSeek: DeepSeek V3.2",
+        "created": 1764594642,
+        "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
+        "architecture": {
+          "tokenizer": "DeepSeek",
+          "instruct_type": null,
+          "modality": "text->text",
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "endpoints": [
+          {
+            "name": "GMICloud | deepseek/deepseek-v3.2-20251201",
+            "model_id": "deepseek/deepseek-v3.2",
+            "model_name": "DeepSeek: DeepSeek V3.2",
+            "context_length": 163840,
+            "pricing": {
+              "prompt": "0.0000002088",
+              "completion": "0.0000003096",
+              "input_cache_read": "0.0000000216",
+              "discount": 0.28
+            },
+            "provider_name": "GMICloud",
+            "tag": "gmicloud/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 147456,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": false,
+              "auto": false,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "SiliconFlow | deepseek/deepseek-v3.2-20251201",
+            "model_id": "deepseek/deepseek-v3.2",
+            "model_name": "DeepSeek: DeepSeek V3.2",
+            "context_length": 163840,
+            "pricing": {
+              "prompt": "0.000000259",
+              "completion": "0.0000008",
+              "input_cache_read": "0.00000014",
+              "discount": 0
+            },
+            "provider_name": "SiliconFlow",
+            "tag": "siliconflow/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 147456,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "temperature",
+              "top_p",
+              "top_k",
+              "frequency_penalty",
+              "response_format",
+              "tools",
+              "tool_choice",
+              "structured_outputs",
+              "max_tokens"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "DeepInfra | deepseek/deepseek-v3.2-20251201",
+            "model_id": "deepseek/deepseek-v3.2",
+            "model_name": "DeepSeek: DeepSeek V3.2",
+            "context_length": 163840,
+            "pricing": {
+              "prompt": "0.00000026",
+              "completion": "0.00000038",
+              "input_cache_read": "0.00000013",
+              "discount": 0
+            },
+            "provider_name": "DeepInfra",
+            "tag": "deepinfra/fp4",
+            "service_tier": null,
+            "quantization": "fp4",
+            "max_completion_tokens": 147456,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "top_k",
+              "seed",
+              "min_p",
+              "tool_choice",
+              "tools",
+              "response_format",
+              "logit_bias",
+              "structured_outputs"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 98.33333333333333,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "AtlasCloud | deepseek/deepseek-v3.2-20251201",
+            "model_id": "deepseek/deepseek-v3.2",
+            "model_name": "DeepSeek: DeepSeek V3.2",
+            "context_length": 163840,
+            "pricing": {
+              "prompt": "0.00000026",
+              "completion": "0.00000038",
+              "input_cache_read": "0.00000013",
+              "discount": 0
+            },
+            "provider_name": "AtlasCloud",
+            "tag": "atlas-cloud/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 147456,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "response_format",
+              "tools",
+              "tool_choice",
+              "seed",
+              "logit_bias",
+              "stop",
+              "min_p",
+              "top_k",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "structured_outputs",
+              "logprobs",
+              "top_logprobs"
+            ],
+            "supports_tool_choice": {
+              "none": false,
+              "auto": true,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 99.93055555555556,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Baidu | deepseek/deepseek-v3.2-20251201",
+            "model_id": "deepseek/deepseek-v3.2",
+            "model_name": "DeepSeek: DeepSeek V3.2",
+            "context_length": 131072,
+            "pricing": {
+              "prompt": "0.00000028",
+              "completion": "0.00000042",
+              "input_cache_read": "0.000000028",
+              "discount": 0
+            },
+            "provider_name": "Baidu",
+            "tag": "baidu/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 65536,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "temperature",
+              "top_p",
+              "max_tokens",
+              "stop",
+              "seed",
+              "response_format",
+              "structured_outputs"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": null,
+            "uptime_last_5m": null,
+            "uptime_last_1d": 90.40511727078892,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "DigitalOcean | deepseek/deepseek-v3.2-20251201",
+            "model_id": "deepseek/deepseek-v3.2",
+            "model_name": "DeepSeek: DeepSeek V3.2",
+            "context_length": 163840,
+            "pricing": {
+              "prompt": "0.0000003",
+              "completion": "0.00000096",
+              "input_cache_read": "0.00000009",
+              "discount": 0
+            },
+            "provider_name": "DigitalOcean",
+            "tag": "digitalocean",
+            "service_tier": null,
+            "quantization": "unknown",
+            "max_completion_tokens": 147456,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "temperature",
+              "top_p",
+              "max_tokens",
+              "logprobs",
+              "top_logprobs"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 96.66666666666667,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 90.34776437189495,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://openrouter.ai/api/v1/models/qwen/qwen3-235b-a22b-2507/endpoints",
+      "fetched_at_utc": "2026-11-17T07:43:08.474992+00:00",
+      "data": {
+        "id": "qwen/qwen3-235b-a22b-2507",
+        "name": "Qwen: Qwen3 235B A22B Instruct 2507",
+        "created": 1753119555,
+        "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
+        "architecture": {
+          "tokenizer": "Qwen3",
+          "instruct_type": null,
+          "modality": "text->text",
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "endpoints": [
+          {
+            "name": "DeepInfra | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.000000072",
+              "completion": "0.00000044",
+              "discount": 0
+            },
+            "provider_name": "DeepInfra",
+            "tag": "deepinfra/fp8/flex",
+            "service_tier": "flex",
+            "quantization": "fp8",
+            "max_completion_tokens": 235929,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "top_k",
+              "seed",
+              "min_p",
+              "logit_bias",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": null,
+            "uptime_last_5m": null,
+            "uptime_last_1d": null,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "DeepInfra | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.00000009",
+              "completion": "0.00000055",
+              "discount": 0
+            },
+            "provider_name": "DeepInfra",
+            "tag": "deepinfra/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 16384,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "top_k",
+              "seed",
+              "min_p",
+              "tools",
+              "tool_choice",
+              "logit_bias",
+              "structured_outputs",
+              "response_format"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 74.20867526377492,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "DeepInfra | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.000000135",
+              "completion": "0.000000825",
+              "discount": 0
+            },
+            "provider_name": "DeepInfra",
+            "tag": "deepinfra/fp8/priority",
+            "service_tier": "priority",
+            "quantization": "fp8",
+            "max_completion_tokens": 235929,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "top_k",
+              "seed",
+              "min_p",
+              "logit_bias",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 96.81528662420382,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Parasail | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 131072,
+            "pricing": {
+              "prompt": "0.00000014",
+              "completion": "0.0000008",
+              "input_cache_read": "0.00000005",
+              "discount": 0
+            },
+            "provider_name": "Parasail",
+            "tag": "parasail/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 117964,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "frequency_penalty",
+              "presence_penalty",
+              "repetition_penalty",
+              "seed",
+              "stop",
+              "top_k",
+              "logit_bias",
+              "tools",
+              "tool_choice",
+              "response_format",
+              "structured_outputs",
+              "logprobs",
+              "top_logprobs"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 99.51388888888889,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Venice | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 128000,
+            "pricing": {
+              "prompt": "0.00000015",
+              "completion": "0.00000075",
+              "discount": 0
+            },
+            "provider_name": "Venice",
+            "tag": "venice/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 16384,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "top_k",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": false,
+              "function": false
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 99.24686192468619,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Nebius | qwen/qwen3-235b-a22b-07-25",
+            "model_id": "qwen/qwen3-235b-a22b-2507",
+            "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+            "context_length": 262144,
+            "pricing": {
+              "prompt": "0.0000002",
+              "completion": "0.0000006",
+              "input_cache_read": "0.00000005",
+              "discount": 0
+            },
+            "provider_name": "Nebius",
+            "tag": "nebius/fp8",
+            "service_tier": null,
+            "quantization": "fp8",
+            "max_completion_tokens": 235929,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stop",
+              "frequency_penalty",
+              "presence_penalty",
+              "seed",
+              "top_k",
+              "logit_bias",
+              "repetition_penalty",
+              "response_format",
+              "structured_outputs",
+              "tools",
+              "tool_choice"
+            ],
+            "supports_tool_choice": {
+              "none": false,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 96.66666666666667,
+            "uptime_last_5m": 80,
+            "uptime_last_1d": 98.19444444444444,
+            "supports_implicit_caching": true,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://openrouter.ai/api/v1/models/google/gemini-2.5-flash-lite/endpoints",
+      "fetched_at_utc": "2026-11-17T07:43:08.667229+00:00",
+      "data": {
+        "id": "google/gemini-2.5-flash-lite",
+        "name": "Google: Gemini 2.5 Flash Lite",
+        "created": 1753200276,
+        "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
+        "architecture": {
+          "tokenizer": "Gemini",
+          "instruct_type": null,
+          "modality": "text+image+file+audio+video->text",
+          "input_modalities": [
+            "text",
+            "image",
+            "file",
+            "audio",
+            "video"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "endpoints": [
+          {
+            "name": "Google AI Studio | google/gemini-2.5-flash-lite",
+            "model_id": "google/gemini-2.5-flash-lite",
+            "model_name": "Google: Gemini 2.5 Flash Lite",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.00000005",
+              "completion": "0.0000002",
+              "image": "0.00000005",
+              "audio": "0.00000015",
+              "input_audio_cache": "0.000000015",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000002",
+              "input_cache_read": "0.000000005",
+              "input_cache_write": "0.0000000416666666666667",
+              "discount": 0
+            },
+            "provider_name": "Google AI Studio",
+            "tag": "google-ai-studio/flex",
+            "service_tier": "flex",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google AI Studio | google/gemini-2.5-flash-lite",
+            "model_id": "google/gemini-2.5-flash-lite",
+            "model_name": "Google: Gemini 2.5 Flash Lite",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.0000001",
+              "completion": "0.0000004",
+              "image": "0.0000001",
+              "audio": "0.0000003",
+              "input_audio_cache": "0.00000003",
+              "web_search": "0.014",
+              "internal_reasoning": "0.0000004",
+              "input_cache_read": "0.00000001",
+              "input_cache_write": "0.0000000833333333333333",
+              "discount": 0
+            },
+            "provider_name": "Google AI Studio",
+            "tag": "google-ai-studio",
+            "service_tier": null,
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": 0,
+            "uptime_last_30m": 100,
+            "uptime_last_5m": 100,
+            "uptime_last_1d": 100,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          },
+          {
+            "name": "Google AI Studio | google/gemini-2.5-flash-lite",
+            "model_id": "google/gemini-2.5-flash-lite",
+            "model_name": "Google: Gemini 2.5 Flash Lite",
+            "context_length": 1048576,
+            "pricing": {
+              "prompt": "0.00000018",
+              "completion": "0.00000072",
+              "image": "0.00000018",
+              "audio": "0.00000054",
+              "input_audio_cache": "0.000000054",
+              "web_search": "0.014",
+              "internal_reasoning": "0.00000072",
+              "input_cache_read": "0.000000018",
+              "input_cache_write": "0.00000015",
+              "discount": 0
+            },
+            "provider_name": "Google AI Studio",
+            "tag": "google-ai-studio/priority",
+            "service_tier": "priority",
+            "quantization": "unknown",
+            "max_completion_tokens": 65535,
+            "max_prompt_tokens": null,
+            "supported_parameters": [
+              "reasoning",
+              "include_reasoning",
+              "structured_outputs",
+              "response_format",
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "seed",
+              "tools",
+              "tool_choice",
+              "stop"
+            ],
+            "supports_tool_choice": {
+              "none": true,
+              "auto": true,
+              "required": true,
+              "function": true
+            },
+            "status": -2,
+            "uptime_last_30m": 83.33333333333334,
+            "uptime_last_5m": null,
+            "uptime_last_1d": 72.13375796178345,
+            "supports_implicit_caching": false,
+            "native_tools": {},
+            "supports_voice_cloning": false,
+            "supports_multiple_audio_references": false,
+            "supports_image_reference": false,
+            "supports_diarization": false,
+            "latency_last_30m": null,
+            "throughput_last_30m": null
+          }
+        ]
+      }
+    }
+  ]
+}

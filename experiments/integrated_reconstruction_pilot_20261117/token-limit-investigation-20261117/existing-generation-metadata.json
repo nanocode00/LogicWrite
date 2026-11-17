@@ -1,0 +1,29 @@
+{
+  "fetched_at_utc": "2026-11-17T07:45:09.405492+00:00",
+  "method": "GET",
+  "endpoint": "/api/v1/generation",
+  "purpose": "existing generation metadata only",
+  "generation_requests": 0,
+  "http_status": 200,
+  "data": {
+    "id": "gen-1794899414-X0TjAeKV0hrIIxy5bUyM",
+    "model": "deepseek/deepseek-v3.2-20251201",
+    "provider_name": "GMICloud",
+    "native_finish_reason": "stop",
+    "finish_reason": "stop",
+    "native_tokens_prompt": 2262,
+    "native_tokens_completion": 16025,
+    "native_tokens_reasoning": 14280,
+    "tokens_prompt": 2289,
+    "tokens_completion": 20260,
+    "total_cost": 0.005433645,
+    "upstream_inference_cost": 0,
+    "cancelled": false,
+    "generation_time": 256411,
+    "latency": 1479
+  },
+  "provider_responses_present": true,
+  "raw_upstream_request_captured": false,
+  "raw_upstream_response_captured": false,
+  "credentials_recorded": false
+}

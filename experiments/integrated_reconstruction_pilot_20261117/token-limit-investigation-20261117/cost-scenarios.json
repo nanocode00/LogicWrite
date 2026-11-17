@@ -1,0 +1,138 @@
+[
+  {
+    "model": "deepseek/deepseek-v3.2",
+    "provider": "gmicloud/fp8",
+    "prompt_usd_per_million": "0.2088000000",
+    "completion_usd_per_million": "0.3096000000",
+    "source_url": "https://openrouter.ai/api/v1/models/deepseek/deepseek-v3.2/endpoints",
+    "checked_at_utc": "2026-11-17T07:43:08.279224+00:00",
+    "remaining_three": [
+      {
+        "target": "IR-002/B0",
+        "input_tokens_upper_estimate": 10396,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.0058858848"
+      },
+      {
+        "target": "IR-002/B1",
+        "input_tokens_upper_estimate": 10828,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.0059760864"
+      },
+      {
+        "target": "IR-003/B1",
+        "input_tokens_upper_estimate": 9197,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.0056355336"
+      }
+    ],
+    "remaining_three_upper_usd": "0.0174975048",
+    "two_probe_estimate_usd": "0.0002534400",
+    "five_request_plan_upper_usd": "0.0177509448",
+    "optional_new_IR003_B0_upper_usd": "0.0055453320",
+    "six_request_plan_upper_usd": "0.0232962768",
+    "caveat": "Offline estimate only, conditional on provider respecting output limit; not a hard billing guarantee. No paid request executed."
+  },
+  {
+    "model": "deepseek/deepseek-v3.2",
+    "provider": "deepinfra/fp4",
+    "prompt_usd_per_million": "0.26000000",
+    "completion_usd_per_million": "0.38000000",
+    "source_url": "https://openrouter.ai/api/v1/models/deepseek/deepseek-v3.2/endpoints",
+    "checked_at_utc": "2026-11-17T07:43:08.279224+00:00",
+    "remaining_three": [
+      {
+        "target": "IR-002/B0",
+        "input_tokens_upper_estimate": 10396,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.00726296"
+      },
+      {
+        "target": "IR-002/B1",
+        "input_tokens_upper_estimate": 10828,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.00737528"
+      },
+      {
+        "target": "IR-003/B1",
+        "input_tokens_upper_estimate": 9197,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.00695122"
+      }
+    ],
+    "remaining_three_upper_usd": "0.02158946",
+    "two_probe_estimate_usd": "0.00031488",
+    "five_request_plan_upper_usd": "0.02190434",
+    "optional_new_IR003_B0_upper_usd": "0.00683890",
+    "six_request_plan_upper_usd": "0.02874324",
+    "caveat": "Offline estimate only, conditional on provider respecting output limit; not a hard billing guarantee. No paid request executed."
+  },
+  {
+    "model": "qwen/qwen3-235b-a22b-2507",
+    "provider": "deepinfra/fp8",
+    "prompt_usd_per_million": "0.09000000",
+    "completion_usd_per_million": "0.55000000",
+    "source_url": "https://openrouter.ai/api/v1/models/qwen/qwen3-235b-a22b-2507/endpoints",
+    "checked_at_utc": "2026-11-17T07:43:08.474992+00:00",
+    "remaining_three": [
+      {
+        "target": "IR-002/B0",
+        "input_tokens_upper_estimate": 10396,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.00753564"
+      },
+      {
+        "target": "IR-002/B1",
+        "input_tokens_upper_estimate": 10828,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.00757452"
+      },
+      {
+        "target": "IR-003/B1",
+        "input_tokens_upper_estimate": 9197,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.00742773"
+      }
+    ],
+    "remaining_three_upper_usd": "0.02253789",
+    "two_probe_estimate_usd": "0.00016256",
+    "five_request_plan_upper_usd": "0.02270045",
+    "optional_new_IR003_B0_upper_usd": "0.00738885",
+    "six_request_plan_upper_usd": "0.03008930",
+    "caveat": "Offline estimate only, conditional on provider respecting output limit; not a hard billing guarantee. No paid request executed."
+  },
+  {
+    "model": "google/gemini-2.5-flash-lite",
+    "provider": "google-ai-studio",
+    "prompt_usd_per_million": "0.1000000",
+    "completion_usd_per_million": "0.4000000",
+    "source_url": "https://openrouter.ai/api/v1/models/google/gemini-2.5-flash-lite/endpoints",
+    "checked_at_utc": "2026-11-17T07:43:08.667229+00:00",
+    "remaining_three": [
+      {
+        "target": "IR-002/B0",
+        "input_tokens_upper_estimate": 10396,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.0058396"
+      },
+      {
+        "target": "IR-002/B1",
+        "input_tokens_upper_estimate": 10828,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.0058828"
+      },
+      {
+        "target": "IR-003/B1",
+        "input_tokens_upper_estimate": 9197,
+        "max_output_tokens": 12000,
+        "estimated_upper_usd": "0.0057197"
+      }
+    ],
+    "remaining_three_upper_usd": "0.0174421",
+    "two_probe_estimate_usd": "0.0001536",
+    "five_request_plan_upper_usd": "0.0175957",
+    "optional_new_IR003_B0_upper_usd": "0.0056765",
+    "six_request_plan_upper_usd": "0.0232722",
+    "caveat": "Offline estimate only, conditional on provider respecting output limit; not a hard billing guarantee. No paid request executed."
+  }
+]
