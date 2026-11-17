@@ -43,7 +43,7 @@ class PilotBoundaryTests(unittest.TestCase):
     def test_no_credentials_fails_before_any_http_request(self):
         import os
         with tempfile.TemporaryDirectory() as directory:
-            env = {k:v for k,v in os.environ.items() if not k.startswith('PILOT_')}
+            env = {k:v for k,v in os.environ.items() if not k.startswith(('PILOT_', 'OPENROUTER_'))}
             folder = Path(directory) / 'run'
             result = subprocess.run([sys.executable, str(HERE / 'run.py'), '--output', str(folder), '--execute'],
                                     env=env, capture_output=True)
