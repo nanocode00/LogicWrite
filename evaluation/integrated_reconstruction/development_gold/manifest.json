@@ -1,0 +1,86 @@
+{
+  "schema_version": "integrated-development-gold-inclusion-v1",
+  "created_date": "2026-11-17",
+  "approval_record_type": "user_explicit_in_chat",
+  "decision": "include_all_3_in_development_gold",
+  "collection": "integrated_reconstruction_exposed_development",
+  "status": "included_for_development_evaluation",
+  "source_family": "synthetic-author-cluster-20261113",
+  "independent_source_families": 1,
+  "split": "exposed_development",
+  "case_count": 3,
+  "cases": [
+    {
+      "case_id": "IR-001",
+      "input_path": "inputs/IR-001.json",
+      "input_sha256": "37b0fcb2aa74a75b5066c5b01fc2ea049a7ce67cdd0ca3fbc6888d776be990d3",
+      "input_git_blob_sha": "b717120f5dec7c3ff427240f8932df77c4e91529",
+      "criteria_path": "criteria/v2/IR-001.json",
+      "criteria_git_blob_sha": "d01cc692b7cca51e1ded7174bf879e7e477c1c01",
+      "criteria_version": "evaluation-criteria-v2/clarification-02",
+      "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+      "reference_path": "reference_outputs/v2_candidates/IR-001.json",
+      "reference_git_blob_sha": "cf6be5d6dcf101ecb2932612c61b0ed18a8d4e1f",
+      "reference_sha256": "ed4fe3a6102d119548683a5f827a68382b2e5cbafb7d0d1e3218a59e7720d3a2",
+      "reference_status": "approved_non_unique_example",
+      "human_review_evidence_path": "reviews/post_revision_approvals/2026-11-17.json",
+      "human_review_git_blob_sha": "ff074f5dfa37a165fb4ba02c2b68dee791ce857c",
+      "gold_inclusion_approval": "approved_for_exposed_development",
+      "special_conditions": [
+        "HITL preservation of unresolved funding-policy conflict and diary changes is valid",
+        "No authorization to publish or resolve the policy"
+      ]
+    },
+    {
+      "case_id": "IR-002",
+      "input_path": "inputs/IR-002.json",
+      "input_sha256": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+      "input_git_blob_sha": "b2b5b03723ddb7c1f58ba00263f3638b0c37f846",
+      "criteria_path": "criteria/v2/IR-002.json",
+      "criteria_git_blob_sha": "4bea0cd53e90acd2d046c047b993dc7158ff3e36",
+      "criteria_version": "evaluation-criteria-v2/clarification-02",
+      "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+      "reference_path": "reference_outputs/v2_candidates/IR-002.json",
+      "reference_git_blob_sha": "b93b65bb85f752000017700a665c006f5e434048",
+      "reference_sha256": "23696d202790faf5fdaa832af042a572e0beaa9120f7265f7ca2f2d2b8f767b6",
+      "reference_status": "approved_non_unique_example",
+      "human_review_evidence_path": "reviews/post_revision_approvals/2026-11-17.json",
+      "human_review_git_blob_sha": "ff074f5dfa37a165fb4ba02c2b68dee791ce857c",
+      "gold_inclusion_approval": "approved_for_exposed_development",
+      "special_conditions": [
+        "Document-group policy consistency and bounded observation valid"
+      ]
+    },
+    {
+      "case_id": "IR-003",
+      "input_path": "inputs/IR-003.json",
+      "input_sha256": "75c88eb7c3b9cd217a8e0ca367889685ca086b7549b26a2024479fcc8a5a6c24",
+      "input_git_blob_sha": "3848fbb2cc574d2aa8a16070724255ab39f99b78",
+      "criteria_path": "answers/IR-003.json",
+      "criteria_git_blob_sha": "0747fe8b57e8b931d2048383f37fbe08bbd54b80",
+      "criteria_version": "evaluation-criteria-v1",
+      "criteria_sha256": null,
+      "reference_path": "reference_outputs/IR-003.json",
+      "reference_git_blob_sha": "d7eafb9b0813084dbfe3d5a10ef1151b50c2260d",
+      "reference_sha256": null,
+      "reference_status": "approved_non_unique_example",
+      "human_review_evidence_path": "reviews/IR-003.json",
+      "human_review_git_blob_sha": "43ffdc1710be0da1eaee94e44ec1d29fdc4c87a7",
+      "gold_inclusion_approval": "approved_for_exposed_development",
+      "special_conditions": [
+        "No-change full document and bounded deferral valid",
+        "No external-publication or content-edit permission"
+      ]
+    }
+  ],
+  "guardrails": {
+    "not_blind_holdout": true,
+    "not_independent_real_examples": true,
+    "do_not_append_to_existing_active_29": true,
+    "do_not_auto_merge_pr_36": true,
+    "no_claim_of_model_evaluation": true,
+    "original_v1_and_earlier_validation_snapshots_remain_unchanged": true,
+    "prior_review_and_candidate_manifest_nulls_are_historical": true
+  },
+  "note": "Approval is effective through this new inclusion registry; historical manifests intentionally retain their pre-approval state. IR-001 and IR-002 human recheck and non-unique reference approval are recorded separately; IR-003 retains the accepted v1 criterion/reference and earlier human review."
+}
