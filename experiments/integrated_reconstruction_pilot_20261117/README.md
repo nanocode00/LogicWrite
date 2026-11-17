@@ -1,5 +1,7 @@
 # 통합 재구성 파일럿 실행 준비 및 장애 보고
 
+> reasoning 허용 새 프로토콜과 1/6 실행 후 정산 대조 중단 결과는 [새 비교 보고서](reasoning-comparison-20261117/REPORT.md)를 참조한다. 이전 보고서·출력은 변경하지 않았다.
+
 > 교체 키의 실제 IR-003/B0 응답·비용과 reasoning 정책 실패는 [ROTATED-KEY-SMOKE.md](ROTATED-KEY-SMOKE.md)를 참조한다. 이전 미실행/차단 기록은 역사 기록으로 보존한다.
 
 > `.env` 연결 및 smoke 보안 차단 결과는 [SMOKE-20261117.md](SMOKE-20261117.md)를 참조한다.

@@ -1,0 +1,9 @@
+{
+  "spent_usd": "0.0027089352",
+  "pending": false,
+  "blocked": true,
+  "smoke_success": false,
+  "completed_targets": [],
+  "pending_upper_usd": "0.00545376",
+  "pending_target": "IR-003/B0"
+}

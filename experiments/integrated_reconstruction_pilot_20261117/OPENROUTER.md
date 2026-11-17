@@ -146,3 +146,13 @@ Git blob `496bf0e9b647a6e7974897368c316aef7f7d4bbf` 하나만 폐기 확인 예�
 Git snapshot/ref/객체를 삭제하거나 이력을 재작성하지 않았다.
 기존 `$0.25` 서버 키 한도, `$0.20` 누적 예산, 가격 상한과 단일 smoke 조건은 유지했다.
 결과는 [ROTATED-KEY-SMOKE.md](ROTATED-KEY-SMOKE.md)를 참조한다.
+
+## Reasoning 허용 비교 버전
+
+사용자가 reasoning 허용 및 정산된 기존 차단 복구를 별도로 승인했다.
+새 실행기는 comparison_v2.py이고 [규약](PROTOCOL_REASONING_V2.md)과
+[실제 비교 시도 보고서](reasoning-comparison-20261117/REPORT.md)를 따른다.
+기존 run.py와 위 reasoning 비활성화 기록은 보존한다. 새 버전은 신규 최대 6회,
+기존 비용 유지·정확한 과거 증거 대조·복구 감사·전역 잠금을 적용한다.
+이번에는 신규 첫 응답 후 즉시 서버 사용량이 지연돼 중단했으며, 뒤에 정산 일치가 확인돼도
+새 차단은 임의 해제하지 않았다. B1 및 나머지 5건을 실행했다고 해석하지 않는다.

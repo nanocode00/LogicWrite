@@ -1,0 +1,63 @@
+{
+  "protocol": "integrated-reasoning-allowed-20261117-v1",
+  "phase": "prepare",
+  "execute": false,
+  "targets": [
+    {
+      "target": "IR-003/B0",
+      "input_tokens_upper_estimate": 8765,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00556065",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-001/B0",
+      "input_tokens_upper_estimate": 11769,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00619149",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-001/B1",
+      "input_tokens_upper_estimate": 12201,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00628221",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-002/B0",
+      "input_tokens_upper_estimate": 10396,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00590316",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-002/B1",
+      "input_tokens_upper_estimate": 10828,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00599388",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-003/B1",
+      "input_tokens_upper_estimate": 9197,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00565137",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    }
+  ],
+  "reasoning": {
+    "enabled": true
+  },
+  "max_tokens": 12000,
+  "temperature": 0,
+  "max_new_requests_campaign": 6,
+  "server_limit_usd": "0.25",
+  "runner_limit_usd": "0.20",
+  "model": "deepseek/deepseek-v3.2",
+  "provider": "gmicloud/fp8",
+  "new_cost_upper_usd": "0.03558276",
+  "runner_sha256": "cfb5f2c8043a8f11d5b6bdbe097efc7b38af0291b944c6e7ec290ba2d904caef",
+  "base_runner_sha256": "5cb91c0bbda5315f3b56a88ebe442acd940aacc5f1a9a30dc53044a84f5f4337",
+  "source_commit": "b370fa0f48eedf24a6ed352d443e50a376b5e068"
+}

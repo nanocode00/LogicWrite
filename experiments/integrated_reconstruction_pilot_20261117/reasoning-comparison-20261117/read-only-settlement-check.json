@@ -1,0 +1,16 @@
+{
+  "key_status": {
+    "limit": "0.25",
+    "limit_remaining": "0.245690894",
+    "usage": "0.004309106",
+    "limit_reset": null,
+    "byok_usage": "0"
+  },
+  "ledger_spent_usd": "0.0043091064",
+  "difference_usd": "-4E-10",
+  "within_server_precision": true,
+  "ledger_blocked": true,
+  "ledger_pending": false,
+  "generation_requests_after_stop": 0,
+  "ledger_modified_by_this_check": false
+}
