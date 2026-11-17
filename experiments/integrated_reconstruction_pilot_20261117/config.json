@@ -1,0 +1,15 @@
+{
+  "protocol": "natural-output-B0-B1-v1",
+  "cases": ["IR-001", "IR-002", "IR-003"],
+  "repeats": 1,
+  "max_completion_tokens": 12000,
+  "timeout_seconds": 180,
+  "max_requests_per_arm_case": 1,
+  "automatic_retries": 0,
+  "external_tools": 0,
+  "temperature": "provider_default",
+  "model": "required_PILOT_MODEL_same_for_all_calls",
+  "model_revision": "record_response_model_if_available_otherwise_unknown",
+  "B2": "unsupported_current_integration",
+  "human_final_semantic_judgment": "pending"
+}

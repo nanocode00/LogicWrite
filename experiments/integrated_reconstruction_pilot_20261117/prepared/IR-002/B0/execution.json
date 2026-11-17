@@ -1,0 +1,13 @@
+{
+  "state": "prepared_not_run",
+  "calls": 0,
+  "input_sha256": "fbca042bf081c7e914792a79d0a07f54891f7bba0a849f3fbb118d38fadba556",
+  "source_input_sha256": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+  "D": "unobserved",
+  "Q": "not_evaluated_no_model_output",
+  "F": "not_evaluated",
+  "HITL": "not_assessed",
+  "usage": null,
+  "seconds": null,
+  "blocker": "missing_dedicated_api_environment"
+}

@@ -1,0 +1,674 @@
+[
+  {
+    "case_id": "IR-001",
+    "arm": "B0",
+    "criteria_path": "criteria/v2/IR-001.json",
+    "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D5",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-001",
+    "arm": "B1",
+    "criteria_path": "criteria/v2/IR-001.json",
+    "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D5",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-001",
+    "arm": "B2",
+    "criteria_path": "criteria/v2/IR-001.json",
+    "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D5",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-002",
+    "arm": "B0",
+    "criteria_path": "criteria/v2/IR-002.json",
+    "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F3",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-002",
+    "arm": "B1",
+    "criteria_path": "criteria/v2/IR-002.json",
+    "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F3",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-002",
+    "arm": "B2",
+    "criteria_path": "criteria/v2/IR-002.json",
+    "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F3",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-003",
+    "arm": "B0",
+    "criteria_path": "answers/IR-003.json",
+    "criteria_sha256": null,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-003",
+    "arm": "B1",
+    "criteria_path": "answers/IR-003.json",
+    "criteria_sha256": null,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  },
+  {
+    "case_id": "IR-003",
+    "arm": "B2",
+    "criteria_path": "answers/IR-003.json",
+    "criteria_sha256": null,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_no_model_output",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated",
+        "evidence": null
+      }
+    ],
+    "quality_axes": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed",
+    "automated_semantic_verdict": null,
+    "ai_semantic_opinion": "No response to assess",
+    "human_final_judgment": null
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "included_development_cases": 3,
+  "source_families": 1,
+  "split": "exposed_development",
+  "existing_active_29_modified": false,
+  "gold_inclusion_approved_in_registry": true,
+  "model_quality_evaluated": false
+}
