@@ -1,0 +1,17 @@
+{
+  "case": "IR-003",
+  "arm": "B0",
+  "source_input_sha256": "75c88eb7c3b9cd217a8e0ca367889685ca086b7549b26a2024479fcc8a5a6c24",
+  "response_sha256": "f5c52c6ee9e8352db6064cd687872f768f313fc5e2e310484b2ea26dc7692a93",
+  "editable_documents_expected": [
+    "meeting"
+  ],
+  "candidate_fenced_document_count": 1,
+  "meeting_candidate_returned_in_full_after_list_marker_normalization": true,
+  "candidate_byte_identical": false,
+  "format_change": "paragraph lines prefixed with Markdown list markers",
+  "read_only_documents": "provided source snapshots unchanged; model claims no edits; no other candidate blocks returned",
+  "format_only_semantics": "needs_AI_and_human_review; normalized equality is mechanical evidence only",
+  "D": "unobserved; response reasoning was not separately committed before editing",
+  "human_final_judgment": null
+}

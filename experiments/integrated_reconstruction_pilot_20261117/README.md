@@ -1,5 +1,7 @@
 # 통합 재구성 파일럿 실행 준비 및 장애 보고
 
+> 교체 키의 실제 IR-003/B0 응답·비용과 reasoning 정책 실패는 [ROTATED-KEY-SMOKE.md](ROTATED-KEY-SMOKE.md)를 참조한다. 이전 미실행/차단 기록은 역사 기록으로 보존한다.
+
 > `.env` 연결 및 smoke 보안 차단 결과는 [SMOKE-20261117.md](SMOKE-20261117.md)를 참조한다.
 
 > 후속 OpenRouter 실행기는 [OPENROUTER.md](OPENROUTER.md)를 따른다. 아래 실행기 옵션·환경변수·명령·API 장애 설명은 최초 준비 시점의 기록이며, 현재 사용법은 후속 문서가 대체한다. 기존 prepared/ 아티팩트는 그대로 보존했다.

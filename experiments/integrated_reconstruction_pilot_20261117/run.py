@@ -57,6 +57,9 @@ BUDGET = Decimal('0.20')
 KEY_LIMIT = Decimal('0.25')
 MAX_TOKENS = 12000
 TIMEOUT = 600
+# User explicitly confirmed revocation; only this previously audited local blob is excepted.
+# Exact current-key matches still block even if the blob is on this list.
+REVOKED_LOCAL_BLOBS = frozenset(['496bf0e9b647a6e7974897368c316aef7f7d4bbf'])
 
 class Blocked(RuntimeError):
     """Fixed safe reason only; never include provider errors or credentials."""
@@ -131,6 +134,7 @@ def verify_secret_protection(key,source,*,repo=REPO):
     proc=subprocess.Popen(['git','cat-file','--batch-all-objects','--batch'],cwd=repo,
                           stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
     count=0
+    revoked_matches=0
     try:
         while True:
             header=proc.stdout.readline()
@@ -140,15 +144,21 @@ def verify_secret_protection(key,source,*,repo=REPO):
             size=int(fields[2]);raw=proc.stdout.read(size)
             if len(raw)!=size or proc.stdout.read(1)!=b'\n': raise Blocked('git_history_scan_failed')
             count+=1
-            if secret in raw or pattern.search(raw):
-                raise Blocked('credential_in_git_object_stop_rotate_key')
+            if secret in raw:
+                raise Blocked('current_credential_in_git_object_stop_rotate_key')
+            if pattern.search(raw):
+                if fields[0].decode() not in REVOKED_LOCAL_BLOBS:
+                    raise Blocked('unacknowledged_credential_in_git_object_stop')
+                revoked_matches+=1
         if proc.wait()!=0: raise Blocked('git_history_scan_failed')
     finally:
         if proc.poll() is None: proc.terminate();proc.wait()
         proc.stdout.close()
     return {'dotenv_ignored':True,'dotenv_example_allowed':True,'tracked_credentials':False,
             'history_scan_passed':True,'git_objects_scanned':count,'checked_worktrees':len(roots),
-            'credential_value_recorded':False}
+            'credential_value_recorded':False,'current_key_absent_from_git':True,
+            'revoked_local_blob_matches':revoked_matches,
+            'warning':'previously_audited_local_blob_user_confirmed_revoked' if revoked_matches else None}
 
 
 def amount(value):
@@ -182,7 +192,9 @@ def api_json(method, path, key, payload=None):
         data=None if payload is None else json.dumps(payload).encode(),
         headers={'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'})
     with urllib.request.build_opener(NoRedirect).open(request, timeout=TIMEOUT if method == 'POST' else 30) as r:
-        return json.loads(r.read())
+        result=json.loads(r.read())
+        result['_http_status']=r.status
+        return result
 
 
 def key_status(result):
@@ -344,6 +356,7 @@ def run(args, *, api=api_json, ledger_dir=None):
                     result=api('POST','/chat/completions',key,payload)
                 finally:
                     record['seconds']=time.monotonic()-started
+                record['http_status']=result.pop('_http_status',None)
                 # Never archive untrusted provider text without credential redaction.
                 dump(folder/'response.json',sanitized(result,key))
                 usage=result.get('usage',{})

@@ -88,4 +88,21 @@ class CredentialTests(unittest.TestCase):
         with self.assertRaises(p.Blocked):
             p.verify_secret_protection('fixture-credential',str(path),repo=self.root)
 
+    def test_only_explicitly_revoked_blob_may_warn(self):
+        self.init_git()
+        old='sk-or-v1-'+'a'*64
+        path=self.root/'old.txt';path.write_text(old)
+        self.git('add','old.txt');self.git('commit','-qm','old credential')
+        blob=self.git('rev-parse','HEAD:old.txt').decode().strip()
+        self.git('rm','-q','old.txt');self.git('commit','-qm','remove')
+        with patch.object(p,'REVOKED_LOCAL_BLOBS',frozenset([blob])):
+            report=p.verify_secret_protection('fixture-current','environment',repo=self.root)
+            self.assertEqual(report['revoked_local_blob_matches'],1)
+            self.assertTrue(report['current_key_absent_from_git'])
+            with self.assertRaises(p.Blocked):
+                p.verify_secret_protection(old,'environment',repo=self.root)
+        with patch.object(p,'REVOKED_LOCAL_BLOBS',frozenset()):
+            with self.assertRaises(p.Blocked):
+                p.verify_secret_protection('fixture-current','environment',repo=self.root)
+
 if __name__=='__main__':unittest.main()

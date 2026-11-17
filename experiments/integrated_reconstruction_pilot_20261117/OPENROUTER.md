@@ -135,3 +135,14 @@ HTTP 응답/청구 검증은 아직 수행하지 않았으므로 첫 smoke의 �
 브랜치 커밋뿐 아니라 로컬 Codex 스냅샷 tree·dangling 객체도 포함하며, 원격 유출을 의미한다고 단정하지 않는다.
 기본 작업 디렉터리의 다른 브랜치에도 즉시 보호를 적용하기 위해 공유 `.git/info/exclude`에 같은 로컬 규칙을 추가했다.
 이 로컬 규칙과 `.env`는 커밋하지 않는다.
+
+## 폐기 확인 이후의 현재 키 검사
+
+사용자가 이전 키 폐기를 명시적으로 확인했다. 실행기는 이전 감사에서 확인한
+Git blob `496bf0e9b647a6e7974897368c316aef7f7d4bbf` 하나만 폐기 확인 예외로 구분한다.
+이 blob이 있어도 현재 키 바이트와 일치하면 먼저 차단한다. 다른 미확인 키 형식도 계속 차단한다.
+`current_key_absent_from_git`, `revoked_local_blob_matches`, warning을 별도로 기록하며,
+폐기 여부는 사용자 확인에 근거하고 OpenRouter로 이전 키를 다시 인증하지 않는다.
+Git snapshot/ref/객체를 삭제하거나 이력을 재작성하지 않았다.
+기존 `$0.25` 서버 키 한도, `$0.20` 누적 예산, 가격 상한과 단일 smoke 조건은 유지했다.
+결과는 [ROTATED-KEY-SMOKE.md](ROTATED-KEY-SMOKE.md)를 참조한다.

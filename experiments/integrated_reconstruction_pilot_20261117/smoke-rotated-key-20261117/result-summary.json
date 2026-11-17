@@ -1,0 +1,51 @@
+{
+  "target": "IR-003/B0",
+  "transport_success": true,
+  "protocol_success": false,
+  "protocol_failure": "reasoning_disable_request_not_observed",
+  "model": "deepseek/deepseek-v3.2",
+  "provider": "GMICloud",
+  "usage": {
+    "prompt_tokens": 1091,
+    "completion_tokens": 8014,
+    "total_tokens": 9105,
+    "cost": 0.0027089352,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0027089352,
+      "upstream_inference_prompt_cost": 0.0002278008,
+      "upstream_inference_completions_cost": 0.0024811344
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7220,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "seconds": 110.79499859700445,
+  "finish_reasons": [
+    "stop"
+  ],
+  "http_status": 200,
+  "generation_requests": 1,
+  "subsequent_generation_requests": 0,
+  "key_status_after": {
+    "limit": "0.25",
+    "limit_remaining": "0.247291065",
+    "usage": "0.002708935",
+    "limit_reset": null,
+    "byok_usage": "0",
+    "http_status": 200,
+    "check_kind": "read_only_post_smoke_key_status"
+  },
+  "document_quality": "AI_draft_review_only",
+  "D": "unobserved",
+  "human_final_judgment": null,
+  "budget_ledger": "blocked; accounted known cost; not reset"
+}
