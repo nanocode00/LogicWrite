@@ -1,0 +1,56 @@
+{
+  "protocol": "integrated-reasoning-allowed-20261117-v1",
+  "phase": "remaining",
+  "execute": true,
+  "targets": [
+    {
+      "target": "IR-001/B0",
+      "input_tokens_upper_estimate": 11769,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00619149",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-001/B1",
+      "input_tokens_upper_estimate": 12201,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00628221",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-002/B0",
+      "input_tokens_upper_estimate": 10396,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00590316",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-002/B1",
+      "input_tokens_upper_estimate": 10828,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00599388",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    },
+    {
+      "target": "IR-003/B1",
+      "input_tokens_upper_estimate": 9197,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00565137",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    }
+  ],
+  "reasoning": {
+    "enabled": true
+  },
+  "max_tokens": 12000,
+  "temperature": 0,
+  "max_new_requests_campaign": 6,
+  "server_limit_usd": "0.25",
+  "runner_limit_usd": "0.20",
+  "model": "deepseek/deepseek-v3.2",
+  "provider": "gmicloud/fp8",
+  "new_cost_upper_usd": "0.03002211",
+  "runner_sha256": "3497f32790703961940449ec2df9c05af349a8b9980ed60f5689ecc005898cae",
+  "base_runner_sha256": "5cb91c0bbda5315f3b56a88ebe442acd940aacc5f1a9a30dc53044a84f5f4337",
+  "source_commit": "82a4980008da79f6691de4c03e9d1728a367f242"
+}

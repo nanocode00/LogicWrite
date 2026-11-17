@@ -81,7 +81,7 @@ class ComparisonV2Tests(unittest.TestCase):
             state,record,response,status=self.fixture()
             state,event=v.recover_state(state,record,response,status)
             v.base.dump(ledger_dir/'budget.json',state)
-            spent=v.base.amount(state['spent_usd']);posts=[];bad_cost=False;stale=False
+            spent=v.base.amount(state['spent_usd']);posts=[];bad_cost=False;stale=False;oversize=False
             def api(method,path,key,payload=None):
                 nonlocal spent
                 if path=='/key':
@@ -99,7 +99,7 @@ class ComparisonV2Tests(unittest.TestCase):
                                      for d in inp['documents'] if d['access']!='read_only'],
                         'review_notes':'unchanged','unresolved_questions':[],'final_checks':'checked'}
                 spent+=v.base.amount('.0001')
-                usage={'cost':.0001,'prompt_tokens':10,'completion_tokens':20,
+                usage={'cost':.0001,'prompt_tokens':10,'completion_tokens':12001 if oversize else 20,
                        'is_byok':False,'completion_tokens_details':{'reasoning_tokens':10}}
                 if bad_cost:del usage['cost']
                 return {'_http_status':200,'model':v.base.MODEL,'provider':'GMICloud','usage':usage,
@@ -117,18 +117,32 @@ class ComparisonV2Tests(unittest.TestCase):
                 self.assertEqual(v.base.amount(saved['spent_usd']),spent)
                 with self.assertRaises(v.base.Blocked):v.run(args('smoke','again'),api=api,ledger_dir=ledger_dir)
                 self.assertEqual(len(posts),6)
-                # Delayed server settlement is a campaign stop, never an automatic release.
+                # Known response costs remain charged locally when the server counter lags.
                 state,record,response,status=self.fixture();state,_=v.recover_state(state,record,response,status)
                 v.base.dump(ledger_dir/'budget.json',state);spent=v.base.amount(state['spent_usd']);stale=True;posts=[]
-                with self.assertRaises(v.base.Blocked):v.run(args('smoke','stale'),api=api,ledger_dir=ledger_dir)
+                v.run(args('smoke','stale'),api=api,ledger_dir=ledger_dir)
                 saved=json.loads((ledger_dir/'budget.json').read_text())
-                self.assertFalse(saved['pending']);self.assertTrue(saved['blocked'])
-                self.assertEqual(saved['block_reason'],'post_request_spend_unreconciled')
+                self.assertFalse(saved['pending']);self.assertFalse(saved['blocked'])
+                self.assertEqual(saved['campaigns'][v.PROTOCOL]['attempts'][0]['settlement']['state'],'lagging_known_costs')
                 self.assertEqual(v.base.amount(saved['spent_usd']),spent)
                 self.assertEqual(len(posts),1)
-                with self.assertRaises(v.base.Blocked):v.run(args('remaining','stale-next',True),api=api,ledger_dir=ledger_dir)
-                self.assertEqual(len(posts),1)
+                v.run(args('remaining','stale-next',True),api=api,ledger_dir=ledger_dir)
+                self.assertEqual(len(posts),6)
+                saved=json.loads((ledger_dir/'budget.json').read_text())
+                self.assertEqual(v.base.amount(saved['spent_usd']),spent)
                 stale=False
+                # Provider token-limit violations are accounted, blocked and never retried.
+                state,record,response,status=self.fixture();state,_=v.recover_state(state,record,response,status)
+                v.base.dump(ledger_dir/'budget.json',state);spent=v.base.amount(state['spent_usd']);oversize=True
+                with self.assertRaises(v.base.Blocked):v.run(args('smoke','oversize'),api=api,ledger_dir=ledger_dir)
+                saved=json.loads((ledger_dir/'budget.json').read_text())
+                self.assertTrue(saved['blocked']);self.assertFalse(saved['pending'])
+                self.assertEqual(saved['block_reason'],'cost_or_token_bound_exceeded')
+                self.assertEqual(v.base.amount(saved['spent_usd']),spent)
+                count=len(posts)
+                with self.assertRaises(v.base.Blocked):v.run(args('remaining','oversize-next',True),api=api,ledger_dir=ledger_dir)
+                self.assertEqual(len(posts),count)
+                oversize=False
                 # Independent fake campaign: unknown cost stays pending and blocks future work.
                 state,record,response,status=self.fixture();state,_=v.recover_state(state,record,response,status)
                 v.base.dump(ledger_dir/'budget.json',state);spent=v.base.amount(state['spent_usd']);bad_cost=True
@@ -138,5 +152,30 @@ class ComparisonV2Tests(unittest.TestCase):
                 count=len(posts)
                 with self.assertRaises(v.base.Blocked):v.run(args('smoke','unknown-retry'),api=api,ledger_dir=ledger_dir)
                 self.assertEqual(len(posts),count)
+
+    def test_known_settlement_lag_is_safe_but_unknown_spend_and_regression_block(self):
+        status={'usage':'0.004309106'}
+        result=v.settlement_status(status,'0.006','0.004309106')
+        self.assertEqual(result['state'],'lagging_known_costs')
+        self.assertEqual(v.settlement_status({'usage':'.006'},'.006','.004')['state'],'settled')
+        with self.assertRaises(v.base.Blocked):v.settlement_status({'usage':'.007'},'.006','.004')
+        with self.assertRaises(v.base.Blocked):v.settlement_status({'usage':'.003'},'.006','.004')
+
+    def test_release_only_existing_settled_smoke_with_audit(self):
+        folder=HERE/'reasoning-comparison-20261117'
+        state=json.loads((folder/'ledger-final.json').read_text())
+        record=json.loads((folder/'smoke/IR-003/B0/execution.json').read_text())
+        response=json.loads((folder/'smoke/IR-003/B0/response.json').read_text())
+        status=json.loads((folder/'read-only-settlement-check.json').read_text())['key_status']
+        before=json.loads(json.dumps(state))
+        released,event=v.release_settlement_block(state,record,response,status)
+        self.assertEqual(event['before'],before);self.assertEqual(state,before)
+        self.assertFalse(released['blocked']);self.assertEqual(released['spent_usd'],before['spent_usd'])
+        self.assertEqual(len(released['campaigns'][v.PROTOCOL]['attempts']),1)
+        self.assertEqual(released['campaigns'][v.PROTOCOL]['attempts'][0]['status'],'response_complete')
+        for field,value in [('pending',True),('block_reason','timeout'),('spent_usd','.02')]:
+            altered=json.loads(json.dumps(before));altered[field]=value
+            with self.assertRaises(v.base.Blocked):v.release_settlement_block(altered,record,response,status)
+        with self.assertRaises(v.base.Blocked):v.release_settlement_block(before,record,response,dict(status,usage='.02'))
 
 if __name__=='__main__':unittest.main()

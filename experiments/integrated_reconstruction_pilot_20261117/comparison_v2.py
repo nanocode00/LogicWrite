@@ -108,6 +108,60 @@ def recover_state(state,record,response,status):
     return result,event
 
 
+def settlement_status(status,spent,last_seen='0'):
+    """Known response costs remain reserved even when the server counter lags."""
+    server=base.amount(status['usage']);known=base.amount(spent);previous=base.amount(last_seen)
+    tolerance=Decimal('0.000001')
+    if server>known+tolerance:raise base.Blocked('server_usage_exceeds_known_costs')
+    if server+tolerance<previous:raise base.Blocked('server_usage_regressed')
+    return {'state':'settled' if abs(server-known)<=tolerance else 'lagging_known_costs',
+            'server_usage_usd':str(server),'ledger_usage_usd':str(known),
+            'unreflected_known_cost_usd':str(max(known-server,Decimal(0))),
+            'policy':'known response costs remain charged against local budget; no generation retry'}
+
+
+def release_settlement_block(state,record,response,status):
+    """Explicit authorization applies only to the already-accounted v2 first response."""
+    if (state.get('pending') is not False or state.get('blocked') is not True or
+        state.get('block_reason')!='post_request_spend_unreconciled'):
+        raise base.Blocked('only_known_settlement_lag_releasable')
+    attempts=state.get('campaigns',{}).get(PROTOCOL,{}).get('attempts',[])
+    if (len(attempts)!=1 or attempts[0].get('target')!='IR-003/B0' or
+        attempts[0].get('status')!='failed' or attempts[0].get('reason')!='post_request_spend_unreconciled'):
+        raise base.Blocked('only_first_accounted_smoke_releasable')
+    usage=response.get('usage',{});cost=base.amount(usage.get('cost'))
+    if (record.get('reason')!='post_request_spend_unreconciled' or record.get('http_status')!=200 or
+        record.get('usage')!=usage or record.get('calls')!=1 or record.get('finish_reasons')!=['stop'] or
+        response.get('model')!=base.MODEL or response.get('provider')!='GMICloud' or response.get('error') or
+        response.get('choices',[{}])[0].get('finish_reason')!='stop' or usage.get('is_byok') is not False or
+        base.amount(attempts[0].get('cost_usd'))!=cost):
+        raise base.Blocked('settlement_response_evidence_invalid')
+    estimate=base.estimate(payload('IR-003','B0')['messages'])
+    if (type(usage.get('prompt_tokens')) is not int or type(usage.get('completion_tokens')) is not int or
+        not 0<=usage['prompt_tokens']<=estimate['input_tokens_upper_estimate'] or
+        not 0<=usage['completion_tokens']<=base.MAX_TOKENS or cost>base.amount(estimate['upper_usd'])):
+        raise base.Blocked('settlement_response_budget_invalid')
+    reasoning=usage.get('completion_tokens_details',{}).get('reasoning_tokens')
+    if type(reasoning) is not int or not 0<=reasoning<=usage['completion_tokens']:
+        raise base.Blocked('settlement_reasoning_cost_unknown')
+    output_check(response['choices'][0]['message']['content'],base.export_input(base.GOLD,'IR-003'))
+    legacy=sum((base.amount(x['cost_usd']) for x in state.get('legacy_requests',[])),Decimal(0))
+    if legacy+cost!=base.amount(state['spent_usd']):raise base.Blocked('ledger_cost_history_mismatch')
+    if abs(base.amount(status['usage'])-base.amount(state['spent_usd']))>Decimal('0.000001'):
+        raise base.Blocked('release_requires_server_reconciliation')
+    result=copy.deepcopy(state)
+    event={'kind':'user_authorized_release_of_known_settlement_lag','at':now(),
+           'authorization':'user_explicit_request_fix_runner_and_continue_2026-11-17',
+           'before':copy.deepcopy(state),'key_status':status,'cost_preserved':True,
+           'original_failure_preserved':True,'new_generation_requests':0}
+    result['blocked']=False;result.pop('block_reason',None)
+    result['last_server_usage_usd']=status['usage']
+    attempt=result['campaigns'][PROTOCOL]['attempts'][0]
+    attempt['status']='response_complete';attempt['settlement_release']=event['at']
+    result.setdefault('settlement_release_events',[]).append(event)
+    return result,event
+
+
 @contextmanager
 def ledger(directory):
     directory.mkdir(parents=True,exist_ok=True)
@@ -183,6 +237,20 @@ def run(args,*,api=base.api_json,ledger_dir=None):
             base.save_ledger(path,new)
             base.dump(args.output/'recovery-after.json',new)
             return
+        if args.phase=='settle':
+            record_path=base.HERE/'reasoning-comparison-20261117/smoke/IR-003/B0/execution.json'
+            response_path=record_path.with_name('response.json')
+            for evidence in [record_path,response_path]:
+                pinned=subprocess.check_output(['git','show','82a4980008da79f6691de4c03e9d1728a367f242:'+str(evidence.relative_to(base.REPO))],cwd=base.REPO)
+                if evidence.read_bytes()!=pinned:raise base.Blocked('settlement_evidence_changed')
+            status=base.key_status(api('GET','/key',key))
+            new,event=release_settlement_block(state,json.loads(record_path.read_text()),json.loads(response_path.read_text()),status)
+            event['record_sha256']=base.digest(record_path.read_bytes())
+            event['response_sha256']=base.digest(response_path.read_bytes())
+            base.dump(args.output/'settlement-before.json',state)
+            base.dump(args.output/'settlement-event.json',event)
+            base.save_ledger(path,new);base.dump(args.output/'settlement-after.json',new)
+            return
         if state.get('blocked') or state.get('pending'):raise base.Blocked('unresolved_ledger_stop')
         if PROTOCOL not in state.get('campaigns',{}):raise base.Blocked('audited_recovery_required')
         campaign=state['campaigns'][PROTOCOL]
@@ -206,6 +274,8 @@ def run(args,*,api=base.api_json,ledger_dir=None):
                 endpoint=base.endpoint_status(api('GET','/models/'+base.MODEL+'/endpoints',key),item['input_tokens_upper_estimate'])
                 endpoint['reasoning_disable_requested']=False;endpoint['reasoning_allowed']=True
                 record.update(key_status=status,endpoint=endpoint)
+                record['settlement_before']=settlement_status(status,state['spent_usd'],state.get('last_server_usage_usd','0'))
+                state['last_server_usage_usd']=status['usage']
                 upper=base.amount(item['upper_usd'])
                 if max(base.amount(status['usage']),base.amount(state['spent_usd']))+upper>base.BUDGET or upper>base.amount(status['limit_remaining']):
                     raise base.Blocked('request_upper_bound_exceeds_remaining_budget')
@@ -245,8 +315,9 @@ def run(args,*,api=base.api_json,ledger_dir=None):
                 base.dump(folder/'candidate.json',data);base.dump(folder/'automatic-checks.json',checks)
                 # Full candidates stay in the experiment directory, never actual document paths.
                 after=base.key_status(api('GET','/key',key));record['key_status_after']=after
-                if abs(base.amount(after['usage'])-base.amount(state['spent_usd']))>Decimal('0.000001'):
-                    raise base.Blocked('post_request_spend_unreconciled')
+                record['settlement_after']=settlement_status(after,state['spent_usd'],state.get('last_server_usage_usd','0'))
+                state['last_server_usage_usd']=after['usage']
+                attempt['settlement']=record['settlement_after']
                 if max(base.amount(after['usage']),base.amount(state['spent_usd']))>base.BUDGET:
                     raise base.Blocked('budget_exceeded')
                 record['state']='response_complete';record['semantic_quality']='pending_AI_and_human_review'
@@ -266,7 +337,7 @@ def run(args,*,api=base.api_json,ledger_dir=None):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--phase',choices=['prepare','recover','smoke','remaining'],default='prepare')
+    parser.add_argument('--phase',choices=['prepare','recover','settle','smoke','remaining'],default='prepare')
     parser.add_argument('--output',required=True,type=Path)
     parser.add_argument('--execute',action='store_true')
     parser.add_argument('--confirm-smoke-checked',action='store_true')

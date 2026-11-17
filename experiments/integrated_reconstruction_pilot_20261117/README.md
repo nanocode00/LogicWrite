@@ -1,5 +1,7 @@
 # 통합 재구성 파일럿 실행 준비 및 장애 보고
 
+> 최신 정산 검사 보완·추가 2회 실행·출력 토큰 상한 위반 중단은 [후속 비교 보고서](settlement-followup-20261117/REPORT.md)에 기록했다. 총 3/6개 조합의 응답이 있으며, 통제된 전체 비교는 아직 미완료다.
+
 > reasoning 허용 새 프로토콜과 1/6 실행 후 정산 대조 중단 결과는 [새 비교 보고서](reasoning-comparison-20261117/REPORT.md)를 참조한다. 이전 보고서·출력은 변경하지 않았다.
 
 > 교체 키의 실제 IR-003/B0 응답·비용과 reasoning 정책 실패는 [ROTATED-KEY-SMOKE.md](ROTATED-KEY-SMOKE.md)를 참조한다. 이전 미실행/차단 기록은 역사 기록으로 보존한다.

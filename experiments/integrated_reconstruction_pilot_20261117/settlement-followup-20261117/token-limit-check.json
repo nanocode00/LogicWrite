@@ -1,0 +1,19 @@
+{
+  "target": "IR-001/B1",
+  "request_max_tokens": 12000,
+  "reported_completion_tokens": 16025,
+  "reasoning_tokens": 14280,
+  "non_reasoning_completion_tokens": 1745,
+  "total_output_token_policy_compliant": false,
+  "actual_cost_usd": 0.0054336456,
+  "cost_estimate_upper_usd": "0.00628221",
+  "cost_estimate_exceeded": false,
+  "input_token_estimate_exceeded": false,
+  "http_status": 200,
+  "finish_reasons": [
+    "stop"
+  ],
+  "output_structurally_complete": true,
+  "protocol_valid_comparison": false,
+  "root_cause": "not established; no retry or additional provider probe"
+}

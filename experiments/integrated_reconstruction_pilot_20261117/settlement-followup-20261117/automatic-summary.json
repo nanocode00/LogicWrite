@@ -1,0 +1,223 @@
+{
+  "protocol": "integrated-reasoning-allowed-20261117-v1",
+  "rows": [
+    {
+      "target": "IR-003/B0",
+      "state": "failed",
+      "D": "unobserved",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 1184,
+        "completion_tokens": 4370,
+        "total_tokens": 5554,
+        "cost": 0.0016001712,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0016001712,
+          "upstream_inference_prompt_cost": 0.0002472192,
+          "upstream_inference_completions_cost": 0.001352952
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3642,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "seconds": 60.62228645896539,
+      "http_status": 200,
+      "finish_reasons": [
+        "stop"
+      ],
+      "reason": "post_request_spend_unreconciled",
+      "candidate_checks": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "byte_identical": false,
+          "normalized_list_marker_equal": true,
+          "characters": 261,
+          "source_characters": 256,
+          "links": [],
+          "source_code_blocks_preserved_literal": []
+        }
+      ],
+      "human_final_judgment": null,
+      "execution_source": "experiments/integrated_reconstruction_pilot_20261117/reasoning-comparison-20261117/smoke/IR-003/B0",
+      "settlement_release": "experiments/integrated_reconstruction_pilot_20261117/settlement-followup-20261117/release/settlement-event.json",
+      "original_execution_state": "failed",
+      "effective_execution_state": "response_complete_after_audited_settlement",
+      "candidate_sha256": "f307f5ca053c4056dd1a29335ac819275a8eccda8db8f9946edf5299dc94b42d",
+      "assessment_boundary": "mechanical diagnostics only; no Q/F/HITL semantic verdict"
+    },
+    {
+      "target": "IR-001/B0",
+      "state": "response_complete",
+      "D": "unobserved",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 2174,
+        "completion_tokens": 10579,
+        "total_tokens": 12753,
+        "cost": 0.0037291896,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0037291896,
+          "upstream_inference_prompt_cost": 0.0004539312,
+          "upstream_inference_completions_cost": 0.0032752584
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9357,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "seconds": 138.36468516098103,
+      "http_status": 200,
+      "finish_reasons": [
+        "stop"
+      ],
+      "reason": null,
+      "candidate_checks": [
+        {
+          "document_id": "readme",
+          "access": "edit",
+          "byte_identical": false,
+          "normalized_list_marker_equal": false,
+          "characters": 860,
+          "source_characters": 587,
+          "links": [
+            "docs/usage.md",
+            "FUNDING.md",
+            "CONTRIBUTING.md",
+            "LICENSE"
+          ],
+          "source_code_blocks_preserved_literal": [
+            true
+          ]
+        },
+        {
+          "document_id": "usage",
+          "access": "edit",
+          "byte_identical": false,
+          "normalized_list_marker_equal": false,
+          "characters": 509,
+          "source_characters": 298,
+          "links": [
+            "../CONTRIBUTING.md"
+          ],
+          "source_code_blocks_preserved_literal": [
+            true,
+            true
+          ]
+        }
+      ],
+      "human_final_judgment": null,
+      "execution_source": "experiments/integrated_reconstruction_pilot_20261117/settlement-followup-20261117/remaining/IR-001/B0",
+      "candidate_sha256": "9eeec6512c07a2f4b5cb7a95f266dea32150a8506f49c607a0be57b89b7664e4",
+      "assessment_boundary": "mechanical diagnostics only; no Q/F/HITL semantic verdict"
+    },
+    {
+      "target": "IR-001/B1",
+      "state": "failed",
+      "D": "unobserved",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 2262,
+        "completion_tokens": 16025,
+        "total_tokens": 18287,
+        "cost": 0.0054336456,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0054336456,
+          "upstream_inference_prompt_cost": 0.0004723056,
+          "upstream_inference_completions_cost": 0.00496134
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 14280,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "seconds": 257.0789640119765,
+      "http_status": 200,
+      "finish_reasons": [
+        "stop"
+      ],
+      "reason": "cost_or_token_bound_exceeded",
+      "candidate_checks": [
+        {
+          "document_id": "readme",
+          "access": "edit",
+          "byte_identical": false,
+          "normalized_list_marker_equal": false,
+          "characters": 862,
+          "source_characters": 587,
+          "links": [
+            "docs/usage.md",
+            "docs/devlog.md",
+            "FUNDING.md",
+            "CONTRIBUTING.md",
+            "LICENSE"
+          ],
+          "source_code_blocks_preserved_literal": [
+            true
+          ]
+        },
+        {
+          "document_id": "usage",
+          "access": "edit",
+          "byte_identical": false,
+          "normalized_list_marker_equal": false,
+          "characters": 477,
+          "source_characters": 298,
+          "links": [
+            "../CONTRIBUTING.md"
+          ],
+          "source_code_blocks_preserved_literal": [
+            true,
+            true
+          ]
+        }
+      ],
+      "human_final_judgment": null,
+      "execution_source": "experiments/integrated_reconstruction_pilot_20261117/settlement-followup-20261117/remaining/IR-001/B1",
+      "candidate_is_diagnostic_after_protocol_failure": true,
+      "candidate_sha256": "be7a3f88f0ffe154edbacf8abd2efb88c8d7465d3bcec178d92c1a9979dfdb3f",
+      "assessment_boundary": "mechanical diagnostics only; no Q/F/HITL semantic verdict"
+    },
+    {
+      "target": "IR-002/B0",
+      "state": "not_run",
+      "D": "unobserved"
+    },
+    {
+      "target": "IR-002/B1",
+      "state": "not_run",
+      "D": "unobserved"
+    },
+    {
+      "target": "IR-003/B1",
+      "state": "not_run",
+      "D": "unobserved"
+    }
+  ],
+  "human_final_judgment": null
+}

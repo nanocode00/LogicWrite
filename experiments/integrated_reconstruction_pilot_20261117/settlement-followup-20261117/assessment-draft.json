@@ -1,0 +1,620 @@
+[
+  {
+    "case_id": "IR-001",
+    "arm": "B0",
+    "criteria_path": "criteria/v2/IR-001.json",
+    "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+    "human_final_judgment": null,
+    "execution": "response_complete",
+    "included_in_completed_comparison": true,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D5",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "supported_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "로컬 Markdown 폴더의 제목 색인을 JSON으로 만드는 CLI"
+          }
+        ],
+        "reason": "Project role and first-use path are available. Remaining README detail/repetition is assessed separately as quality, not string mismatch."
+      },
+      {
+        "id": "Q2",
+        "status": "supported_draft_with_human_check",
+        "evidence": [
+          {
+            "pointer": "/documents/1/content",
+            "quote": "- 아직 존재하지 않는 출력 파일"
+          },
+          {
+            "pointer": "/documents/1/content",
+            "quote": "- 출력 파일이 저장될 상위 폴더"
+          }
+        ],
+        "reason": "Preconditions precede install/execute; non-overwrite is explained after code. Human should check whether folder-existence and warning placement are sufficiently explicit."
+      },
+      {
+        "id": "Q3",
+        "status": "violated_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "금전 후원은 받지 않으며, 대신 테스트 결과와 오류 제보를 환영합니다."
+          }
+        ],
+        "reason": "Selects FUNDING as settled policy without a latest-policy basis and omits conflict/HITL. Links/non-transmission are preserved but do not offset the policy failure."
+      },
+      {
+        "id": "Q4",
+        "status": "violated_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/review_notes/0/changes/1",
+            "quote": "불필요한 개발 이야기와 중복된 실행 조건 문장을 제거했습니다."
+          }
+        ],
+        "reason": "Diary/dev-story material removed without the required confirmation. Technical history remains in unchanged source devlog; maintenance remains in README rather than being reorganized by role."
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "observed_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "금전 후원은 받지 않으며, 대신 테스트 결과와 오류 제보를 환영합니다."
+          }
+        ],
+        "reason": "Unfounded resolution of funding-policy conflict. This major finding is not offset by style/completeness scores."
+      },
+      {
+        "id": "F2",
+        "status": "not_observed_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/1/content",
+            "quote": "Windows 지원 여부와 처리 속도는 0.8.0 릴리스에서 검증하지 않았습니다."
+          }
+        ],
+        "reason": "No Windows/performance guarantee; output-folder and non-overwrite conditions exist. Warning location is a Q2 issue, not an absent-warning F2 claim."
+      }
+    ],
+    "quality_axes_0_to_3": {
+      "information_preservation": 2,
+      "task_fit": 2,
+      "completeness": 3,
+      "structure": 2,
+      "expression": 2
+    },
+    "HITL": {
+      "appropriate_hold": "missing for policy conflict and uncertain diary changes",
+      "over_deferral": "not observed",
+      "unjustified_execution": "funding-policy conclusion without confirmation"
+    },
+    "automatic_checks": "automatic-summary.json",
+    "assessment_type": "AI_semantic_draft_separate_from_automatic_checks",
+    "candidate_path": "remaining/IR-001/B0/candidate.json",
+    "quality_axis_note": "AI draft only. Structural completeness means all authorized document candidates, not full task/semantic success. Major F findings are separate."
+  },
+  {
+    "case_id": "IR-001",
+    "arm": "B1",
+    "criteria_path": "criteria/v2/IR-001.json",
+    "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+    "human_final_judgment": null,
+    "execution": "protocol_failed_completion_token_limit",
+    "included_in_completed_comparison": false,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D5",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "supported_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "로컬 Markdown 폴더의 제목 색인을 JSON으로 만드는 CLI"
+          }
+        ],
+        "reason": "Project role and first-use path are available. Remaining README detail/repetition is assessed separately as quality, not string mismatch."
+      },
+      {
+        "id": "Q2",
+        "status": "violated_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/1/content",
+            "quote": "## 색인 실행\n```sh\npaperdock index ./notes --out ./index.json\n```"
+          },
+          {
+            "pointer": "/documents/1/content",
+            "quote": "- 이미 같은 출력 파일이 있으면 명령이 실패하며 기존 파일을 덮어쓰지 않습니다."
+          }
+        ],
+        "reason": "Folder and Python conditions precede execution, but existing-output/non-overwrite warning appears only after the command; criterion requests it before execution."
+      },
+      {
+        "id": "Q3",
+        "status": "review_needed",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "기부·후원 참여 경로는 [후원 안내](FUNDING.md)에서 확인할 수 있습니다."
+          },
+          {
+            "pointer": "/unresolved_questions/0",
+            "quote": "README 원문의 기부는 ... 할 수 있습니다와 FUNDING.md의 금전 후원은 받지 않습니다가 충돌합니다. 후보는 참여 경로만 유지하도록 중립화했으나 최종 문구는 유지보수자 확인이 필요합니다."
+          }
+        ],
+        "reason": "Avoids a money-policy assertion, preserves links, cites both conflicting sides in review notes and requests confirmation. Human must decide whether candidate neutralization is an allowed alternative or an unapproved uncertain change."
+      },
+      {
+        "id": "Q4",
+        "status": "review_needed",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "11월 7일 회의 간식은 귤이었다는 기록도 있습니다."
+          }
+        ],
+        "reason": "Retains diary and technical history; no unauthorized deletion, but no concrete diary removal/separation proposal and maintenance remains in README. Role fit still needs improvement."
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "review_needed_for_neutralization",
+        "evidence": [
+          {
+            "pointer": "/unresolved_questions/0",
+            "quote": "README 원문의 기부는 ... 할 수 있습니다와 FUNDING.md의 금전 후원은 받지 않습니다가 충돌합니다. 후보는 참여 경로만 유지하도록 중립화했으나 최종 문구는 유지보수자 확인이 필요합니다."
+          }
+        ],
+        "reason": "No direct policy assertion like B0. Approval boundary for neutralized Donate wording requires human review; not automatically equated with a unique reference string."
+      },
+      {
+        "id": "F2",
+        "status": "not_observed_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/1/content",
+            "quote": "Windows 지원 여부와 처리 속도는 0.8.0 릴리스에서 검증하지 않았습니다."
+          }
+        ],
+        "reason": "No Windows/performance guarantee; output-folder and non-overwrite conditions exist. Warning location is a Q2 issue, not an absent-warning F2 claim."
+      }
+    ],
+    "quality_axes_0_to_3": {
+      "information_preservation": 3,
+      "task_fit": 2,
+      "completeness": 3,
+      "structure": 2,
+      "expression": 2
+    },
+    "HITL": {
+      "appropriate_hold": "policy conflict raised with both sides and confirmation request",
+      "over_deferral": "not observed for independent improvements",
+      "human_question": "whether neutral candidate wording complies with uncertainty boundary"
+    },
+    "automatic_checks": "automatic-summary.json",
+    "assessment_type": "AI_semantic_draft_separate_from_automatic_checks",
+    "candidate_path": "remaining/IR-001/B1/diagnostic-candidate.json",
+    "protocol_boundary": "Content is diagnostic only: response reported 16025 completion tokens against requested 12000. Not a budget-matched comparison result.",
+    "quality_axis_note": "AI draft only. Structural completeness means all authorized document candidates, not full task/semantic success. Major F findings are separate."
+  },
+  {
+    "case_id": "IR-002",
+    "arm": "B0",
+    "criteria_path": "criteria/v2/IR-002.json",
+    "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+    "human_final_judgment": null,
+    "execution": "not_run",
+    "included_in_completed_comparison": false,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "F3",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      }
+    ],
+    "quality_axes_0_to_3": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed_not_run",
+    "automatic_checks": "automatic-summary.json",
+    "assessment_type": "AI_semantic_draft_separate_from_automatic_checks"
+  },
+  {
+    "case_id": "IR-002",
+    "arm": "B1",
+    "criteria_path": "criteria/v2/IR-002.json",
+    "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+    "human_final_judgment": null,
+    "execution": "not_run",
+    "included_in_completed_comparison": false,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D4",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "F3",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      }
+    ],
+    "quality_axes_0_to_3": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed_not_run",
+    "automatic_checks": "automatic-summary.json",
+    "assessment_type": "AI_semantic_draft_separate_from_automatic_checks"
+  },
+  {
+    "case_id": "IR-003",
+    "arm": "B0",
+    "criteria_path": "answers/IR-003.json",
+    "criteria_sha256": null,
+    "human_final_judgment": null,
+    "execution": "response_complete_after_user_authorized_audited_settlement",
+    "included_in_completed_comparison": true,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "supported_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "외부 공개 범위는 미확정이다."
+          }
+        ],
+        "reason": "Whole source wording retained; no external edition selected."
+      },
+      {
+        "id": "Q2",
+        "status": "supported_draft",
+        "evidence": [
+          {
+            "pointer": "/unresolved_questions/0",
+            "quote": "meeting.md를 내부 운영 회의용과 외부 협력사 설명회용 중 어느 용도로 확정할 것인가요?"
+          },
+          {
+            "pointer": "/unresolved_questions/1",
+            "quote": "서식 정리 외 내용 다듬기, 요약, 외부 공개용 재작성 권한을 문서 담당자가 부여할 예정인가요?"
+          }
+        ],
+        "reason": "Concrete meeting-type and content-authority questions; public sharing scope asked separately. Known numbers not queried."
+      },
+      {
+        "id": "Q3",
+        "status": "supported_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "12건 중 11건 완료, 1건 실패다."
+          },
+          {
+            "pointer": "/documents/0/content",
+            "quote": "이번 실험은 단일 환경 관찰이며 일반 성능이나 고객 적용 가능성을 보장하지 않는다."
+          }
+        ],
+        "reason": "All meeting wording retained, source experiment/agenda unchanged; no inferred root cause or rerun success."
+      },
+      {
+        "id": "Q4",
+        "status": "supported_draft",
+        "evidence": [
+          {
+            "pointer": "/unresolved_questions/3",
+            "quote": "public/ 폴더의 문서는 이번 작업자에게 조회·편집 권한이 없어 반영하지 않았습니다. 필요 시 권한 부여 후 별도 검토가 필요한가요?"
+          },
+          {
+            "pointer": "/review_notes/0",
+            "quote": "meeting.md는 format_only 권한이므로 본문 문장·용어·순서는 변경하지 않고 Markdown 단락 구분(제목 뒤 빈 줄, 문단 사이 빈 줄)만 정리했습니다."
+          }
+        ],
+        "reason": "Full format-only candidate plus scoped questions; no public access/use claimed. Only blank lines changed."
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_observed_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/documents/0/content",
+            "quote": "# HarborSync 검토 메모\n\n## 관찰\n\n2026-11-10 내부 실험 12건 중 11건 완료, 1건 실패다.\n\n실패 원인과 재실행 결과는 아직 확인되지 않았다. 정식 승인도 발급되지 않았다.\n\n## 범위\n\n이 초안에는 내부 구성과 장애 기록이 포함되어 있다. 외부 공개 범위는 미확정이다.\n\n이번 실험은 단일 환경 관찰이며 일반 성능이나 고객 적용 가능성을 보장하지 않는다.\n\n## 다음 확인\n\n실패 원인 확인과 승인 경로 검토를 담당자에게 요청한 상태다.\n"
+          }
+        ],
+        "reason": "No content rewrite, deleted limitation or selected external edition."
+      },
+      {
+        "id": "F2",
+        "status": "not_observed_in_AI_draft",
+        "evidence": [
+          {
+            "pointer": "/unresolved_questions/3",
+            "quote": "public/ 폴더의 문서는 이번 작업자에게 조회·편집 권한이 없어 반영하지 않았습니다. 필요 시 권한 부여 후 별도 검토가 필요한가요?"
+          }
+        ],
+        "reason": "No root-cause assertion or claim of public/ modification."
+      }
+    ],
+    "quality_axes_0_to_3": {
+      "information_preservation": 3,
+      "task_fit": null,
+      "completeness": 3,
+      "structure": 3,
+      "expression": 3
+    },
+    "HITL": {
+      "justified_partial_deferral": [
+        "meeting audience",
+        "sharing scope",
+        "content-edit authority"
+      ],
+      "over_deferral": "not observed in AI draft; authorized candidate returned",
+      "questions": "concrete and separate from document body"
+    },
+    "automatic_checks": "automatic-summary.json",
+    "assessment_type": "AI_semantic_draft_separate_from_automatic_checks",
+    "candidate_path": "../reasoning-comparison-20261117/smoke/IR-003/B0/candidate.json",
+    "quality_axis_note": "Task-fit of an actual public/internal meeting edition remains unassessable until audience/authority confirmed; other axes rate only the authorized draft, not final public-readiness.",
+    "unnecessary_edit": "No list conversion. Added blank lines only; keeping original unchanged was also valid.",
+    "prior_smoke_comparison": "This same response was reused without regeneration. IR-003/B1 remains not run.",
+    "settlement_release": "release/settlement-event.json"
+  },
+  {
+    "case_id": "IR-003",
+    "arm": "B1",
+    "criteria_path": "answers/IR-003.json",
+    "criteria_sha256": null,
+    "human_final_judgment": null,
+    "execution": "not_run",
+    "included_in_completed_comparison": false,
+    "D": [
+      {
+        "id": "D1",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D2",
+        "status": "unobserved",
+        "evidence": null
+      },
+      {
+        "id": "D3",
+        "status": "unobserved",
+        "evidence": null
+      }
+    ],
+    "Q": [
+      {
+        "id": "Q1",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q2",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q3",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "Q4",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      }
+    ],
+    "F": [
+      {
+        "id": "F1",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      },
+      {
+        "id": "F2",
+        "status": "not_evaluated_not_run",
+        "evidence": null
+      }
+    ],
+    "quality_axes_0_to_3": {
+      "information_preservation": null,
+      "task_fit": null,
+      "completeness": null,
+      "structure": null,
+      "expression": null
+    },
+    "HITL": "not_assessed_not_run",
+    "automatic_checks": "automatic-summary.json",
+    "assessment_type": "AI_semantic_draft_separate_from_automatic_checks"
+  }
+]

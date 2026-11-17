@@ -9,11 +9,12 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 import comparison_v2 as v
 
 
-def summarize(root):
+def summarize(root,prior_smoke_root=None,release=None):
     rows=[]
     for target in v.TARGETS:
         cid,arm=target.split('/')
-        folder=root/('smoke' if target=='IR-003/B0' else 'remaining')/cid/arm
+        source_root=prior_smoke_root if target=='IR-003/B0' and prior_smoke_root else root
+        folder=source_root/('smoke' if target=='IR-003/B0' else 'remaining')/cid/arm
         rec=folder/'execution.json'
         if not rec.exists():
             rows.append({'target':target,'state':'not_run','D':'unobserved'});continue
@@ -23,9 +24,17 @@ def summarize(root):
              'http_status':record.get('http_status'),'finish_reasons':record.get('finish_reasons'),
              'reason':record.get('reason'),'candidate_checks':[],
              'human_final_judgment':None}
+        row['execution_source']=str(folder)
+        if target=='IR-003/B0' and release is not None:
+            row['settlement_release']=str(release)
+            row['original_execution_state']=row['state']
+            row['effective_execution_state']='response_complete_after_audited_settlement'
         inp=v.base.export_input(v.base.GOLD,cid)
         source={d['document_id']:d for d in inp['documents']}
         path=folder/'candidate.json'
+        if not path.exists() and (folder/'diagnostic-candidate.json').exists():
+            path=folder/'diagnostic-candidate.json'
+            row['candidate_is_diagnostic_after_protocol_failure']=True
         if path.exists():
             data=json.loads(path.read_text())
             row['candidate_sha256']=v.base.digest(path.read_bytes())
@@ -43,4 +52,6 @@ def summarize(root):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('root',type=Path)
-    args=parser.parse_args();print(json.dumps(summarize(args.root),ensure_ascii=False,indent=2))
+    parser.add_argument('--prior-smoke-root',type=Path)
+    parser.add_argument('--settlement-release',type=Path)
+    args=parser.parse_args();print(json.dumps(summarize(args.root,args.prior_smoke_root,args.settlement_release),ensure_ascii=False,indent=2))

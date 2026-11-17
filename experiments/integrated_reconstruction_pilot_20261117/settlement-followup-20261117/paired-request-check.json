@@ -1,0 +1,8 @@
+{
+  "case": "IR-001",
+  "same_input": true,
+  "same_generation_settings": true,
+  "system_prompt_difference": "B1 generic IMPROVED instruction only",
+  "response_token_budget_honored_by_both": false,
+  "controlled_pair_eligible": false
+}
