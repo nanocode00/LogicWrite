@@ -1,0 +1,7 @@
+{
+  "exact_quote_checks": 26,
+  "all_passed": true,
+  "artifact_and_criteria_hashes_match": true,
+  "human_judgment_unchanged": true,
+  "semantic_support_validated_by_machine": false
+}

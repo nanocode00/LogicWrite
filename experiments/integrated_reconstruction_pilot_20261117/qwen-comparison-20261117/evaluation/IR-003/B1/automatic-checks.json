@@ -1,0 +1,13 @@
+{
+  "required_editable_documents": [
+    "meeting"
+  ],
+  "returned_documents": [
+    "meeting"
+  ],
+  "all_editable_documents_present": true,
+  "nonempty_full_candidates": true,
+  "content_completeness": "candidate existence only; semantic completeness needs separate review",
+  "readonly_snapshot_changes": false,
+  "human_final_judgment": null
+}

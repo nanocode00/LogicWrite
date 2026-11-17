@@ -1,0 +1,255 @@
+{
+  "spent_usd": "0.0135102916",
+  "pending": false,
+  "blocked": true,
+  "smoke_success": false,
+  "completed_targets": [],
+  "pending_upper_usd": "0.00041662",
+  "pending_target": "Probe-A",
+  "recovery_events": [
+    {
+      "kind": "resolve_only_settled_legacy_reasoning_violation",
+      "at": "2026-11-17T06:53:02.577596+00:00",
+      "authorization": "user_explicit_request_2026-11-17_reasoning_allowed_comparison",
+      "before": {
+        "spent_usd": "0.0027089352",
+        "pending": false,
+        "blocked": true,
+        "smoke_success": false,
+        "completed_targets": [],
+        "pending_upper_usd": "0.00545376",
+        "pending_target": "IR-003/B0"
+      },
+      "server_status": {
+        "limit": "0.25",
+        "limit_remaining": "0.247291065",
+        "usage": "0.002708935",
+        "limit_reset": null,
+        "byok_usage": "0"
+      },
+      "reason": "new protocol permits reasoning; prior result remains a failed exploratory smoke",
+      "legacy_response_cost_usd": "0.0027089352",
+      "after_blocked": false,
+      "cost_preserved": true,
+      "legacy_record_sha256": "d35f1fd3a4ae31c5acc0781d96690e097b47186804d55a39f07fa93a5374ca78",
+      "legacy_response_sha256": "f5c52c6ee9e8352db6064cd687872f768f313fc5e2e310484b2ea26dc7692a93",
+      "endpoint": {
+        "tag": "gmicloud/fp8",
+        "provider_name": "GMICloud",
+        "pricing": {
+          "prompt": "0.0000002088",
+          "completion": "0.0000003096",
+          "input_cache_read": "0.0000000216",
+          "discount": 0.28
+        },
+        "supported_parameters": [
+          "reasoning",
+          "include_reasoning",
+          "max_tokens",
+          "temperature",
+          "top_p",
+          "seed",
+          "tools",
+          "tool_choice"
+        ],
+        "reasoning_disable_requested": false,
+        "reasoning_allowed": true
+      }
+    }
+  ],
+  "legacy_requests": [
+    {
+      "target": "IR-003/B0",
+      "protocol": "reasoning_disabled_exploratory",
+      "cost_usd": "0.0027089352",
+      "status": "reasoning_policy_violation",
+      "evidence_path": "experiments/integrated_reconstruction_pilot_20261117/smoke-rotated-key-20261117/live/IR-003/B0"
+    }
+  ],
+  "campaigns": {
+    "integrated-reasoning-allowed-20261117-v1": {
+      "attempts": [
+        {
+          "target": "IR-003/B0",
+          "status": "response_complete",
+          "evidence_path": "/home/honorbear/LogicWrite-integrated-eval/experiments/integrated_reconstruction_pilot_20261117/reasoning-comparison-20261117/smoke/IR-003/B0",
+          "at": "2026-11-17T06:53:11.363136+00:00",
+          "cost_usd": "0.0016001712",
+          "reason": "post_request_spend_unreconciled",
+          "settlement_release": "2026-11-17T07:07:43.973697+00:00"
+        },
+        {
+          "target": "IR-001/B0",
+          "status": "response_complete",
+          "evidence_path": "/home/honorbear/LogicWrite-integrated-eval/experiments/integrated_reconstruction_pilot_20261117/settlement-followup-20261117/remaining/IR-001/B0",
+          "at": "2026-11-17T07:07:54.593048+00:00",
+          "cost_usd": "0.0037291896",
+          "settlement": {
+            "state": "lagging_known_costs",
+            "server_usage_usd": "0.004309106",
+            "ledger_usage_usd": "0.0080382960",
+            "unreflected_known_cost_usd": "0.0037291900",
+            "policy": "known response costs remain charged against local budget; no generation retry"
+          }
+        },
+        {
+          "target": "IR-001/B1",
+          "status": "failed",
+          "evidence_path": "/home/honorbear/LogicWrite-integrated-eval/experiments/integrated_reconstruction_pilot_20261117/settlement-followup-20261117/remaining/IR-001/B1",
+          "at": "2026-11-17T07:10:14.097828+00:00",
+          "cost_usd": "0.0054336456",
+          "reason": "cost_or_token_bound_exceeded"
+        }
+      ],
+      "smoke_checked": true,
+      "smoke_check_authorization": "user authorized agent completeness/cost/protocol check; human semantic judgment remains pending"
+    },
+    "integrated-qwen-instruct-20261117-v1": {
+      "attempts": [
+        {
+          "target": "Probe-A",
+          "status": "response_complete",
+          "evidence_path": "/home/honorbear/LogicWrite-integrated-eval/experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/probe-a",
+          "at": "2026-11-17T08:11:48.028438+00:00",
+          "cost_usd": "0.00003835",
+          "settlement": {
+            "state": "lagging_known_costs",
+            "server_usage_usd": "0.01347194",
+            "ledger_usage_usd": "0.0135102916",
+            "unreflected_known_cost_usd": "0.0000383516",
+            "policy": "known response costs remain charged against local budget; no generation retry"
+          }
+        }
+      ],
+      "spent_usd": "0.00003835",
+      "blocked": false,
+      "limit_usd": "0.06",
+      "max_requests": 8
+    }
+  },
+  "last_server_usage_usd": "0.01347194",
+  "settlement_release_events": [
+    {
+      "kind": "user_authorized_release_of_known_settlement_lag",
+      "at": "2026-11-17T07:07:43.973697+00:00",
+      "authorization": "user_explicit_request_fix_runner_and_continue_2026-11-17",
+      "before": {
+        "spent_usd": "0.0043091064",
+        "pending": false,
+        "blocked": true,
+        "smoke_success": false,
+        "completed_targets": [],
+        "pending_upper_usd": "0.00556065",
+        "pending_target": "IR-003/B0",
+        "recovery_events": [
+          {
+            "kind": "resolve_only_settled_legacy_reasoning_violation",
+            "at": "2026-11-17T06:53:02.577596+00:00",
+            "authorization": "user_explicit_request_2026-11-17_reasoning_allowed_comparison",
+            "before": {
+              "spent_usd": "0.0027089352",
+              "pending": false,
+              "blocked": true,
+              "smoke_success": false,
+              "completed_targets": [],
+              "pending_upper_usd": "0.00545376",
+              "pending_target": "IR-003/B0"
+            },
+            "server_status": {
+              "limit": "0.25",
+              "limit_remaining": "0.247291065",
+              "usage": "0.002708935",
+              "limit_reset": null,
+              "byok_usage": "0"
+            },
+            "reason": "new protocol permits reasoning; prior result remains a failed exploratory smoke",
+            "legacy_response_cost_usd": "0.0027089352",
+            "after_blocked": false,
+            "cost_preserved": true,
+            "legacy_record_sha256": "d35f1fd3a4ae31c5acc0781d96690e097b47186804d55a39f07fa93a5374ca78",
+            "legacy_response_sha256": "f5c52c6ee9e8352db6064cd687872f768f313fc5e2e310484b2ea26dc7692a93",
+            "endpoint": {
+              "tag": "gmicloud/fp8",
+              "provider_name": "GMICloud",
+              "pricing": {
+                "prompt": "0.0000002088",
+                "completion": "0.0000003096",
+                "input_cache_read": "0.0000000216",
+                "discount": 0.28
+              },
+              "supported_parameters": [
+                "reasoning",
+                "include_reasoning",
+                "max_tokens",
+                "temperature",
+                "top_p",
+                "seed",
+                "tools",
+                "tool_choice"
+              ],
+              "reasoning_disable_requested": false,
+              "reasoning_allowed": true
+            }
+          }
+        ],
+        "legacy_requests": [
+          {
+            "target": "IR-003/B0",
+            "protocol": "reasoning_disabled_exploratory",
+            "cost_usd": "0.0027089352",
+            "status": "reasoning_policy_violation",
+            "evidence_path": "experiments/integrated_reconstruction_pilot_20261117/smoke-rotated-key-20261117/live/IR-003/B0"
+          }
+        ],
+        "campaigns": {
+          "integrated-reasoning-allowed-20261117-v1": {
+            "attempts": [
+              {
+                "target": "IR-003/B0",
+                "status": "failed",
+                "evidence_path": "/home/honorbear/LogicWrite-integrated-eval/experiments/integrated_reconstruction_pilot_20261117/reasoning-comparison-20261117/smoke/IR-003/B0",
+                "at": "2026-11-17T06:53:11.363136+00:00",
+                "cost_usd": "0.0016001712",
+                "reason": "post_request_spend_unreconciled"
+              }
+            ],
+            "smoke_checked": false
+          }
+        },
+        "block_reason": "post_request_spend_unreconciled"
+      },
+      "key_status": {
+        "limit": "0.25",
+        "limit_remaining": "0.245690894",
+        "usage": "0.004309106",
+        "limit_reset": null,
+        "byok_usage": "0"
+      },
+      "cost_preserved": true,
+      "original_failure_preserved": true,
+      "new_generation_requests": 0,
+      "record_sha256": "20e312cd4309c61355f6a11bf3533856cb5cab5609bae1380eded8a3e5266df9",
+      "response_sha256": "89eb067364b84e48553b03b8d9c342188906691a8f56866659214ad7d21a4c15"
+    }
+  ],
+  "block_reason": "cost_or_token_bound_exceeded",
+  "active_campaign": "integrated-qwen-instruct-20261117-v1",
+  "campaign_activation_events": [
+    {
+      "at": "2026-11-17T08:11:41.694698+00:00",
+      "authorization": "user_explicit_qwen_2_probes_6_evaluations_2026-11-17",
+      "legacy_state_sha256": "d7311d9bc8f8084247015859aae8d2f07a4778a47fb4425015acfb15ca1dc15d",
+      "legacy_block_preserved": true,
+      "model": "qwen/qwen3-235b-a22b-2507",
+      "provider": "deepinfra/fp8",
+      "key_status": {
+        "limit": "0.25",
+        "limit_remaining": "0.23652806",
+        "usage": "0.01347194",
+        "limit_reset": null,
+        "byok_usage": "0"
+      },
+      "reason": "new independent non-thinking campaign; legacy failure is not released or reclassified"
+    }
+  ]
+}

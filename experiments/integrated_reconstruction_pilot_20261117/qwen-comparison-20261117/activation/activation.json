@@ -1,0 +1,101 @@
+{
+  "event": {
+    "at": "2026-11-17T08:11:41.694698+00:00",
+    "authorization": "user_explicit_qwen_2_probes_6_evaluations_2026-11-17",
+    "legacy_state_sha256": "d7311d9bc8f8084247015859aae8d2f07a4778a47fb4425015acfb15ca1dc15d",
+    "legacy_block_preserved": true,
+    "model": "qwen/qwen3-235b-a22b-2507",
+    "provider": "deepinfra/fp8",
+    "key_status": {
+      "limit": "0.25",
+      "limit_remaining": "0.23652806",
+      "usage": "0.01347194",
+      "limit_reset": null,
+      "byok_usage": "0"
+    },
+    "reason": "new independent non-thinking campaign; legacy failure is not released or reclassified"
+  },
+  "endpoint": {
+    "checked_at": "2026-11-17T08:11:41.694499+00:00",
+    "url": "https://openrouter.ai/api/v1/models/qwen/qwen3-235b-a22b-2507/endpoints",
+    "endpoint": {
+      "name": "DeepInfra | qwen/qwen3-235b-a22b-07-25",
+      "model_id": "qwen/qwen3-235b-a22b-2507",
+      "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": "0.00000009",
+        "completion": "0.00000055",
+        "discount": 0
+      },
+      "provider_name": "DeepInfra",
+      "tag": "deepinfra/fp8",
+      "service_tier": null,
+      "quantization": "fp8",
+      "max_completion_tokens": 16384,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "repetition_penalty",
+        "top_k",
+        "seed",
+        "min_p",
+        "tools",
+        "tool_choice",
+        "logit_bias",
+        "structured_outputs",
+        "response_format"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": false,
+        "function": false
+      },
+      "status": 0,
+      "uptime_last_30m": 100,
+      "uptime_last_5m": 100,
+      "uptime_last_1d": 74.20867526377492,
+      "supports_implicit_caching": false,
+      "native_tools": {},
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "supports_diarization": false,
+      "latency_last_30m": {
+        "p50": 395,
+        "p75": 603,
+        "p90": 973.9000000000005,
+        "p99": 3209.8100000000013
+      },
+      "throughput_last_30m": {
+        "p50": 28,
+        "p75": 21,
+        "p90": 17,
+        "p99": 11
+      },
+      "perf_last_30m_by_workload": {
+        "text_generation": {
+          "latency": {
+            "p50": 395,
+            "p75": 603,
+            "p90": 973.9000000000005,
+            "p99": 3209.8100000000013
+          },
+          "throughput": {
+            "p50": 28,
+            "p75": 21,
+            "p90": 17,
+            "p99": 11
+          },
+          "request_count": 8903
+        }
+      }
+    }
+  }
+}

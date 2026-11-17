@@ -1,0 +1,29 @@
+{
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Return exactly one JSON object with documents containing one document_id \"demo\" and content \"# Demo\\n\\nReady.\\n\". No other prose."
+    }
+  ],
+  "max_tokens": 256,
+  "temperature": 0,
+  "usage": {
+    "include": true
+  },
+  "provider": {
+    "only": [
+      "deepinfra/fp8"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "max_price": {
+      "prompt": 0.09,
+      "completion": 0.55,
+      "request": 0
+    }
+  },
+  "response_format": {
+    "type": "json_object"
+  }
+}

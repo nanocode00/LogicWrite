@@ -1,0 +1,15 @@
+test_activation_preserves_block_and_old_costs (test_qwen_campaign.QwenCampaignTests.test_activation_preserves_block_and_old_costs) ... ok
+test_campaign_budget_independent_of_global (test_qwen_campaign.QwenCampaignTests.test_campaign_budget_independent_of_global) ... ok
+test_campaign_duplicate_order_cap_and_stop (test_qwen_campaign.QwenCampaignTests.test_campaign_duplicate_order_cap_and_stop) ... ok
+test_fake_live_missing_cost_keeps_pending (test_qwen_campaign.QwenCampaignTests.test_fake_live_missing_cost_keeps_pending) ... ok
+test_fake_live_stops_and_preserves_cost_on_oversize (test_qwen_campaign.QwenCampaignTests.test_fake_live_stops_and_preserves_cost_on_oversize) ... ok
+test_ninth_request_and_old_runner_bypass_forbidden (test_qwen_campaign.QwenCampaignTests.test_ninth_request_and_old_runner_bypass_forbidden) ... ok
+test_other_failures_pending_unreconciled_forbidden (test_qwen_campaign.QwenCampaignTests.test_other_failures_pending_unreconciled_forbidden) ... ok
+test_paid_cost_saved_even_when_tokens_invalid (test_qwen_campaign.QwenCampaignTests.test_paid_cost_saved_even_when_tokens_invalid) ... ok
+test_payload_and_endpoint_pin (test_qwen_campaign.QwenCampaignTests.test_payload_and_endpoint_pin) ... ok
+test_token_limit_and_double_count (test_qwen_campaign.QwenCampaignTests.test_token_limit_and_double_count) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.042s
+
+OK

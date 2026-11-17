@@ -1,0 +1,9 @@
+{
+  "at": "2026-11-17T08:21:43.700622+00:00",
+  "kind": "AI_operator_stop_after_semantic_authority_violation",
+  "target": "IR-003/B1",
+  "evidence_path": "evaluation/IR-003/B1/candidate.json",
+  "reason": "format_only_sentence_word_deletion",
+  "human_final_judgment": null,
+  "new_generation_requests": 0
+}

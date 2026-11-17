@@ -1,0 +1,24 @@
+{
+  "protocol": "integrated-qwen-instruct-20261117-v1",
+  "phase": "request",
+  "execute": true,
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "provider": "deepinfra/fp8",
+  "temperature": 0,
+  "timeout_seconds": 600,
+  "max_requests": 8,
+  "campaign_limit_usd": ".06",
+  "key_limit_usd": ".25",
+  "global_limit_usd": ".20",
+  "runner_sha256": "48a57bd73044b15140349ee071baf61323c46d30dc32efb744d5aa6c2877c96f",
+  "base_runner_sha256": "5cb91c0bbda5315f3b56a88ebe442acd940aacc5f1a9a30dc53044a84f5f4337",
+  "shared_runner_sha256": "3497f32790703961940449ec2df9c05af349a8b9980ed60f5689ecc005898cae",
+  "source_commit": "2b06ef9249592ee41da77ba2f9dcb428b46585fc",
+  "target": "IR-001/B1",
+  "estimate": {
+    "input_tokens_upper_estimate": 12201,
+    "max_output_tokens": 12000,
+    "upper_usd": "0.00769809",
+    "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+  }
+}

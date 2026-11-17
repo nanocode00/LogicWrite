@@ -1,0 +1,15 @@
+{
+  "reviewer": "AI execution operator",
+  "human_final_judgment": null,
+  "candidate_full_documents_present": true,
+  "truncation_observed": false,
+  "readonly_modification_observed": false,
+  "continue_execution": true,
+  "semantic_findings_draft": [
+    "Q2/F2: output parent directory prerequisite missing",
+    "Funding conflict not detected",
+    "Windows unverified status incorrectly described as unsupported in review notes",
+    "Unnecessary permission restriction asserted in review notes; no unauthorized file application occurred"
+  ],
+  "boundary": "Evaluation shortcomings recorded separately from runtime protocol validity; no final human approval."
+}

@@ -1,0 +1,14 @@
+{
+  "reviewer": "AI execution operator",
+  "human_final_judgment": null,
+  "candidate_full_documents_present": true,
+  "format_only_exact_unchanged": false,
+  "continue_execution": false,
+  "semantic_findings_draft": [
+    "Format-only authority crossed by deleting sentence ending 다",
+    "Self-check incorrectly asserts within_authority",
+    "Question fields describe ambiguity without concrete confirmation requests",
+    "Final-check failure cause description may conflate observed stage with root cause; human review needed"
+  ],
+  "stop_reason": "semantic_format_only_violation"
+}
