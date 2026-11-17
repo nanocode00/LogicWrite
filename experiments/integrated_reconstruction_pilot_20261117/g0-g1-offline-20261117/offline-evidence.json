@@ -1,0 +1,1313 @@
+{
+  "version": "b2-g0-g1-offline-v1",
+  "mode": "offline_admission_and_validator_shadow",
+  "model_calls": 0,
+  "b2_reconstruction_success": false,
+  "semantic_judgment": "unresolved",
+  "delivery_approved": false,
+  "source_hashes": {
+    "evaluation/integrated_reconstruction/inputs/IR-001.json": "37b0fcb2aa74a75b5066c5b01fc2ea049a7ce67cdd0ca3fbc6888d776be990d3",
+    "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-001/B0/candidate.json": "d3e6db35f681ac121da43cfe5fd7fa7a2f6f6d336a17f20f91af994168ebf7b7",
+    "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-001/B1/candidate.json": "30b40e7308d0f442022629b5d28bbc494f4c411cfc401c425b5bf72637d5c9a8",
+    "evaluation/integrated_reconstruction/inputs/IR-002.json": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+    "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-002/B0/candidate.json": "b190b52347be0f1cf279324e4c8006934b4ec3abc736b37a30a85a1f581696a9",
+    "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-002/B1/candidate.json": "f769cafc3c0a455834abed7d3ab086eca0ef777db74caab7937d42de00fb4fe2",
+    "evaluation/integrated_reconstruction/inputs/IR-003.json": "75c88eb7c3b9cd217a8e0ca367889685ca086b7549b26a2024479fcc8a5a6c24",
+    "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-003/B0/candidate.json": "8a438aac4ccee8c459569c3cb70a2b22597d8748bbcb20d4d911a17a9e95c72d",
+    "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-003/B1/candidate.json": "60ac6981716fc26d06eb7a6392f396c3f500217c7662eec95158cd72d5e86bfe"
+  },
+  "legacy_probes": [
+    {
+      "single_scope_admitted": true,
+      "multiple_scope_admitted": false,
+      "block_reason": "Prototype requires exactly one concrete output_scope",
+      "case_id": "IR-001",
+      "integrated_status": "STOPPED",
+      "candidate_generated": false,
+      "stage_transition_allowed": false
+    },
+    {
+      "single_scope_admitted": true,
+      "multiple_scope_admitted": false,
+      "block_reason": "Prototype requires exactly one concrete output_scope",
+      "case_id": "IR-002",
+      "integrated_status": "STOPPED",
+      "candidate_generated": false,
+      "stage_transition_allowed": false
+    },
+    {
+      "single_scope_admitted": true,
+      "multiple_scope_admitted": false,
+      "block_reason": "Prototype requires exactly one concrete output_scope",
+      "case_id": "IR-003",
+      "integrated_status": "STOPPED",
+      "candidate_generated": false,
+      "stage_transition_allowed": false
+    }
+  ],
+  "ir_mappings": [
+    {
+      "case_id": "IR-001",
+      "input_file_sha256": "37b0fcb2aa74a75b5066c5b01fc2ea049a7ce67cdd0ca3fbc6888d776be990d3",
+      "contract_sha256": "23b62255bbe14223ca9d4d140783ad993d2fab812d35909a1b7f5c3dc0f32a1b",
+      "admission": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "core-document-set-v1",
+        "structural_input_valid": true,
+        "ready_for_planning": true,
+        "contract_sha256": "23b62255bbe14223ca9d4d140783ad993d2fab812d35909a1b7f5c3dc0f32a1b",
+        "baseline_pinned": true,
+        "reasons": []
+      },
+      "documents": [
+        {
+          "document_id": "readme",
+          "role": "프로젝트 입구와 첫 사용 경로",
+          "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+          "access": "edit",
+          "completeness": "complete",
+          "output_target": true,
+          "sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+        },
+        {
+          "document_id": "usage",
+          "role": "사용자가 설치하고 색인을 실행하는 안내",
+          "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+          "access": "edit",
+          "completeness": "complete",
+          "output_target": true,
+          "sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+        },
+        {
+          "document_id": "release",
+          "role": "릴리스 담당자가 확정한 실행 명세",
+          "authority": "0.8.0 실행 조건의 승인 근거",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+        },
+        {
+          "document_id": "history",
+          "role": "유지보수자의 역사와 릴리스 확인 기록",
+          "authority": "과거 결정 및 절차의 기록; 제품 실행 명세는 아님",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+        },
+        {
+          "document_id": "funding",
+          "role": "후원 안내",
+          "authority": "참여 경로",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+        },
+        {
+          "document_id": "contributing",
+          "role": "기여 안내",
+          "authority": "참여 경로",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+        },
+        {
+          "document_id": "license",
+          "role": "배포 라이선스 안내",
+          "authority": "가상 프로젝트 고지",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+        }
+      ],
+      "pending_questions": [],
+      "reconstruction": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "status": "unsupported",
+        "reason": "DOCUMENT_SET_RECONSTRUCTION_NOT_IMPLEMENTED",
+        "admission": {
+          "gate_state": "REVIEW",
+          "semantic_judgment": "unresolved",
+          "execution_state": "not_run",
+          "b2_reconstruction_success": false,
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "version": "core-document-set-v1",
+          "structural_input_valid": true,
+          "ready_for_planning": true,
+          "contract_sha256": "23b62255bbe14223ca9d4d140783ad993d2fab812d35909a1b7f5c3dc0f32a1b",
+          "baseline_pinned": true,
+          "reasons": []
+        }
+      }
+    },
+    {
+      "case_id": "IR-002",
+      "input_file_sha256": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+      "contract_sha256": "2c20562a95c22d8ed5e5f5d8271b648c2ea7bec34650a3c968476f2ed071f2b4",
+      "admission": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "core-document-set-v1",
+        "structural_input_valid": true,
+        "ready_for_planning": true,
+        "contract_sha256": "2c20562a95c22d8ed5e5f5d8271b648c2ea7bec34650a3c968476f2ed071f2b4",
+        "baseline_pinned": true,
+        "reasons": []
+      },
+      "documents": [
+        {
+          "document_id": "design",
+          "role": "팀장의 현행 구조와 설계 이유 확인",
+          "authority": "현행 설계 초안; 변경 기록 ADR-07이 최신 승인 근거",
+          "access": "edit",
+          "completeness": "complete",
+          "output_target": true,
+          "sha256": "37c6be756598c7913581d3f2268c27a004943e12652adf31edac2a1b28ee0bd1"
+        },
+        {
+          "document_id": "ops",
+          "role": "교대자의 일상 점검과 장애 대응",
+          "authority": "현행 운영 초안; 적용 조건은 ADR-07을 대조한다",
+          "access": "edit",
+          "completeness": "complete",
+          "output_target": true,
+          "sha256": "656348ecd2c1bedaefb9cbd678903da42758abca7482374d81c9487e41a00e51"
+        },
+        {
+          "document_id": "adr",
+          "role": "승인된 현재 정책과 이전 정책의 적용 경계",
+          "authority": "ADR-07; 2026-11-11 승인; 이 묶음의 현행 정책 근거",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f"
+        },
+        {
+          "document_id": "weekly",
+          "role": "팀장의 해당 주 관찰과 미해결 상태 추적",
+          "authority": "관찰 기록; 일반 성능을 보장하는 증거는 아님",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09"
+        }
+      ],
+      "pending_questions": [],
+      "reconstruction": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "status": "unsupported",
+        "reason": "DOCUMENT_SET_RECONSTRUCTION_NOT_IMPLEMENTED",
+        "admission": {
+          "gate_state": "REVIEW",
+          "semantic_judgment": "unresolved",
+          "execution_state": "not_run",
+          "b2_reconstruction_success": false,
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "version": "core-document-set-v1",
+          "structural_input_valid": true,
+          "ready_for_planning": true,
+          "contract_sha256": "2c20562a95c22d8ed5e5f5d8271b648c2ea7bec34650a3c968476f2ed071f2b4",
+          "baseline_pinned": true,
+          "reasons": []
+        }
+      }
+    },
+    {
+      "case_id": "IR-003",
+      "input_file_sha256": "75c88eb7c3b9cd217a8e0ca367889685ca086b7549b26a2024479fcc8a5a6c24",
+      "contract_sha256": "fb6b6590cc93af265763325f84266e3c4473ce8b238a4c318129793664d46b9e",
+      "admission": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "core-document-set-v1",
+        "structural_input_valid": true,
+        "ready_for_planning": true,
+        "contract_sha256": "fb6b6590cc93af265763325f84266e3c4473ce8b238a4c318129793664d46b9e",
+        "baseline_pinned": true,
+        "reasons": []
+      },
+      "documents": [
+        {
+          "document_id": "meeting",
+          "role": "회의 설명용 초안; 사용 회의 미확정",
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only",
+          "completeness": "complete",
+          "output_target": true,
+          "sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "document_id": "experiment",
+          "role": "내부 실험의 고정 기록",
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+        },
+        {
+          "document_id": "agenda",
+          "role": "회의 일정과 참석 범위 조율",
+          "authority": "회의 운영 담당자의 현황 메모",
+          "access": "read_only",
+          "completeness": "complete",
+          "output_target": false,
+          "sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+        }
+      ],
+      "pending_questions": [
+        "회의의 대상 독자·공유 범위·내용 편집 권한은 미확정이다.",
+        "public/의 문서는 제공되지 않았고 조회·편집도 허용되지 않았다."
+      ],
+      "reconstruction": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "status": "unsupported",
+        "reason": "DOCUMENT_SET_RECONSTRUCTION_NOT_IMPLEMENTED",
+        "admission": {
+          "gate_state": "REVIEW",
+          "semantic_judgment": "unresolved",
+          "execution_state": "not_run",
+          "b2_reconstruction_success": false,
+          "delivery_approved": false,
+          "stage_transition_allowed": false,
+          "version": "core-document-set-v1",
+          "structural_input_valid": true,
+          "ready_for_planning": true,
+          "contract_sha256": "fb6b6590cc93af265763325f84266e3c4473ce8b238a4c318129793664d46b9e",
+          "baseline_pinned": true,
+          "reasons": []
+        }
+      }
+    }
+  ],
+  "validator_shadow": [
+    {
+      "mode": "validator_shadow",
+      "case_id": "IR-001",
+      "baseline": "B0",
+      "candidate_path": "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-001/B0/candidate.json",
+      "candidate_file_sha256": "d3e6db35f681ac121da43cfe5fd7fa7a2f6f6d336a17f20f91af994168ebf7b7",
+      "pair_composition": "Qwen writable candidates plus unchanged input read_only references",
+      "b2_generated": false,
+      "model_calls": 0,
+      "permission_report": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "document-set-candidate-check-v1",
+        "permission_status": "within_declared_access",
+        "reasons": [],
+        "candidate_sha256": "137b428d3825afed647224610167981f34e6407c50b37892e05dd5b1319b24b0",
+        "contract_sha256": "23b62255bbe14223ca9d4d140783ad993d2fab812d35909a1b7f5c3dc0f32a1b"
+      },
+      "legacy_external_semantic_report": {
+        "version": "source-candidate-semantic-evaluation-v1",
+        "checks": {
+          "CLAIM_FACTS": {
+            "status": "unresolved"
+          },
+          "QUANTITY_SCOPE": {
+            "status": "unresolved"
+          },
+          "POLARITY_CONDITIONS": {
+            "status": "unresolved"
+          },
+          "ADDITIONS_OMISSIONS": {
+            "status": "unresolved"
+          },
+          "CONTRADICTIONS": {
+            "status": "unresolved"
+          },
+          "MOVE_CONSOLIDATION": {
+            "status": "unresolved"
+          },
+          "PROVENANCE": {
+            "status": "unresolved"
+          }
+        },
+        "coverage": {
+          "complete": false,
+          "all_checks_reviewed": false,
+          "all_judgments_definitive": false,
+          "required_checks": [
+            "CLAIM_FACTS",
+            "QUANTITY_SCOPE",
+            "POLARITY_CONDITIONS",
+            "ADDITIONS_OMISSIONS",
+            "CONTRADICTIONS",
+            "MOVE_CONSOLIDATION",
+            "PROVENANCE"
+          ],
+          "reviewed_checks": []
+        },
+        "violation_confirmed": false,
+        "evidence_trust": {
+          "kind": "advisory",
+          "model_execution_authenticated": false,
+          "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+        },
+        "execution": {
+          "state": "not_run",
+          "request_sha256": "73b80ae73392961d1bf8bf521ebec3badf3f073433338b618672fd0aa2730294",
+          "response_sha256": null,
+          "max_review_chars": 48000,
+          "timeout_seconds": 30
+        },
+        "snapshot_refs": [
+          {
+            "side": "source",
+            "document_id": "readme",
+            "snapshot_id": "source:readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+            "version": "supplied-v1",
+            "sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+          },
+          {
+            "side": "source",
+            "document_id": "usage",
+            "snapshot_id": "source:usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+            "version": "supplied-v1",
+            "sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+          },
+          {
+            "side": "source",
+            "document_id": "release",
+            "snapshot_id": "source:release:d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+            "version": "supplied-v1",
+            "sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+          },
+          {
+            "side": "source",
+            "document_id": "history",
+            "snapshot_id": "source:history:22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+            "version": "supplied-v1",
+            "sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+          },
+          {
+            "side": "source",
+            "document_id": "funding",
+            "snapshot_id": "source:funding:008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+            "version": "supplied-v1",
+            "sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+          },
+          {
+            "side": "source",
+            "document_id": "contributing",
+            "snapshot_id": "source:contributing:49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+            "version": "supplied-v1",
+            "sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+          },
+          {
+            "side": "source",
+            "document_id": "license",
+            "snapshot_id": "source:license:ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+            "version": "supplied-v1",
+            "sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+          },
+          {
+            "side": "output",
+            "document_id": "readme",
+            "snapshot_id": "external-pair:readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+            "version": "external-pair-v1",
+            "sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+          },
+          {
+            "side": "output",
+            "document_id": "usage",
+            "snapshot_id": "external-pair:usage:b5a840e8823fcc5cf66480244802c733befaefe008a19afcbc9457e3e553e819",
+            "version": "external-pair-v1",
+            "sha256": "b5a840e8823fcc5cf66480244802c733befaefe008a19afcbc9457e3e553e819"
+          },
+          {
+            "side": "output",
+            "document_id": "release",
+            "snapshot_id": "external-pair:release:d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+            "version": "external-pair-v1",
+            "sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+          },
+          {
+            "side": "output",
+            "document_id": "history",
+            "snapshot_id": "external-pair:history:22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+            "version": "external-pair-v1",
+            "sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+          },
+          {
+            "side": "output",
+            "document_id": "funding",
+            "snapshot_id": "external-pair:funding:008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+            "version": "external-pair-v1",
+            "sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+          },
+          {
+            "side": "output",
+            "document_id": "contributing",
+            "snapshot_id": "external-pair:contributing:49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+            "version": "external-pair-v1",
+            "sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+          },
+          {
+            "side": "output",
+            "document_id": "license",
+            "snapshot_id": "external-pair:license:ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+            "version": "external-pair-v1",
+            "sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+          }
+        ],
+        "lineage": {
+          "available": false,
+          "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+        },
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "overall_judgment": "unresolved",
+        "gate_state": "REVIEW",
+        "report_sha256": "f874d3c310c54a6d3be766f3d30e659e9c96de8116ee96f315b562b0b2149101"
+      },
+      "diffs": [
+        {
+          "document_id": "readme",
+          "unchanged": true,
+          "source_chars": 587,
+          "candidate_chars": 587
+        },
+        {
+          "document_id": "usage",
+          "unchanged": false,
+          "source_chars": 298,
+          "candidate_chars": 298
+        }
+      ]
+    },
+    {
+      "mode": "validator_shadow",
+      "case_id": "IR-001",
+      "baseline": "B1",
+      "candidate_path": "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-001/B1/candidate.json",
+      "candidate_file_sha256": "30b40e7308d0f442022629b5d28bbc494f4c411cfc401c425b5bf72637d5c9a8",
+      "pair_composition": "Qwen writable candidates plus unchanged input read_only references",
+      "b2_generated": false,
+      "model_calls": 0,
+      "permission_report": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "document-set-candidate-check-v1",
+        "permission_status": "within_declared_access",
+        "reasons": [],
+        "candidate_sha256": "5568ab33a6d039a99c99e23a1f5be0f443ba9109673a1c3de14bfc9d945e4607",
+        "contract_sha256": "23b62255bbe14223ca9d4d140783ad993d2fab812d35909a1b7f5c3dc0f32a1b"
+      },
+      "legacy_external_semantic_report": {
+        "version": "source-candidate-semantic-evaluation-v1",
+        "checks": {
+          "CLAIM_FACTS": {
+            "status": "unresolved"
+          },
+          "QUANTITY_SCOPE": {
+            "status": "unresolved"
+          },
+          "POLARITY_CONDITIONS": {
+            "status": "unresolved"
+          },
+          "ADDITIONS_OMISSIONS": {
+            "status": "unresolved"
+          },
+          "CONTRADICTIONS": {
+            "status": "unresolved"
+          },
+          "MOVE_CONSOLIDATION": {
+            "status": "unresolved"
+          },
+          "PROVENANCE": {
+            "status": "unresolved"
+          }
+        },
+        "coverage": {
+          "complete": false,
+          "all_checks_reviewed": false,
+          "all_judgments_definitive": false,
+          "required_checks": [
+            "CLAIM_FACTS",
+            "QUANTITY_SCOPE",
+            "POLARITY_CONDITIONS",
+            "ADDITIONS_OMISSIONS",
+            "CONTRADICTIONS",
+            "MOVE_CONSOLIDATION",
+            "PROVENANCE"
+          ],
+          "reviewed_checks": []
+        },
+        "violation_confirmed": false,
+        "evidence_trust": {
+          "kind": "advisory",
+          "model_execution_authenticated": false,
+          "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+        },
+        "execution": {
+          "state": "not_run",
+          "request_sha256": "47953dd83109fef7db54b4a3752713af75dcede1874ff7cc9326580f417f5a22",
+          "response_sha256": null,
+          "max_review_chars": 48000,
+          "timeout_seconds": 30
+        },
+        "snapshot_refs": [
+          {
+            "side": "source",
+            "document_id": "readme",
+            "snapshot_id": "source:readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+            "version": "supplied-v1",
+            "sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+          },
+          {
+            "side": "source",
+            "document_id": "usage",
+            "snapshot_id": "source:usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+            "version": "supplied-v1",
+            "sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+          },
+          {
+            "side": "source",
+            "document_id": "release",
+            "snapshot_id": "source:release:d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+            "version": "supplied-v1",
+            "sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+          },
+          {
+            "side": "source",
+            "document_id": "history",
+            "snapshot_id": "source:history:22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+            "version": "supplied-v1",
+            "sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+          },
+          {
+            "side": "source",
+            "document_id": "funding",
+            "snapshot_id": "source:funding:008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+            "version": "supplied-v1",
+            "sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+          },
+          {
+            "side": "source",
+            "document_id": "contributing",
+            "snapshot_id": "source:contributing:49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+            "version": "supplied-v1",
+            "sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+          },
+          {
+            "side": "source",
+            "document_id": "license",
+            "snapshot_id": "source:license:ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+            "version": "supplied-v1",
+            "sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+          },
+          {
+            "side": "output",
+            "document_id": "readme",
+            "snapshot_id": "external-pair:readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+            "version": "external-pair-v1",
+            "sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+          },
+          {
+            "side": "output",
+            "document_id": "usage",
+            "snapshot_id": "external-pair:usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+            "version": "external-pair-v1",
+            "sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+          },
+          {
+            "side": "output",
+            "document_id": "release",
+            "snapshot_id": "external-pair:release:d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+            "version": "external-pair-v1",
+            "sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+          },
+          {
+            "side": "output",
+            "document_id": "history",
+            "snapshot_id": "external-pair:history:22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+            "version": "external-pair-v1",
+            "sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+          },
+          {
+            "side": "output",
+            "document_id": "funding",
+            "snapshot_id": "external-pair:funding:008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+            "version": "external-pair-v1",
+            "sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+          },
+          {
+            "side": "output",
+            "document_id": "contributing",
+            "snapshot_id": "external-pair:contributing:49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+            "version": "external-pair-v1",
+            "sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+          },
+          {
+            "side": "output",
+            "document_id": "license",
+            "snapshot_id": "external-pair:license:ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+            "version": "external-pair-v1",
+            "sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+          }
+        ],
+        "lineage": {
+          "available": false,
+          "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+        },
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "overall_judgment": "unresolved",
+        "gate_state": "REVIEW",
+        "report_sha256": "87398457a289d549674e13e5e1f23c2064b4a177a01a06fcb5bb9cbb585cf90c"
+      },
+      "diffs": [
+        {
+          "document_id": "readme",
+          "unchanged": true,
+          "source_chars": 587,
+          "candidate_chars": 587
+        },
+        {
+          "document_id": "usage",
+          "unchanged": true,
+          "source_chars": 298,
+          "candidate_chars": 298
+        }
+      ]
+    },
+    {
+      "mode": "validator_shadow",
+      "case_id": "IR-002",
+      "baseline": "B0",
+      "candidate_path": "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-002/B0/candidate.json",
+      "candidate_file_sha256": "b190b52347be0f1cf279324e4c8006934b4ec3abc736b37a30a85a1f581696a9",
+      "pair_composition": "Qwen writable candidates plus unchanged input read_only references",
+      "b2_generated": false,
+      "model_calls": 0,
+      "permission_report": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "document-set-candidate-check-v1",
+        "permission_status": "within_declared_access",
+        "reasons": [],
+        "candidate_sha256": "39e0f972bbab60194073471397767611cbff605dd713936cf9e253eb1d1432c4",
+        "contract_sha256": "2c20562a95c22d8ed5e5f5d8271b648c2ea7bec34650a3c968476f2ed071f2b4"
+      },
+      "legacy_external_semantic_report": {
+        "version": "source-candidate-semantic-evaluation-v1",
+        "checks": {
+          "CLAIM_FACTS": {
+            "status": "unresolved"
+          },
+          "QUANTITY_SCOPE": {
+            "status": "unresolved"
+          },
+          "POLARITY_CONDITIONS": {
+            "status": "unresolved"
+          },
+          "ADDITIONS_OMISSIONS": {
+            "status": "unresolved"
+          },
+          "CONTRADICTIONS": {
+            "status": "unresolved"
+          },
+          "MOVE_CONSOLIDATION": {
+            "status": "unresolved"
+          },
+          "PROVENANCE": {
+            "status": "unresolved"
+          }
+        },
+        "coverage": {
+          "complete": false,
+          "all_checks_reviewed": false,
+          "all_judgments_definitive": false,
+          "required_checks": [
+            "CLAIM_FACTS",
+            "QUANTITY_SCOPE",
+            "POLARITY_CONDITIONS",
+            "ADDITIONS_OMISSIONS",
+            "CONTRADICTIONS",
+            "MOVE_CONSOLIDATION",
+            "PROVENANCE"
+          ],
+          "reviewed_checks": []
+        },
+        "violation_confirmed": false,
+        "evidence_trust": {
+          "kind": "advisory",
+          "model_execution_authenticated": false,
+          "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+        },
+        "execution": {
+          "state": "not_run",
+          "request_sha256": "dce3b0913c90921fec5a70b4bb70eeb89182514ddea1d937272e3e2cdc736cdd",
+          "response_sha256": null,
+          "max_review_chars": 48000,
+          "timeout_seconds": 30
+        },
+        "snapshot_refs": [
+          {
+            "side": "source",
+            "document_id": "design",
+            "snapshot_id": "source:design:37c6be756598c7913581d3f2268c27a004943e12652adf31edac2a1b28ee0bd1",
+            "version": "supplied-v1",
+            "sha256": "37c6be756598c7913581d3f2268c27a004943e12652adf31edac2a1b28ee0bd1"
+          },
+          {
+            "side": "source",
+            "document_id": "ops",
+            "snapshot_id": "source:ops:656348ecd2c1bedaefb9cbd678903da42758abca7482374d81c9487e41a00e51",
+            "version": "supplied-v1",
+            "sha256": "656348ecd2c1bedaefb9cbd678903da42758abca7482374d81c9487e41a00e51"
+          },
+          {
+            "side": "source",
+            "document_id": "adr",
+            "snapshot_id": "source:adr:43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f",
+            "version": "supplied-v1",
+            "sha256": "43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f"
+          },
+          {
+            "side": "source",
+            "document_id": "weekly",
+            "snapshot_id": "source:weekly:e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09",
+            "version": "supplied-v1",
+            "sha256": "e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09"
+          },
+          {
+            "side": "output",
+            "document_id": "design",
+            "snapshot_id": "external-pair:design:65c5df02576895824b42a66fac214dd2a142afb8c645aa44bad4a94daed19778",
+            "version": "external-pair-v1",
+            "sha256": "65c5df02576895824b42a66fac214dd2a142afb8c645aa44bad4a94daed19778"
+          },
+          {
+            "side": "output",
+            "document_id": "ops",
+            "snapshot_id": "external-pair:ops:3ef78f24236d886688adb1d616690585c3da8ac71d3321261bbbeb139b6a8d6d",
+            "version": "external-pair-v1",
+            "sha256": "3ef78f24236d886688adb1d616690585c3da8ac71d3321261bbbeb139b6a8d6d"
+          },
+          {
+            "side": "output",
+            "document_id": "adr",
+            "snapshot_id": "external-pair:adr:43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f",
+            "version": "external-pair-v1",
+            "sha256": "43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f"
+          },
+          {
+            "side": "output",
+            "document_id": "weekly",
+            "snapshot_id": "external-pair:weekly:e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09",
+            "version": "external-pair-v1",
+            "sha256": "e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09"
+          }
+        ],
+        "lineage": {
+          "available": false,
+          "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+        },
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "overall_judgment": "unresolved",
+        "gate_state": "REVIEW",
+        "report_sha256": "ecbf6f63ee97699ff6baa88cc5c1540d112da6ab288826e864cf5815874e023c"
+      },
+      "diffs": [
+        {
+          "document_id": "design",
+          "unchanged": false,
+          "source_chars": 353,
+          "candidate_chars": 385
+        },
+        {
+          "document_id": "ops",
+          "unchanged": false,
+          "source_chars": 278,
+          "candidate_chars": 275
+        }
+      ]
+    },
+    {
+      "mode": "validator_shadow",
+      "case_id": "IR-002",
+      "baseline": "B1",
+      "candidate_path": "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-002/B1/candidate.json",
+      "candidate_file_sha256": "f769cafc3c0a455834abed7d3ab086eca0ef777db74caab7937d42de00fb4fe2",
+      "pair_composition": "Qwen writable candidates plus unchanged input read_only references",
+      "b2_generated": false,
+      "model_calls": 0,
+      "permission_report": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "document-set-candidate-check-v1",
+        "permission_status": "within_declared_access",
+        "reasons": [],
+        "candidate_sha256": "d7add13183d64083a00d64715122f587a03af60cfcd363639dd84ef5605628d9",
+        "contract_sha256": "2c20562a95c22d8ed5e5f5d8271b648c2ea7bec34650a3c968476f2ed071f2b4"
+      },
+      "legacy_external_semantic_report": {
+        "version": "source-candidate-semantic-evaluation-v1",
+        "checks": {
+          "CLAIM_FACTS": {
+            "status": "unresolved"
+          },
+          "QUANTITY_SCOPE": {
+            "status": "unresolved"
+          },
+          "POLARITY_CONDITIONS": {
+            "status": "unresolved"
+          },
+          "ADDITIONS_OMISSIONS": {
+            "status": "unresolved"
+          },
+          "CONTRADICTIONS": {
+            "status": "unresolved"
+          },
+          "MOVE_CONSOLIDATION": {
+            "status": "unresolved"
+          },
+          "PROVENANCE": {
+            "status": "unresolved"
+          }
+        },
+        "coverage": {
+          "complete": false,
+          "all_checks_reviewed": false,
+          "all_judgments_definitive": false,
+          "required_checks": [
+            "CLAIM_FACTS",
+            "QUANTITY_SCOPE",
+            "POLARITY_CONDITIONS",
+            "ADDITIONS_OMISSIONS",
+            "CONTRADICTIONS",
+            "MOVE_CONSOLIDATION",
+            "PROVENANCE"
+          ],
+          "reviewed_checks": []
+        },
+        "violation_confirmed": false,
+        "evidence_trust": {
+          "kind": "advisory",
+          "model_execution_authenticated": false,
+          "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+        },
+        "execution": {
+          "state": "not_run",
+          "request_sha256": "d2bd3dc8f7a71894179b7a87e7490285e650554347c75e4dfeaaf055681ec758",
+          "response_sha256": null,
+          "max_review_chars": 48000,
+          "timeout_seconds": 30
+        },
+        "snapshot_refs": [
+          {
+            "side": "source",
+            "document_id": "design",
+            "snapshot_id": "source:design:37c6be756598c7913581d3f2268c27a004943e12652adf31edac2a1b28ee0bd1",
+            "version": "supplied-v1",
+            "sha256": "37c6be756598c7913581d3f2268c27a004943e12652adf31edac2a1b28ee0bd1"
+          },
+          {
+            "side": "source",
+            "document_id": "ops",
+            "snapshot_id": "source:ops:656348ecd2c1bedaefb9cbd678903da42758abca7482374d81c9487e41a00e51",
+            "version": "supplied-v1",
+            "sha256": "656348ecd2c1bedaefb9cbd678903da42758abca7482374d81c9487e41a00e51"
+          },
+          {
+            "side": "source",
+            "document_id": "adr",
+            "snapshot_id": "source:adr:43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f",
+            "version": "supplied-v1",
+            "sha256": "43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f"
+          },
+          {
+            "side": "source",
+            "document_id": "weekly",
+            "snapshot_id": "source:weekly:e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09",
+            "version": "supplied-v1",
+            "sha256": "e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09"
+          },
+          {
+            "side": "output",
+            "document_id": "design",
+            "snapshot_id": "external-pair:design:823be779d756f1bf926e10705870a8da425b9a06fb1e1e4351d266ca892e6b83",
+            "version": "external-pair-v1",
+            "sha256": "823be779d756f1bf926e10705870a8da425b9a06fb1e1e4351d266ca892e6b83"
+          },
+          {
+            "side": "output",
+            "document_id": "ops",
+            "snapshot_id": "external-pair:ops:6a32b294130db36d187e271a3b9067dfa5e3c41c6f4ba6304fa03fcadd835bdf",
+            "version": "external-pair-v1",
+            "sha256": "6a32b294130db36d187e271a3b9067dfa5e3c41c6f4ba6304fa03fcadd835bdf"
+          },
+          {
+            "side": "output",
+            "document_id": "adr",
+            "snapshot_id": "external-pair:adr:43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f",
+            "version": "external-pair-v1",
+            "sha256": "43918ae4c1ecf2cdee8cae9f3d122ce997cb1bd21b75d04d67108736b428781f"
+          },
+          {
+            "side": "output",
+            "document_id": "weekly",
+            "snapshot_id": "external-pair:weekly:e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09",
+            "version": "external-pair-v1",
+            "sha256": "e7d24a442d082b10e76bdc59db94562f4acc7b6747fc9155adfc33dbc7030f09"
+          }
+        ],
+        "lineage": {
+          "available": false,
+          "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+        },
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "overall_judgment": "unresolved",
+        "gate_state": "REVIEW",
+        "report_sha256": "8e6c53e9bdcfea0c273e76ed70625bdf5d64e262a3998a86af6780717ec9dd87"
+      },
+      "diffs": [
+        {
+          "document_id": "design",
+          "unchanged": false,
+          "source_chars": 353,
+          "candidate_chars": 391
+        },
+        {
+          "document_id": "ops",
+          "unchanged": false,
+          "source_chars": 278,
+          "candidate_chars": 279
+        }
+      ]
+    },
+    {
+      "mode": "validator_shadow",
+      "case_id": "IR-003",
+      "baseline": "B0",
+      "candidate_path": "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-003/B0/candidate.json",
+      "candidate_file_sha256": "8a438aac4ccee8c459569c3cb70a2b22597d8748bbcb20d4d911a17a9e95c72d",
+      "pair_composition": "Qwen writable candidates plus unchanged input read_only references",
+      "b2_generated": false,
+      "model_calls": 0,
+      "permission_report": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "document-set-candidate-check-v1",
+        "permission_status": "within_declared_access",
+        "reasons": [],
+        "candidate_sha256": "15b04a64cdd8b75ef942a65428118e605dc7955ebfbfaf7524fc85e14d97ca13",
+        "contract_sha256": "fb6b6590cc93af265763325f84266e3c4473ce8b238a4c318129793664d46b9e"
+      },
+      "legacy_external_semantic_report": {
+        "version": "source-candidate-semantic-evaluation-v1",
+        "checks": {
+          "CLAIM_FACTS": {
+            "status": "unresolved"
+          },
+          "QUANTITY_SCOPE": {
+            "status": "unresolved"
+          },
+          "POLARITY_CONDITIONS": {
+            "status": "unresolved"
+          },
+          "ADDITIONS_OMISSIONS": {
+            "status": "unresolved"
+          },
+          "CONTRADICTIONS": {
+            "status": "unresolved"
+          },
+          "MOVE_CONSOLIDATION": {
+            "status": "unresolved"
+          },
+          "PROVENANCE": {
+            "status": "unresolved"
+          }
+        },
+        "coverage": {
+          "complete": false,
+          "all_checks_reviewed": false,
+          "all_judgments_definitive": false,
+          "required_checks": [
+            "CLAIM_FACTS",
+            "QUANTITY_SCOPE",
+            "POLARITY_CONDITIONS",
+            "ADDITIONS_OMISSIONS",
+            "CONTRADICTIONS",
+            "MOVE_CONSOLIDATION",
+            "PROVENANCE"
+          ],
+          "reviewed_checks": []
+        },
+        "violation_confirmed": false,
+        "evidence_trust": {
+          "kind": "advisory",
+          "model_execution_authenticated": false,
+          "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+        },
+        "execution": {
+          "state": "not_run",
+          "request_sha256": "4c8527d1556fd3808791882f1697f9bcd8a05f722d46fe3dca8fb9c76d0d81ba",
+          "response_sha256": null,
+          "max_review_chars": 48000,
+          "timeout_seconds": 30
+        },
+        "snapshot_refs": [
+          {
+            "side": "source",
+            "document_id": "meeting",
+            "snapshot_id": "source:meeting:0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+            "version": "supplied-v1",
+            "sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          {
+            "side": "source",
+            "document_id": "experiment",
+            "snapshot_id": "source:experiment:daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+            "version": "supplied-v1",
+            "sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          {
+            "side": "source",
+            "document_id": "agenda",
+            "snapshot_id": "source:agenda:82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+            "version": "supplied-v1",
+            "sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          },
+          {
+            "side": "output",
+            "document_id": "meeting",
+            "snapshot_id": "external-pair:meeting:0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+            "version": "external-pair-v1",
+            "sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          {
+            "side": "output",
+            "document_id": "experiment",
+            "snapshot_id": "external-pair:experiment:daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+            "version": "external-pair-v1",
+            "sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          {
+            "side": "output",
+            "document_id": "agenda",
+            "snapshot_id": "external-pair:agenda:82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+            "version": "external-pair-v1",
+            "sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          }
+        ],
+        "lineage": {
+          "available": false,
+          "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+        },
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "overall_judgment": "unresolved",
+        "gate_state": "REVIEW",
+        "report_sha256": "9c93d12e8d85c01989a1789507b7f1a747dbaf10b9f886d10f85fba0238d625c"
+      },
+      "diffs": [
+        {
+          "document_id": "meeting",
+          "unchanged": true,
+          "source_chars": 256,
+          "candidate_chars": 256
+        }
+      ]
+    },
+    {
+      "mode": "validator_shadow",
+      "case_id": "IR-003",
+      "baseline": "B1",
+      "candidate_path": "experiments/integrated_reconstruction_pilot_20261117/qwen-comparison-20261117/evaluation/IR-003/B1/candidate.json",
+      "candidate_file_sha256": "60ac6981716fc26d06eb7a6392f396c3f500217c7662eec95158cd72d5e86bfe",
+      "pair_composition": "Qwen writable candidates plus unchanged input read_only references",
+      "b2_generated": false,
+      "model_calls": 0,
+      "permission_report": {
+        "gate_state": "REVIEW",
+        "semantic_judgment": "unresolved",
+        "execution_state": "not_run",
+        "b2_reconstruction_success": false,
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "version": "document-set-candidate-check-v1",
+        "permission_status": "unresolved",
+        "reasons": [
+          "FORMAT_CHANGE_REQUIRES_REVIEW"
+        ],
+        "candidate_sha256": "2a1ebf4d9d69bc844765c5608bb0c2b563552e879f45e5c242ea5222d472e70d",
+        "contract_sha256": "fb6b6590cc93af265763325f84266e3c4473ce8b238a4c318129793664d46b9e"
+      },
+      "legacy_external_semantic_report": {
+        "version": "source-candidate-semantic-evaluation-v1",
+        "checks": {
+          "CLAIM_FACTS": {
+            "status": "unresolved"
+          },
+          "QUANTITY_SCOPE": {
+            "status": "unresolved"
+          },
+          "POLARITY_CONDITIONS": {
+            "status": "unresolved"
+          },
+          "ADDITIONS_OMISSIONS": {
+            "status": "unresolved"
+          },
+          "CONTRADICTIONS": {
+            "status": "unresolved"
+          },
+          "MOVE_CONSOLIDATION": {
+            "status": "unresolved"
+          },
+          "PROVENANCE": {
+            "status": "unresolved"
+          }
+        },
+        "coverage": {
+          "complete": false,
+          "all_checks_reviewed": false,
+          "all_judgments_definitive": false,
+          "required_checks": [
+            "CLAIM_FACTS",
+            "QUANTITY_SCOPE",
+            "POLARITY_CONDITIONS",
+            "ADDITIONS_OMISSIONS",
+            "CONTRADICTIONS",
+            "MOVE_CONSOLIDATION",
+            "PROVENANCE"
+          ],
+          "reviewed_checks": []
+        },
+        "violation_confirmed": false,
+        "evidence_trust": {
+          "kind": "advisory",
+          "model_execution_authenticated": false,
+          "limitation": "Self hashes and request reconstruction verify data consistency, not actual model execution."
+        },
+        "execution": {
+          "state": "not_run",
+          "request_sha256": "9a4c3d745b3a25ee241539f31024b9e023abebac75d498acb42574751870fa81",
+          "response_sha256": null,
+          "max_review_chars": 48000,
+          "timeout_seconds": 30
+        },
+        "snapshot_refs": [
+          {
+            "side": "source",
+            "document_id": "meeting",
+            "snapshot_id": "source:meeting:0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+            "version": "supplied-v1",
+            "sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          {
+            "side": "source",
+            "document_id": "experiment",
+            "snapshot_id": "source:experiment:daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+            "version": "supplied-v1",
+            "sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          {
+            "side": "source",
+            "document_id": "agenda",
+            "snapshot_id": "source:agenda:82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+            "version": "supplied-v1",
+            "sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          },
+          {
+            "side": "output",
+            "document_id": "meeting",
+            "snapshot_id": "external-pair:meeting:a1387250cbccb3a263f9a7da7078a22dc2a443e27a7d70c365fb55e2f476dcb2",
+            "version": "external-pair-v1",
+            "sha256": "a1387250cbccb3a263f9a7da7078a22dc2a443e27a7d70c365fb55e2f476dcb2"
+          },
+          {
+            "side": "output",
+            "document_id": "experiment",
+            "snapshot_id": "external-pair:experiment:daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+            "version": "external-pair-v1",
+            "sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          {
+            "side": "output",
+            "document_id": "agenda",
+            "snapshot_id": "external-pair:agenda:82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+            "version": "external-pair-v1",
+            "sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          }
+        ],
+        "lineage": {
+          "available": false,
+          "reason": "EXTERNAL_PAIR_HAS_NO_RECONSTRUCTION_LINEAGE"
+        },
+        "delivery_approved": false,
+        "stage_transition_allowed": false,
+        "overall_judgment": "unresolved",
+        "gate_state": "REVIEW",
+        "report_sha256": "f9cbf14c27fe41adc8c5f92c28a3b2c6b13c0353bd80d90bbc818abfb41fd71c"
+      },
+      "diffs": [
+        {
+          "document_id": "meeting",
+          "unchanged": false,
+          "source_chars": 256,
+          "candidate_chars": 254
+        }
+      ]
+    }
+  ]
+}

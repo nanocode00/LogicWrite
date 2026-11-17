@@ -1,0 +1,329 @@
+{
+  "status": "PASS",
+  "tests_run": 881,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "expected_failures": 0,
+  "unexpected_successes": 0,
+  "command": "python3 tools/evidence_validation/run.py --output /tmp/logicwrite-b2-g0-g1-20261117-regression-initial.json",
+  "full_report_path": "/tmp/logicwrite-b2-g0-g1-20261117-regression-initial.json",
+  "full_report_sha256": "bf68c11f532a52e713aa3cf6c7f35bc066ebe88ec2f922dc6074928e1f526e0a",
+  "current_code_revision": "c1a82b4fe2c85b9ef639eae36caddd7fc14c925a",
+  "current_code_source_sha256": "2ad76816d6cfc141a64ceda9d08e248702741a14870db959006f4296eaac7cb8",
+  "suites": [
+    {
+      "phase": "historical",
+      "directory": "evaluation/core_pipeline_2026_11_11",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/development_gold_active",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/g3_g4",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/g3_g4/development_gold_v2_2026-11-11",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/g3_g4/final_review_2026-11-11",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 24,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/activation_preflight_2026_11_13",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/codex_counterreview_2026_11_11",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/confirmation_bridge_2026_11_13",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/counterreview_2026_11_11",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/formal_review_reuse_2026_11_13",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/gold_inclusion_approval_2026_11_13",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/legacy_migration_2026_11_13",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/golden_expansion/user_final_2026_11_11",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/semantic_pilot",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/semantic_pilot/independent_review",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/semantic_pilot/user_review_v1",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 34,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "historical",
+      "directory": "evaluation/source_candidate_semantics",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "evaluation/core_pipeline_2026_11_11",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "evaluation/source_candidate_semantics",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "experiments/extraction_ab",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "experiments/extraction_analysis",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 27,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "experiments/full_document_control",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 399,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "experiments/integrated_reconstruction_pilot_20261117",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 59,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "experiments/minimal_gate",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "tools/evidence_validation",
+      "pattern": "test_*.py",
+      "returncode": 0,
+      "tests_run": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "evaluation/integrated_reconstruction",
+      "pattern": "test_criteria.py",
+      "returncode": 0,
+      "tests_run": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "evaluation/integrated_reconstruction",
+      "pattern": "test_development_gold.py",
+      "returncode": 0,
+      "tests_run": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "evaluation/integrated_reconstruction",
+      "pattern": "test_integrity.py",
+      "returncode": 0,
+      "tests_run": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "evaluation/integrated_reconstruction",
+      "pattern": "test_preservation.py",
+      "returncode": 0,
+      "tests_run": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "phase": "current",
+      "directory": "evaluation/integrated_reconstruction",
+      "pattern": "test_reference_candidates.py",
+      "returncode": 0,
+      "tests_run": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "real_model": "not_run",
+  "b2_reconstruction_success": false,
+  "note": "Local historical/current regression only; not semantic quality or B2 generation. Report/progress documents were finalized after this frozen-tree run; production code is unchanged."
+}
