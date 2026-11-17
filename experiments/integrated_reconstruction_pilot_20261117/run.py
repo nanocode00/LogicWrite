@@ -15,6 +15,7 @@ import urllib.error
 from decimal import Decimal, InvalidOperation
 import fcntl
 import socket
+import re
 from contextlib import contextmanager
 
 HERE = Path(__file__).resolve().parent
@@ -59,6 +60,95 @@ TIMEOUT = 600
 
 class Blocked(RuntimeError):
     """Fixed safe reason only; never include provider errors or credentials."""
+
+
+def env_candidates(repo=REPO, here=HERE):
+    paths=[here/'.env',repo/'.env']
+    common=Path(subprocess.check_output(['git','rev-parse','--path-format=absolute','--git-common-dir'],
+                                      cwd=repo,text=True).strip())
+    if common.name=='.git':
+        paths.append(common.parent/'.env')
+    return list(dict.fromkeys(path.resolve() for path in paths))
+
+
+def load_api_key(paths=None):
+    """One allowlisted dotenv key, no execution, expansion, copying, or environment mutation."""
+    if 'OPENROUTER_API_KEY' in os.environ:
+        key=os.environ['OPENROUTER_API_KEY'].strip()
+        if not key: raise Blocked('empty_OPENROUTER_API_KEY_environment')
+        return key,'environment'
+    for path in env_candidates() if paths is None else paths:
+        if not path.is_file(): continue
+        values=[]
+        for line in path.read_text(encoding='utf-8-sig').splitlines():
+            match=re.match(r'^\s*(?:export\s+)?OPENROUTER_API_KEY\s*=(.*)$',line)
+            if not match: continue
+            value=match.group(1).strip()
+            if value.startswith(('"',"'")):
+                quote=value[0];end=value.find(quote,1)
+                if end<1 or value[end+1:].strip() and not value[end+1:].strip().startswith('#'):
+                    raise Blocked('invalid_dotenv_key_assignment')
+                value=value[1:end]
+            else:
+                value=re.split(r'\s+#',value,maxsplit=1)[0].strip()
+            if not value or any(c.isspace() for c in value) or any(c in value for c in '$`'):
+                raise Blocked('invalid_dotenv_key_assignment')
+            values.append(value)
+        if len(values)>1: raise Blocked('duplicate_dotenv_key_assignment')
+        if values: return values[0],str(path)
+    raise Blocked('OPENROUTER_API_KEY_required')
+
+
+def verify_secret_protection(key,source,*,repo=REPO):
+    """Inspect indexes/worktrees and all local Git objects; return counts only."""
+    def git(*args,cwd=repo):
+        return subprocess.check_output(['git',*args],cwd=cwd,stderr=subprocess.DEVNULL)
+    roots=[repo]
+    if source!='environment':
+        source_path=Path(source).resolve()
+        root=Path(git('rev-parse','--show-toplevel',cwd=source_path.parent).decode().strip())
+        roots.append(root)
+    roots=list(dict.fromkeys(roots))
+    secret=key.encode()
+    pattern=re.compile(rb'sk-or-v1-[a-fA-F0-9]{32,}')
+    for root in roots:
+        tracked=git('ls-files','-z',cwd=root).decode().split('\0')
+        for name in filter(None,tracked):
+            base=Path(name).name
+            if (base=='.env' or base.startswith('.env.')) and base!='.env.example':
+                raise Blocked('credential_file_tracked_stop_rotate_key_if_exposed')
+            path=root/name
+            if path.is_file():
+                raw=path.read_bytes()
+                if secret in raw or pattern.search(raw):
+                    raise Blocked('credential_in_tracked_content_stop_rotate_key')
+        for rel in ('.env','.env.local','experiments/integrated_reconstruction_pilot_20261117/.env'):
+            result=subprocess.run(['git','check-ignore','--quiet',rel],cwd=root,capture_output=True)
+            if result.returncode!=0: raise Blocked('dotenv_not_git_ignored')
+        result=subprocess.run(['git','check-ignore','--quiet','.env.example'],cwd=root,capture_output=True)
+        if result.returncode!=1: raise Blocked('dotenv_example_should_remain_allowed')
+    # Includes historical, reachable and dangling/staged objects. Never print object content.
+    proc=subprocess.Popen(['git','cat-file','--batch-all-objects','--batch'],cwd=repo,
+                          stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
+    count=0
+    try:
+        while True:
+            header=proc.stdout.readline()
+            if not header: break
+            fields=header.split()
+            if len(fields)!=3: raise Blocked('git_history_scan_failed')
+            size=int(fields[2]);raw=proc.stdout.read(size)
+            if len(raw)!=size or proc.stdout.read(1)!=b'\n': raise Blocked('git_history_scan_failed')
+            count+=1
+            if secret in raw or pattern.search(raw):
+                raise Blocked('credential_in_git_object_stop_rotate_key')
+        if proc.wait()!=0: raise Blocked('git_history_scan_failed')
+    finally:
+        if proc.poll() is None: proc.terminate();proc.wait()
+        proc.stdout.close()
+    return {'dotenv_ignored':True,'dotenv_example_allowed':True,'tracked_credentials':False,
+            'history_scan_passed':True,'git_objects_scanned':count,'checked_worktrees':len(roots),
+            'credential_value_recorded':False}
 
 
 def amount(value):
@@ -205,9 +295,14 @@ def run(args, *, api=api_json, ledger_dir=None):
     print(json.dumps(plan,ensure_ascii=False,indent=2),flush=True)
     if not args.execute:
         return
-    key=os.environ.get('OPENROUTER_API_KEY')
-    if not key:
-        raise Blocked('OPENROUTER_API_KEY_required')
+    key,source=load_api_key()
+    try:
+        protection=verify_secret_protection(key,source)
+    except Blocked as exc:
+        dump(args.output/'credential-safety.json',{'key_present':True,'credential_source':source,
+             'state':'blocked','reason':str(exc),'paid_requests':0,'credential_value_recorded':False})
+        raise
+    dump(args.output/'credential-safety.json',dict(protection,key_present=True,credential_source=source))
     if ledger_dir is None:
         common=Path(subprocess.check_output(['git','rev-parse','--git-common-dir'],cwd=REPO,text=True).strip())
         if not common.is_absolute(): common=REPO/common

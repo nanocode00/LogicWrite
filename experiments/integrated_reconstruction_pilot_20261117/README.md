@@ -1,5 +1,7 @@
 # 통합 재구성 파일럿 실행 준비 및 장애 보고
 
+> `.env` 연결 및 smoke 보안 차단 결과는 [SMOKE-20261117.md](SMOKE-20261117.md)를 참조한다.
+
 > 후속 OpenRouter 실행기는 [OPENROUTER.md](OPENROUTER.md)를 따른다. 아래 실행기 옵션·환경변수·명령·API 장애 설명은 최초 준비 시점의 기록이며, 현재 사용법은 후속 문서가 대체한다. 기존 prepared/ 아티팩트는 그대로 보존했다.
 
 2026-11-17 (Asia/Seoul). 기준 PR #36 head `82180fb5f07bb30ae6df2ea2e6a71298d7fcd6d7`.

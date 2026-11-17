@@ -21,6 +21,10 @@ class BudgetTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         self.calls = []
+        paths=patch.object(p,'env_candidates',return_value=[])
+        paths.start(); self.addCleanup(paths.stop)
+        safety=patch.object(p,'verify_secret_protection',return_value={'history_scan_passed':True})
+        safety.start(); self.addCleanup(safety.stop)
         quiet=patch("sys.stdout",new_callable=io.StringIO)
         quiet.start(); self.addCleanup(quiet.stop)
         self.key = {'data': {'limit': .25, 'limit_remaining': .25, 'usage': 0,

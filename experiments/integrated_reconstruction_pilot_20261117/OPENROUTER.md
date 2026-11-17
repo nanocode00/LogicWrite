@@ -1,11 +1,11 @@
 # OpenRouter 저비용 파일럿 운영
 
 2026-11-17. 기존 `prepared/`, 평가 초안·로그는 최초 미실행 기록으로 보존했다.
-이번 변경도 **유료 요청 0회**이며 Core·골드·평가 기준·사람 최종 판정을 변경하지 않았다.
+최초 OpenRouter 준비 단계는 **유료 요청 0회**였다. 후속 `.env` 연결 및 실제 smoke 시도 결과는 [SMOKE-20261117.md](SMOKE-20261117.md)를 참조한다. Core·골드·평가 기준·사람 최종 판정은 변경하지 않았다.
 
 ## 연결과 고정 조건
 
-- API base: `https://openrouter.ai/api/v1`. 환경변수는 `OPENROUTER_API_KEY` 하나만 사용한다. `.env` 자동 로드 없음. 이전 PILOT_* 환경변수는 사용하지 않는다.
+- API base: `https://openrouter.ai/api/v1`. 환경변수는 `OPENROUTER_API_KEY` 하나만 사용한다. 기존 환경변수를 최우선 사용하고 없으면 실험 폴더 `.env` → 현재 worktree 루트 `.env` → Git common directory로 찾은 기본 작업 루트 `.env` 순서로 해당 키만 파싱한다. 파일 실행·셸 확장·키 복사·환경변수 주입은 하지 않는다. 이전 PILOT_* 환경변수는 사용하지 않는다.
 - 모델 `deepseek/deepseek-v3.2`, provider endpoint `gmicloud/fp8` 고정. 다른 모델·provider로 자동 전환하지 않는다. 해당 경로가 없으면 중지한다.
 - B0/B1 모두 `max_tokens=12000`, `temperature=0`, `reasoning.enabled=false`, `usage.include=true`. `provider.only`, `allow_fallbacks=false`, `require_parameters=true`, `max_price`를 함께 보낸다.
 - POST socket timeout 600초, GET 30초. 소켓 timeout은 전체 실행 wall-clock 상한이 아니다. 자동 재시도·병렬 실행·외부 도구 호출 없음.
@@ -79,9 +79,9 @@ python3 experiments/integrated_reconstruction_pilot_20261117/run.py --smoke --ou
 python3 experiments/integrated_reconstruction_pilot_20261117/run.py --case IR-002 --arm B1 --output /tmp/ir-openrouter-dry-002-b1-01
 ```
 
-사용자가 OpenRouter에서 키의 lifetime $0.25 한도를 설정하고, 터미널 환경에
-`OPENROUTER_API_KEY`를 안전하게 설정한 뒤 **명시적으로 다음 명령을 실행할 때만** 유료 요청한다.
-키를 명령 인수나 파일에 적지 않는다. `.env` 내용 출력·자동 로드·Git 추가를 하지 않는다.
+사용자가 OpenRouter에서 키의 lifetime $0.25 한도를 설정하고, 로컬 `.env` 또는 터미널 환경에
+`OPENROUTER_API_KEY`를 안전하게 설정한 뒤 **명시적으로 다음 명령을 실행할 때만**, Git 보호·과거 객체 검사까지 통과한 경우 유료 요청한다.
+키를 명령 인수나 공유/추적 파일에 적지 않는다. `.env` 내용 출력·셸 실행·Git 추가를 하지 않는다. 파일에서는 OPENROUTER_API_KEY만 안전하게 파싱한다.
 
 ```sh
 python3 experiments/integrated_reconstruction_pilot_20261117/run.py --execute --smoke --output /tmp/ir-openrouter-live-smoke-01
@@ -128,3 +128,10 @@ python3 experiments/integrated_reconstruction_pilot_20261117/run.py --execute --
 로그는 `openrouter-readiness/tests.log`, `regression.log`, `gold-validation.json`, `preservation.json`이다.
 새 구현은 먼저 실패하는 예산 테스트를 실행한 뒤 구현했고, API 오류 분류 회귀도 실패→통과를 확인했다.
 HTTP 응답/청구 검증은 아직 수행하지 않았으므로 첫 smoke의 사용자 확인이 필요하다.
+
+후속 보안 검사: `.gitignore`는 모든 깊이의 `.env`와 `.env.*`를 제외하고 `.env.example`만 허용한다.
+실제 실행기는 키를 읽은 후 Git 추적 파일·해당 파일 ignore 여부와 **모든 로컬 Git 객체**를 검사한다.
+현재 키와의 정확 일치 또는 OpenRouter 키 형식 발견 시 API GET/POST 전에 차단한다.
+브랜치 커밋뿐 아니라 로컬 Codex 스냅샷 tree·dangling 객체도 포함하며, 원격 유출을 의미한다고 단정하지 않는다.
+기본 작업 디렉터리의 다른 브랜치에도 즉시 보호를 적용하기 위해 공유 `.git/info/exclude`에 같은 로컬 규칙을 추가했다.
+이 로컬 규칙과 `.env`는 커밋하지 않는다.

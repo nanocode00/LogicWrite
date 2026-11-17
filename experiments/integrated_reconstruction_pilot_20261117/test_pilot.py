@@ -41,15 +41,15 @@ class PilotBoundaryTests(unittest.TestCase):
             self.assertEqual(sentinel.read_text(), 'preserve')
 
     def test_no_credentials_fails_before_any_http_request(self):
-        import os
+        import argparse
+        from unittest.mock import patch
         with tempfile.TemporaryDirectory() as directory:
-            env = {k:v for k,v in os.environ.items() if not k.startswith(('PILOT_', 'OPENROUTER_'))}
-            folder = Path(directory) / 'run'
-            result = subprocess.run([sys.executable, str(HERE / 'run.py'), '--output', str(folder), '--execute'],
-                                    env=env, capture_output=True)
-            self.assertNotEqual(result.returncode, 0)
-            for path in folder.glob('IR-*/B*/execution.json'):
-                self.assertEqual(json.loads(path.read_text())['calls'], 0)
+            args=argparse.Namespace(output=Path(directory)/'run',execute=True,
+                case=None,arm=None,smoke=True,confirm_smoke_reviewed=False)
+            with patch.object(pilot,'load_api_key',side_effect=pilot.Blocked('missing_fixture')):
+                with patch.object(pilot,'api_json',side_effect=AssertionError('no HTTP')):
+                    with self.assertRaises(pilot.Blocked): pilot.run(args)
+            self.assertFalse(any(args.output.rglob('response.json')))
 
 if __name__ == '__main__':
     unittest.main()
