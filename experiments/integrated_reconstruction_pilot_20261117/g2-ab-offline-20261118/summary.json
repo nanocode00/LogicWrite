@@ -1,0 +1,92 @@
+[
+  {
+    "input_id": "IR-001",
+    "documents": 7,
+    "units": 37,
+    "coverage_status": "complete_literal_coverage",
+    "relations": {
+      "condition_claim_cooccurrence": 6,
+      "explicit_reference": 5,
+      "shared_literal_candidate": 6
+    },
+    "task_statuses": {
+      "eligible": 37,
+      "held": 1
+    },
+    "hitl_questions": 1,
+    "confirmed_semantic_conflicts": 0,
+    "semantic_analysis_complete": false,
+    "organization_complete": false,
+    "execution_state": "not_run",
+    "contract_sha256": "23b62255bbe14223ca9d4d140783ad993d2fab812d35909a1b7f5c3dc0f32a1b",
+    "analysis_sha256": "764c148c3b3d71ae062fc95c4f163ae51ebb27a2fdcfbd0dd71018e63ad55a72",
+    "plan_sha256": "15a1bbb82cba46d798bd7dde99809ae4d87c6408c1b00b0dcbcc9d84070c077f"
+  },
+  {
+    "input_id": "IR-002",
+    "documents": 4,
+    "units": 19,
+    "coverage_status": "complete_literal_coverage",
+    "relations": {
+      "condition_claim_cooccurrence": 3,
+      "shared_literal_candidate": 15
+    },
+    "task_statuses": {
+      "eligible": 19,
+      "held": 1
+    },
+    "hitl_questions": 1,
+    "confirmed_semantic_conflicts": 0,
+    "semantic_analysis_complete": false,
+    "organization_complete": false,
+    "execution_state": "not_run",
+    "contract_sha256": "2c20562a95c22d8ed5e5f5d8271b648c2ea7bec34650a3c968476f2ed071f2b4",
+    "analysis_sha256": "793896165e05e0f6514990ac3af5d388d04b89a1617dd273989f064c796e6f74",
+    "plan_sha256": "a5ae070c9a8f8de36e2d5bf5d387a835a00ce709a55c3f46838147a597420150"
+  },
+  {
+    "input_id": "IR-003",
+    "documents": 3,
+    "units": 11,
+    "coverage_status": "complete_literal_coverage",
+    "relations": {
+      "shared_literal_candidate": 6
+    },
+    "task_statuses": {
+      "eligible": 11,
+      "held": 1
+    },
+    "hitl_questions": 3,
+    "confirmed_semantic_conflicts": 0,
+    "semantic_analysis_complete": false,
+    "organization_complete": false,
+    "execution_state": "not_run",
+    "contract_sha256": "fb6b6590cc93af265763325f84266e3c4473ce8b238a4c318129793664d46b9e",
+    "analysis_sha256": "13beb649dcca7d54a5c05d0e2a864732c39fdce712f7f8f76cd503eb0480cf4a",
+    "plan_sha256": "48b372ccff11f851efd22282995cf362f2807cff7c430aa24584dd72166b1576"
+  },
+  {
+    "input_id": "synthetic",
+    "documents": 4,
+    "units": 11,
+    "coverage_status": "complete_literal_coverage",
+    "relations": {
+      "condition_claim_cooccurrence": 1,
+      "explicit_reference": 1
+    },
+    "task_statuses": {
+      "eligible": 1,
+      "held": 1,
+      "denied": 1,
+      "unsupported": 1
+    },
+    "hitl_questions": 1,
+    "confirmed_semantic_conflicts": 0,
+    "semantic_analysis_complete": false,
+    "organization_complete": false,
+    "execution_state": "not_run",
+    "contract_sha256": "52cf25b488ba646ff2bf2a0f3c871eb0996691532fd88208ec77f5c51c428622",
+    "analysis_sha256": "58c9fd0f63e735d9234c6ede5ae8cd5f52f9b449fce1e28940f17718ebe9b4fd",
+    "plan_sha256": "1c6512fee3b8f46927a98f783c1ebe3bac995d1258981b2454fe20705c671d41"
+  }
+]

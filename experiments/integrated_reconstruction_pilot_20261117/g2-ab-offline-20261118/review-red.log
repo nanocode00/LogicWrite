@@ -1,0 +1,39 @@
+......F..........F..........F.
+======================================================================
+FAIL: test_document_reference_carries_unit_scoped_hitl_dependencies (test_document_set_g2.G2Tests.test_document_reference_carries_unit_scoped_hitl_dependencies)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-integrated-eval/experiments/full_document_control/test_document_set_g2.py", line 283, in test_document_reference_carries_unit_scoped_hitl_dependencies
+    p=self.plan([t],issues=[issue]);self.assertEqual(p['tasks'][0]['status'],'held')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'eligible' != 'held'
+- eligible
++ held
+
+
+======================================================================
+FAIL: test_parent_condition_and_destination_condition_hold_moves (test_document_set_g2.G2Tests.test_parent_condition_and_destination_condition_hold_moves)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-integrated-eval/experiments/full_document_control/test_document_set_g2.py", line 271, in test_parent_condition_and_destination_condition_hold_moves
+    self.assertEqual(self.plan([t])['tasks'][0]['status'],'held')
+AssertionError: 'eligible' != 'held'
+- eligible
++ held
+
+
+======================================================================
+FAIL: test_unresolved_reference_blocks_changed_task (test_document_set_g2.G2Tests.test_unresolved_reference_blocks_changed_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-integrated-eval/experiments/full_document_control/test_document_set_g2.py", line 263, in test_unresolved_reference_blocks_changed_task
+    self.assertEqual(self.plan([t])['tasks'][0]['status'],'held')
+AssertionError: 'eligible' != 'held'
+- eligible
++ held
+
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.128s
+
+FAILED (failures=3)

@@ -1,0 +1,127 @@
+{
+  "schema_version": "core-document-set-v1",
+  "contract_id": "DispatchDesk",
+  "request": "Improve the supplied guides.",
+  "context": "Independent synthetic document set for offline scoped planning examples.",
+  "audience": null,
+  "purpose": null,
+  "explicit_constraints": [
+    "Preserve conditions."
+  ],
+  "pending_questions": [],
+  "origin": {
+    "source_id": "synthetic",
+    "input_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "format": "synthetic"
+  },
+  "document_set_completeness": "complete",
+  "documents": [
+    {
+      "document_id": "guide",
+      "role": "guide",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "completeness": "complete",
+      "content": "# DispatchDesk\n\nCommercial tickets are accepted.\n\nIf count exceeds 913, stop. Do not restart before approval.\n\n[Policy](policy.md)\n",
+      "sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "guide.md",
+        "snapshot_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": []
+    },
+    {
+      "document_id": "policy",
+      "role": "policy",
+      "authority": "supplied policy owner",
+      "access": "read_only",
+      "completeness": "complete",
+      "content": "# Policy\n\nCommercial tickets are not accepted.\n",
+      "sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "policy.md",
+        "snapshot_sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474"
+      },
+      "output_target": false,
+      "explicit_constraints": [],
+      "pending_questions": []
+    },
+    {
+      "document_id": "notes",
+      "role": "notes",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "completeness": "complete",
+      "content": "# Notes\n\nInstall the package.\n\nVerify the installation.\n",
+      "sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "notes.md",
+        "snapshot_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": []
+    },
+    {
+      "document_id": "format",
+      "role": "format",
+      "authority": "supplied policy owner",
+      "access": "format_only",
+      "completeness": "complete",
+      "content": "# Minutes\n\nThe attempt failed.\n",
+      "sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "format.md",
+        "snapshot_sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": []
+    }
+  ],
+  "output_scopes": [
+    {
+      "scope_id": "guide",
+      "document_id": "guide"
+    },
+    {
+      "scope_id": "notes",
+      "document_id": "notes"
+    },
+    {
+      "scope_id": "format",
+      "document_id": "format"
+    }
+  ],
+  "additional_permissions": {
+    "external_lookup": "not_granted",
+    "create_document": "not_granted",
+    "apply_files": "not_granted"
+  },
+  "delivery": {
+    "mode": "reviewable_candidate_only",
+    "required": "Review only"
+  }
+}

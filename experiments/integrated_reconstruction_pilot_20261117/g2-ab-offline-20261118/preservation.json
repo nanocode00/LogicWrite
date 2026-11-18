@@ -1,0 +1,26 @@
+{
+  "baseline_head": "7970ef7caad6fea2a7295597ffa8efa0709083d3",
+  "tracked_files_checked": 1072,
+  "changed_existing_files": [],
+  "other_worktrees_checked": 15,
+  "changed_other_worktrees": [],
+  "other_worktree_statuses": {
+    "/home/honorbear/LogicWrite": "?? .gitignore\n",
+    "/home/honorbear/LogicWrite-core-next": "",
+    "/home/honorbear/LogicWrite-core-structural": "",
+    "/home/honorbear/LogicWrite-evidence-boundary": "",
+    "/home/honorbear/LogicWrite-g3-g4": "",
+    "/home/honorbear/LogicWrite-gold-pilot": "",
+    "/home/honorbear/LogicWrite-golden-next": "",
+    "/home/honorbear/LogicWrite-integration-22-23": "",
+    "/home/honorbear/LogicWrite-merge-verification": "",
+    "/home/honorbear/LogicWrite-semantic-adapter": "",
+    "/tmp/logicwrite-final-main": "",
+    "/tmp/logicwrite-pr33-review": "",
+    "/tmp/logicwrite-pr35-review": "",
+    "/tmp/logicwrite-pr36-review": "",
+    "/tmp/logicwrite-pr37-review": ""
+  },
+  "baseline_manifest_sha256": "0087491358b6df2a86b0abf4ef97ba1af5d7680bde8142e96de1105745c8594e",
+  "baseline_reconstructable_from_git": true
+}

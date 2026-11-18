@@ -1,0 +1,93 @@
+{
+  "schema_version": "core-document-set-plan-request-v1",
+  "tasks": [
+    {
+      "task_id": "independent-placement",
+      "action": "PLACE",
+      "unit_ids": [
+        "a54cce283929ee81c27e3978537c5851d025d395737a95d8b02328b2c46a16aa"
+      ],
+      "target_document_id": "notes",
+      "reason": "Explicit synthetic caller request",
+      "evidence_unit_ids": [
+        "a54cce283929ee81c27e3978537c5851d025d395737a95d8b02328b2c46a16aa"
+      ],
+      "depends_on": [],
+      "parameters": {
+        "anchor_unit_id": "ce08c2063b67979718bb5ab3068d07cf951bc01ff7f6c11b93a32c3cb4c1fa44",
+        "position": "after"
+      }
+    },
+    {
+      "task_id": "policy-revision",
+      "action": "REVISE",
+      "unit_ids": [
+        "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3"
+      ],
+      "target_document_id": "guide",
+      "reason": "Explicit synthetic caller request",
+      "evidence_unit_ids": [
+        "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3"
+      ],
+      "depends_on": [],
+      "parameters": {
+        "operation": "REVISE",
+        "constraints": {
+          "terminology": {
+            "accepted": "not accepted"
+          }
+        }
+      }
+    },
+    {
+      "task_id": "format-content-denied",
+      "action": "REVISE",
+      "unit_ids": [
+        "b726b1aa6594baca7b1e7d5e13fceacc9b8973070d6745df4f805bdc7d181907"
+      ],
+      "target_document_id": "format",
+      "reason": "Explicit synthetic caller request",
+      "evidence_unit_ids": [
+        "b726b1aa6594baca7b1e7d5e13fceacc9b8973070d6745df4f805bdc7d181907"
+      ],
+      "depends_on": [],
+      "parameters": {
+        "operation": "COMPRESS",
+        "constraints": {}
+      }
+    },
+    {
+      "task_id": "remove-unsupported",
+      "action": "REMOVE",
+      "unit_ids": [
+        "65fba929cdb61ad3502f5ef6a13e1adaddbacaf324c410eb31bdf6ffe9c07c68"
+      ],
+      "target_document_id": "guide",
+      "reason": "Explicit synthetic caller request",
+      "evidence_unit_ids": [
+        "65fba929cdb61ad3502f5ef6a13e1adaddbacaf324c410eb31bdf6ffe9c07c68"
+      ],
+      "depends_on": [],
+      "parameters": {}
+    }
+  ],
+  "issues": [
+    {
+      "issue_id": "commercial-policy",
+      "kind": "potential_conflict",
+      "question": "Which commercial ticket policy applies to this guide?",
+      "decision_owner": "Product policy maintainer",
+      "decision_needed": "Confirm policy and effective scope before revising the guide",
+      "unit_ids": [
+        "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3",
+        "81729213471a39a73669ef6ff7f5942403eba2a93d750b02664e53b66bf2277b"
+      ],
+      "document_ids": [],
+      "evidence_unit_ids": [
+        "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3",
+        "81729213471a39a73669ef6ff7f5942403eba2a93d750b02664e53b66bf2277b"
+      ]
+    }
+  ],
+  "question_scopes": []
+}

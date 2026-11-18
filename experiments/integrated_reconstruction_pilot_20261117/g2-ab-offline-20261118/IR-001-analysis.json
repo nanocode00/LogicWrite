@@ -1,0 +1,3634 @@
+{
+  "gate_state": "REVIEW",
+  "semantic_judgment": "unresolved",
+  "execution_state": "not_run",
+  "b2_reconstruction_success": false,
+  "delivery_approved": false,
+  "stage_transition_allowed": false,
+  "execution_allowed": false,
+  "model_calls": 0,
+  "schema_version": "core-document-set-analysis-v1",
+  "contract_sha256": "23b62255bbe14223ca9d4d140783ad993d2fab812d35909a1b7f5c3dc0f32a1b",
+  "documents": [
+    {
+      "document_id": "readme",
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "completeness": "complete",
+      "sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 0,
+          "end": 12,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# PaperDock\n",
+          "sha256": "83152992bf8f880dd66f3e7733fcadc27c21ce49e0986f3a575a754f5fac3d11",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 12,
+          "end": 77,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "PaperDock는 로컬 Markdown 폴더의 제목 색인을 만드는 CLI입니다. 내용은 외부로 전송하지 않습니다.\n",
+          "sha256": "8229e1d245214ae8831ab2ab64c61f617364112a5b730dbcd09be4500446653a",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B003",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "blank",
+          "start": 77,
+          "end": 78,
+          "line_start": 3,
+          "line_end": 3,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B004",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 78,
+          "end": 88,
+          "line_start": 4,
+          "line_end": 4,
+          "text": "## 개발 이야기\n",
+          "sha256": "429fd5da62c28aecb283427f64a61f7798d2b92b5e28aa4efb5c65ff902269f9",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B005",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 88,
+          "end": 188,
+          "line_start": 5,
+          "line_end": 6,
+          "text": "처음에는 CSV를 썼지만 0.7에서 JSON으로 바꿨다. 파일 하나씩 만드느라 힘들었다.\n11월 7일 회의 간식은 귤이었다. 이 문서는 프로젝트의 여러 정보를 소개하는 문서이다.\n",
+          "sha256": "6da75906c6ad5e6eedb1f4c0af9742dc0aa33c69dc758545dd4ca0bb71289698",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B006",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "blank",
+          "start": 188,
+          "end": 189,
+          "line_start": 7,
+          "line_end": 7,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B007",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 189,
+          "end": 195,
+          "line_start": 8,
+          "line_end": 8,
+          "text": "## 시작\n",
+          "sha256": "b891405ac45cbab281cfd7fa094bf8216c6885ff7f606a6109ccdf1805c59ed8",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B008",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "code_block",
+          "start": 195,
+          "end": 248,
+          "line_start": 9,
+          "line_end": 11,
+          "text": "```sh\npaperdock index ./notes --out ./index.json\n```\n",
+          "sha256": "32887647650b820b8e46831e8a6ad35b748f46aaa8c1fa47d4b922c78d23a0de",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B009",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 248,
+          "end": 301,
+          "line_start": 12,
+          "line_end": 12,
+          "text": "위와 같이 실행하면 됩니다. 자세한 사용법은 [사용 안내](docs/usage.md)를 봐요.\n",
+          "sha256": "bc40557d1d4f81c80b0adf94ea81a4d5fc714928f126891681abfaf3e3d77084",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B010",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "blank",
+          "start": 301,
+          "end": 302,
+          "line_start": 13,
+          "line_end": 13,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B011",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 302,
+          "end": 311,
+          "line_start": 14,
+          "line_end": 14,
+          "text": "## 실행 조건\n",
+          "sha256": "1c67060f7897ee3d8aeda4e245de9a8d1f569343e398d4026fd7559fbdc439cd",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B012",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 311,
+          "end": 356,
+          "line_start": 15,
+          "line_end": 15,
+          "text": "Python 3.11 이상을 사용한다. Python은 3.11 이상이 필요해요.\n",
+          "sha256": "5d7322b1d85b051dcad4209dbab33f24106c58f2cd91af10f1b3dd0c7871edce",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B013",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "blank",
+          "start": 356,
+          "end": 357,
+          "line_start": 16,
+          "line_end": 16,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B014",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 357,
+          "end": 366,
+          "line_start": 17,
+          "line_end": 17,
+          "text": "## 배포 작업\n",
+          "sha256": "4b65266b984f119e22aadbc529b27681246f39284dcd2eb01b6c7a0ea07bf79a",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B015",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 366,
+          "end": 432,
+          "line_start": 18,
+          "line_end": 18,
+          "text": "유지보수자는 태그를 만들기 전에 `python -m unittest`를 실행한다. 이 절차는 0.8.0부터 적용한다.\n",
+          "sha256": "5e2026bec19ce59968602564c907085af94e9c8e7eae7b558077c4671b02e2f0",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B016",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "blank",
+          "start": 432,
+          "end": 433,
+          "line_start": 19,
+          "line_end": 19,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B017",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 433,
+          "end": 443,
+          "line_start": 20,
+          "line_end": 20,
+          "text": "## Donate\n",
+          "sha256": "1f3f8a1af60a97834c365870c9c49f8f246d1815405445c5d8d90c355bfc6290",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B018",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 443,
+          "end": 479,
+          "line_start": 21,
+          "line_end": 21,
+          "text": "기부는 [후원 안내](FUNDING.md)에서 할 수 있습니다.\n",
+          "sha256": "0adab4007934a751fb3178e67d7da8e3141633adaac819cb8988b24bb682d33c",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B019",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "blank",
+          "start": 479,
+          "end": 480,
+          "line_start": 22,
+          "line_end": 22,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B020",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 480,
+          "end": 496,
+          "line_start": 23,
+          "line_end": 23,
+          "text": "## Contributing\n",
+          "sha256": "ade6eb22c91ad42c48ce367974fb7fb67ecbb58e420dcc446d3f427d43e96843",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B021",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 496,
+          "end": 543,
+          "line_start": 24,
+          "line_end": 24,
+          "text": "변경 제안과 오류 제보는 [기여 안내](CONTRIBUTING.md)를 확인하세요.\n",
+          "sha256": "0487ed75466ffa3554e455fe295891e0bb8ab079fccd819d7a3295e392de2fd7",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B022",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "blank",
+          "start": 543,
+          "end": 544,
+          "line_start": 25,
+          "line_end": 25,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B023",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "heading",
+          "start": 544,
+          "end": 555,
+          "line_start": 26,
+          "line_end": 26,
+          "text": "## License\n",
+          "sha256": "ae070da695f33eee9ad9a6f12cb2c2c5d8074103c8df5ce396ff5a65ede8ce37",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B024",
+          "snapshot_id": "readme:3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+          "kind": "paragraph",
+          "start": 555,
+          "end": 587,
+          "line_start": 27,
+          "line_end": 27,
+          "text": "MIT. [LICENSE](LICENSE)를 참고하세요.\n",
+          "sha256": "1263458cf0ee2b03b3903a85c04605ffacb224590b6ec8bd5462bf91769bc08a",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "5baa09607196c4e85d00606dac1e6c788d66fa628fda813febee3d2682a37ea9",
+        "9c3a22a91f5db52865b0a99d0917b9b4e77056133025a2b0ded065ec11a69f22",
+        "ac274179686ae23d65788b27925d41cbae843b672e2f111f13d0d6f4dac5505c",
+        "dd24a42588ab7499e0f632ff42b22e418b65f446b1fd1edee095027db42096dc",
+        "599b9c8cfa8f3271814ede7cd7bb620817c2b83c71e67f50c5362f69ff174743",
+        "9c560cdb971e3971ae57c54604789ed3390b230b00559948c783b004645fa834",
+        "55604a37299b3a634f62772e771471309ef7d5b5305ab687ea5438c7d1c8d7e5",
+        "94bdc380785a99b7e7ff2d81fe91b1cbb78770de09d1e332cea143bd4acecad5",
+        "408307fb0a83afa24437e43c00c6ff979c1767da688457ae19213e0b1d420650",
+        "0de337f38bf907585d78d29fd813f36348111f3d0979bfb71ed173ea415a2a14",
+        "c10de80ffd3407a6792e9bf08610d3c90bcddc6b2717feffa01ecd077ac22e1c",
+        "d29768a50d89cf942343165442a16c7fb072b330e41c3d76688753384f422f1b",
+        "d4db4b1871794c8609c5ec6e50ec8e8d209ed12b19fb8a20b77f7e1c5a75aa23",
+        "efc13d8b870de7080f5e17b8d51b9f649993ecb526c9465c6a4f846fac6bdd2c",
+        "14b3956ac6bf04a03baac51230ac14bcdd9de42bd542a6bc12b5122f5f6e4e9f",
+        "474892aef57316a333e9a72e05cb9bde4e1046653fcf7812b90fbbff8f295861"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "usage",
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "completeness": "complete",
+      "sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "heading",
+          "start": 0,
+          "end": 8,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# 사용 안내\n",
+          "sha256": "c807162661e1c69d9337c2caed5aa360868908843baae5aee5ffe8d9b03c7b0e",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "paragraph",
+          "start": 8,
+          "end": 41,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "PaperDock는 로컬 Markdown 폴더를 처리한다.\n",
+          "sha256": "2916c6b121fea9d68ace9e8db1e9b5fc1b72d75ea764e86a2db104a7b9911aff",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B003",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "blank",
+          "start": 41,
+          "end": 42,
+          "line_start": 3,
+          "line_end": 3,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B004",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "heading",
+          "start": 42,
+          "end": 48,
+          "line_start": 4,
+          "line_end": 4,
+          "text": "## 색인\n",
+          "sha256": "d0d2fc174fc1130c5b126607a722a4446b31d141896832f64b9d2ac2d427ab26",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B005",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "code_block",
+          "start": 48,
+          "end": 101,
+          "line_start": 5,
+          "line_end": 7,
+          "text": "```sh\npaperdock index ./notes --out ./index.json\n```\n",
+          "sha256": "32887647650b820b8e46831e8a6ad35b748f46aaa8c1fa47d4b922c78d23a0de",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B006",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "paragraph",
+          "start": 101,
+          "end": 150,
+          "line_start": 8,
+          "line_end": 8,
+          "text": "출력은 JSON이다. 제목과 상대 경로만 들어간다. 입력 파일의 본문은 바꾸지 않는다.\n",
+          "sha256": "a2aaa4a9b0c42c1d6b00794e8f0034045b095e7399702aa6163c46a8ceeb9e18",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B007",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "blank",
+          "start": 150,
+          "end": 151,
+          "line_start": 9,
+          "line_end": 9,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B008",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "heading",
+          "start": 151,
+          "end": 157,
+          "line_start": 10,
+          "line_end": 10,
+          "text": "## 설치\n",
+          "sha256": "41f9a619661ad32bf39251b3c100d756252138b7284b75929eba0974b5bbc70d",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B009",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "code_block",
+          "start": 157,
+          "end": 206,
+          "line_start": 11,
+          "line_end": 13,
+          "text": "```sh\npython -m pip install paperdock==0.8.0\n```\n",
+          "sha256": "a2a6b3b39ce9718fc69fca64e08b70d1c972b0a4027814bde89cdd1e58e11172",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B010",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "paragraph",
+          "start": 206,
+          "end": 250,
+          "line_start": 14,
+          "line_end": 14,
+          "text": "이미 같은 출력 파일이 있으면 명령이 실패한다. 기존 파일은 덮어쓰지 않는다.\n",
+          "sha256": "bb1a11be10e1bfff5eeef5be26fe6571c4fd7b4d0204065670d0bf974e199ce4",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B011",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "blank",
+          "start": 250,
+          "end": 251,
+          "line_start": 15,
+          "line_end": 15,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B012",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "heading",
+          "start": 251,
+          "end": 257,
+          "line_start": 16,
+          "line_end": 16,
+          "text": "## 기여\n",
+          "sha256": "bbe16e2a0458149ab7f3e3e0f213766bce9e00dea1799d3622c819c4a5cbd13b",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B013",
+          "snapshot_id": "usage:f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+          "kind": "paragraph",
+          "start": 257,
+          "end": 298,
+          "line_start": 17,
+          "line_end": 17,
+          "text": "오류 제보는 [기여 안내](../CONTRIBUTING.md)로 보낸다.\n",
+          "sha256": "468f1c6410c4c5a8da4db5939657ada8d66a2432ed5cea2ef617474417cd805e",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "4d6634614e093373685a6f484d13138fd6412eaa59dbda9635577cbf5b0cffeb",
+        "a4ce9c72b3539f86c3f0c2b3eaab4e395986eafbd2067fb87cd4cd4074d4a2f0",
+        "b99e43444a221722b8a951e3f6b4ffb330b3fa1967378b3c346b77fb056e7d5e",
+        "fa8191dee8593e52b55af17ada18dc9a52f733eaffdc375e8a3a705614afa1b8",
+        "1babe23a2f42deaef7e15943705909e116079ffe09348740ee1d0dfc0cfe08b4",
+        "ed0b2af91430143ecc65a71bf206921f1455092684ae3c42a7248d09b6aa5158",
+        "013f0b452ecce0f9d6861f5a6e2c763f8ec5c28e8f953394ea4ee7c18ab6f03d",
+        "2ed03424c330bda09229ab17364e9c090c97e4a910e8c965c611f25a81ca9e9d",
+        "a5b84346949b46abf2396d05b87833d211d3a2b94739b1d62d3c80cb1d18754b"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "release",
+      "role": "릴리스 담당자가 확정한 실행 명세",
+      "authority": "0.8.0 실행 조건의 승인 근거",
+      "access": "read_only",
+      "completeness": "complete",
+      "sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "specs/0.8.0.md",
+        "snapshot_sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+      },
+      "output_target": false,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "release:d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+          "kind": "heading",
+          "start": 0,
+          "end": 24,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# PaperDock 0.8.0 승인 명세\n",
+          "sha256": "6b0d4e86efa7eb7bfc2a2cd444a4aa8a4b97167f986b17175213663d2992eb48",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "release:d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+          "kind": "paragraph",
+          "start": 24,
+          "end": 338,
+          "line_start": 2,
+          "line_end": 7,
+          "text": "승인 기록 PD-80, 2026-11-10. Python 3.11 이상이 필요하다.\n설치 명령은 `python -m pip install paperdock==0.8.0`이다.\n색인은 `paperdock index ./notes --out ./index.json`으로 실행한다.\n`--out` 파일이 존재하면 실패하며 덮어쓰지 않는다. 출력 상위 폴더는 미리 존재해야 한다.\n출력에는 Markdown 제목과 입력 폴더 기준 상대 경로만 포함한다. 본문 수정과 네트워크 전송은 하지 않는다.\nWindows 지원 여부와 처리 속도는 이번 릴리스에서 검증하지 않았다.\n",
+          "sha256": "7af28cc79a23d8383515d5a06c3f2858aa9ef21ad7a5497ac9e0673d0a0295cc",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "8686fda1ed16b0ac80124a21b270ccab28d6a5d9ba0e186e231efa188c1cf2ca",
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "history",
+      "role": "유지보수자의 역사와 릴리스 확인 기록",
+      "authority": "과거 결정 및 절차의 기록; 제품 실행 명세는 아님",
+      "access": "read_only",
+      "completeness": "complete",
+      "sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/devlog.md",
+        "snapshot_sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+      },
+      "output_target": false,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "history:22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+          "kind": "heading",
+          "start": 0,
+          "end": 8,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# 개발 기록\n",
+          "sha256": "2c1af3df13dfc36aa6d5911d7fef4965430fcf8ce7723cfcf53bd2d5c35da685",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "history:22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+          "kind": "paragraph",
+          "start": 8,
+          "end": 245,
+          "line_start": 2,
+          "line_end": 5,
+          "text": "2026-10-28: CSV에서 JSON으로 바꾼 이유는 상대 경로와 제목의 이스케이프 처리를 단순하게 하기 위해서다.\n2026-11-07: 팀 회의 간식은 귤이었다. 제품 기능과 무관한 팀 메모다.\n2026-11-10: 0.8.0 배포 전 `python -m unittest` 실행을 필수로 결정했다.\n2026-11-10: 설치하지 않은 신규 사용자는 실행 명령만 보고 실패했다. 설치 방법은 승인 명세에 기록되어 있다.\n",
+          "sha256": "6de08d39b142ef200deafd2ef02e2e71ab884873022073e1ad9c380b595ac3b4",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "3f888e1889268038c8763c3a5b4fc59ddc4a78ec575c9d48b30463fbad06a979",
+        "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "funding",
+      "role": "후원 안내",
+      "authority": "참여 경로",
+      "access": "read_only",
+      "completeness": "complete",
+      "sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "FUNDING.md",
+        "snapshot_sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+      },
+      "output_target": false,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "funding:008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+          "kind": "heading",
+          "start": 0,
+          "end": 5,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# 후원\n",
+          "sha256": "28674a616f9d96f7243ff45de0861579d10e3031b53002150d1940a61b75acf0",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "funding:008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+          "kind": "paragraph",
+          "start": 5,
+          "end": 46,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "금전 후원은 받지 않습니다. 대신 테스트 결과와 오류 제보를 환영합니다.\n",
+          "sha256": "e17b948f1c8a258fe7568f19424345c3e6f34a70abff71b73d50676ad3aa3805",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "fcb0ca7b82176fe6ab32821d4f11d2a91390bb7c421badfa19fdf2dfa9ae5f31",
+        "36cae269c991b672eb32d004d0ce8a1b0559e60c0978648589789b8a768f813d"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "contributing",
+      "role": "기여 안내",
+      "authority": "참여 경로",
+      "access": "read_only",
+      "completeness": "complete",
+      "sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "CONTRIBUTING.md",
+        "snapshot_sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+      },
+      "output_target": false,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "contributing:49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+          "kind": "heading",
+          "start": 0,
+          "end": 5,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# 기여\n",
+          "sha256": "c94d10329d5fbef824d158f527b2d9328e03d52db7fdfe207f0bbd7ccf230bc3",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "contributing:49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+          "kind": "paragraph",
+          "start": 5,
+          "end": 37,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "재현 명령과 Python 버전을 적어 이슈로 제출합니다.\n",
+          "sha256": "a2c48931145542d8cb81a9d9f2456489dbb43d25cee81ad920fd96f4b7bc3d82",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "77bbc032c6f2ccefc04ed91bc81280c0677818f8795785903e00195674154270",
+        "a21a2eaf3ed51888a3227db48461d93f5d97687f88c119eb9cd9ee9562835fcf"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "license",
+      "role": "배포 라이선스 안내",
+      "authority": "가상 프로젝트 고지",
+      "access": "read_only",
+      "completeness": "complete",
+      "sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "LICENSE",
+        "snapshot_sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+      },
+      "output_target": false,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "license:ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+          "kind": "heading",
+          "start": 0,
+          "end": 10,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# License\n",
+          "sha256": "32dbdfa042c1a637516beff52f2a4dbcb4bc5e6f3c09e5cca824815b5a6157f5",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "license:ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+          "kind": "paragraph",
+          "start": 10,
+          "end": 50,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "MIT. 이 파일은 평가용 축약 고지이며 실제 라이선스 전문이 아니다.\n",
+          "sha256": "284797ad0dbd6ad2c5a45c60d927e53bba839fcc5cd20abc17fb2d309ef72d93",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "2cf922ddf900f109970a8c8e897996764a09556ca5421d23f27205e0cc4fc706",
+        "774b339b4f08f8087b4c9c8892655ce16278c535a36c3d7814162d8d66a9b591"
+      ],
+      "literal_coverage": "complete"
+    }
+  ],
+  "units": [
+    {
+      "unit_id": "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+      "document_id": "readme",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# PaperDock\n",
+      "quote_sha256": "83152992bf8f880dd66f3e7733fcadc27c21ce49e0986f3a575a754f5fac3d11",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 12,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 12
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216"
+      ],
+      "preservation_group": "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+      "claim": {
+        "quote": "# PaperDock\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "5baa09607196c4e85d00606dac1e6c788d66fa628fda813febee3d2682a37ea9",
+      "document_id": "readme",
+      "block_id": "B002",
+      "kind": "paragraph",
+      "quote": "PaperDock는 로컬 Markdown 폴더의 제목 색인을 만드는 CLI입니다. 내용은 외부로 전송하지 않습니다.\n",
+      "quote_sha256": "8229e1d245214ae8831ab2ab64c61f617364112a5b730dbcd09be4500446653a",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 12,
+        "end": 77,
+        "line_start": 2,
+        "line_end": 2,
+        "byte_start": 12,
+        "byte_end": 139
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216"
+      ],
+      "preservation_group": "5baa09607196c4e85d00606dac1e6c788d66fa628fda813febee3d2682a37ea9",
+      "claim": {
+        "quote": "PaperDock는 로컬 Markdown 폴더의 제목 색인을 만드는 CLI입니다. 내용은 외부로 전송하지 않습니다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "않",
+            "start": 71,
+            "end": 72,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "9c3a22a91f5db52865b0a99d0917b9b4e77056133025a2b0ded065ec11a69f22",
+      "document_id": "readme",
+      "block_id": "B004",
+      "kind": "heading",
+      "quote": "## 개발 이야기\n",
+      "quote_sha256": "429fd5da62c28aecb283427f64a61f7798d2b92b5e28aa4efb5c65ff902269f9",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 78,
+        "end": 88,
+        "line_start": 4,
+        "line_end": 4,
+        "byte_start": 140,
+        "byte_end": 160
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "9c3a22a91f5db52865b0a99d0917b9b4e77056133025a2b0ded065ec11a69f22"
+      ],
+      "preservation_group": "9c3a22a91f5db52865b0a99d0917b9b4e77056133025a2b0ded065ec11a69f22",
+      "claim": {
+        "quote": "## 개발 이야기\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "ac274179686ae23d65788b27925d41cbae843b672e2f111f13d0d6f4dac5505c",
+      "document_id": "readme",
+      "block_id": "B005",
+      "kind": "paragraph",
+      "quote": "처음에는 CSV를 썼지만 0.7에서 JSON으로 바꿨다. 파일 하나씩 만드느라 힘들었다.\n11월 7일 회의 간식은 귤이었다. 이 문서는 프로젝트의 여러 정보를 소개하는 문서이다.\n",
+      "quote_sha256": "6da75906c6ad5e6eedb1f4c0af9742dc0aa33c69dc758545dd4ca0bb71289698",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 88,
+        "end": 188,
+        "line_start": 5,
+        "line_end": 6,
+        "byte_start": 160,
+        "byte_end": 382
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "9c3a22a91f5db52865b0a99d0917b9b4e77056133025a2b0ded065ec11a69f22"
+      ],
+      "preservation_group": "ac274179686ae23d65788b27925d41cbae843b672e2f111f13d0d6f4dac5505c",
+      "claim": {
+        "quote": "처음에는 CSV를 썼지만 0.7에서 JSON으로 바꿨다. 파일 하나씩 만드느라 힘들었다.\n11월 7일 회의 간식은 귤이었다. 이 문서는 프로젝트의 여러 정보를 소개하는 문서이다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": [
+          {
+            "quote": "0.7",
+            "start": 102,
+            "end": 105,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "11",
+            "start": 138,
+            "end": 140,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "7일",
+            "start": 142,
+            "end": 144,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "dd24a42588ab7499e0f632ff42b22e418b65f446b1fd1edee095027db42096dc",
+      "document_id": "readme",
+      "block_id": "B007",
+      "kind": "heading",
+      "quote": "## 시작\n",
+      "quote_sha256": "b891405ac45cbab281cfd7fa094bf8216c6885ff7f606a6109ccdf1805c59ed8",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 189,
+        "end": 195,
+        "line_start": 8,
+        "line_end": 8,
+        "byte_start": 383,
+        "byte_end": 393
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "dd24a42588ab7499e0f632ff42b22e418b65f446b1fd1edee095027db42096dc"
+      ],
+      "preservation_group": "dd24a42588ab7499e0f632ff42b22e418b65f446b1fd1edee095027db42096dc",
+      "claim": {
+        "quote": "## 시작\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "599b9c8cfa8f3271814ede7cd7bb620817c2b83c71e67f50c5362f69ff174743",
+      "document_id": "readme",
+      "block_id": "B008",
+      "kind": "code_block",
+      "quote": "```sh\npaperdock index ./notes --out ./index.json\n```\n",
+      "quote_sha256": "32887647650b820b8e46831e8a6ad35b748f46aaa8c1fa47d4b922c78d23a0de",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 195,
+        "end": 248,
+        "line_start": 9,
+        "line_end": 11,
+        "byte_start": 393,
+        "byte_end": 446
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "dd24a42588ab7499e0f632ff42b22e418b65f446b1fd1edee095027db42096dc"
+      ],
+      "preservation_group": "599b9c8cfa8f3271814ede7cd7bb620817c2b83c71e67f50c5362f69ff174743",
+      "claim": {
+        "quote": "```sh\npaperdock index ./notes --out ./index.json\n```\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "9c560cdb971e3971ae57c54604789ed3390b230b00559948c783b004645fa834",
+      "document_id": "readme",
+      "block_id": "B009",
+      "kind": "paragraph",
+      "quote": "위와 같이 실행하면 됩니다. 자세한 사용법은 [사용 안내](docs/usage.md)를 봐요.\n",
+      "quote_sha256": "bc40557d1d4f81c80b0adf94ea81a4d5fc714928f126891681abfaf3e3d77084",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 248,
+        "end": 301,
+        "line_start": 12,
+        "line_end": 12,
+        "byte_start": 446,
+        "byte_end": 549
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "dd24a42588ab7499e0f632ff42b22e418b65f446b1fd1edee095027db42096dc"
+      ],
+      "preservation_group": "9c560cdb971e3971ae57c54604789ed3390b230b00559948c783b004645fa834",
+      "claim": {
+        "quote": "위와 같이 실행하면 됩니다. 자세한 사용법은 [사용 안내](docs/usage.md)를 봐요.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [
+          {
+            "quote": "실행하면",
+            "start": 254,
+            "end": 258,
+            "status": "literal_observation"
+          }
+        ],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "55604a37299b3a634f62772e771471309ef7d5b5305ab687ea5438c7d1c8d7e5",
+      "document_id": "readme",
+      "block_id": "B011",
+      "kind": "heading",
+      "quote": "## 실행 조건\n",
+      "quote_sha256": "1c67060f7897ee3d8aeda4e245de9a8d1f569343e398d4026fd7559fbdc439cd",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 302,
+        "end": 311,
+        "line_start": 14,
+        "line_end": 14,
+        "byte_start": 550,
+        "byte_end": 567
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "55604a37299b3a634f62772e771471309ef7d5b5305ab687ea5438c7d1c8d7e5"
+      ],
+      "preservation_group": "55604a37299b3a634f62772e771471309ef7d5b5305ab687ea5438c7d1c8d7e5",
+      "claim": {
+        "quote": "## 실행 조건\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [
+          {
+            "quote": "조건",
+            "start": 308,
+            "end": 310,
+            "status": "literal_observation"
+          }
+        ],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "94bdc380785a99b7e7ff2d81fe91b1cbb78770de09d1e332cea143bd4acecad5",
+      "document_id": "readme",
+      "block_id": "B012",
+      "kind": "paragraph",
+      "quote": "Python 3.11 이상을 사용한다. Python은 3.11 이상이 필요해요.\n",
+      "quote_sha256": "5d7322b1d85b051dcad4209dbab33f24106c58f2cd91af10f1b3dd0c7871edce",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 311,
+        "end": 356,
+        "line_start": 15,
+        "line_end": 15,
+        "byte_start": 567,
+        "byte_end": 642
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "55604a37299b3a634f62772e771471309ef7d5b5305ab687ea5438c7d1c8d7e5"
+      ],
+      "preservation_group": "94bdc380785a99b7e7ff2d81fe91b1cbb78770de09d1e332cea143bd4acecad5",
+      "claim": {
+        "quote": "Python 3.11 이상을 사용한다. Python은 3.11 이상이 필요해요.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [
+          {
+            "quote": "이상",
+            "start": 323,
+            "end": 325,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "이상",
+            "start": 346,
+            "end": 348,
+            "status": "literal_observation"
+          }
+        ],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": [
+          {
+            "quote": "3.11",
+            "start": 318,
+            "end": 322,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "3.11",
+            "start": 341,
+            "end": 345,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "408307fb0a83afa24437e43c00c6ff979c1767da688457ae19213e0b1d420650",
+      "document_id": "readme",
+      "block_id": "B014",
+      "kind": "heading",
+      "quote": "## 배포 작업\n",
+      "quote_sha256": "4b65266b984f119e22aadbc529b27681246f39284dcd2eb01b6c7a0ea07bf79a",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 357,
+        "end": 366,
+        "line_start": 17,
+        "line_end": 17,
+        "byte_start": 643,
+        "byte_end": 660
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "408307fb0a83afa24437e43c00c6ff979c1767da688457ae19213e0b1d420650"
+      ],
+      "preservation_group": "408307fb0a83afa24437e43c00c6ff979c1767da688457ae19213e0b1d420650",
+      "claim": {
+        "quote": "## 배포 작업\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "0de337f38bf907585d78d29fd813f36348111f3d0979bfb71ed173ea415a2a14",
+      "document_id": "readme",
+      "block_id": "B015",
+      "kind": "paragraph",
+      "quote": "유지보수자는 태그를 만들기 전에 `python -m unittest`를 실행한다. 이 절차는 0.8.0부터 적용한다.\n",
+      "quote_sha256": "5e2026bec19ce59968602564c907085af94e9c8e7eae7b558077c4671b02e2f0",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 366,
+        "end": 432,
+        "line_start": 18,
+        "line_end": 18,
+        "byte_start": 660,
+        "byte_end": 784
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "408307fb0a83afa24437e43c00c6ff979c1767da688457ae19213e0b1d420650"
+      ],
+      "preservation_group": "0de337f38bf907585d78d29fd813f36348111f3d0979bfb71ed173ea415a2a14",
+      "claim": {
+        "quote": "유지보수자는 태그를 만들기 전에 `python -m unittest`를 실행한다. 이 절차는 0.8.0부터 적용한다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [
+          {
+            "quote": "전에",
+            "start": 381,
+            "end": 383,
+            "status": "literal_observation"
+          }
+        ],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [
+          {
+            "quote": "`python -m unittest`",
+            "start": 384,
+            "end": 404,
+            "status": "literal_observation"
+          }
+        ],
+        "quantities": [
+          {
+            "quote": "0.8.0",
+            "start": 418,
+            "end": 423,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "c10de80ffd3407a6792e9bf08610d3c90bcddc6b2717feffa01ecd077ac22e1c",
+      "document_id": "readme",
+      "block_id": "B017",
+      "kind": "heading",
+      "quote": "## Donate\n",
+      "quote_sha256": "1f3f8a1af60a97834c365870c9c49f8f246d1815405445c5d8d90c355bfc6290",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 433,
+        "end": 443,
+        "line_start": 20,
+        "line_end": 20,
+        "byte_start": 785,
+        "byte_end": 795
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "c10de80ffd3407a6792e9bf08610d3c90bcddc6b2717feffa01ecd077ac22e1c"
+      ],
+      "preservation_group": "c10de80ffd3407a6792e9bf08610d3c90bcddc6b2717feffa01ecd077ac22e1c",
+      "claim": {
+        "quote": "## Donate\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "d29768a50d89cf942343165442a16c7fb072b330e41c3d76688753384f422f1b",
+      "document_id": "readme",
+      "block_id": "B018",
+      "kind": "paragraph",
+      "quote": "기부는 [후원 안내](FUNDING.md)에서 할 수 있습니다.\n",
+      "quote_sha256": "0adab4007934a751fb3178e67d7da8e3141633adaac819cb8988b24bb682d33c",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 443,
+        "end": 479,
+        "line_start": 21,
+        "line_end": 21,
+        "byte_start": 795,
+        "byte_end": 861
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "c10de80ffd3407a6792e9bf08610d3c90bcddc6b2717feffa01ecd077ac22e1c"
+      ],
+      "preservation_group": "d29768a50d89cf942343165442a16c7fb072b330e41c3d76688753384f422f1b",
+      "claim": {
+        "quote": "기부는 [후원 안내](FUNDING.md)에서 할 수 있습니다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "d4db4b1871794c8609c5ec6e50ec8e8d209ed12b19fb8a20b77f7e1c5a75aa23",
+      "document_id": "readme",
+      "block_id": "B020",
+      "kind": "heading",
+      "quote": "## Contributing\n",
+      "quote_sha256": "ade6eb22c91ad42c48ce367974fb7fb67ecbb58e420dcc446d3f427d43e96843",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 480,
+        "end": 496,
+        "line_start": 23,
+        "line_end": 23,
+        "byte_start": 862,
+        "byte_end": 878
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "d4db4b1871794c8609c5ec6e50ec8e8d209ed12b19fb8a20b77f7e1c5a75aa23"
+      ],
+      "preservation_group": "d4db4b1871794c8609c5ec6e50ec8e8d209ed12b19fb8a20b77f7e1c5a75aa23",
+      "claim": {
+        "quote": "## Contributing\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "efc13d8b870de7080f5e17b8d51b9f649993ecb526c9465c6a4f846fac6bdd2c",
+      "document_id": "readme",
+      "block_id": "B021",
+      "kind": "paragraph",
+      "quote": "변경 제안과 오류 제보는 [기여 안내](CONTRIBUTING.md)를 확인하세요.\n",
+      "quote_sha256": "0487ed75466ffa3554e455fe295891e0bb8ab079fccd819d7a3295e392de2fd7",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 496,
+        "end": 543,
+        "line_start": 24,
+        "line_end": 24,
+        "byte_start": 878,
+        "byte_end": 965
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "d4db4b1871794c8609c5ec6e50ec8e8d209ed12b19fb8a20b77f7e1c5a75aa23"
+      ],
+      "preservation_group": "efc13d8b870de7080f5e17b8d51b9f649993ecb526c9465c6a4f846fac6bdd2c",
+      "claim": {
+        "quote": "변경 제안과 오류 제보는 [기여 안내](CONTRIBUTING.md)를 확인하세요.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "14b3956ac6bf04a03baac51230ac14bcdd9de42bd542a6bc12b5122f5f6e4e9f",
+      "document_id": "readme",
+      "block_id": "B023",
+      "kind": "heading",
+      "quote": "## License\n",
+      "quote_sha256": "ae070da695f33eee9ad9a6f12cb2c2c5d8074103c8df5ce396ff5a65ede8ce37",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 544,
+        "end": 555,
+        "line_start": 26,
+        "line_end": 26,
+        "byte_start": 966,
+        "byte_end": 977
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "14b3956ac6bf04a03baac51230ac14bcdd9de42bd542a6bc12b5122f5f6e4e9f"
+      ],
+      "preservation_group": "14b3956ac6bf04a03baac51230ac14bcdd9de42bd542a6bc12b5122f5f6e4e9f",
+      "claim": {
+        "quote": "## License\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "474892aef57316a333e9a72e05cb9bde4e1046653fcf7812b90fbbff8f295861",
+      "document_id": "readme",
+      "block_id": "B024",
+      "kind": "paragraph",
+      "quote": "MIT. [LICENSE](LICENSE)를 참고하세요.\n",
+      "quote_sha256": "1263458cf0ee2b03b3903a85c04605ffacb224590b6ec8bd5462bf91769bc08a",
+      "source_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "README.md",
+        "snapshot_sha256": "3eed49527a8515a39c3e1272fa5098447213c3fe1fd2055ec97807021259f94b"
+      },
+      "source_span": {
+        "start": 555,
+        "end": 587,
+        "line_start": 27,
+        "line_end": 27,
+        "byte_start": 977,
+        "byte_end": 1021
+      },
+      "role": "프로젝트 입구와 첫 사용 경로",
+      "authority": "소개 초안; 실행 조건은 0.8.0 승인 명세를 따른다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "14b3956ac6bf04a03baac51230ac14bcdd9de42bd542a6bc12b5122f5f6e4e9f"
+      ],
+      "preservation_group": "474892aef57316a333e9a72e05cb9bde4e1046653fcf7812b90fbbff8f295861",
+      "claim": {
+        "quote": "MIT. [LICENSE](LICENSE)를 참고하세요.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+      "document_id": "usage",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# 사용 안내\n",
+      "quote_sha256": "c807162661e1c69d9337c2caed5aa360868908843baae5aee5ffe8d9b03c7b0e",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 8,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 16
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b"
+      ],
+      "preservation_group": "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+      "claim": {
+        "quote": "# 사용 안내\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "4d6634614e093373685a6f484d13138fd6412eaa59dbda9635577cbf5b0cffeb",
+      "document_id": "usage",
+      "block_id": "B002",
+      "kind": "paragraph",
+      "quote": "PaperDock는 로컬 Markdown 폴더를 처리한다.\n",
+      "quote_sha256": "2916c6b121fea9d68ace9e8db1e9b5fc1b72d75ea764e86a2db104a7b9911aff",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 8,
+        "end": 41,
+        "line_start": 2,
+        "line_end": 2,
+        "byte_start": 16,
+        "byte_end": 69
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b"
+      ],
+      "preservation_group": "4d6634614e093373685a6f484d13138fd6412eaa59dbda9635577cbf5b0cffeb",
+      "claim": {
+        "quote": "PaperDock는 로컬 Markdown 폴더를 처리한다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "a4ce9c72b3539f86c3f0c2b3eaab4e395986eafbd2067fb87cd4cd4074d4a2f0",
+      "document_id": "usage",
+      "block_id": "B004",
+      "kind": "heading",
+      "quote": "## 색인\n",
+      "quote_sha256": "d0d2fc174fc1130c5b126607a722a4446b31d141896832f64b9d2ac2d427ab26",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 42,
+        "end": 48,
+        "line_start": 4,
+        "line_end": 4,
+        "byte_start": 70,
+        "byte_end": 80
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "a4ce9c72b3539f86c3f0c2b3eaab4e395986eafbd2067fb87cd4cd4074d4a2f0"
+      ],
+      "preservation_group": "a4ce9c72b3539f86c3f0c2b3eaab4e395986eafbd2067fb87cd4cd4074d4a2f0",
+      "claim": {
+        "quote": "## 색인\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "b99e43444a221722b8a951e3f6b4ffb330b3fa1967378b3c346b77fb056e7d5e",
+      "document_id": "usage",
+      "block_id": "B005",
+      "kind": "code_block",
+      "quote": "```sh\npaperdock index ./notes --out ./index.json\n```\n",
+      "quote_sha256": "32887647650b820b8e46831e8a6ad35b748f46aaa8c1fa47d4b922c78d23a0de",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 48,
+        "end": 101,
+        "line_start": 5,
+        "line_end": 7,
+        "byte_start": 80,
+        "byte_end": 133
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "a4ce9c72b3539f86c3f0c2b3eaab4e395986eafbd2067fb87cd4cd4074d4a2f0"
+      ],
+      "preservation_group": "b99e43444a221722b8a951e3f6b4ffb330b3fa1967378b3c346b77fb056e7d5e",
+      "claim": {
+        "quote": "```sh\npaperdock index ./notes --out ./index.json\n```\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "fa8191dee8593e52b55af17ada18dc9a52f733eaffdc375e8a3a705614afa1b8",
+      "document_id": "usage",
+      "block_id": "B006",
+      "kind": "paragraph",
+      "quote": "출력은 JSON이다. 제목과 상대 경로만 들어간다. 입력 파일의 본문은 바꾸지 않는다.\n",
+      "quote_sha256": "a2aaa4a9b0c42c1d6b00794e8f0034045b095e7399702aa6163c46a8ceeb9e18",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 101,
+        "end": 150,
+        "line_start": 8,
+        "line_end": 8,
+        "byte_start": 133,
+        "byte_end": 244
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "a4ce9c72b3539f86c3f0c2b3eaab4e395986eafbd2067fb87cd4cd4074d4a2f0"
+      ],
+      "preservation_group": "fa8191dee8593e52b55af17ada18dc9a52f733eaffdc375e8a3a705614afa1b8",
+      "claim": {
+        "quote": "출력은 JSON이다. 제목과 상대 경로만 들어간다. 입력 파일의 본문은 바꾸지 않는다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "않",
+            "start": 145,
+            "end": 146,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "1babe23a2f42deaef7e15943705909e116079ffe09348740ee1d0dfc0cfe08b4",
+      "document_id": "usage",
+      "block_id": "B008",
+      "kind": "heading",
+      "quote": "## 설치\n",
+      "quote_sha256": "41f9a619661ad32bf39251b3c100d756252138b7284b75929eba0974b5bbc70d",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 151,
+        "end": 157,
+        "line_start": 10,
+        "line_end": 10,
+        "byte_start": 245,
+        "byte_end": 255
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "1babe23a2f42deaef7e15943705909e116079ffe09348740ee1d0dfc0cfe08b4"
+      ],
+      "preservation_group": "1babe23a2f42deaef7e15943705909e116079ffe09348740ee1d0dfc0cfe08b4",
+      "claim": {
+        "quote": "## 설치\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "ed0b2af91430143ecc65a71bf206921f1455092684ae3c42a7248d09b6aa5158",
+      "document_id": "usage",
+      "block_id": "B009",
+      "kind": "code_block",
+      "quote": "```sh\npython -m pip install paperdock==0.8.0\n```\n",
+      "quote_sha256": "a2a6b3b39ce9718fc69fca64e08b70d1c972b0a4027814bde89cdd1e58e11172",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 157,
+        "end": 206,
+        "line_start": 11,
+        "line_end": 13,
+        "byte_start": 255,
+        "byte_end": 304
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "1babe23a2f42deaef7e15943705909e116079ffe09348740ee1d0dfc0cfe08b4"
+      ],
+      "preservation_group": "ed0b2af91430143ecc65a71bf206921f1455092684ae3c42a7248d09b6aa5158",
+      "claim": {
+        "quote": "```sh\npython -m pip install paperdock==0.8.0\n```\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": [
+          {
+            "quote": "0.8.0",
+            "start": 196,
+            "end": 201,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "013f0b452ecce0f9d6861f5a6e2c763f8ec5c28e8f953394ea4ee7c18ab6f03d",
+      "document_id": "usage",
+      "block_id": "B010",
+      "kind": "paragraph",
+      "quote": "이미 같은 출력 파일이 있으면 명령이 실패한다. 기존 파일은 덮어쓰지 않는다.\n",
+      "quote_sha256": "bb1a11be10e1bfff5eeef5be26fe6571c4fd7b4d0204065670d0bf974e199ce4",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 206,
+        "end": 250,
+        "line_start": 14,
+        "line_end": 14,
+        "byte_start": 304,
+        "byte_end": 410
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "1babe23a2f42deaef7e15943705909e116079ffe09348740ee1d0dfc0cfe08b4"
+      ],
+      "preservation_group": "013f0b452ecce0f9d6861f5a6e2c763f8ec5c28e8f953394ea4ee7c18ab6f03d",
+      "claim": {
+        "quote": "이미 같은 출력 파일이 있으면 명령이 실패한다. 기존 파일은 덮어쓰지 않는다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [
+          {
+            "quote": "있으면",
+            "start": 219,
+            "end": 222,
+            "status": "literal_observation"
+          }
+        ],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "실패",
+            "start": 227,
+            "end": 229,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "않",
+            "start": 245,
+            "end": 246,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "2ed03424c330bda09229ab17364e9c090c97e4a910e8c965c611f25a81ca9e9d",
+      "document_id": "usage",
+      "block_id": "B012",
+      "kind": "heading",
+      "quote": "## 기여\n",
+      "quote_sha256": "bbe16e2a0458149ab7f3e3e0f213766bce9e00dea1799d3622c819c4a5cbd13b",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 251,
+        "end": 257,
+        "line_start": 16,
+        "line_end": 16,
+        "byte_start": 411,
+        "byte_end": 421
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "2ed03424c330bda09229ab17364e9c090c97e4a910e8c965c611f25a81ca9e9d"
+      ],
+      "preservation_group": "2ed03424c330bda09229ab17364e9c090c97e4a910e8c965c611f25a81ca9e9d",
+      "claim": {
+        "quote": "## 기여\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "a5b84346949b46abf2396d05b87833d211d3a2b94739b1d62d3c80cb1d18754b",
+      "document_id": "usage",
+      "block_id": "B013",
+      "kind": "paragraph",
+      "quote": "오류 제보는 [기여 안내](../CONTRIBUTING.md)로 보낸다.\n",
+      "quote_sha256": "468f1c6410c4c5a8da4db5939657ada8d66a2432ed5cea2ef617474417cd805e",
+      "source_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/usage.md",
+        "snapshot_sha256": "f984e4482fb76092628aa91d21fca9206cd52cc926ce10e738173d11fa485308"
+      },
+      "source_span": {
+        "start": 257,
+        "end": 298,
+        "line_start": 17,
+        "line_end": 17,
+        "byte_start": 421,
+        "byte_end": 488
+      },
+      "role": "사용자가 설치하고 색인을 실행하는 안내",
+      "authority": "실행 동작은 0.8.0 승인 명세와 대조한다",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "2ed03424c330bda09229ab17364e9c090c97e4a910e8c965c611f25a81ca9e9d"
+      ],
+      "preservation_group": "a5b84346949b46abf2396d05b87833d211d3a2b94739b1d62d3c80cb1d18754b",
+      "claim": {
+        "quote": "오류 제보는 [기여 안내](../CONTRIBUTING.md)로 보낸다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "8686fda1ed16b0ac80124a21b270ccab28d6a5d9ba0e186e231efa188c1cf2ca",
+      "document_id": "release",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# PaperDock 0.8.0 승인 명세\n",
+      "quote_sha256": "6b0d4e86efa7eb7bfc2a2cd444a4aa8a4b97167f986b17175213663d2992eb48",
+      "source_sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "specs/0.8.0.md",
+        "snapshot_sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 24,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 32
+      },
+      "role": "릴리스 담당자가 확정한 실행 명세",
+      "authority": "0.8.0 실행 조건의 승인 근거",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "8686fda1ed16b0ac80124a21b270ccab28d6a5d9ba0e186e231efa188c1cf2ca"
+      ],
+      "preservation_group": "8686fda1ed16b0ac80124a21b270ccab28d6a5d9ba0e186e231efa188c1cf2ca",
+      "claim": {
+        "quote": "# PaperDock 0.8.0 승인 명세\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "승인",
+            "start": 18,
+            "end": 20,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": [
+          {
+            "quote": "0.8.0",
+            "start": 12,
+            "end": 17,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518",
+      "document_id": "release",
+      "block_id": "B002",
+      "kind": "paragraph",
+      "quote": "승인 기록 PD-80, 2026-11-10. Python 3.11 이상이 필요하다.\n설치 명령은 `python -m pip install paperdock==0.8.0`이다.\n색인은 `paperdock index ./notes --out ./index.json`으로 실행한다.\n`--out` 파일이 존재하면 실패하며 덮어쓰지 않는다. 출력 상위 폴더는 미리 존재해야 한다.\n출력에는 Markdown 제목과 입력 폴더 기준 상대 경로만 포함한다. 본문 수정과 네트워크 전송은 하지 않는다.\nWindows 지원 여부와 처리 속도는 이번 릴리스에서 검증하지 않았다.\n",
+      "quote_sha256": "7af28cc79a23d8383515d5a06c3f2858aa9ef21ad7a5497ac9e0673d0a0295cc",
+      "source_sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "specs/0.8.0.md",
+        "snapshot_sha256": "d594af281c2a02aac4ee81b184d30e03438dd6459c27c75035abdf0797ecd909"
+      },
+      "source_span": {
+        "start": 24,
+        "end": 338,
+        "line_start": 2,
+        "line_end": 7,
+        "byte_start": 32,
+        "byte_end": 592
+      },
+      "role": "릴리스 담당자가 확정한 실행 명세",
+      "authority": "0.8.0 실행 조건의 승인 근거",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "8686fda1ed16b0ac80124a21b270ccab28d6a5d9ba0e186e231efa188c1cf2ca"
+      ],
+      "preservation_group": "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518",
+      "claim": {
+        "quote": "승인 기록 PD-80, 2026-11-10. Python 3.11 이상이 필요하다.\n설치 명령은 `python -m pip install paperdock==0.8.0`이다.\n색인은 `paperdock index ./notes --out ./index.json`으로 실행한다.\n`--out` 파일이 존재하면 실패하며 덮어쓰지 않는다. 출력 상위 폴더는 미리 존재해야 한다.\n출력에는 Markdown 제목과 입력 폴더 기준 상대 경로만 포함한다. 본문 수정과 네트워크 전송은 하지 않는다.\nWindows 지원 여부와 처리 속도는 이번 릴리스에서 검증하지 않았다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [
+          {
+            "quote": "이상",
+            "start": 61,
+            "end": 63,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "존재하면",
+            "start": 191,
+            "end": 195,
+            "status": "literal_observation"
+          }
+        ],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "승인",
+            "start": 24,
+            "end": 26,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "실패",
+            "start": 196,
+            "end": 198,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "않",
+            "start": 206,
+            "end": 207,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "않",
+            "start": 292,
+            "end": 293,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "않",
+            "start": 333,
+            "end": 334,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [
+          {
+            "quote": "`python -m pip install paperdock==0.8.0`",
+            "start": 78,
+            "end": 118,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "`paperdock index ./notes --out ./index.json`",
+            "start": 126,
+            "end": 170,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "`--out`",
+            "start": 179,
+            "end": 186,
+            "status": "literal_observation"
+          }
+        ],
+        "quantities": [
+          {
+            "quote": "80",
+            "start": 33,
+            "end": 35,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "2026",
+            "start": 37,
+            "end": 41,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "11",
+            "start": 42,
+            "end": 44,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "10",
+            "start": 45,
+            "end": 47,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "3.11",
+            "start": 56,
+            "end": 60,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "0.8.0",
+            "start": 112,
+            "end": 117,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "3f888e1889268038c8763c3a5b4fc59ddc4a78ec575c9d48b30463fbad06a979",
+      "document_id": "history",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# 개발 기록\n",
+      "quote_sha256": "2c1af3df13dfc36aa6d5911d7fef4965430fcf8ce7723cfcf53bd2d5c35da685",
+      "source_sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/devlog.md",
+        "snapshot_sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 8,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 16
+      },
+      "role": "유지보수자의 역사와 릴리스 확인 기록",
+      "authority": "과거 결정 및 절차의 기록; 제품 실행 명세는 아님",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "3f888e1889268038c8763c3a5b4fc59ddc4a78ec575c9d48b30463fbad06a979"
+      ],
+      "preservation_group": "3f888e1889268038c8763c3a5b4fc59ddc4a78ec575c9d48b30463fbad06a979",
+      "claim": {
+        "quote": "# 개발 기록\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615",
+      "document_id": "history",
+      "block_id": "B002",
+      "kind": "paragraph",
+      "quote": "2026-10-28: CSV에서 JSON으로 바꾼 이유는 상대 경로와 제목의 이스케이프 처리를 단순하게 하기 위해서다.\n2026-11-07: 팀 회의 간식은 귤이었다. 제품 기능과 무관한 팀 메모다.\n2026-11-10: 0.8.0 배포 전 `python -m unittest` 실행을 필수로 결정했다.\n2026-11-10: 설치하지 않은 신규 사용자는 실행 명령만 보고 실패했다. 설치 방법은 승인 명세에 기록되어 있다.\n",
+      "quote_sha256": "6de08d39b142ef200deafd2ef02e2e71ab884873022073e1ad9c380b595ac3b4",
+      "source_sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "docs/devlog.md",
+        "snapshot_sha256": "22deabb284e7271401dcc0c8040783a962b5e27b3ec1fe3f3dc277129228ee5e"
+      },
+      "source_span": {
+        "start": 8,
+        "end": 245,
+        "line_start": 2,
+        "line_end": 5,
+        "byte_start": 16,
+        "byte_end": 471
+      },
+      "role": "유지보수자의 역사와 릴리스 확인 기록",
+      "authority": "과거 결정 및 절차의 기록; 제품 실행 명세는 아님",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "3f888e1889268038c8763c3a5b4fc59ddc4a78ec575c9d48b30463fbad06a979"
+      ],
+      "preservation_group": "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615",
+      "claim": {
+        "quote": "2026-10-28: CSV에서 JSON으로 바꾼 이유는 상대 경로와 제목의 이스케이프 처리를 단순하게 하기 위해서다.\n2026-11-07: 팀 회의 간식은 귤이었다. 제품 기능과 무관한 팀 메모다.\n2026-11-10: 0.8.0 배포 전 `python -m unittest` 실행을 필수로 결정했다.\n2026-11-10: 설치하지 않은 신규 사용자는 실행 명령만 보고 실패했다. 설치 방법은 승인 명세에 기록되어 있다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "필수",
+            "start": 168,
+            "end": 170,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "않",
+            "start": 195,
+            "end": 196,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "실패",
+            "start": 216,
+            "end": 218,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "승인",
+            "start": 229,
+            "end": 231,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [
+          {
+            "quote": "`python -m unittest`",
+            "start": 143,
+            "end": 163,
+            "status": "literal_observation"
+          }
+        ],
+        "quantities": [
+          {
+            "quote": "2026",
+            "start": 8,
+            "end": 12,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "10",
+            "start": 13,
+            "end": 15,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "28",
+            "start": 16,
+            "end": 18,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "2026",
+            "start": 75,
+            "end": 79,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "11",
+            "start": 80,
+            "end": 82,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "07",
+            "start": 83,
+            "end": 85,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "2026",
+            "start": 120,
+            "end": 124,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "11",
+            "start": 125,
+            "end": 127,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "10",
+            "start": 128,
+            "end": 130,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "0.8.0",
+            "start": 132,
+            "end": 137,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "2026",
+            "start": 178,
+            "end": 182,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "11",
+            "start": 183,
+            "end": 185,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "10",
+            "start": 186,
+            "end": 188,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "fcb0ca7b82176fe6ab32821d4f11d2a91390bb7c421badfa19fdf2dfa9ae5f31",
+      "document_id": "funding",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# 후원\n",
+      "quote_sha256": "28674a616f9d96f7243ff45de0861579d10e3031b53002150d1940a61b75acf0",
+      "source_sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "FUNDING.md",
+        "snapshot_sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 5,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 9
+      },
+      "role": "후원 안내",
+      "authority": "참여 경로",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "fcb0ca7b82176fe6ab32821d4f11d2a91390bb7c421badfa19fdf2dfa9ae5f31"
+      ],
+      "preservation_group": "fcb0ca7b82176fe6ab32821d4f11d2a91390bb7c421badfa19fdf2dfa9ae5f31",
+      "claim": {
+        "quote": "# 후원\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "36cae269c991b672eb32d004d0ce8a1b0559e60c0978648589789b8a768f813d",
+      "document_id": "funding",
+      "block_id": "B002",
+      "kind": "paragraph",
+      "quote": "금전 후원은 받지 않습니다. 대신 테스트 결과와 오류 제보를 환영합니다.\n",
+      "quote_sha256": "e17b948f1c8a258fe7568f19424345c3e6f34a70abff71b73d50676ad3aa3805",
+      "source_sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "FUNDING.md",
+        "snapshot_sha256": "008001562dfbdadb5b1212fe20274500489ccf1705728078f7edc70afd7d9650"
+      },
+      "source_span": {
+        "start": 5,
+        "end": 46,
+        "line_start": 2,
+        "line_end": 2,
+        "byte_start": 9,
+        "byte_end": 108
+      },
+      "role": "후원 안내",
+      "authority": "참여 경로",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "fcb0ca7b82176fe6ab32821d4f11d2a91390bb7c421badfa19fdf2dfa9ae5f31"
+      ],
+      "preservation_group": "36cae269c991b672eb32d004d0ce8a1b0559e60c0978648589789b8a768f813d",
+      "claim": {
+        "quote": "금전 후원은 받지 않습니다. 대신 테스트 결과와 오류 제보를 환영합니다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "않",
+            "start": 15,
+            "end": 16,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "77bbc032c6f2ccefc04ed91bc81280c0677818f8795785903e00195674154270",
+      "document_id": "contributing",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# 기여\n",
+      "quote_sha256": "c94d10329d5fbef824d158f527b2d9328e03d52db7fdfe207f0bbd7ccf230bc3",
+      "source_sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "CONTRIBUTING.md",
+        "snapshot_sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 5,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 9
+      },
+      "role": "기여 안내",
+      "authority": "참여 경로",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "77bbc032c6f2ccefc04ed91bc81280c0677818f8795785903e00195674154270"
+      ],
+      "preservation_group": "77bbc032c6f2ccefc04ed91bc81280c0677818f8795785903e00195674154270",
+      "claim": {
+        "quote": "# 기여\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "a21a2eaf3ed51888a3227db48461d93f5d97687f88c119eb9cd9ee9562835fcf",
+      "document_id": "contributing",
+      "block_id": "B002",
+      "kind": "paragraph",
+      "quote": "재현 명령과 Python 버전을 적어 이슈로 제출합니다.\n",
+      "quote_sha256": "a2c48931145542d8cb81a9d9f2456489dbb43d25cee81ad920fd96f4b7bc3d82",
+      "source_sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "CONTRIBUTING.md",
+        "snapshot_sha256": "49168a88d71fe14f8cc285a1bdc2f226980990a243c9b4a8415ee0b65593b3d1"
+      },
+      "source_span": {
+        "start": 5,
+        "end": 37,
+        "line_start": 2,
+        "line_end": 2,
+        "byte_start": 9,
+        "byte_end": 77
+      },
+      "role": "기여 안내",
+      "authority": "참여 경로",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "77bbc032c6f2ccefc04ed91bc81280c0677818f8795785903e00195674154270"
+      ],
+      "preservation_group": "a21a2eaf3ed51888a3227db48461d93f5d97687f88c119eb9cd9ee9562835fcf",
+      "claim": {
+        "quote": "재현 명령과 Python 버전을 적어 이슈로 제출합니다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "2cf922ddf900f109970a8c8e897996764a09556ca5421d23f27205e0cc4fc706",
+      "document_id": "license",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# License\n",
+      "quote_sha256": "32dbdfa042c1a637516beff52f2a4dbcb4bc5e6f3c09e5cca824815b5a6157f5",
+      "source_sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "LICENSE",
+        "snapshot_sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 10,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 10
+      },
+      "role": "배포 라이선스 안내",
+      "authority": "가상 프로젝트 고지",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "2cf922ddf900f109970a8c8e897996764a09556ca5421d23f27205e0cc4fc706"
+      ],
+      "preservation_group": "2cf922ddf900f109970a8c8e897996764a09556ca5421d23f27205e0cc4fc706",
+      "claim": {
+        "quote": "# License\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "774b339b4f08f8087b4c9c8892655ce16278c535a36c3d7814162d8d66a9b591",
+      "document_id": "license",
+      "block_id": "B002",
+      "kind": "paragraph",
+      "quote": "MIT. 이 파일은 평가용 축약 고지이며 실제 라이선스 전문이 아니다.\n",
+      "quote_sha256": "284797ad0dbd6ad2c5a45c60d927e53bba839fcc5cd20abc17fb2d309ef72d93",
+      "source_sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "supplied-input:e8d67c1e8462021fce5f820d87b643c93866e05b3cef10379e37879ba67d384c",
+        "path": "LICENSE",
+        "snapshot_sha256": "ca8fc55407c2b2e01dc49e47508e41e37f797ed54b1616cbba87ba11c5756515"
+      },
+      "source_span": {
+        "start": 10,
+        "end": 50,
+        "line_start": 2,
+        "line_end": 2,
+        "byte_start": 10,
+        "byte_end": 100
+      },
+      "role": "배포 라이선스 안내",
+      "authority": "가상 프로젝트 고지",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "2cf922ddf900f109970a8c8e897996764a09556ca5421d23f27205e0cc4fc706"
+      ],
+      "preservation_group": "774b339b4f08f8087b4c9c8892655ce16278c535a36c3d7814162d8d66a9b591",
+      "claim": {
+        "quote": "MIT. 이 파일은 평가용 축약 고지이며 실제 라이선스 전문이 아니다.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "처음 방문한 개발자가 프로젝트의 용도와 첫 실행 방법을 이해하고 필요한 안내를 찾을 수 있도록 현재 저장소 문서를 개선해 주세요. 유지보수자가 검토할 수 있게 결과와 근거를 남겨 주세요.",
+        "explicit_constraints": [
+          "기부·기여 참여 경로와 MIT 라이선스 고지는 README에서 계속 찾을 수 있어야 한다.",
+          "코드 블록·명령·파일명은 근거 없이 바꾸지 않는다.",
+          "참조 자료와 개발 기록은 읽기 전용이다. 새 문서 생성은 이번 권한에 포함되지 않는다."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "condition_claim_cooccurrence",
+      "unit_ids": [
+        "9c560cdb971e3971ae57c54604789ed3390b230b00559948c783b004645fa834"
+      ],
+      "basis": "same_atomic_source_block",
+      "status": "observed",
+      "semantic_status": "unresolved",
+      "preservation": "retain_entire_block_and_review_context"
+    },
+    {
+      "kind": "explicit_reference",
+      "unit_ids": [
+        "9c560cdb971e3971ae57c54604789ed3390b230b00559948c783b004645fa834"
+      ],
+      "target_document_id": "usage",
+      "literal_target": "docs/usage.md",
+      "start": 281,
+      "end": 294,
+      "status": "resolved_path_only",
+      "semantic_status": "unresolved"
+    },
+    {
+      "kind": "condition_claim_cooccurrence",
+      "unit_ids": [
+        "55604a37299b3a634f62772e771471309ef7d5b5305ab687ea5438c7d1c8d7e5"
+      ],
+      "basis": "same_atomic_source_block",
+      "status": "observed",
+      "semantic_status": "unresolved",
+      "preservation": "retain_entire_block_and_review_context"
+    },
+    {
+      "kind": "condition_claim_cooccurrence",
+      "unit_ids": [
+        "94bdc380785a99b7e7ff2d81fe91b1cbb78770de09d1e332cea143bd4acecad5"
+      ],
+      "basis": "same_atomic_source_block",
+      "status": "observed",
+      "semantic_status": "unresolved",
+      "preservation": "retain_entire_block_and_review_context"
+    },
+    {
+      "kind": "condition_claim_cooccurrence",
+      "unit_ids": [
+        "0de337f38bf907585d78d29fd813f36348111f3d0979bfb71ed173ea415a2a14"
+      ],
+      "basis": "same_atomic_source_block",
+      "status": "observed",
+      "semantic_status": "unresolved",
+      "preservation": "retain_entire_block_and_review_context"
+    },
+    {
+      "kind": "explicit_reference",
+      "unit_ids": [
+        "d29768a50d89cf942343165442a16c7fb072b330e41c3d76688753384f422f1b"
+      ],
+      "target_document_id": "funding",
+      "literal_target": "FUNDING.md",
+      "start": 455,
+      "end": 465,
+      "status": "resolved_path_only",
+      "semantic_status": "unresolved"
+    },
+    {
+      "kind": "explicit_reference",
+      "unit_ids": [
+        "efc13d8b870de7080f5e17b8d51b9f649993ecb526c9465c6a4f846fac6bdd2c"
+      ],
+      "target_document_id": "contributing",
+      "literal_target": "CONTRIBUTING.md",
+      "start": 518,
+      "end": 533,
+      "status": "resolved_path_only",
+      "semantic_status": "unresolved"
+    },
+    {
+      "kind": "explicit_reference",
+      "unit_ids": [
+        "474892aef57316a333e9a72e05cb9bde4e1046653fcf7812b90fbbff8f295861"
+      ],
+      "target_document_id": "license",
+      "literal_target": "LICENSE",
+      "start": 570,
+      "end": 577,
+      "status": "resolved_path_only",
+      "semantic_status": "unresolved"
+    },
+    {
+      "kind": "condition_claim_cooccurrence",
+      "unit_ids": [
+        "013f0b452ecce0f9d6861f5a6e2c763f8ec5c28e8f953394ea4ee7c18ab6f03d"
+      ],
+      "basis": "same_atomic_source_block",
+      "status": "observed",
+      "semantic_status": "unresolved",
+      "preservation": "retain_entire_block_and_review_context"
+    },
+    {
+      "kind": "explicit_reference",
+      "unit_ids": [
+        "a5b84346949b46abf2396d05b87833d211d3a2b94739b1d62d3c80cb1d18754b"
+      ],
+      "target_document_id": "contributing",
+      "literal_target": "../CONTRIBUTING.md",
+      "start": 272,
+      "end": 290,
+      "status": "resolved_path_only",
+      "semantic_status": "unresolved"
+    },
+    {
+      "kind": "condition_claim_cooccurrence",
+      "unit_ids": [
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518"
+      ],
+      "basis": "same_atomic_source_block",
+      "status": "observed",
+      "semantic_status": "unresolved",
+      "preservation": "retain_entire_block_and_review_context"
+    },
+    {
+      "kind": "shared_literal_candidate",
+      "unit_ids": [
+        "0de337f38bf907585d78d29fd813f36348111f3d0979bfb71ed173ea415a2a14",
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518",
+        "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615",
+        "8686fda1ed16b0ac80124a21b270ccab28d6a5d9ba0e186e231efa188c1cf2ca",
+        "ed0b2af91430143ecc65a71bf206921f1455092684ae3c42a7248d09b6aa5158"
+      ],
+      "literal": "0.8.0",
+      "status": "unresolved",
+      "semantic_status": "unresolved",
+      "basis": "literal_overlap_only"
+    },
+    {
+      "kind": "shared_literal_candidate",
+      "unit_ids": [
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518",
+        "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615"
+      ],
+      "literal": "10",
+      "status": "unresolved",
+      "semantic_status": "unresolved",
+      "basis": "literal_overlap_only"
+    },
+    {
+      "kind": "shared_literal_candidate",
+      "unit_ids": [
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518",
+        "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615",
+        "ac274179686ae23d65788b27925d41cbae843b672e2f111f13d0d6f4dac5505c"
+      ],
+      "literal": "11",
+      "status": "unresolved",
+      "semantic_status": "unresolved",
+      "basis": "literal_overlap_only"
+    },
+    {
+      "kind": "shared_literal_candidate",
+      "unit_ids": [
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518",
+        "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615"
+      ],
+      "literal": "2026",
+      "status": "unresolved",
+      "semantic_status": "unresolved",
+      "basis": "literal_overlap_only"
+    },
+    {
+      "kind": "shared_literal_candidate",
+      "unit_ids": [
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518",
+        "94bdc380785a99b7e7ff2d81fe91b1cbb78770de09d1e332cea143bd4acecad5"
+      ],
+      "literal": "3.11",
+      "status": "unresolved",
+      "semantic_status": "unresolved",
+      "basis": "literal_overlap_only"
+    },
+    {
+      "kind": "shared_literal_candidate",
+      "unit_ids": [
+        "0de337f38bf907585d78d29fd813f36348111f3d0979bfb71ed173ea415a2a14",
+        "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615"
+      ],
+      "literal": "`python -m unittest`",
+      "status": "unresolved",
+      "semantic_status": "unresolved",
+      "basis": "literal_overlap_only"
+    }
+  ],
+  "confirmed_semantic_conflicts": [],
+  "unanalysed": [],
+  "uncertainties": [
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "readme"
+      ],
+      "unit_ids": [
+        "184fd26ba554bac3c210b94fa1d080a1a15f7e9d7d99b523194f8f7cd1610216",
+        "5baa09607196c4e85d00606dac1e6c788d66fa628fda813febee3d2682a37ea9",
+        "9c3a22a91f5db52865b0a99d0917b9b4e77056133025a2b0ded065ec11a69f22",
+        "ac274179686ae23d65788b27925d41cbae843b672e2f111f13d0d6f4dac5505c",
+        "dd24a42588ab7499e0f632ff42b22e418b65f446b1fd1edee095027db42096dc",
+        "599b9c8cfa8f3271814ede7cd7bb620817c2b83c71e67f50c5362f69ff174743",
+        "9c560cdb971e3971ae57c54604789ed3390b230b00559948c783b004645fa834",
+        "55604a37299b3a634f62772e771471309ef7d5b5305ab687ea5438c7d1c8d7e5",
+        "94bdc380785a99b7e7ff2d81fe91b1cbb78770de09d1e332cea143bd4acecad5",
+        "408307fb0a83afa24437e43c00c6ff979c1767da688457ae19213e0b1d420650",
+        "0de337f38bf907585d78d29fd813f36348111f3d0979bfb71ed173ea415a2a14",
+        "c10de80ffd3407a6792e9bf08610d3c90bcddc6b2717feffa01ecd077ac22e1c",
+        "d29768a50d89cf942343165442a16c7fb072b330e41c3d76688753384f422f1b",
+        "d4db4b1871794c8609c5ec6e50ec8e8d209ed12b19fb8a20b77f7e1c5a75aa23",
+        "efc13d8b870de7080f5e17b8d51b9f649993ecb526c9465c6a4f846fac6bdd2c",
+        "14b3956ac6bf04a03baac51230ac14bcdd9de42bd542a6bc12b5122f5f6e4e9f",
+        "474892aef57316a333e9a72e05cb9bde4e1046653fcf7812b90fbbff8f295861"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "usage"
+      ],
+      "unit_ids": [
+        "fb9e3f70c4b12098a1a3da739353fc437e69e23410e45e69cfc67fe4ab038d4b",
+        "4d6634614e093373685a6f484d13138fd6412eaa59dbda9635577cbf5b0cffeb",
+        "a4ce9c72b3539f86c3f0c2b3eaab4e395986eafbd2067fb87cd4cd4074d4a2f0",
+        "b99e43444a221722b8a951e3f6b4ffb330b3fa1967378b3c346b77fb056e7d5e",
+        "fa8191dee8593e52b55af17ada18dc9a52f733eaffdc375e8a3a705614afa1b8",
+        "1babe23a2f42deaef7e15943705909e116079ffe09348740ee1d0dfc0cfe08b4",
+        "ed0b2af91430143ecc65a71bf206921f1455092684ae3c42a7248d09b6aa5158",
+        "013f0b452ecce0f9d6861f5a6e2c763f8ec5c28e8f953394ea4ee7c18ab6f03d",
+        "2ed03424c330bda09229ab17364e9c090c97e4a910e8c965c611f25a81ca9e9d",
+        "a5b84346949b46abf2396d05b87833d211d3a2b94739b1d62d3c80cb1d18754b"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "release"
+      ],
+      "unit_ids": [
+        "8686fda1ed16b0ac80124a21b270ccab28d6a5d9ba0e186e231efa188c1cf2ca",
+        "7540cedb94844f622af09c52b08514e3d5a46fe01a52463f00d85ca47d9d5518"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "history"
+      ],
+      "unit_ids": [
+        "3f888e1889268038c8763c3a5b4fc59ddc4a78ec575c9d48b30463fbad06a979",
+        "7acb41fc4b56221812abdef1c50fb67f9c8dc1b79f1ba03432ab2c53f68d1615"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "funding"
+      ],
+      "unit_ids": [
+        "fcb0ca7b82176fe6ab32821d4f11d2a91390bb7c421badfa19fdf2dfa9ae5f31",
+        "36cae269c991b672eb32d004d0ce8a1b0559e60c0978648589789b8a768f813d"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "contributing"
+      ],
+      "unit_ids": [
+        "77bbc032c6f2ccefc04ed91bc81280c0677818f8795785903e00195674154270",
+        "a21a2eaf3ed51888a3227db48461d93f5d97687f88c119eb9cd9ee9562835fcf"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "license"
+      ],
+      "unit_ids": [
+        "2cf922ddf900f109970a8c8e897996764a09556ca5421d23f27205e0cc4fc706",
+        "774b339b4f08f8087b4c9c8892655ce16278c535a36c3d7814162d8d66a9b591"
+      ],
+      "status": "unresolved"
+    }
+  ],
+  "coverage_status": "complete_literal_coverage",
+  "semantic_analysis_complete": false,
+  "reasons": [],
+  "analysis_sha256": "764c148c3b3d71ae062fc95c4f163ae51ebb27a2fdcfbd0dd71018e63ad55a72"
+}
