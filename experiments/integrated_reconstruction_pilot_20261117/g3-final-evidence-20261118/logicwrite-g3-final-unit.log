@@ -1,0 +1,23 @@
+test_candidate_and_source_tampering_rejected (test_document_set_g3.IndependentTests.test_candidate_and_source_tampering_rejected) ... ok
+test_definitive_omission_review_can_cite_verified_empty_target (test_document_set_g3.IndependentTests.test_definitive_omission_review_can_cite_verified_empty_target) ... ok
+test_edit_outside_plan_and_false_self_check (test_document_set_g3.IndependentTests.test_edit_outside_plan_and_false_self_check) ... ok
+test_exact_target_requirement_detects_wrong_document_scope_and_negation (test_document_set_g3.IndependentTests.test_exact_target_requirement_detects_wrong_document_scope_and_negation) ... ok
+test_forged_native_trace_is_detected_independently_of_cached_structure (test_document_set_g3.IndependentTests.test_forged_native_trace_is_detected_independently_of_cached_structure) ... ok
+test_format_word_change_and_undefined_whitespace (test_document_set_g3.IndependentTests.test_format_word_change_and_undefined_whitespace) ... ok
+test_formatting_markup_around_same_words_needs_review (test_document_set_g3.IndependentTests.test_formatting_markup_around_same_words_needs_review) ... ok
+test_g2c_move_and_unchanged_formats_pass_with_review_boundary (test_document_set_g3.IndependentTests.test_g2c_move_and_unchanged_formats_pass_with_review_boundary) ... ok
+test_human_record_requires_current_question_and_authenticated_owner (test_document_set_g3.IndependentTests.test_human_record_requires_current_question_and_authenticated_owner) ... ok
+test_independent_whitespace_policy_is_specific_to_exact_candidate (test_document_set_g3.IndependentTests.test_independent_whitespace_policy_is_specific_to_exact_candidate) ... ok
+test_literal_inside_code_or_comment_does_not_verify_prose_exposure (test_document_set_g3.IndependentTests.test_literal_inside_code_or_comment_does_not_verify_prose_exposure) ... ok
+test_native_prerequisite_creates_question_without_blocking_independent_keep (test_document_set_g3.IndependentTests.test_native_prerequisite_creates_question_without_blocking_independent_keep) ... ok
+test_pending_edit_is_held_and_unchanged_is_allowed (test_document_set_g3.IndependentTests.test_pending_edit_is_held_and_unchanged_is_allowed) ... ok
+test_read_only_output_and_missing_document (test_document_set_g3.IndependentTests.test_read_only_output_and_missing_document) ... ok
+test_review_is_pinned_to_current_exact_spans_and_cannot_override_mechanical_checks (test_document_set_g3.IndependentTests.test_review_is_pinned_to_current_exact_spans_and_cannot_override_mechanical_checks) ... ok
+test_semantic_uncertainty_and_partial_hitl_propagation (test_document_set_g3.IndependentTests.test_semantic_uncertainty_and_partial_hitl_propagation) ... ok
+test_stale_report_cannot_be_reused (test_document_set_g3.IndependentTests.test_stale_report_cannot_be_reused) ... ok
+test_unrelated_trace_corruption_does_not_assert_move_unauthorized (test_document_set_g3.IndependentTests.test_unrelated_trace_corruption_does_not_assert_move_unauthorized) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.291s
+
+OK

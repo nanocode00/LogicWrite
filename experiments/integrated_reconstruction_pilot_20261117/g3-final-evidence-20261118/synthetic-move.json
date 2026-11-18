@@ -1,0 +1,180 @@
+{
+  "verification": {
+    "version": "document-set-verification-v1",
+    "gate_state": "REVIEW",
+    "semantic_judgment": "unresolved",
+    "delivery_approved": false,
+    "stage_transition_allowed": false,
+    "accepted": true,
+    "bindings": {
+      "mode": "g2c",
+      "contract_sha256": "4f60d4f3d4126b9d4c96a41b17b979c3d14525f643fc3d4c735fd18c63fd2af7",
+      "analysis_sha256": "8c61fd6826ef413062643a38953fc428458d4a12be3ed1f04b0a176dedc8b29d",
+      "plan_sha256": "60a141c8ee5423faabd812e480e3b0bf9e6175b2f7316309721c84a5269ea885",
+      "request_sha256": "8b25b473a5879dac74f26c07684adbe3722d9a22b2e0934bc4a16b308799150b",
+      "candidate_request_sha256": "61f0ad3cdc6a8ea16f6cf2c980ac9d496398ef1ead66482660dfd719ec68a988",
+      "verifier_version": "document-set-verification-v1",
+      "requirements_sha256": "356a93f58e5c5099f15031e5eb25e8cacf9b39b7a80b208d33a2ac546280e35c",
+      "candidate_sha256": "5806caf3e65aabd046e65b24060b52b82ce1a9ff18a29b5a10bfc672fc625adf",
+      "independent_review_sha256": null
+    },
+    "checks": {
+      "coverage": {
+        "status": "passed",
+        "reason": "OUTPUT_SET_MATCHES_CONTRACT",
+        "document_ids": [
+          "catalog",
+          "log"
+        ],
+        "evidence": [],
+        "task_ids": [],
+        "kind": "mechanical",
+        "missing_document_ids": [],
+        "extra_document_ids": [],
+        "duplicate_document_ids": []
+      },
+      "lineage": {
+        "status": "passed",
+        "reason": "LAYOUT_TRACE_BOUND",
+        "document_ids": [
+          "catalog",
+          "log"
+        ],
+        "evidence": [],
+        "task_ids": [],
+        "kind": "mechanical"
+      },
+      "authority:catalog": {
+        "status": "passed",
+        "reason": "PINNED_TASK_AND_TRACE_SUPPORT_WRITE",
+        "document_ids": [
+          "catalog"
+        ],
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "catalog",
+            "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+            "start": 0,
+            "end": 65,
+            "byte_start": 0,
+            "byte_end": 65,
+            "quote": "# Catalog\n\nRecord the item label.\n\nPhotograph the storage shelf.\n",
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "catalog.md",
+              "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            "source_scope": null,
+            "authority": "Synthetic document owner",
+            "role": "catalog"
+          },
+          {
+            "side": "candidate",
+            "document_id": "catalog",
+            "snapshot_sha256": "31d3eb5d1a3ba4f1724d61a1845120613b39aea06ebe481fa4e20380e04fb2a0",
+            "start": 0,
+            "end": 35,
+            "byte_start": 0,
+            "byte_end": 35,
+            "quote": "# Catalog\n\nRecord the item label.\n\n"
+          }
+        ],
+        "task_ids": [
+          "move-photo"
+        ],
+        "kind": "mechanical"
+      },
+      "authority:log": {
+        "status": "passed",
+        "reason": "PINNED_TASK_AND_TRACE_SUPPORT_WRITE",
+        "document_ids": [
+          "log"
+        ],
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "log",
+            "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+            "start": 0,
+            "end": 30,
+            "byte_start": 0,
+            "byte_end": 30,
+            "quote": "# Log\n\nArchive the inventory.\n",
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "log.md",
+              "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+            },
+            "source_scope": null,
+            "authority": "Synthetic document owner",
+            "role": "log"
+          },
+          {
+            "side": "candidate",
+            "document_id": "log",
+            "snapshot_sha256": "304f862f86117cac525e7369c4a6be83fd2ea4ffb28830fb38be806a8fa7b7a4",
+            "start": 0,
+            "end": 61,
+            "byte_start": 0,
+            "byte_end": 61,
+            "quote": "# Log\n\nArchive the inventory.\n\nPhotograph the storage shelf.\n"
+          }
+        ],
+        "task_ids": [
+          "move-photo"
+        ],
+        "kind": "mechanical"
+      },
+      "semantic_coverage": {
+        "status": "unresolved",
+        "reason": "GENERAL_SEMANTIC_COVERAGE_NOT_ESTABLISHED",
+        "document_ids": [
+          "catalog",
+          "log"
+        ],
+        "evidence": [],
+        "task_ids": [],
+        "kind": "semantic"
+      }
+    },
+    "self_checks": [],
+    "hitl_questions": [],
+    "impact": {
+      "held_task_ids": [],
+      "independent_task_ids": [
+        "move-photo"
+      ],
+      "changed_document_ids": [
+        "catalog",
+        "log"
+      ],
+      "native_task_states": {
+        "move-photo": {
+          "state": "ready",
+          "reasons": []
+        }
+      }
+    },
+    "execution": {
+      "state": "completed",
+      "semantic_review": "not_run",
+      "model_calls": 0,
+      "supplemental_structure": {
+        "schema_version": "core-document-set-structure-v1",
+        "status": "passed",
+        "g1_permission_status": "within_declared_access",
+        "gate_state": "REVIEW",
+        "reasons": [],
+        "candidate_result_sha256": "ef2da24b74acd31e6c5c1ac99fc5fb39115cdf9b20880e32541cf471eb97ee4d",
+        "semantic_judgment": "unresolved",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    "reasons": [],
+    "report_sha256": "d90a59940f972edfe2ae0aaa0a2c519fcb7d3eaeeb8242a13862b894214a3efd"
+  }
+}
