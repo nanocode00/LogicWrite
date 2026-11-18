@@ -1,6 +1,6 @@
 # Core document-set contract v1 (G1)
 
-`document_set.py` and `document-set-v1.schema.json` are a separate input and permission foundation. The existing `pipeline.validate_input_bundle`, single-document executor, final audit and approval interfaces are unchanged. No document-set generator is connected. `prepare_reconstruction` returns `unsupported`, `execution_state=not_run`, without candidates.
+`document_set.py` and `document-set-v1.schema.json` are a separate input and permission foundation. The existing `pipeline.validate_input_bundle`, single-document executor, final audit and approval interfaces are unchanged. `prepare_reconstruction` retains its G1 admission-only response. The separate G2-C entry point binds a G2-B plan and a pinned candidate request. See [G2-C execution and examples](../integrated_reconstruction_pilot_20261117/g2-c-offline-20261118/REPORT.md).
 
 | Interface | Meaning |
 |---|---|
@@ -53,4 +53,4 @@ unsupported = core.prepare_reconstruction(contract, trusted_contract_sha256=pin)
 
 Complete IR-001~003 contract JSON and actual admission/shadow reports are in [g0-g1-offline-20261117](../integrated_reconstruction_pilot_20261117/g0-g1-offline-20261117/). These are converted input examples and validator results, not reconstructed documents.
 
-G2 must add shared analysis/planning, explicit per-action permission/uncertainty binding, scoped HITL, source tracking and supported execution with trace, without relaxing the old executor. G3 must independently assess format changes, meaning and local reader requirements. G4 requires separate model-run authorization, budget/receipt controls and an independently reviewed complete pipeline. None is implemented by G1.
+G2-C provides source-preserving KEEP, bounded PLACE and append MOVE with scoped HITL and a complete candidate trace. G3 must independently assess format changes, meaning and local reader requirements. G4 requires separate model-run authorization, budget/receipt controls and an independently reviewed complete pipeline. None is implemented by G1.

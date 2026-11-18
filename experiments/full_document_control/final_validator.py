@@ -13,6 +13,17 @@ CHECKS = ('SNAPSHOT_INTEGRITY', 'FULL_COVERAGE', 'PROTECTED_INFORMATION', 'ORGAN
 VERSION = 'final-document-validation-v1'
 
 
+def span_partition_issues(ranges, length):
+    """Report uncovered or overlapping ranges in an ordered snapshot partition."""
+    cursor = 0
+    for start, end in ranges:
+        if start != cursor or not start < end <= length:
+            yield 'range'
+        cursor = end
+    if cursor != length:
+        yield 'tail'
+
+
 def validate_final_result(bundle, analysis, org, preview, result, *, destination_snapshots=None):
     checks = dict.fromkeys(CHECKS, 'passed')
     findings = []
@@ -118,22 +129,20 @@ def _validate(bundle, analysis, org, preview, result, destinations, finding):
     # Exact source coverage is independent of the generator's claimed coverage.
     for doc, snap in docs.items():
         rows = sorted((r for r in ledger if r.get('source_document_id') == doc), key=lambda r: r['start'])
-        cursor = 0
-        for row in rows:
-            if row['start'] != cursor or not row['start'] < row['end'] <= len(snap['content']):
+        ranges = ((r['start'], r['end']) for r in rows)
+        for issue in span_partition_issues(ranges, len(snap['content'])):
+            if issue == 'range':
                 finding('FULL_COVERAGE', 'SOURCE_COVERAGE_GAP_OR_OVERLAP', 'Source bytes were lost or reused without explicit consolidation')
-            cursor = row['end']
-        if cursor != len(snap['content']):
-            finding('FULL_COVERAGE', 'SOURCE_COVERAGE_INCOMPLETE', 'Source tail is untracked')
+            else:
+                finding('FULL_COVERAGE', 'SOURCE_COVERAGE_INCOMPLETE', 'Source tail is untracked')
     for doc, snap in outputs.items():
         rows = sorted((r for r in ledger if r['output_document_id'] == doc and not r.get('alias')), key=lambda r: r['output_start'])
-        cursor = 0
-        for row in rows:
-            if row['output_start'] != cursor or not row['output_start'] < row['output_end'] <= len(snap['content']):
+        ranges = ((r['output_start'], r['output_end']) for r in rows)
+        for issue in span_partition_issues(ranges, len(snap['content'])):
+            if issue == 'range':
                 finding('FULL_COVERAGE', 'OUTPUT_COVERAGE_GAP_OR_OVERLAP', 'Output contains untraced, overlapping or missing text')
-            cursor = row['output_end']
-        if cursor != len(snap['content']):
-            finding('FULL_COVERAGE', 'UNSUPPORTED_NEW_OUTPUT', 'Output text has no complete provenance')
+            else:
+                finding('FULL_COVERAGE', 'UNSUPPORTED_NEW_OUTPUT', 'Output text has no complete provenance')
     _check_physical_order(bundle, analysis, org, docs, ledger, finding)
     units = {u['id']: u for u in analysis['units']}
     entries = {e['unit_id']: e for e in preview['expression_plan']['entries']}

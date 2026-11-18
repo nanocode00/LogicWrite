@@ -1,0 +1,2524 @@
+{
+  "inputs": {
+    "contract": {
+      "schema_version": "core-document-set-v1",
+      "contract_id": "synthetic-partial",
+      "request": "Apply the explicitly proposed paragraph relocations.",
+      "context": "Offline synthetic example",
+      "audience": null,
+      "purpose": null,
+      "explicit_constraints": [
+        "Preserve all existing conditions."
+      ],
+      "pending_questions": [],
+      "origin": {
+        "source_id": "g2-c-synthetic",
+        "input_sha256": "3a7a31f71d32b9c3ec4c059f6bf8c8bb91c07fab5d96663a72819ee7f7caa0e1",
+        "format": "synthetic"
+      },
+      "document_set_completeness": "complete",
+      "documents": [
+        {
+          "document_id": "catalog",
+          "role": "catalog",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "content": "# Catalog\n\nRecord the item label.\n\nPhotograph the storage shelf.\n",
+          "sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "catalog.md",
+            "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": []
+        },
+        {
+          "document_id": "log",
+          "role": "log",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "content": "# Log\n\nArchive the inventory.\n",
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "log.md",
+            "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": []
+        },
+        {
+          "document_id": "operations",
+          "role": "operations",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "content": "# Operations\n\nIf the alarm sounds, wait.\n",
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "operations.md",
+            "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": []
+        },
+        {
+          "document_id": "safety",
+          "role": "safety",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "content": "# Safety\n\nReport the drill date.\n",
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "safety.md",
+            "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": []
+        }
+      ],
+      "output_scopes": [
+        {
+          "scope_id": "catalog-output",
+          "document_id": "catalog"
+        },
+        {
+          "scope_id": "log-output",
+          "document_id": "log"
+        },
+        {
+          "scope_id": "operations-output",
+          "document_id": "operations"
+        },
+        {
+          "scope_id": "safety-output",
+          "document_id": "safety"
+        }
+      ],
+      "additional_permissions": {
+        "external_lookup": "not_granted",
+        "create_document": "not_granted",
+        "apply_files": "not_granted"
+      },
+      "delivery": {
+        "mode": "reviewable_candidate_only",
+        "required": "Review only"
+      }
+    },
+    "analysis": {
+      "gate_state": "REVIEW",
+      "semantic_judgment": "unresolved",
+      "execution_state": "not_run",
+      "b2_reconstruction_success": false,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "execution_allowed": false,
+      "model_calls": 0,
+      "schema_version": "core-document-set-analysis-v1",
+      "contract_sha256": "609a6db8242a12590c97cc8ec8fbc4befbdd6dc6f1cd8caafd4d846f1260f82a",
+      "documents": [
+        {
+          "document_id": "catalog",
+          "role": "catalog",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "catalog.md",
+            "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": [],
+          "blocks": [
+            {
+              "block_id": "B001",
+              "snapshot_id": "catalog:fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "kind": "heading",
+              "start": 0,
+              "end": 10,
+              "line_start": 1,
+              "line_end": 1,
+              "text": "# Catalog\n",
+              "sha256": "863435301d91bf2ba84a9010c7f4575abc28ef826ef977269a75612f845fb2ee",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B002",
+              "snapshot_id": "catalog:fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "kind": "blank",
+              "start": 10,
+              "end": 11,
+              "line_start": 2,
+              "line_end": 2,
+              "text": "\n",
+              "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+              "extractable": false,
+              "exclusion_reason": "whitespace_only_separator",
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B003",
+              "snapshot_id": "catalog:fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "kind": "paragraph",
+              "start": 11,
+              "end": 34,
+              "line_start": 3,
+              "line_end": 3,
+              "text": "Record the item label.\n",
+              "sha256": "51e75e473df6b5ed45c7cb93907090a91b97773b88ea331e201b99f80efee8b5",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B004",
+              "snapshot_id": "catalog:fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "kind": "blank",
+              "start": 34,
+              "end": 35,
+              "line_start": 4,
+              "line_end": 4,
+              "text": "\n",
+              "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+              "extractable": false,
+              "exclusion_reason": "whitespace_only_separator",
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B005",
+              "snapshot_id": "catalog:fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "kind": "paragraph",
+              "start": 35,
+              "end": 65,
+              "line_start": 5,
+              "line_end": 5,
+              "text": "Photograph the storage shelf.\n",
+              "sha256": "a63492071a0788623fd1ef4cd17812c0f79165bfe71443f3b1c32f6a5dc5f2fb",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            }
+          ],
+          "unit_ids": [
+            "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+            "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+            "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e"
+          ],
+          "literal_coverage": "complete"
+        },
+        {
+          "document_id": "log",
+          "role": "log",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "log.md",
+            "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": [],
+          "blocks": [
+            {
+              "block_id": "B001",
+              "snapshot_id": "log:86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+              "kind": "heading",
+              "start": 0,
+              "end": 6,
+              "line_start": 1,
+              "line_end": 1,
+              "text": "# Log\n",
+              "sha256": "c99f90eaabc29aee18aa9f168f1c1f32e791ab0c351345511934448f2f988506",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B002",
+              "snapshot_id": "log:86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+              "kind": "blank",
+              "start": 6,
+              "end": 7,
+              "line_start": 2,
+              "line_end": 2,
+              "text": "\n",
+              "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+              "extractable": false,
+              "exclusion_reason": "whitespace_only_separator",
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B003",
+              "snapshot_id": "log:86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+              "kind": "paragraph",
+              "start": 7,
+              "end": 30,
+              "line_start": 3,
+              "line_end": 3,
+              "text": "Archive the inventory.\n",
+              "sha256": "8dc5a58392db3b943268564341518cd2cb80e3060006b11e7d3cb392ca95b382",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            }
+          ],
+          "unit_ids": [
+            "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45",
+            "aed5a889f4664dee8226f65147b2fe79a0ad46c859c991104846705692bf2805"
+          ],
+          "literal_coverage": "complete"
+        },
+        {
+          "document_id": "operations",
+          "role": "operations",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "operations.md",
+            "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": [],
+          "blocks": [
+            {
+              "block_id": "B001",
+              "snapshot_id": "operations:f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+              "kind": "heading",
+              "start": 0,
+              "end": 13,
+              "line_start": 1,
+              "line_end": 1,
+              "text": "# Operations\n",
+              "sha256": "d2fa6bc907e705a244b254e5febb5ec32aac1cea31fb16184ce25cb493a3c56d",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B002",
+              "snapshot_id": "operations:f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+              "kind": "blank",
+              "start": 13,
+              "end": 14,
+              "line_start": 2,
+              "line_end": 2,
+              "text": "\n",
+              "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+              "extractable": false,
+              "exclusion_reason": "whitespace_only_separator",
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B003",
+              "snapshot_id": "operations:f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+              "kind": "paragraph",
+              "start": 14,
+              "end": 41,
+              "line_start": 3,
+              "line_end": 3,
+              "text": "If the alarm sounds, wait.\n",
+              "sha256": "7d8135d955a80c7c2bb356d1cecaf2860dc2d4d79623c54886bd5630ac1a722d",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            }
+          ],
+          "unit_ids": [
+            "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "literal_coverage": "complete"
+        },
+        {
+          "document_id": "safety",
+          "role": "safety",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "completeness": "complete",
+          "source_scope": null,
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "safety.md",
+            "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+          },
+          "output_target": true,
+          "purpose": null,
+          "audience": null,
+          "explicit_constraints": [],
+          "pending_questions": [],
+          "blocks": [
+            {
+              "block_id": "B001",
+              "snapshot_id": "safety:3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+              "kind": "heading",
+              "start": 0,
+              "end": 9,
+              "line_start": 1,
+              "line_end": 1,
+              "text": "# Safety\n",
+              "sha256": "f316e51bfeae20bd24c4cb6085bb9819ba4499bd248ffec60b93ced17df39cb2",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B002",
+              "snapshot_id": "safety:3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+              "kind": "blank",
+              "start": 9,
+              "end": 10,
+              "line_start": 2,
+              "line_end": 2,
+              "text": "\n",
+              "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+              "extractable": false,
+              "exclusion_reason": "whitespace_only_separator",
+              "unsupported_reason": null
+            },
+            {
+              "block_id": "B003",
+              "snapshot_id": "safety:3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+              "kind": "paragraph",
+              "start": 10,
+              "end": 33,
+              "line_start": 3,
+              "line_end": 3,
+              "text": "Report the drill date.\n",
+              "sha256": "ec2f94b9567d6bff23ed33ab320f31b6d6b9bde8b1f0dcd34ddd360cc08eb038",
+              "extractable": true,
+              "exclusion_reason": null,
+              "unsupported_reason": null
+            }
+          ],
+          "unit_ids": [
+            "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+            "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55"
+          ],
+          "literal_coverage": "complete"
+        }
+      ],
+      "units": [
+        {
+          "unit_id": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+          "document_id": "catalog",
+          "block_id": "B001",
+          "kind": "heading",
+          "quote": "# Catalog\n",
+          "quote_sha256": "863435301d91bf2ba84a9010c7f4575abc28ef826ef977269a75612f845fb2ee",
+          "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "catalog.md",
+            "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          "source_span": {
+            "start": 0,
+            "end": 10,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 10
+          },
+          "role": "catalog",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc"
+          ],
+          "preservation_group": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+          "claim": {
+            "quote": "# Catalog\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+          "document_id": "catalog",
+          "block_id": "B003",
+          "kind": "paragraph",
+          "quote": "Record the item label.\n",
+          "quote_sha256": "51e75e473df6b5ed45c7cb93907090a91b97773b88ea331e201b99f80efee8b5",
+          "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "catalog.md",
+            "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          "source_span": {
+            "start": 11,
+            "end": 34,
+            "line_start": 3,
+            "line_end": 3,
+            "byte_start": 11,
+            "byte_end": 34
+          },
+          "role": "catalog",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc"
+          ],
+          "preservation_group": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+          "claim": {
+            "quote": "Record the item label.\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+          "document_id": "catalog",
+          "block_id": "B005",
+          "kind": "paragraph",
+          "quote": "Photograph the storage shelf.\n",
+          "quote_sha256": "a63492071a0788623fd1ef4cd17812c0f79165bfe71443f3b1c32f6a5dc5f2fb",
+          "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "catalog.md",
+            "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          "source_span": {
+            "start": 35,
+            "end": 65,
+            "line_start": 5,
+            "line_end": 5,
+            "byte_start": 35,
+            "byte_end": 65
+          },
+          "role": "catalog",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc"
+          ],
+          "preservation_group": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+          "claim": {
+            "quote": "Photograph the storage shelf.\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45",
+          "document_id": "log",
+          "block_id": "B001",
+          "kind": "heading",
+          "quote": "# Log\n",
+          "quote_sha256": "c99f90eaabc29aee18aa9f168f1c1f32e791ab0c351345511934448f2f988506",
+          "source_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "log.md",
+            "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+          },
+          "source_span": {
+            "start": 0,
+            "end": 6,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 6
+          },
+          "role": "log",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45"
+          ],
+          "preservation_group": "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45",
+          "claim": {
+            "quote": "# Log\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "aed5a889f4664dee8226f65147b2fe79a0ad46c859c991104846705692bf2805",
+          "document_id": "log",
+          "block_id": "B003",
+          "kind": "paragraph",
+          "quote": "Archive the inventory.\n",
+          "quote_sha256": "8dc5a58392db3b943268564341518cd2cb80e3060006b11e7d3cb392ca95b382",
+          "source_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "log.md",
+            "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+          },
+          "source_span": {
+            "start": 7,
+            "end": 30,
+            "line_start": 3,
+            "line_end": 3,
+            "byte_start": 7,
+            "byte_end": 30
+          },
+          "role": "log",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45"
+          ],
+          "preservation_group": "aed5a889f4664dee8226f65147b2fe79a0ad46c859c991104846705692bf2805",
+          "claim": {
+            "quote": "Archive the inventory.\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+          "document_id": "operations",
+          "block_id": "B001",
+          "kind": "heading",
+          "quote": "# Operations\n",
+          "quote_sha256": "d2fa6bc907e705a244b254e5febb5ec32aac1cea31fb16184ce25cb493a3c56d",
+          "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "operations.md",
+            "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+          },
+          "source_span": {
+            "start": 0,
+            "end": 13,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 13
+          },
+          "role": "operations",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9"
+          ],
+          "preservation_group": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+          "claim": {
+            "quote": "# Operations\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+          "document_id": "operations",
+          "block_id": "B003",
+          "kind": "paragraph",
+          "quote": "If the alarm sounds, wait.\n",
+          "quote_sha256": "7d8135d955a80c7c2bb356d1cecaf2860dc2d4d79623c54886bd5630ac1a722d",
+          "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "operations.md",
+            "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+          },
+          "source_span": {
+            "start": 14,
+            "end": 41,
+            "line_start": 3,
+            "line_end": 3,
+            "byte_start": 14,
+            "byte_end": 41
+          },
+          "role": "operations",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9"
+          ],
+          "preservation_group": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+          "claim": {
+            "quote": "If the alarm sounds, wait.\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [
+              {
+                "quote": "If",
+                "start": 14,
+                "end": 16,
+                "status": "literal_observation"
+              }
+            ],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+          "document_id": "safety",
+          "block_id": "B001",
+          "kind": "heading",
+          "quote": "# Safety\n",
+          "quote_sha256": "f316e51bfeae20bd24c4cb6085bb9819ba4499bd248ffec60b93ced17df39cb2",
+          "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "safety.md",
+            "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+          },
+          "source_span": {
+            "start": 0,
+            "end": 9,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 9
+          },
+          "role": "safety",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94"
+          ],
+          "preservation_group": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+          "claim": {
+            "quote": "# Safety\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        },
+        {
+          "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+          "document_id": "safety",
+          "block_id": "B003",
+          "kind": "paragraph",
+          "quote": "Report the drill date.\n",
+          "quote_sha256": "ec2f94b9567d6bff23ed33ab320f31b6d6b9bde8b1f0dcd34ddd360cc08eb038",
+          "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "g2-c-synthetic",
+            "path": "safety.md",
+            "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+          },
+          "source_span": {
+            "start": 10,
+            "end": 33,
+            "line_start": 3,
+            "line_end": 3,
+            "byte_start": 10,
+            "byte_end": 33
+          },
+          "role": "safety",
+          "authority": "Synthetic document owner",
+          "access": "edit",
+          "output_target": true,
+          "section_unit_ids": [
+            "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94"
+          ],
+          "preservation_group": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+          "claim": {
+            "quote": "Report the drill date.\n",
+            "status": "uninterpreted_source_block"
+          },
+          "observations": {
+            "conditions": [],
+            "exceptions": [],
+            "states": [],
+            "identifiers": [],
+            "quantities": []
+          },
+          "reader_relevance": {
+            "status": "unresolved",
+            "audience": null,
+            "purpose": null,
+            "request": "Apply the explicitly proposed paragraph relocations.",
+            "explicit_constraints": [
+              "Preserve all existing conditions."
+            ]
+          },
+          "semantic_status": "unresolved",
+          "analysis_status": "literal_only"
+        }
+      ],
+      "relations": [
+        {
+          "kind": "condition_claim_cooccurrence",
+          "unit_ids": [
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "basis": "same_atomic_source_block",
+          "status": "observed",
+          "semantic_status": "unresolved",
+          "preservation": "retain_entire_block_and_review_context"
+        }
+      ],
+      "confirmed_semantic_conflicts": [],
+      "unanalysed": [],
+      "uncertainties": [
+        {
+          "kind": "semantic_analysis_not_run",
+          "document_ids": [
+            "catalog"
+          ],
+          "unit_ids": [
+            "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+            "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+            "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e"
+          ],
+          "status": "unresolved"
+        },
+        {
+          "kind": "semantic_analysis_not_run",
+          "document_ids": [
+            "log"
+          ],
+          "unit_ids": [
+            "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45",
+            "aed5a889f4664dee8226f65147b2fe79a0ad46c859c991104846705692bf2805"
+          ],
+          "status": "unresolved"
+        },
+        {
+          "kind": "semantic_analysis_not_run",
+          "document_ids": [
+            "operations"
+          ],
+          "unit_ids": [
+            "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "status": "unresolved"
+        },
+        {
+          "kind": "semantic_analysis_not_run",
+          "document_ids": [
+            "safety"
+          ],
+          "unit_ids": [
+            "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+            "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55"
+          ],
+          "status": "unresolved"
+        }
+      ],
+      "coverage_status": "complete_literal_coverage",
+      "semantic_analysis_complete": false,
+      "reasons": [],
+      "analysis_sha256": "af07147fbe10252fbe2a4f4f0eb6b52e008a0b21286a0578c33da06616706887"
+    },
+    "plan": {
+      "gate_state": "REVIEW",
+      "semantic_judgment": "unresolved",
+      "execution_state": "not_run",
+      "b2_reconstruction_success": false,
+      "delivery_approved": false,
+      "stage_transition_allowed": false,
+      "execution_allowed": false,
+      "model_calls": 0,
+      "schema_version": "core-document-set-plan-v1",
+      "tasks": [
+        {
+          "task_id": "place-label",
+          "action": "PLACE",
+          "unit_ids": [
+            "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8"
+          ],
+          "target_document_id": "catalog",
+          "evidence_unit_ids": [
+            "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8"
+          ],
+          "reason": "Explicit synthetic relocation proposal",
+          "parameters": {
+            "anchor_unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+            "position": "after"
+          },
+          "depends_on": [],
+          "status": "eligible",
+          "reasons": [],
+          "required_hitl_question_ids": [],
+          "execution_allowed": false,
+          "semantic_judgment": "unresolved",
+          "eligibility_is_conditional": true,
+          "applied": false,
+          "source_evidence": [
+            {
+              "unit_id": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+              "document_id": "catalog",
+              "quote": "Record the item label.\n",
+              "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "source_span": {
+                "start": 11,
+                "end": 34,
+                "line_start": 3,
+                "line_end": 3,
+                "byte_start": 11,
+                "byte_end": 34
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "catalog.md",
+                "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+              "document_id": "catalog",
+              "quote": "Photograph the storage shelf.\n",
+              "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "source_span": {
+                "start": 35,
+                "end": 65,
+                "line_start": 5,
+                "line_end": 5,
+                "byte_start": 35,
+                "byte_end": 65
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "catalog.md",
+                "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+              "document_id": "catalog",
+              "quote": "# Catalog\n",
+              "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+              "source_span": {
+                "start": 0,
+                "end": 10,
+                "line_start": 1,
+                "line_end": 1,
+                "byte_start": 0,
+                "byte_end": 10
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "catalog.md",
+                "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            }
+          ],
+          "applicable_permissions": [
+            {
+              "document_id": "catalog",
+              "access": "edit",
+              "output_target": true,
+              "authority": "Synthetic document owner",
+              "operation": "edit_content"
+            }
+          ],
+          "preservation_obligations": [
+            {
+              "kind": "retain_source_binding",
+              "unit_id": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+              "preservation_group": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+              "quote_sha256": "51e75e473df6b5ed45c7cb93907090a91b97773b88ea331e201b99f80efee8b5",
+              "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            {
+              "kind": "retain_source_binding",
+              "unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+              "preservation_group": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+              "quote_sha256": "a63492071a0788623fd1ef4cd17812c0f79165bfe71443f3b1c32f6a5dc5f2fb",
+              "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            {
+              "kind": "retain_source_binding",
+              "unit_id": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+              "preservation_group": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+              "quote_sha256": "863435301d91bf2ba84a9010c7f4575abc28ef826ef977269a75612f845fb2ee",
+              "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            {
+              "kind": "uninterpreted_constraint",
+              "document_id": null,
+              "text": "Preserve all existing conditions."
+            }
+          ],
+          "executor_mapping": {
+            "component": "organization",
+            "action": "KEEP",
+            "requires_g2c_binding": true,
+            "mode": "candidate_plan_only",
+            "requires_source_and_constraint_revalidation": true,
+            "requires_independent_semantic_review": true
+          },
+          "conflicts": [],
+          "uncertainties": []
+        },
+        {
+          "task_id": "move-alarm",
+          "action": "MOVE",
+          "unit_ids": [
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "target_document_id": "safety",
+          "evidence_unit_ids": [
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "reason": "Explicit synthetic relocation proposal",
+          "parameters": {
+            "placement": "append"
+          },
+          "depends_on": [],
+          "status": "held",
+          "reasons": [
+            "CONDITION_CONTEXT_REVIEW_REQUIRED"
+          ],
+          "required_hitl_question_ids": [
+            "task:move-alarm"
+          ],
+          "execution_allowed": false,
+          "semantic_judgment": "unresolved",
+          "eligibility_is_conditional": true,
+          "applied": false,
+          "source_evidence": [
+            {
+              "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+              "document_id": "operations",
+              "quote": "# Operations\n",
+              "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+              "source_span": {
+                "start": 0,
+                "end": 13,
+                "line_start": 1,
+                "line_end": 1,
+                "byte_start": 0,
+                "byte_end": 13
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "operations.md",
+                "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+              "document_id": "safety",
+              "quote": "# Safety\n",
+              "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+              "source_span": {
+                "start": 0,
+                "end": 9,
+                "line_start": 1,
+                "line_end": 1,
+                "byte_start": 0,
+                "byte_end": 9
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "safety.md",
+                "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+              "document_id": "safety",
+              "quote": "Report the drill date.\n",
+              "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+              "source_span": {
+                "start": 10,
+                "end": 33,
+                "line_start": 3,
+                "line_end": 3,
+                "byte_start": 10,
+                "byte_end": 33
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "safety.md",
+                "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+              "document_id": "operations",
+              "quote": "If the alarm sounds, wait.\n",
+              "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+              "source_span": {
+                "start": 14,
+                "end": 41,
+                "line_start": 3,
+                "line_end": 3,
+                "byte_start": 14,
+                "byte_end": 41
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "operations.md",
+                "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            }
+          ],
+          "applicable_permissions": [
+            {
+              "document_id": "operations",
+              "access": "edit",
+              "output_target": true,
+              "authority": "Synthetic document owner",
+              "operation": "edit_content"
+            },
+            {
+              "document_id": "safety",
+              "access": "edit",
+              "output_target": true,
+              "authority": "Synthetic document owner",
+              "operation": "edit_content"
+            }
+          ],
+          "preservation_obligations": [
+            {
+              "kind": "retain_source_binding",
+              "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+              "preservation_group": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+              "quote_sha256": "d2fa6bc907e705a244b254e5febb5ec32aac1cea31fb16184ce25cb493a3c56d",
+              "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            {
+              "kind": "retain_source_binding",
+              "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+              "preservation_group": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+              "quote_sha256": "f316e51bfeae20bd24c4cb6085bb9819ba4499bd248ffec60b93ced17df39cb2",
+              "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            {
+              "kind": "retain_source_binding",
+              "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+              "preservation_group": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+              "quote_sha256": "ec2f94b9567d6bff23ed33ab320f31b6d6b9bde8b1f0dcd34ddd360cc08eb038",
+              "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            {
+              "kind": "retain_source_binding",
+              "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+              "preservation_group": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+              "quote_sha256": "7d8135d955a80c7c2bb356d1cecaf2860dc2d4d79623c54886bd5630ac1a722d",
+              "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            {
+              "kind": "uninterpreted_constraint",
+              "document_id": null,
+              "text": "Preserve all existing conditions."
+            }
+          ],
+          "executor_mapping": null,
+          "conflicts": [],
+          "uncertainties": [
+            {
+              "kind": "condition_claim_cooccurrence",
+              "unit_ids": [
+                "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+              ],
+              "basis": "same_atomic_source_block",
+              "status": "observed",
+              "semantic_status": "unresolved",
+              "preservation": "retain_entire_block_and_review_context"
+            }
+          ]
+        }
+      ],
+      "hitl_questions": [
+        {
+          "question_id": "task:move-alarm",
+          "question": "CONDITION_CONTEXT_REVIEW_REQUIRED",
+          "document_ids": [],
+          "unit_ids": [
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "evidence": [
+            {
+              "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+              "document_id": "operations",
+              "quote": "# Operations\n",
+              "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+              "source_span": {
+                "start": 0,
+                "end": 13,
+                "line_start": 1,
+                "line_end": 1,
+                "byte_start": 0,
+                "byte_end": 13
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "operations.md",
+                "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+              "document_id": "safety",
+              "quote": "# Safety\n",
+              "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+              "source_span": {
+                "start": 0,
+                "end": 9,
+                "line_start": 1,
+                "line_end": 1,
+                "byte_start": 0,
+                "byte_end": 9
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "safety.md",
+                "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+              "document_id": "safety",
+              "quote": "Report the drill date.\n",
+              "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+              "source_span": {
+                "start": 10,
+                "end": 33,
+                "line_start": 3,
+                "line_end": 3,
+                "byte_start": 10,
+                "byte_end": 33
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "safety.md",
+                "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            },
+            {
+              "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+              "document_id": "operations",
+              "quote": "If the alarm sounds, wait.\n",
+              "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+              "source_span": {
+                "start": 14,
+                "end": 41,
+                "line_start": 3,
+                "line_end": 3,
+                "byte_start": 14,
+                "byte_end": 41
+              },
+              "source_scope": null,
+              "provenance": {
+                "kind": "supplied_snapshot",
+                "source_id": "g2-c-synthetic",
+                "path": "operations.md",
+                "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+              },
+              "authority": "Synthetic document owner",
+              "access": "edit"
+            }
+          ],
+          "decision_owner": "Requesting user / document authority owner",
+          "decision_needed": "Resolve recorded task prerequisites; do not execute before G2-C",
+          "origin": "planner_prerequisite",
+          "status": "unresolved",
+          "dependent_task_ids": [
+            "move-alarm"
+          ],
+          "held_task_ids": [
+            "move-alarm"
+          ]
+        }
+      ],
+      "contract_sha256": "609a6db8242a12590c97cc8ec8fbc4befbdd6dc6f1cd8caafd4d846f1260f82a",
+      "analysis_sha256": "af07147fbe10252fbe2a4f4f0eb6b52e008a0b21286a0578c33da06616706887",
+      "request_sha256": "b8efa4c151f33b0332ef4a662d4b4e30dac1da6645716d9f418f73613101eaed",
+      "plan_sha256": "807d41fe5c3e0b11dc7dbf0bb302229bdd7fb2cd37bbf66a3dfbeeca5ac29017",
+      "organization_complete": false,
+      "unplanned_unit_ids": [
+        "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+        "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+        "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+        "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+        "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+        "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45",
+        "aed5a889f4664dee8226f65147b2fe79a0ad46c859c991104846705692bf2805"
+      ],
+      "reasons": [
+        "PLANNING_ONLY_SEMANTIC_REVIEW_AND_EXECUTION_NOT_RUN"
+      ]
+    },
+    "plan_request": {
+      "schema_version": "core-document-set-plan-request-v1",
+      "tasks": [
+        {
+          "task_id": "place-label",
+          "action": "PLACE",
+          "unit_ids": [
+            "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8"
+          ],
+          "target_document_id": "catalog",
+          "evidence_unit_ids": [
+            "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8"
+          ],
+          "reason": "Explicit synthetic relocation proposal",
+          "parameters": {
+            "anchor_unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+            "position": "after"
+          },
+          "depends_on": []
+        },
+        {
+          "task_id": "move-alarm",
+          "action": "MOVE",
+          "unit_ids": [
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "target_document_id": "safety",
+          "evidence_unit_ids": [
+            "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+          ],
+          "reason": "Explicit synthetic relocation proposal",
+          "parameters": {
+            "placement": "append"
+          },
+          "depends_on": []
+        }
+      ],
+      "issues": [],
+      "question_scopes": []
+    },
+    "candidate_request": {
+      "schema_version": "core-document-set-candidate-request-v1",
+      "mode": "isolated_candidate",
+      "plan_sha256": "807d41fe5c3e0b11dc7dbf0bb302229bdd7fb2cd37bbf66a3dfbeeca5ac29017",
+      "task_ids": [
+        "place-label"
+      ],
+      "document_ids": [
+        "catalog",
+        "log",
+        "operations",
+        "safety"
+      ]
+    },
+    "trusted_contract_sha256": "609a6db8242a12590c97cc8ec8fbc4befbdd6dc6f1cd8caafd4d846f1260f82a",
+    "trusted_request_sha256": "b8efa4c151f33b0332ef4a662d4b4e30dac1da6645716d9f418f73613101eaed",
+    "trusted_candidate_request_sha256": "ca030eed113b8665205009fbcc041033830175282733c3b7c7169988f2c0a5eb"
+  },
+  "result": {
+    "schema_version": "core-document-set-reconstruction-v1",
+    "mode": "isolated_candidate",
+    "gate_state": "REVIEW",
+    "semantic_judgment": "unresolved",
+    "delivery_approved": false,
+    "stage_transition_allowed": false,
+    "b2_reconstruction_success": false,
+    "request_complete": false,
+    "model_calls": 0,
+    "execution_state": "partial_candidate",
+    "bindings": {
+      "contract_sha256": "609a6db8242a12590c97cc8ec8fbc4befbdd6dc6f1cd8caafd4d846f1260f82a",
+      "analysis_sha256": "af07147fbe10252fbe2a4f4f0eb6b52e008a0b21286a0578c33da06616706887",
+      "request_sha256": "b8efa4c151f33b0332ef4a662d4b4e30dac1da6645716d9f418f73613101eaed",
+      "plan_sha256": "807d41fe5c3e0b11dc7dbf0bb302229bdd7fb2cd37bbf66a3dfbeeca5ac29017",
+      "candidate_request_sha256": "ca030eed113b8665205009fbcc041033830175282733c3b7c7169988f2c0a5eb"
+    },
+    "output_scopes": [
+      {
+        "scope_id": "catalog-output",
+        "document_id": "catalog"
+      },
+      {
+        "scope_id": "log-output",
+        "document_id": "log"
+      },
+      {
+        "scope_id": "operations-output",
+        "document_id": "operations"
+      },
+      {
+        "scope_id": "safety-output",
+        "document_id": "safety"
+      }
+    ],
+    "candidates": [
+      {
+        "document_id": "catalog",
+        "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+        "source_path": "catalog.md",
+        "content": "# Catalog\n\n\nPhotograph the storage shelf.\n\nRecord the item label.\n",
+        "sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085"
+      },
+      {
+        "document_id": "log",
+        "source_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+        "source_path": "log.md",
+        "content": "# Log\n\nArchive the inventory.\n",
+        "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+      },
+      {
+        "document_id": "operations",
+        "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+        "source_path": "operations.md",
+        "content": "# Operations\n\nIf the alarm sounds, wait.\n",
+        "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+      },
+      {
+        "document_id": "safety",
+        "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+        "source_path": "safety.md",
+        "content": "# Safety\n\nReport the drill date.\n",
+        "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+      }
+    ],
+    "change_ledger": {
+      "catalog": {
+        "scope_id": "catalog-output",
+        "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+        "output_sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+        "changed": true,
+        "incoming": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "outgoing": [
+          0,
+          1,
+          2,
+          3,
+          5
+        ],
+        "changes": [
+          4,
+          5
+        ]
+      },
+      "log": {
+        "scope_id": "log-output",
+        "source_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+        "output_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+        "changed": false,
+        "incoming": [
+          6,
+          7,
+          8
+        ],
+        "outgoing": [
+          6,
+          7,
+          8
+        ],
+        "changes": []
+      },
+      "operations": {
+        "scope_id": "operations-output",
+        "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+        "output_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+        "changed": false,
+        "incoming": [
+          9,
+          10,
+          11
+        ],
+        "outgoing": [
+          9,
+          10,
+          11
+        ],
+        "changes": []
+      },
+      "safety": {
+        "scope_id": "safety-output",
+        "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+        "output_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+        "changed": false,
+        "incoming": [
+          12,
+          13,
+          14
+        ],
+        "outgoing": [
+          12,
+          13,
+          14
+        ],
+        "changes": []
+      }
+    },
+    "trace": [
+      {
+        "source": {
+          "document_id": "catalog",
+          "sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "start": 0,
+          "end": 10,
+          "byte_start": 0,
+          "byte_end": 10
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "catalog.md",
+          "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+        },
+        "source_block_id": "B001",
+        "unit_id": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "catalog",
+          "sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+          "start": 0,
+          "end": 10,
+          "byte_start": 0,
+          "byte_end": 10
+        },
+        "text": "# Catalog\n"
+      },
+      {
+        "source": {
+          "document_id": "catalog",
+          "sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "start": 10,
+          "end": 11,
+          "byte_start": 10,
+          "byte_end": 11
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "catalog.md",
+          "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+        },
+        "source_block_id": "B002",
+        "unit_id": null,
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "catalog",
+          "sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+          "start": 10,
+          "end": 11,
+          "byte_start": 10,
+          "byte_end": 11
+        },
+        "text": "\n"
+      },
+      {
+        "source": {
+          "document_id": "catalog",
+          "sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "start": 34,
+          "end": 35,
+          "byte_start": 34,
+          "byte_end": 35
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "catalog.md",
+          "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+        },
+        "source_block_id": "B004",
+        "unit_id": null,
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "catalog",
+          "sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+          "start": 11,
+          "end": 12,
+          "byte_start": 11,
+          "byte_end": 12
+        },
+        "text": "\n"
+      },
+      {
+        "source": {
+          "document_id": "catalog",
+          "sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "start": 35,
+          "end": 65,
+          "byte_start": 35,
+          "byte_end": 65
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "catalog.md",
+          "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+        },
+        "source_block_id": "B005",
+        "unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "catalog",
+          "sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+          "start": 12,
+          "end": 42,
+          "byte_start": 12,
+          "byte_end": 42
+        },
+        "text": "Photograph the storage shelf.\n"
+      },
+      {
+        "source": null,
+        "source_provenance": null,
+        "source_block_id": null,
+        "unit_id": null,
+        "task_id": "place-label",
+        "treatment": "SEPARATOR",
+        "output": {
+          "document_id": "catalog",
+          "sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+          "start": 42,
+          "end": 43,
+          "byte_start": 42,
+          "byte_end": 43
+        },
+        "text": "\n"
+      },
+      {
+        "source": {
+          "document_id": "catalog",
+          "sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+          "start": 11,
+          "end": 34,
+          "byte_start": 11,
+          "byte_end": 34
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "catalog.md",
+          "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+        },
+        "source_block_id": "B003",
+        "unit_id": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+        "task_id": "place-label",
+        "treatment": "PLACE",
+        "output": {
+          "document_id": "catalog",
+          "sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+          "start": 43,
+          "end": 66,
+          "byte_start": 43,
+          "byte_end": 66
+        },
+        "text": "Record the item label.\n"
+      },
+      {
+        "source": {
+          "document_id": "log",
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "start": 0,
+          "end": 6,
+          "byte_start": 0,
+          "byte_end": 6
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "log.md",
+          "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+        },
+        "source_block_id": "B001",
+        "unit_id": "a4ea1be2af575c9f8f84d26bcd1bfecb2ce2d52fdd588da2b946146f86a27a45",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "log",
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "start": 0,
+          "end": 6,
+          "byte_start": 0,
+          "byte_end": 6
+        },
+        "text": "# Log\n"
+      },
+      {
+        "source": {
+          "document_id": "log",
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "start": 6,
+          "end": 7,
+          "byte_start": 6,
+          "byte_end": 7
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "log.md",
+          "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+        },
+        "source_block_id": "B002",
+        "unit_id": null,
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "log",
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "start": 6,
+          "end": 7,
+          "byte_start": 6,
+          "byte_end": 7
+        },
+        "text": "\n"
+      },
+      {
+        "source": {
+          "document_id": "log",
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "start": 7,
+          "end": 30,
+          "byte_start": 7,
+          "byte_end": 30
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "log.md",
+          "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+        },
+        "source_block_id": "B003",
+        "unit_id": "aed5a889f4664dee8226f65147b2fe79a0ad46c859c991104846705692bf2805",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "log",
+          "sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+          "start": 7,
+          "end": 30,
+          "byte_start": 7,
+          "byte_end": 30
+        },
+        "text": "Archive the inventory.\n"
+      },
+      {
+        "source": {
+          "document_id": "operations",
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "start": 0,
+          "end": 13,
+          "byte_start": 0,
+          "byte_end": 13
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "operations.md",
+          "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+        },
+        "source_block_id": "B001",
+        "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "operations",
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "start": 0,
+          "end": 13,
+          "byte_start": 0,
+          "byte_end": 13
+        },
+        "text": "# Operations\n"
+      },
+      {
+        "source": {
+          "document_id": "operations",
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "start": 13,
+          "end": 14,
+          "byte_start": 13,
+          "byte_end": 14
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "operations.md",
+          "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+        },
+        "source_block_id": "B002",
+        "unit_id": null,
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "operations",
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "start": 13,
+          "end": 14,
+          "byte_start": 13,
+          "byte_end": 14
+        },
+        "text": "\n"
+      },
+      {
+        "source": {
+          "document_id": "operations",
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "start": 14,
+          "end": 41,
+          "byte_start": 14,
+          "byte_end": 41
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "operations.md",
+          "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+        },
+        "source_block_id": "B003",
+        "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "operations",
+          "sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+          "start": 14,
+          "end": 41,
+          "byte_start": 14,
+          "byte_end": 41
+        },
+        "text": "If the alarm sounds, wait.\n"
+      },
+      {
+        "source": {
+          "document_id": "safety",
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "start": 0,
+          "end": 9,
+          "byte_start": 0,
+          "byte_end": 9
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "safety.md",
+          "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+        },
+        "source_block_id": "B001",
+        "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "safety",
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "start": 0,
+          "end": 9,
+          "byte_start": 0,
+          "byte_end": 9
+        },
+        "text": "# Safety\n"
+      },
+      {
+        "source": {
+          "document_id": "safety",
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "start": 9,
+          "end": 10,
+          "byte_start": 9,
+          "byte_end": 10
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "safety.md",
+          "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+        },
+        "source_block_id": "B002",
+        "unit_id": null,
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "safety",
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "start": 9,
+          "end": 10,
+          "byte_start": 9,
+          "byte_end": 10
+        },
+        "text": "\n"
+      },
+      {
+        "source": {
+          "document_id": "safety",
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "start": 10,
+          "end": 33,
+          "byte_start": 10,
+          "byte_end": 33
+        },
+        "source_provenance": {
+          "kind": "supplied_snapshot",
+          "source_id": "g2-c-synthetic",
+          "path": "safety.md",
+          "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+        },
+        "source_block_id": "B003",
+        "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+        "task_id": null,
+        "treatment": "KEEP",
+        "output": {
+          "document_id": "safety",
+          "sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+          "start": 10,
+          "end": 33,
+          "byte_start": 10,
+          "byte_end": 33
+        },
+        "text": "Report the drill date.\n"
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "place-label",
+        "action": "PLACE",
+        "planned_status": "eligible",
+        "status": "executed",
+        "reasons": [],
+        "depends_on": [],
+        "unit_ids": [
+          "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8"
+        ],
+        "target_document_id": "catalog",
+        "basis": "Explicit synthetic relocation proposal",
+        "source_evidence": [
+          {
+            "unit_id": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+            "document_id": "catalog",
+            "quote": "Record the item label.\n",
+            "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+            "source_span": {
+              "start": 11,
+              "end": 34,
+              "line_start": 3,
+              "line_end": 3,
+              "byte_start": 11,
+              "byte_end": 34
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "catalog.md",
+              "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+            "document_id": "catalog",
+            "quote": "Photograph the storage shelf.\n",
+            "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+            "source_span": {
+              "start": 35,
+              "end": 65,
+              "line_start": 5,
+              "line_end": 5,
+              "byte_start": 35,
+              "byte_end": 65
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "catalog.md",
+              "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+            "document_id": "catalog",
+            "quote": "# Catalog\n",
+            "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+            "source_span": {
+              "start": 0,
+              "end": 10,
+              "line_start": 1,
+              "line_end": 1,
+              "byte_start": 0,
+              "byte_end": 10
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "catalog.md",
+              "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          }
+        ],
+        "preservation_obligations": [
+          {
+            "kind": "retain_source_binding",
+            "unit_id": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+            "preservation_group": "01a49aa421776c96a3510f6220f4338399ea1c9810edf9a39948ca7f99b7aca8",
+            "quote_sha256": "51e75e473df6b5ed45c7cb93907090a91b97773b88ea331e201b99f80efee8b5",
+            "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          {
+            "kind": "retain_source_binding",
+            "unit_id": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+            "preservation_group": "1b4cc7f028aa21633fce3c0e7b84fcdbae6576f89276623ce24e209b07d0e67e",
+            "quote_sha256": "a63492071a0788623fd1ef4cd17812c0f79165bfe71443f3b1c32f6a5dc5f2fb",
+            "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          {
+            "kind": "retain_source_binding",
+            "unit_id": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+            "preservation_group": "5e94c5758237ae8cf26b219bd185ad4fdcb84bd208f52b3c02c42a7d618c70fc",
+            "quote_sha256": "863435301d91bf2ba84a9010c7f4575abc28ef826ef977269a75612f845fb2ee",
+            "source_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+          },
+          {
+            "kind": "uninterpreted_constraint",
+            "document_id": null,
+            "text": "Preserve all existing conditions."
+          }
+        ],
+        "required_hitl_question_ids": [],
+        "conflicts": [],
+        "verification": "passed"
+      },
+      {
+        "task_id": "move-alarm",
+        "action": "MOVE",
+        "planned_status": "held",
+        "status": "held",
+        "reasons": [
+          "CONDITION_CONTEXT_REVIEW_REQUIRED"
+        ],
+        "depends_on": [],
+        "unit_ids": [
+          "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+        ],
+        "target_document_id": "safety",
+        "basis": "Explicit synthetic relocation proposal",
+        "source_evidence": [
+          {
+            "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+            "document_id": "operations",
+            "quote": "# Operations\n",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "source_span": {
+              "start": 0,
+              "end": 13,
+              "line_start": 1,
+              "line_end": 1,
+              "byte_start": 0,
+              "byte_end": 13
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "operations.md",
+              "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+            "document_id": "safety",
+            "quote": "# Safety\n",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "source_span": {
+              "start": 0,
+              "end": 9,
+              "line_start": 1,
+              "line_end": 1,
+              "byte_start": 0,
+              "byte_end": 9
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "safety.md",
+              "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+            "document_id": "safety",
+            "quote": "Report the drill date.\n",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "source_span": {
+              "start": 10,
+              "end": 33,
+              "line_start": 3,
+              "line_end": 3,
+              "byte_start": 10,
+              "byte_end": 33
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "safety.md",
+              "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+            "document_id": "operations",
+            "quote": "If the alarm sounds, wait.\n",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "source_span": {
+              "start": 14,
+              "end": 41,
+              "line_start": 3,
+              "line_end": 3,
+              "byte_start": 14,
+              "byte_end": 41
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "operations.md",
+              "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          }
+        ],
+        "preservation_obligations": [
+          {
+            "kind": "retain_source_binding",
+            "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+            "preservation_group": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+            "quote_sha256": "d2fa6bc907e705a244b254e5febb5ec32aac1cea31fb16184ce25cb493a3c56d",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+          },
+          {
+            "kind": "retain_source_binding",
+            "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+            "preservation_group": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+            "quote_sha256": "f316e51bfeae20bd24c4cb6085bb9819ba4499bd248ffec60b93ced17df39cb2",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+          },
+          {
+            "kind": "retain_source_binding",
+            "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+            "preservation_group": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+            "quote_sha256": "ec2f94b9567d6bff23ed33ab320f31b6d6b9bde8b1f0dcd34ddd360cc08eb038",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+          },
+          {
+            "kind": "retain_source_binding",
+            "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+            "preservation_group": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+            "quote_sha256": "7d8135d955a80c7c2bb356d1cecaf2860dc2d4d79623c54886bd5630ac1a722d",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+          },
+          {
+            "kind": "uninterpreted_constraint",
+            "document_id": null,
+            "text": "Preserve all existing conditions."
+          }
+        ],
+        "required_hitl_question_ids": [
+          "task:move-alarm"
+        ],
+        "conflicts": [],
+        "verification": "not_run"
+      }
+    ],
+    "hitl_questions": [
+      {
+        "question_id": "task:move-alarm",
+        "question": "CONDITION_CONTEXT_REVIEW_REQUIRED",
+        "document_ids": [],
+        "unit_ids": [
+          "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+        ],
+        "evidence": [
+          {
+            "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+            "document_id": "operations",
+            "quote": "# Operations\n",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "source_span": {
+              "start": 0,
+              "end": 13,
+              "line_start": 1,
+              "line_end": 1,
+              "byte_start": 0,
+              "byte_end": 13
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "operations.md",
+              "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+            "document_id": "safety",
+            "quote": "# Safety\n",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "source_span": {
+              "start": 0,
+              "end": 9,
+              "line_start": 1,
+              "line_end": 1,
+              "byte_start": 0,
+              "byte_end": 9
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "safety.md",
+              "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+            "document_id": "safety",
+            "quote": "Report the drill date.\n",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "source_span": {
+              "start": 10,
+              "end": 33,
+              "line_start": 3,
+              "line_end": 3,
+              "byte_start": 10,
+              "byte_end": 33
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "safety.md",
+              "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+            "document_id": "operations",
+            "quote": "If the alarm sounds, wait.\n",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "source_span": {
+              "start": 14,
+              "end": 41,
+              "line_start": 3,
+              "line_end": 3,
+              "byte_start": 14,
+              "byte_end": 41
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "operations.md",
+              "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          }
+        ],
+        "decision_owner": "Requesting user / document authority owner",
+        "decision_needed": "Resolve recorded task prerequisites; do not execute before G2-C",
+        "origin": "planner_prerequisite",
+        "status": "unresolved",
+        "dependent_task_ids": [
+          "move-alarm"
+        ],
+        "held_task_ids": [
+          "move-alarm"
+        ]
+      }
+    ],
+    "planned": [
+      "place-label",
+      "move-alarm"
+    ],
+    "executed": [
+      "place-label"
+    ],
+    "preserved": [],
+    "held": [
+      "move-alarm"
+    ],
+    "denied": [],
+    "unsupported": [],
+    "failed": [],
+    "reasons": [
+      "GENERAL_SEMANTIC_PRESERVATION_UNRESOLVED",
+      "READER_PURPOSE_UNRESOLVED",
+      "NATURAL_LANGUAGE_CONSTRAINTS_UNRESOLVED",
+      "UNRESOLVED_PLANNING_OR_CANDIDATE_SCOPE"
+    ],
+    "structure": {
+      "schema_version": "core-document-set-structure-v1",
+      "status": "passed",
+      "g1_permission_status": "within_declared_access",
+      "gate_state": "REVIEW",
+      "reasons": [],
+      "candidate_result_sha256": "389baea88b794992765fac483816df28e68dd6764936fc032c7d404a12aaf303",
+      "semantic_judgment": "unresolved",
+      "delivery_approved": false,
+      "stage_transition_allowed": false
+    }
+  }
+}

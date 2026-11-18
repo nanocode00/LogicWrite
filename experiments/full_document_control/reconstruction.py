@@ -153,6 +153,13 @@ def reconstruct_documents(bundle, analysis, org, preview, *, destination_snapsho
     return expression.seal(result, 'revision_sha256')
 
 
+def paragraph_separator(content, newline='\n'):
+    """Return only the line breaks needed before a standalone paragraph."""
+    if not content or content.endswith(newline * 2):
+        return ''
+    return newline if content.endswith(newline) else newline * 2
+
+
 def _construct(bundle, analysis, org, preview, docs, result):
     source_doc = bundle['document_snapshot']['document_id']
     source = docs[source_doc]
@@ -341,8 +348,8 @@ def _construct(bundle, analysis, org, preview, docs, result):
         content = ''
         for node in layout:
             # Ensure moved paragraphs do not concatenate with existing text.
-            if node.get('doc') != source_doc and node['id'] in requests and content and not content.endswith('\n\n'):
-                separator = '\n' if content.endswith('\n') else '\n\n'
+            separator = paragraph_separator(content) if node.get('doc') != source_doc and node['id'] in requests else ''
+            if separator:
                 ledger.append({'source_document_id': None, 'start': None, 'end': None, 'text': separator,
                                'treatment': 'SEPARATOR', 'output_document_id': doc, 'output_start': len(content),
                                'output_end': len(content) + len(separator), 'alias': False})
