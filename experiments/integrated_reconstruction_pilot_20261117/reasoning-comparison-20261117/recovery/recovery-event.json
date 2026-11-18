@@ -1,0 +1,49 @@
+{
+  "kind": "resolve_only_settled_legacy_reasoning_violation",
+  "at": "2026-11-17T06:53:02.577596+00:00",
+  "authorization": "user_explicit_request_2026-11-17_reasoning_allowed_comparison",
+  "before": {
+    "spent_usd": "0.0027089352",
+    "pending": false,
+    "blocked": true,
+    "smoke_success": false,
+    "completed_targets": [],
+    "pending_upper_usd": "0.00545376",
+    "pending_target": "IR-003/B0"
+  },
+  "server_status": {
+    "limit": "0.25",
+    "limit_remaining": "0.247291065",
+    "usage": "0.002708935",
+    "limit_reset": null,
+    "byok_usage": "0"
+  },
+  "reason": "new protocol permits reasoning; prior result remains a failed exploratory smoke",
+  "legacy_response_cost_usd": "0.0027089352",
+  "after_blocked": false,
+  "cost_preserved": true,
+  "legacy_record_sha256": "d35f1fd3a4ae31c5acc0781d96690e097b47186804d55a39f07fa93a5374ca78",
+  "legacy_response_sha256": "f5c52c6ee9e8352db6064cd687872f768f313fc5e2e310484b2ea26dc7692a93",
+  "endpoint": {
+    "tag": "gmicloud/fp8",
+    "provider_name": "GMICloud",
+    "pricing": {
+      "prompt": "0.0000002088",
+      "completion": "0.0000003096",
+      "input_cache_read": "0.0000000216",
+      "discount": 0.28
+    },
+    "supported_parameters": [
+      "reasoning",
+      "include_reasoning",
+      "max_tokens",
+      "temperature",
+      "top_p",
+      "seed",
+      "tools",
+      "tool_choice"
+    ],
+    "reasoning_disable_requested": false,
+    "reasoning_allowed": true
+  }
+}

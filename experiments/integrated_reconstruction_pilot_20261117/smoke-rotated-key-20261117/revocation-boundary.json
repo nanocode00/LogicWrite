@@ -1,0 +1,13 @@
+{
+  "record_type": "user_confirmed_key_revocation",
+  "confirmation": "explicit_in_current_chat",
+  "date": "2026-11-17",
+  "revoked_local_git_blob": "496bf0e9b647a6e7974897368c316aef7f7d4bbf",
+  "api_revocation_independently_verified": false,
+  "old_key_reauthenticated": false,
+  "current_key_exact_match_always_blocks": true,
+  "unacknowledged_key_patterns_still_block": true,
+  "git_objects_or_refs_deleted": false,
+  "budget_limits_changed": false,
+  "credential_values_recorded": false
+}

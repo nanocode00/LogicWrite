@@ -1,0 +1,22 @@
+{
+  "mode": "live_requested",
+  "model": "deepseek/deepseek-v3.2",
+  "provider": "gmicloud/fp8",
+  "max_output_tokens": 12000,
+  "timeout_seconds": 600,
+  "targets": [
+    {
+      "case": "IR-003",
+      "arm": "B0",
+      "input_tokens_upper_estimate": 8256,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00545376",
+      "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+    }
+  ],
+  "total_upper_usd": "0.00545376",
+  "budget_usd": "0.20",
+  "server_key_limit_usd": "0.25",
+  "pricing": "offline ceilings; live endpoint prices must be revalidated before every POST",
+  "source_commit": "f3cd10bd4928596cbfaca5ba2145f680a59dd367"
+}

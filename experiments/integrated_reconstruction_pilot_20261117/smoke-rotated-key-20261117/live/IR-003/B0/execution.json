@@ -1,0 +1,77 @@
+{
+  "state": "accounting_or_preflight_failure",
+  "calls": 1,
+  "usage": {
+    "prompt_tokens": 1091,
+    "completion_tokens": 8014,
+    "total_tokens": 9105,
+    "cost": 0.0027089352,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0027089352,
+      "upstream_inference_prompt_cost": 0.0002278008,
+      "upstream_inference_completions_cost": 0.0024811344
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7220,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "D": "unobserved",
+  "Q": "not_evaluated",
+  "F": "not_evaluated",
+  "HITL": "not_assessed",
+  "estimate": {
+    "case": "IR-003",
+    "arm": "B0",
+    "input_tokens_upper_estimate": 8256,
+    "max_output_tokens": 12000,
+    "upper_usd": "0.00545376",
+    "method": "UTF-8 bytes plus 4096 template allowance; conservative estimate, not exact tokens"
+  },
+  "input_sha256": "8937d3ed9b7c0dc657fdbd7cda95957842f2806cc8c0f1350b9ed5747acebf54",
+  "key_status": {
+    "limit": "0.25",
+    "limit_remaining": "0.25",
+    "usage": "0",
+    "limit_reset": null,
+    "byok_usage": "0"
+  },
+  "endpoint": {
+    "tag": "gmicloud/fp8",
+    "provider_name": "GMICloud",
+    "pricing": {
+      "prompt": "0.0000002088",
+      "completion": "0.0000003096",
+      "input_cache_read": "0.0000000216",
+      "discount": 0.28
+    },
+    "supported_parameters": [
+      "reasoning",
+      "include_reasoning",
+      "max_tokens",
+      "temperature",
+      "top_p",
+      "seed",
+      "tools",
+      "tool_choice"
+    ],
+    "reasoning_disable_requested": true
+  },
+  "seconds": 110.79499859700445,
+  "http_status": 200,
+  "model_returned": "deepseek/deepseek-v3.2",
+  "provider_returned": "GMICloud",
+  "finish_reasons": [
+    "stop"
+  ],
+  "reasoning_observed": "nonzero_reported_tokens",
+  "reason": "cost_token_or_reasoning_policy_violation"
+}

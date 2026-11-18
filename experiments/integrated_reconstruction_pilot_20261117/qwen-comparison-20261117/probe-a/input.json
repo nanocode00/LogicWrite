@@ -1,0 +1,6 @@
+[
+  {
+    "role": "user",
+    "content": "Write an English counting list from 1 through 1000, one number per line. Continue until the list is complete."
+  }
+]

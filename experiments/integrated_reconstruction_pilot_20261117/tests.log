@@ -1,0 +1,9 @@
+test_both_arms_receive_exact_same_validated_input (test_pilot.PilotBoundaryTests.test_both_arms_receive_exact_same_validated_input) ... ok
+test_no_credentials_fails_before_any_http_request (test_pilot.PilotBoundaryTests.test_no_credentials_fails_before_any_http_request) ... ok
+test_prepared_inputs_and_hashes_match_current_export (test_pilot.PilotBoundaryTests.test_prepared_inputs_and_hashes_match_current_export) ... ok
+test_refuses_overwriting_any_existing_output (test_pilot.PilotBoundaryTests.test_refuses_overwriting_any_existing_output) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.202s
+
+OK

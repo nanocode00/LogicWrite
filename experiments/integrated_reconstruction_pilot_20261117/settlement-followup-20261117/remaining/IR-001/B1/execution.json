@@ -1,0 +1,78 @@
+{
+  "protocol": "integrated-reasoning-allowed-20261117-v1",
+  "target": "IR-001/B1",
+  "state": "failed",
+  "calls": 1,
+  "D": "unobserved",
+  "usage": {
+    "prompt_tokens": 2262,
+    "completion_tokens": 16025,
+    "total_tokens": 18287,
+    "cost": 0.0054336456,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0054336456,
+      "upstream_inference_prompt_cost": 0.0004723056,
+      "upstream_inference_completions_cost": 0.00496134
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14280,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "human_final_judgment": null,
+  "input_sha256": "62d749a9b865e8d7298621b4f7551cbb2a7f80d685a39907d5e29b7d126758e5",
+  "key_status": {
+    "limit": "0.25",
+    "limit_remaining": "0.245690894",
+    "usage": "0.004309106",
+    "limit_reset": null,
+    "byok_usage": "0"
+  },
+  "endpoint": {
+    "tag": "gmicloud/fp8",
+    "provider_name": "GMICloud",
+    "pricing": {
+      "prompt": "0.0000002088",
+      "completion": "0.0000003096",
+      "input_cache_read": "0.0000000216",
+      "discount": 0.28
+    },
+    "supported_parameters": [
+      "reasoning",
+      "include_reasoning",
+      "max_tokens",
+      "temperature",
+      "top_p",
+      "seed",
+      "tools",
+      "tool_choice"
+    ],
+    "reasoning_disable_requested": false,
+    "reasoning_allowed": true
+  },
+  "settlement_before": {
+    "state": "lagging_known_costs",
+    "server_usage_usd": "0.004309106",
+    "ledger_usage_usd": "0.0080382960",
+    "unreflected_known_cost_usd": "0.0037291900",
+    "policy": "known response costs remain charged against local budget; no generation retry"
+  },
+  "seconds": 257.0789640119765,
+  "http_status": 200,
+  "reasoning_tokens": 14280,
+  "non_reasoning_completion_tokens": 1745,
+  "model_returned": "deepseek/deepseek-v3.2",
+  "provider_returned": "GMICloud",
+  "finish_reasons": [
+    "stop"
+  ],
+  "reason": "cost_or_token_bound_exceeded"
+}

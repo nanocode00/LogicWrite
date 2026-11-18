@@ -1,0 +1,22 @@
+{
+  "new_requests_this_followup": 2,
+  "campaign_requests_total": 3,
+  "campaign_max": 6,
+  "transport_responses": 3,
+  "protocol_conformant_responses_after_audit": 2,
+  "controlled_complete_case_pairs": 0,
+  "not_run": [
+    "IR-002/B0",
+    "IR-002/B1",
+    "IR-003/B1"
+  ],
+  "stop_reason": "completion_tokens 16025 exceeds requested max_tokens 12000",
+  "cost_this_followup_usd": "0.0091628352",
+  "campaign_cost_usd": "0.0107630064",
+  "legacy_exploratory_cost_usd": ".0027089352",
+  "cumulative_ledger_usd": "0.0134719416",
+  "runner_remaining_usd": "0.1865280584",
+  "final_key_status_file": "key-status-final.json",
+  "ledger_blocked": true,
+  "human_final_judgment": null
+}

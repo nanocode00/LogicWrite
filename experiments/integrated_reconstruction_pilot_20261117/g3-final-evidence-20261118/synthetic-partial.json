@@ -1,0 +1,408 @@
+{
+  "verification": {
+    "version": "document-set-verification-v1",
+    "gate_state": "REVIEW",
+    "semantic_judgment": "unresolved",
+    "delivery_approved": false,
+    "stage_transition_allowed": false,
+    "accepted": true,
+    "bindings": {
+      "mode": "g2c",
+      "contract_sha256": "609a6db8242a12590c97cc8ec8fbc4befbdd6dc6f1cd8caafd4d846f1260f82a",
+      "analysis_sha256": "af07147fbe10252fbe2a4f4f0eb6b52e008a0b21286a0578c33da06616706887",
+      "plan_sha256": "807d41fe5c3e0b11dc7dbf0bb302229bdd7fb2cd37bbf66a3dfbeeca5ac29017",
+      "request_sha256": "b8efa4c151f33b0332ef4a662d4b4e30dac1da6645716d9f418f73613101eaed",
+      "candidate_request_sha256": "ca030eed113b8665205009fbcc041033830175282733c3b7c7169988f2c0a5eb",
+      "verifier_version": "document-set-verification-v1",
+      "requirements_sha256": "356a93f58e5c5099f15031e5eb25e8cacf9b39b7a80b208d33a2ac546280e35c",
+      "candidate_sha256": "8240a97e2419eb18911cd9df0ab9ed67557c439e836e72641c49687be12d5d53",
+      "independent_review_sha256": null
+    },
+    "checks": {
+      "coverage": {
+        "status": "passed",
+        "reason": "OUTPUT_SET_MATCHES_CONTRACT",
+        "document_ids": [
+          "catalog",
+          "log",
+          "operations",
+          "safety"
+        ],
+        "evidence": [],
+        "task_ids": [],
+        "kind": "mechanical",
+        "missing_document_ids": [],
+        "extra_document_ids": [],
+        "duplicate_document_ids": []
+      },
+      "lineage": {
+        "status": "passed",
+        "reason": "LAYOUT_TRACE_BOUND",
+        "document_ids": [
+          "catalog",
+          "log",
+          "operations",
+          "safety"
+        ],
+        "evidence": [],
+        "task_ids": [],
+        "kind": "mechanical"
+      },
+      "authority:catalog": {
+        "status": "passed",
+        "reason": "PINNED_TASK_AND_TRACE_SUPPORT_WRITE",
+        "document_ids": [
+          "catalog"
+        ],
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "catalog",
+            "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7",
+            "start": 0,
+            "end": 65,
+            "byte_start": 0,
+            "byte_end": 65,
+            "quote": "# Catalog\n\nRecord the item label.\n\nPhotograph the storage shelf.\n",
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "catalog.md",
+              "snapshot_sha256": "fc8a6f6914957c11a8a596a001c0fe5fc12a1a436647ce7dfe4e170cbf240fb7"
+            },
+            "source_scope": null,
+            "authority": "Synthetic document owner",
+            "role": "catalog"
+          },
+          {
+            "side": "candidate",
+            "document_id": "catalog",
+            "snapshot_sha256": "0b7a6e97d56e8879ad95a50bdd11937bee2156b8bd2e59bafe9302ff51838085",
+            "start": 0,
+            "end": 66,
+            "byte_start": 0,
+            "byte_end": 66,
+            "quote": "# Catalog\n\n\nPhotograph the storage shelf.\n\nRecord the item label.\n"
+          }
+        ],
+        "task_ids": [
+          "place-label"
+        ],
+        "kind": "mechanical"
+      },
+      "authority:log": {
+        "status": "passed",
+        "reason": "UNCHANGED",
+        "document_ids": [
+          "log"
+        ],
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "log",
+            "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+            "start": 0,
+            "end": 30,
+            "byte_start": 0,
+            "byte_end": 30,
+            "quote": "# Log\n\nArchive the inventory.\n",
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "log.md",
+              "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1"
+            },
+            "source_scope": null,
+            "authority": "Synthetic document owner",
+            "role": "log"
+          },
+          {
+            "side": "candidate",
+            "document_id": "log",
+            "snapshot_sha256": "86ce9e1f3941d3c0de58726fa3848ff87dc29707b4c5f3f7a13f4124e4424ae1",
+            "start": 0,
+            "end": 30,
+            "byte_start": 0,
+            "byte_end": 30,
+            "quote": "# Log\n\nArchive the inventory.\n"
+          }
+        ],
+        "task_ids": [],
+        "kind": "mechanical"
+      },
+      "authority:operations": {
+        "status": "passed",
+        "reason": "UNCHANGED",
+        "document_ids": [
+          "operations"
+        ],
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "operations",
+            "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "start": 0,
+            "end": 41,
+            "byte_start": 0,
+            "byte_end": 41,
+            "quote": "# Operations\n\nIf the alarm sounds, wait.\n",
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "operations.md",
+              "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            "source_scope": null,
+            "authority": "Synthetic document owner",
+            "role": "operations"
+          },
+          {
+            "side": "candidate",
+            "document_id": "operations",
+            "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "start": 0,
+            "end": 41,
+            "byte_start": 0,
+            "byte_end": 41,
+            "quote": "# Operations\n\nIf the alarm sounds, wait.\n"
+          }
+        ],
+        "task_ids": [],
+        "kind": "mechanical"
+      },
+      "authority:safety": {
+        "status": "passed",
+        "reason": "UNCHANGED",
+        "document_ids": [
+          "safety"
+        ],
+        "evidence": [
+          {
+            "side": "source",
+            "document_id": "safety",
+            "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "start": 0,
+            "end": 33,
+            "byte_start": 0,
+            "byte_end": 33,
+            "quote": "# Safety\n\nReport the drill date.\n",
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "safety.md",
+              "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            "source_scope": null,
+            "authority": "Synthetic document owner",
+            "role": "safety"
+          },
+          {
+            "side": "candidate",
+            "document_id": "safety",
+            "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "start": 0,
+            "end": 33,
+            "byte_start": 0,
+            "byte_end": 33,
+            "quote": "# Safety\n\nReport the drill date.\n"
+          }
+        ],
+        "task_ids": [],
+        "kind": "mechanical"
+      },
+      "semantic_coverage": {
+        "status": "unresolved",
+        "reason": "GENERAL_SEMANTIC_COVERAGE_NOT_ESTABLISHED",
+        "document_ids": [
+          "catalog"
+        ],
+        "evidence": [],
+        "task_ids": [],
+        "kind": "semantic"
+      }
+    },
+    "self_checks": [],
+    "hitl_questions": [
+      {
+        "question_id": "g2:task:move-alarm",
+        "question": "CONDITION_CONTEXT_REVIEW_REQUIRED",
+        "document_ids": [],
+        "unit_ids": [
+          "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8"
+        ],
+        "evidence": [
+          {
+            "unit_id": "1fb143af3411bbd09e48630ecb71d216d474bfe12b9be5f7a315bcbad95b34d9",
+            "document_id": "operations",
+            "quote": "# Operations\n",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "source_span": {
+              "start": 0,
+              "end": 13,
+              "line_start": 1,
+              "line_end": 1,
+              "byte_start": 0,
+              "byte_end": 13
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "operations.md",
+              "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "60cb23f6ef3c96924ee494f09e3eb360207cdb8929122dfcd0aeb9d28f44ef94",
+            "document_id": "safety",
+            "quote": "# Safety\n",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "source_span": {
+              "start": 0,
+              "end": 9,
+              "line_start": 1,
+              "line_end": 1,
+              "byte_start": 0,
+              "byte_end": 9
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "safety.md",
+              "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "868555ccbbf4e52e6f80ba9afe6ef7f03a40261c84f033891ccb85e116262f55",
+            "document_id": "safety",
+            "quote": "Report the drill date.\n",
+            "source_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "source_span": {
+              "start": 10,
+              "end": 33,
+              "line_start": 3,
+              "line_end": 3,
+              "byte_start": 10,
+              "byte_end": 33
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "safety.md",
+              "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          },
+          {
+            "unit_id": "a60c173f3b15436a3a118a7b329837a0fc1dac059f152bf4367774d709eeaaa8",
+            "document_id": "operations",
+            "quote": "If the alarm sounds, wait.\n",
+            "source_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "source_span": {
+              "start": 14,
+              "end": 41,
+              "line_start": 3,
+              "line_end": 3,
+              "byte_start": 14,
+              "byte_end": 41
+            },
+            "source_scope": null,
+            "provenance": {
+              "kind": "supplied_snapshot",
+              "source_id": "g2-c-synthetic",
+              "path": "operations.md",
+              "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9"
+            },
+            "authority": "Synthetic document owner",
+            "access": "edit"
+          }
+        ],
+        "decision_owner": "Requesting user / document authority owner",
+        "decision_needed": "Resolve recorded task prerequisites; do not execute before G2-C",
+        "origin": "g2_plan",
+        "status": "unresolved",
+        "dependent_task_ids": [
+          "move-alarm"
+        ],
+        "held_task_ids": [
+          "move-alarm"
+        ],
+        "check_id": null,
+        "upstream_question_id": "task:move-alarm",
+        "candidate_evidence": [
+          {
+            "side": "candidate",
+            "document_id": "operations",
+            "snapshot_sha256": "f5b3aec3405760268d8ff15478c78bac36cea3a6aaf7e053a63a799496499fc9",
+            "start": 0,
+            "end": 41,
+            "byte_start": 0,
+            "byte_end": 41,
+            "quote": "# Operations\n\nIf the alarm sounds, wait.\n"
+          },
+          {
+            "side": "candidate",
+            "document_id": "safety",
+            "snapshot_sha256": "3a22ef7b1c3dddf1831b12fc211f5b5adf536a4a06e43dc19d48d4e935d4974c",
+            "start": 0,
+            "end": 33,
+            "byte_start": 0,
+            "byte_end": 33,
+            "quote": "# Safety\n\nReport the drill date.\n"
+          }
+        ],
+        "independent_task_ids": [
+          "place-label"
+        ]
+      }
+    ],
+    "impact": {
+      "held_task_ids": [
+        "move-alarm"
+      ],
+      "independent_task_ids": [
+        "place-label"
+      ],
+      "changed_document_ids": [
+        "catalog"
+      ],
+      "native_task_states": {
+        "place-label": {
+          "state": "ready",
+          "reasons": []
+        },
+        "move-alarm": {
+          "state": "held",
+          "reasons": [
+            "CONDITION_CONTEXT_REVIEW_REQUIRED"
+          ]
+        }
+      }
+    },
+    "execution": {
+      "state": "completed",
+      "semantic_review": "not_run",
+      "model_calls": 0,
+      "supplemental_structure": {
+        "schema_version": "core-document-set-structure-v1",
+        "status": "passed",
+        "g1_permission_status": "within_declared_access",
+        "gate_state": "REVIEW",
+        "reasons": [],
+        "candidate_result_sha256": "389baea88b794992765fac483816df28e68dd6764936fc032c7d404a12aaf303",
+        "semantic_judgment": "unresolved",
+        "delivery_approved": false,
+        "stage_transition_allowed": false
+      }
+    },
+    "reasons": [],
+    "report_sha256": "755444e6075b5404b80e5c9164e2e289fa6b5a1a9a980ff863af24cd5623ca3a"
+  }
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "worktree": "/home/honorbear/LogicWrite-integrated-eval",
+    "check_ignore": [
+      {
+        "path": ".env",
+        "exit_code": 0,
+        "ignore_rule": ".gitignore:2:.env\t.env"
+      },
+      {
+        "path": ".env.local",
+        "exit_code": 0,
+        "ignore_rule": ".gitignore:3:.env.*\t.env.local"
+      },
+      {
+        "path": "experiments/integrated_reconstruction_pilot_20261117/.env",
+        "exit_code": 0,
+        "ignore_rule": ".gitignore:2:.env\texperiments/integrated_reconstruction_pilot_20261117/.env"
+      },
+      {
+        "path": ".env.example",
+        "exit_code": 0,
+        "ignore_rule": ".gitignore:4:!.env.example\t.env.example"
+      }
+    ],
+    "tracked_dotenv_paths": []
+  },
+  {
+    "worktree": "/home/honorbear/LogicWrite",
+    "check_ignore": [
+      {
+        "path": ".env",
+        "exit_code": 0,
+        "ignore_rule": ".git/info/exclude:10:.env\t.env"
+      },
+      {
+        "path": ".env.local",
+        "exit_code": 0,
+        "ignore_rule": ".git/info/exclude:11:.env.*\t.env.local"
+      },
+      {
+        "path": "experiments/integrated_reconstruction_pilot_20261117/.env",
+        "exit_code": 0,
+        "ignore_rule": ".git/info/exclude:10:.env\texperiments/integrated_reconstruction_pilot_20261117/.env"
+      },
+      {
+        "path": ".env.example",
+        "exit_code": 0,
+        "ignore_rule": ".git/info/exclude:12:!.env.example\t.env.example"
+      }
+    ],
+    "tracked_dotenv_paths": []
+  }
+]

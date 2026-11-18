@@ -1,0 +1,1105 @@
+{
+  "gate_state": "REVIEW",
+  "semantic_judgment": "unresolved",
+  "execution_state": "not_run",
+  "b2_reconstruction_success": false,
+  "delivery_approved": false,
+  "stage_transition_allowed": false,
+  "execution_allowed": false,
+  "model_calls": 0,
+  "schema_version": "core-document-set-analysis-v1",
+  "contract_sha256": "52cf25b488ba646ff2bf2a0f3c871eb0996691532fd88208ec77f5c51c428622",
+  "documents": [
+    {
+      "document_id": "guide",
+      "role": "guide",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "completeness": "complete",
+      "sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "guide.md",
+        "snapshot_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "guide:effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+          "kind": "heading",
+          "start": 0,
+          "end": 15,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# DispatchDesk\n",
+          "sha256": "f6335497ffcd0fa02047232075fa7810bf7e03be45927af00241ccf8a1e1c5cf",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "guide:effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+          "kind": "blank",
+          "start": 15,
+          "end": 16,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B003",
+          "snapshot_id": "guide:effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+          "kind": "paragraph",
+          "start": 16,
+          "end": 49,
+          "line_start": 3,
+          "line_end": 3,
+          "text": "Commercial tickets are accepted.\n",
+          "sha256": "a11eed5a6ab8c7871b4d7984d8e0277bccbc76206b7baa4629d0e7c5e9c8ce3e",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B004",
+          "snapshot_id": "guide:effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+          "kind": "blank",
+          "start": 49,
+          "end": 50,
+          "line_start": 4,
+          "line_end": 4,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B005",
+          "snapshot_id": "guide:effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+          "kind": "paragraph",
+          "start": 50,
+          "end": 110,
+          "line_start": 5,
+          "line_end": 5,
+          "text": "If count exceeds 913, stop. Do not restart before approval.\n",
+          "sha256": "277e5506019215688c86f66e3b4f3d3042eea0a9b0a52fd3a6116f20febba110",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B006",
+          "snapshot_id": "guide:effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+          "kind": "blank",
+          "start": 110,
+          "end": 111,
+          "line_start": 6,
+          "line_end": 6,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B007",
+          "snapshot_id": "guide:effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+          "kind": "paragraph",
+          "start": 111,
+          "end": 131,
+          "line_start": 7,
+          "line_end": 7,
+          "text": "[Policy](policy.md)\n",
+          "sha256": "6c4b9fbdae3885c476e6386baada2766a67143e8d2eca37482e06a5340e67980",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4",
+        "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3",
+        "65fba929cdb61ad3502f5ef6a13e1adaddbacaf324c410eb31bdf6ffe9c07c68",
+        "187352be4b26a8721c03210ecbd1b543fc7d1f15009072d4ecdbf6b5b17fbe12"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "policy",
+      "role": "policy",
+      "authority": "supplied policy owner",
+      "access": "read_only",
+      "completeness": "complete",
+      "sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "policy.md",
+        "snapshot_sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474"
+      },
+      "output_target": false,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "policy:923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474",
+          "kind": "heading",
+          "start": 0,
+          "end": 9,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# Policy\n",
+          "sha256": "906634d4c84299d734a3b62d9a4ba6cf36931982688a06e654c705158ad62884",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "policy:923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474",
+          "kind": "blank",
+          "start": 9,
+          "end": 10,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B003",
+          "snapshot_id": "policy:923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474",
+          "kind": "paragraph",
+          "start": 10,
+          "end": 47,
+          "line_start": 3,
+          "line_end": 3,
+          "text": "Commercial tickets are not accepted.\n",
+          "sha256": "445a845e60847028cbc81b99b9d4828eb8ba4dbee564e80ad0da98bedd3cc34c",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "12ebd1f3a09f215718370ebd6d0f518eb3ac55042abb507eb11260223294e84a",
+        "81729213471a39a73669ef6ff7f5942403eba2a93d750b02664e53b66bf2277b"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "notes",
+      "role": "notes",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "completeness": "complete",
+      "sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "notes.md",
+        "snapshot_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "notes:0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+          "kind": "heading",
+          "start": 0,
+          "end": 8,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# Notes\n",
+          "sha256": "365d0b84ae63c2afc293dedd2b00bdf0dc8d6ef70c9297d90f9e5682ab0d72ee",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "notes:0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+          "kind": "blank",
+          "start": 8,
+          "end": 9,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B003",
+          "snapshot_id": "notes:0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+          "kind": "paragraph",
+          "start": 9,
+          "end": 30,
+          "line_start": 3,
+          "line_end": 3,
+          "text": "Install the package.\n",
+          "sha256": "be1a09eda76e40ac05ff7afe62acd286f4f3317b9267cd2c9c1331d9a70d2ec1",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B004",
+          "snapshot_id": "notes:0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+          "kind": "blank",
+          "start": 30,
+          "end": 31,
+          "line_start": 4,
+          "line_end": 4,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B005",
+          "snapshot_id": "notes:0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+          "kind": "paragraph",
+          "start": 31,
+          "end": 56,
+          "line_start": 5,
+          "line_end": 5,
+          "text": "Verify the installation.\n",
+          "sha256": "11287f4c13e7f2f620d6b37713ef4186c1d408535ba77842fc942de540bea81c",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "13993717e88c1efecae1208f92ea4c6f3242d02f4da601c8b3faf4e2fc16af4b",
+        "a54cce283929ee81c27e3978537c5851d025d395737a95d8b02328b2c46a16aa",
+        "ce08c2063b67979718bb5ab3068d07cf951bc01ff7f6c11b93a32c3cb4c1fa44"
+      ],
+      "literal_coverage": "complete"
+    },
+    {
+      "document_id": "format",
+      "role": "format",
+      "authority": "supplied policy owner",
+      "access": "format_only",
+      "completeness": "complete",
+      "sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a",
+      "audience": null,
+      "purpose": null,
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "format.md",
+        "snapshot_sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a"
+      },
+      "output_target": true,
+      "explicit_constraints": [],
+      "pending_questions": [],
+      "blocks": [
+        {
+          "block_id": "B001",
+          "snapshot_id": "format:dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a",
+          "kind": "heading",
+          "start": 0,
+          "end": 10,
+          "line_start": 1,
+          "line_end": 1,
+          "text": "# Minutes\n",
+          "sha256": "01e73faa7d0b6d6e883ce2e740ad65ecf31b7c05569489ee66f8c60c0110168e",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B002",
+          "snapshot_id": "format:dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a",
+          "kind": "blank",
+          "start": 10,
+          "end": 11,
+          "line_start": 2,
+          "line_end": 2,
+          "text": "\n",
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "extractable": false,
+          "exclusion_reason": "whitespace_only_separator",
+          "unsupported_reason": null
+        },
+        {
+          "block_id": "B003",
+          "snapshot_id": "format:dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a",
+          "kind": "paragraph",
+          "start": 11,
+          "end": 31,
+          "line_start": 3,
+          "line_end": 3,
+          "text": "The attempt failed.\n",
+          "sha256": "dc5a06522492f1e1c04b65af893858b28911b7af8dd649b4fb287d874f0721cb",
+          "extractable": true,
+          "exclusion_reason": null,
+          "unsupported_reason": null
+        }
+      ],
+      "unit_ids": [
+        "6b3218de24c8c74664c03ce3279ef4d079d3cba8225ffc08c5bceae663f5464c",
+        "b726b1aa6594baca7b1e7d5e13fceacc9b8973070d6745df4f805bdc7d181907"
+      ],
+      "literal_coverage": "complete"
+    }
+  ],
+  "units": [
+    {
+      "unit_id": "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4",
+      "document_id": "guide",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# DispatchDesk\n",
+      "quote_sha256": "f6335497ffcd0fa02047232075fa7810bf7e03be45927af00241ccf8a1e1c5cf",
+      "source_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "guide.md",
+        "snapshot_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 15,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 15
+      },
+      "role": "guide",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4"
+      ],
+      "preservation_group": "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4",
+      "claim": {
+        "quote": "# DispatchDesk\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3",
+      "document_id": "guide",
+      "block_id": "B003",
+      "kind": "paragraph",
+      "quote": "Commercial tickets are accepted.\n",
+      "quote_sha256": "a11eed5a6ab8c7871b4d7984d8e0277bccbc76206b7baa4629d0e7c5e9c8ce3e",
+      "source_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "guide.md",
+        "snapshot_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3"
+      },
+      "source_span": {
+        "start": 16,
+        "end": 49,
+        "line_start": 3,
+        "line_end": 3,
+        "byte_start": 16,
+        "byte_end": 49
+      },
+      "role": "guide",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4"
+      ],
+      "preservation_group": "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3",
+      "claim": {
+        "quote": "Commercial tickets are accepted.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "65fba929cdb61ad3502f5ef6a13e1adaddbacaf324c410eb31bdf6ffe9c07c68",
+      "document_id": "guide",
+      "block_id": "B005",
+      "kind": "paragraph",
+      "quote": "If count exceeds 913, stop. Do not restart before approval.\n",
+      "quote_sha256": "277e5506019215688c86f66e3b4f3d3042eea0a9b0a52fd3a6116f20febba110",
+      "source_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "guide.md",
+        "snapshot_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3"
+      },
+      "source_span": {
+        "start": 50,
+        "end": 110,
+        "line_start": 5,
+        "line_end": 5,
+        "byte_start": 50,
+        "byte_end": 110
+      },
+      "role": "guide",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4"
+      ],
+      "preservation_group": "65fba929cdb61ad3502f5ef6a13e1adaddbacaf324c410eb31bdf6ffe9c07c68",
+      "claim": {
+        "quote": "If count exceeds 913, stop. Do not restart before approval.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [
+          {
+            "quote": "If",
+            "start": 50,
+            "end": 52,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "before",
+            "start": 93,
+            "end": 99,
+            "status": "literal_observation"
+          }
+        ],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "stop",
+            "start": 72,
+            "end": 76,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "not",
+            "start": 81,
+            "end": 84,
+            "status": "literal_observation"
+          },
+          {
+            "quote": "restart",
+            "start": 85,
+            "end": 92,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": [
+          {
+            "quote": "913",
+            "start": 67,
+            "end": 70,
+            "status": "literal_observation"
+          }
+        ]
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "187352be4b26a8721c03210ecbd1b543fc7d1f15009072d4ecdbf6b5b17fbe12",
+      "document_id": "guide",
+      "block_id": "B007",
+      "kind": "paragraph",
+      "quote": "[Policy](policy.md)\n",
+      "quote_sha256": "6c4b9fbdae3885c476e6386baada2766a67143e8d2eca37482e06a5340e67980",
+      "source_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "guide.md",
+        "snapshot_sha256": "effada8f33aeab916e0b8fe74477b14136a525c27e9f1ba41a9d2b77e91562c3"
+      },
+      "source_span": {
+        "start": 111,
+        "end": 131,
+        "line_start": 7,
+        "line_end": 7,
+        "byte_start": 111,
+        "byte_end": 131
+      },
+      "role": "guide",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4"
+      ],
+      "preservation_group": "187352be4b26a8721c03210ecbd1b543fc7d1f15009072d4ecdbf6b5b17fbe12",
+      "claim": {
+        "quote": "[Policy](policy.md)\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "12ebd1f3a09f215718370ebd6d0f518eb3ac55042abb507eb11260223294e84a",
+      "document_id": "policy",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# Policy\n",
+      "quote_sha256": "906634d4c84299d734a3b62d9a4ba6cf36931982688a06e654c705158ad62884",
+      "source_sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "policy.md",
+        "snapshot_sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 9,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 9
+      },
+      "role": "policy",
+      "authority": "supplied policy owner",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "12ebd1f3a09f215718370ebd6d0f518eb3ac55042abb507eb11260223294e84a"
+      ],
+      "preservation_group": "12ebd1f3a09f215718370ebd6d0f518eb3ac55042abb507eb11260223294e84a",
+      "claim": {
+        "quote": "# Policy\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "81729213471a39a73669ef6ff7f5942403eba2a93d750b02664e53b66bf2277b",
+      "document_id": "policy",
+      "block_id": "B003",
+      "kind": "paragraph",
+      "quote": "Commercial tickets are not accepted.\n",
+      "quote_sha256": "445a845e60847028cbc81b99b9d4828eb8ba4dbee564e80ad0da98bedd3cc34c",
+      "source_sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "policy.md",
+        "snapshot_sha256": "923ab67edc1ca5596ebb4abdf769857f9f8c37dae016e4303a0e0af8b3434474"
+      },
+      "source_span": {
+        "start": 10,
+        "end": 47,
+        "line_start": 3,
+        "line_end": 3,
+        "byte_start": 10,
+        "byte_end": 47
+      },
+      "role": "policy",
+      "authority": "supplied policy owner",
+      "access": "read_only",
+      "output_target": false,
+      "section_unit_ids": [
+        "12ebd1f3a09f215718370ebd6d0f518eb3ac55042abb507eb11260223294e84a"
+      ],
+      "preservation_group": "81729213471a39a73669ef6ff7f5942403eba2a93d750b02664e53b66bf2277b",
+      "claim": {
+        "quote": "Commercial tickets are not accepted.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "not",
+            "start": 33,
+            "end": 36,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "13993717e88c1efecae1208f92ea4c6f3242d02f4da601c8b3faf4e2fc16af4b",
+      "document_id": "notes",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# Notes\n",
+      "quote_sha256": "365d0b84ae63c2afc293dedd2b00bdf0dc8d6ef70c9297d90f9e5682ab0d72ee",
+      "source_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "notes.md",
+        "snapshot_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 8,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 8
+      },
+      "role": "notes",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "13993717e88c1efecae1208f92ea4c6f3242d02f4da601c8b3faf4e2fc16af4b"
+      ],
+      "preservation_group": "13993717e88c1efecae1208f92ea4c6f3242d02f4da601c8b3faf4e2fc16af4b",
+      "claim": {
+        "quote": "# Notes\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "a54cce283929ee81c27e3978537c5851d025d395737a95d8b02328b2c46a16aa",
+      "document_id": "notes",
+      "block_id": "B003",
+      "kind": "paragraph",
+      "quote": "Install the package.\n",
+      "quote_sha256": "be1a09eda76e40ac05ff7afe62acd286f4f3317b9267cd2c9c1331d9a70d2ec1",
+      "source_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "notes.md",
+        "snapshot_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538"
+      },
+      "source_span": {
+        "start": 9,
+        "end": 30,
+        "line_start": 3,
+        "line_end": 3,
+        "byte_start": 9,
+        "byte_end": 30
+      },
+      "role": "notes",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "13993717e88c1efecae1208f92ea4c6f3242d02f4da601c8b3faf4e2fc16af4b"
+      ],
+      "preservation_group": "a54cce283929ee81c27e3978537c5851d025d395737a95d8b02328b2c46a16aa",
+      "claim": {
+        "quote": "Install the package.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "ce08c2063b67979718bb5ab3068d07cf951bc01ff7f6c11b93a32c3cb4c1fa44",
+      "document_id": "notes",
+      "block_id": "B005",
+      "kind": "paragraph",
+      "quote": "Verify the installation.\n",
+      "quote_sha256": "11287f4c13e7f2f620d6b37713ef4186c1d408535ba77842fc942de540bea81c",
+      "source_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "notes.md",
+        "snapshot_sha256": "0925c9e51f5aa12faea2a39d6d8c62f6d3d576a22b5fa6b948f24bdcaa232538"
+      },
+      "source_span": {
+        "start": 31,
+        "end": 56,
+        "line_start": 5,
+        "line_end": 5,
+        "byte_start": 31,
+        "byte_end": 56
+      },
+      "role": "notes",
+      "authority": "supplied policy owner",
+      "access": "edit",
+      "output_target": true,
+      "section_unit_ids": [
+        "13993717e88c1efecae1208f92ea4c6f3242d02f4da601c8b3faf4e2fc16af4b"
+      ],
+      "preservation_group": "ce08c2063b67979718bb5ab3068d07cf951bc01ff7f6c11b93a32c3cb4c1fa44",
+      "claim": {
+        "quote": "Verify the installation.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "6b3218de24c8c74664c03ce3279ef4d079d3cba8225ffc08c5bceae663f5464c",
+      "document_id": "format",
+      "block_id": "B001",
+      "kind": "heading",
+      "quote": "# Minutes\n",
+      "quote_sha256": "01e73faa7d0b6d6e883ce2e740ad65ecf31b7c05569489ee66f8c60c0110168e",
+      "source_sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "format.md",
+        "snapshot_sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a"
+      },
+      "source_span": {
+        "start": 0,
+        "end": 10,
+        "line_start": 1,
+        "line_end": 1,
+        "byte_start": 0,
+        "byte_end": 10
+      },
+      "role": "format",
+      "authority": "supplied policy owner",
+      "access": "format_only",
+      "output_target": true,
+      "section_unit_ids": [
+        "6b3218de24c8c74664c03ce3279ef4d079d3cba8225ffc08c5bceae663f5464c"
+      ],
+      "preservation_group": "6b3218de24c8c74664c03ce3279ef4d079d3cba8225ffc08c5bceae663f5464c",
+      "claim": {
+        "quote": "# Minutes\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    },
+    {
+      "unit_id": "b726b1aa6594baca7b1e7d5e13fceacc9b8973070d6745df4f805bdc7d181907",
+      "document_id": "format",
+      "block_id": "B003",
+      "kind": "paragraph",
+      "quote": "The attempt failed.\n",
+      "quote_sha256": "dc5a06522492f1e1c04b65af893858b28911b7af8dd649b4fb287d874f0721cb",
+      "source_sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a",
+      "source_scope": null,
+      "provenance": {
+        "kind": "supplied_snapshot",
+        "source_id": "synthetic",
+        "path": "format.md",
+        "snapshot_sha256": "dae64c0ba4cd64a33bb96cd2912a4ad82fe657b606394e7726752cab422ea92a"
+      },
+      "source_span": {
+        "start": 11,
+        "end": 31,
+        "line_start": 3,
+        "line_end": 3,
+        "byte_start": 11,
+        "byte_end": 31
+      },
+      "role": "format",
+      "authority": "supplied policy owner",
+      "access": "format_only",
+      "output_target": true,
+      "section_unit_ids": [
+        "6b3218de24c8c74664c03ce3279ef4d079d3cba8225ffc08c5bceae663f5464c"
+      ],
+      "preservation_group": "b726b1aa6594baca7b1e7d5e13fceacc9b8973070d6745df4f805bdc7d181907",
+      "claim": {
+        "quote": "The attempt failed.\n",
+        "status": "uninterpreted_source_block"
+      },
+      "observations": {
+        "conditions": [],
+        "exceptions": [],
+        "states": [
+          {
+            "quote": "failed",
+            "start": 23,
+            "end": 29,
+            "status": "literal_observation"
+          }
+        ],
+        "identifiers": [],
+        "quantities": []
+      },
+      "reader_relevance": {
+        "status": "unresolved",
+        "audience": null,
+        "purpose": null,
+        "request": "Improve the supplied guides.",
+        "explicit_constraints": [
+          "Preserve conditions."
+        ]
+      },
+      "semantic_status": "unresolved",
+      "analysis_status": "literal_only"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "condition_claim_cooccurrence",
+      "unit_ids": [
+        "65fba929cdb61ad3502f5ef6a13e1adaddbacaf324c410eb31bdf6ffe9c07c68"
+      ],
+      "basis": "same_atomic_source_block",
+      "status": "observed",
+      "semantic_status": "unresolved",
+      "preservation": "retain_entire_block_and_review_context"
+    },
+    {
+      "kind": "explicit_reference",
+      "unit_ids": [
+        "187352be4b26a8721c03210ecbd1b543fc7d1f15009072d4ecdbf6b5b17fbe12"
+      ],
+      "target_document_id": "policy",
+      "literal_target": "policy.md",
+      "start": 120,
+      "end": 129,
+      "status": "resolved_path_only",
+      "semantic_status": "unresolved"
+    }
+  ],
+  "confirmed_semantic_conflicts": [],
+  "unanalysed": [],
+  "uncertainties": [
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "guide"
+      ],
+      "unit_ids": [
+        "20004ece55934658004b29540bf15b35bc5de6b811738c88b9f15872e10033c4",
+        "53cc3e574cdcc017d0f5e1c745794307d42350eee156ffa0fbef15190f6ba3d3",
+        "65fba929cdb61ad3502f5ef6a13e1adaddbacaf324c410eb31bdf6ffe9c07c68",
+        "187352be4b26a8721c03210ecbd1b543fc7d1f15009072d4ecdbf6b5b17fbe12"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "policy"
+      ],
+      "unit_ids": [
+        "12ebd1f3a09f215718370ebd6d0f518eb3ac55042abb507eb11260223294e84a",
+        "81729213471a39a73669ef6ff7f5942403eba2a93d750b02664e53b66bf2277b"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "notes"
+      ],
+      "unit_ids": [
+        "13993717e88c1efecae1208f92ea4c6f3242d02f4da601c8b3faf4e2fc16af4b",
+        "a54cce283929ee81c27e3978537c5851d025d395737a95d8b02328b2c46a16aa",
+        "ce08c2063b67979718bb5ab3068d07cf951bc01ff7f6c11b93a32c3cb4c1fa44"
+      ],
+      "status": "unresolved"
+    },
+    {
+      "kind": "semantic_analysis_not_run",
+      "document_ids": [
+        "format"
+      ],
+      "unit_ids": [
+        "6b3218de24c8c74664c03ce3279ef4d079d3cba8225ffc08c5bceae663f5464c",
+        "b726b1aa6594baca7b1e7d5e13fceacc9b8973070d6745df4f805bdc7d181907"
+      ],
+      "status": "unresolved"
+    }
+  ],
+  "coverage_status": "complete_literal_coverage",
+  "semantic_analysis_complete": false,
+  "reasons": [],
+  "analysis_sha256": "58c9fd0f63e735d9234c6ede5ae8cd5f52f9b449fce1e28940f17718ebe9b4fd"
+}

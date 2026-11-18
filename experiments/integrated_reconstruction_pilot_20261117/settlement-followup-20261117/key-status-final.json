@@ -1,0 +1,19 @@
+{
+  "status": {
+    "limit": "0.25",
+    "limit_remaining": "0.23652806",
+    "usage": "0.01347194",
+    "limit_reset": null,
+    "byok_usage": "0"
+  },
+  "ledger_spent_usd": "0.0134719416",
+  "settlement": {
+    "state": "settled",
+    "server_usage_usd": "0.01347194",
+    "ledger_usage_usd": "0.0134719416",
+    "unreflected_known_cost_usd": "1.6E-9",
+    "policy": "known response costs remain charged against local budget; no generation retry"
+  },
+  "read_only": true,
+  "ledger_modified": false
+}

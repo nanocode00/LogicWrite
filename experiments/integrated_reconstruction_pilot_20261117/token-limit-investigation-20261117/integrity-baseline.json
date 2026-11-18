@@ -1,0 +1,6 @@
+{
+  "ledger_path": "/home/honorbear/LogicWrite/.git/logicwrite-openrouter-pilot/budget.json",
+  "ledger_sha256": "b63dc4d1c92b74eb0df062b70f3616c48999c2fa1af59df442e43151e76eb756",
+  "baseline_head": "9e80f672e43fe939c7675893638c0734887c93b2",
+  "paid_generation_requests": 0
+}

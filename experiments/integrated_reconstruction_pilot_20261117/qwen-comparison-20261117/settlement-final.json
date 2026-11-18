@@ -1,0 +1,7 @@
+{
+  "state": "settled",
+  "server_usage_usd": "0.01811136",
+  "ledger_usage_usd": "0.0181113616",
+  "unreflected_known_cost_usd": "1.6E-9",
+  "policy": "known response costs remain charged against local budget; no generation retry"
+}

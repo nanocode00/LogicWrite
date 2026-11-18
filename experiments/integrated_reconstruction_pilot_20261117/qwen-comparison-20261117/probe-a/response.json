@@ -1,0 +1,46 @@
+{
+  "id": "gen-1794903108-86bPr9uy3Z8gfvZP3G1K",
+  "object": "chat.completion",
+  "created": 1794903108,
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "provider": "DeepInfra",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "length",
+      "native_finish_reason": "length",
+      "message": {
+        "role": "assistant",
+        "content": "1  \n2  \n3  \n4  \n5  \n6  \n7  \n8  \n9  \n10  \n11  \n12  \n13  \n14  \n15  \n16  \n17  \n18  \n19  \n20  \n21  \n22  \n23  \n24  \n2",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 35,
+    "completion_tokens": 64,
+    "total_tokens": 99,
+    "cost": 3.835e-05,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 3.835e-05,
+      "upstream_inference_prompt_cost": 3.15e-06,
+      "upstream_inference_completions_cost": 3.52e-05
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.................F..............
+======================================================================
+FAIL: test_one_task_changing_another_tasks_read_evidence_is_held (test_document_set_g2.G2Tests.test_one_task_changing_another_tasks_read_evidence_is_held)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-integrated-eval/experiments/full_document_control/test_document_set_g2.py", line 305, in test_one_task_changing_another_tasks_read_evidence_is_held
+    self.assertEqual([t['status'] for t in p['tasks']],['held','held'])
+AssertionError: Lists differ: ['eligible', 'eligible'] != ['held', 'held']
+
+First differing element 0:
+'eligible'
+'held'
+
+- ['eligible', 'eligible']
++ ['held', 'held']
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.144s
+
+FAILED (failures=1)

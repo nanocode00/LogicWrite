@@ -1,0 +1,14 @@
+{
+  "historical_revision": "879d15b8fa267010217d9310b72d1066fda74f99",
+  "historical_snapshot_files_verified": 616,
+  "current_evidence_files_unchanged": 545,
+  "protected_pr_objects_verified": 421,
+  "pilot_evidence_files_unchanged": 21,
+  "original_review_forms": "authenticated_archives",
+  "prior_review_records_verified": 3,
+  "current_review_records_verified": 3,
+  "legacy_checkout_checked": false,
+  "legacy_checkout_files_verified": 0,
+  "current_core_comparison": "historical equality not required",
+  "gold_promoted": false
+}

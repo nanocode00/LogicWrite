@@ -1,0 +1,49 @@
+{
+  "schema_version": "integrated-human-review-approval-v1",
+  "record_type": "post_revision_human_review_and_reference_candidate_approval",
+  "decision_date": "2026-11-17",
+  "decision_source": "User explicitly authorized approval after reviewing the AI-assisted assessment in this ChatGPT conversation; no independent second human review",
+  "review_method": "User and ChatGPT joint review of the revised criteria and complete candidate outputs; no separate blind reviewer or actual model execution",
+  "cases": [
+    {
+      "case_id": "IR-001",
+      "criteria_version": "evaluation-criteria-v2",
+      "criteria_basis": "clarification-02",
+      "criteria_path": "criteria/v2/IR-001.json",
+      "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+      "candidate_path": "reference_outputs/v2_candidates/IR-001.json",
+      "candidate_sha256": "ed4fe3a6102d119548683a5f827a68382b2e5cbafb7d0d1e3218a59e7720d3a2",
+      "post_revision_human_review": "approved",
+      "reference_candidate_review": "approved_as_non_unique_example_with_HITL_deferred_scope",
+      "conditions": [
+        "The existing conflicting Donate text remains unchanged pending authoritative funding-policy decision; internal review and uncertain policy are not newly inserted into README.",
+        "The irrelevant diary section stays only pending user approval to remove/separate; neither retained material nor conflicting text should be treated as final publication approval.",
+        "Other authorized improvements (README introduction, usage commands, output constraints, maintainer directions) are accepted as a review candidate."
+      ]
+    },
+    {
+      "case_id": "IR-002",
+      "criteria_version": "evaluation-criteria-v2",
+      "criteria_basis": "clarification-02",
+      "criteria_path": "criteria/v2/IR-002.json",
+      "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+      "candidate_path": "reference_outputs/v2_candidates/IR-002.json",
+      "candidate_sha256": "23696d202790faf5fdaa832af042a572e0beaa9120f7265f7ca2f2d2b8f767b6",
+      "post_revision_human_review": "approved",
+      "reference_candidate_review": "approved_as_non_unique_example",
+      "conditions": [
+        "Operations 60s / development 30s policy effective 2026-11-12 is discoverable across the document set without forced repetition.",
+        "Operations alone retains the 09:00 check, 10-minute delay escalation, backlog strictly over 500 stop, and no restart before on-call confirmation.",
+        "The 20/19/1 observations and 95% are presented as bounded historical observations, not general reliability proof."
+      ]
+    }
+  ],
+  "scope_limitations": {
+    "IR-003": "Earlier human evaluation remains unchanged; this approval covers only IR-001 and IR-002 revised criteria and v2 reference candidates.",
+    "gold_inclusion_approval": null,
+    "merge_or_publication_approval": false,
+    "independent_human_counterreview": false,
+    "actual_model_evaluation": false
+  },
+  "preservation_note": "Earlier manifest post_revision_human_review=null values are immutable preapproval snapshots; this subsequent record authorizes the later human-review state without retroactively rewriting the earlier validation snapshot."
+}

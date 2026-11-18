@@ -1,0 +1,20 @@
+{
+  "case_id": "IR-003",
+  "input_sha256": "75c88eb7c3b9cd217a8e0ca367889685ca086b7549b26a2024479fcc8a5a6c24",
+  "kind": "ai_authored_non_unique_example_not_execution",
+  "bundle": "A",
+  "documents": [
+    {
+      "document_id": "meeting",
+      "content": "# HarborSync 검토 메모\n\n## 관찰\n2026-11-10 내부 실험 12건 중 11건 완료, 1건 실패다.\n실패 원인과 재실행 결과는 아직 확인되지 않았다. 정식 승인도 발급되지 않았다.\n\n## 범위\n이 초안에는 내부 구성과 장애 기록이 포함되어 있다. 외부 공개 범위는 미확정이다.\n이번 실험은 단일 환경 관찰이며 일반 성능이나 고객 적용 가능성을 보장하지 않는다.\n\n## 다음 확인\n실패 원인 확인과 승인 경로 검토를 담당자에게 요청한 상태다.\n",
+      "sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+    }
+  ],
+  "unresolved_questions": [
+    "회의 대상과 공유 범위, 내용 편집 권한을 확정해 주세요."
+  ],
+  "deferred_scope": [
+    "내용 재작성과 외부용 문서 작성; public/ 조회·편집"
+  ],
+  "executed_by_system": false
+}

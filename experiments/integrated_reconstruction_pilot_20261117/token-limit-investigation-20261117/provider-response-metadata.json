@@ -1,0 +1,16 @@
+{
+  "endpoint": "GET /generation",
+  "generation_requests": 0,
+  "provider_responses_structure_and_allowlisted_values": [
+    {
+      "endpoint_id": "str",
+      "id": "str",
+      "is_byok": "bool",
+      "latency": 1445,
+      "model_permaslug": "str",
+      "provider_name": "GMICloud",
+      "status": 200
+    }
+  ],
+  "sensitive_or_unselected_leaf_values_omitted": true
+}

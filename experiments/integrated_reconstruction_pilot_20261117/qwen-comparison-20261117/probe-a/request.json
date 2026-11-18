@@ -1,0 +1,26 @@
+{
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write an English counting list from 1 through 1000, one number per line. Continue until the list is complete."
+    }
+  ],
+  "max_tokens": 64,
+  "temperature": 0,
+  "usage": {
+    "include": true
+  },
+  "provider": {
+    "only": [
+      "deepinfra/fp8"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "max_price": {
+      "prompt": 0.09,
+      "completion": 0.55,
+      "request": 0
+    }
+  }
+}

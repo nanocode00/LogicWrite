@@ -1,0 +1,15 @@
+{
+  "reviewer": "AI execution operator",
+  "human_final_judgment": null,
+  "candidate_full_documents_present": true,
+  "truncation_observed": false,
+  "readonly_modification_observed": false,
+  "continue_execution": true,
+  "semantic_findings_draft": [
+    "Ops omits 500-exceeded stop and no-resume-before-oncall rules despite final_checks claiming presence",
+    "Design misattributes mixed-policy observation to current policy",
+    "Environmental retry distinction preserved",
+    "Operational safety omission is a quality/safety finding, not deployed behavior; no document application performed"
+  ],
+  "boundary": "Runtime protocol checks passed. Semantic failures retained for comparison rather than reclassified as justified HITL."
+}

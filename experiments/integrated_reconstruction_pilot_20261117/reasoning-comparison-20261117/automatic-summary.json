@@ -1,0 +1,81 @@
+{
+  "protocol": "integrated-reasoning-allowed-20261117-v1",
+  "rows": [
+    {
+      "target": "IR-003/B0",
+      "state": "failed",
+      "D": "unobserved",
+      "calls": 1,
+      "usage": {
+        "prompt_tokens": 1184,
+        "completion_tokens": 4370,
+        "total_tokens": 5554,
+        "cost": 0.0016001712,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0016001712,
+          "upstream_inference_prompt_cost": 0.0002472192,
+          "upstream_inference_completions_cost": 0.001352952
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3642,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "seconds": 60.62228645896539,
+      "http_status": 200,
+      "finish_reasons": [
+        "stop"
+      ],
+      "reason": "post_request_spend_unreconciled",
+      "candidate_checks": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "byte_identical": false,
+          "normalized_list_marker_equal": true,
+          "characters": 261,
+          "source_characters": 256,
+          "links": [],
+          "source_code_blocks_preserved_literal": []
+        }
+      ],
+      "human_final_judgment": null,
+      "candidate_sha256": "f307f5ca053c4056dd1a29335ac819275a8eccda8db8f9946edf5299dc94b42d",
+      "assessment_boundary": "mechanical diagnostics only; no Q/F/HITL semantic verdict"
+    },
+    {
+      "target": "IR-001/B0",
+      "state": "not_run",
+      "D": "unobserved"
+    },
+    {
+      "target": "IR-001/B1",
+      "state": "not_run",
+      "D": "unobserved"
+    },
+    {
+      "target": "IR-002/B0",
+      "state": "not_run",
+      "D": "unobserved"
+    },
+    {
+      "target": "IR-002/B1",
+      "state": "not_run",
+      "D": "unobserved"
+    },
+    {
+      "target": "IR-003/B1",
+      "state": "not_run",
+      "D": "unobserved"
+    }
+  ],
+  "human_final_judgment": null
+}

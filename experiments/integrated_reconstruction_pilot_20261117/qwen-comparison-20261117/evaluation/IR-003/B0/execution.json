@@ -1,0 +1,153 @@
+{
+  "protocol": "integrated-qwen-instruct-20261117-v1",
+  "target": "IR-003/B0",
+  "state": "response_complete",
+  "calls": 1,
+  "D": "unobserved",
+  "human_final_judgment": null,
+  "input_sha256": "c8bfc521911bdf19f80955952f3f468edae6481a2d392977d669cfa44030253a",
+  "key_status": {
+    "limit": "0.25",
+    "limit_remaining": "0.23395196000000001",
+    "usage": "0.01604804",
+    "limit_reset": null,
+    "byok_usage": "0"
+  },
+  "endpoint": {
+    "checked_at": "2026-11-17T08:19:05.145100+00:00",
+    "url": "https://openrouter.ai/api/v1/models/qwen/qwen3-235b-a22b-2507/endpoints",
+    "endpoint": {
+      "name": "DeepInfra | qwen/qwen3-235b-a22b-07-25",
+      "model_id": "qwen/qwen3-235b-a22b-2507",
+      "model_name": "Qwen: Qwen3 235B A22B Instruct 2507",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": "0.00000009",
+        "completion": "0.00000055",
+        "discount": 0
+      },
+      "provider_name": "DeepInfra",
+      "tag": "deepinfra/fp8",
+      "service_tier": null,
+      "quantization": "fp8",
+      "max_completion_tokens": 16384,
+      "max_prompt_tokens": null,
+      "supported_parameters": [
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "repetition_penalty",
+        "top_k",
+        "seed",
+        "min_p",
+        "tools",
+        "tool_choice",
+        "logit_bias",
+        "structured_outputs",
+        "response_format"
+      ],
+      "supports_tool_choice": {
+        "none": true,
+        "auto": true,
+        "required": false,
+        "function": false
+      },
+      "status": 0,
+      "uptime_last_30m": 100,
+      "uptime_last_5m": 100,
+      "uptime_last_1d": 74.20867526377492,
+      "supports_implicit_caching": false,
+      "native_tools": {},
+      "supports_voice_cloning": false,
+      "supports_multiple_audio_references": false,
+      "supports_image_reference": false,
+      "supports_diarization": false,
+      "latency_last_30m": {
+        "p50": 414,
+        "p75": 655.25,
+        "p90": 1328.9000000000005,
+        "p99": 5682.720000000001
+      },
+      "throughput_last_30m": {
+        "p50": 23,
+        "p75": 18,
+        "p90": 15,
+        "p99": 8
+      },
+      "perf_last_30m_by_workload": {
+        "text_generation": {
+          "latency": {
+            "p50": 414,
+            "p75": 655.25,
+            "p90": 1328.9000000000005,
+            "p99": 5682.720000000001
+          },
+          "throughput": {
+            "p50": 23,
+            "p75": 18,
+            "p90": 15,
+            "p99": 8
+          },
+          "request_count": 8239
+        }
+      }
+    }
+  },
+  "settlement_before": {
+    "state": "lagging_known_costs",
+    "server_usage_usd": "0.01604804",
+    "ledger_usage_usd": "0.0169609316",
+    "unreflected_known_cost_usd": "0.0009128916",
+    "policy": "known response costs remain charged against local budget; no generation retry"
+  },
+  "seconds": 36.89032922597835,
+  "http_status": 200,
+  "usage": {
+    "prompt_tokens": 1369,
+    "completion_tokens": 704,
+    "total_tokens": 2073,
+    "cost": 0.00051041,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00051041,
+      "upstream_inference_prompt_cost": 0.00012321,
+      "upstream_inference_completions_cost": 0.0003872
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "model_returned": "qwen/qwen3-235b-a22b-2507",
+  "provider_returned": "DeepInfra",
+  "reasoning_tokens": 0,
+  "reasoning_counter_present": true,
+  "non_reasoning_completion_tokens": 704,
+  "finish_reasons": [
+    "stop"
+  ],
+  "key_status_after": {
+    "limit": "0.25",
+    "limit_remaining": "0.23303907000000001",
+    "usage": "0.01696093",
+    "limit_reset": null,
+    "byok_usage": "0"
+  },
+  "settlement_after": {
+    "state": "lagging_known_costs",
+    "server_usage_usd": "0.01696093",
+    "ledger_usage_usd": "0.0174713416",
+    "unreflected_known_cost_usd": "0.0005104116",
+    "policy": "known response costs remain charged against local budget; no generation retry"
+  }
+}

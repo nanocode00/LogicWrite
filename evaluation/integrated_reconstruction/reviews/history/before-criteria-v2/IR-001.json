@@ -1,0 +1,13 @@
+{
+  "schema_version": "integrated-review-v1",
+  "case_id": "IR-001",
+  "input_sha256": "37b0fcb2aa74a75b5066c5b01fc2ea049a7ce67cdd0ca3fbc6888d776be990d3",
+  "status": "pending_human_review",
+  "initial_judgment": null,
+  "initial_evidence": null,
+  "answer_exposure": "이번 사용자 지시에는 최초 판단과 AI 초안 열람 후 대조·반례 검토의 원기록 및 열람 순서·범위가 제공되지 않았다. 최초 판단을 추정하지 않는다. ChatGPT를 통한 검토는 독립적인 사람 반례 검토가 아니다. 상세 경계는 CHANGE_REQUESTS.md 참조.",
+  "counterreview": null,
+  "final_judgment": "이번 사용자 지시로 제공된 사람 검수 결과: 평가 기준 수정 필요, 골드 포함 보류. 상세 판단과 보존 조건은 CHANGE_REQUESTS.md의 IR-001 절 참조.",
+  "adjudication": "수정요청 CR-001-01~CR-001-05 모두 미반영. 실제 평가 기준·입력·답안·참고 출력 수정 및 재검증은 후속 작업이다. 중재 실시나 골드 포함 승인을 기록하는 것이 아니다. 기존 스키마 제약으로 status는 pending_human_review 유지. 상세 내용은 CHANGE_REQUESTS.md 참조.",
+  "gold_inclusion_approval": null
+}

@@ -1,0 +1,10 @@
+test_actual_block_cannot_be_released_by_reasoning_or_settlement_recovery (test_token_limit_investigation.TokenLimitInvestigationTests.test_actual_block_cannot_be_released_by_reasoning_or_settlement_recovery) ... ok
+test_exact_record_and_native_metadata_agree_without_double_count (test_token_limit_investigation.TokenLimitInvestigationTests.test_exact_record_and_native_metadata_agree_without_double_count) ... ok
+test_model_provider_and_fallback_are_fixed_in_current_runner (test_token_limit_investigation.TokenLimitInvestigationTests.test_model_provider_and_fallback_are_fixed_in_current_runner) ... ok
+test_native_token_billing_reconciles_and_reasoning_is_not_added_twice (test_token_limit_investigation.TokenLimitInvestigationTests.test_native_token_billing_reconciles_and_reasoning_is_not_added_twice) ... ok
+test_replayed_oversize_usage_is_accounted_before_stop_no_retry (test_token_limit_investigation.TokenLimitInvestigationTests.test_replayed_oversize_usage_is_accounted_before_stop_no_retry) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.037s
+
+OK

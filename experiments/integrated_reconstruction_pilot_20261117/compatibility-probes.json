@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "IR-001",
+    "probe": "validate_input_bundle(raw_IR_input)",
+    "result": "input_bundle missing fields: document_snapshot, writing_contract",
+    "model_calls": 0
+  },
+  {
+    "case_id": "IR-002",
+    "probe": "validate_input_bundle(raw_IR_input)",
+    "result": "input_bundle missing fields: document_snapshot, writing_contract",
+    "model_calls": 0
+  },
+  {
+    "case_id": "IR-003",
+    "probe": "validate_input_bundle(raw_IR_input)",
+    "result": "input_bundle missing fields: document_snapshot, writing_contract",
+    "model_calls": 0
+  }
+]

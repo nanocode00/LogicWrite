@@ -1,0 +1,1896 @@
+{
+  "gate_state": "REVIEW",
+  "semantic_judgment": "unresolved",
+  "execution_state": "not_run",
+  "b2_reconstruction_success": false,
+  "delivery_approved": false,
+  "stage_transition_allowed": false,
+  "execution_allowed": false,
+  "model_calls": 0,
+  "schema_version": "core-document-set-plan-v1",
+  "tasks": [
+    {
+      "task_id": "keep:c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+      "action": "KEEP",
+      "unit_ids": [
+        "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b"
+      ],
+      "target_document_id": "meeting",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "document_id": "meeting",
+          "quote": "# HarborSync 검토 메모\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 0,
+            "end": 19,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 27
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "output_target": true,
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "preservation_group": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "quote_sha256": "10c4f97e24e834294e4fe9bd16bd1bd2b5aae5caa9c9b9328605ec0b49b5bf3f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "candidate_plan_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": []
+    },
+    {
+      "task_id": "keep:571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0",
+      "action": "KEEP",
+      "unit_ids": [
+        "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0"
+      ],
+      "target_document_id": "meeting",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "document_id": "experiment",
+          "quote": "2026-11-10, 환경 staging-A. 12건 중 11건 완료, 1건 실패.\n실패 건은 인증 경로 단계에서 중단됐다. 근본 원인은 아직 미확인이다.\n재실행 결과 미수집. 정식 승인 미발급. 외부 배포 승인자는 지정되지 않았다.\n",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+          "source_span": {
+            "start": 17,
+            "end": 148,
+            "line_start": 2,
+            "line_end": 4,
+            "byte_start": 29,
+            "byte_end": 296
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "records/experiment.md",
+            "snapshot_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "access": "read_only"
+        },
+        {
+          "unit_id": "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0",
+          "document_id": "meeting",
+          "quote": "## 관찰\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 20,
+            "end": 26,
+            "line_start": 3,
+            "line_end": 3,
+            "byte_start": 28,
+            "byte_end": 38
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "document_id": "meeting",
+          "quote": "2026-11-10 내부 실험 12건 중 11건 완료, 1건 실패다.\n실패 원인과 재실행 결과는 아직 확인되지 않았다. 정식 승인도 발급되지 않았다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 26,
+            "end": 110,
+            "line_start": 4,
+            "line_end": 5,
+            "byte_start": 38,
+            "byte_end": 212
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "document_id": "meeting",
+          "quote": "# HarborSync 검토 메모\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 0,
+            "end": 19,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 27
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "output_target": true,
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "preservation_group": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "quote_sha256": "267811d8b6016d12635e3ac1437a2be607b3de58e0f222d71533f4602fd1c283",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0",
+          "preservation_group": "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0",
+          "quote_sha256": "4961ef327bb2baa626755a0e3af498afafd45cdd8c6febd0d46eb7a20156b381",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "preservation_group": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "quote_sha256": "4461268b9cb4c7763d09c76b8d7ea1e015628b59fa89fa94f042584a9819955f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "preservation_group": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "quote_sha256": "10c4f97e24e834294e4fe9bd16bd1bd2b5aae5caa9c9b9328605ec0b49b5bf3f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "candidate_plan_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": [
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "10",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "12건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "1건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "2026",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        }
+      ]
+    },
+    {
+      "task_id": "keep:6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+      "action": "KEEP",
+      "unit_ids": [
+        "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+      ],
+      "target_document_id": "meeting",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "document_id": "experiment",
+          "quote": "2026-11-10, 환경 staging-A. 12건 중 11건 완료, 1건 실패.\n실패 건은 인증 경로 단계에서 중단됐다. 근본 원인은 아직 미확인이다.\n재실행 결과 미수집. 정식 승인 미발급. 외부 배포 승인자는 지정되지 않았다.\n",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+          "source_span": {
+            "start": 17,
+            "end": 148,
+            "line_start": 2,
+            "line_end": 4,
+            "byte_start": 29,
+            "byte_end": 296
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "records/experiment.md",
+            "snapshot_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "access": "read_only"
+        },
+        {
+          "unit_id": "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0",
+          "document_id": "meeting",
+          "quote": "## 관찰\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 20,
+            "end": 26,
+            "line_start": 3,
+            "line_end": 3,
+            "byte_start": 28,
+            "byte_end": 38
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "document_id": "meeting",
+          "quote": "2026-11-10 내부 실험 12건 중 11건 완료, 1건 실패다.\n실패 원인과 재실행 결과는 아직 확인되지 않았다. 정식 승인도 발급되지 않았다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 26,
+            "end": 110,
+            "line_start": 4,
+            "line_end": 5,
+            "byte_start": 38,
+            "byte_end": 212
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "document_id": "meeting",
+          "quote": "# HarborSync 검토 메모\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 0,
+            "end": 19,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 27
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "output_target": true,
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "preservation_group": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "quote_sha256": "267811d8b6016d12635e3ac1437a2be607b3de58e0f222d71533f4602fd1c283",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0",
+          "preservation_group": "571171e73b72564fe165a733e70f85192efb53ea51c2308a1f77e94982ae63e0",
+          "quote_sha256": "4961ef327bb2baa626755a0e3af498afafd45cdd8c6febd0d46eb7a20156b381",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "preservation_group": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "quote_sha256": "4461268b9cb4c7763d09c76b8d7ea1e015628b59fa89fa94f042584a9819955f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "preservation_group": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "quote_sha256": "10c4f97e24e834294e4fe9bd16bd1bd2b5aae5caa9c9b9328605ec0b49b5bf3f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "candidate_plan_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": [
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "10",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "12건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "1건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "2026",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        }
+      ]
+    },
+    {
+      "task_id": "keep:417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309",
+      "action": "KEEP",
+      "unit_ids": [
+        "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309"
+      ],
+      "target_document_id": "meeting",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309",
+          "document_id": "meeting",
+          "quote": "## 범위\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 111,
+            "end": 117,
+            "line_start": 7,
+            "line_end": 7,
+            "byte_start": 213,
+            "byte_end": 223
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd",
+          "document_id": "meeting",
+          "quote": "이 초안에는 내부 구성과 장애 기록이 포함되어 있다. 외부 공개 범위는 미확정이다.\n이번 실험은 단일 환경 관찰이며 일반 성능이나 고객 적용 가능성을 보장하지 않는다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 117,
+            "end": 211,
+            "line_start": 8,
+            "line_end": 9,
+            "byte_start": 223,
+            "byte_end": 451
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "document_id": "meeting",
+          "quote": "# HarborSync 검토 메모\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 0,
+            "end": 19,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 27
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "output_target": true,
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309",
+          "preservation_group": "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309",
+          "quote_sha256": "1e1a86d42918e7ab9fbe5848d689a74c10e5761432509075df303c2e4982b100",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd",
+          "preservation_group": "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd",
+          "quote_sha256": "a3488db1ec0335d2c808ddc96370a90b28cc051840f37e61f2cb57995da88c28",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "preservation_group": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "quote_sha256": "10c4f97e24e834294e4fe9bd16bd1bd2b5aae5caa9c9b9328605ec0b49b5bf3f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "candidate_plan_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": []
+    },
+    {
+      "task_id": "keep:4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd",
+      "action": "KEEP",
+      "unit_ids": [
+        "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd"
+      ],
+      "target_document_id": "meeting",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309",
+          "document_id": "meeting",
+          "quote": "## 범위\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 111,
+            "end": 117,
+            "line_start": 7,
+            "line_end": 7,
+            "byte_start": 213,
+            "byte_end": 223
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd",
+          "document_id": "meeting",
+          "quote": "이 초안에는 내부 구성과 장애 기록이 포함되어 있다. 외부 공개 범위는 미확정이다.\n이번 실험은 단일 환경 관찰이며 일반 성능이나 고객 적용 가능성을 보장하지 않는다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 117,
+            "end": 211,
+            "line_start": 8,
+            "line_end": 9,
+            "byte_start": 223,
+            "byte_end": 451
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "document_id": "meeting",
+          "quote": "# HarborSync 검토 메모\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 0,
+            "end": 19,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 27
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "output_target": true,
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309",
+          "preservation_group": "417302607c005d8500856f848b3658e54d80f0905a2e6deaafa4b72d5ae1f309",
+          "quote_sha256": "1e1a86d42918e7ab9fbe5848d689a74c10e5761432509075df303c2e4982b100",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd",
+          "preservation_group": "4b7d3a043a3b801671a4693347952192af293b290a979fec28ca2eadb7c69ebd",
+          "quote_sha256": "a3488db1ec0335d2c808ddc96370a90b28cc051840f37e61f2cb57995da88c28",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "preservation_group": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "quote_sha256": "10c4f97e24e834294e4fe9bd16bd1bd2b5aae5caa9c9b9328605ec0b49b5bf3f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "candidate_plan_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": []
+    },
+    {
+      "task_id": "keep:d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee",
+      "action": "KEEP",
+      "unit_ids": [
+        "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee"
+      ],
+      "target_document_id": "meeting",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a",
+          "document_id": "meeting",
+          "quote": "실패 원인 확인과 승인 경로 검토를 담당자에게 요청한 상태다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 221,
+            "end": 256,
+            "line_start": 12,
+            "line_end": 12,
+            "byte_start": 469,
+            "byte_end": 554
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "document_id": "meeting",
+          "quote": "# HarborSync 검토 메모\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 0,
+            "end": 19,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 27
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee",
+          "document_id": "meeting",
+          "quote": "## 다음 확인\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 212,
+            "end": 221,
+            "line_start": 11,
+            "line_end": 11,
+            "byte_start": 452,
+            "byte_end": 469
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "output_target": true,
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a",
+          "preservation_group": "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a",
+          "quote_sha256": "2a01cf4349ff8e3d3f47c72dee580395f0dbc903cdafa1f7db9e1f20d87e1a4f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "preservation_group": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "quote_sha256": "10c4f97e24e834294e4fe9bd16bd1bd2b5aae5caa9c9b9328605ec0b49b5bf3f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee",
+          "preservation_group": "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee",
+          "quote_sha256": "d723ef26d6e2188996d50e84ea113e54f3f2b4fe24f081d45597d76f77739322",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "candidate_plan_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": []
+    },
+    {
+      "task_id": "keep:988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a",
+      "action": "KEEP",
+      "unit_ids": [
+        "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a"
+      ],
+      "target_document_id": "meeting",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a",
+          "document_id": "meeting",
+          "quote": "실패 원인 확인과 승인 경로 검토를 담당자에게 요청한 상태다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 221,
+            "end": 256,
+            "line_start": 12,
+            "line_end": 12,
+            "byte_start": 469,
+            "byte_end": 554
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "document_id": "meeting",
+          "quote": "# HarborSync 검토 메모\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 0,
+            "end": 19,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 27
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee",
+          "document_id": "meeting",
+          "quote": "## 다음 확인\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 212,
+            "end": 221,
+            "line_start": 11,
+            "line_end": 11,
+            "byte_start": 452,
+            "byte_end": 469
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "meeting",
+          "access": "format_only",
+          "output_target": true,
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a",
+          "preservation_group": "988813e9886947b20354d919319e0a707799f00b8e74679a8af9fae6d0174b1a",
+          "quote_sha256": "2a01cf4349ff8e3d3f47c72dee580395f0dbc903cdafa1f7db9e1f20d87e1a4f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "preservation_group": "c9030eb3266c8b0509ee6c983ccd8d6c93e39feb23262c9cb4ecd8e36fb6f64b",
+          "quote_sha256": "10c4f97e24e834294e4fe9bd16bd1bd2b5aae5caa9c9b9328605ec0b49b5bf3f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee",
+          "preservation_group": "d0da59423401a0070de8996444366f2b9a4498811d41e3ca51ee04d6ee1bcbee",
+          "quote_sha256": "d723ef26d6e2188996d50e84ea113e54f3f2b4fe24f081d45597d76f77739322",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "candidate_plan_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": []
+    },
+    {
+      "task_id": "keep:8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50",
+      "action": "KEEP",
+      "unit_ids": [
+        "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50"
+      ],
+      "target_document_id": "experiment",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "document_id": "experiment",
+          "quote": "2026-11-10, 환경 staging-A. 12건 중 11건 완료, 1건 실패.\n실패 건은 인증 경로 단계에서 중단됐다. 근본 원인은 아직 미확인이다.\n재실행 결과 미수집. 정식 승인 미발급. 외부 배포 승인자는 지정되지 않았다.\n",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+          "source_span": {
+            "start": 17,
+            "end": 148,
+            "line_start": 2,
+            "line_end": 4,
+            "byte_start": 29,
+            "byte_end": 296
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "records/experiment.md",
+            "snapshot_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "access": "read_only"
+        },
+        {
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "document_id": "meeting",
+          "quote": "2026-11-10 내부 실험 12건 중 11건 완료, 1건 실패다.\n실패 원인과 재실행 결과는 아직 확인되지 않았다. 정식 승인도 발급되지 않았다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 26,
+            "end": 110,
+            "line_start": 4,
+            "line_end": 5,
+            "byte_start": 38,
+            "byte_end": 212
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50",
+          "document_id": "experiment",
+          "quote": "# 내부 실험 기록 HS-12\n",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+          "source_span": {
+            "start": 0,
+            "end": 17,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 29
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "records/experiment.md",
+            "snapshot_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "access": "read_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "experiment",
+          "access": "read_only",
+          "output_target": false,
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "preservation_group": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "quote_sha256": "267811d8b6016d12635e3ac1437a2be607b3de58e0f222d71533f4602fd1c283",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "preservation_group": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "quote_sha256": "4461268b9cb4c7763d09c76b8d7ea1e015628b59fa89fa94f042584a9819955f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50",
+          "preservation_group": "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50",
+          "quote_sha256": "01e085172b81c260b15365e89a792d37c9ac46e7437f0d9a6fab46bbdbc142a5",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "reference_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": [
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "10",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "12건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "1건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "2026",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        }
+      ]
+    },
+    {
+      "task_id": "keep:3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+      "action": "KEEP",
+      "unit_ids": [
+        "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0"
+      ],
+      "target_document_id": "experiment",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "document_id": "experiment",
+          "quote": "2026-11-10, 환경 staging-A. 12건 중 11건 완료, 1건 실패.\n실패 건은 인증 경로 단계에서 중단됐다. 근본 원인은 아직 미확인이다.\n재실행 결과 미수집. 정식 승인 미발급. 외부 배포 승인자는 지정되지 않았다.\n",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+          "source_span": {
+            "start": 17,
+            "end": 148,
+            "line_start": 2,
+            "line_end": 4,
+            "byte_start": 29,
+            "byte_end": 296
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "records/experiment.md",
+            "snapshot_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "access": "read_only"
+        },
+        {
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "document_id": "meeting",
+          "quote": "2026-11-10 내부 실험 12건 중 11건 완료, 1건 실패다.\n실패 원인과 재실행 결과는 아직 확인되지 않았다. 정식 승인도 발급되지 않았다.\n",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6",
+          "source_span": {
+            "start": 26,
+            "end": 110,
+            "line_start": 4,
+            "line_end": 5,
+            "byte_start": 38,
+            "byte_end": 212
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "meeting.md",
+            "snapshot_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+          },
+          "authority": "초안; 수치와 상태는 실험 기록에서 확인한다",
+          "access": "format_only"
+        },
+        {
+          "unit_id": "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50",
+          "document_id": "experiment",
+          "quote": "# 내부 실험 기록 HS-12\n",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767",
+          "source_span": {
+            "start": 0,
+            "end": 17,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 29
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "records/experiment.md",
+            "snapshot_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+          },
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "access": "read_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "experiment",
+          "access": "read_only",
+          "output_target": false,
+          "authority": "관찰 근거; 외부 공개 승인 아님",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "preservation_group": "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+          "quote_sha256": "267811d8b6016d12635e3ac1437a2be607b3de58e0f222d71533f4602fd1c283",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "preservation_group": "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d",
+          "quote_sha256": "4461268b9cb4c7763d09c76b8d7ea1e015628b59fa89fa94f042584a9819955f",
+          "source_sha256": "0b95f50d0ca55ce4019bec4fc05d0464025456443e4c831c995b5502705e3ec6"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50",
+          "preservation_group": "8fd7030cb304da46f6b0f34dd195587d8196a4e5a4d1a915ba6a672984211e50",
+          "quote_sha256": "01e085172b81c260b15365e89a792d37c9ac46e7437f0d9a6fab46bbdbc142a5",
+          "source_sha256": "daa4d244730330572faf1850c178aaa6ea690906662a213a20b92746893e0767"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "reference_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": [
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "10",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "11건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "12건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "1건",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        },
+        {
+          "kind": "shared_literal_candidate",
+          "unit_ids": [
+            "3a3cafd2b1bd9fbb103efdf0169bc5d17b01e83efc024d1c43bbf10550caaed0",
+            "6f02b952dbe3b4bc182ff80314a54bfc45a194ae240ecbd1008de1c1736f6d7d"
+          ],
+          "literal": "2026",
+          "status": "unresolved",
+          "semantic_status": "unresolved",
+          "basis": "literal_overlap_only"
+        }
+      ]
+    },
+    {
+      "task_id": "keep:86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd",
+      "action": "KEEP",
+      "unit_ids": [
+        "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd"
+      ],
+      "target_document_id": "agenda",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565",
+          "document_id": "agenda",
+          "quote": "내부 운영 회의 안과 외부 협력사 설명회 안 중 일정·참석자를 조율 중이다.\n문서 담당자는 meeting.md의 서식 정리만 허용했다. 내용 변경과 외부용 재작성 권한은 아직 결정하지 않았다.\n공유 폴더 public/의 파일은 이번 작업자에게 조회·편집 권한이 없다.\n",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+          "source_span": {
+            "start": 11,
+            "end": 161,
+            "line_start": 2,
+            "line_end": 4,
+            "byte_start": 23,
+            "byte_end": 359
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "agenda.md",
+            "snapshot_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          },
+          "authority": "회의 운영 담당자의 현황 메모",
+          "access": "read_only"
+        },
+        {
+          "unit_id": "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd",
+          "document_id": "agenda",
+          "quote": "# 회의 준비 현황\n",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+          "source_span": {
+            "start": 0,
+            "end": 11,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 23
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "agenda.md",
+            "snapshot_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          },
+          "authority": "회의 운영 담당자의 현황 메모",
+          "access": "read_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "agenda",
+          "access": "read_only",
+          "output_target": false,
+          "authority": "회의 운영 담당자의 현황 메모",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565",
+          "preservation_group": "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565",
+          "quote_sha256": "f04bef34b018ac847cb0a5b4a8f6047f2be3975b46420f64e0e6d32d70507a12",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd",
+          "preservation_group": "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd",
+          "quote_sha256": "364dd31deeeab38aa599e77ae21ee58e17ba41bd3e990b91d311c370740ec5a6",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "reference_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": []
+    },
+    {
+      "task_id": "keep:75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565",
+      "action": "KEEP",
+      "unit_ids": [
+        "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565"
+      ],
+      "target_document_id": "agenda",
+      "reason": "Preserve source pending explicit task decomposition",
+      "evidence_unit_ids": [
+        "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "status": "eligible",
+      "reasons": [],
+      "required_hitl_question_ids": [],
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "source_evidence": [
+        {
+          "unit_id": "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565",
+          "document_id": "agenda",
+          "quote": "내부 운영 회의 안과 외부 협력사 설명회 안 중 일정·참석자를 조율 중이다.\n문서 담당자는 meeting.md의 서식 정리만 허용했다. 내용 변경과 외부용 재작성 권한은 아직 결정하지 않았다.\n공유 폴더 public/의 파일은 이번 작업자에게 조회·편집 권한이 없다.\n",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+          "source_span": {
+            "start": 11,
+            "end": 161,
+            "line_start": 2,
+            "line_end": 4,
+            "byte_start": 23,
+            "byte_end": 359
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "agenda.md",
+            "snapshot_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          },
+          "authority": "회의 운영 담당자의 현황 메모",
+          "access": "read_only"
+        },
+        {
+          "unit_id": "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd",
+          "document_id": "agenda",
+          "quote": "# 회의 준비 현황\n",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a",
+          "source_span": {
+            "start": 0,
+            "end": 11,
+            "line_start": 1,
+            "line_end": 1,
+            "byte_start": 0,
+            "byte_end": 23
+          },
+          "source_scope": null,
+          "provenance": {
+            "kind": "supplied_snapshot",
+            "source_id": "supplied-input:e87d1fe61cddff2f771cbaa8b95dee338d9597d6bc94cac94c553f98bb33bba2",
+            "path": "agenda.md",
+            "snapshot_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+          },
+          "authority": "회의 운영 담당자의 현황 메모",
+          "access": "read_only"
+        }
+      ],
+      "applicable_permissions": [
+        {
+          "document_id": "agenda",
+          "access": "read_only",
+          "output_target": false,
+          "authority": "회의 운영 담당자의 현황 메모",
+          "operation": "reference"
+        }
+      ],
+      "preservation_obligations": [
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565",
+          "preservation_group": "75bd00be6c30c8106ea01c8e9ba80e6f71979ef78ec6a0cd728b563f13070565",
+          "quote_sha256": "f04bef34b018ac847cb0a5b4a8f6047f2be3975b46420f64e0e6d32d70507a12",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+        },
+        {
+          "kind": "retain_source_binding",
+          "unit_id": "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd",
+          "preservation_group": "86f805e69425244045d62e65807225b13b63cc19d101f6ea42c73241650070cd",
+          "quote_sha256": "364dd31deeeab38aa599e77ae21ee58e17ba41bd3e990b91d311c370740ec5a6",
+          "source_sha256": "82b22f9f1994ecbe39bf3bbd96308ed9f2c60d0afc180a683a6b7dc9c9c1e37a"
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "현재 부여된 권한을 넘는 내용 변경이나 다른 문서로의 반영은 하지 않는다."
+        },
+        {
+          "kind": "uninterpreted_constraint",
+          "document_id": null,
+          "text": "기록의 수치·불확실성·공개 제한을 유지한다. 실제 발행과 전송은 이번 작업 범위 밖이다."
+        }
+      ],
+      "executor_mapping": {
+        "component": "organization",
+        "action": "KEEP",
+        "requires_g2c_binding": true,
+        "mode": "reference_only",
+        "requires_source_and_constraint_revalidation": true,
+        "requires_independent_semantic_review": true
+      },
+      "conflicts": [],
+      "uncertainties": []
+    },
+    {
+      "task_id": "request-decomposition",
+      "action": "DECOMPOSE_REQUEST",
+      "unit_ids": [],
+      "target_document_id": null,
+      "evidence_unit_ids": [],
+      "source_evidence": [],
+      "reason": "이 자료를 다음 회의에서 사용할 수 있게 다듬어 주세요. 문서 담당자가 검토할 수 있는 후보와 남은 확인 사항을 알려 주세요.",
+      "status": "held",
+      "reasons": [
+        "REQUEST_DECOMPOSITION_UNRESOLVED"
+      ],
+      "depends_on": [],
+      "parameters": {},
+      "applicable_permissions": [],
+      "preservation_obligations": [],
+      "required_hitl_question_ids": [
+        "request-decomposition",
+        "global:0",
+        "global:1"
+      ],
+      "executor_mapping": null,
+      "execution_allowed": false,
+      "semantic_judgment": "unresolved",
+      "eligibility_is_conditional": true,
+      "applied": false,
+      "conflicts": [],
+      "uncertainties": []
+    }
+  ],
+  "hitl_questions": [
+    {
+      "question_id": "global:0",
+      "question": "회의의 대상 독자·공유 범위·내용 편집 권한은 미확정이다.",
+      "document_ids": [],
+      "unit_ids": [],
+      "evidence": [],
+      "decision_owner": "Requesting user / document authority owner",
+      "decision_needed": "Clarify scope or supply missing authority/context",
+      "origin": "contract",
+      "status": "unresolved",
+      "dependent_task_ids": [
+        "request-decomposition"
+      ],
+      "held_task_ids": [
+        "request-decomposition"
+      ]
+    },
+    {
+      "question_id": "global:1",
+      "question": "public/의 문서는 제공되지 않았고 조회·편집도 허용되지 않았다.",
+      "document_ids": [],
+      "unit_ids": [],
+      "evidence": [],
+      "decision_owner": "Requesting user / document authority owner",
+      "decision_needed": "Clarify scope or supply missing authority/context",
+      "origin": "contract",
+      "status": "unresolved",
+      "dependent_task_ids": [
+        "request-decomposition"
+      ],
+      "held_task_ids": [
+        "request-decomposition"
+      ]
+    },
+    {
+      "question_id": "request-decomposition",
+      "question": "Which source-bound operations implement the supplied request?",
+      "document_ids": [],
+      "unit_ids": [],
+      "evidence": [],
+      "decision_owner": "Requesting user / document authority owner",
+      "decision_needed": "Supply explicit task proposals and resolve semantic relevance",
+      "origin": "planner_gap",
+      "status": "unresolved",
+      "dependent_task_ids": [
+        "request-decomposition"
+      ],
+      "held_task_ids": [
+        "request-decomposition"
+      ]
+    }
+  ],
+  "contract_sha256": "fb6b6590cc93af265763325f84266e3c4473ce8b238a4c318129793664d46b9e",
+  "analysis_sha256": "13beb649dcca7d54a5c05d0e2a864732c39fdce712f7f8f76cd503eb0480cf4a",
+  "request_sha256": "30f3002394aad4d561690048df99df6416f22f031328f08ac82adbf39e511d91",
+  "plan_sha256": "48b372ccff11f851efd22282995cf362f2807cff7c430aa24584dd72166b1576",
+  "organization_complete": false,
+  "unplanned_unit_ids": [],
+  "reasons": [
+    "PLANNING_ONLY_SEMANTIC_REVIEW_AND_EXECUTION_NOT_RUN"
+  ]
+}

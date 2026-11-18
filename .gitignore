@@ -1,0 +1,4 @@
+# Local credentials at any directory depth. Keep only explicit empty examples shareable.
+.env
+.env.*
+!.env.example

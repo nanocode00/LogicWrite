@@ -1,0 +1,147 @@
+{
+  "schema_version": "integrated-criteria-lineage-v1",
+  "version": "evaluation-criteria-v2",
+  "serialization_schema": "answer.schema.json",
+  "input_contract_changed": false,
+  "cases": [
+    {
+      "case_id": "IR-001",
+      "criteria_version": "evaluation-criteria-v2",
+      "criteria_path": "criteria/v2/IR-001.json",
+      "criteria_sha256": "f02af4dd969bb2306cdfe49dc7f24d1fafc3dca72ef672f78ed7040d27421d21",
+      "parent_version": "evaluation-criteria-v1",
+      "parent_path": "answers/IR-001.json",
+      "parent_sha256": "3ab3e18d9bdb075750af91903e877135e72eb65bb06ea92636a9d40f37ada358",
+      "input_path": "inputs/IR-001.json",
+      "input_sha256": "37b0fcb2aa74a75b5066c5b01fc2ea049a7ce67cdd0ca3fbc6888d776be990d3",
+      "reference_output_path": "reference_outputs/IR-001.json",
+      "reference_output_sha256": "86b881db1642c469e524950541fe2227199253d4c62ee96b5010881d1909963e",
+      "reference_status": "historical_v1_not_revalidated_for_v2",
+      "change_requests": [
+        {
+          "id": "CR-001-01",
+          "status": "implemented",
+          "locations": [
+            "D.inferred_requirements",
+            "D.decision_criteria.D1",
+            "Q.invariants.Q1",
+            "Q.reader_tasks",
+            "Q.acceptable_bundles"
+          ]
+        },
+        {
+          "id": "CR-001-02",
+          "status": "implemented",
+          "locations": [
+            "D.decision_criteria.D2",
+            "D.confirmation",
+            "Q.invariants.Q3",
+            "Q.forbidden_outcomes.F1"
+          ]
+        },
+        {
+          "id": "CR-001-03",
+          "status": "implemented",
+          "locations": [
+            "D.decision_criteria.D3",
+            "D.confirmation",
+            "Q.invariants.Q4",
+            "evidence.E11"
+          ]
+        },
+        {
+          "id": "CR-001-04",
+          "status": "implemented",
+          "locations": [
+            "D.decision_criteria.D4",
+            "Q.invariants.Q4",
+            "Q.acceptable_bundles"
+          ]
+        },
+        {
+          "id": "CR-001-05",
+          "status": "implemented",
+          "locations": [
+            "D.inferred_requirements",
+            "D.confirmation",
+            "Q.invariants.Q4",
+            "Q.acceptable_bundles"
+          ]
+        }
+      ],
+      "post_revision_human_review": null,
+      "gold_inclusion_approval": null
+    },
+    {
+      "case_id": "IR-002",
+      "criteria_version": "evaluation-criteria-v2",
+      "criteria_path": "criteria/v2/IR-002.json",
+      "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+      "parent_version": "evaluation-criteria-v1",
+      "parent_path": "answers/IR-002.json",
+      "parent_sha256": "e2d876dcb78f8ba4bde40db2156c5cdf72f7f02b5c54b0ea71bd042c7b215d3e",
+      "input_path": "inputs/IR-002.json",
+      "input_sha256": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+      "reference_output_path": "reference_outputs/IR-002.json",
+      "reference_output_sha256": "f4aad64951b3ea8b0fb7b7a04dec3063ded9616ffa04cf22a9fc4aba36920401",
+      "reference_status": "historical_v1_not_revalidated_for_v2",
+      "change_requests": [
+        {
+          "id": "CR-002-01",
+          "status": "implemented",
+          "locations": [
+            "Q.invariants.Q1",
+            "Q.reader_tasks",
+            "Q.acceptable_bundles"
+          ]
+        }
+      ],
+      "post_revision_human_review": null,
+      "gold_inclusion_approval": null
+    }
+  ],
+  "reviews": [
+    {
+      "case_id": "IR-001",
+      "current_path": "reviews/IR-001.json",
+      "snapshot_path": "reviews/history/recorded-2026-11-16/IR-001.json",
+      "sha256": "0a43eefc3a9c4d3f2c91b20039c81a8e84b042380095779cb417f8243f6cf2cb",
+      "prior_revision": "6d6f32140b951cac025701ef42995ddba43565e0",
+      "prior_path": "reviews/history/before-criteria-v2/IR-001.json",
+      "prior_sha256": "292792dd8975da90c1432d635249ae79f6ce89dead0a27ba88e83d458afc25f7"
+    },
+    {
+      "case_id": "IR-002",
+      "current_path": "reviews/IR-002.json",
+      "snapshot_path": "reviews/history/recorded-2026-11-16/IR-002.json",
+      "sha256": "db4016104409e57d450f6e552dac1c788e42cb6df43c1b0de4bfaff14e1b70c1",
+      "prior_revision": "6d6f32140b951cac025701ef42995ddba43565e0",
+      "prior_path": "reviews/history/before-criteria-v2/IR-002.json",
+      "prior_sha256": "115744ffa27c9ac1829a684d4507dcb87b775132ef8d0ca082758ca6ceb96b3c"
+    },
+    {
+      "case_id": "IR-003",
+      "current_path": "reviews/IR-003.json",
+      "snapshot_path": "reviews/history/clarification-01/IR-003.json",
+      "sha256": "83c8c7fe16642ed9cb42193cbbef473d7aa460482055ec10580fb9f164bc5915",
+      "prior_revision": "6d6f32140b951cac025701ef42995ddba43565e0",
+      "prior_path": "reviews/history/before-criteria-v2/IR-003.json",
+      "prior_sha256": "083e6ca66c749af68c48a75dc97babde8c652fbe79857a673bbe111f5e02c0be"
+    }
+  ],
+  "gold_eligible": false,
+  "correction": {
+    "id": "clarification-01",
+    "parent_revision": "bd30dbdd65b1b895ebea3e8ee53fbe06a4b541e7",
+    "parent_manifest_path": "criteria/v2/history/before-clarification-01/manifest.json",
+    "parent_manifest_sha256": "54d59c1c9cfe3e301757d107442c05990728b666bef175a14676088fd4249215",
+    "parent_criteria_path": "criteria/v2/history/before-clarification-01/IR-001.json",
+    "parent_criteria_sha256": "55e9242673b36a1027ec4668018b6a0e5989a86e774caef6cd76c4ea5890b90f",
+    "prior_review_path": "reviews/history/recorded-2026-11-16/IR-003.json",
+    "prior_review_sha256": "2292ac3a005eb06440151529f40ef18ba87abd7e7021b49004e78984ed51a3d7",
+    "prior_change_requests_path": "reviews/history/before-clarification-01/CHANGE_REQUESTS.md",
+    "prior_change_requests_sha256": "4ec8701106261dae2bc046a6e8e3b25b2738ee6eaea3f14cb532d19d1a436dfb",
+    "post_revision_human_review": null,
+    "gold_inclusion_approval": null
+  }
+}

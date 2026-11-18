@@ -1,0 +1,168 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "integrated-reference-candidates-v2"
+    },
+    "status": {
+      "const": "ai_authored_non_unique_candidates"
+    },
+    "parent_revision": {
+      "const": "ed3103299c468ba0979995381c20cc543a956670"
+    },
+    "criteria_version": {
+      "const": "evaluation-criteria-v2"
+    },
+    "criteria_basis": {
+      "const": "clarification-02"
+    },
+    "criteria_manifest_path": {
+      "const": "criteria/v2/manifest.json"
+    },
+    "criteria_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "review_path": {
+      "const": "reference_outputs/v2_candidates/REVIEW.md"
+    },
+    "review_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "input_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "input_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "criteria_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "criteria_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "reference_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "parent_reference_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parent_reference_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "frozen_passages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "document_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_quote": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "document_id",
+                "source_quote"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "post_revision_human_review": {
+            "type": "null"
+          },
+          "gold_inclusion_approval": {
+            "type": "null"
+          },
+          "review_evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "reviewed_criteria": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "case_id",
+          "input_path",
+          "input_sha256",
+          "criteria_path",
+          "criteria_sha256",
+          "reference_path",
+          "reference_sha256",
+          "parent_reference_path",
+          "parent_reference_sha256",
+          "frozen_passages",
+          "post_revision_human_review",
+          "gold_inclusion_approval",
+          "review_evidence_refs",
+          "reviewed_criteria"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "post_revision_human_review": {
+      "type": "null"
+    },
+    "gold_inclusion_approval": {
+      "type": "null"
+    },
+    "gold_eligible": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "parent_revision",
+    "criteria_version",
+    "criteria_basis",
+    "criteria_manifest_path",
+    "criteria_manifest_sha256",
+    "review_path",
+    "review_sha256",
+    "cases",
+    "post_revision_human_review",
+    "gold_inclusion_approval",
+    "gold_eligible"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

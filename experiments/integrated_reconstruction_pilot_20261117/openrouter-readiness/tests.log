@@ -1,0 +1,30 @@
+test_api_error_and_missing_cost_stop_remaining_requests (test_openrouter.BudgetTests.test_api_error_and_missing_cost_stop_remaining_requests) ... ok
+test_both_arms_share_all_generation_settings (test_openrouter.BudgetTests.test_both_arms_share_all_generation_settings) ... ok
+test_budget_reserves_entire_request_bound (test_openrouter.BudgetTests.test_budget_reserves_entire_request_bound) ... ok
+test_cumulative_local_budget_survives_new_output_directory (test_openrouter.BudgetTests.test_cumulative_local_budget_survives_new_output_directory) ... ok
+test_invalid_smoke_cannot_modify_existing_output (test_openrouter.BudgetTests.test_invalid_smoke_cannot_modify_existing_output) ... ok
+test_key_limit_unlimited_high_reset_or_missing_fails_before_post (test_openrouter.BudgetTests.test_key_limit_unlimited_high_reset_or_missing_fails_before_post) ... ok
+test_key_query_failure_sends_no_post (test_openrouter.BudgetTests.test_key_query_failure_sends_no_post) ... ok
+test_missing_credentials_cannot_even_query_key (test_openrouter.BudgetTests.test_missing_credentials_cannot_even_query_key) ... ok
+test_missing_usage_blocks_future_run_in_new_directory (test_openrouter.BudgetTests.test_missing_usage_blocks_future_run_in_new_directory) ... ok
+test_non_smoke_requires_explicit_review_and_persisted_smoke (test_openrouter.BudgetTests.test_non_smoke_requires_explicit_review_and_persisted_smoke) ... ok
+test_nonblocking_lock_prevents_parallel_runs (test_openrouter.BudgetTests.test_nonblocking_lock_prevents_parallel_runs) ... ok
+test_nonzero_reasoning_is_recorded_and_stops (test_openrouter.BudgetTests.test_nonzero_reasoning_is_recorded_and_stops) ... ok
+test_nonzero_reasoning_stops_after_accounting (test_openrouter.BudgetTests.test_nonzero_reasoning_stops_after_accounting) ... ok
+test_offline_dry_run_never_calls_network_even_with_key (test_openrouter.BudgetTests.test_offline_dry_run_never_calls_network_even_with_key) ... ok
+test_price_increase_or_unknown_fee_fails_closed (test_openrouter.BudgetTests.test_price_increase_or_unknown_fee_fails_closed) ... ok
+test_response_redacts_accidentally_echoed_credentials (test_openrouter.BudgetTests.test_response_redacts_accidentally_echoed_credentials) ... ok
+test_sequential_remainder_skips_smoke_and_keeps_global_spend (test_openrouter.BudgetTests.test_sequential_remainder_skips_smoke_and_keeps_global_spend) ... ok
+test_smoke_one_post_and_records_real_usage_and_disabled_reasoning (test_openrouter.BudgetTests.test_smoke_one_post_and_records_real_usage_and_disabled_reasoning) ... ok
+test_timeout_remains_pending_and_never_retries (test_openrouter.BudgetTests.test_timeout_remains_pending_and_never_retries) ... ok
+test_truncation_accounts_cost_and_blocks_batch (test_openrouter.BudgetTests.test_truncation_accounts_cost_and_blocks_batch) ... ok
+test_unknown_reasoning_does_not_claim_disabled (test_openrouter.BudgetTests.test_unknown_reasoning_does_not_claim_disabled) ... ok
+test_both_arms_receive_exact_same_validated_input (test_pilot.PilotBoundaryTests.test_both_arms_receive_exact_same_validated_input) ... ok
+test_no_credentials_fails_before_any_http_request (test_pilot.PilotBoundaryTests.test_no_credentials_fails_before_any_http_request) ... ok
+test_prepared_inputs_and_hashes_match_current_export (test_pilot.PilotBoundaryTests.test_prepared_inputs_and_hashes_match_current_export) ... ok
+test_refuses_overwriting_any_existing_output (test_pilot.PilotBoundaryTests.test_refuses_overwriting_any_existing_output) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.716s
+
+OK

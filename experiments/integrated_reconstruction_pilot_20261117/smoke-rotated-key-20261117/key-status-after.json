@@ -1,0 +1,9 @@
+{
+  "limit": "0.25",
+  "limit_remaining": "0.247291065",
+  "usage": "0.002708935",
+  "limit_reset": null,
+  "byok_usage": "0",
+  "http_status": 200,
+  "check_kind": "read_only_post_smoke_key_status"
+}

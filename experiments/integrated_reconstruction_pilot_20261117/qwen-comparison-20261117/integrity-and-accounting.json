@@ -1,0 +1,20 @@
+{
+  "generation_requests": 8,
+  "probe_requests": 2,
+  "evaluation_requests": 6,
+  "runtime_complete_full_candidate_pairs": 3,
+  "semantic_all_criteria_success_pairs": "not_confirmed; known failures recorded",
+  "new_campaign_usd": "0.00463942",
+  "global_usd": "0.0181113616",
+  "campaign_remaining_usd": "0.05536058",
+  "runner_remaining_usd": "0.1818886384",
+  "all_usage_costs_match_endpoint_token_prices": true,
+  "request_settings_pairs_match": true,
+  "run_sources_match_recorded_hashes": true,
+  "old_tracked_files_modified": false,
+  "legacy_costs_and_failures_preserved": true,
+  "legacy_global_block_preserved": true,
+  "new_campaign_semantic_stop": true,
+  "pending": false,
+  "human_final_judgment": null
+}

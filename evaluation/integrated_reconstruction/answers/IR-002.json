@@ -1,0 +1,233 @@
+{
+  "schema_version": "integrated-answer-v1",
+  "case_id": "IR-002",
+  "input_sha256": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+  "status": "ai_draft",
+  "gold_eligible": false,
+  "author_type": "ai",
+  "evidence": [
+    {
+      "id": "E1",
+      "document_id": "adr",
+      "start": 44,
+      "end": 102,
+      "quote": "외부 API 제한 때문에 운영 환경의 실패 재시도 간격은 60초로 한다. 개발 환경은 30초를 유지한다."
+    },
+    {
+      "id": "E2",
+      "document_id": "design",
+      "start": 96,
+      "end": 119,
+      "quote": "모든 환경에서 30초 간격으로 재시도한다."
+    },
+    {
+      "id": "E3",
+      "document_id": "adr",
+      "start": 103,
+      "end": 140,
+      "quote": "작업 ID 중복 판별과 완료 ID의 24시간 보존은 바꾸지 않는다."
+    },
+    {
+      "id": "E4",
+      "document_id": "adr",
+      "start": 141,
+      "end": 194,
+      "quote": "대기 건수가 500건을 넘으면 신규 배치를 중단한다. 당직자가 확인하기 전에는 재개하지 않는다."
+    },
+    {
+      "id": "E5",
+      "document_id": "adr",
+      "start": 195,
+      "end": 260,
+      "quote": "오전 09:00 점검, 지연 10분 이상 지속 시 연락, #queue-oncall과 대시보드 Q-1은 계속 사용한다."
+    },
+    {
+      "id": "E6",
+      "document_id": "weekly",
+      "start": 49,
+      "end": 95,
+      "quote": "19건 처리, 1건 대기이며 재처리 완료 여부는 미확인이다. 관찰 비율은 95%다."
+    },
+    {
+      "id": "E7",
+      "document_id": "weekly",
+      "start": 144,
+      "end": 194,
+      "quote": "표본이 적고 정책 적용 시점이 섞여 있다. 장기 성공률이나 안정성을 입증한 결과가 아니다."
+    },
+    {
+      "id": "E8",
+      "document_id": "adr",
+      "start": 261,
+      "end": 312,
+      "quote": "2026-11-11까지는 운영 환경도 30초였다. 과거 기록의 수치를 소급 변경하지 않는다."
+    },
+    {
+      "id": "E9",
+      "document_id": "design",
+      "start": 269,
+      "end": 306,
+      "quote": "큐를 사용해 외부 API 장애가 수집 요청을 직접 막지 않게 했다."
+    }
+  ],
+  "D": {
+    "explicit_constraints": [
+      {
+        "input_pointer": "/explicit_constraints/0",
+        "interpretation": "주간 보고서와 승인 기록의 원문은 변경하지 않는다."
+      },
+      {
+        "input_pointer": "/explicit_constraints/1",
+        "interpretation": "장애 연락처와 중단 조건은 운영서에서 즉시 확인 가능해야 한다."
+      },
+      {
+        "input_pointer": "/explicit_constraints/2",
+        "interpretation": "날짜·수치·적용 조건·표본 범위를 보존한다. 새 운영 명령이나 승인 사실을 만들지 않는다."
+      },
+      {
+        "input_pointer": "/explicit_constraints/3",
+        "interpretation": "설계서와 운영서의 문체는 한다체로 정리한다."
+      }
+    ],
+    "inferred_requirements": [
+      {
+        "id": "I1",
+        "criterion": "문서마다 현행 설계·운영 과업·과거 관찰의 역할이 다르다. 현행 정책 변경과 역사 기록 변조를 구분한다.",
+        "evidence_refs": [
+          "E1",
+          "E2"
+        ]
+      }
+    ],
+    "decision_criteria": [
+      {
+        "id": "D1",
+        "criterion": "2026-11-12 이후 운영 60초/개발 30초를 과거 운영 30초와 구분한다. 날짜와 적용 범위를 가진 차이를 무조건 모순으로 처리하지 않는다.",
+        "evidence_refs": [
+          "E1",
+          "E2",
+          "E8"
+        ]
+      },
+      {
+        "id": "D2",
+        "criterion": "설계의 인계 절차와 운영서의 구조 설명을 문서 역할에 맞춰 정리하면서 중단·재개 조건을 운영서에 확보한다.",
+        "evidence_refs": [
+          "E4",
+          "E5",
+          "E9"
+        ]
+      },
+      {
+        "id": "D3",
+        "criterion": "관찰 95%와 일반 안정성 보장을 구별한다. 1건 대기와 재처리 미확인을 성공으로 바꾸지 않는다.",
+        "evidence_refs": [
+          "E6",
+          "E7"
+        ]
+      },
+      {
+        "id": "D4",
+        "criterion": "작업 ID·24시간·당직 채널·대시보드 등 기존 고유 조건을 통합 과정에서 보존하고 현행 두 문서를 대조한다.",
+        "evidence_refs": [
+          "E3",
+          "E5"
+        ]
+      }
+    ],
+    "confirmation": [],
+    "observation": "native_trace_or_declared_plan_before_edit; absent=unobserved; output_effect=auxiliary_only"
+  },
+  "Q": {
+    "invariants": [
+      {
+        "id": "Q1",
+        "criterion": "설계서와 운영서의 현행 조건이 운영 60초/개발 30초로 일치하고 적용일을 오해하지 않는다.",
+        "evidence_refs": [
+          "E1",
+          "E8"
+        ]
+      },
+      {
+        "id": "Q2",
+        "criterion": "운영서만으로 09:00 점검, 지연 10분, 500건 초과 중단, 당직 확인 전 재개 금지, 채널과 대시보드를 찾는다.",
+        "evidence_refs": [
+          "E4",
+          "E5"
+        ]
+      },
+      {
+        "id": "Q3",
+        "criterion": "설계 선택 이유와 작업 ID·24시간을 잃지 않는다. 불필요한 절차 반복은 줄이되 안전 조건의 필요한 반복은 허용한다.",
+        "evidence_refs": [
+          "E3",
+          "E9"
+        ]
+      },
+      {
+        "id": "Q4",
+        "criterion": "20건/19건/1건/미확인/관찰 기간을 일반 신뢰성 보장으로 바꾸지 않는다. 상세 주간 수치는 보고서 참조로 대신해도 된다.",
+        "evidence_refs": [
+          "E6",
+          "E7"
+        ]
+      }
+    ],
+    "forbidden_outcomes": [
+      {
+        "id": "F1",
+        "criterion": "개발까지 60초로 덮어쓰거나 과거 기록을 현행에 맞춰 변조.",
+        "evidence_refs": [
+          "E1",
+          "E8"
+        ]
+      },
+      {
+        "id": "F2",
+        "criterion": "500건 초과를 500건 이상으로 바꾸거나 당직 확인 없이 재개 가능하게 함.",
+        "evidence_refs": [
+          "E4"
+        ]
+      },
+      {
+        "id": "F3",
+        "criterion": "95%를 일반 안정성 입증 또는 대기 1건의 성공으로 바꿈.",
+        "evidence_refs": [
+          "E6",
+          "E7"
+        ]
+      }
+    ],
+    "acceptable_bundles": [
+      {
+        "id": "A",
+        "description": "설계서에 현행 정책과 선택 이유, 운영서에 현행 정책·점검·중단을 둔다. 주간 관찰은 고정 보고서로 링크한다.",
+        "must_satisfy": [
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4"
+        ]
+      },
+      {
+        "id": "B",
+        "description": "같은 역할 배치를 따르되 설계서에 주간 관찰을 기간·한계와 함께 짧게 남길 수 있다. 경고와 핵심 재시도 조건은 양쪽에 반복해도 된다.",
+        "must_satisfy": [
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4"
+        ]
+      }
+    ],
+    "reader_tasks": [
+      "설계서와 운영서의 현행 조건이 운영 60초/개발 30초로 일치하고 적용일을 오해하지 않는다.",
+      "운영서만으로 09:00 점검, 지연 10분, 500건 초과 중단, 당직 확인 전 재개 금지, 채널과 대시보드를 찾는다.",
+      "설계 선택 이유와 작업 ID·24시간을 잃지 않는다. 불필요한 절차 반복은 줄이되 안전 조건의 필요한 반복은 허용한다.",
+      "20건/19건/1건/미확인/관찰 기간을 일반 신뢰성 보장으로 바꾸지 않는다. 상세 주간 수치는 보고서 참조로 대신해도 된다."
+    ],
+    "reference_output_path": "reference_outputs/IR-002.json",
+    "reference_is_unique": false,
+    "assessment": "human_semantic_review_required"
+  }
+}

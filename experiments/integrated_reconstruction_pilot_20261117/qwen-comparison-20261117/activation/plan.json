@@ -1,0 +1,75 @@
+{
+  "protocol": "integrated-qwen-instruct-20261117-v1",
+  "phase": "activate",
+  "execute": true,
+  "model": "qwen/qwen3-235b-a22b-2507",
+  "provider": "deepinfra/fp8",
+  "temperature": 0,
+  "timeout_seconds": 600,
+  "max_requests": 8,
+  "campaign_limit_usd": ".06",
+  "key_limit_usd": ".25",
+  "global_limit_usd": ".20",
+  "runner_sha256": "48a57bd73044b15140349ee071baf61323c46d30dc32efb744d5aa6c2877c96f",
+  "base_runner_sha256": "5cb91c0bbda5315f3b56a88ebe442acd940aacc5f1a9a30dc53044a84f5f4337",
+  "shared_runner_sha256": "3497f32790703961940449ec2df9c05af349a8b9980ed60f5689ecc005898cae",
+  "source_commit": "2b06ef9249592ee41da77ba2f9dcb428b46585fc",
+  "all_requests": [
+    {
+      "target": "Probe-A",
+      "input_tokens_upper_estimate": 4238,
+      "max_output_tokens": 64,
+      "upper_usd": "0.00041662",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    },
+    {
+      "target": "Probe-B",
+      "input_tokens_upper_estimate": 4265,
+      "max_output_tokens": 256,
+      "upper_usd": "0.00052465",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    },
+    {
+      "target": "IR-001/B0",
+      "input_tokens_upper_estimate": 11769,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00765921",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    },
+    {
+      "target": "IR-001/B1",
+      "input_tokens_upper_estimate": 12201,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00769809",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    },
+    {
+      "target": "IR-002/B0",
+      "input_tokens_upper_estimate": 10396,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00753564",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    },
+    {
+      "target": "IR-002/B1",
+      "input_tokens_upper_estimate": 10828,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00757452",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    },
+    {
+      "target": "IR-003/B0",
+      "input_tokens_upper_estimate": 8765,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00738885",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    },
+    {
+      "target": "IR-003/B1",
+      "input_tokens_upper_estimate": 9197,
+      "max_output_tokens": 12000,
+      "upper_usd": "0.00742773",
+      "method": "UTF-8 bytes plus 4096 template allowance; planning estimate, not tokenizer proof"
+    }
+  ]
+}

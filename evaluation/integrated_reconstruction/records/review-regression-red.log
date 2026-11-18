@@ -1,0 +1,25 @@
+........F.F........
+======================================================================
+FAIL: test_format_only_numeric_token_split (test_integrity.IntegrityTests.test_format_only_numeric_token_split)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-integrated-eval/evaluation/integrated_reconstruction/test_integrity.py", line 89, in test_format_only_numeric_token_split
+    self.reject()
+  File "/home/honorbear/LogicWrite-integrated-eval/evaluation/integrated_reconstruction/test_integrity.py", line 29, in reject
+    with self.assertRaises((ValueError, KeyError)):
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_format_only_word_token_join (test_integrity.IntegrityTests.test_format_only_word_token_join)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/honorbear/LogicWrite-integrated-eval/evaluation/integrated_reconstruction/test_integrity.py", line 97, in test_format_only_word_token_join
+    self.reject()
+  File "/home/honorbear/LogicWrite-integrated-eval/evaluation/integrated_reconstruction/test_integrity.py", line 29, in reject
+    with self.assertRaises((ValueError, KeyError)):
+AssertionError: (<class 'ValueError'>, <class 'KeyError'>) not raised
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.404s
+
+FAILED (failures=2)

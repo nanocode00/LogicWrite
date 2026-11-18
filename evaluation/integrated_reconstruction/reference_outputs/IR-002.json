@@ -1,0 +1,21 @@
+{
+  "case_id": "IR-002",
+  "input_sha256": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+  "kind": "ai_authored_non_unique_example_not_execution",
+  "bundle": "A",
+  "documents": [
+    {
+      "document_id": "design",
+      "content": "# QueueBridge 설계\n대상은 팀장과 개발자다. 2026-11-12 기준이다.\n\n## 구조와 선택 이유\n수집기는 작업을 큐에 넣고 워커가 처리한다. 외부 API 장애가 수집 요청을 직접 막지 않도록 큐를 사용한다.\n워커는 작업 ID로 중복을 판별하며 처리 완료 ID는 24시간 보존한다.\n\n## 재시도 정책\n[ADR-07](records/ADR-07.md)에 따라 2026-11-12부터 운영 환경은 60초, 개발 환경은 30초 간격으로 재시도한다. 11월 11일까지 운영 환경도 30초였다.\n\n## 운영과 관찰 자료\n일상 점검과 중단·재개 조건은 [운영서](operations.md)를 따른다.\n해당 주의 20건 관찰과 미해결 상태는 [46주 보고](reports/week-46.md)에 기록되어 있다. 이는 장기 성공률이나 안정성 입증이 아니다.\n",
+      "sha256": "fd19e533bbafb74393c21c2bd2a5dcc9e67ab9f6790ba214f1965891e71e0f1b"
+    },
+    {
+      "document_id": "ops",
+      "content": "# QueueBridge 운영\n## 아침 점검과 장애 대응\n오전 09:00에 큐 지연을 확인한다. 대기 건수는 대시보드 Q-1에서 확인한다.\n지연이 10분 이상 지속되면 사내 당직 채널 #queue-oncall에 연락한다.\n대기 건수가 500건을 넘으면 신규 배치를 중단한다. 당직자가 확인하기 전에는 재개하지 않는다.\n\n## 재시도와 중복 판별\n[ADR-07](records/ADR-07.md)에 따라 2026-11-12부터 운영 환경은 60초, 개발 환경은 30초 간격으로 재시도한다.\n작업 ID로 중복을 판별하며 처리 완료 ID는 24시간 보존한다.\n구조와 선택 이유는 [설계서](design.md)에서 확인한다.\n\n## 관찰 이력\n기간별 수치와 미해결 상태는 [46주 보고](reports/week-46.md)를 확인한다. 과거 수치를 현행 정책으로 소급 해석하지 않는다.\n",
+      "sha256": "bd2b6f98eb4fdbbb7a19af3a2a153b0f16b3b0439d99406c730a25baf4394d6c"
+    }
+  ],
+  "unresolved_questions": [],
+  "deferred_scope": [],
+  "executed_by_system": false
+}

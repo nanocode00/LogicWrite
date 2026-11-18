@@ -1,0 +1,103 @@
+{
+  "schema_version": "integrated-reference-candidates-v2",
+  "status": "ai_authored_non_unique_candidates",
+  "parent_revision": "ed3103299c468ba0979995381c20cc543a956670",
+  "criteria_version": "evaluation-criteria-v2",
+  "criteria_basis": "clarification-02",
+  "criteria_manifest_path": "criteria/v2/manifest.json",
+  "criteria_manifest_sha256": "d5fdd5e406afd949c83ca0c650307e79a0a4eeb451ea6f90f7ca23b0a7cefc2d",
+  "review_path": "reference_outputs/v2_candidates/REVIEW.md",
+  "review_sha256": "7e6183a8325a64e7b9c5c5abf3b89467dc6a96455c2edc4ec5e71c7c995c0eae",
+  "cases": [
+    {
+      "case_id": "IR-001",
+      "input_path": "inputs/IR-001.json",
+      "input_sha256": "37b0fcb2aa74a75b5066c5b01fc2ea049a7ce67cdd0ca3fbc6888d776be990d3",
+      "criteria_path": "criteria/v2/IR-001.json",
+      "criteria_sha256": "c442e86026212dd201eb11b8723bcf193ed8cfdf157257b1003fcf3787c93a6c",
+      "reference_path": "reference_outputs/v2_candidates/IR-001.json",
+      "reference_sha256": "ed4fe3a6102d119548683a5f827a68382b2e5cbafb7d0d1e3218a59e7720d3a2",
+      "parent_reference_path": "reference_outputs/IR-001.json",
+      "parent_reference_sha256": "86b881db1642c469e524950541fe2227199253d4c62ee96b5010881d1909963e",
+      "frozen_passages": [
+        {
+          "document_id": "readme",
+          "source_quote": "## Donate\n기부는 [후원 안내](FUNDING.md)에서 할 수 있습니다.\n"
+        },
+        {
+          "document_id": "readme",
+          "source_quote": "## 개발 이야기\n처음에는 CSV를 썼지만 0.7에서 JSON으로 바꿨다. 파일 하나씩 만드느라 힘들었다.\n11월 7일 회의 간식은 귤이었다. 이 문서는 프로젝트의 여러 정보를 소개하는 문서이다.\n"
+        }
+      ],
+      "post_revision_human_review": null,
+      "gold_inclusion_approval": null,
+      "review_evidence_refs": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9",
+        "E10",
+        "E11"
+      ],
+      "reviewed_criteria": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "F1",
+        "F2"
+      ]
+    },
+    {
+      "case_id": "IR-002",
+      "input_path": "inputs/IR-002.json",
+      "input_sha256": "086dc12ca81d3c866cb5369d74f9bed3c00bd46e80304084bc17fbdb6372878a",
+      "criteria_path": "criteria/v2/IR-002.json",
+      "criteria_sha256": "79be954c6403b1e7df19e0aba5475ccc75dd10a16a65090ef2cd134ea00e8910",
+      "reference_path": "reference_outputs/v2_candidates/IR-002.json",
+      "reference_sha256": "23696d202790faf5fdaa832af042a572e0beaa9120f7265f7ca2f2d2b8f767b6",
+      "parent_reference_path": "reference_outputs/IR-002.json",
+      "parent_reference_sha256": "f4aad64951b3ea8b0fb7b7a04dec3063ded9616ffa04cf22a9fc4aba36920401",
+      "frozen_passages": [],
+      "post_revision_human_review": null,
+      "gold_inclusion_approval": null,
+      "review_evidence_refs": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "E8",
+        "E9"
+      ],
+      "reviewed_criteria": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "F1",
+        "F2",
+        "F3"
+      ]
+    }
+  ],
+  "post_revision_human_review": null,
+  "gold_inclusion_approval": null,
+  "gold_eligible": false
+}

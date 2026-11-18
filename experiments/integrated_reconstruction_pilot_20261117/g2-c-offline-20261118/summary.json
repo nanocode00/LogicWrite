@@ -1,0 +1,196 @@
+[
+  {
+    "scenario": "IR-001",
+    "input_documents": 7,
+    "output_documents": [
+      "readme",
+      "usage"
+    ],
+    "changed_documents": [],
+    "executed": [],
+    "planned_statuses": {
+      "eligible": 37,
+      "held": 1
+    },
+    "execution_statuses": {
+      "preserved": 37,
+      "held": 1
+    },
+    "held": {
+      "request-decomposition": [
+        "REQUEST_DECOMPOSITION_UNRESOLVED"
+      ]
+    },
+    "hitl_questions": 1,
+    "execution_state": "partial_candidate",
+    "structure": {
+      "schema_version": "core-document-set-structure-v1",
+      "status": "passed",
+      "g1_permission_status": "within_declared_access",
+      "gate_state": "REVIEW",
+      "reasons": [],
+      "candidate_result_sha256": "6ab7f81e818ec0b2f471624962c934e94137e0a9e444c11f4f17e877d41ddc29",
+      "semantic_judgment": "unresolved",
+      "delivery_approved": false,
+      "stage_transition_allowed": false
+    },
+    "gate_state": "REVIEW",
+    "model_calls": 0
+  },
+  {
+    "scenario": "IR-002",
+    "input_documents": 4,
+    "output_documents": [
+      "design",
+      "ops"
+    ],
+    "changed_documents": [],
+    "executed": [],
+    "planned_statuses": {
+      "eligible": 19,
+      "held": 1
+    },
+    "execution_statuses": {
+      "preserved": 19,
+      "held": 1
+    },
+    "held": {
+      "request-decomposition": [
+        "REQUEST_DECOMPOSITION_UNRESOLVED"
+      ]
+    },
+    "hitl_questions": 1,
+    "execution_state": "partial_candidate",
+    "structure": {
+      "schema_version": "core-document-set-structure-v1",
+      "status": "passed",
+      "g1_permission_status": "within_declared_access",
+      "gate_state": "REVIEW",
+      "reasons": [],
+      "candidate_result_sha256": "234518a2a2478e0d892682ae0cc2b5edc4f4850bfeda49ab0737ced22719c6c5",
+      "semantic_judgment": "unresolved",
+      "delivery_approved": false,
+      "stage_transition_allowed": false
+    },
+    "gate_state": "REVIEW",
+    "model_calls": 0
+  },
+  {
+    "scenario": "IR-003",
+    "input_documents": 3,
+    "output_documents": [
+      "meeting"
+    ],
+    "changed_documents": [],
+    "executed": [],
+    "planned_statuses": {
+      "eligible": 11,
+      "held": 1
+    },
+    "execution_statuses": {
+      "preserved": 11,
+      "held": 1
+    },
+    "held": {
+      "request-decomposition": [
+        "REQUEST_DECOMPOSITION_UNRESOLVED"
+      ]
+    },
+    "hitl_questions": 3,
+    "execution_state": "partial_candidate",
+    "structure": {
+      "schema_version": "core-document-set-structure-v1",
+      "status": "passed",
+      "g1_permission_status": "within_declared_access",
+      "gate_state": "REVIEW",
+      "reasons": [],
+      "candidate_result_sha256": "b9114a417d3099cc6875a551a790c67565cb2802099a4f04e908733c2e734e9f",
+      "semantic_judgment": "unresolved",
+      "delivery_approved": false,
+      "stage_transition_allowed": false
+    },
+    "gate_state": "REVIEW",
+    "model_calls": 0
+  },
+  {
+    "scenario": "synthetic-move",
+    "input_documents": 2,
+    "output_documents": [
+      "catalog",
+      "log"
+    ],
+    "changed_documents": [
+      "catalog",
+      "log"
+    ],
+    "executed": [
+      "move-photo"
+    ],
+    "planned_statuses": {
+      "eligible": 1
+    },
+    "execution_statuses": {
+      "executed": 1
+    },
+    "held": {},
+    "hitl_questions": 0,
+    "execution_state": "candidate",
+    "structure": {
+      "schema_version": "core-document-set-structure-v1",
+      "status": "passed",
+      "g1_permission_status": "within_declared_access",
+      "gate_state": "REVIEW",
+      "reasons": [],
+      "candidate_result_sha256": "ef2da24b74acd31e6c5c1ac99fc5fb39115cdf9b20880e32541cf471eb97ee4d",
+      "semantic_judgment": "unresolved",
+      "delivery_approved": false,
+      "stage_transition_allowed": false
+    },
+    "gate_state": "REVIEW",
+    "model_calls": 0
+  },
+  {
+    "scenario": "synthetic-partial",
+    "input_documents": 4,
+    "output_documents": [
+      "catalog",
+      "log",
+      "operations",
+      "safety"
+    ],
+    "changed_documents": [
+      "catalog"
+    ],
+    "executed": [
+      "place-label"
+    ],
+    "planned_statuses": {
+      "eligible": 1,
+      "held": 1
+    },
+    "execution_statuses": {
+      "executed": 1,
+      "held": 1
+    },
+    "held": {
+      "move-alarm": [
+        "CONDITION_CONTEXT_REVIEW_REQUIRED"
+      ]
+    },
+    "hitl_questions": 1,
+    "execution_state": "partial_candidate",
+    "structure": {
+      "schema_version": "core-document-set-structure-v1",
+      "status": "passed",
+      "g1_permission_status": "within_declared_access",
+      "gate_state": "REVIEW",
+      "reasons": [],
+      "candidate_result_sha256": "389baea88b794992765fac483816df28e68dd6764936fc032c7d404a12aaf303",
+      "semantic_judgment": "unresolved",
+      "delivery_approved": false,
+      "stage_transition_allowed": false
+    },
+    "gate_state": "REVIEW",
+    "model_calls": 0
+  }
+]

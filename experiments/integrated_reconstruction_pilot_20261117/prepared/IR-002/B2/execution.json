@@ -1,0 +1,6 @@
+{
+  "state": "unsupported_current_integration",
+  "calls": 0,
+  "reason": "Single source snapshot/concrete scope; no joint document analysis or native per-document access mapping. No adapter or pipeline executed.",
+  "hitl": "not_assessed"
+}
