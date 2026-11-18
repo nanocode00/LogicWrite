@@ -111,6 +111,7 @@ def _matches_trace(trace, expected):
 
 
 def _check_document(candidate, source_doc, order, trace, context):
+    # A missing iterator requests a layout/bytes check without trace evidence.
     docs, unit_ids = context
     if not order:
         return False
@@ -122,12 +123,12 @@ def _check_document(candidate, source_doc, order, trace, context):
         gap = boundary_gap(content[:cursor], block, op, previous, source_doc['content'])
         if gap:
             expected_gap = trace_row(docs, unit_ids, candidate, None, None, op or previous, gap, cursor)
-            if not _matches_trace(trace, expected_gap) or content[cursor:cursor + len(gap)] != gap:
+            if (trace is not None and not _matches_trace(trace, expected_gap)) or content[cursor:cursor + len(gap)] != gap:
                 return False
             cursor += len(gap)
         text = block['text']
         expected = trace_row(docs, unit_ids, candidate, source_id, block, op, text, cursor)
-        if not _matches_trace(trace, expected) or content[cursor:cursor + len(text)] != text:
+        if (trace is not None and not _matches_trace(trace, expected)) or content[cursor:cursor + len(text)] != text:
             return False
         if block['kind'] != 'blank':
             significant.append((block['kind'], cursor, text.rstrip('\r\n')))
